@@ -85,3 +85,23 @@ h1 {
   color: var(--akcent);
   font-weight: 700;
 }
+
+/* Przyciski w treści ekranu */
+.przycisk {
+  height: 48px;
+  margin: 8px 8px 0 0;
+  padding: 0 16px;
+  border: 0;
+  border-radius: 12px;
+  background: var(--akcent);
+  color: var(--tlo);
+  font-size: 15px;
+  font-weight: 700;
+  font-family: inherit;
+}
+
+.przycisk.drugi {
+  background: none;
+  border: 1px solid var(--akcent);
+  color: var(--akcent);
+}
