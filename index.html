@@ -26,6 +26,52 @@
         <label for="pole-rodzaj">Rodzaj aktywności</label>
         <select id="pole-rodzaj"></select>
 
+        <label for="pole-ilosc-typ">Miara ćwiczenia</label>
+        <select id="pole-ilosc-typ">
+          <option value="powtorzenia">Serie i powtórzenia</option>
+          <option value="czas">Czas</option>
+          <option value="dystans">Dystans</option>
+        </select>
+
+        <div class="rzad" id="ilosc-powtorzenia">
+          <div>
+            <label for="pole-serie">Serie</label>
+            <input type="number" id="pole-serie" min="1" inputmode="numeric" placeholder="3">
+          </div>
+          <div>
+            <label for="pole-powtorzenia">Powtórzenia</label>
+            <input type="number" id="pole-powtorzenia" min="1" inputmode="numeric" placeholder="12">
+          </div>
+        </div>
+
+        <div class="rzad" id="ilosc-czas" hidden>
+          <div>
+            <label for="pole-czas">Czas</label>
+            <input type="number" id="pole-czas" min="1" inputmode="decimal" placeholder="30">
+          </div>
+          <div>
+            <label for="pole-czas-jednostka">Jednostka</label>
+            <select id="pole-czas-jednostka">
+              <option value="s">sekundy</option>
+              <option value="min">minuty</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="rzad" id="ilosc-dystans" hidden>
+          <div>
+            <label for="pole-dystans">Dystans</label>
+            <input type="number" id="pole-dystans" min="0" step="any" inputmode="decimal" placeholder="5">
+          </div>
+          <div>
+            <label for="pole-dystans-jednostka">Jednostka</label>
+            <select id="pole-dystans-jednostka">
+              <option value="km">kilometry</option>
+              <option value="m">metry</option>
+            </select>
+          </div>
+        </div>
+
         <div class="etykieta">Partie mięśni</div>
         <div id="pole-partie" class="wybory"></div>
 
