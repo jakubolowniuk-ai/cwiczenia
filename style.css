@@ -1,0 +1,87 @@
+/* Kolory zapisane jako zmienne: jasny motyw */
+:root {
+  --tlo: #F4F6F5;
+  --karta: #FFFFFF;
+  --tekst: #16201F;
+  --tekst-szary: #55625F;
+  --akcent: #0B6B5F;
+  --linia: #DDE5E3;
+}
+
+/* Ciemny motyw: włącza się, gdy telefon ma ciemny tryb */
+@media (prefers-color-scheme: dark) {
+  :root {
+    --tlo: #0F1615;
+    --karta: #1A2423;
+    --tekst: #E8EFED;
+    --tekst-szary: #9DB0AC;
+    --akcent: #4FD1B8;
+    --linia: #2B3836;
+  }
+}
+
+* {
+  box-sizing: border-box;
+}
+
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  background: var(--tlo);
+  color: var(--tekst);
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+}
+
+main {
+  flex: 1;
+  overflow-y: auto;
+  padding: 28px 20px 16px;
+}
+
+h1 {
+  margin: 0 0 8px;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.opis {
+  margin: 0;
+  color: var(--tekst-szary);
+}
+
+/* Ekrany: widoczny tylko ten z klasą "aktywny" */
+.ekran {
+  display: none;
+}
+
+.ekran.aktywny {
+  display: block;
+}
+
+/* Dolny pasek nawigacji */
+.pasek {
+  display: flex;
+  height: 72px;
+  background: var(--karta);
+  border-top: 1px solid var(--linia);
+}
+
+.zakladka {
+  flex: 1;
+  border: 0;
+  background: none;
+  color: var(--tekst-szary);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.zakladka.aktywna {
+  color: var(--akcent);
+  font-weight: 700;
+}
