@@ -16,18 +16,38 @@
 
     <section id="ekran-cwiczenia" class="ekran">
       <h1>Ćwiczenia</h1>
-      <p class="opis">Tutaj będzie baza ćwiczeń i treningi.</p>
 
-      <!-- Test zapisu danych: usuniemy go w następnych krokach -->
-      <p>Kategorie: <strong id="licznik-kategorii">0</strong></p>
-      <p>Ćwiczenia: <strong id="licznik-cwiczen">0</strong></p>
-      <button class="przycisk" id="przycisk-test">Dodaj testowe ćwiczenie</button>
-      <button class="przycisk drugi" id="przycisk-reset">Wyczyść dane</button>
+      <button class="przycisk" id="przycisk-nowe">+ Dodaj ćwiczenie</button>
+
+      <div class="formularz" id="formularz-cwiczenia" hidden>
+        <label for="pole-nazwa">Nazwa</label>
+        <input type="text" id="pole-nazwa" placeholder="Np. Wiosłowanie">
+
+        <label for="pole-rodzaj">Rodzaj aktywności</label>
+        <select id="pole-rodzaj"></select>
+
+        <div class="etykieta">Partie mięśni</div>
+        <div id="pole-partie" class="wybory"></div>
+
+        <label for="pole-link">Link do filmu (opcjonalnie)</label>
+        <input type="url" id="pole-link" placeholder="https://">
+
+        <p class="blad" id="komunikat-bledu"></p>
+
+        <div>
+          <button class="przycisk" id="przycisk-zapisz">Zapisz</button>
+          <button class="przycisk drugi" id="przycisk-anuluj">Anuluj</button>
+        </div>
+      </div>
+
+      <p class="opis" id="pusta-lista">Nie masz jeszcze ćwiczeń. Dodaj pierwsze.</p>
+      <div id="lista-cwiczen"></div>
     </section>
 
     <section id="ekran-postep" class="ekran">
       <h1>Postęp</h1>
       <p class="opis">Tutaj będą cele i historia.</p>
+      <button class="przycisk drugi" id="przycisk-reset">Wyczyść dane (tryb testowy)</button>
     </section>
   </main>
 
@@ -38,6 +58,7 @@
   </nav>
 
   <script src="dane.js"></script>
+  <script src="cwiczenia.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

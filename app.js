@@ -22,30 +22,13 @@ zakladki.forEach(function (zakladka) {
   });
 });
 
-// ===== Test zapisu danych =====
+// ===== Czyszczenie danych (na czas budowy aplikacji) =====
 
-const licznikKategorii = document.getElementById("licznik-kategorii");
-const licznikCwiczen = document.getElementById("licznik-cwiczen");
-const przyciskTest = document.getElementById("przycisk-test");
 const przyciskReset = document.getElementById("przycisk-reset");
 
-// Wpisuje na ekranie aktualne liczby z danych
-function odswiezLiczniki() {
-  licznikKategorii.textContent = dane.kategorie.length;
-  licznikCwiczen.textContent = dane.cwiczenia.length;
-}
-
-// Dodaje ćwiczenie testowe i zapisuje dane w telefonie
-przyciskTest.addEventListener("click", function () {
-  dane.cwiczenia.push({ id: "test-" + Date.now(), nazwa: "Ćwiczenie testowe" });
-  zapiszDane();
-  odswiezLiczniki();
-});
-
-// Kasuje zapisane dane i wczytuje stronę od nowa
 przyciskReset.addEventListener("click", function () {
-  localStorage.removeItem(KLUCZ_DANYCH);
-  location.reload();
+  if (confirm("Usunąć wszystkie zapisane dane?")) {
+    localStorage.removeItem(KLUCZ_DANYCH);
+    location.reload();
+  }
 });
-
-odswiezLiczniki();
