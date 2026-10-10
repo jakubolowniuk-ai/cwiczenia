@@ -20,60 +20,120 @@
       <button class="przycisk" id="przycisk-nowe">+ Dodaj ćwiczenie</button>
 
       <div class="formularz" id="formularz-cwiczenia" hidden>
+        <h2 class="tytul-formularza" id="tytul-formularza">Nowe ćwiczenie</h2>
+
         <label for="pole-nazwa">Nazwa</label>
         <input type="text" id="pole-nazwa" placeholder="Np. Wiosłowanie">
 
         <label for="pole-rodzaj">Rodzaj aktywności</label>
         <select id="pole-rodzaj"></select>
 
-        <label for="pole-ilosc-typ">Miara ćwiczenia</label>
-        <select id="pole-ilosc-typ">
-          <option value="powtorzenia">Serie i powtórzenia</option>
-          <option value="czas">Czas</option>
-          <option value="dystans">Dystans</option>
-        </select>
+        <!-- Miara: serie i powtórzenia albo czas -->
+        <div id="blok-miary-serie" hidden>
+          <label for="pole-ilosc-typ">Miara ćwiczenia</label>
+          <select id="pole-ilosc-typ">
+            <option value="powtorzenia">Serie i powtórzenia</option>
+            <option value="czas">Czas</option>
+          </select>
 
-        <div class="rzad" id="ilosc-powtorzenia">
-          <div>
-            <label for="pole-serie">Serie</label>
-            <input type="number" id="pole-serie" min="1" inputmode="numeric" placeholder="3">
+          <div class="rzad" id="ilosc-powtorzenia">
+            <div>
+              <label for="pole-serie">Serie</label>
+              <input type="number" id="pole-serie" min="0" inputmode="numeric" value="0">
+            </div>
+            <div>
+              <label for="pole-powtorzenia">Powtórzenia</label>
+              <input type="number" id="pole-powtorzenia" min="0" inputmode="numeric" value="0">
+            </div>
           </div>
-          <div>
-            <label for="pole-powtorzenia">Powtórzenia</label>
-            <input type="number" id="pole-powtorzenia" min="1" inputmode="numeric" placeholder="12">
+
+          <div class="rzad" id="ilosc-czas" hidden>
+            <div>
+              <label for="pole-czas">Czas</label>
+              <input type="number" id="pole-czas" min="0" step="any" inputmode="decimal" value="0">
+            </div>
+            <div>
+              <label for="pole-czas-jednostka">Jednostka</label>
+              <select id="pole-czas-jednostka">
+                <option value="s">sekundy</option>
+                <option value="min">minuty</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="rzad" id="ilosc-czas" hidden>
-          <div>
-            <label for="pole-czas">Czas</label>
-            <input type="number" id="pole-czas" min="1" inputmode="decimal" placeholder="30">
+        <!-- Miara: dystans i czas (basen, bieganie) -->
+        <div id="blok-sesja" hidden>
+          <div class="rzad">
+            <div>
+              <label for="pole-sesja-dystans">Dystans</label>
+              <input type="number" id="pole-sesja-dystans" min="0" step="any" inputmode="decimal" value="0">
+            </div>
+            <div>
+              <label for="pole-sesja-dystans-jednostka">Jednostka</label>
+              <select id="pole-sesja-dystans-jednostka">
+                <option value="km">kilometry</option>
+                <option value="m">metry</option>
+              </select>
+            </div>
           </div>
-          <div>
-            <label for="pole-czas-jednostka">Jednostka</label>
-            <select id="pole-czas-jednostka">
-              <option value="s">sekundy</option>
-              <option value="min">minuty</option>
-            </select>
+          <div class="rzad">
+            <div>
+              <label for="pole-sesja-czas">Czas</label>
+              <input type="number" id="pole-sesja-czas" min="0" step="any" inputmode="decimal" value="0">
+            </div>
+            <div>
+              <label for="pole-sesja-czas-jednostka">Jednostka</label>
+              <select id="pole-sesja-czas-jednostka">
+                <option value="min">minuty</option>
+                <option value="s">sekundy</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="rzad" id="ilosc-dystans" hidden>
-          <div>
-            <label for="pole-dystans">Dystans</label>
-            <input type="number" id="pole-dystans" min="0" step="any" inputmode="decimal" placeholder="5">
+        <!-- Miara: powtórzenia i czas (trening statyczny) -->
+        <div id="blok-statyczna" hidden>
+          <div class="rzad">
+            <div>
+              <label for="pole-stat-powtorzenia">Powtórzenia</label>
+              <input type="number" id="pole-stat-powtorzenia" min="0" inputmode="numeric" value="0">
+            </div>
+            <div>
+              <label for="pole-stat-czas">Czas jednego powtórzenia</label>
+              <input type="number" id="pole-stat-czas" min="0" step="any" inputmode="decimal" value="0">
+            </div>
           </div>
-          <div>
-            <label for="pole-dystans-jednostka">Jednostka</label>
-            <select id="pole-dystans-jednostka">
-              <option value="km">kilometry</option>
-              <option value="m">metry</option>
-            </select>
+          <div class="rzad">
+            <div>
+              <label for="pole-stat-czas-jednostka">Jednostka czasu</label>
+              <select id="pole-stat-czas-jednostka">
+                <option value="s">sekundy</option>
+                <option value="min">minuty</option>
+              </select>
+            </div>
           </div>
         </div>
 
-        <div class="etykieta">Partie mięśni</div>
-        <div id="pole-partie" class="wybory"></div>
+        <!-- Partie mięśni: najpierw ptaszek, potem lista, potem podsumowanie -->
+        <label class="wybor wybor-pelny">
+          <input type="checkbox" id="pole-czy-partie">
+          Ćwiczenie uwzględnia partię mięśni
+        </label>
+
+        <div class="panel" id="panel-partii" hidden>
+          <div class="etykieta">Zaznacz partie mięśni</div>
+          <div id="pole-partie" class="wybory"></div>
+          <button class="przycisk" id="przycisk-gotowe">Gotowe</button>
+        </div>
+
+        <div class="podsumowanie" id="podsumowanie-partii" hidden>
+          <div>
+            <div class="etykieta-mala">Partie mięśni</div>
+            <div class="podsumowanie-tekst" id="tekst-partii"></div>
+          </div>
+          <button class="akcja" id="przycisk-zmien-partie">Zmień</button>
+        </div>
 
         <label for="pole-link">Link do filmu (opcjonalnie)</label>
         <input type="url" id="pole-link" placeholder="https://">
@@ -86,7 +146,21 @@
         </div>
       </div>
 
+      <div class="filtry" id="blok-filtrow" hidden>
+        <label for="pole-szukaj" class="etykieta-pola">Szukaj ćwiczenia</label>
+        <input type="search" id="pole-szukaj" placeholder="Wpisz nazwę">
+
+        <div class="etykieta-pola">Partie mięśni</div>
+        <div class="chipy" id="chipy-partie"></div>
+
+        <div class="etykieta-pola">Rodzaj aktywności</div>
+        <div class="chipy" id="chipy-rodzaje"></div>
+
+        <button class="akcja" id="przycisk-wyczysc" hidden>Wyczyść filtry</button>
+      </div>
+
       <p class="opis" id="pusta-lista">Nie masz jeszcze ćwiczeń. Dodaj pierwsze.</p>
+      <p class="opis" id="brak-wynikow" hidden>Brak ćwiczeń dla wybranych filtrów.</p>
       <div id="lista-cwiczen"></div>
     </section>
 

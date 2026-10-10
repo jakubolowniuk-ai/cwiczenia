@@ -127,7 +127,7 @@ h1 {
   color: var(--tekst-szary);
 }
 
-.formularz label:first-child {
+.formularz > label:first-child {
   margin-top: 0;
 }
 
@@ -223,8 +223,112 @@ h1 {
 .rzad {
   display: flex;
   gap: 12px;
+  margin-top: 12px;
 }
 
 .rzad > div {
   flex: 1;
+}
+
+/* Pole wyboru partii na całą szerokość i odstęp listy partii */
+.formularz .wybor-pelny {
+  margin-top: 16px;
+}
+
+#pole-partie {
+  margin-top: 10px;
+}
+
+/* Tytuł formularza i panel wyboru partii */
+.tytul-formularza {
+  margin: 0 0 4px;
+  font-size: 20px;
+}
+
+.panel {
+  margin-top: 10px;
+  padding: 12px;
+  background: var(--tlo);
+  border-radius: 12px;
+}
+
+.panel .etykieta {
+  margin-top: 0;
+}
+
+.podsumowanie {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  padding: 10px 6px 10px 14px;
+  background: var(--tlo);
+  border-radius: 12px;
+}
+
+.etykieta-mala {
+  font-size: 13px;
+  color: var(--tekst-szary);
+}
+
+.podsumowanie-tekst {
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.karta-tekst {
+  min-width: 0;
+}
+
+/* Wyszukiwarka i filtry */
+.filtry {
+  margin-top: 16px;
+}
+
+.etykieta-pola {
+  display: block;
+  margin: 14px 0 6px;
+  font-size: 14px;
+  color: var(--tekst-szary);
+}
+
+.filtry .etykieta-pola:first-child {
+  margin-top: 0;
+}
+
+#pole-szukaj {
+  width: 100%;
+  height: 48px;
+  padding: 0 12px;
+  border: 1px solid var(--linia);
+  border-radius: 12px;
+  background: var(--karta);
+  color: var(--tekst);
+  font-size: 16px;
+  font-family: inherit;
+}
+
+.chipy {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.chip {
+  height: 40px;
+  padding: 0 14px;
+  border: 1px solid var(--linia);
+  border-radius: 20px;
+  background: var(--karta);
+  color: var(--tekst);
+  font-size: 14px;
+  font-family: inherit;
+}
+
+.chip.aktywny {
+  border-color: var(--akcent);
+  background: var(--akcent);
+  color: var(--tlo);
+  font-weight: 700;
 }
