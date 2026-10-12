@@ -17,6 +17,13 @@
     <section id="ekran-cwiczenia" class="ekran">
       <h1>Ćwiczenia</h1>
 
+      <div class="przelacznik">
+        <button class="segment aktywny" id="przelacznik-baza">Baza</button>
+        <button class="segment" id="przelacznik-treningi">Moje treningi</button>
+      </div>
+
+      <div id="widok-baza">
+
       <button class="przycisk" id="przycisk-nowe">+ Dodaj ćwiczenie</button>
 
       <div class="formularz" id="formularz-cwiczenia" hidden>
@@ -162,6 +169,49 @@
       <p class="opis" id="pusta-lista">Nie masz jeszcze ćwiczeń. Dodaj pierwsze.</p>
       <p class="opis" id="brak-wynikow" hidden>Brak ćwiczeń dla wybranych filtrów.</p>
       <div id="lista-cwiczen"></div>
+
+      </div>
+
+      <div id="widok-treningi" hidden>
+        <button class="przycisk" id="przycisk-nowy-trening">+ Dodaj trening</button>
+
+        <div class="formularz" id="formularz-treningu" hidden>
+          <h2 class="tytul-formularza" id="tytul-treningu">Nowy trening</h2>
+
+          <label for="pole-nazwa-treningu">Nazwa treningu</label>
+          <input type="text" id="pole-nazwa-treningu" placeholder="Np. Plecy A">
+
+          <div class="etykieta">Ćwiczenia w treningu</div>
+          <p class="opis" id="puste-wybrane">Nie dodano jeszcze ćwiczeń.</p>
+          <div id="wybrane-cwiczenia"></div>
+
+          <button class="przycisk drugi" id="przycisk-dodaj-cwiczenia">+ Dodaj ćwiczenia</button>
+
+          <div class="panel" id="panel-wyboru" hidden>
+            <label for="pole-szukaj-wyboru" class="etykieta-pola">Szukaj ćwiczenia</label>
+            <input type="search" id="pole-szukaj-wyboru" placeholder="Wpisz nazwę">
+
+            <div class="etykieta-pola">Partie mięśni</div>
+            <div class="chipy" id="chipy-partie-wyboru"></div>
+
+            <div class="etykieta-pola">Rodzaj aktywności</div>
+            <div class="chipy" id="chipy-rodzaje-wyboru"></div>
+
+            <div id="lista-wyboru"></div>
+            <button class="przycisk" id="przycisk-gotowe-wyboru">Gotowe</button>
+          </div>
+
+          <p class="blad" id="blad-treningu"></p>
+
+          <div>
+            <button class="przycisk" id="przycisk-zapisz-trening">Zapisz trening</button>
+            <button class="przycisk drugi" id="przycisk-anuluj-trening">Anuluj</button>
+          </div>
+        </div>
+
+        <p class="opis" id="puste-treningi">Nie masz jeszcze treningów. Dodaj pierwszy.</p>
+        <div id="lista-treningow"></div>
+      </div>
     </section>
 
     <section id="ekran-postep" class="ekran">
@@ -179,6 +229,7 @@
 
   <script src="dane.js"></script>
   <script src="cwiczenia.js"></script>
+  <script src="treningi.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

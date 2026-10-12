@@ -549,12 +549,30 @@ function rysujListe() {
 
     karta.appendChild(
       przyciskAkcji("Usuń", "usun", function () {
-        if (confirm("Usunąć ćwiczenie „" + cwiczenie.nazwa + "”?")) {
+        // Sprawdzamy, w ilu treningach jest to ćwiczenie
+        const uzycia = dane.treningi.filter(function (trening) {
+          return trening.cwiczeniaIds.indexOf(cwiczenie.id) !== -1;
+        }).length;
+
+        let pytanie = "Usunąć ćwiczenie „" + cwiczenie.nazwa + "”?";
+        if (uzycia > 0) {
+          pytanie += "\n\nZostanie też usunięte z treningów (" + uzycia + ").";
+        }
+
+        if (confirm(pytanie)) {
           dane.cwiczenia = dane.cwiczenia.filter(function (inne) {
             return inne.id !== cwiczenie.id;
           });
+          dane.treningi.forEach(function (trening) {
+            trening.cwiczeniaIds = trening.cwiczeniaIds.filter(function (id) {
+              return id !== cwiczenie.id;
+            });
+          });
           zapiszDane();
           rysujListe();
+          if (typeof rysujTreningi === "function") {
+            rysujTreningi();
+          }
         }
       })
     );

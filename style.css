@@ -133,6 +133,7 @@ h1 {
 
 .formularz input[type="text"],
 .formularz input[type="url"],
+.formularz input[type="search"],
 .formularz input[type="number"],
 .formularz select {
   width: 100%;
@@ -297,7 +298,8 @@ h1 {
   margin-top: 0;
 }
 
-#pole-szukaj {
+#pole-szukaj,
+#pole-szukaj-wyboru {
   width: 100%;
   height: 48px;
   padding: 0 12px;
@@ -331,4 +333,58 @@ h1 {
   background: var(--akcent);
   color: var(--tlo);
   font-weight: 700;
+}
+
+/* Przełącznik Baza / Moje treningi */
+.przelacznik {
+  display: flex;
+  margin: 12px 0;
+  padding: 4px;
+  background: var(--linia);
+  border-radius: 12px;
+}
+
+.segment {
+  flex: 1;
+  height: 44px;
+  border: 0;
+  border-radius: 9px;
+  background: none;
+  color: var(--tekst-szary);
+  font-size: 15px;
+  font-family: inherit;
+}
+
+.segment.aktywny {
+  background: var(--karta);
+  color: var(--tekst);
+  font-weight: 700;
+}
+
+/* Karty wewnątrz formularza i przyciski w treningu */
+.formularz .karta {
+  background: var(--tlo);
+}
+
+.akcja.strzalka {
+  justify-content: center;
+  width: 40px;
+  padding: 0;
+  font-size: 18px;
+}
+
+.akcja:disabled {
+  opacity: 0.3;
+}
+
+.akcja.wybrane {
+  color: var(--tekst-szary);
+}
+
+#wybrane-cwiczenia {
+  margin-bottom: 4px;
+}
+
+#lista-wyboru {
+  margin: 12px 0 4px;
 }
