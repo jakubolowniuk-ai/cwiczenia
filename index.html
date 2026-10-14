@@ -340,12 +340,59 @@
         <button class="akcja" id="kr-od-nowa" hidden>Zacznij od nowa</button>
       </div>
 
-      <!-- Krok 2: na razie podgląd (wybór ćwiczeń dodamy w następnym kroku) -->
+      <!-- Krok 2: wybór treningu dla każdej aktywności -->
       <div id="kr-krok2" hidden>
-        <h2 class="tytul-formularza">Wybór ćwiczeń</h2>
-        <p class="opis">Ten krok dodamy w następnej wersji. Twoje aktywności są zapisane jako szkic planu:</p>
-        <div id="kr-podglad"></div>
-        <button class="przycisk drugi wielki" id="kr-wroc-krok1">Wróć do aktywności</button>
+
+        <div id="kr2-widok-lista">
+          <h2 class="tytul-formularza">Wybierz treningi</h2>
+          <p class="opis">Dla każdej aktywności wybierz gotowy trening albo zbuduj nowy z sugerowanych ćwiczeń.</p>
+          <div id="kr2-lista"></div>
+          <p class="blad" id="kr2-blad"></p>
+          <button class="przycisk wielki" id="kr2-dalej">Dalej</button>
+        </div>
+
+        <div id="kr2-widok-wybor" hidden>
+          <h2 class="tytul-formularza" id="kr2-wybor-tytul">Trening</h2>
+          <label class="wybor wybor-pelny">
+            <input type="checkbox" id="kr2-wszystkie-treningi">
+            Pokaż wszystkie treningi
+          </label>
+          <p class="opis" id="kr2-brak-treningow" hidden></p>
+          <div id="kr2-treningi"></div>
+          <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy trening</button>
+          <button class="przycisk drugi wielki" id="kr2-wybor-wstecz">Wróć</button>
+        </div>
+
+        <div id="kr2-widok-budowa" hidden>
+          <h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2>
+          <div class="formularz">
+            <label for="kr2-nazwa">Nazwa treningu</label>
+            <input type="text" id="kr2-nazwa" placeholder="Np. Plecy A">
+
+            <div class="etykieta">Sugerowane ćwiczenia</div>
+            <label class="wybor wybor-pelny">
+              <input type="checkbox" id="kr2-wszystkie">
+              Pokaż wszystkie ćwiczenia z bazy
+            </label>
+            <div id="kr2-cwiczenia"></div>
+            <p class="opis" id="kr2-wybrano"></p>
+
+            <p class="blad" id="kr2-blad-budowy"></p>
+            <div>
+              <button class="przycisk" id="kr2-zapisz">Zapisz i wybierz</button>
+              <button class="przycisk drugi" id="kr2-anuluj">Anuluj</button>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- Krok 3: na razie podgląd (rozłożenie na dni dodamy w następnym kroku) -->
+      <div id="kr-krok3" hidden>
+        <h2 class="tytul-formularza">Rozłożenie na dni</h2>
+        <p class="opis">Ten krok dodamy w następnej wersji. Dotychczas wybrane:</p>
+        <div id="kr3-podglad"></div>
+        <button class="przycisk drugi wielki" id="kr3-wroc">Wróć do wyboru treningów</button>
       </div>
 
     </div>
@@ -355,6 +402,7 @@
   <script src="cwiczenia.js"></script>
   <script src="treningi.js"></script>
   <script src="kreator.js"></script>
+  <script src="kreator2.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

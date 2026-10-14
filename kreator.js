@@ -14,6 +14,7 @@ const krPostep = [
 ];
 const krKrok1 = document.getElementById("kr-krok1");
 const krKrok2 = document.getElementById("kr-krok2");
+const krKrok3 = document.getElementById("kr-krok3");
 
 // Krok 1
 const krOkresTydzien = document.getElementById("kr-okres-tydzien");
@@ -47,10 +48,6 @@ const krBlad = document.getElementById("kr-blad");
 const krZapiszAktywnosc = document.getElementById("kr-zapisz-aktywnosc");
 const krAnulujAktywnosc = document.getElementById("kr-anuluj-aktywnosc");
 const krUsunAktywnosc = document.getElementById("kr-usun-aktywnosc");
-
-// Krok 2 (podgląd)
-const krPodglad = document.getElementById("kr-podglad");
-const krWrocKrok1 = document.getElementById("kr-wroc-krok1");
 
 // Wejścia do kreatora
 const dzisUtworzPlan = document.getElementById("dzis-utworz-plan");
@@ -156,6 +153,7 @@ function pokazKrok(numer) {
   krokKreatora = numer;
   krKrok1.hidden = numer !== 1;
   krKrok2.hidden = numer !== 2;
+  krKrok3.hidden = numer !== 3;
   krEtykietaKroku.textContent = "Krok " + numer + " z 3";
   krPostep.forEach(function (pasek, indeks) {
     pasek.classList.toggle("aktywny", indeks < numer);
@@ -439,18 +437,20 @@ function dalejZKroku1() {
   krBladKroku.textContent = "";
   zapiszSzkic();
 
-  // Krok 2 jest na razie podglądem szkicu
-  krPodglad.innerHTML = "";
-  szkic.aktywnosci.forEach(function (aktywnosc) {
-    const opis = opisAktywnosci(aktywnosc);
-    krPodglad.appendChild(zrobKarte(opis.tytul, opis.podtytul));
-  });
+  // Krok 2: wybór treningów (kreator2.js)
+  rysujKrok2();
   pokazKrok(2);
+  kreator.querySelector(".kreator-tresc").scrollTop = 0;
 }
 
 function wstecz() {
-  if (krokKreatora === 2) {
-    pokazKrok(1);
+  if (krokKreatora === 3) {
+    pokazKrok(2);
+  } else if (krokKreatora === 2) {
+    // Najpierw zamykamy ewentualny widok wyboru lub budowy treningu
+    if (!krok2Wstecz()) {
+      pokazKrok(1);
+    }
   } else if (!krFormularz.hidden) {
     zamknijFormularzAktywnosci();
   } else {
@@ -489,9 +489,6 @@ krAnulujAktywnosc.addEventListener("click", zamknijFormularzAktywnosci);
 krUsunAktywnosc.addEventListener("click", usunAktywnosc);
 krDalej.addEventListener("click", dalejZKroku1);
 krOdNowa.addEventListener("click", zacznijOdNowa);
-krWrocKrok1.addEventListener("click", function () {
-  pokazKrok(1);
-});
 
 // Po dotknięciu pola liczbowego zaznaczamy jego zawartość (np. 0)
 krFormularz.querySelectorAll('input[type="number"]').forEach(function (pole) {
