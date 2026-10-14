@@ -496,6 +496,9 @@ function wyczyscFiltry() {
 // Rysuje listę ćwiczeń na ekranie (tylko te, które pasują do filtrów)
 function rysujListe() {
   listaCwiczen.innerHTML = "";
+  if (typeof odswiezPrzelacznik === "function") {
+    odswiezPrzelacznik();
+  }
 
   const widoczne = dane.cwiczenia.filter(pasujeDoFiltrow);
   const brakCwiczen = dane.cwiczenia.length === 0;
@@ -533,11 +536,11 @@ function rysujListe() {
 
     if (cwiczenie.link) {
       const film = document.createElement("a");
-      film.className = "akcja";
+      film.className = "akcja film";
       film.href = cwiczenie.link;
       film.target = "_blank";
       film.rel = "noopener";
-      film.textContent = "Film";
+      film.textContent = "▶ Film";
       karta.appendChild(film);
     }
 

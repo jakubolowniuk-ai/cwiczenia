@@ -335,30 +335,28 @@ h1 {
   font-weight: 700;
 }
 
-/* Przełącznik Baza / Moje treningi */
+/* Przełącznik Baza ćwiczeń / Moje treningi: dwa wyraźne przyciski */
 .przelacznik {
   display: flex;
-  margin: 12px 0;
-  padding: 4px;
-  background: var(--linia);
-  border-radius: 12px;
+  gap: 8px;
+  margin: 12px 0 16px;
 }
 
 .segment {
   flex: 1;
-  height: 44px;
-  border: 0;
-  border-radius: 9px;
-  background: none;
-  color: var(--tekst-szary);
-  font-size: 15px;
+  height: 52px;
+  border: 2px solid var(--akcent);
+  border-radius: 14px;
+  background: var(--karta);
+  color: var(--akcent);
+  font-size: 16px;
+  font-weight: 700;
   font-family: inherit;
 }
 
 .segment.aktywny {
-  background: var(--karta);
-  color: var(--tekst);
-  font-weight: 700;
+  background: var(--akcent);
+  color: var(--tlo);
 }
 
 /* Karty wewnątrz formularza i przyciski w treningu */
@@ -387,4 +385,32 @@ h1 {
 
 #lista-wyboru {
   margin: 12px 0 4px;
+}
+
+/* Przycisk filmu przy ćwiczeniu */
+.akcja.film {
+  white-space: nowrap;
+}
+
+/* Rozwijana lista ćwiczeń w treningu */
+.karta.zwijana {
+  flex-wrap: wrap;
+}
+
+.szczegoly {
+  flex-basis: 100%;
+  margin-top: 8px;
+  padding-top: 4px;
+  border-top: 1px solid var(--linia);
+}
+
+.szczegol-wiersz {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  padding: 6px 0;
+}
+
+.szczegol-wiersz .karta-tekst {
+  flex: 1;
 }

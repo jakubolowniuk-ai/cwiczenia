@@ -70,6 +70,27 @@ function opisCwiczenia(cwiczenie) {
     .join(" · ");
 }
 
+// Dodaje do karty przycisk "▶ Film" (otwiera link), jeśli ćwiczenie ma film
+function dodajFilm(karta, cwiczenie) {
+  if (!cwiczenie.link) {
+    return;
+  }
+  const film = document.createElement("a");
+  film.className = "akcja film";
+  film.href = cwiczenie.link;
+  film.target = "_blank";
+  film.rel = "noopener";
+  film.textContent = "▶ Film";
+  film.setAttribute("aria-label", "Obejrzyj film: " + cwiczenie.nazwa);
+  karta.appendChild(film);
+}
+
+// Pokazuje w przełączniku liczbę ćwiczeń i treningów
+function odswiezPrzelacznik() {
+  przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.length + ")";
+  przelacznikTreningi.textContent = "Moje treningi (" + dane.treningi.length + ")";
+}
+
 // Tworzy kartę z nazwą i opisem (bez przycisków)
 function zrobKarte(nazwa, opis) {
   const karta = document.createElement("div");
@@ -149,6 +170,7 @@ function rysujWybrane() {
       rysujWybor();
     });
 
+    dodajFilm(karta, cwiczenie);
     karta.appendChild(wyzej);
     karta.appendChild(nizej);
     karta.appendChild(usun);
@@ -227,6 +249,7 @@ function rysujWybor() {
       rysujWybor();
     });
 
+    dodajFilm(karta, cwiczenie);
     karta.appendChild(przycisk);
     listaWyboru.appendChild(karta);
   });
@@ -317,6 +340,7 @@ function zapiszTrening() {
 // ===== Lista treningów =====
 
 function rysujTreningi() {
+  odswiezPrzelacznik();
   listaTreningow.innerHTML = "";
   pusteTreningi.hidden = dane.treningi.length > 0;
 
@@ -351,6 +375,40 @@ function rysujTreningi() {
     }).join(", ");
     karta.firstChild.appendChild(nazwyCwiczen);
 
+    // Rozwijana lista ćwiczeń treningu, każde z przyciskiem do filmu
+    karta.classList.add("zwijana");
+    const szczegoly = document.createElement("div");
+    szczegoly.className = "szczegoly";
+    szczegoly.hidden = true;
+
+    cwiczenia.forEach(function (cwiczenie, indeks) {
+      const wiersz = document.createElement("div");
+      wiersz.className = "szczegol-wiersz";
+
+      const tekst = document.createElement("div");
+      tekst.className = "karta-tekst";
+
+      const nazwaCw = document.createElement("div");
+      nazwaCw.className = "karta-nazwa";
+      nazwaCw.textContent = (indeks + 1) + ". " + cwiczenie.nazwa;
+
+      const opisCw = document.createElement("div");
+      opisCw.className = "karta-opis";
+      opisCw.textContent = opisIlosci(cwiczenie.ilosc);
+
+      tekst.appendChild(nazwaCw);
+      tekst.appendChild(opisCw);
+      wiersz.appendChild(tekst);
+      dodajFilm(wiersz, cwiczenie);
+      szczegoly.appendChild(wiersz);
+    });
+
+    const pokaz = przyciskAkcji("Pokaż", "", function () {
+      szczegoly.hidden = !szczegoly.hidden;
+      pokaz.textContent = szczegoly.hidden ? "Pokaż" : "Ukryj";
+    });
+    karta.appendChild(pokaz);
+
     karta.appendChild(
       przyciskAkcji("Edytuj", "", function () {
         otworzFormularzTreningu(trening);
@@ -369,6 +427,7 @@ function rysujTreningi() {
       })
     );
 
+    karta.appendChild(szczegoly);
     listaTreningow.appendChild(karta);
   });
 }
