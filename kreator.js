@@ -1,0 +1,488 @@
+// ===== Kreator planu =====
+// Krok 1: okres (tydzień lub miesiąc) i aktywności z liczbą razy.
+// Kroki 2 i 3 (wybór ćwiczeń, rozłożenie na dni) dodamy w następnych wersjach.
+// Rozpoczęty plan zapisujemy jako szkic w dane.szkicPlanu.
+
+// Elementy kreatora
+const kreator = document.getElementById("kreator");
+const krWstecz = document.getElementById("kr-wstecz");
+const krEtykietaKroku = document.getElementById("kr-etykieta-kroku");
+const krPostep = [
+  document.getElementById("kr-postep-1"),
+  document.getElementById("kr-postep-2"),
+  document.getElementById("kr-postep-3")
+];
+const krKrok1 = document.getElementById("kr-krok1");
+const krKrok2 = document.getElementById("kr-krok2");
+
+// Krok 1
+const krOkresTydzien = document.getElementById("kr-okres-tydzien");
+const krOkresMiesiac = document.getElementById("kr-okres-miesiac");
+const krPusta = document.getElementById("kr-pusta");
+const krLista = document.getElementById("kr-lista");
+const krDodaj = document.getElementById("kr-dodaj");
+const krPodpowiedz = document.getElementById("kr-podpowiedz");
+const krBladKroku = document.getElementById("kr-blad-kroku");
+const krDalej = document.getElementById("kr-dalej");
+const krOdNowa = document.getElementById("kr-od-nowa");
+
+// Formularz aktywności
+const krFormularz = document.getElementById("kr-formularz");
+const krTytulFormularza = document.getElementById("kr-tytul-formularza");
+const krRodzaj = document.getElementById("kr-rodzaj");
+const krPolePartia = document.getElementById("kr-pole-partia");
+const krPartia = document.getElementById("kr-partia");
+const krPoleStyl = document.getElementById("kr-pole-styl");
+const krStyl = document.getElementById("kr-styl");
+const krPoleDlugosci = document.getElementById("kr-pole-dlugosci");
+const krDlugosci = document.getElementById("kr-dlugosci");
+const krPoleDystans = document.getElementById("kr-pole-dystans");
+const krDystans = document.getElementById("kr-dystans");
+const krDystansJednostka = document.getElementById("kr-dystans-jednostka");
+const krPoleCzas = document.getElementById("kr-pole-czas");
+const krCzas = document.getElementById("kr-czas");
+const krCzasJednostka = document.getElementById("kr-czas-jednostka");
+const krRazy = document.getElementById("kr-razy");
+const krBlad = document.getElementById("kr-blad");
+const krZapiszAktywnosc = document.getElementById("kr-zapisz-aktywnosc");
+const krAnulujAktywnosc = document.getElementById("kr-anuluj-aktywnosc");
+const krUsunAktywnosc = document.getElementById("kr-usun-aktywnosc");
+
+// Krok 2 (podgląd)
+const krPodglad = document.getElementById("kr-podglad");
+const krWrocKrok1 = document.getElementById("kr-wroc-krok1");
+
+// Wejścia do kreatora
+const dzisUtworzPlan = document.getElementById("dzis-utworz-plan");
+const postepNowyPlan = document.getElementById("postep-nowy-plan");
+
+// Liczba dni w okresie (uproszczenie: miesiąc = 30 dni)
+const DNI_W_OKRESIE = { tydzien: 7, miesiac: 30 };
+
+// Aktualny szkic planu, krok kreatora i edytowana aktywność
+let szkic = { okres: "tydzien", aktywnosci: [] };
+let krokKreatora = 1;
+let edytowanaAktywnoscId = null;
+
+// ===== Pomocnicze =====
+
+// Poprawna forma słowa zależnie od liczby, np. 1 sesja, 2 sesje, 5 sesji
+function odmiana(liczba, jeden, kilka, wiele) {
+  if (liczba === 1) {
+    return jeden;
+  }
+  const reszta10 = liczba % 10;
+  const reszta100 = liczba % 100;
+  if (reszta10 >= 2 && reszta10 <= 4 && !(reszta100 >= 12 && reszta100 <= 14)) {
+    return kilka;
+  }
+  return wiele;
+}
+
+function zapiszSzkic() {
+  dane.szkicPlanu = szkic;
+  zapiszDane();
+}
+
+// Czy w szkicu coś już jest (żeby pokazać "Zacznij od nowa")
+function szkicNiepusty() {
+  return szkic.aktywnosci.length > 0;
+}
+
+// Tytuł i podtytuł karty aktywności, np. "Plecy" i "Trening ciała · 3×"
+function opisAktywnosci(aktywnosc) {
+  const rodzaj = znajdzKategorie(aktywnosc.rodzajId);
+  const nazwaRodzaju = rodzaj ? rodzaj.nazwa : "?";
+  const czesci = [];
+  let tytul = nazwaRodzaju;
+
+  if (aktywnosc.partiaId) {
+    tytul = nazwaKategorii(aktywnosc.partiaId);
+    czesci.push(nazwaRodzaju);
+  }
+  if (aktywnosc.styl) {
+    czesci.push(aktywnosc.styl);
+  }
+  if (aktywnosc.dlugosci) {
+    czesci.push(aktywnosc.dlugosci + " " + (aktywnosc.dlugosci === 1 ? "długość" : "długości"));
+  }
+  if (aktywnosc.dystans) {
+    czesci.push(aktywnosc.dystans.wartosc + " " + aktywnosc.dystans.jednostka);
+  }
+  if (aktywnosc.czas) {
+    czesci.push(aktywnosc.czas.wartosc + " " + aktywnosc.czas.jednostka);
+  }
+  czesci.push(aktywnosc.razy + "×");
+
+  return { tytul: tytul, podtytul: czesci.join(" · ") };
+}
+
+// ===== Otwieranie i zamykanie kreatora =====
+
+function otworzKreator() {
+  // Wznawiamy rozpoczęty szkic albo zaczynamy nowy
+  szkic = dane.szkicPlanu
+    ? JSON.parse(JSON.stringify(dane.szkicPlanu))
+    : { okres: "tydzien", aktywnosci: [] };
+
+  edytowanaAktywnoscId = null;
+  krFormularz.hidden = true;
+  krBladKroku.textContent = "";
+  przygotujSelectyAktywnosci();
+  pokazKrok(1);
+  rysujKrok1();
+  kreator.hidden = false;
+  kreator.querySelector(".kreator-tresc").scrollTop = 0;
+}
+
+function zamknijKreator() {
+  kreator.hidden = true;
+}
+
+function pokazKrok(numer) {
+  krokKreatora = numer;
+  krKrok1.hidden = numer !== 1;
+  krKrok2.hidden = numer !== 2;
+  krEtykietaKroku.textContent = "Krok " + numer + " z 3";
+  krPostep.forEach(function (pasek, indeks) {
+    pasek.classList.toggle("aktywny", indeks < numer);
+  });
+}
+
+// ===== Krok 1: okres i lista aktywności =====
+
+function ustawOkres(okres) {
+  szkic.okres = okres;
+  zapiszSzkic();
+  rysujKrok1();
+}
+
+function rysujKrok1() {
+  krOkresTydzien.classList.toggle("aktywny", szkic.okres === "tydzien");
+  krOkresMiesiac.classList.toggle("aktywny", szkic.okres === "miesiac");
+
+  krLista.innerHTML = "";
+  krPusta.hidden = szkic.aktywnosci.length > 0;
+
+  szkic.aktywnosci.forEach(function (aktywnosc) {
+    const opis = opisAktywnosci(aktywnosc);
+    const karta = zrobKarte(opis.tytul, opis.podtytul);
+    karta.appendChild(
+      przyciskAkcji("Edytuj", "", function () {
+        otworzFormularzAktywnosci(aktywnosc);
+      })
+    );
+    krLista.appendChild(karta);
+  });
+
+  // Podpowiedź: ile sesji w ilu dniach (miękkie ostrzeżenie, bez blokady)
+  const razem = szkic.aktywnosci.reduce(function (suma, a) {
+    return suma + a.razy;
+  }, 0);
+  const dni = DNI_W_OKRESIE[szkic.okres];
+  if (razem === 0) {
+    krPodpowiedz.textContent = "";
+  } else {
+    let tekst = "Razem " + razem + " " + odmiana(razem, "sesja", "sesje", "sesji") + " w " + dni + " dniach.";
+    if (razem > dni) {
+      tekst += " To więcej niż dni w okresie, więc w niektóre dni będzie kilka sesji.";
+    }
+    krPodpowiedz.textContent = tekst;
+  }
+
+  krOdNowa.hidden = !szkicNiepusty();
+  krDalej.hidden = !krFormularz.hidden;
+  krDodaj.hidden = !krFormularz.hidden;
+}
+
+// ===== Formularz aktywności =====
+
+// Wypełnia listy wyboru: rodzaje, partie i style pływania
+function przygotujSelectyAktywnosci() {
+  krRodzaj.innerHTML = "";
+  const pustaOpcja = document.createElement("option");
+  pustaOpcja.value = "";
+  pustaOpcja.textContent = "Wybierz rodzaj";
+  krRodzaj.appendChild(pustaOpcja);
+  kategorieTypu("rodzaj").forEach(function (kategoria) {
+    const opcja = document.createElement("option");
+    opcja.value = kategoria.id;
+    opcja.textContent = kategoria.nazwa;
+    krRodzaj.appendChild(opcja);
+  });
+
+  krPartia.innerHTML = "";
+  const pustaPartia = document.createElement("option");
+  pustaPartia.value = "";
+  pustaPartia.textContent = "Wybierz partię";
+  krPartia.appendChild(pustaPartia);
+  kategorieTypu("partia").forEach(function (kategoria) {
+    const opcja = document.createElement("option");
+    opcja.value = kategoria.id;
+    opcja.textContent = kategoria.nazwa;
+    krPartia.appendChild(opcja);
+  });
+
+  krStyl.innerHTML = "";
+  const pustyStyl = document.createElement("option");
+  pustyStyl.value = "";
+  pustyStyl.textContent = "Wybierz styl";
+  krStyl.appendChild(pustyStyl);
+  dane.stylePlywania.forEach(function (styl) {
+    const opcja = document.createElement("option");
+    opcja.value = styl;
+    opcja.textContent = styl;
+    krStyl.appendChild(opcja);
+  });
+}
+
+// Pokazuje tylko te pola, których wymaga wybrany rodzaj aktywności
+function ustawPolaAktywnosci() {
+  const rodzaj = znajdzKategorie(krRodzaj.value);
+  const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
+
+  krPolePartia.hidden = pola.indexOf("partia") === -1;
+  krPoleStyl.hidden = pola.indexOf("styl") === -1;
+  krPoleDlugosci.hidden = pola.indexOf("dlugosci") === -1;
+  krPoleDystans.hidden = pola.indexOf("dystans") === -1;
+  krPoleCzas.hidden = pola.indexOf("czas") === -1;
+}
+
+function pokazBladAktywnosci(tekst) {
+  krBlad.textContent = tekst;
+}
+
+// Otwiera formularz: pusty (nowa aktywność) albo wypełniony (edycja)
+function otworzFormularzAktywnosci(aktywnosc) {
+  pokazBladAktywnosci("");
+  krBladKroku.textContent = "";
+
+  // Zerujemy pola
+  krRodzaj.value = "";
+  krPartia.value = "";
+  krStyl.value = "";
+  krDlugosci.value = "0";
+  krDystans.value = "0";
+  krDystansJednostka.value = "km";
+  krCzas.value = "0";
+  krCzasJednostka.value = "min";
+  krRazy.value = "0";
+
+  if (aktywnosc) {
+    edytowanaAktywnoscId = aktywnosc.id;
+    krTytulFormularza.textContent = "Edycja aktywności";
+    krRodzaj.value = aktywnosc.rodzajId;
+    krPartia.value = aktywnosc.partiaId || "";
+    krStyl.value = aktywnosc.styl || "";
+    krDlugosci.value = aktywnosc.dlugosci || 0;
+    if (aktywnosc.dystans) {
+      krDystans.value = aktywnosc.dystans.wartosc;
+      krDystansJednostka.value = aktywnosc.dystans.jednostka;
+    }
+    if (aktywnosc.czas) {
+      krCzas.value = aktywnosc.czas.wartosc;
+      krCzasJednostka.value = aktywnosc.czas.jednostka;
+    }
+    krRazy.value = aktywnosc.razy;
+    krUsunAktywnosc.hidden = false;
+  } else {
+    edytowanaAktywnoscId = null;
+    krTytulFormularza.textContent = "Nowa aktywność";
+    krUsunAktywnosc.hidden = true;
+  }
+
+  ustawPolaAktywnosci();
+  krFormularz.hidden = false;
+  rysujKrok1();
+  krFormularz.scrollIntoView({ behavior: "smooth", block: "start" });
+}
+
+function zamknijFormularzAktywnosci() {
+  krFormularz.hidden = true;
+  edytowanaAktywnoscId = null;
+  rysujKrok1();
+}
+
+// Odczytuje pole liczbowe z jednostką: null (puste lub 0), false (błąd) albo obiekt
+function odczytajLiczbeZJednostka(pole, jednostka) {
+  const tekst = pole.value.trim();
+  if (tekst === "") {
+    return null;
+  }
+  const wartosc = Number(tekst);
+  if (isNaN(wartosc) || wartosc < 0) {
+    return false;
+  }
+  if (wartosc === 0) {
+    return null;
+  }
+  return { wartosc: wartosc, jednostka: jednostka.value };
+}
+
+// Sprawdza pola formularza i zapisuje aktywność w szkicu
+function zapiszAktywnosc() {
+  const rodzaj = znajdzKategorie(krRodzaj.value);
+  if (!rodzaj) {
+    pokazBladAktywnosci("Wybierz rodzaj aktywności.");
+    return;
+  }
+
+  const pola = rodzaj.polaPlanu || [];
+  const wpis = {
+    id: edytowanaAktywnoscId || "ak-" + Date.now(),
+    rodzajId: rodzaj.id,
+    partiaId: null,
+    styl: null,
+    dlugosci: null,
+    dystans: null,
+    czas: null,
+    razy: 0
+  };
+
+  if (pola.indexOf("partia") !== -1) {
+    if (krPartia.value === "") {
+      pokazBladAktywnosci("Wybierz partię mięśni.");
+      return;
+    }
+    wpis.partiaId = krPartia.value;
+  }
+
+  if (pola.indexOf("styl") !== -1) {
+    if (krStyl.value === "") {
+      pokazBladAktywnosci("Wybierz styl.");
+      return;
+    }
+    wpis.styl = krStyl.value;
+  }
+
+  if (pola.indexOf("dlugosci") !== -1) {
+    const dlugosci = Number(krDlugosci.value);
+    if (!(dlugosci >= 1)) {
+      pokazBladAktywnosci("Wpisz liczbę długości basenu (co najmniej 1).");
+      return;
+    }
+    wpis.dlugosci = dlugosci;
+  }
+
+  if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1) {
+    const dystans = pola.indexOf("dystans") !== -1
+      ? odczytajLiczbeZJednostka(krDystans, krDystansJednostka)
+      : null;
+    const czas = pola.indexOf("czas") !== -1
+      ? odczytajLiczbeZJednostka(krCzas, krCzasJednostka)
+      : null;
+
+    if (dystans === false || czas === false) {
+      pokazBladAktywnosci("Dystans i czas nie mogą być ujemne.");
+      return;
+    }
+    if (dystans === null && czas === null) {
+      pokazBladAktywnosci("Wpisz dystans lub czas (albo oba), większe od zera.");
+      return;
+    }
+    wpis.dystans = dystans;
+    wpis.czas = czas;
+  }
+
+  const razy = Number(krRazy.value);
+  if (!(razy >= 1) || Math.floor(razy) !== razy) {
+    pokazBladAktywnosci("Wpisz, ile razy w okresie (liczba całkowita, co najmniej 1).");
+    return;
+  }
+  wpis.razy = razy;
+
+  if (edytowanaAktywnoscId) {
+    szkic.aktywnosci = szkic.aktywnosci.map(function (inna) {
+      return inna.id === edytowanaAktywnoscId ? wpis : inna;
+    });
+  } else {
+    szkic.aktywnosci.push(wpis);
+  }
+
+  zapiszSzkic();
+  zamknijFormularzAktywnosci();
+}
+
+function usunAktywnosc() {
+  if (!edytowanaAktywnoscId) {
+    return;
+  }
+  if (confirm("Usunąć tę aktywność z planu?")) {
+    szkic.aktywnosci = szkic.aktywnosci.filter(function (inna) {
+      return inna.id !== edytowanaAktywnoscId;
+    });
+    zapiszSzkic();
+    zamknijFormularzAktywnosci();
+  }
+}
+
+// ===== Przejścia między krokami =====
+
+function dalejZKroku1() {
+  if (szkic.aktywnosci.length === 0) {
+    krBladKroku.textContent = "Dodaj co najmniej jedną aktywność.";
+    return;
+  }
+  krBladKroku.textContent = "";
+  zapiszSzkic();
+
+  // Krok 2 jest na razie podglądem szkicu
+  krPodglad.innerHTML = "";
+  szkic.aktywnosci.forEach(function (aktywnosc) {
+    const opis = opisAktywnosci(aktywnosc);
+    krPodglad.appendChild(zrobKarte(opis.tytul, opis.podtytul));
+  });
+  pokazKrok(2);
+}
+
+function wstecz() {
+  if (krokKreatora === 2) {
+    pokazKrok(1);
+  } else if (!krFormularz.hidden) {
+    zamknijFormularzAktywnosci();
+  } else {
+    zamknijKreator();
+  }
+}
+
+function zacznijOdNowa() {
+  if (confirm("Usunąć rozpoczęty plan i zacząć od nowa?")) {
+    szkic = { okres: "tydzien", aktywnosci: [] };
+    dane.szkicPlanu = null;
+    zapiszDane();
+    krFormularz.hidden = true;
+    rysujKrok1();
+  }
+}
+
+// ===== Podpięcie przycisków =====
+
+dzisUtworzPlan.addEventListener("click", otworzKreator);
+postepNowyPlan.addEventListener("click", otworzKreator);
+
+krWstecz.addEventListener("click", wstecz);
+krOkresTydzien.addEventListener("click", function () {
+  ustawOkres("tydzien");
+});
+krOkresMiesiac.addEventListener("click", function () {
+  ustawOkres("miesiac");
+});
+krDodaj.addEventListener("click", function () {
+  otworzFormularzAktywnosci(null);
+});
+krRodzaj.addEventListener("change", ustawPolaAktywnosci);
+krZapiszAktywnosc.addEventListener("click", zapiszAktywnosc);
+krAnulujAktywnosc.addEventListener("click", zamknijFormularzAktywnosci);
+krUsunAktywnosc.addEventListener("click", usunAktywnosc);
+krDalej.addEventListener("click", dalejZKroku1);
+krOdNowa.addEventListener("click", zacznijOdNowa);
+krWrocKrok1.addEventListener("click", function () {
+  pokazKrok(1);
+});
+
+// Po dotknięciu pola liczbowego zaznaczamy jego zawartość (np. 0)
+krFormularz.querySelectorAll('input[type="number"]').forEach(function (pole) {
+  pole.addEventListener("focus", function () {
+    pole.select();
+  });
+});

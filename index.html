@@ -11,7 +11,15 @@
   <main>
     <section id="ekran-dzis" class="ekran aktywny">
       <h1>Dziś</h1>
-      <p class="opis">Tutaj pojawią się dzisiejsze sesje.</p>
+
+      <div class="pusty-stan" id="dzis-brak-planu">
+        <div class="pusty-ikona">
+          <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
+        </div>
+        <div class="pusty-tytul">Nie masz jeszcze planu</div>
+        <p class="opis">Ułóż plan na tydzień lub miesiąc, a tutaj pojawią się Twoje sesje.</p>
+        <button class="przycisk wielki" id="dzis-utworz-plan">Utwórz plan</button>
+      </div>
     </section>
 
     <section id="ekran-cwiczenia" class="ekran">
@@ -217,6 +225,7 @@
     <section id="ekran-postep" class="ekran">
       <h1>Postęp</h1>
       <p class="opis">Tutaj będą cele i historia.</p>
+      <button class="przycisk wielki" id="postep-nowy-plan">Nowy plan</button>
       <button class="przycisk drugi" id="przycisk-reset">Wyczyść dane (tryb testowy)</button>
     </section>
   </main>
@@ -227,9 +236,125 @@
     <button class="zakladka" data-ekran="ekran-postep">Postęp</button>
   </nav>
 
+  <!-- Kreator planu: pełny ekran nad aplikacją -->
+  <div class="kreator" id="kreator" hidden>
+    <div class="kreator-naglowek">
+      <button class="wstecz" id="kr-wstecz" aria-label="Wstecz">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <div>
+        <div class="kreator-krok" id="kr-etykieta-kroku">Krok 1 z 3</div>
+        <h2 class="kreator-tytul">Nowy plan</h2>
+      </div>
+    </div>
+
+    <div class="kreator-postep">
+      <span class="aktywny" id="kr-postep-1"></span>
+      <span id="kr-postep-2"></span>
+      <span id="kr-postep-3"></span>
+    </div>
+
+    <div class="kreator-tresc">
+
+      <!-- Krok 1: okres i aktywności -->
+      <div id="kr-krok1">
+        <div class="etykieta-pola">Okres</div>
+        <div class="przelacznik">
+          <button class="segment aktywny" id="kr-okres-tydzien">Tydzień</button>
+          <button class="segment" id="kr-okres-miesiac">Miesiąc</button>
+        </div>
+
+        <div class="etykieta-pola">Aktywności</div>
+        <p class="opis" id="kr-pusta">Nie dodano jeszcze aktywności.</p>
+        <div id="kr-lista"></div>
+
+        <button class="przycisk-przerywany" id="kr-dodaj">+ Dodaj aktywność</button>
+
+        <div class="formularz" id="kr-formularz" hidden>
+          <h2 class="tytul-formularza" id="kr-tytul-formularza">Nowa aktywność</h2>
+
+          <label for="kr-rodzaj">Rodzaj aktywności</label>
+          <select id="kr-rodzaj"></select>
+
+          <div id="kr-pole-partia" hidden>
+            <label for="kr-partia">Partia mięśni</label>
+            <select id="kr-partia"></select>
+          </div>
+
+          <div id="kr-pole-styl" hidden>
+            <label for="kr-styl">Styl</label>
+            <select id="kr-styl"></select>
+          </div>
+
+          <div id="kr-pole-dlugosci" hidden>
+            <label for="kr-dlugosci">Liczba długości basenu</label>
+            <input type="number" id="kr-dlugosci" min="0" inputmode="numeric" value="0">
+          </div>
+
+          <div class="rzad" id="kr-pole-dystans" hidden>
+            <div>
+              <label for="kr-dystans">Dystans</label>
+              <input type="number" id="kr-dystans" min="0" step="any" inputmode="decimal" value="0">
+            </div>
+            <div>
+              <label for="kr-dystans-jednostka">Jednostka</label>
+              <select id="kr-dystans-jednostka">
+                <option value="km">kilometry</option>
+                <option value="m">metry</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="rzad" id="kr-pole-czas" hidden>
+            <div>
+              <label for="kr-czas">Czas</label>
+              <input type="number" id="kr-czas" min="0" step="any" inputmode="decimal" value="0">
+            </div>
+            <div>
+              <label for="kr-czas-jednostka">Jednostka</label>
+              <select id="kr-czas-jednostka">
+                <option value="min">minuty</option>
+                <option value="s">sekundy</option>
+              </select>
+            </div>
+          </div>
+
+          <div>
+            <label for="kr-razy">Ile razy w okresie</label>
+            <input type="number" id="kr-razy" min="0" inputmode="numeric" value="0">
+          </div>
+
+          <p class="blad" id="kr-blad"></p>
+
+          <div>
+            <button class="przycisk" id="kr-zapisz-aktywnosc">Zapisz</button>
+            <button class="przycisk drugi" id="kr-anuluj-aktywnosc">Anuluj</button>
+            <button class="przycisk drugi" id="kr-usun-aktywnosc" hidden>Usuń</button>
+          </div>
+        </div>
+
+        <p class="podpowiedz" id="kr-podpowiedz"></p>
+        <p class="blad" id="kr-blad-kroku"></p>
+
+        <button class="przycisk wielki" id="kr-dalej">Dalej</button>
+        <button class="akcja" id="kr-od-nowa" hidden>Zacznij od nowa</button>
+      </div>
+
+      <!-- Krok 2: na razie podgląd (wybór ćwiczeń dodamy w następnym kroku) -->
+      <div id="kr-krok2" hidden>
+        <h2 class="tytul-formularza">Wybór ćwiczeń</h2>
+        <p class="opis">Ten krok dodamy w następnej wersji. Twoje aktywności są zapisane jako szkic planu:</p>
+        <div id="kr-podglad"></div>
+        <button class="przycisk drugi wielki" id="kr-wroc-krok1">Wróć do aktywności</button>
+      </div>
+
+    </div>
+  </div>
+
   <script src="dane.js"></script>
   <script src="cwiczenia.js"></script>
   <script src="treningi.js"></script>
+  <script src="kreator.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

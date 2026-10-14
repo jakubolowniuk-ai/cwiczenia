@@ -6,23 +6,27 @@ const KLUCZ_DANYCH = "cwiczenia-dane-v1";
 //   "serie"     = serie i powtórzenia albo czas
 //   "sesja"     = dystans i czas
 //   "statyczna" = powtórzenia i czas
+// "polaPlanu" mówi, jakie pola pokazać przy dodawaniu aktywności w kreatorze planu
+// (zawsze dochodzi jeszcze "ile razy w okresie")
 // "wersjaUstawien" rośnie, gdy zmieniamy te ustawienia, żeby starsze dane też się zaktualizowały
 function domyslneDane() {
   return {
-    wersjaUstawien: 2,
+    wersjaUstawien: 3,
     kategorie: [
-      { id: "rodzaj-cialo", nazwa: "Trening ciała", typ: "rodzaj", miara: "serie" },
-      { id: "rodzaj-statyczny", nazwa: "Trening statyczny", typ: "rodzaj", miara: "statyczna" },
-      { id: "rodzaj-rozciaganie", nazwa: "Rozciąganie", typ: "rodzaj", miara: "serie" },
-      { id: "rodzaj-bieganie", nazwa: "Bieganie", typ: "rodzaj", miara: "sesja" },
-      { id: "rodzaj-basen", nazwa: "Basen", typ: "rodzaj", miara: "sesja" },
+      { id: "rodzaj-cialo", nazwa: "Trening ciała", typ: "rodzaj", miara: "serie", polaPlanu: ["partia"] },
+      { id: "rodzaj-statyczny", nazwa: "Trening statyczny", typ: "rodzaj", miara: "statyczna", polaPlanu: [] },
+      { id: "rodzaj-rozciaganie", nazwa: "Rozciąganie", typ: "rodzaj", miara: "serie", polaPlanu: [] },
+      { id: "rodzaj-bieganie", nazwa: "Bieganie", typ: "rodzaj", miara: "sesja", polaPlanu: ["dystans", "czas"] },
+      { id: "rodzaj-basen", nazwa: "Basen", typ: "rodzaj", miara: "sesja", polaPlanu: ["styl", "dlugosci"] },
       { id: "partia-plecy", nazwa: "Plecy", typ: "partia" },
       { id: "partia-brzuch", nazwa: "Brzuch", typ: "partia" },
       { id: "partia-klatka", nazwa: "Klatka piersiowa", typ: "partia" },
       { id: "partia-nogi", nazwa: "Nogi", typ: "partia" }
     ],
+    stylePlywania: ["Kraul", "Grzbietowy", "Klasyczny", "Motylkowy", "Dowolny"],
     cwiczenia: [],
     treningi: [],
+    szkicPlanu: null,
     plany: [],
     historia: [],
     ustawienia: { godzinaAlarmu: "18:30" }
@@ -49,9 +53,13 @@ function uzupelnijDane(zapisane) {
       }
     }
 
-    // Starsza wersja ustawień: nadpisujemy miarę nowym ustawieniem
-    if (zapisane.wersjaUstawien !== startowe.wersjaUstawien && domyslna.miara) {
-      istniejaca.miara = domyslna.miara;
+    // Starsza wersja ustawień: nadpisujemy ustawienia formularzy nowymi
+    if (zapisane.wersjaUstawien !== startowe.wersjaUstawien) {
+      ["miara", "polaPlanu"].forEach(function (klucz) {
+        if (domyslna[klucz] !== undefined) {
+          istniejaca[klucz] = domyslna[klucz];
+        }
+      });
     }
   });
 
@@ -62,6 +70,14 @@ function uzupelnijDane(zapisane) {
       zapisane[nazwa] = [];
     }
   });
+
+  if (!Array.isArray(zapisane.stylePlywania)) {
+    zapisane.stylePlywania = startowe.stylePlywania;
+  }
+
+  if (!("szkicPlanu" in zapisane)) {
+    zapisane.szkicPlanu = null;
+  }
 
   if (!zapisane.ustawienia) {
     zapisane.ustawienia = startowe.ustawienia;
