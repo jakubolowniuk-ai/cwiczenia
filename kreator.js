@@ -119,7 +119,20 @@ function opisAktywnosci(aktywnosc) {
 
 // ===== Otwieranie i zamykanie kreatora =====
 
+// Wersja ustawień w dane.js, której wymaga kreator
+const WYMAGANA_WERSJA_DANYCH = 3;
+
 function otworzKreator() {
+  // Jeśli plik dane.js jest w starej wersji, kreator nie ma ustawień i nie zadziała.
+  // Zamiast milczeć, mówimy o tym wprost.
+  if (dane.wersjaUstawien !== WYMAGANA_WERSJA_DANYCH || !Array.isArray(dane.stylePlywania)) {
+    alert(
+      "Kreator nie może się otworzyć, bo plik dane.js na GitHubie jest w starej wersji.\n\n" +
+      "Wgraj go ponownie (razem z kreator.js, index.html i style.css), odśwież stronę i spróbuj jeszcze raz."
+    );
+    return;
+  }
+
   // Wznawiamy rozpoczęty szkic albo zaczynamy nowy
   szkic = dane.szkicPlanu
     ? JSON.parse(JSON.stringify(dane.szkicPlanu))
