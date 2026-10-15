@@ -194,44 +194,6 @@
             <select id="kr-partia"></select>
           </div>
 
-          <div id="kr-pole-styl" hidden>
-            <label for="kr-styl">Styl</label>
-            <select id="kr-styl"></select>
-          </div>
-
-          <div id="kr-pole-dlugosci" hidden>
-            <label for="kr-dlugosci">Liczba długości basenu</label>
-            <input type="number" id="kr-dlugosci" min="0" inputmode="numeric" value="0">
-          </div>
-
-          <div class="rzad" id="kr-pole-dystans" hidden>
-            <div>
-              <label for="kr-dystans">Dystans</label>
-              <input type="number" id="kr-dystans" min="0" step="any" inputmode="decimal" value="0">
-            </div>
-            <div>
-              <label for="kr-dystans-jednostka">Jednostka</label>
-              <select id="kr-dystans-jednostka">
-                <option value="km">kilometry</option>
-                <option value="m">metry</option>
-              </select>
-            </div>
-          </div>
-
-          <div class="rzad" id="kr-pole-czas" hidden>
-            <div>
-              <label for="kr-czas">Czas</label>
-              <input type="number" id="kr-czas" min="0" step="any" inputmode="decimal" value="0">
-            </div>
-            <div>
-              <label for="kr-czas-jednostka">Jednostka</label>
-              <select id="kr-czas-jednostka">
-                <option value="min">minuty</option>
-                <option value="s">sekundy</option>
-              </select>
-            </div>
-          </div>
-
           <div>
             <label for="kr-razy">Ile razy w okresie</label>
             <input type="number" id="kr-razy" min="0" inputmode="numeric" value="0">
@@ -258,7 +220,7 @@
 
         <div id="kr2-widok-lista">
           <h2 class="tytul-formularza">Wybierz treningi</h2>
-          <p class="opis">Dla każdej aktywności wybierz gotowy trening albo zbuduj nowy, a potem ustaw parametry każdego ćwiczenia (serie, powtórzenia, czas).</p>
+          <p class="opis">Dla każdej aktywności wybierz gotowy trening albo zbuduj nowy, a potem ustaw parametry (serie, powtórzenia, czas, dystans, styl). Bieganie i basen mają tylko parametry.</p>
           <div id="kr2-lista"></div>
           <p class="blad" id="kr2-blad"></p>
           <button class="przycisk wielki" id="kr2-dalej">Dalej</button>

@@ -3,7 +3,8 @@
 // wybieramy gotowy trening z "Moje treningi" albo budujemy nowy z sugerowanych ćwiczeń.
 // Potem dla każdego ćwiczenia treningu ustawiamy parametry (serie, powtórzenia, czas).
 // Parametry zapisujemy w aktywności planu: aktywnosc.parametry[idĆwiczenia].
-// Bieganie i basen to sesje z własnym celem, więc nie wymagają treningu ani parametrów.
+// Bieganie i basen to sesje z własnym celem: nie mają treningu, ale ich parametry
+// (dystans, czas, styl, długości) ustawiamy tu, w tym samym kroku co parametry ćwiczeń.
 
 // Widoki kroku 2
 const kr2WidokLista = document.getElementById("kr2-widok-lista");
@@ -119,6 +120,24 @@ function dodajLinie(karta, tekst) {
   karta.firstChild.appendChild(linia);
 }
 
+// Czy cel sesji (bieganie, basen) jest ustawiony
+function celSesjiUstawiony(aktywnosc) {
+  const rodzaj = znajdzKategorie(aktywnosc.rodzajId);
+  const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
+  if (pola.indexOf("styl") !== -1 && !aktywnosc.styl) {
+    return false;
+  }
+  if (pola.indexOf("dlugosci") !== -1 && !(aktywnosc.dlugosci >= 1)) {
+    return false;
+  }
+  if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1) {
+    if (!aktywnosc.dystans && !aktywnosc.czas) {
+      return false;
+    }
+  }
+  return true;
+}
+
 // Ćwiczenia, których parametry nie są jeszcze ustawione
 function cwiczeniaBezParametrow(aktywnosc) {
   const trening = znajdzTrening(aktywnosc.treningId);
@@ -170,7 +189,13 @@ function rysujKrok2() {
     const karta = zrobKarte(opis.tytul, opis.podtytul);
 
     if (!wymagaTreningu(aktywnosc)) {
-      dodajLinie(karta, "Sesja z własnym celem, bez ćwiczeń.");
+      const ustawiony = celSesjiUstawiony(aktywnosc);
+      dodajLinie(karta, ustawiony ? "Parametry ustawione ✓" : "Parametry: do ustawienia");
+      karta.appendChild(
+        przyciskAkcji("Parametry", ustawiony ? "" : "wybrane", function () {
+          otworzParametry(aktywnosc);
+        })
+      );
     } else {
       const trening = znajdzTrening(aktywnosc.treningId);
       if (trening) {
@@ -286,6 +311,24 @@ function zrobWyborJednostki(etykieta, wartosc) {
   opis.textContent = etykieta;
   const wybor = document.createElement("select");
   [["s", "sekundy"], ["min", "minuty"]].forEach(function (para) {
+    const opcja = document.createElement("option");
+    opcja.value = para[0];
+    opcja.textContent = para[1];
+    wybor.appendChild(opcja);
+  });
+  wybor.value = wartosc;
+  blok.appendChild(opis);
+  blok.appendChild(wybor);
+  return { blok: blok, wybor: wybor };
+}
+
+// Lista wyboru jednostki z podanych opcji [[wartość, nazwa], ...]
+function zrobWyborJednostkiZ(etykieta, opcje, wartosc) {
+  const blok = document.createElement("div");
+  const opis = document.createElement("label");
+  opis.textContent = etykieta;
+  const wybor = document.createElement("select");
+  opcje.forEach(function (para) {
     const opcja = document.createElement("option");
     opcja.value = para[0];
     opcja.textContent = para[1];
@@ -439,6 +482,109 @@ function zrobKarteParametrow(aktywnosc, cwiczenie) {
   };
 }
 
+// Karta celu sesji: bieganie (dystans, czas) albo basen (styl, długości).
+// Pola pokazujemy zależnie od rodzaju aktywności (polaPlanu).
+function zrobKarteSesji(aktywnosc) {
+  const rodzaj = znajdzKategorie(aktywnosc.rodzajId);
+  const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
+
+  const karta = document.createElement("div");
+  karta.className = "formularz parametry-karta";
+  const blad = document.createElement("p");
+  blad.className = "blad";
+
+  let styl = null;
+  let dlugosci = null;
+  let dystans = null;
+  let dystansJedn = null;
+  let czas = null;
+  let czasJedn = null;
+
+  if (pola.indexOf("styl") !== -1) {
+    const blok = document.createElement("div");
+    const opis = document.createElement("label");
+    opis.textContent = "Styl";
+    styl = document.createElement("select");
+    const pusta = document.createElement("option");
+    pusta.value = "";
+    pusta.textContent = "Wybierz styl";
+    styl.appendChild(pusta);
+    dane.stylePlywania.forEach(function (nazwa) {
+      const opcja = document.createElement("option");
+      opcja.value = nazwa;
+      opcja.textContent = nazwa;
+      styl.appendChild(opcja);
+    });
+    styl.value = aktywnosc.styl || "";
+    blok.appendChild(opis);
+    blok.appendChild(styl);
+    karta.appendChild(blok);
+  }
+
+  if (pola.indexOf("dlugosci") !== -1) {
+    dlugosci = zrobPoleLiczbowe("Liczba długości basenu", aktywnosc.dlugosci || 0, false);
+    const rzad = zrobRzad();
+    rzad.appendChild(dlugosci.blok);
+    karta.appendChild(rzad);
+  }
+
+  if (pola.indexOf("dystans") !== -1) {
+    dystans = zrobPoleLiczbowe("Dystans", aktywnosc.dystans ? aktywnosc.dystans.wartosc : 0, true);
+    dystansJedn = zrobWyborJednostkiZ("Jednostka", [["km", "kilometry"], ["m", "metry"]], aktywnosc.dystans ? aktywnosc.dystans.jednostka : "km");
+    const rzad = zrobRzad();
+    rzad.appendChild(dystans.blok);
+    rzad.appendChild(dystansJedn.blok);
+    karta.appendChild(rzad);
+  }
+
+  if (pola.indexOf("czas") !== -1) {
+    czas = zrobPoleLiczbowe("Czas", aktywnosc.czas ? aktywnosc.czas.wartosc : 0, true);
+    czasJedn = zrobWyborJednostkiZ("Jednostka", [["min", "minuty"], ["s", "sekundy"]], aktywnosc.czas ? aktywnosc.czas.jednostka : "min");
+    const rzad = zrobRzad();
+    rzad.appendChild(czas.blok);
+    rzad.appendChild(czasJedn.blok);
+    karta.appendChild(rzad);
+  }
+
+  karta.appendChild(blad);
+
+  return {
+    sesja: true,
+    karta: karta,
+    cwiczenie: { nazwa: opisAktywnosci(aktywnosc).tytul },
+    odczytaj: function () {
+      const wynik = {};
+      if (styl) {
+        if (styl.value === "") {
+          blad.textContent = "Wybierz styl.";
+          return null;
+        }
+        wynik.styl = styl.value;
+      }
+      if (dlugosci) {
+        const d = Number(dlugosci.pole.value);
+        if (!(d >= 1) || Math.floor(d) !== d) {
+          blad.textContent = "Wpisz liczbę długości basenu (co najmniej 1).";
+          return null;
+        }
+        wynik.dlugosci = d;
+      }
+      if (dystans || czas) {
+        const dyst = dystans ? Number(dystans.pole.value) : 0;
+        const cz = czas ? Number(czas.pole.value) : 0;
+        if (!(dyst >= 0) || !(cz >= 0) || (!(dyst > 0) && !(cz > 0))) {
+          blad.textContent = "Wpisz dystans lub czas (albo oba), większe od zera.";
+          return null;
+        }
+        wynik.dystans = dyst > 0 ? { wartosc: dyst, jednostka: dystansJedn.wybor.value } : null;
+        wynik.czas = cz > 0 ? { wartosc: cz, jednostka: czasJedn.wybor.value } : null;
+      }
+      blad.textContent = "";
+      return wynik;
+    }
+  };
+}
+
 function otworzParametry(aktywnosc) {
   kr2Aktywnosc = aktywnosc;
   const trening = znajdzTrening(aktywnosc.treningId);
@@ -446,6 +592,16 @@ function otworzParametry(aktywnosc) {
   kr2BladParametrow.textContent = "";
   kr2ParametryLista.innerHTML = "";
   kr2Odczyty = [];
+
+  // Sesja (bieganie, basen): jedna karta z celem, bez ćwiczeń
+  if (!wymagaTreningu(aktywnosc)) {
+    const wpis = zrobKarteSesji(aktywnosc);
+    kr2Odczyty.push(wpis);
+    kr2ParametryLista.appendChild(wpis.karta);
+    kr2ParametryGotowe.hidden = false;
+    pokazWidokKroku2("parametry");
+    return;
+  }
 
   const cwiczenia = trening ? cwiczeniaTreningu(trening) : [];
   if (cwiczenia.length === 0) {
@@ -469,6 +625,20 @@ function otworzParametry(aktywnosc) {
 function zapiszParametry() {
   const wyniki = {};
   let pierwszyBlad = null;
+
+  if (kr2Odczyty.length === 1 && kr2Odczyty[0].sesja) {
+    const cel = kr2Odczyty[0].odczytaj();
+    if (cel === null) {
+      kr2BladParametrow.textContent = "Popraw zaznaczone pole.";
+      return;
+    }
+    Object.keys(cel).forEach(function (klucz) {
+      kr2Aktywnosc[klucz] = cel[klucz];
+    });
+    zapiszSzkic();
+    rysujKrok2();
+    return;
+  }
 
   kr2Odczyty.forEach(function (wpis) {
     const ilosc = wpis.odczytaj();
@@ -584,13 +754,16 @@ function dalejZKroku2() {
   }
 
   const bezParametrow = szkic.aktywnosci.filter(function (aktywnosc) {
-    return wymagaTreningu(aktywnosc) && cwiczeniaBezParametrow(aktywnosc).length > 0;
+    if (!wymagaTreningu(aktywnosc)) {
+      return !celSesjiUstawiony(aktywnosc);
+    }
+    return cwiczeniaBezParametrow(aktywnosc).length > 0;
   });
   if (bezParametrow.length > 0) {
     const nazwy = bezParametrow.map(function (aktywnosc) {
       return opisAktywnosci(aktywnosc).tytul;
     });
-    kr2Blad.textContent = "Ustaw parametry ćwiczeń dla: " + nazwy.join(", ") + ".";
+    kr2Blad.textContent = "Ustaw parametry dla: " + nazwy.join(", ") + ".";
     return;
   }
 

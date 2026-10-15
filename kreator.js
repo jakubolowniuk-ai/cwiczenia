@@ -1,5 +1,5 @@
 // ===== Kreator planu =====
-// Krok 1: okres (tydzień lub miesiąc) i aktywności z liczbą razy.
+// Krok 1: okres (tydzień lub miesiąc) i aktywności z liczbą razy (bez parametrów).
 // Kroki 2 i 3 (wybór ćwiczeń, rozłożenie na dni) dodamy w następnych wersjach.
 // Rozpoczęty plan zapisujemy jako szkic w dane.szkicPlanu.
 
@@ -33,16 +33,6 @@ const krTytulFormularza = document.getElementById("kr-tytul-formularza");
 const krRodzaj = document.getElementById("kr-rodzaj");
 const krPolePartia = document.getElementById("kr-pole-partia");
 const krPartia = document.getElementById("kr-partia");
-const krPoleStyl = document.getElementById("kr-pole-styl");
-const krStyl = document.getElementById("kr-styl");
-const krPoleDlugosci = document.getElementById("kr-pole-dlugosci");
-const krDlugosci = document.getElementById("kr-dlugosci");
-const krPoleDystans = document.getElementById("kr-pole-dystans");
-const krDystans = document.getElementById("kr-dystans");
-const krDystansJednostka = document.getElementById("kr-dystans-jednostka");
-const krPoleCzas = document.getElementById("kr-pole-czas");
-const krCzas = document.getElementById("kr-czas");
-const krCzasJednostka = document.getElementById("kr-czas-jednostka");
 const krRazy = document.getElementById("kr-razy");
 const krBlad = document.getElementById("kr-blad");
 const krZapiszAktywnosc = document.getElementById("kr-zapisz-aktywnosc");
@@ -234,17 +224,6 @@ function przygotujSelectyAktywnosci() {
     krPartia.appendChild(opcja);
   });
 
-  krStyl.innerHTML = "";
-  const pustyStyl = document.createElement("option");
-  pustyStyl.value = "";
-  pustyStyl.textContent = "Wybierz styl";
-  krStyl.appendChild(pustyStyl);
-  dane.stylePlywania.forEach(function (styl) {
-    const opcja = document.createElement("option");
-    opcja.value = styl;
-    opcja.textContent = styl;
-    krStyl.appendChild(opcja);
-  });
 }
 
 // Pokazuje tylko te pola, których wymaga wybrany rodzaj aktywności
@@ -252,11 +231,9 @@ function ustawPolaAktywnosci() {
   const rodzaj = znajdzKategorie(krRodzaj.value);
   const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
 
+  // W kroku 1 wybieramy tylko partię. Pozostałe parametry (dystans, czas, styl, długości)
+  // ustawiamy w kroku 2, razem z parametrami ćwiczeń.
   krPolePartia.hidden = pola.indexOf("partia") === -1;
-  krPoleStyl.hidden = pola.indexOf("styl") === -1;
-  krPoleDlugosci.hidden = pola.indexOf("dlugosci") === -1;
-  krPoleDystans.hidden = pola.indexOf("dystans") === -1;
-  krPoleCzas.hidden = pola.indexOf("czas") === -1;
 }
 
 function pokazBladAktywnosci(tekst) {
@@ -271,12 +248,6 @@ function otworzFormularzAktywnosci(aktywnosc) {
   // Zerujemy pola
   krRodzaj.value = "";
   krPartia.value = "";
-  krStyl.value = "";
-  krDlugosci.value = "0";
-  krDystans.value = "0";
-  krDystansJednostka.value = "km";
-  krCzas.value = "0";
-  krCzasJednostka.value = "min";
   krRazy.value = "0";
 
   if (aktywnosc) {
@@ -284,16 +255,6 @@ function otworzFormularzAktywnosci(aktywnosc) {
     krTytulFormularza.textContent = "Edycja aktywności";
     krRodzaj.value = aktywnosc.rodzajId;
     krPartia.value = aktywnosc.partiaId || "";
-    krStyl.value = aktywnosc.styl || "";
-    krDlugosci.value = aktywnosc.dlugosci || 0;
-    if (aktywnosc.dystans) {
-      krDystans.value = aktywnosc.dystans.wartosc;
-      krDystansJednostka.value = aktywnosc.dystans.jednostka;
-    }
-    if (aktywnosc.czas) {
-      krCzas.value = aktywnosc.czas.wartosc;
-      krCzasJednostka.value = aktywnosc.czas.jednostka;
-    }
     krRazy.value = aktywnosc.razy;
     krUsunAktywnosc.hidden = false;
   } else {
@@ -314,22 +275,6 @@ function zamknijFormularzAktywnosci() {
   rysujKrok1();
 }
 
-// Odczytuje pole liczbowe z jednostką: null (puste lub 0), false (błąd) albo obiekt
-function odczytajLiczbeZJednostka(pole, jednostka) {
-  const tekst = pole.value.trim();
-  if (tekst === "") {
-    return null;
-  }
-  const wartosc = Number(tekst);
-  if (isNaN(wartosc) || wartosc < 0) {
-    return false;
-  }
-  if (wartosc === 0) {
-    return null;
-  }
-  return { wartosc: wartosc, jednostka: jednostka.value };
-}
-
 // Sprawdza pola formularza i zapisuje aktywność w szkicu
 function zapiszAktywnosc() {
   const rodzaj = znajdzKategorie(krRodzaj.value);
@@ -339,14 +284,14 @@ function zapiszAktywnosc() {
   }
 
   const pola = rodzaj.polaPlanu || [];
+  // Przy edycji zachowujemy wybrany trening i parametry, o ile rodzaj i partia się nie zmieniły
+  const stara = szkic.aktywnosci.find(function (a) {
+    return a.id === edytowanaAktywnoscId;
+  });
   const wpis = {
     id: edytowanaAktywnoscId || "ak-" + Date.now(),
     rodzajId: rodzaj.id,
     partiaId: null,
-    styl: null,
-    dlugosci: null,
-    dystans: null,
-    czas: null,
     razy: 0
   };
 
@@ -358,49 +303,20 @@ function zapiszAktywnosc() {
     wpis.partiaId = krPartia.value;
   }
 
-  if (pola.indexOf("styl") !== -1) {
-    if (krStyl.value === "") {
-      pokazBladAktywnosci("Wybierz styl.");
-      return;
-    }
-    wpis.styl = krStyl.value;
-  }
-
-  if (pola.indexOf("dlugosci") !== -1) {
-    const dlugosci = Number(krDlugosci.value);
-    if (!(dlugosci >= 1)) {
-      pokazBladAktywnosci("Wpisz liczbę długości basenu (co najmniej 1).");
-      return;
-    }
-    wpis.dlugosci = dlugosci;
-  }
-
-  if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1) {
-    const dystans = pola.indexOf("dystans") !== -1
-      ? odczytajLiczbeZJednostka(krDystans, krDystansJednostka)
-      : null;
-    const czas = pola.indexOf("czas") !== -1
-      ? odczytajLiczbeZJednostka(krCzas, krCzasJednostka)
-      : null;
-
-    if (dystans === false || czas === false) {
-      pokazBladAktywnosci("Dystans i czas nie mogą być ujemne.");
-      return;
-    }
-    if (dystans === null && czas === null) {
-      pokazBladAktywnosci("Wpisz dystans lub czas (albo oba), większe od zera.");
-      return;
-    }
-    wpis.dystans = dystans;
-    wpis.czas = czas;
-  }
-
   const razy = Number(krRazy.value);
   if (!(razy >= 1) || Math.floor(razy) !== razy) {
     pokazBladAktywnosci("Wpisz, ile razy w okresie (liczba całkowita, co najmniej 1).");
     return;
   }
   wpis.razy = razy;
+
+  if (stara && stara.rodzajId === wpis.rodzajId && stara.partiaId === wpis.partiaId) {
+    ["treningId", "parametry", "styl", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
+      if (stara[klucz] !== undefined) {
+        wpis[klucz] = stara[klucz];
+      }
+    });
+  }
 
   if (edytowanaAktywnoscId) {
     szkic.aktywnosci = szkic.aktywnosci.map(function (inna) {
