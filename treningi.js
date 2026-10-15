@@ -59,10 +59,10 @@ function slowoCwiczen(liczba) {
   return "ćwiczeń";
 }
 
-// Krótki opis ćwiczenia: ilość, rodzaj i partie
+// Krótki opis ćwiczenia: rodzaj i partie
 function opisCwiczenia(cwiczenie) {
   const nazwyPartii = (cwiczenie.partieIds || []).map(nazwaKategorii);
-  return [opisIlosci(cwiczenie.ilosc), nazwaKategorii(cwiczenie.rodzajId)]
+  return [nazwaKategorii(cwiczenie.rodzajId)]
     .concat(nazwyPartii)
     .filter(function (czesc) {
       return czesc !== "";
@@ -394,7 +394,7 @@ function rysujTreningi() {
 
       const opisCw = document.createElement("div");
       opisCw.className = "karta-opis";
-      opisCw.textContent = opisIlosci(cwiczenie.ilosc);
+      opisCw.textContent = opisCwiczenia(cwiczenie);
 
       tekst.appendChild(nazwaCw);
       tekst.appendChild(opisCw);

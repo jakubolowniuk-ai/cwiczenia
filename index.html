@@ -43,93 +43,6 @@
         <label for="pole-rodzaj">Rodzaj aktywności</label>
         <select id="pole-rodzaj"></select>
 
-        <!-- Miara: serie i powtórzenia albo czas -->
-        <div id="blok-miary-serie" hidden>
-          <label for="pole-ilosc-typ">Miara ćwiczenia</label>
-          <select id="pole-ilosc-typ">
-            <option value="powtorzenia">Serie i powtórzenia</option>
-            <option value="czas">Czas</option>
-          </select>
-
-          <div class="rzad" id="ilosc-powtorzenia">
-            <div>
-              <label for="pole-serie">Serie</label>
-              <input type="number" id="pole-serie" min="0" inputmode="numeric" value="0">
-            </div>
-            <div>
-              <label for="pole-powtorzenia">Powtórzenia</label>
-              <input type="number" id="pole-powtorzenia" min="0" inputmode="numeric" value="0">
-            </div>
-          </div>
-
-          <div class="rzad" id="ilosc-czas" hidden>
-            <div>
-              <label for="pole-czas">Czas</label>
-              <input type="number" id="pole-czas" min="0" step="any" inputmode="decimal" value="0">
-            </div>
-            <div>
-              <label for="pole-czas-jednostka">Jednostka</label>
-              <select id="pole-czas-jednostka">
-                <option value="s">sekundy</option>
-                <option value="min">minuty</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Miara: dystans i czas (basen, bieganie) -->
-        <div id="blok-sesja" hidden>
-          <div class="rzad">
-            <div>
-              <label for="pole-sesja-dystans">Dystans</label>
-              <input type="number" id="pole-sesja-dystans" min="0" step="any" inputmode="decimal" value="0">
-            </div>
-            <div>
-              <label for="pole-sesja-dystans-jednostka">Jednostka</label>
-              <select id="pole-sesja-dystans-jednostka">
-                <option value="km">kilometry</option>
-                <option value="m">metry</option>
-              </select>
-            </div>
-          </div>
-          <div class="rzad">
-            <div>
-              <label for="pole-sesja-czas">Czas</label>
-              <input type="number" id="pole-sesja-czas" min="0" step="any" inputmode="decimal" value="0">
-            </div>
-            <div>
-              <label for="pole-sesja-czas-jednostka">Jednostka</label>
-              <select id="pole-sesja-czas-jednostka">
-                <option value="min">minuty</option>
-                <option value="s">sekundy</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
-        <!-- Miara: powtórzenia i czas (trening statyczny) -->
-        <div id="blok-statyczna" hidden>
-          <div class="rzad">
-            <div>
-              <label for="pole-stat-powtorzenia">Powtórzenia</label>
-              <input type="number" id="pole-stat-powtorzenia" min="0" inputmode="numeric" value="0">
-            </div>
-            <div>
-              <label for="pole-stat-czas">Czas jednego powtórzenia</label>
-              <input type="number" id="pole-stat-czas" min="0" step="any" inputmode="decimal" value="0">
-            </div>
-          </div>
-          <div class="rzad">
-            <div>
-              <label for="pole-stat-czas-jednostka">Jednostka czasu</label>
-              <select id="pole-stat-czas-jednostka">
-                <option value="s">sekundy</option>
-                <option value="min">minuty</option>
-              </select>
-            </div>
-          </div>
-        </div>
-
         <!-- Partie mięśni: najpierw ptaszek, potem lista, potem podsumowanie -->
         <label class="wybor wybor-pelny">
           <input type="checkbox" id="pole-czy-partie">
@@ -345,7 +258,7 @@
 
         <div id="kr2-widok-lista">
           <h2 class="tytul-formularza">Wybierz treningi</h2>
-          <p class="opis">Dla każdej aktywności wybierz gotowy trening albo zbuduj nowy z sugerowanych ćwiczeń.</p>
+          <p class="opis">Dla każdej aktywności wybierz gotowy trening albo zbuduj nowy, a potem ustaw parametry każdego ćwiczenia (serie, powtórzenia, czas).</p>
           <div id="kr2-lista"></div>
           <p class="blad" id="kr2-blad"></p>
           <button class="przycisk wielki" id="kr2-dalej">Dalej</button>
@@ -361,6 +274,15 @@
           <div id="kr2-treningi"></div>
           <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy trening</button>
           <button class="przycisk drugi wielki" id="kr2-wybor-wstecz">Wróć</button>
+        </div>
+
+        <div id="kr2-widok-parametry" hidden>
+          <h2 class="tytul-formularza" id="kr2-parametry-tytul">Parametry</h2>
+          <p class="opis">Ustaw osobno każde ćwiczenie. Wartości zostają zapisane w tym planie.</p>
+          <div id="kr2-parametry-lista"></div>
+          <p class="blad" id="kr2-blad-parametrow"></p>
+          <button class="przycisk wielki" id="kr2-parametry-gotowe">Gotowe</button>
+          <button class="przycisk drugi wielki" id="kr2-parametry-wroc">Wróć</button>
         </div>
 
         <div id="kr2-widok-budowa" hidden>
@@ -390,9 +312,9 @@
       <!-- Krok 3: na razie podgląd (rozłożenie na dni dodamy w następnym kroku) -->
       <div id="kr-krok3" hidden>
         <h2 class="tytul-formularza">Rozłożenie na dni</h2>
-        <p class="opis">Ten krok dodamy w następnej wersji. Dotychczas wybrane:</p>
+        <p class="opis">Ten krok dodamy w następnej wersji. Dotychczas ustawione:</p>
         <div id="kr3-podglad"></div>
-        <button class="przycisk drugi wielki" id="kr3-wroc">Wróć do wyboru treningów</button>
+        <button class="przycisk drugi wielki" id="kr3-wroc">Wróć do treningów</button>
       </div>
 
     </div>

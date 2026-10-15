@@ -7,29 +7,6 @@ const tytulFormularza = document.getElementById("tytul-formularza");
 const poleNazwa = document.getElementById("pole-nazwa");
 const poleRodzaj = document.getElementById("pole-rodzaj");
 
-// Miara "serie": serie i powtórzenia albo czas
-const blokMiarySerie = document.getElementById("blok-miary-serie");
-const poleIloscTyp = document.getElementById("pole-ilosc-typ");
-const iloscPowtorzenia = document.getElementById("ilosc-powtorzenia");
-const iloscCzas = document.getElementById("ilosc-czas");
-const poleSerie = document.getElementById("pole-serie");
-const polePowtorzenia = document.getElementById("pole-powtorzenia");
-const poleCzas = document.getElementById("pole-czas");
-const poleCzasJednostka = document.getElementById("pole-czas-jednostka");
-
-// Miara "sesja": dystans i czas
-const blokSesja = document.getElementById("blok-sesja");
-const poleSesjaDystans = document.getElementById("pole-sesja-dystans");
-const poleSesjaDystansJednostka = document.getElementById("pole-sesja-dystans-jednostka");
-const poleSesjaCzas = document.getElementById("pole-sesja-czas");
-const poleSesjaCzasJednostka = document.getElementById("pole-sesja-czas-jednostka");
-
-// Miara "statyczna": powtórzenia i czas
-const blokStatyczna = document.getElementById("blok-statyczna");
-const poleStatPowtorzenia = document.getElementById("pole-stat-powtorzenia");
-const poleStatCzas = document.getElementById("pole-stat-czas");
-const poleStatCzasJednostka = document.getElementById("pole-stat-czas-jednostka");
-
 // Partie mięśni
 const poleCzyPartie = document.getElementById("pole-czy-partie");
 const panelPartii = document.getElementById("panel-partii");
@@ -104,25 +81,6 @@ function opisIlosci(ilosc) {
     return czesci.join(" · ");
   }
   return ilosc.wartosc + " " + ilosc.jednostka;
-}
-
-// ===== Pokazywanie i ukrywanie pól formularza =====
-
-// Pokazuje pola serii albo czasu, zależnie od wybranej miary
-function ustawPolaIlosci() {
-  const typ = poleIloscTyp.value;
-  iloscPowtorzenia.hidden = typ !== "powtorzenia";
-  iloscCzas.hidden = typ !== "czas";
-}
-
-// Po wyborze rodzaju aktywności pokazuje tylko pasujące pola miary
-function ustawPolaRodzaju() {
-  const rodzaj = znajdzKategorie(poleRodzaj.value);
-  const miara = rodzaj ? rodzaj.miara : "";
-
-  blokMiarySerie.hidden = !rodzaj || miara === "sesja" || miara === "statyczna";
-  blokSesja.hidden = miara !== "sesja";
-  blokStatyczna.hidden = miara !== "statyczna";
 }
 
 // Zwraca id zaznaczonych partii
@@ -205,58 +163,9 @@ function pokazBlad(tekst) {
   komunikatBledu.textContent = tekst;
 }
 
-// Ustawia wszystkie pola liczbowe miary na 0
-function wyzerujPola() {
-  [
-    poleSerie, polePowtorzenia, poleCzas,
-    poleSesjaDystans, poleSesjaCzas,
-    poleStatPowtorzenia, poleStatCzas
-  ].forEach(function (pole) {
-    pole.value = "0";
-  });
-  poleIloscTyp.value = "powtorzenia";
-}
-
-// Wpisuje zapisaną ilość z powrotem do pól (przy edycji)
-function wypelnijIlosc(ilosc) {
-  if (!ilosc) {
-    return;
-  }
-
-  if (ilosc.typ === "powtorzenia") {
-    poleIloscTyp.value = "powtorzenia";
-    poleSerie.value = ilosc.serie;
-    polePowtorzenia.value = ilosc.powtorzenia;
-  } else if (ilosc.typ === "czas") {
-    poleIloscTyp.value = "czas";
-    poleCzas.value = ilosc.wartosc;
-    poleCzasJednostka.value = ilosc.jednostka;
-  } else if (ilosc.typ === "czas-powtorzenia") {
-    poleStatPowtorzenia.value = ilosc.powtorzenia;
-    poleStatCzas.value = ilosc.czas.wartosc;
-    poleStatCzasJednostka.value = ilosc.czas.jednostka;
-  } else if (ilosc.typ === "sesja") {
-    if (ilosc.dystans) {
-      poleSesjaDystans.value = ilosc.dystans.wartosc;
-      poleSesjaDystansJednostka.value = ilosc.dystans.jednostka;
-    }
-    if (ilosc.czas) {
-      poleSesjaCzas.value = ilosc.czas.wartosc;
-      poleSesjaCzasJednostka.value = ilosc.czas.jednostka;
-    }
-  } else if (ilosc.typ === "dystans") {
-    // Stary format zapisu
-    poleSesjaDystans.value = ilosc.wartosc;
-    poleSesjaDystansJednostka.value = ilosc.jednostka;
-  }
-
-  ustawPolaIlosci();
-}
-
 // Otwiera formularz: pusty (nowe ćwiczenie) albo wypełniony (edycja)
 function otworzFormularz(cwiczenie) {
   przygotujFormularz();
-  wyzerujPola();
   pokazBlad("");
 
   poleNazwa.value = "";
@@ -271,8 +180,6 @@ function otworzFormularz(cwiczenie) {
     poleNazwa.value = cwiczenie.nazwa;
     poleLink.value = cwiczenie.link || "";
     poleRodzaj.value = cwiczenie.rodzajId;
-    ustawPolaRodzaju();
-    wypelnijIlosc(cwiczenie.ilosc);
 
     const partie = cwiczenie.partieIds || [];
     if (partie.length > 0) {
@@ -285,8 +192,6 @@ function otworzFormularz(cwiczenie) {
   } else {
     edytowaneId = null;
     tytulFormularza.textContent = "Nowe ćwiczenie";
-    ustawPolaIlosci();
-    ustawPolaRodzaju();
   }
 
   formularz.hidden = false;
@@ -304,72 +209,6 @@ function ukryjFormularz() {
 
 // ===== Odczyt i sprawdzanie pól =====
 
-// Odczytuje pole liczbowe z jednostką.
-// Zwraca null (puste albo 0), false (błędna wartość) albo obiekt z wartością.
-function odczytajPoleZJednostka(pole, jednostka) {
-  const tekst = pole.value.trim();
-  if (tekst === "") {
-    return null;
-  }
-  const wartosc = Number(tekst);
-  if (isNaN(wartosc) || wartosc < 0) {
-    return false;
-  }
-  if (wartosc === 0) {
-    return null;
-  }
-  return { wartosc: wartosc, jednostka: jednostka.value };
-}
-
-// Odczytuje ilość z pól. Zwraca null i pokazuje błąd, gdy coś jest nie tak
-function odczytajIlosc() {
-  // Dystans i czas (basen, bieganie)
-  if (!blokSesja.hidden) {
-    const dystans = odczytajPoleZJednostka(poleSesjaDystans, poleSesjaDystansJednostka);
-    const czas = odczytajPoleZJednostka(poleSesjaCzas, poleSesjaCzasJednostka);
-
-    if (dystans === false || czas === false) {
-      pokazBlad("Dystans i czas nie mogą być ujemne.");
-      return null;
-    }
-    if (dystans === null && czas === null) {
-      pokazBlad("Wpisz dystans lub czas (albo oba), większe od zera.");
-      return null;
-    }
-    return { typ: "sesja", dystans: dystans, czas: czas };
-  }
-
-  // Powtórzenia i czas (trening statyczny)
-  if (!blokStatyczna.hidden) {
-    const powtorzenia = Number(poleStatPowtorzenia.value);
-    const czas = odczytajPoleZJednostka(poleStatCzas, poleStatCzasJednostka);
-    if (!(powtorzenia >= 1) || !czas) {
-      pokazBlad("Wpisz liczbę powtórzeń i czas, większe od zera.");
-      return null;
-    }
-    return { typ: "czas-powtorzenia", powtorzenia: powtorzenia, czas: czas };
-  }
-
-  // Serie i powtórzenia
-  if (poleIloscTyp.value === "powtorzenia") {
-    const serie = Number(poleSerie.value);
-    const powtorzenia = Number(polePowtorzenia.value);
-    if (!(serie >= 1) || !(powtorzenia >= 1)) {
-      pokazBlad("Wpisz liczbę serii i powtórzeń większą od zera.");
-      return null;
-    }
-    return { typ: "powtorzenia", serie: serie, powtorzenia: powtorzenia };
-  }
-
-  // Czas
-  const czas = odczytajPoleZJednostka(poleCzas, poleCzasJednostka);
-  if (!czas) {
-    pokazBlad("Wpisz czas większy od zera.");
-    return null;
-  }
-  return { typ: "czas", wartosc: czas.wartosc, jednostka: czas.jednostka };
-}
-
 // Sprawdza pola i zapisuje ćwiczenie (nowe albo edytowane)
 function zapiszCwiczenie() {
   const nazwa = poleNazwa.value.trim();
@@ -380,11 +219,6 @@ function zapiszCwiczenie() {
 
   if (poleRodzaj.value === "") {
     pokazBlad("Wybierz rodzaj aktywności.");
-    return;
-  }
-
-  const ilosc = odczytajIlosc();
-  if (ilosc === null) {
     return;
   }
 
@@ -404,11 +238,21 @@ function zapiszCwiczenie() {
     return;
   }
 
+  // Parametry (serie, powtórzenia, czas) ustawiamy w kreatorze planu.
+  // Stara ilość edytowanego ćwiczenia zostaje jako podpowiedź w kreatorze.
+  let staraIlosc = null;
+  if (edytowaneId) {
+    const stare = dane.cwiczenia.find(function (inne) {
+      return inne.id === edytowaneId;
+    });
+    staraIlosc = stare && stare.ilosc ? stare.ilosc : null;
+  }
+
   const wpis = {
     id: edytowaneId || "cw-" + Date.now(),
     nazwa: nazwa,
     rodzajId: poleRodzaj.value,
-    ilosc: ilosc,
+    ilosc: staraIlosc,
     partieIds: partie,
     link: link
   };
@@ -518,9 +362,9 @@ function rysujListe() {
     nazwa.className = "karta-nazwa";
     nazwa.textContent = cwiczenie.nazwa;
 
-    // Opis: ilość, rodzaj aktywności i partie, rozdzielone kropkami
+    // Opis: rodzaj aktywności i partie, rozdzielone kropkami
     const nazwyPartii = (cwiczenie.partieIds || []).map(nazwaKategorii);
-    const czesci = [opisIlosci(cwiczenie.ilosc), nazwaKategorii(cwiczenie.rodzajId)]
+    const czesci = [nazwaKategorii(cwiczenie.rodzajId)]
       .concat(nazwyPartii)
       .filter(function (czesc) {
         return czesc !== "";
@@ -591,8 +435,6 @@ przyciskNowe.addEventListener("click", function () {
 });
 przyciskAnuluj.addEventListener("click", ukryjFormularz);
 przyciskZapisz.addEventListener("click", zapiszCwiczenie);
-poleRodzaj.addEventListener("change", ustawPolaRodzaju);
-poleIloscTyp.addEventListener("change", ustawPolaIlosci);
 poleCzyPartie.addEventListener("change", zmianaPolaPartii);
 przyciskGotowe.addEventListener("click", zatwierdzPartie);
 przyciskZmienPartie.addEventListener("click", zmienPartie);

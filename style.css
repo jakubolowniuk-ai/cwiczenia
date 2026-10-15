@@ -541,3 +541,19 @@ h1 {
   font-size: 13px;
   color: var(--tekst-szary);
 }
+
+/* Parametry ćwiczeń w kreatorze planu (używają stylów .formularz) */
+.parametry-naglowek {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.parametry-karta .rzad {
+  margin-top: 0;
+}
+
+.parametry-karta .blad {
+  margin: 8px 0 0;
+}

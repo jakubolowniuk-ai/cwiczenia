@@ -1,12 +1,22 @@
 // ===== Kreator planu, krok 2: wybór treningu dla każdej aktywności =====
 // Dla aktywności opartych na ćwiczeniach (trening ciała, rozciąganie, trening statyczny)
 // wybieramy gotowy trening z "Moje treningi" albo budujemy nowy z sugerowanych ćwiczeń.
-// Bieganie i basen to sesje z własnym celem, więc nie wymagają treningu.
+// Potem dla każdego ćwiczenia treningu ustawiamy parametry (serie, powtórzenia, czas).
+// Parametry zapisujemy w aktywności planu: aktywnosc.parametry[idĆwiczenia].
+// Bieganie i basen to sesje z własnym celem, więc nie wymagają treningu ani parametrów.
 
 // Widoki kroku 2
 const kr2WidokLista = document.getElementById("kr2-widok-lista");
 const kr2WidokWybor = document.getElementById("kr2-widok-wybor");
 const kr2WidokBudowa = document.getElementById("kr2-widok-budowa");
+const kr2WidokParametry = document.getElementById("kr2-widok-parametry");
+
+// Parametry ćwiczeń
+const kr2ParametryTytul = document.getElementById("kr2-parametry-tytul");
+const kr2ParametryLista = document.getElementById("kr2-parametry-lista");
+const kr2BladParametrow = document.getElementById("kr2-blad-parametrow");
+const kr2ParametryGotowe = document.getElementById("kr2-parametry-gotowe");
+const kr2ParametryWroc = document.getElementById("kr2-parametry-wroc");
 
 // Lista aktywności
 const kr2Lista = document.getElementById("kr2-lista");
@@ -39,6 +49,8 @@ const kr3Wroc = document.getElementById("kr3-wroc");
 let kr2Aktywnosc = null;
 let kr2Widok = "lista";
 let kr2BudowaIds = [];
+// Dla każdego ćwiczenia w widoku parametrów: funkcja odczytująca jego pola
+let kr2Odczyty = [];
 
 // ===== Pomocnicze =====
 
@@ -107,12 +119,25 @@ function dodajLinie(karta, tekst) {
   karta.firstChild.appendChild(linia);
 }
 
-// Pokazuje jeden z widoków kroku 2: "lista", "wybor" albo "budowa"
+// Ćwiczenia, których parametry nie są jeszcze ustawione
+function cwiczeniaBezParametrow(aktywnosc) {
+  const trening = znajdzTrening(aktywnosc.treningId);
+  if (!trening) {
+    return [];
+  }
+  const parametry = aktywnosc.parametry || {};
+  return cwiczeniaTreningu(trening).filter(function (cwiczenie) {
+    return !parametry[cwiczenie.id];
+  });
+}
+
+// Pokazuje jeden z widoków kroku 2: "lista", "wybor", "parametry" albo "budowa"
 function pokazWidokKroku2(nazwa) {
   kr2Widok = nazwa;
   kr2WidokLista.hidden = nazwa !== "lista";
   kr2WidokWybor.hidden = nazwa !== "wybor";
   kr2WidokBudowa.hidden = nazwa !== "budowa";
+  kr2WidokParametry.hidden = nazwa !== "parametry";
   kreator.querySelector(".kreator-tresc").scrollTop = 0;
 }
 
@@ -120,6 +145,10 @@ function pokazWidokKroku2(nazwa) {
 function krok2Wstecz() {
   if (kr2Widok === "budowa") {
     pokazWidokKroku2("wybor");
+    return true;
+  }
+  if (kr2Widok === "parametry") {
+    rysujKrok2();
     return true;
   }
   if (kr2Widok === "wybor") {
@@ -147,6 +176,13 @@ function rysujKrok2() {
       if (trening) {
         const liczba = cwiczeniaTreningu(trening).length;
         dodajLinie(karta, "Trening: " + trening.nazwa + " · " + liczba + " " + slowoCwiczen(liczba));
+        const brakuje = cwiczeniaBezParametrow(aktywnosc).length;
+        dodajLinie(karta, brakuje === 0 ? "Parametry ustawione ✓" : "Parametry: do ustawienia (" + brakuje + ")");
+        karta.appendChild(
+          przyciskAkcji("Parametry", brakuje === 0 ? "" : "wybrane", function () {
+            otworzParametry(aktywnosc);
+          })
+        );
       } else {
         dodajLinie(karta, "Nie wybrano treningu");
       }
@@ -194,13 +230,266 @@ function rysujTreningiWyboru() {
     const wybrany = kr2Aktywnosc.treningId === trening.id;
     karta.appendChild(
       przyciskAkcji(wybrany ? "Wybrano ✓" : "Wybierz", wybrany ? "wybrane" : "", function () {
-        kr2Aktywnosc.treningId = trening.id;
-        zapiszSzkic();
-        rysujKrok2();
+        wybierzTrening(kr2Aktywnosc, trening.id);
       })
     );
     kr2Treningi.appendChild(karta);
   });
+}
+
+// Przypisuje trening do aktywności i od razu przechodzi do ustawiania parametrów
+function wybierzTrening(aktywnosc, treningId) {
+  if (aktywnosc.treningId !== treningId) {
+    aktywnosc.treningId = treningId;
+    // Zostawiamy tylko parametry ćwiczeń, które są w nowym treningu
+    const trening = znajdzTrening(treningId);
+    const stare = aktywnosc.parametry || {};
+    const nowe = {};
+    cwiczeniaTreningu(trening).forEach(function (cwiczenie) {
+      if (stare[cwiczenie.id]) {
+        nowe[cwiczenie.id] = stare[cwiczenie.id];
+      }
+    });
+    aktywnosc.parametry = nowe;
+  }
+  zapiszSzkic();
+  otworzParametry(aktywnosc);
+}
+
+// ===== Widok: parametry ćwiczeń =====
+
+// Tworzy pole liczbowe z etykietą. Zwraca { blok, pole }
+function zrobPoleLiczbowe(etykieta, wartosc, ulamki) {
+  const blok = document.createElement("div");
+  const opis = document.createElement("label");
+  opis.textContent = etykieta;
+  const pole = document.createElement("input");
+  pole.type = "number";
+  pole.min = "0";
+  pole.value = String(wartosc);
+  pole.setAttribute("inputmode", ulamki ? "decimal" : "numeric");
+  if (ulamki) {
+    pole.step = "any";
+  }
+  pole.addEventListener("focus", function () {
+    pole.select();
+  });
+  blok.appendChild(opis);
+  blok.appendChild(pole);
+  return { blok: blok, pole: pole };
+}
+
+// Tworzy listę wyboru jednostki czasu. Zwraca { blok, wybor }
+function zrobWyborJednostki(etykieta, wartosc) {
+  const blok = document.createElement("div");
+  const opis = document.createElement("label");
+  opis.textContent = etykieta;
+  const wybor = document.createElement("select");
+  [["s", "sekundy"], ["min", "minuty"]].forEach(function (para) {
+    const opcja = document.createElement("option");
+    opcja.value = para[0];
+    opcja.textContent = para[1];
+    wybor.appendChild(opcja);
+  });
+  wybor.value = wartosc;
+  blok.appendChild(opis);
+  blok.appendChild(wybor);
+  return { blok: blok, wybor: wybor };
+}
+
+function zrobRzad() {
+  const rzad = document.createElement("div");
+  rzad.className = "rzad";
+  return rzad;
+}
+
+// Podpowiedź startowa dla ćwiczenia: zapisane w planie, albo stara ilość z bazy, albo zera
+function ilosciStartowa(aktywnosc, cwiczenie, miara) {
+  const zapisane = (aktywnosc.parametry || {})[cwiczenie.id];
+  if (zapisane) {
+    return zapisane;
+  }
+  const stara = cwiczenie.ilosc;
+  if (stara) {
+    if (miara === "statyczna" && stara.typ === "czas-powtorzenia") {
+      return stara;
+    }
+    if (miara === "serie" && (stara.typ === "powtorzenia" || stara.typ === "czas")) {
+      return stara;
+    }
+  }
+  return null;
+}
+
+// Tworzy kartę z polami parametrów jednego ćwiczenia.
+// Zwraca funkcję odczytującą pola: zwraca ilość albo null (i wtedy ustawia błąd w karcie)
+function zrobKarteParametrow(aktywnosc, cwiczenie) {
+  const rodzaj = znajdzKategorie(cwiczenie.rodzajId);
+  const miara = rodzaj ? rodzaj.miara : "serie";
+  const start = ilosciStartowa(aktywnosc, cwiczenie, miara);
+
+  const karta = document.createElement("div");
+  karta.className = "formularz parametry-karta";
+
+  const naglowek = document.createElement("div");
+  naglowek.className = "parametry-naglowek";
+  const nazwa = document.createElement("div");
+  nazwa.className = "karta-nazwa";
+  nazwa.textContent = cwiczenie.nazwa;
+  naglowek.appendChild(nazwa);
+  dodajFilm(naglowek, cwiczenie);
+  karta.appendChild(naglowek);
+
+  const blad = document.createElement("p");
+  blad.className = "blad";
+
+  let odczytaj;
+
+  if (miara === "statyczna") {
+    // Powtórzenia i czas jednego powtórzenia
+    const pow = zrobPoleLiczbowe("Powtórzenia", start ? start.powtorzenia : 0, false);
+    const czas = zrobPoleLiczbowe("Czas jednego powtórzenia", start && start.czas ? start.czas.wartosc : 0, true);
+    const jedn = zrobWyborJednostki("Jednostka czasu", start && start.czas ? start.czas.jednostka : "s");
+    const rzad1 = zrobRzad();
+    rzad1.appendChild(pow.blok);
+    rzad1.appendChild(czas.blok);
+    const rzad2 = zrobRzad();
+    rzad2.appendChild(jedn.blok);
+    karta.appendChild(rzad1);
+    karta.appendChild(rzad2);
+
+    odczytaj = function () {
+      const p = Number(pow.pole.value);
+      const c = Number(czas.pole.value);
+      if (!(p >= 1) || Math.floor(p) !== p || !(c > 0)) {
+        return "Wpisz liczbę powtórzeń i czas, większe od zera.";
+      }
+      return { typ: "czas-powtorzenia", powtorzenia: p, czas: { wartosc: c, jednostka: jedn.wybor.value } };
+    };
+  } else {
+    // Serie i powtórzenia albo czas
+    const typBlok = document.createElement("div");
+    const typOpis = document.createElement("label");
+    typOpis.textContent = "Miara ćwiczenia";
+    const typ = document.createElement("select");
+    [["powtorzenia", "Serie i powtórzenia"], ["czas", "Czas"]].forEach(function (para) {
+      const opcja = document.createElement("option");
+      opcja.value = para[0];
+      opcja.textContent = para[1];
+      typ.appendChild(opcja);
+    });
+    typ.value = start && start.typ === "czas" ? "czas" : "powtorzenia";
+    typBlok.appendChild(typOpis);
+    typBlok.appendChild(typ);
+    karta.appendChild(typBlok);
+
+    const serie = zrobPoleLiczbowe("Serie", start && start.typ === "powtorzenia" ? start.serie : 0, false);
+    const pow = zrobPoleLiczbowe("Powtórzenia", start && start.typ === "powtorzenia" ? start.powtorzenia : 0, false);
+    const rzadSerie = zrobRzad();
+    rzadSerie.appendChild(serie.blok);
+    rzadSerie.appendChild(pow.blok);
+
+    const czas = zrobPoleLiczbowe("Czas", start && start.typ === "czas" ? start.wartosc : 0, true);
+    const jedn = zrobWyborJednostki("Jednostka", start && start.typ === "czas" ? start.jednostka : "s");
+    const rzadCzas = zrobRzad();
+    rzadCzas.appendChild(czas.blok);
+    rzadCzas.appendChild(jedn.blok);
+
+    karta.appendChild(rzadSerie);
+    karta.appendChild(rzadCzas);
+
+    const pokazPola = function () {
+      rzadSerie.hidden = typ.value !== "powtorzenia";
+      rzadCzas.hidden = typ.value !== "czas";
+    };
+    typ.addEventListener("change", pokazPola);
+    pokazPola();
+
+    odczytaj = function () {
+      if (typ.value === "powtorzenia") {
+        const s = Number(serie.pole.value);
+        const p = Number(pow.pole.value);
+        if (!(s >= 1) || !(p >= 1) || Math.floor(s) !== s || Math.floor(p) !== p) {
+          return "Wpisz liczbę serii i powtórzeń większą od zera.";
+        }
+        return { typ: "powtorzenia", serie: s, powtorzenia: p };
+      }
+      const c = Number(czas.pole.value);
+      if (!(c > 0)) {
+        return "Wpisz czas większy od zera.";
+      }
+      return { typ: "czas", wartosc: c, jednostka: jedn.wybor.value };
+    };
+  }
+
+  karta.appendChild(blad);
+
+  return {
+    cwiczenie: cwiczenie,
+    odczytaj: function () {
+      const wynik = odczytaj();
+      if (typeof wynik === "string") {
+        blad.textContent = wynik;
+        return null;
+      }
+      blad.textContent = "";
+      return wynik;
+    },
+    karta: karta
+  };
+}
+
+function otworzParametry(aktywnosc) {
+  kr2Aktywnosc = aktywnosc;
+  const trening = znajdzTrening(aktywnosc.treningId);
+  kr2ParametryTytul.textContent = "Parametry: " + opisAktywnosci(aktywnosc).tytul;
+  kr2BladParametrow.textContent = "";
+  kr2ParametryLista.innerHTML = "";
+  kr2Odczyty = [];
+
+  const cwiczenia = trening ? cwiczeniaTreningu(trening) : [];
+  if (cwiczenia.length === 0) {
+    const komunikat = document.createElement("p");
+    komunikat.className = "opis";
+    komunikat.textContent = "Ten trening nie ma już żadnych ćwiczeń. Wróć i wybierz inny trening.";
+    kr2ParametryLista.appendChild(komunikat);
+  }
+
+  cwiczenia.forEach(function (cwiczenie) {
+    const wpis = zrobKarteParametrow(aktywnosc, cwiczenie);
+    kr2Odczyty.push(wpis);
+    kr2ParametryLista.appendChild(wpis.karta);
+  });
+
+  kr2ParametryGotowe.hidden = cwiczenia.length === 0;
+  pokazWidokKroku2("parametry");
+}
+
+// Sprawdza wszystkie karty i zapisuje parametry w aktywności
+function zapiszParametry() {
+  const wyniki = {};
+  let pierwszyBlad = null;
+
+  kr2Odczyty.forEach(function (wpis) {
+    const ilosc = wpis.odczytaj();
+    if (ilosc === null) {
+      if (pierwszyBlad === null) {
+        pierwszyBlad = wpis;
+      }
+    } else {
+      wyniki[wpis.cwiczenie.id] = ilosc;
+    }
+  });
+
+  if (pierwszyBlad) {
+    kr2BladParametrow.textContent = "Popraw ćwiczenie: " + pierwszyBlad.cwiczenie.nazwa + ".";
+    pierwszyBlad.karta.scrollIntoView({ behavior: "smooth", block: "center" });
+    return;
+  }
+
+  kr2Aktywnosc.parametry = wyniki;
+  zapiszSzkic();
+  rysujKrok2();
 }
 
 // ===== Widok: budowa nowego treningu =====
@@ -272,13 +561,11 @@ function zapiszNowyTrening() {
     cwiczeniaIds: kr2BudowaIds.slice()
   };
   dane.treningi.push(trening);
-  kr2Aktywnosc.treningId = trening.id;
-  zapiszSzkic();
 
   if (typeof rysujTreningi === "function") {
     rysujTreningi();
   }
-  rysujKrok2();
+  wybierzTrening(kr2Aktywnosc, trening.id);
 }
 
 // ===== Przejście do kroku 3 =====
@@ -293,6 +580,17 @@ function dalejZKroku2() {
       return opisAktywnosci(aktywnosc).tytul;
     });
     kr2Blad.textContent = "Wybierz trening dla: " + nazwy.join(", ") + ".";
+    return;
+  }
+
+  const bezParametrow = szkic.aktywnosci.filter(function (aktywnosc) {
+    return wymagaTreningu(aktywnosc) && cwiczeniaBezParametrow(aktywnosc).length > 0;
+  });
+  if (bezParametrow.length > 0) {
+    const nazwy = bezParametrow.map(function (aktywnosc) {
+      return opisAktywnosci(aktywnosc).tytul;
+    });
+    kr2Blad.textContent = "Ustaw parametry ćwiczeń dla: " + nazwy.join(", ") + ".";
     return;
   }
 
@@ -311,6 +609,10 @@ function rysujKrok3() {
     const trening = znajdzTrening(aktywnosc.treningId);
     if (wymagaTreningu(aktywnosc) && trening) {
       dodajLinie(karta, "Trening: " + trening.nazwa);
+      cwiczeniaTreningu(trening).forEach(function (cwiczenie) {
+        const ilosc = (aktywnosc.parametry || {})[cwiczenie.id];
+        dodajLinie(karta, "• " + cwiczenie.nazwa + (ilosc ? " — " + opisIlosci(ilosc) : ""));
+      });
     }
     kr3Podglad.appendChild(karta);
   });
@@ -328,6 +630,8 @@ kr2Zapisz.addEventListener("click", zapiszNowyTrening);
 kr2Anuluj.addEventListener("click", function () {
   pokazWidokKroku2("wybor");
 });
+kr2ParametryGotowe.addEventListener("click", zapiszParametry);
+kr2ParametryWroc.addEventListener("click", rysujKrok2);
 kr2Dalej.addEventListener("click", dalejZKroku2);
 kr3Wroc.addEventListener("click", function () {
   pokazKrok(2);
