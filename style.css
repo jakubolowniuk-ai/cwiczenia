@@ -810,3 +810,107 @@ h1 {
   background: var(--tlo);
   font-size: 14px;
 }
+
+/* ===== Ekran Dziś ===== */
+.dzis-karta {
+  margin-bottom: 14px;
+  padding: 16px;
+  background: var(--karta);
+  border-radius: 14px;
+  border-left: 6px solid #0B6B5F;
+}
+
+.dzis-karta.koniec {
+  border-left-color: #D97706;
+}
+
+.dzis-naglowek {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+}
+
+.dzis-tytul {
+  font-size: 18px;
+  font-weight: 700;
+}
+
+.dzis-status.zaliczona {
+  font-size: 14px;
+  font-weight: 700;
+  color: #0B6B5F;
+}
+
+.dzis-postep {
+  display: flex;
+  justify-content: space-between;
+  margin: 12px 0 6px;
+  font-size: 14px;
+}
+
+.dzis-procent {
+  font-weight: 700;
+}
+
+.dzis-wynik {
+  margin: 6px 0 12px;
+  font-weight: 700;
+}
+
+.pasek-postepu {
+  height: 8px;
+  margin-bottom: 8px;
+  border-radius: 4px;
+  background: rgba(127, 127, 127, 0.25);
+  overflow: hidden;
+}
+
+.pasek-postepu > div {
+  height: 100%;
+  background: #0B6B5F;
+  border-radius: 4px;
+}
+
+.cw-wiersz {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 0;
+  border-top: 1px solid rgba(127, 127, 127, 0.25);
+}
+
+.odhacz {
+  flex: none;
+  width: 44px;
+  height: 44px;
+  border: 2px solid #0B6B5F;
+  border-radius: 12px;
+  background: transparent;
+  color: #fff;
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.odhacz.zrobione {
+  background: #0B6B5F;
+}
+
+.wynik-tlo {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  z-index: 40;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 16px;
+  overflow-y: auto;
+  background: rgba(10, 20, 18, 0.55);
+}
+
+.wynik-tlo[hidden] {
+  display: none;
+}

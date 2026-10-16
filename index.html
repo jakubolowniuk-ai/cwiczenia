@@ -20,6 +20,12 @@
         <p class="opis">Ułóż plan na tydzień lub miesiąc, a tutaj pojawią się Twoje sesje.</p>
         <button class="przycisk wielki" id="dzis-utworz-plan">Utwórz plan</button>
       </div>
+
+      <div id="dzis-plan" hidden>
+        <p class="opis" id="dzis-data"></p>
+        <div id="dzis-sesje"></div>
+        <p class="opis" id="dzis-podsumowanie"></p>
+      </div>
     </section>
 
     <section id="ekran-cwiczenia" class="ekran">
@@ -327,11 +333,26 @@
 
   </div>
 
+  <!-- Wynik biegania i basenu -->
+  <div class="wynik-tlo" id="wynik-tlo" hidden>
+    <div class="okno" role="dialog" aria-label="Wynik sesji">
+      <h2 id="wynik-tytul">Wynik</h2>
+      <p class="opis">Pola są wypełnione celem z planu. Popraw je, jeśli wynik był inny.</p>
+      <div id="wynik-pola"></div>
+      <p class="blad" id="wynik-blad"></p>
+      <div>
+        <button class="przycisk drugi" id="wynik-anuluj">Anuluj</button>
+        <button class="przycisk" id="wynik-zapisz">Zapisz i zalicz</button>
+      </div>
+    </div>
+  </div>
+
   <script src="dane.js"></script>
   <script src="cwiczenia.js"></script>
   <script src="treningi.js"></script>
   <script src="kreator.js"></script>
   <script src="kreator2.js"></script>
+  <script src="dzis.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

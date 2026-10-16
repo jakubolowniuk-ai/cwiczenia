@@ -1206,7 +1206,7 @@ function zapiszPlan() {
   szkic = { okres: "tydzien", aktywnosci: [], sesje: [] };
   zapiszDane();
   zamknijKreator();
-  alert("Plan zapisany. Ekran „Dziś” z Twoimi sesjami dodamy w następnym kroku.");
+  pokazEkran("ekran-dzis");
 }
 
 // ===== Cofanie w kroku 2 =====

@@ -13,6 +13,10 @@ function pokazEkran(idEkranu) {
   zakladki.forEach(function (zakladka) {
     zakladka.classList.toggle("aktywna", zakladka.dataset.ekran === idEkranu);
   });
+
+  if (idEkranu === "ekran-dzis" && typeof rysujDzis === "function") {
+    rysujDzis();
+  }
 }
 
 // Po dotknięciu zakładki pokazujemy jej ekran
@@ -49,6 +53,9 @@ przyciskReset.addEventListener("click", function () {
   if (!document.getElementById("kal-siatka")) {
     problemy.push("index.html");
   }
+  if (typeof rysujDzis === "undefined" || !document.getElementById("dzis-sesje")) {
+    problemy.push("dzis.js");
+  }
   if (typeof dane === "undefined" || dane.wersjaUstawien !== 3) {
     problemy.push("dane.js");
   }
@@ -67,3 +74,8 @@ przyciskReset.addEventListener("click", function () {
     problemy.join(", ") + ".";
   document.body.appendChild(baner);
 })();
+
+// Pierwsze narysowanie ekranu Dziś
+if (typeof rysujDzis === "function" && document.getElementById("dzis-sesje")) {
+  rysujDzis();
+}
