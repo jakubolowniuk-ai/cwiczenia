@@ -1,6 +1,6 @@
 // ===== Kreator planu =====
 // Krok 1: okres (tydzień lub miesiąc) i aktywności z liczbą razy (bez parametrów).
-// Kroki 2 i 3 (wybór ćwiczeń, rozłożenie na dni) dodamy w następnych wersjach.
+// Krok 2: kalendarz, w którym rozkładamy sesje na dni (kreator2.js).
 // Rozpoczęty plan zapisujemy jako szkic w dane.szkicPlanu.
 
 // Elementy kreatora
@@ -9,12 +9,10 @@ const krWstecz = document.getElementById("kr-wstecz");
 const krEtykietaKroku = document.getElementById("kr-etykieta-kroku");
 const krPostep = [
   document.getElementById("kr-postep-1"),
-  document.getElementById("kr-postep-2"),
-  document.getElementById("kr-postep-3")
+  document.getElementById("kr-postep-2")
 ];
 const krKrok1 = document.getElementById("kr-krok1");
 const krKrok2 = document.getElementById("kr-krok2");
-const krKrok3 = document.getElementById("kr-krok3");
 
 // Krok 1
 const krOkresTydzien = document.getElementById("kr-okres-tydzien");
@@ -47,7 +45,10 @@ const postepNowyPlan = document.getElementById("postep-nowy-plan");
 const DNI_W_OKRESIE = { tydzien: 7, miesiac: 30 };
 
 // Aktualny szkic planu, krok kreatora i edytowana aktywność
-let szkic = { okres: "tydzien", aktywnosci: [] };
+let szkic = { okres: "tydzien", aktywnosci: [], sesje: [] };
+
+// Kolory aktywności w kalendarzu (różne też jasnością, nie tylko barwą)
+const KOLORY_AKTYWNOSCI = ["#0B6B5F", "#D97706", "#7B3FA0", "#2563EB", "#B3261E", "#6B7A00"];
 let krokKreatora = 1;
 let edytowanaAktywnoscId = null;
 
@@ -123,7 +124,10 @@ function otworzKreator() {
   // Wznawiamy rozpoczęty szkic albo zaczynamy nowy
   szkic = dane.szkicPlanu
     ? JSON.parse(JSON.stringify(dane.szkicPlanu))
-    : { okres: "tydzien", aktywnosci: [] };
+    : { okres: "tydzien", aktywnosci: [], sesje: [] };
+  if (!Array.isArray(szkic.sesje)) {
+    szkic.sesje = [];
+  }
 
   edytowanaAktywnoscId = null;
   krFormularz.hidden = true;
@@ -143,8 +147,7 @@ function pokazKrok(numer) {
   krokKreatora = numer;
   krKrok1.hidden = numer !== 1;
   krKrok2.hidden = numer !== 2;
-  krKrok3.hidden = numer !== 3;
-  krEtykietaKroku.textContent = "Krok " + numer + " z 3";
+  krEtykietaKroku.textContent = "Krok " + numer + " z 2";
   krPostep.forEach(function (pasek, indeks) {
     pasek.classList.toggle("aktywny", indeks < numer);
   });
@@ -275,6 +278,17 @@ function zamknijFormularzAktywnosci() {
   rysujKrok1();
 }
 
+// Pierwszy kolor z palety, którego nie używa jeszcze żadna aktywność
+function kolejnyKolor() {
+  const uzyte = szkic.aktywnosci.map(function (a) {
+    return a.kolor;
+  });
+  const wolny = KOLORY_AKTYWNOSCI.find(function (kolor) {
+    return uzyte.indexOf(kolor) === -1;
+  });
+  return wolny || KOLORY_AKTYWNOSCI[szkic.aktywnosci.length % KOLORY_AKTYWNOSCI.length];
+}
+
 // Sprawdza pola formularza i zapisuje aktywność w szkicu
 function zapiszAktywnosc() {
   const rodzaj = znajdzKategorie(krRodzaj.value);
@@ -284,7 +298,6 @@ function zapiszAktywnosc() {
   }
 
   const pola = rodzaj.polaPlanu || [];
-  // Przy edycji zachowujemy wybrany trening i parametry, o ile rodzaj i partia się nie zmieniły
   const stara = szkic.aktywnosci.find(function (a) {
     return a.id === edytowanaAktywnoscId;
   });
@@ -292,7 +305,8 @@ function zapiszAktywnosc() {
     id: edytowanaAktywnoscId || "ak-" + Date.now(),
     rodzajId: rodzaj.id,
     partiaId: null,
-    razy: 0
+    razy: 0,
+    kolor: stara && stara.kolor ? stara.kolor : kolejnyKolor()
   };
 
   if (pola.indexOf("partia") !== -1) {
@@ -310,12 +324,24 @@ function zapiszAktywnosc() {
   }
   wpis.razy = razy;
 
-  if (stara && stara.rodzajId === wpis.rodzajId && stara.partiaId === wpis.partiaId) {
-    ["treningId", "parametry", "styl", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
-      if (stara[klucz] !== undefined) {
-        wpis[klucz] = stara[klucz];
+  // Edycja aktywności, która ma już sesje w kalendarzu
+  if (stara) {
+    const rozlozone = szkic.sesje.filter(function (s) {
+      return s.aktywnoscId === stara.id;
+    }).length;
+    const zmienionaTresc = stara.rodzajId !== wpis.rodzajId || stara.partiaId !== wpis.partiaId;
+
+    if (zmienionaTresc && rozlozone > 0) {
+      if (!confirm("Ta aktywność ma już " + rozlozone + " sesji w kalendarzu. Zmiana rodzaju lub partii usunie je z kalendarza. Kontynuować?")) {
+        return;
       }
-    });
+      szkic.sesje = szkic.sesje.filter(function (s) {
+        return s.aktywnoscId !== stara.id;
+      });
+    } else if (wpis.razy < rozlozone) {
+      pokazBladAktywnosci("W kalendarzu jest już " + rozlozone + " sesji tej aktywności. Wpisz co najmniej " + rozlozone + ".");
+      return;
+    }
   }
 
   if (edytowanaAktywnoscId) {
@@ -334,9 +360,12 @@ function usunAktywnosc() {
   if (!edytowanaAktywnoscId) {
     return;
   }
-  if (confirm("Usunąć tę aktywność z planu?")) {
+  if (confirm("Usunąć tę aktywność z planu (razem z jej sesjami w kalendarzu)?")) {
     szkic.aktywnosci = szkic.aktywnosci.filter(function (inna) {
       return inna.id !== edytowanaAktywnoscId;
+    });
+    szkic.sesje = szkic.sesje.filter(function (s) {
+      return s.aktywnoscId !== edytowanaAktywnoscId;
     });
     zapiszSzkic();
     zamknijFormularzAktywnosci();
@@ -353,19 +382,18 @@ function dalejZKroku1() {
   krBladKroku.textContent = "";
   zapiszSzkic();
 
-  // Krok 2: wybór treningów (kreator2.js)
-  rysujKrok2();
+  // Krok 2: kalendarz (kreator2.js)
+  rysujKalendarz();
   pokazKrok(2);
   kreator.querySelector(".kreator-tresc").scrollTop = 0;
 }
 
 function wstecz() {
-  if (krokKreatora === 3) {
-    pokazKrok(2);
-  } else if (krokKreatora === 2) {
-    // Najpierw zamykamy ewentualny widok wyboru lub budowy treningu
+  if (krokKreatora === 2) {
+    // Najpierw zamykamy ewentualne okno albo panel dnia
     if (!krok2Wstecz()) {
       pokazKrok(1);
+      rysujKrok1();
     }
   } else if (!krFormularz.hidden) {
     zamknijFormularzAktywnosci();
@@ -376,7 +404,7 @@ function wstecz() {
 
 function zacznijOdNowa() {
   if (confirm("Usunąć rozpoczęty plan i zacząć od nowa?")) {
-    szkic = { okres: "tydzien", aktywnosci: [] };
+    szkic = { okres: "tydzien", aktywnosci: [], sesje: [] };
     dane.szkicPlanu = null;
     zapiszDane();
     krFormularz.hidden = true;

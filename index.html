@@ -156,7 +156,7 @@
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
       </button>
       <div>
-        <div class="kreator-krok" id="kr-etykieta-kroku">Krok 1 z 3</div>
+        <div class="kreator-krok" id="kr-etykieta-kroku">Krok 1 z 2</div>
         <h2 class="kreator-tytul">Nowy plan</h2>
       </div>
     </div>
@@ -164,7 +164,6 @@
     <div class="kreator-postep">
       <span class="aktywny" id="kr-postep-1"></span>
       <span id="kr-postep-2"></span>
-      <span id="kr-postep-3"></span>
     </div>
 
     <div class="kreator-tresc">
@@ -215,71 +214,117 @@
         <button class="akcja" id="kr-od-nowa" hidden>Zacznij od nowa</button>
       </div>
 
-      <!-- Krok 2: wybór treningu dla każdej aktywności -->
+      <!-- Krok 2: kalendarz -->
       <div id="kr-krok2" hidden>
-
-        <div id="kr2-widok-lista">
-          <h2 class="tytul-formularza">Wybierz treningi</h2>
-          <p class="opis">Dla każdej aktywności wybierz gotowy trening albo zbuduj nowy, a potem ustaw parametry (serie, powtórzenia, czas, dystans, styl). Bieganie i basen mają tylko parametry.</p>
-          <div id="kr2-lista"></div>
-          <p class="blad" id="kr2-blad"></p>
-          <button class="przycisk wielki" id="kr2-dalej">Dalej</button>
+        <div class="etykieta-pola">Do rozłożenia</div>
+        <div class="legenda" id="kal-legenda"></div>
+        <div class="kal-oznaczenia">
+          <span><i class="znacznik" style="background:currentColor"></i> sesja gotowa</span>
+          <span><i class="znacznik pusty"></i> do uzupełnienia</span>
         </div>
-
-        <div id="kr2-widok-wybor" hidden>
-          <h2 class="tytul-formularza" id="kr2-wybor-tytul">Trening</h2>
-          <label class="wybor wybor-pelny">
-            <input type="checkbox" id="kr2-wszystkie-treningi">
-            Pokaż wszystkie treningi
-          </label>
-          <p class="opis" id="kr2-brak-treningow" hidden></p>
-          <div id="kr2-treningi"></div>
-          <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy trening</button>
-          <button class="przycisk drugi wielki" id="kr2-wybor-wstecz">Wróć</button>
+        <div class="kal-dni-tygodnia">
+          <span>Pn</span><span>Wt</span><span>Śr</span><span>Cz</span><span>Pt</span><span>So</span><span>Nd</span>
         </div>
-
-        <div id="kr2-widok-parametry" hidden>
-          <h2 class="tytul-formularza" id="kr2-parametry-tytul">Parametry</h2>
-          <p class="opis">Ustaw osobno każde ćwiczenie. Wartości zostają zapisane w tym planie.</p>
-          <div id="kr2-parametry-lista"></div>
-          <p class="blad" id="kr2-blad-parametrow"></p>
-          <button class="przycisk wielki" id="kr2-parametry-gotowe">Gotowe</button>
-          <button class="przycisk drugi wielki" id="kr2-parametry-wroc">Wróć</button>
-        </div>
-
-        <div id="kr2-widok-budowa" hidden>
-          <h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2>
-          <div class="formularz">
-            <label for="kr2-nazwa">Nazwa treningu</label>
-            <input type="text" id="kr2-nazwa" placeholder="Np. Plecy A">
-
-            <div class="etykieta">Sugerowane ćwiczenia</div>
-            <label class="wybor wybor-pelny">
-              <input type="checkbox" id="kr2-wszystkie">
-              Pokaż wszystkie ćwiczenia z bazy
-            </label>
-            <div id="kr2-cwiczenia"></div>
-            <p class="opis" id="kr2-wybrano"></p>
-
-            <p class="blad" id="kr2-blad-budowy"></p>
-            <div>
-              <button class="przycisk" id="kr2-zapisz">Zapisz i wybierz</button>
-              <button class="przycisk drugi" id="kr2-anuluj">Anuluj</button>
-            </div>
-          </div>
-        </div>
-
-      </div>
-
-      <!-- Krok 3: na razie podgląd (rozłożenie na dni dodamy w następnym kroku) -->
-      <div id="kr-krok3" hidden>
-        <h2 class="tytul-formularza">Rozłożenie na dni</h2>
-        <p class="opis">Ten krok dodamy w następnej wersji. Dotychczas ustawione:</p>
-        <div id="kr3-podglad"></div>
-        <button class="przycisk drugi wielki" id="kr3-wroc">Wróć do treningów</button>
+        <div class="kal-siatka" id="kal-siatka"></div>
+        <p class="podpowiedz" id="kal-podsumowanie"></p>
+        <p class="blad" id="kal-blad"></p>
+        <button class="przycisk drugi wielki" id="kal-propozycja">Zaproponuj rozkład</button>
+        <button class="przycisk wielki" id="kal-zapisz">Zapisz plan</button>
       </div>
 
     </div>
+
+    <!-- Panel dnia: wysuwa się z dołu po dotknięciu kafelka -->
+    <div class="arkusz-tlo" id="arkusz-tlo" hidden>
+      <div class="arkusz" id="arkusz" role="dialog" aria-label="Panel dnia">
+        <div class="arkusz-uchwyt"></div>
+        <div class="arkusz-naglowek">
+          <h2 id="pd-tytul">Dzień</h2>
+          <span id="pd-podtytul"></span>
+        </div>
+        <div class="arkusz-tresc" id="arkusz-tresc">
+
+          <div id="pd-widok-dzien">
+            <div id="pd-sesje"></div>
+            <button class="przycisk-przerywany" id="pd-dodaj">+ Dodaj sesję</button>
+            <button class="przycisk wielki" id="pd-zamknij">Gotowe</button>
+          </div>
+
+          <div id="pd-widok-dodaj" hidden>
+            <h2 class="tytul-formularza">Dodaj sesję</h2>
+            <div id="pd-wybor-aktywnosci"></div>
+            <button class="przycisk drugi wielki" id="pd-dodaj-anuluj">Anuluj</button>
+          </div>
+
+          <div id="pd-widok-sesja" hidden>
+            <h2 class="tytul-formularza" id="pd-sesja-tytul">Sesja</h2>
+            <div id="pd-sesja-trening"></div>
+            <div id="pd-sesja-parametry"></div>
+            <p class="blad" id="pd-sesja-blad"></p>
+            <p class="opis" id="pd-sesja-info"></p>
+            <button class="przycisk wielki" id="pd-sesja-zapisz">Zapisz sesję</button>
+            <button class="przycisk drugi wielki" id="pd-sesja-kopiuj">Kopiuj do innych sesji</button>
+            <button class="przycisk drugi wielki" id="pd-sesja-wroc">Wróć</button>
+            <button class="akcja usun" id="pd-sesja-usun">Usuń sesję</button>
+          </div>
+
+          <div id="pd-widok-wybor" hidden>
+            <h2 class="tytul-formularza" id="kr2-wybor-tytul">Trening</h2>
+            <label class="wybor wybor-pelny">
+              <input type="checkbox" id="kr2-wszystkie-treningi">
+              Pokaż wszystkie treningi
+            </label>
+            <p class="opis" id="kr2-brak-treningow" hidden></p>
+            <div id="kr2-treningi"></div>
+            <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy trening</button>
+            <button class="przycisk drugi wielki" id="kr2-wybor-wstecz">Wróć</button>
+          </div>
+
+          <div id="pd-widok-budowa" hidden>
+            <h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2>
+            <div class="formularz">
+              <label for="kr2-nazwa">Nazwa treningu</label>
+              <input type="text" id="kr2-nazwa" placeholder="Np. Plecy A">
+
+              <div class="etykieta">Sugerowane ćwiczenia</div>
+              <label class="wybor wybor-pelny">
+                <input type="checkbox" id="kr2-wszystkie">
+                Pokaż wszystkie ćwiczenia z bazy
+              </label>
+              <div id="kr2-cwiczenia"></div>
+              <p class="opis" id="kr2-wybrano"></p>
+
+              <p class="blad" id="kr2-blad-budowy"></p>
+              <div>
+                <button class="przycisk" id="kr2-zapisz">Zapisz i wybierz</button>
+                <button class="przycisk drugi" id="kr2-anuluj">Anuluj</button>
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+
+    <!-- Okno zmiany liczby sesji aktywności -->
+    <div class="arkusz-tlo srodek" id="okno-liczby-tlo" hidden>
+      <div class="okno" role="dialog" aria-label="Liczba sesji">
+        <div class="okno-tytul"><span class="kwadrat" id="ol-kwadrat"></span><h2 id="ol-tytul">Aktywność</h2></div>
+        <p class="opis">Liczba sesji w planie</p>
+        <div class="stepper">
+          <button id="ol-mniej" aria-label="Mniej sesji">−</button>
+          <div id="ol-liczba">1</div>
+          <button id="ol-wiecej" aria-label="Więcej sesji">+</button>
+        </div>
+        <p class="okno-info" id="ol-info"></p>
+        <div>
+          <button class="przycisk drugi" id="ol-anuluj">Anuluj</button>
+          <button class="przycisk" id="ol-zapisz">Zapisz</button>
+        </div>
+        <button class="akcja usun" id="ol-usun">Usuń aktywność z planu</button>
+      </div>
+    </div>
+
   </div>
 
   <script src="dane.js"></script>
