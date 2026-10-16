@@ -213,7 +213,7 @@ function zrobKarteDzis(plan, sesja) {
   const naglowek = document.createElement("div");
   naglowek.className = "dzis-naglowek";
   naglowek.appendChild(tekstElement("div", "dzis-tytul", opisAktywnosci(aktywnosc).tytul + " " + numerSesjiWPlanie(plan, sesja) + " z " + aktywnosc.razy));
-  naglowek.appendChild(tekstElement("div", "dzis-status" + (zaliczona ? " zaliczona" : ""), zaliczona ? "Zaliczone ✓" : ""));
+  naglowek.appendChild(tekstElement("div", "dzis-status" + (zaliczona ? " zaliczona" : ""), zaliczona ? (wymagaTreningu(aktywnosc) && sesjaPonizejPlanu(sesja) ? "Zaliczone ◐" : "Zaliczone ✓") : ""));
   karta.appendChild(naglowek);
 
   if (wymagaTreningu(aktywnosc)) {
@@ -269,6 +269,8 @@ function zrobKarteDzis(plan, sesja) {
 function zrobWierszCwiczenia(sesja, id) {
   const cwiczenie = znajdzCwiczenie(id);
   const zrobione = !!(sesja.zrobione || {})[id];
+  const plan = sesja.parametry[id];
+  const wykonane = zrobione && sesja.wykonane ? sesja.wykonane[id] : null;
 
   const wiersz = document.createElement("div");
   wiersz.className = "cw-wiersz";
@@ -283,6 +285,9 @@ function zrobWierszCwiczenia(sesja, id) {
       sesja.zrobione = {};
     }
     sesja.zrobione[id] = !sesja.zrobione[id];
+    if (!sesja.zrobione[id] && sesja.wykonane) {
+      delete sesja.wykonane[id];
+    }
     zapiszDane();
     rysujDzis();
   });
@@ -291,12 +296,245 @@ function zrobWierszCwiczenia(sesja, id) {
   const tekst = document.createElement("div");
   tekst.className = "karta-tekst";
   tekst.appendChild(tekstElement("div", "karta-nazwa", cwiczenie.nazwa));
-  tekst.appendChild(tekstElement("div", "karta-opis", opisIlosci(sesja.parametry[id])));
+  const opis = tekstElement("button", "wartosc-przycisk", opisIlosci(wykonane || plan));
+  opis.setAttribute("aria-label", "Wpisz inną wartość: " + cwiczenie.nazwa);
+  opis.addEventListener("click", function () {
+    otworzWartosc(sesja, id);
+  });
+  tekst.appendChild(opis);
+
+  if (wykonane) {
+    const roznica = opisRoznicy(plan, wykonane);
+    if (roznica) {
+      tekst.appendChild(tekstElement("div", "etykieta " + (roznica.wiecej ? "ponad" : "ponizej"), roznica.wiecej ? roznica.tekst : "plan " + opisIlosci(plan) + " · " + roznica.tekst));
+    }
+  }
   wiersz.appendChild(tekst);
 
   dodajFilm(wiersz, cwiczenie);
   return wiersz;
 }
+
+// ===== Porównanie wykonanej wartości z planem =====
+
+function sekundyZ(wartosc, jednostka) {
+  return jednostka === "min" ? wartosc * 60 : wartosc;
+}
+
+// Jedna liczba opisująca "ile pracy": powtórzenia razem albo sekundy
+function miaraIlosci(ilosc) {
+  if (ilosc.typ === "powtorzenia") {
+    return ilosc.serie * ilosc.powtorzenia;
+  }
+  if (ilosc.typ === "czas") {
+    return sekundyZ(ilosc.wartosc, ilosc.jednostka);
+  }
+  return ilosc.powtorzenia * sekundyZ(ilosc.czas.wartosc, ilosc.czas.jednostka);
+}
+
+// Stosunek wykonania do planu (1 = zgodnie z planem)
+function stosunekIlosci(plan, wykonane) {
+  const m = miaraIlosci(plan);
+  return m > 0 ? miaraIlosci(wykonane) / m : 1;
+}
+
+// Krótki opis różnicy, np. "−2 powt." albo "+10 s"; null, gdy bez różnicy
+function opisRoznicy(plan, wykonane) {
+  const roznica = miaraIlosci(wykonane) - miaraIlosci(plan);
+  if (roznica === 0) {
+    return null;
+  }
+  const znak = roznica > 0 ? "+" : "−";
+  const ile = Math.abs(roznica);
+  let tekst;
+  if (plan.typ === "powtorzenia") {
+    if (wykonane.serie === plan.serie) {
+      tekst = znak + Math.abs(wykonane.powtorzenia - plan.powtorzenia) + " powt.";
+    } else {
+      tekst = znak + ile + " powt. łącznie";
+    }
+  } else if (plan.typ === "czas") {
+    tekst = znak + (Math.round(ile * 10) / 10) + " s";
+  } else {
+    tekst = znak + (Math.round(ile * 10) / 10) + " s łącznie";
+  }
+  if (roznica > 0) {
+    return { wiecej: true, tekst: tekst + " ponad plan" };
+  }
+  return { wiecej: false, tekst: tekst };
+}
+
+// Czy w zaliczonej sesji treningowej jakieś ćwiczenie zrobiono poniżej planu
+function sesjaPonizejPlanu(sesja) {
+  const wykonane = sesja.wykonane || {};
+  return Object.keys(wykonane).some(function (id) {
+    return sesja.parametry[id] && stosunekIlosci(sesja.parametry[id], wykonane[id]) < 1;
+  });
+}
+
+// ===== Okno wartości ćwiczenia =====
+
+const wartTlo = document.getElementById("wart-tlo");
+const wartTytul = document.getElementById("wart-tytul");
+const wartPlan = document.getElementById("wart-plan");
+const wartPola = document.getElementById("wart-pola");
+const wartInfo = document.getElementById("wart-info");
+const wartZapisz = document.getElementById("wart-zapisz");
+const wartAnuluj = document.getElementById("wart-anuluj");
+const wartCofnij = document.getElementById("wart-cofnij");
+
+let wartSesja = null;
+let wartId = null;
+let wartPolaDane = [];
+
+// Jedno pole z przyciskami − i +
+function zrobStepper(etykieta, wartosc, krok) {
+  const blok = document.createElement("div");
+  blok.className = "wart-blok";
+  blok.appendChild(tekstElement("div", "wart-etykieta", etykieta));
+  const rzad = document.createElement("div");
+  rzad.className = "wart-stepper";
+  const mniej = tekstElement("button", "", "−");
+  mniej.setAttribute("aria-label", "Mniej: " + etykieta);
+  const pole = document.createElement("input");
+  pole.type = "number";
+  pole.inputMode = "decimal";
+  pole.min = "0";
+  pole.step = String(krok);
+  pole.value = String(wartosc);
+  const wiecej = tekstElement("button", "", "+");
+  wiecej.setAttribute("aria-label", "Więcej: " + etykieta);
+  mniej.addEventListener("click", function () {
+    pole.value = String(Math.max(0, Math.round((Number(pole.value) - krok) * 10) / 10));
+    odswiezWartInfo();
+  });
+  wiecej.addEventListener("click", function () {
+    pole.value = String(Math.round((Number(pole.value) + krok) * 10) / 10);
+    odswiezWartInfo();
+  });
+  pole.addEventListener("input", odswiezWartInfo);
+  rzad.appendChild(mniej);
+  rzad.appendChild(pole);
+  rzad.appendChild(wiecej);
+  blok.appendChild(rzad);
+  return { blok: blok, pole: pole };
+}
+
+// Składa wykonaną ilość z pól okna; null, gdy wartości są błędne
+function odczytajWartosc(plan) {
+  const v = wartPolaDane.map(function (p) {
+    return Number(p.pole.value);
+  });
+  if (plan.typ === "powtorzenia") {
+    if (!(v[0] >= 1) || !(v[1] >= 1) || Math.floor(v[0]) !== v[0] || Math.floor(v[1]) !== v[1]) {
+      return null;
+    }
+    return { typ: "powtorzenia", serie: v[0], powtorzenia: v[1] };
+  }
+  if (plan.typ === "czas") {
+    if (!(v[0] > 0)) {
+      return null;
+    }
+    return { typ: "czas", wartosc: v[0], jednostka: plan.jednostka };
+  }
+  if (!(v[0] >= 1) || Math.floor(v[0]) !== v[0] || !(v[1] > 0)) {
+    return null;
+  }
+  return { typ: "czas-powtorzenia", powtorzenia: v[0], czas: { wartosc: v[1], jednostka: plan.czas.jednostka } };
+}
+
+function odswiezWartInfo() {
+  const plan = wartSesja.parametry[wartId];
+  const wynik = odczytajWartosc(plan);
+  wartZapisz.disabled = wynik === null;
+  wartInfo.className = "wart-info";
+  if (wynik === null) {
+    wartInfo.textContent = "Wpisz wartości większe od zera.";
+    return;
+  }
+  const roznica = opisRoznicy(plan, wynik);
+  if (!roznica) {
+    wartInfo.textContent = "Zgodnie z planem.";
+  } else if (roznica.wiecej) {
+    wartInfo.className = "wart-info ponad";
+    wartInfo.textContent = "To " + roznica.tekst + ". Brawo!";
+  } else {
+    wartInfo.className = "wart-info ponizej";
+    wartInfo.textContent = "To " + roznica.tekst.replace("−", "") + " mniej niż w planie. Ćwiczenie i tak się zalicza. Wynik zobaczysz w Postępie.";
+  }
+}
+
+function otworzWartosc(sesja, id) {
+  const plan = sesja.parametry[id];
+  const start = (sesja.zrobione && sesja.zrobione[id] && sesja.wykonane && sesja.wykonane[id]) || plan;
+  wartSesja = sesja;
+  wartId = id;
+  wartTytul.textContent = znajdzCwiczenie(id).nazwa;
+  wartPlan.textContent = "Zaplanowano: " + opisIlosci(plan);
+  wartPola.innerHTML = "";
+  wartPolaDane = [];
+  if (plan.typ === "powtorzenia") {
+    wartPolaDane.push(zrobStepper("Serie", start.serie, 1));
+    wartPolaDane.push(zrobStepper("Powtórzenia", start.powtorzenia, 1));
+  } else if (plan.typ === "czas") {
+    wartPolaDane.push(zrobStepper("Czas (" + plan.jednostka + ")", start.wartosc, plan.jednostka === "min" ? 1 : 5));
+  } else {
+    wartPolaDane.push(zrobStepper("Powtórzenia", start.powtorzenia, 1));
+    wartPolaDane.push(zrobStepper("Czas jednego (" + plan.czas.jednostka + ")", start.czas.wartosc, plan.czas.jednostka === "min" ? 1 : 5));
+  }
+  wartPolaDane.forEach(function (p) {
+    wartPola.appendChild(p.blok);
+  });
+  wartCofnij.hidden = !(sesja.zrobione && sesja.zrobione[id]);
+  odswiezWartInfo();
+  wartTlo.hidden = false;
+}
+
+function zamknijWartosc() {
+  wartTlo.hidden = true;
+  wartSesja = null;
+  wartId = null;
+}
+
+wartZapisz.addEventListener("click", function () {
+  const plan = wartSesja.parametry[wartId];
+  const wynik = odczytajWartosc(plan);
+  if (wynik === null) {
+    return;
+  }
+  if (!wartSesja.zrobione) {
+    wartSesja.zrobione = {};
+  }
+  if (!wartSesja.wykonane) {
+    wartSesja.wykonane = {};
+  }
+  wartSesja.zrobione[wartId] = true;
+  if (miaraIlosci(wynik) === miaraIlosci(plan) && JSON.stringify(wynik) === JSON.stringify(plan)) {
+    delete wartSesja.wykonane[wartId];
+  } else {
+    wartSesja.wykonane[wartId] = wynik;
+  }
+  zapiszDane();
+  zamknijWartosc();
+  rysujDzis();
+});
+
+wartCofnij.addEventListener("click", function () {
+  wartSesja.zrobione[wartId] = false;
+  if (wartSesja.wykonane) {
+    delete wartSesja.wykonane[wartId];
+  }
+  zapiszDane();
+  zamknijWartosc();
+  rysujDzis();
+});
+
+wartAnuluj.addEventListener("click", zamknijWartosc);
+wartTlo.addEventListener("click", function (zdarzenie) {
+  if (zdarzenie.target === wartTlo) {
+    zamknijWartosc();
+  }
+});
 
 // ===== Koniec planu =====
 

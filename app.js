@@ -17,6 +17,9 @@ function pokazEkran(idEkranu) {
   if (idEkranu === "ekran-dzis" && typeof rysujDzis === "function") {
     rysujDzis();
   }
+  if (idEkranu === "ekran-postep" && typeof rysujPostep === "function") {
+    rysujPostep();
+  }
 }
 
 // Po dotknięciu zakładki pokazujemy jej ekran
@@ -55,6 +58,9 @@ przyciskReset.addEventListener("click", function () {
   }
   if (typeof rysujDzis === "undefined" || !document.getElementById("dzis-sesje")) {
     problemy.push("dzis.js");
+  }
+  if (typeof rysujPostep === "undefined" || !document.getElementById("postep-tresc")) {
+    problemy.push("postep.js");
   }
   if (typeof dane === "undefined" || dane.wersjaUstawien !== 3) {
     problemy.push("dane.js");
