@@ -56,14 +56,23 @@ przyciskReset.addEventListener("click", function () {
   if (!document.getElementById("kal-siatka")) {
     problemy.push("index.html");
   }
-  if (typeof rysujDzis === "undefined" || !document.getElementById("dzis-sesje")) {
+  if (typeof rysujDzis === "undefined") {
     problemy.push("dzis.js");
   }
-  if (typeof rysujPostep === "undefined" || !document.getElementById("postep-tresc")) {
+  if (!document.getElementById("dzis-sesje") && problemy.indexOf("index.html") === -1) {
+    problemy.push("index.html");
+  }
+  if (typeof rysujPostep === "undefined") {
     problemy.push("postep.js");
   }
-  if (typeof zrobIcs === "undefined" || !document.getElementById("ust-alarm")) {
+  if (!document.getElementById("postep-tresc") && problemy.indexOf("index.html") === -1) {
+    problemy.push("index.html");
+  }
+  if (typeof zrobIcs === "undefined") {
     problemy.push("ustawienia.js");
+  }
+  if (!document.getElementById("ust-alarm") && problemy.indexOf("index.html") === -1) {
+    problemy.push("index.html");
   }
   if (typeof dane === "undefined" || dane.wersjaUstawien !== 3) {
     problemy.push("dane.js");
