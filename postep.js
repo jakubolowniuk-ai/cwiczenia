@@ -178,6 +178,42 @@ function zrobWskazowke(znaczek, kolor, tlo, tytul, opis) {
   return blok;
 }
 
+// ===== Ekran główny: dwa kafelki =====
+
+function zrobKafelek(etykieta, duza, jednostka, p, akcja) {
+  const k = document.createElement("button");
+  k.className = "pp-kafel";
+  const gora = document.createElement("div");
+  gora.className = "pp-kafel-gora";
+  gora.appendChild(tekstElement("span", "", etykieta));
+  gora.appendChild(tekstElement("span", "strzalka", "›"));
+  k.appendChild(gora);
+  const dol = document.createElement("div");
+  dol.className = "pp-kafel-dol";
+  dol.appendChild(tekstElement("div", "pp-kafel-duza", duza));
+  dol.appendChild(tekstElement("div", "pp-kafel-jedn", jednostka));
+  dol.appendChild(zrobPasek(p));
+  k.appendChild(dol);
+  k.addEventListener("click", akcja);
+  return k;
+}
+
+function sesjeDnia(plan, indeks) {
+  return plan.sesje.filter(function (s) {
+    return s.dzien === indeks;
+  });
+}
+
+function nazwaOkresu(plan) {
+  return plan.okres === "tydzien" ? "Tydzień" : "Miesiąc";
+}
+
+function zakresDat(plan) {
+  const a = dataPlanu(plan, 0);
+  const b = dataPlanu(plan, DNI_W_OKRESIE[plan.okres] - 1);
+  return a.getDate() + "." + (a.getMonth() + 1) + " – " + b.getDate() + "." + (b.getMonth() + 1);
+}
+
 function rysujPostep() {
   postepTresc.innerHTML = "";
   const plan = aktywnyPlan();
@@ -187,108 +223,200 @@ function rysujPostep() {
   }
 
   const indeks = dzisiejszyDzienPlanu(plan);
-  const liczbaDni = DNI_W_OKRESIE[plan.okres];
-  const poczatek = dataPlanu(plan, 0);
-  const koniec = dataPlanu(plan, liczbaDni - 1);
-  postepTresc.appendChild(tekstElement("p", "opis", (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " · " + poczatek.getDate() + "." + (poczatek.getMonth() + 1) + " – " + koniec.getDate() + "." + (koniec.getMonth() + 1)));
+  postepTresc.appendChild(tekstElement("p", "opis", (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " · " + zakresDat(plan)));
 
+  const kafle = document.createElement("div");
+  kafle.className = "pp-kafle";
+
+  // Kafelek Dziś
+  const dzis = sesjeDnia(plan, indeks);
+  const zalDzis = dzis.filter(function (s) {
+    return sesjaZaliczona(plan, s);
+  }).length;
+  if (dzis.length === 0) {
+    kafle.appendChild(zrobKafelek("Dziś", "—", indeks < 0 ? "plan jeszcze się nie zaczął" : "odpoczynek", 0, function () {
+      otworzOknoDzis(plan, indeks);
+    }));
+  } else {
+    kafle.appendChild(zrobKafelek("Dziś", zalDzis + " z " + dzis.length, dzis.length === 1 ? "sesja" : "sesje", procent(zalDzis, dzis.length), function () {
+      otworzOknoDzis(plan, indeks);
+    }));
+  }
+
+  // Kafelek Tydzień / Miesiąc
   const wymagane = plan.sesje.filter(function (s) {
     return s.dzien <= indeks;
   });
-
-  // Realizacja planu
-  const karta = document.createElement("div");
-  karta.className = "pp-karta";
-  karta.appendChild(tekstElement("div", "opis", "Realizacja planu"));
-  if (wymagane.length === 0) {
-    karta.appendChild(tekstElement("p", "opis", "Pierwsze sesje jeszcze przed Tobą."));
-  } else {
-    let suma = 0;
-    wymagane.forEach(function (s) {
-      suma += stosunekSesji(plan, s);
-    });
-    const p = procent(suma, wymagane.length);
-    karta.appendChild(tekstElement("div", "pp-duze", p + "%"));
-    karta.appendChild(zrobPasek(p));
-    karta.appendChild(tekstElement("p", "opis", "zaplanowanej pracy do dziś (serie × powtórzenia, czas i dystans)"));
-  }
-  postepTresc.appendChild(karta);
-
-  // Trzy stany sesji
-  const liczniki = { pelna: 0, prawie: 0, brak: 0 };
-  let przed = 0;
-  plan.sesje.forEach(function (s) {
-    const stan = stanSesji(plan, s);
-    if (stan !== "brak") {
-      liczniki[stan]++;
-    } else if (s.dzien < indeks) {
-      liczniki.brak++;
-    } else {
-      przed++;
-    }
+  let suma = 0;
+  wymagane.forEach(function (s) {
+    suma += stosunekSesji(plan, s);
   });
-  const stany = document.createElement("div");
-  stany.className = "pp-stany";
-  [["✓", liczniki.pelna, "w pełni", "#0B6B5F"], ["◐", liczniki.prawie, "prawie", "#D97706"], ["○", liczniki.brak, "niezrobione", "#55625F"]].forEach(function (d) {
-    const blok = document.createElement("div");
-    blok.className = "pp-stan";
-    const ikona = tekstElement("div", "ikona", d[0]);
-    ikona.style.color = d[3];
-    blok.appendChild(ikona);
-    blok.appendChild(tekstElement("div", "liczba", String(d[1])));
-    blok.appendChild(tekstElement("div", "podpis", d[2]));
-    stany.appendChild(blok);
-  });
-  postepTresc.appendChild(stany);
-  if (przed > 0) {
-    postepTresc.appendChild(tekstElement("p", "opis", "Jeszcze przed Tobą: " + przed + " " + (przed === 1 ? "sesja" : "sesji") + "."));
-  }
+  const p = procent(suma, wymagane.length);
+  const zalPlan = plan.sesje.filter(function (s) {
+    return sesjaZaliczona(plan, s);
+  }).length;
+  kafle.appendChild(zrobKafelek(nazwaOkresu(plan), wymagane.length === 0 ? "—" : p + "%", zalPlan + " z " + plan.sesje.length + " sesji", p, function () {
+    otworzOknoOkresu(plan, indeks);
+  }));
+  postepTresc.appendChild(kafle);
 
-  // Aktywności
-  const aktywnosci = document.createElement("div");
-  aktywnosci.className = "pp-karta";
-  plan.aktywnosci.forEach(function (aktywnosc) {
-    const sesje = plan.sesje.filter(function (s) {
-      return s.aktywnoscId === aktywnosc.id;
-    });
-    const due = sesje.filter(function (s) {
-      return s.dzien <= indeks;
-    });
-    let suma = 0;
-    due.forEach(function (s) {
-      suma += stosunekSesji(plan, s);
-    });
-    const p = procent(suma, due.length);
-    const zaliczone = sesje.filter(function (s) {
-      return sesjaZaliczona(plan, s);
-    }).length;
-
-    const blok = document.createElement("div");
-    blok.className = "pp-akt";
-    const gora = document.createElement("div");
-    gora.className = "pp-akt-gora";
-    const kwadrat = document.createElement("span");
-    kwadrat.className = "kwadrat";
-    kwadrat.style.background = aktywnosc.kolor || "#0B6B5F";
-    gora.appendChild(kwadrat);
-    gora.appendChild(tekstElement("b", "", opisAktywnosci(aktywnosc).tytul));
-    gora.appendChild(tekstElement("b", "", due.length === 0 ? "—" : p + "%"));
-    blok.appendChild(gora);
-    blok.appendChild(tekstElement("div", "pp-podpis", zaliczone + " z " + aktywnosc.razy + " sesji"));
-    blok.appendChild(zrobPasek(p, aktywnosc.kolor));
-    aktywnosci.appendChild(blok);
-  });
-  postepTresc.appendChild(aktywnosci);
-
-  // Wskazówki motywacyjne
-  znajdzRekordy(plan).slice(-2).reverse().forEach(function (r) {
-    postepTresc.appendChild(zrobWskazowke("★", "#0B6B5F", "#DDF1E8", "Nowy rekord", znajdzCwiczenie(r.id).nazwa + ": " + opisIlosci(r.ilosc) + ". Poprzednio " + opisIlosci(r.poprzednio) + "."));
-  });
-  znajdzDoPoprawy(plan).slice(0, 2).forEach(function (d) {
-    postepTresc.appendChild(zrobWskazowke("↗", "#D97706", "#FDEFD3", "Na następny raz", znajdzCwiczenie(d.id).nazwa + ": ostatnio " + opisIlosci(d.wykonane) + " zamiast " + opisIlosci(d.plan) + ". Celuj w " + opisIlosci(d.plan) + "."));
-  });
   const seria = liczSerie(plan, indeks);
   if (seria >= 2) {
     postepTresc.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " sesji z rzędu", "Dni odpoczynku jej nie przerywają."));
   }
+}
+
+// ===== Okno ze szczegółami =====
+
+const postepOkno = document.getElementById("postep-okno");
+const postepOknoTytul = document.getElementById("postep-okno-tytul");
+const postepOknoPodtytul = document.getElementById("postep-okno-podtytul");
+const postepOknoTresc = document.getElementById("postep-okno-tresc");
+const postepOknoWstecz = document.getElementById("postep-okno-wstecz");
+
+function pokazOkno(tytul, podtytul) {
+  postepOknoTytul.textContent = tytul;
+  postepOknoPodtytul.textContent = podtytul;
+  postepOknoTresc.innerHTML = "";
+  postepOkno.hidden = false;
+}
+
+postepOknoWstecz.addEventListener("click", function () {
+  postepOkno.hidden = true;
+});
+
+function zrobMarker(stan, kolor) {
+  const m = document.createElement("span");
+  m.className = "pp-marker " + stan;
+  m.style.setProperty("--kolor", kolor);
+  return m;
+}
+
+function otworzOknoOkresu(plan, indeks) {
+  pokazOkno(nazwaOkresu(plan), zakresDat(plan));
+  const wymagane = plan.sesje.filter(function (s) {
+    return s.dzien <= indeks;
+  });
+  let suma = 0;
+  wymagane.forEach(function (s) {
+    suma += stosunekSesji(plan, s);
+  });
+  const p = procent(suma, wymagane.length);
+
+  const gora = document.createElement("div");
+  gora.className = "pp-karta";
+  gora.appendChild(tekstElement("div", "opis", "Realizacja planu"));
+  gora.appendChild(tekstElement("div", "pp-duze", wymagane.length === 0 ? "—" : p + "%"));
+  gora.appendChild(zrobPasek(p));
+  postepOknoTresc.appendChild(gora);
+
+  const lista = document.createElement("div");
+  lista.className = "pp-karta";
+  plan.aktywnosci.forEach(function (aktywnosc) {
+    const sesje = plan.sesje.filter(function (s) {
+      return s.aktywnoscId === aktywnosc.id;
+    }).sort(function (a, b) {
+      return a.dzien - b.dzien;
+    });
+    const due = sesje.filter(function (s) {
+      return s.dzien <= indeks;
+    });
+    let s2 = 0;
+    due.forEach(function (s) {
+      s2 += stosunekSesji(plan, s);
+    });
+    const pa = procent(s2, due.length);
+    const zaliczone = sesje.filter(function (s) {
+      return sesjaZaliczona(plan, s);
+    }).length;
+    const kolor = aktywnosc.kolor || "#0B6B5F";
+
+    const blok = document.createElement("div");
+    blok.className = "pp-akt";
+    const wiersz = document.createElement("div");
+    wiersz.className = "pp-akt-gora";
+    const kwadrat = document.createElement("span");
+    kwadrat.className = "kwadrat";
+    kwadrat.style.background = kolor;
+    wiersz.appendChild(kwadrat);
+    wiersz.appendChild(tekstElement("b", "", opisAktywnosci(aktywnosc).tytul));
+    wiersz.appendChild(tekstElement("b", "", due.length === 0 ? "—" : pa + "%"));
+    blok.appendChild(wiersz);
+
+    const markery = document.createElement("div");
+    markery.className = "pp-markery";
+    sesje.forEach(function (s) {
+      const stan = stanSesji(plan, s);
+      markery.appendChild(zrobMarker(stan === "pelna" ? "pelny" : stan === "prawie" ? "pol" : "pusty", kolor));
+    });
+    blok.appendChild(markery);
+    blok.appendChild(tekstElement("div", "pp-podpis", zaliczone + " z " + aktywnosc.razy + " sesji"));
+    blok.appendChild(zrobPasek(pa, kolor));
+    lista.appendChild(blok);
+  });
+  postepOknoTresc.appendChild(lista);
+
+  znajdzRekordy(plan).slice(-2).reverse().forEach(function (r) {
+    postepOknoTresc.appendChild(zrobWskazowke("★", "#0B6B5F", "#DDF1E8", "Nowy rekord", znajdzCwiczenie(r.id).nazwa + ": " + opisIlosci(r.ilosc) + ". Poprzednio " + opisIlosci(r.poprzednio) + "."));
+  });
+  znajdzDoPoprawy(plan).slice(0, 2).forEach(function (d) {
+    postepOknoTresc.appendChild(zrobWskazowke("↗", "#D97706", "#FDEFD3", "Na następny raz", znajdzCwiczenie(d.id).nazwa + ": ostatnio " + opisIlosci(d.wykonane) + ". Celuj w " + opisIlosci(d.plan) + "."));
+  });
+
+  postepOknoTresc.appendChild(tekstElement("p", "pp-legenda", "■ w pełni   ◐ prawie   □ jeszcze przed Tobą"));
+}
+
+function otworzOknoDzis(plan, indeks) {
+  const dzis = new Date();
+  const nazwyDni = ["niedziela", "poniedziałek", "wtorek", "środa", "czwartek", "piątek", "sobota"];
+  pokazOkno("Dziś", nazwyDni[dzis.getDay()] + ", " + dzis.getDate() + " " + MIESIACE_DOPELNIACZ[dzis.getMonth()]);
+  const sesje = sesjeDnia(plan, indeks);
+  if (sesje.length === 0) {
+    postepOknoTresc.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", "Brak sesji w planie na dzisiaj."));
+    return;
+  }
+  sesje.forEach(function (sesja) {
+    const aktywnosc = aktywnoscPlanu(plan, sesja.aktywnoscId);
+    const stan = stanSesji(plan, sesja);
+    const karta = document.createElement("div");
+    karta.className = "dzis-karta";
+    karta.style.borderLeftColor = aktywnosc.kolor || "#0B6B5F";
+    const naglowek = document.createElement("div");
+    naglowek.className = "dzis-naglowek";
+    naglowek.appendChild(tekstElement("div", "dzis-tytul", opisAktywnosci(aktywnosc).tytul + " " + numerSesjiWPlanie(plan, sesja) + " z " + aktywnosc.razy));
+    const status = tekstElement("div", "dzis-status " + stan, stan === "pelna" ? "✓ w pełni" : stan === "prawie" ? "◐ prawie" : "□ do zrobienia");
+    naglowek.appendChild(status);
+    karta.appendChild(naglowek);
+
+    if (wymagaTreningu(aktywnosc)) {
+      cwiczeniaSesjiIds(sesja).forEach(function (id) {
+        const zrobione = !!(sesja.zrobione || {})[id];
+        const plan_ = sesja.parametry[id];
+        const wyk = zrobione && sesja.wykonane ? sesja.wykonane[id] : null;
+        const wiersz = document.createElement("div");
+        wiersz.className = "cw-wiersz";
+        const znacznik = document.createElement("div");
+        znacznik.className = "odhacz maly" + (zrobione ? " zrobione" : "");
+        znacznik.textContent = zrobione ? "✓" : "";
+        wiersz.appendChild(znacznik);
+        const tekst = document.createElement("div");
+        tekst.className = "karta-tekst";
+        tekst.appendChild(tekstElement("div", "karta-nazwa", znajdzCwiczenie(id).nazwa));
+        tekst.appendChild(tekstElement("div", "karta-opis", opisIlosci(wyk || plan_)));
+        if (wyk) {
+          const r = opisRoznicy(plan_, wyk);
+          if (r) {
+            tekst.appendChild(tekstElement("div", "etykieta " + (r.wiecej ? "ponad" : "ponizej"), r.wiecej ? r.tekst : "plan " + opisIlosci(plan_) + " · " + r.tekst));
+          }
+        }
+        wiersz.appendChild(tekst);
+        karta.appendChild(wiersz);
+      });
+    } else if (sesja.wynik) {
+      karta.appendChild(tekstElement("div", "karta-opis", "Wynik: " + opisCeluSesji(sesja.wynik)));
+    } else {
+      karta.appendChild(tekstElement("div", "karta-opis", "Cel: " + opisCeluSesji(sesja)));
+    }
+    postepOknoTresc.appendChild(karta);
+  });
 }

@@ -10,7 +10,12 @@
 
   <main>
     <section id="ekran-dzis" class="ekran aktywny">
-      <h1>Dziś</h1>
+      <div class="naglowek-rzad">
+        <h1>Dziś</h1>
+        <button class="ikona-przycisk" id="otworz-ustawienia" aria-label="Ustawienia">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.7 1.7 0 0 0 .3 1.8l.1.1a2 2 0 1 1-2.8 2.8l-.1-.1a1.7 1.7 0 0 0-1.8-.3 1.7 1.7 0 0 0-1 1.5V21a2 2 0 1 1-4 0v-.1a1.7 1.7 0 0 0-1.1-1.5 1.7 1.7 0 0 0-1.8.3l-.1.1a2 2 0 1 1-2.8-2.8l.1-.1a1.7 1.7 0 0 0 .3-1.8 1.7 1.7 0 0 0-1.5-1H3a2 2 0 1 1 0-4h.1a1.7 1.7 0 0 0 1.5-1.1 1.7 1.7 0 0 0-.3-1.8l-.1-.1a2 2 0 1 1 2.8-2.8l.1.1a1.7 1.7 0 0 0 1.8.3H9a1.7 1.7 0 0 0 1-1.5V3a2 2 0 1 1 4 0v.1a1.7 1.7 0 0 0 1 1.5 1.7 1.7 0 0 0 1.8-.3l.1-.1a2 2 0 1 1 2.8 2.8l-.1.1a1.7 1.7 0 0 0-.3 1.8V9a1.7 1.7 0 0 0 1.5 1H21a2 2 0 1 1 0 4h-.1a1.7 1.7 0 0 0-1.5 1z"/></svg>
+        </button>
+      </div>
 
       <div class="pusty-stan" id="dzis-brak-planu">
         <div class="pusty-ikona">
@@ -333,6 +338,55 @@
 
   </div>
 
+  <!-- Ustawienia -->
+  <div class="postep-okno" id="ustawienia-okno" hidden>
+    <div class="postep-okno-gora">
+      <button class="wstecz" id="ustawienia-wstecz" aria-label="Wstecz">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <h1>Ustawienia</h1>
+    </div>
+    <div class="postep-okno-tresc">
+      <div class="ust-naglowek">Przypomnienie</div>
+      <div class="pp-karta">
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Alarm</div>
+          <button class="przelacznik-wl" id="ust-alarm" role="switch" aria-checked="true" aria-label="Alarm"><span></span></button>
+        </div>
+        <div id="ust-godzina-blok">
+          <div class="ust-linia"></div>
+          <label class="ust-nazwa" for="ust-godzina">Godzina</label>
+          <input type="time" id="ust-godzina" class="ust-godzina" value="18:30">
+          <p class="opis">Alarm dzwoni tylko w dni z zaplanowaną sesją. W dni odpoczynku jest cisza.</p>
+        </div>
+        <div id="ust-ics-blok" hidden>
+          <div class="ust-linia"></div>
+          <button class="przycisk drugi" id="ust-ics">Dodaj przypomnienia do kalendarza</button>
+          <p class="opis" id="ust-ics-info"></p>
+        </div>
+      </div>
+      <div class="ust-naglowek">Wygląd</div>
+      <div class="ust-segmenty">
+        <button id="ust-jasny">Jasny</button>
+        <button id="ust-ciemny">Ciemny</button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Okno szczegółów w Postępie -->
+  <div class="postep-okno" id="postep-okno" hidden>
+    <div class="postep-okno-gora">
+      <button class="wstecz" id="postep-okno-wstecz" aria-label="Wstecz">
+        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg>
+      </button>
+      <div>
+        <h1 id="postep-okno-tytul">Tydzień</h1>
+        <div class="opis" id="postep-okno-podtytul"></div>
+      </div>
+    </div>
+    <div class="postep-okno-tresc" id="postep-okno-tresc"></div>
+  </div>
+
   <!-- Wartość ćwiczenia (inna niż w planie) -->
   <div class="wynik-tlo" id="wart-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Wartości ćwiczenia">
@@ -369,6 +423,7 @@
   <script src="kreator2.js"></script>
   <script src="dzis.js"></script>
   <script src="postep.js"></script>
+  <script src="ustawienia.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

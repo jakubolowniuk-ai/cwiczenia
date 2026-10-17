@@ -62,6 +62,9 @@ przyciskReset.addEventListener("click", function () {
   if (typeof rysujPostep === "undefined" || !document.getElementById("postep-tresc")) {
     problemy.push("postep.js");
   }
+  if (typeof zrobIcs === "undefined" || !document.getElementById("ust-alarm")) {
+    problemy.push("ustawienia.js");
+  }
   if (typeof dane === "undefined" || dane.wersjaUstawien !== 3) {
     problemy.push("dane.js");
   }
