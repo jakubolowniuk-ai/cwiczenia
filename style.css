@@ -1410,3 +1410,16 @@ h1 {
   color: var(--tekst);
   font-weight: 700;
 }
+
+/* ===== Usuwanie planu ===== */
+.przycisk.niebezpieczny {
+  background: #B3261E;
+  color: #fff;
+}
+
+.pp-usun {
+  display: block;
+  width: 100%;
+  margin-top: 12px;
+  color: #B3261E;
+}

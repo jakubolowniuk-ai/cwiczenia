@@ -264,7 +264,53 @@ function rysujPostep() {
   if (seria >= 2) {
     postepTresc.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " sesji z rzędu", "Dni odpoczynku jej nie przerywają."));
   }
+
+  const usun = document.createElement("button");
+  usun.className = "akcja usun pp-usun";
+  usun.textContent = "Usuń plan";
+  usun.addEventListener("click", function () {
+    otworzUsuwanie(plan);
+  });
+  postepTresc.appendChild(usun);
 }
+
+// ===== Usuwanie planu =====
+
+const usunTlo = document.getElementById("usun-tlo");
+const usunOpis = document.getElementById("usun-opis");
+const usunAnuluj = document.getElementById("usun-anuluj");
+const usunPotwierdz = document.getElementById("usun-potwierdz");
+let usuwanyPlan = null;
+
+function otworzUsuwanie(plan) {
+  usuwanyPlan = plan;
+  const zaliczone = plan.sesje.filter(function (s) {
+    return sesjaZaliczona(plan, s);
+  }).length;
+  usunOpis.textContent = (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " i jego postęp zostaną usunięte. Zaliczone sesje: " + zaliczone + " z " + plan.sesje.length + ".";
+  usunTlo.hidden = false;
+}
+
+function zamknijUsuwanie() {
+  usunTlo.hidden = true;
+  usuwanyPlan = null;
+}
+
+usunAnuluj.addEventListener("click", zamknijUsuwanie);
+usunTlo.addEventListener("click", function (zdarzenie) {
+  if (zdarzenie.target === usunTlo) {
+    zamknijUsuwanie();
+  }
+});
+usunPotwierdz.addEventListener("click", function () {
+  dane.plany = dane.plany.filter(function (p) {
+    return p !== usuwanyPlan;
+  });
+  zapiszDane();
+  zamknijUsuwanie();
+  rysujPostep();
+  rysujDzis();
+});
 
 // ===== Okno ze szczegółami =====
 

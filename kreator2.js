@@ -1201,6 +1201,13 @@ function zapiszPlan() {
     sesje: JSON.parse(JSON.stringify(szkic.sesje)),
     utworzono: new Date().toISOString()
   };
+  // Poprzedni aktywny plan zostaje zamknięty (zostaje w historii), nowy staje się aktywny
+  dane.plany.forEach(function (stary) {
+    if (!stary.zamkniety) {
+      stary.zamkniety = true;
+      stary.zamknieto = new Date().toISOString();
+    }
+  });
   dane.plany.push(plan);
   dane.szkicPlanu = null;
   szkic = { okres: "tydzien", aktywnosci: [], sesje: [] };
