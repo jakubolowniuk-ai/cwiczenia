@@ -74,7 +74,16 @@ przyciskReset.addEventListener("click", function () {
   if (!document.getElementById("ust-alarm") && problemy.indexOf("index.html") === -1) {
     problemy.push("index.html");
   }
-  if (typeof dane === "undefined" || dane.wersjaUstawien !== 3) {
+  if (typeof dodajCwiczeniaZListy === "undefined") {
+    problemy.push("kopia.js");
+  }
+  if (!document.getElementById("kopia-zapisz") && problemy.indexOf("index.html") === -1) {
+    problemy.push("index.html");
+  }
+  if (typeof zrobAnatomie === "undefined") {
+    problemy.push("anatomia.js");
+  }
+  if (typeof dane === "undefined" || dane.wersjaUstawien !== 4) {
     problemy.push("dane.js");
   }
 

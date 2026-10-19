@@ -74,6 +74,18 @@
           <button class="akcja" id="przycisk-zmien-partie">Zmień</button>
         </div>
 
+        <!-- Mięśnie: rysunek, lista wybranych i panel wyboru -->
+        <div class="etykieta-pola">Mięśnie</div>
+        <div class="an-ramka" id="an-formularz"></div>
+        <p class="opis" id="tekst-miesni">Nie wybrano mięśni.</p>
+        <button class="przycisk drugi" id="przycisk-miesnie">Wybierz mięśnie</button>
+
+        <div class="panel" id="panel-miesni" hidden>
+          <div class="etykieta">Zaznacz mięśnie ćwiczenia</div>
+          <div id="pole-miesnie"></div>
+          <button class="przycisk" id="przycisk-gotowe-miesnie">Gotowe</button>
+        </div>
+
         <label for="pole-link">Link do filmu (opcjonalnie)</label>
         <input type="url" id="pole-link" placeholder="https://">
 
@@ -377,11 +389,33 @@
           <p class="opis" id="ust-ics-info"></p>
         </div>
       </div>
+      <div class="ust-naglowek">Dane</div>
+      <div class="pp-karta">
+        <button class="przycisk" id="kopia-zapisz">Zapisz kopię zapasową</button>
+        <button class="przycisk drugi" id="kopia-wczytaj">Wczytaj kopię</button>
+        <div class="ust-linia"></div>
+        <button class="przycisk drugi" id="kopia-cwiczenia">Dodaj ćwiczenia z pliku</button>
+        <button class="akcja" id="kopia-wzor">Pobierz wzór pliku z ćwiczeniami</button>
+        <p class="opis" id="kopia-info"></p>
+        <input type="file" id="kopia-wczytaj-plik" accept=".json,application/json" hidden>
+        <input type="file" id="kopia-cwiczenia-plik" accept=".json,application/json" hidden>
+      </div>
+
       <div class="ust-naglowek">Wygląd</div>
       <div class="ust-segmenty">
         <button id="ust-jasny">Jasny</button>
         <button id="ust-ciemny">Ciemny</button>
       </div>
+    </div>
+  </div>
+
+  <!-- Mięśnie ćwiczenia (rysunek) -->
+  <div class="wynik-tlo" id="an-tlo" hidden>
+    <div class="okno" role="dialog" aria-label="Mięśnie ćwiczenia">
+      <h2 id="an-tytul">Ćwiczenie</h2>
+      <div class="an-ramka" id="an-okno-rysunek"></div>
+      <p class="opis" id="an-okno-lista"></p>
+      <button class="przycisk" id="an-zamknij">Zamknij</button>
     </div>
   </div>
 
@@ -429,6 +463,7 @@
   </div>
 
   <script src="dane.js"></script>
+  <script src="anatomia.js"></script>
   <script src="cwiczenia.js"></script>
   <script src="treningi.js"></script>
   <script src="kreator.js"></script>
@@ -436,6 +471,7 @@
   <script src="dzis.js"></script>
   <script src="postep.js"></script>
   <script src="ustawienia.js"></script>
+  <script src="kopia.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

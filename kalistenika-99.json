@@ -1,0 +1,1383 @@
+{
+ "cwiczenia": [
+  {
+   "nazwa": "Pompki klasyczne",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki szerokie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki diamentowe",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki z nogami na podwyższeniu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki z rękami na podwyższeniu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki łucznicze",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki pseudo-planche",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Triceps",
+    "Zębaty przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki hinduskie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki z wypchnięciem łopatek (Push-Up Plus)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Zębaty przedni",
+    "Piersiowy większy",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki z klaśnięciem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki pike",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Piersiowy większy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki pike z nogami na podwyższeniu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki w staniu na rękach przy ścianie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Stanie na rękach",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Zębaty przedni",
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dipy na poręczach",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dipy z pochyleniem tułowia",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dipy z pionowym tułowiem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dipy na ławce",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podpór na kółkach (Ring Support Hold)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Ramiona",
+    "Barki"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Naramienny przedni",
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pompki z wąskim rozstawem dłoni",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie nachwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie podchwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie chwytem neutralnym",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie szerokim nachwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie wąskim nachwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie australijskie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Równoległoboczny",
+    "Biceps",
+    "Naramienny tylny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie australijskie podchwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Równoległoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie australijskie z nogami na podwyższeniu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie łucznicze",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Muscle-up",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Piersiowy większy",
+    "Triceps",
+    "Biceps",
+    "Naramienny przedni",
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie łopatkowe",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Równoległoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Zwis aktywny na drążku",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Zębaty przedni",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Zwis bierny na drążku",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Ramiona",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Przedramiona",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie na kółkach gimnastycznych",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Równoległoboczny",
+    "Biceps",
+    "Naramienny tylny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie australijskie jednorącz",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny",
+    "Biceps",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion na kółkach gimnastycznych",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion w australijskim podciąganiu podchwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Najszerszy grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion na niskim drążku podchwytem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Utrzymanie zwisu z ugiętymi łokciami",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Najszerszy grzbietu",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Deska przodem (Front Plank)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Deska bokiem (Side Plank)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośne brzucha",
+    "Czworoboczny lędźwi",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Hollow Body Hold",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Hollow Body Rocks",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie kolan w zwisie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie prostych nóg w zwisie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie kolan w podporze na poręczach",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Odwrotne spięcia brzucha",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Spięcia brzucha",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Rowerki brzucha",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Russian Twist",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośne brzucha",
+    "Prosty brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dead Bug",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Poprzeczny brzucha",
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Bird Dog",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Pośladkowy wielki",
+    "Naramienny przedni",
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dotykanie barków w podporze",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Zębaty przedni",
+    "Naramienny przedni",
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Mountain Climbers",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Biodrowo-lędźwiowy",
+    "Naramienny przedni",
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Most biodrowy",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Most biodrowy jednonóż",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Hip Thrust",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe",
+    "Przywodziciele uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Hip Thrust jednonóż",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Pośladkowy średni",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Odwodzenie biodra w leżeniu bokiem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Pośladkowy mały",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Donkey Kicks",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Fire Hydrant",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Pośladkowy mały",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie biodra w staniu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Chód bokiem w półprzysiadzie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Pośladkowy wielki",
+    "Czworogłowy uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Mostek gimnastyczny",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad klasyczny",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad głęboki",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad sumo",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Przywodziciele uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad bułgarski",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykroki w przód",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykroki w tył",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Czworogłowy uda",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykroki chodzone",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykrok boczny",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Czworogłowy uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pistol Squat",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pistol Squat z podparciem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wall Sit",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad z wyskokiem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Brzuchaty łydki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyskoki z półprzysiadu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad kozacki (Cossack Squat)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Czworogłowy uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Nordic Hamstring Curl",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Sliding Leg Curl",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Ring Hamstring Curl",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Martwy ciąg na jednej nodze bez obciążenia",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe",
+    "Pośladkowy średni",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wspięcia na palce obunóż",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wspięcia na palce jednonóż",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wspięcia na palce z ugiętymi kolanami",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Płaszczkowaty",
+    "Brzuchaty łydki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Ekscentryczne opuszczanie pięt ze stopnia",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Tibialis Raise",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Piszczelowy przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Chód na piętach",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Piszczelowy przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Chód na palcach",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki",
+    "Płaszczkowaty",
+    "Piszczelowy przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Burpees",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Piersiowy większy",
+    "Triceps",
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Tuck Jumps",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Brzuchaty łydki",
+    "Płaszczkowaty",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Skoki w dal z miejsca",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Czworogłowy uda",
+    "Kulszowo-goleniowe",
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Skoki łyżwiarskie na boki",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Pośladkowy średni",
+    "Czworogłowy uda",
+    "Przywodziciele uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Bear Crawl",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Zębaty przedni",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Czworogłowy uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Crab Walk",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Barki"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Naramienny tylny",
+    "Pośladkowy wielki",
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "L-Sit",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Czworogłowy uda",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Tuck Planche Hold",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Zębaty przedni",
+    "Triceps",
+    "Prosty brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Front Lever Hold",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Obły większy",
+    "Naramienny tylny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Back Lever Hold",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Biceps",
+    "Prosty brzucha",
+    "Skośne brzucha",
+    "Czworoboczny"
+   ],
+   "link": ""
+  }
+ ]
+}

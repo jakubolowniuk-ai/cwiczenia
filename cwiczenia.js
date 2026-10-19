@@ -16,6 +16,19 @@ const podsumowaniePartii = document.getElementById("podsumowanie-partii");
 const tekstPartii = document.getElementById("tekst-partii");
 const przyciskZmienPartie = document.getElementById("przycisk-zmien-partie");
 
+// Mięśnie i rysunek anatomiczny
+const rysunekFormularza = document.getElementById("an-formularz");
+const tekstMiesni = document.getElementById("tekst-miesni");
+const przyciskMiesnie = document.getElementById("przycisk-miesnie");
+const panelMiesni = document.getElementById("panel-miesni");
+const poleMiesnie = document.getElementById("pole-miesnie");
+const przyciskGotoweMiesnie = document.getElementById("przycisk-gotowe-miesnie");
+const anTlo = document.getElementById("an-tlo");
+const anTytul = document.getElementById("an-tytul");
+const anOknoRysunek = document.getElementById("an-okno-rysunek");
+const anOknoLista = document.getElementById("an-okno-lista");
+const anZamknij = document.getElementById("an-zamknij");
+
 const poleLink = document.getElementById("pole-link");
 const komunikatBledu = document.getElementById("komunikat-bledu");
 const przyciskZapisz = document.getElementById("przycisk-zapisz");
@@ -129,6 +142,93 @@ function zmienPartie() {
   panelPartii.hidden = false;
 }
 
+// ===== Mięśnie i rysunek =====
+
+// Zwraca id zaznaczonych mięśni
+function zaznaczoneMiesnie() {
+  return Array.from(poleMiesnie.querySelectorAll("input:checked")).map(function (pole) {
+    return pole.value;
+  });
+}
+
+// Rysuje rysunek w podanym miejscu, mięśnie z listy na czerwono
+function wstawRysunek(miejsce, miesnieIds) {
+  miejsce.innerHTML = "";
+  miejsce.appendChild(zrobAnatomie(miesnieIds));
+}
+
+// Odświeża rysunek i opis w formularzu
+function odswiezMiesnieFormularza() {
+  const ids = zaznaczoneMiesnie();
+  wstawRysunek(rysunekFormularza, ids);
+  tekstMiesni.textContent = ids.length === 0 ? "Nie wybrano mięśni." : ids.map(nazwaKategorii).join(", ");
+}
+
+// Panel wyboru: mięśnie pogrupowane według partii
+function zbudujPanelMiesni(wybrane) {
+  poleMiesnie.innerHTML = "";
+  kategorieTypu("partia").forEach(function (partia) {
+    const miesnie = kategorieTypu("miesien").filter(function (m) {
+      return m.partiaId === partia.id;
+    });
+    if (miesnie.length === 0) {
+      return;
+    }
+    const naglowek = document.createElement("div");
+    naglowek.className = "miesnie-grupa";
+    naglowek.textContent = partia.nazwa;
+    poleMiesnie.appendChild(naglowek);
+
+    const wybory = document.createElement("div");
+    wybory.className = "wybory";
+    miesnie.forEach(function (m) {
+      const etykieta = document.createElement("label");
+      etykieta.className = "wybor";
+      const pole = document.createElement("input");
+      pole.type = "checkbox";
+      pole.value = m.id;
+      pole.checked = wybrane.indexOf(m.id) !== -1;
+      pole.addEventListener("change", odswiezMiesnieFormularza);
+      etykieta.appendChild(pole);
+      etykieta.appendChild(document.createTextNode(" " + m.nazwa));
+      wybory.appendChild(etykieta);
+    });
+    poleMiesnie.appendChild(wybory);
+  });
+}
+
+// "Gotowe" w panelu mięśni: dopisuje też partie wybranych mięśni
+function zatwierdzMiesnie() {
+  const ids = zaznaczoneMiesnie();
+  const partie = [];
+  ids.forEach(function (id) {
+    const m = znajdzKategorie(id);
+    if (m && partie.indexOf(m.partiaId) === -1) {
+      partie.push(m.partiaId);
+    }
+  });
+  if (partie.length > 0) {
+    poleCzyPartie.checked = true;
+    polePartie.querySelectorAll("input").forEach(function (pole) {
+      if (partie.indexOf(pole.value) !== -1) {
+        pole.checked = true;
+      }
+    });
+    pokazPodsumowaniePartii();
+  }
+  panelMiesni.hidden = true;
+  przyciskMiesnie.hidden = false;
+}
+
+// Okno z rysunkiem mięśni ćwiczenia (z karty na liście)
+function otworzOknoMiesni(cwiczenie) {
+  const ids = cwiczenie.miesnieIds || [];
+  anTytul.textContent = cwiczenie.nazwa;
+  wstawRysunek(anOknoRysunek, ids);
+  anOknoLista.textContent = ids.map(nazwaKategorii).join(", ");
+  anTlo.hidden = false;
+}
+
 // ===== Formularz =====
 
 // Wypełnia listę rodzajów i pola wyboru partii na podstawie kategorii z danych
@@ -173,6 +273,10 @@ function otworzFormularz(cwiczenie) {
   poleCzyPartie.checked = false;
   panelPartii.hidden = true;
   podsumowaniePartii.hidden = true;
+  panelMiesni.hidden = true;
+  przyciskMiesnie.hidden = false;
+  zbudujPanelMiesni(cwiczenie ? cwiczenie.miesnieIds || [] : []);
+  odswiezMiesnieFormularza();
 
   if (cwiczenie) {
     edytowaneId = cwiczenie.id;
@@ -254,6 +358,7 @@ function zapiszCwiczenie() {
     rodzajId: poleRodzaj.value,
     ilosc: staraIlosc,
     partieIds: partie,
+    miesnieIds: zaznaczoneMiesnie(),
     link: link
   };
 
@@ -378,6 +483,14 @@ function rysujListe() {
     tekst.appendChild(opis);
     karta.appendChild(tekst);
 
+    if ((cwiczenie.miesnieIds || []).length > 0) {
+      karta.appendChild(
+        przyciskAkcji("Mięśnie", "", function () {
+          otworzOknoMiesni(cwiczenie);
+        })
+      );
+    }
+
     if (cwiczenie.link) {
       const film = document.createElement("a");
       film.className = "akcja film";
@@ -438,6 +551,19 @@ przyciskZapisz.addEventListener("click", zapiszCwiczenie);
 poleCzyPartie.addEventListener("change", zmianaPolaPartii);
 przyciskGotowe.addEventListener("click", zatwierdzPartie);
 przyciskZmienPartie.addEventListener("click", zmienPartie);
+przyciskMiesnie.addEventListener("click", function () {
+  panelMiesni.hidden = false;
+  przyciskMiesnie.hidden = true;
+});
+przyciskGotoweMiesnie.addEventListener("click", zatwierdzMiesnie);
+anZamknij.addEventListener("click", function () {
+  anTlo.hidden = true;
+});
+anTlo.addEventListener("click", function (zdarzenie) {
+  if (zdarzenie.target === anTlo) {
+    anTlo.hidden = true;
+  }
+});
 przyciskWyczysc.addEventListener("click", wyczyscFiltry);
 poleSzukaj.addEventListener("input", function () {
   filtr.tekst = poleSzukaj.value.trim().toLowerCase();

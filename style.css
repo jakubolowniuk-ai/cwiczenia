@@ -6,6 +6,9 @@
   --tekst-szary: #55625F;
   --akcent: #0B6B5F;
   --linia: #DDE5E3;
+  --an-cialo: #E6ECEA;
+  --an-miesien: #C9D4D1;
+  --an-on: #D32F2F;
 }
 
 /* Ciemny motyw: włącza się, gdy telefon ma ciemny tryb */
@@ -17,6 +20,9 @@
     --tekst-szary: #9DB0AC;
     --akcent: #4FD1B8;
     --linia: #2B3836;
+    --an-cialo: #26322F;
+    --an-miesien: #3B4B47;
+    --an-on: #FF5A52;
   }
 }
 
@@ -1287,6 +1293,9 @@ h1 {
 /* ===== Wybór motywu ręcznie (nadpisuje tryb telefonu) ===== */
 :root[data-motyw="ciemny"] {
   color-scheme: dark;
+  --an-cialo: #26322F;
+  --an-miesien: #3B4B47;
+  --an-on: #FF5A52;
   --tlo: #0F1615;
   --karta: #1A2423;
   --tekst: #E8EFED;
@@ -1297,6 +1306,9 @@ h1 {
 
 :root[data-motyw="jasny"] {
   color-scheme: light;
+  --an-cialo: #E6ECEA;
+  --an-miesien: #C9D4D1;
+  --an-on: #D32F2F;
   --tlo: #F4F6F5;
   --karta: #FFFFFF;
   --tekst: #16201F;
@@ -1422,4 +1434,52 @@ h1 {
   width: 100%;
   margin-top: 12px;
   color: #B3261E;
+}
+
+/* ===== Kopia zapasowa ===== */
+#kopia-info.blad {
+  color: #B3261E;
+}
+
+#kopia-wzor {
+  display: block;
+  margin-top: 8px;
+}
+
+/* ===== Grafika anatomiczna ===== */
+.an-ramka {
+  margin: 6px 0 4px;
+}
+
+.anatomia {
+  display: block;
+  width: 100%;
+  max-width: 340px;
+  margin: 0 auto;
+}
+
+.an-cialo {
+  fill: var(--an-cialo);
+}
+
+.an-miesien {
+  fill: var(--an-miesien);
+  stroke: var(--karta);
+  stroke-width: 0.8;
+}
+
+.an-miesien.an-on {
+  fill: var(--an-on);
+}
+
+.an-podpis {
+  font-size: 12px;
+  fill: var(--tekst-szary);
+}
+
+.miesnie-grupa {
+  margin: 10px 0 2px;
+  font-size: 13px;
+  font-weight: 700;
+  color: var(--tekst-szary);
 }
