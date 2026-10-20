@@ -80,6 +80,9 @@ function opisIlosci(ilosc) {
   if (ilosc.typ === "powtorzenia") {
     return ilosc.serie + " × " + ilosc.powtorzenia;
   }
+  if (ilosc.typ === "serie-lista") {
+    return ilosc.powtorzenia.join(" / ") + " powt.";
+  }
   if (ilosc.typ === "czas-powtorzenia") {
     return ilosc.powtorzenia + " × " + ilosc.czas.wartosc + " " + ilosc.czas.jednostka;
   }

@@ -547,7 +547,7 @@ function ilosciStartowa(sesja, cwiczenie, miara) {
     if (miara === "statyczna" && stara.typ === "czas-powtorzenia") {
       return stara;
     }
-    if (miara === "serie" && (stara.typ === "powtorzenia" || stara.typ === "czas")) {
+    if (miara === "serie" && (stara.typ === "powtorzenia" || stara.typ === "serie-lista" || stara.typ === "czas")) {
       return stara;
     }
   }
@@ -603,13 +603,13 @@ function zrobKarteParametrow(sesja, cwiczenie) {
     const typOpis = document.createElement("label");
     typOpis.textContent = "Miara ćwiczenia";
     const typ = document.createElement("select");
-    [["powtorzenia", "Serie i powtórzenia"], ["czas", "Czas"]].forEach(function (para) {
+    [["powtorzenia", "Serie i powtórzenia"], ["lista", "Różne powtórzenia w seriach"], ["czas", "Czas"]].forEach(function (para) {
       const opcja = document.createElement("option");
       opcja.value = para[0];
       opcja.textContent = para[1];
       typ.appendChild(opcja);
     });
-    typ.value = start && start.typ === "czas" ? "czas" : "powtorzenia";
+    typ.value = start && start.typ === "czas" ? "czas" : start && start.typ === "serie-lista" ? "lista" : "powtorzenia";
     typBlok.appendChild(typOpis);
     typBlok.appendChild(typ);
     karta.appendChild(typBlok);
@@ -626,17 +626,89 @@ function zrobKarteParametrow(sesja, cwiczenie) {
     rzadCzas.appendChild(czas.blok);
     rzadCzas.appendChild(jedn.blok);
 
+    // Powtórzenia osobno dla każdej serii
+    const rzadLista = document.createElement("div");
+    let polaSerii = [];
+    const rysujListeSerii = function (powtorzenia) {
+      rzadLista.innerHTML = "";
+      polaSerii = [];
+      powtorzenia.forEach(function (ile, i) {
+        const pole = zrobPoleLiczbowe("Seria " + (i + 1), ile, false);
+        polaSerii.push(pole);
+        rzadLista.appendChild(pole.blok);
+      });
+      const przyciski = document.createElement("div");
+      const dodaj = document.createElement("button");
+      dodaj.type = "button";
+      dodaj.className = "akcja";
+      dodaj.textContent = "+ seria";
+      dodaj.addEventListener("click", function () {
+        const lista = odczytajPolaSerii();
+        lista.push(lista.length > 0 ? lista[lista.length - 1] || 0 : 0);
+        rysujListeSerii(lista);
+      });
+      const usun = document.createElement("button");
+      usun.type = "button";
+      usun.className = "akcja usun";
+      usun.textContent = "− seria";
+      usun.disabled = powtorzenia.length <= 1;
+      usun.addEventListener("click", function () {
+        const lista = odczytajPolaSerii();
+        lista.pop();
+        rysujListeSerii(lista);
+      });
+      przyciski.appendChild(dodaj);
+      przyciski.appendChild(usun);
+      rzadLista.appendChild(przyciski);
+    };
+    const odczytajPolaSerii = function () {
+      return polaSerii.map(function (p) {
+        return Number(p.pole.value) || 0;
+      });
+    };
+    // Lista startowa: zapisana, albo z pól "serie × powtórzenia"
+    const listaStartowa = function () {
+      if (start && start.typ === "serie-lista") {
+        return start.powtorzenia.slice();
+      }
+      const s = Math.max(1, Number(serie.pole.value) || 3);
+      const p = Number(pow.pole.value) || 0;
+      return new Array(s).fill(p);
+    };
+    rysujListeSerii(listaStartowa());
+
     karta.appendChild(rzadSerie);
+    karta.appendChild(rzadLista);
     karta.appendChild(rzadCzas);
 
+    let poprzedniTyp = typ.value;
     const pokazPola = function () {
+      // Przejście ze "zwykłych" serii na listę: przepisz wartości z pól
+      if (typ.value === "lista" && poprzedniTyp === "powtorzenia") {
+        const s = Math.max(1, Number(serie.pole.value) || 1);
+        rysujListeSerii(new Array(s).fill(Number(pow.pole.value) || 0));
+      }
+      if (typ.value === "powtorzenia" && poprzedniTyp === "lista") {
+        const l = odczytajPolaSerii();
+        serie.pole.value = String(l.length);
+        pow.pole.value = String(l[0] || 0);
+      }
+      poprzedniTyp = typ.value;
       rzadSerie.hidden = typ.value !== "powtorzenia";
+      rzadLista.hidden = typ.value !== "lista";
       rzadCzas.hidden = typ.value !== "czas";
     };
     typ.addEventListener("change", pokazPola);
     pokazPola();
 
     odczytaj = function () {
+      if (typ.value === "lista") {
+        const l = odczytajPolaSerii();
+        if (l.length < 1 || !l.every(function (x) { return x >= 1 && Math.floor(x) === x; })) {
+          return "Wpisz powtórzenia większe od zera w każdej serii.";
+        }
+        return { typ: "serie-lista", powtorzenia: l };
+      }
       if (typ.value === "powtorzenia") {
         const s = Number(serie.pole.value);
         const p = Number(pow.pole.value);

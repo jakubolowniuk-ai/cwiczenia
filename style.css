@@ -1504,3 +1504,10 @@ h1 {
 .schowany {
   display: none;
 }
+
+/* Różne powtórzenia w seriach */
+.wart-serie-akcje {
+  display: flex;
+  gap: 12px;
+  margin-top: 8px;
+}

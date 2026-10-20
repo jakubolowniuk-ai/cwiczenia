@@ -321,8 +321,30 @@ function sekundyZ(wartosc, jednostka) {
   return jednostka === "min" ? wartosc * 60 : wartosc;
 }
 
+// Powtórzenia w kolejnych seriach, np. [12, 10, 8]; dla zwykłego "3 × 10" to [10, 10, 10]
+function listaPowtorzen(ilosc) {
+  if (ilosc.typ === "serie-lista") {
+    return ilosc.powtorzenia;
+  }
+  const lista = [];
+  for (let i = 0; i < ilosc.serie; i++) {
+    lista.push(ilosc.powtorzenia);
+  }
+  return lista;
+}
+
+// Czy ilość to serie z powtórzeniami (zwykłe albo różne w seriach)
+function czyPowtorzenia(ilosc) {
+  return ilosc.typ === "powtorzenia" || ilosc.typ === "serie-lista";
+}
+
 // Jedna liczba opisująca "ile pracy": powtórzenia razem albo sekundy
 function miaraIlosci(ilosc) {
+  if (ilosc.typ === "serie-lista") {
+    return ilosc.powtorzenia.reduce(function (suma, p) {
+      return suma + p;
+    }, 0);
+  }
   if (ilosc.typ === "powtorzenia") {
     return ilosc.serie * ilosc.powtorzenia;
   }
@@ -347,8 +369,8 @@ function opisRoznicy(plan, wykonane) {
   const znak = roznica > 0 ? "+" : "−";
   const ile = Math.abs(roznica);
   let tekst;
-  if (plan.typ === "powtorzenia") {
-    if (wykonane.serie === plan.serie) {
+  if (czyPowtorzenia(plan)) {
+    if (plan.typ === "powtorzenia" && wykonane.typ === "powtorzenia" && wykonane.serie === plan.serie) {
       tekst = znak + Math.abs(wykonane.powtorzenia - plan.powtorzenia) + " powt.";
     } else {
       tekst = znak + ile + " powt. łącznie";
@@ -386,6 +408,7 @@ const wartCofnij = document.getElementById("wart-cofnij");
 let wartSesja = null;
 let wartId = null;
 let wartPolaDane = [];
+let wartTryb = "jednolite"; // "lista": powtórzenia osobno dla każdej serii
 
 // Jedno pole z przyciskami − i +
 function zrobStepper(etykieta, wartosc, krok) {
@@ -425,6 +448,18 @@ function odczytajWartosc(plan) {
   const v = wartPolaDane.map(function (p) {
     return Number(p.pole.value);
   });
+  if (czyPowtorzenia(plan) && wartTryb === "lista") {
+    const poprawne = v.length >= 1 && v.every(function (x) {
+      return x >= 1 && Math.floor(x) === x;
+    });
+    if (!poprawne) {
+      return null;
+    }
+    const takie = v.every(function (x) {
+      return x === v[0];
+    });
+    return takie ? { typ: "powtorzenia", serie: v.length, powtorzenia: v[0] } : { typ: "serie-lista", powtorzenia: v };
+  }
   if (plan.typ === "powtorzenia") {
     if (!(v[0] >= 1) || !(v[1] >= 1) || Math.floor(v[0]) !== v[0] || Math.floor(v[1]) !== v[1]) {
       return null;
@@ -473,9 +508,11 @@ function otworzWartosc(sesja, id) {
   wartPlan.textContent = "Zaplanowano: " + opisIlosci(plan);
   wartPola.innerHTML = "";
   wartPolaDane = [];
-  if (plan.typ === "powtorzenia") {
-    wartPolaDane.push(zrobStepper("Serie", start.serie, 1));
-    wartPolaDane.push(zrobStepper("Powtórzenia", start.powtorzenia, 1));
+  wartTryb = plan.typ === "serie-lista" || start.typ === "serie-lista" ? "lista" : "jednolite";
+  if (czyPowtorzenia(plan)) {
+    wartStart = start;
+    narysujPolaPowtorzen(listaPowtorzen(start));
+    return koniecOtwarciaWartosci(sesja, id);
   } else if (plan.typ === "czas") {
     wartPolaDane.push(zrobStepper("Czas (" + plan.jednostka + ")", start.wartosc, plan.jednostka === "min" ? 1 : 5));
   } else {
@@ -485,9 +522,74 @@ function otworzWartosc(sesja, id) {
   wartPolaDane.forEach(function (p) {
     wartPola.appendChild(p.blok);
   });
+  koniecOtwarciaWartosci(sesja, id);
+}
+
+function koniecOtwarciaWartosci(sesja, id) {
   wartCofnij.hidden = !(sesja.zrobione && sesja.zrobione[id]);
   odswiezWartInfo();
   wartTlo.hidden = false;
+}
+
+let wartStart = null;
+
+// Pola powtórzeń: dwa pola (serie i powtórzenia) albo osobne pole dla każdej serii
+function narysujPolaPowtorzen(powtorzenia) {
+  wartPola.innerHTML = "";
+  wartPolaDane = [];
+  if (wartTryb === "jednolite") {
+    wartPolaDane.push(zrobStepper("Serie", powtorzenia.length, 1));
+    wartPolaDane.push(zrobStepper("Powtórzenia", powtorzenia[0], 1));
+    wartPolaDane.forEach(function (p) {
+      wartPola.appendChild(p.blok);
+    });
+    const rozpisz = tekstElement("button", "akcja", "Różne powtórzenia w seriach");
+    rozpisz.type = "button";
+    rozpisz.addEventListener("click", function () {
+      const serie = Math.max(1, Number(wartPolaDane[0].pole.value) || 1);
+      const powt = Math.max(1, Number(wartPolaDane[1].pole.value) || 1);
+      const lista = [];
+      for (let i = 0; i < serie; i++) {
+        lista.push(powt);
+      }
+      wartTryb = "lista";
+      narysujPolaPowtorzen(lista);
+      odswiezWartInfo();
+    });
+    wartPola.appendChild(rozpisz);
+    return;
+  }
+  powtorzenia.forEach(function (ile, i) {
+    const p = zrobStepper("Seria " + (i + 1), ile, 1);
+    wartPolaDane.push(p);
+    wartPola.appendChild(p.blok);
+  });
+  const rzad = document.createElement("div");
+  rzad.className = "wart-serie-akcje";
+  const dodaj = tekstElement("button", "akcja", "+ seria");
+  dodaj.type = "button";
+  dodaj.addEventListener("click", function () {
+    const lista = wartPolaDane.map(function (p) {
+      return Number(p.pole.value) || 0;
+    });
+    lista.push(lista.length > 0 ? lista[lista.length - 1] || 1 : 1);
+    narysujPolaPowtorzen(lista);
+    odswiezWartInfo();
+  });
+  const usun = tekstElement("button", "akcja usun", "− seria");
+  usun.type = "button";
+  usun.disabled = powtorzenia.length <= 1;
+  usun.addEventListener("click", function () {
+    const lista = wartPolaDane.map(function (p) {
+      return Number(p.pole.value) || 0;
+    });
+    lista.pop();
+    narysujPolaPowtorzen(lista);
+    odswiezWartInfo();
+  });
+  rzad.appendChild(dodaj);
+  rzad.appendChild(usun);
+  wartPola.appendChild(rzad);
 }
 
 function zamknijWartosc() {
