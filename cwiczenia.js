@@ -142,6 +142,44 @@ function zmienPartie() {
   panelPartii.hidden = false;
 }
 
+// ===== Style pływania (rodzaj Basen) =====
+
+const poleStyle = document.getElementById("pole-style");
+const styleWybory = document.getElementById("style-wybory");
+
+// Czy wybrany rodzaj aktywności ma wybór stylu
+function rodzajMaStyl(rodzajId) {
+  const rodzaj = znajdzKategorie(rodzajId);
+  return !!rodzaj && Array.isArray(rodzaj.polaPlanu) && rodzaj.polaPlanu.indexOf("styl") !== -1;
+}
+
+// Buduje listę stylów z zaznaczonymi wybranymi
+function zbudujStyle(wybrane) {
+  styleWybory.innerHTML = "";
+  dane.stylePlywania.forEach(function (nazwa) {
+    const etykieta = document.createElement("label");
+    etykieta.className = "wybor";
+    const pole = document.createElement("input");
+    pole.type = "checkbox";
+    pole.value = nazwa;
+    pole.checked = wybrane.indexOf(nazwa) !== -1;
+    etykieta.appendChild(pole);
+    etykieta.appendChild(document.createTextNode(" " + nazwa));
+    styleWybory.appendChild(etykieta);
+  });
+}
+
+function zaznaczoneStyle() {
+  return Array.from(styleWybory.querySelectorAll("input:checked")).map(function (pole) {
+    return pole.value;
+  });
+}
+
+// Pokazuje wybór stylów tylko dla basenu
+function odswiezPoleStyli() {
+  poleStyle.hidden = !rodzajMaStyl(poleRodzaj.value);
+}
+
 // ===== Mięśnie i rysunek =====
 
 // Zwraca id zaznaczonych mięśni
@@ -277,6 +315,7 @@ function otworzFormularz(cwiczenie) {
   przyciskMiesnie.hidden = false;
   zbudujPanelMiesni(cwiczenie ? cwiczenie.miesnieIds || [] : []);
   odswiezMiesnieFormularza();
+  zbudujStyle(cwiczenie ? cwiczenie.style || [] : []);
 
   if (cwiczenie) {
     edytowaneId = cwiczenie.id;
@@ -284,6 +323,7 @@ function otworzFormularz(cwiczenie) {
     poleNazwa.value = cwiczenie.nazwa;
     poleLink.value = cwiczenie.link || "";
     poleRodzaj.value = cwiczenie.rodzajId;
+    odswiezPoleStyli();
 
     const partie = cwiczenie.partieIds || [];
     if (partie.length > 0) {
@@ -296,6 +336,7 @@ function otworzFormularz(cwiczenie) {
   } else {
     edytowaneId = null;
     tytulFormularza.textContent = "Nowe ćwiczenie";
+    odswiezPoleStyli();
   }
 
   formularz.hidden = false;
@@ -324,6 +365,16 @@ function zapiszCwiczenie() {
   if (poleRodzaj.value === "") {
     pokazBlad("Wybierz rodzaj aktywności.");
     return;
+  }
+
+  // Styl pływania: przy basenie trzeba zaznaczyć co najmniej jeden
+  let style = [];
+  if (rodzajMaStyl(poleRodzaj.value)) {
+    style = zaznaczoneStyle();
+    if (style.length === 0) {
+      pokazBlad("Zaznacz co najmniej jeden styl pływania.");
+      return;
+    }
   }
 
   // Partie zapisujemy tylko wtedy, gdy pole "uwzględnia partię" jest zaznaczone
@@ -361,6 +412,9 @@ function zapiszCwiczenie() {
     miesnieIds: zaznaczoneMiesnie(),
     link: link
   };
+  if (style.length > 0) {
+    wpis.style = style;
+  }
 
   if (edytowaneId) {
     dane.cwiczenia = dane.cwiczenia.map(function (inne) {
@@ -506,6 +560,7 @@ function rysujListe() {
     const nazwyPartii = (cwiczenie.partieIds || []).map(nazwaKategorii);
     const czesci = [nazwaKategorii(cwiczenie.rodzajId)]
       .concat(nazwyPartii)
+      .concat(cwiczenie.style || [])
       .filter(function (czesc) {
         return czesc !== "";
       });
@@ -591,6 +646,7 @@ przyciskMiesnie.addEventListener("click", function () {
   przyciskMiesnie.hidden = true;
 });
 przyciskGotoweMiesnie.addEventListener("click", zatwierdzMiesnie);
+poleRodzaj.addEventListener("change", odswiezPoleStyli);
 anZamknij.addEventListener("click", function () {
   anTlo.hidden = true;
 });

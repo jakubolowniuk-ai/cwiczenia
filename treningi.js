@@ -66,6 +66,7 @@ function opisCwiczenia(cwiczenie) {
   const nazwyPartii = (cwiczenie.partieIds || []).map(nazwaKategorii);
   return [nazwaKategorii(cwiczenie.rodzajId)]
     .concat(nazwyPartii)
+    .concat(cwiczenie.style || [])
     .filter(function (czesc) {
       return czesc !== "";
     })

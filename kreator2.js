@@ -687,22 +687,75 @@ function zrobKarteSesji(sesja, aktywnosc) {
   let czas = null;
   let czasJedn = null;
 
+  let wyborCwiczenia = null;
   if (pola.indexOf("styl") !== -1) {
+    // Ćwiczenia basenowe z bazy, które mają zapisane style
+    const basenowe = dane.cwiczenia.filter(function (c) {
+      return c.rodzajId === aktywnosc.rodzajId && Array.isArray(c.style) && c.style.length > 0;
+    });
+
+    if (basenowe.length > 0) {
+      const blokC = document.createElement("div");
+      const opisC = document.createElement("label");
+      opisC.textContent = "Ćwiczenie";
+      wyborCwiczenia = document.createElement("select");
+      const dowolne = document.createElement("option");
+      dowolne.value = "";
+      dowolne.textContent = "Dowolne (wszystkie style)";
+      wyborCwiczenia.appendChild(dowolne);
+      basenowe.forEach(function (c) {
+        const opcja = document.createElement("option");
+        opcja.value = c.id;
+        opcja.textContent = c.nazwa;
+        wyborCwiczenia.appendChild(opcja);
+      });
+      wyborCwiczenia.value = sesja.cwiczenieId && basenowe.some(function (c) { return c.id === sesja.cwiczenieId; })
+        ? sesja.cwiczenieId
+        : "";
+      blokC.appendChild(opisC);
+      blokC.appendChild(wyborCwiczenia);
+      karta.appendChild(blokC);
+    }
+
     const blok = document.createElement("div");
     const opis = document.createElement("label");
     opis.textContent = "Styl";
     styl = document.createElement("select");
-    const pusta = document.createElement("option");
-    pusta.value = "";
-    pusta.textContent = "Wybierz styl";
-    styl.appendChild(pusta);
-    dane.stylePlywania.forEach(function (nazwa) {
-      const opcja = document.createElement("option");
-      opcja.value = nazwa;
-      opcja.textContent = nazwa;
-      styl.appendChild(opcja);
-    });
-    styl.value = sesja.styl || "";
+
+    // Style do wyboru: z wybranego ćwiczenia albo wszystkie
+    const wypelnijStyle = function (wybrany) {
+      let dostepne = dane.stylePlywania;
+      if (wyborCwiczenia && wyborCwiczenia.value !== "") {
+        const c = basenowe.find(function (x) { return x.id === wyborCwiczenia.value; });
+        if (c) {
+          dostepne = c.style;
+        }
+      }
+      styl.innerHTML = "";
+      const pusta = document.createElement("option");
+      pusta.value = "";
+      pusta.textContent = "Wybierz styl";
+      styl.appendChild(pusta);
+      dostepne.forEach(function (nazwa) {
+        const opcja = document.createElement("option");
+        opcja.value = nazwa;
+        opcja.textContent = nazwa;
+        styl.appendChild(opcja);
+      });
+      if (dostepne.indexOf(wybrany) !== -1) {
+        styl.value = wybrany;
+      } else if (dostepne.length === 1 && wyborCwiczenia && wyborCwiczenia.value !== "") {
+        styl.value = dostepne[0];
+      } else {
+        styl.value = "";
+      }
+    };
+    wypelnijStyle(sesja.styl || "");
+    if (wyborCwiczenia) {
+      wyborCwiczenia.addEventListener("change", function () {
+        wypelnijStyle("");
+      });
+    }
     blok.appendChild(opis);
     blok.appendChild(styl);
     karta.appendChild(blok);
@@ -746,6 +799,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
           return null;
         }
         wynik.styl = styl.value;
+        wynik.cwiczenieId = wyborCwiczenia && wyborCwiczenia.value !== "" ? wyborCwiczenia.value : null;
       }
       if (dlugosci) {
         const d = Number(dlugosci.pole.value);
@@ -895,7 +949,7 @@ function kopiujDoInnych() {
       s.treningId = pdSesja.treningId;
       s.parametry = JSON.parse(JSON.stringify(pdSesja.parametry));
     } else {
-      ["styl", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
+      ["styl", "cwiczenieId", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
         s[klucz] = pdSesja[klucz] ? JSON.parse(JSON.stringify(pdSesja[klucz])) : null;
       });
     }
