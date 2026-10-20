@@ -127,11 +127,6 @@ function dodajCwiczeniaZListy(lista) {
       wynik.bledy.push(nazwa + ": nieznany rodzaj „" + (wpis.rodzaj || "") + "”");
       return;
     }
-    if (zajete[nazwaKlucz(nazwa)]) {
-      wynik.duplikaty++;
-      return;
-    }
-
     const partieIds = [];
     (Array.isArray(wpis.partie) ? wpis.partie : []).forEach(function (nazwaPartii) {
       const tekst = String(nazwaPartii || "").trim();
@@ -165,6 +160,26 @@ function dodajCwiczeniaZListy(lista) {
         miesnieIds.push(miesien.id);
       }
     });
+
+    // Ćwiczenie już jest w bazie: uzupełniamy tylko brakujące mięśnie
+    if (zajete[nazwaKlucz(nazwa)]) {
+      const istniejace = dane.cwiczenia.find(function (c) {
+        return nazwaKlucz(c.nazwa) === nazwaKlucz(nazwa);
+      });
+      if (istniejace && miesnieIds.length > 0 && !(istniejace.miesnieIds || []).length) {
+        istniejace.miesnieIds = miesnieIds;
+        istniejace.partieIds = istniejace.partieIds || [];
+        partieIds.forEach(function (id) {
+          if (istniejace.partieIds.indexOf(id) === -1) {
+            istniejace.partieIds.push(id);
+          }
+        });
+        wynik.uzupelnione = (wynik.uzupelnione || 0) + 1;
+      } else {
+        wynik.duplikaty++;
+      }
+      return;
+    }
 
     dane.cwiczenia.push({
       id: "cw-" + Date.now() + "-" + dane.cwiczenia.length,
@@ -210,6 +225,9 @@ kopiaCwiczeniaPlik.addEventListener("change", function () {
       odswiezPrzelacznik();
     }
     let opis = "Dodano ćwiczeń: " + w.dodane + ".";
+    if (w.uzupelnione > 0) {
+      opis += " Uzupełniono mięśnie w istniejących ćwiczeniach: " + w.uzupelnione + ".";
+    }
     if (w.duplikaty > 0) {
       opis += " Pominięto (już są w bazie): " + w.duplikaty + ".";
     }

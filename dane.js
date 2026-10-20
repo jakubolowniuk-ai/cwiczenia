@@ -111,6 +111,29 @@ function uzupelnijDane(zapisane) {
     }
   }
 
+  // Partie dodane wcześniej z pliku (np. "Barki") łączymy z partiami startowymi o tej samej nazwie
+  if (Array.isArray(zapisane.cwiczenia)) {
+    startowe.kategorie.forEach(function (stara) {
+      if (stara.typ !== "partia") {
+        return;
+      }
+      zapisane.kategorie.filter(function (k) {
+        return k.typ === "partia" && k.id !== stara.id && k.nazwa.trim().toLowerCase() === stara.nazwa.toLowerCase();
+      }).forEach(function (duplikat) {
+        zapisane.cwiczenia.forEach(function (c) {
+          if (Array.isArray(c.partieIds)) {
+            c.partieIds = c.partieIds.map(function (id) {
+              return id === duplikat.id ? stara.id : id;
+            }).filter(function (id, i, tab) {
+              return tab.indexOf(id) === i;
+            });
+          }
+        });
+        zapisane.kategorie.splice(zapisane.kategorie.indexOf(duplikat), 1);
+      });
+    });
+  }
+
   zapisane.wersjaUstawien = startowe.wersjaUstawien;
 
   ["cwiczenia", "treningi", "plany", "historia"].forEach(function (nazwa) {
