@@ -56,6 +56,8 @@ const kr2BudowaTytul = document.getElementById("kr2-budowa-tytul");
 const kr2Nazwa = document.getElementById("kr2-nazwa");
 const kr2Wszystkie = document.getElementById("kr2-wszystkie");
 const kr2Cwiczenia = document.getElementById("kr2-cwiczenia");
+const kr2Szukaj = document.getElementById("kr2-szukaj");
+const kr2SzukajTreningow = document.getElementById("kr2-szukaj-treningow");
 const kr2Wybrano = document.getElementById("kr2-wybrano");
 const kr2BladBudowy = document.getElementById("kr2-blad-budowy");
 const kr2Zapisz = document.getElementById("kr2-zapisz");
@@ -923,6 +925,7 @@ function otworzWybor(aktywnosc) {
   kr2Aktywnosc = aktywnosc;
   kr2WyborTytul.textContent = "Trening dla: " + opisAktywnosci(aktywnosc).tytul;
   kr2WszystkieTreningi.checked = false;
+  kr2SzukajTreningow.value = "";
   rysujTreningiWyboru();
   pokazWidokPanelu("wybor");
 }
@@ -961,7 +964,12 @@ function rysujTreningiWyboru() {
     kr2BrakTreningow.textContent = "Nie masz jeszcze pasującego treningu. Zbuduj nowy albo pokaż wszystkie treningi.";
   }
 
-  lista.forEach(function (trening) {
+  const tekstT = kr2SzukajTreningow.value.trim().toLowerCase();
+  const pasujace = lista.filter(function (trening) {
+    return tekstT === "" || trening.nazwa.toLowerCase().indexOf(tekstT) !== -1;
+  });
+
+  dopiszPorcjami(kr2Treningi, pasujace, function (trening) {
     const opis = opisTreningu(trening);
     const karta = zrobKarte(trening.nazwa, opis.opis);
     dodajLinie(karta, opis.nazwy);
@@ -972,8 +980,8 @@ function rysujTreningiWyboru() {
         wybierzTrening(trening.id);
       })
     );
-    kr2Treningi.appendChild(karta);
-  });
+    return karta;
+  }, "t|" + tekstT + "|" + wszystkie);
 }
 
 // ===== Panel: budowa nowego treningu =====
@@ -982,6 +990,7 @@ function otworzBudowe() {
   kr2BudowaIds = [];
   kr2Nazwa.value = "";
   kr2Wszystkie.checked = false;
+  kr2Szukaj.value = "";
   kr2BladBudowy.textContent = "";
   kr2BudowaTytul.textContent = "Nowy trening dla: " + opisAktywnosci(kr2Aktywnosc).tytul;
   rysujBudowe();
@@ -992,8 +1001,10 @@ function otworzBudowe() {
 function rysujBudowe() {
   kr2Cwiczenia.innerHTML = "";
 
+  const tekstC = kr2Szukaj.value.trim().toLowerCase();
   const lista = dane.cwiczenia.filter(function (cwiczenie) {
-    return kr2Wszystkie.checked || pasujeDoAktywnosci(cwiczenie, kr2Aktywnosc);
+    return (kr2Wszystkie.checked || pasujeDoAktywnosci(cwiczenie, kr2Aktywnosc)) &&
+      (tekstC === "" || cwiczenie.nazwa.toLowerCase().indexOf(tekstC) !== -1);
   });
 
   if (lista.length === 0) {
@@ -1005,7 +1016,7 @@ function rysujBudowe() {
     kr2Cwiczenia.appendChild(komunikat);
   }
 
-  lista.forEach(function (cwiczenie) {
+  dopiszPorcjami(kr2Cwiczenia, lista, function (cwiczenie) {
     const dodane = kr2BudowaIds.indexOf(cwiczenie.id) !== -1;
     const karta = zrobKarte(cwiczenie.nazwa, opisCwiczenia(cwiczenie));
     dodajFilm(karta, cwiczenie);
@@ -1021,8 +1032,8 @@ function rysujBudowe() {
         rysujBudowe();
       })
     );
-    kr2Cwiczenia.appendChild(karta);
-  });
+    return karta;
+  }, "c|" + tekstC + "|" + kr2Wszystkie.checked + "|" + (kr2Aktywnosc ? kr2Aktywnosc.id : ""));
 
   kr2Wybrano.textContent = "Wybrano: " + kr2BudowaIds.length + " " + slowoCwiczen(kr2BudowaIds.length);
 }
@@ -1268,6 +1279,8 @@ pdSesjaWroc.addEventListener("click", function () {
   rysujKalendarz();
 });
 pdSesjaUsun.addEventListener("click", usunSesje);
+kr2Szukaj.addEventListener("input", rysujBudowe);
+kr2SzukajTreningow.addEventListener("input", rysujTreningiWyboru);
 
 kr2Nowy.addEventListener("click", otworzBudowe);
 kr2WyborWstecz.addEventListener("click", function () {

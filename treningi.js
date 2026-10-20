@@ -36,6 +36,8 @@ let edytowanyTreningId = null;
 let wybraneIds = [];
 
 // Filtry w panelu wyboru ćwiczeń
+const poleSzukajTreningow = document.getElementById("szukaj-treningow");
+let szukajTreningow = "";
 const filtrWyboru = { tekst: "", partiaId: null, rodzajId: null };
 
 // ===== Pomocnicze =====
@@ -233,7 +235,7 @@ function rysujWybor() {
     return;
   }
 
-  widoczne.forEach(function (cwiczenie) {
+  dopiszPorcjami(listaWyboru, widoczne, function (cwiczenie) {
     const dodane = wybraneIds.indexOf(cwiczenie.id) !== -1;
     const karta = zrobKarte(cwiczenie.nazwa, opisCwiczenia(cwiczenie));
 
@@ -251,8 +253,8 @@ function rysujWybor() {
 
     dodajFilm(karta, cwiczenie);
     karta.appendChild(przycisk);
-    listaWyboru.appendChild(karta);
-  });
+    return karta;
+  }, [filtrWyboru.tekst, filtrWyboru.partiaId, filtrWyboru.rodzajId].join("|"));
 }
 
 function otworzPanelWyboru() {
@@ -344,7 +346,25 @@ function rysujTreningi() {
   listaTreningow.innerHTML = "";
   pusteTreningi.hidden = dane.treningi.length > 0;
 
-  dane.treningi.forEach(function (trening) {
+  const widoczneTreningi = dane.treningi.filter(function (trening) {
+    if (szukajTreningow === "") {
+      return true;
+    }
+    return trening.nazwa.toLowerCase().indexOf(szukajTreningow) !== -1 ||
+      trening.cwiczeniaIds.some(function (id) {
+        const cw = znajdzCwiczenie(id);
+        return cw && cw.nazwa.toLowerCase().indexOf(szukajTreningow) !== -1;
+      });
+  });
+  poleSzukajTreningow.hidden = dane.treningi.length < 6;
+  if (dane.treningi.length > 0 && widoczneTreningi.length === 0) {
+    const brak = document.createElement("p");
+    brak.className = "opis";
+    brak.textContent = "Nie znaleziono treningu o takiej nazwie.";
+    listaTreningow.appendChild(brak);
+  }
+
+  dopiszPorcjami(listaTreningow, widoczneTreningi, function (trening) {
     const cwiczenia = trening.cwiczeniaIds.map(znajdzCwiczenie).filter(function (c) {
       return c !== undefined;
     });
@@ -428,8 +448,8 @@ function rysujTreningi() {
     );
 
     karta.appendChild(szczegoly);
-    listaTreningow.appendChild(karta);
-  });
+    return karta;
+  }, "t|" + szukajTreningow);
 }
 
 // ===== Podpięcie przycisków =====
@@ -452,6 +472,11 @@ przyciskGotoweWyboru.addEventListener("click", zamknijPanelWyboru);
 poleSzukajWyboru.addEventListener("input", function () {
   filtrWyboru.tekst = poleSzukajWyboru.value.trim().toLowerCase();
   rysujWybor();
+});
+
+poleSzukajTreningow.addEventListener("input", function () {
+  szukajTreningow = poleSzukajTreningow.value.trim().toLowerCase();
+  rysujTreningi();
 });
 
 rysujTreningi();

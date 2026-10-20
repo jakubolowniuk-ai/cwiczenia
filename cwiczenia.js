@@ -440,6 +440,41 @@ function wyczyscFiltry() {
   rysujListe();
 }
 
+// ===== Długie listy: porcje po 15 i przycisk "Pokaż więcej" =====
+
+const PORCJA_LISTY = 15;
+
+// Dopisuje do kontenera karty z listy, ale tylko pierwszą porcję.
+// "klucz" opisuje filtry: gdy się zmieni, lista wraca do pierwszej porcji.
+function dopiszPorcjami(kontener, lista, zrobKarteElementu, klucz) {
+  if (kontener._klucz !== klucz) {
+    kontener._klucz = klucz;
+    kontener._ile = PORCJA_LISTY;
+  }
+  let pokazane = 0;
+  const wiecej = document.createElement("button");
+  wiecej.className = "przycisk-przerywany";
+
+  function dodajDo(limit) {
+    lista.slice(pokazane, limit).forEach(function (element) {
+      kontener.insertBefore(zrobKarteElementu(element), wiecej.parentNode === kontener ? wiecej : null);
+    });
+    pokazane = Math.min(limit, lista.length);
+    kontener._ile = Math.max(kontener._ile, pokazane);
+    if (pokazane < lista.length) {
+      wiecej.textContent = "Pokaż więcej (jeszcze " + (lista.length - pokazane) + ")";
+      kontener.appendChild(wiecej);
+    } else if (wiecej.parentNode === kontener) {
+      kontener.removeChild(wiecej);
+    }
+  }
+
+  wiecej.addEventListener("click", function () {
+    dodajDo(pokazane + PORCJA_LISTY);
+  });
+  dodajDo(kontener._ile);
+}
+
 // ===== Lista ćwiczeń =====
 
 // Rysuje listę ćwiczeń na ekranie (tylko te, które pasują do filtrów)
@@ -456,7 +491,7 @@ function rysujListe() {
   brakWynikow.hidden = brakCwiczen || widoczne.length > 0;
   blokFiltrow.hidden = brakCwiczen || !formularz.hidden;
 
-  widoczne.forEach(function (cwiczenie) {
+  dopiszPorcjami(listaCwiczen, widoczne, function (cwiczenie) {
     const karta = document.createElement("div");
     karta.className = "karta";
 
@@ -537,8 +572,8 @@ function rysujListe() {
       })
     );
 
-    listaCwiczen.appendChild(karta);
-  });
+    return karta;
+  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId].join("|"));
 }
 
 // ===== Podpięcie przycisków =====
