@@ -102,6 +102,30 @@ przyciskReset.addEventListener("click", function () {
   document.body.appendChild(baner);
 })();
 
+// Instalacja jako aplikacja i działanie bez internetu
+if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
+  const mialaKontroler = !!navigator.serviceWorker.controller;
+  navigator.serviceWorker.register("sw.js").catch(function () {});
+  navigator.serviceWorker.addEventListener("controllerchange", function () {
+    if (!mialaKontroler) {
+      return;
+    }
+    const info = document.createElement("div");
+    info.style.cssText =
+      "position:fixed;left:12px;right:12px;bottom:76px;z-index:100;padding:12px 16px;border-radius:12px;" +
+      "background:var(--akcent);color:var(--karta);font-size:14px;display:flex;gap:12px;align-items:center;justify-content:space-between";
+    info.textContent = "Jest nowa wersja aplikacji.";
+    const przycisk = document.createElement("button");
+    przycisk.textContent = "Odśwież";
+    przycisk.style.cssText = "border:0;border-radius:8px;padding:8px 14px;font-weight:700;background:var(--karta);color:var(--akcent)";
+    przycisk.addEventListener("click", function () {
+      location.reload();
+    });
+    info.appendChild(przycisk);
+    document.body.appendChild(info);
+  });
+}
+
 // Pierwsze narysowanie ekranu Dziś
 if (typeof rysujDzis === "function" && document.getElementById("dzis-sesje")) {
   rysujDzis();
