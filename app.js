@@ -102,6 +102,16 @@ przyciskReset.addEventListener("click", function () {
   document.body.appendChild(baner);
 })();
 
+// Strzałki wstecz na górze formularzy: robią to samo co schowany przycisk na dole
+document.querySelectorAll(".wstecz[data-cel]").forEach(function (strzalka) {
+  strzalka.addEventListener("click", function () {
+    const cel = document.getElementById(strzalka.getAttribute("data-cel"));
+    if (cel) {
+      cel.click();
+    }
+  });
+});
+
 // Instalacja jako aplikacja i działanie bez internetu
 if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
   const mialaKontroler = !!navigator.serviceWorker.controller;

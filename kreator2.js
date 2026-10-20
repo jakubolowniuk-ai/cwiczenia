@@ -425,6 +425,12 @@ function rysujPanelDnia() {
         otworzSesje(sesja);
       })
     );
+    karta.appendChild(
+      przyciskAkcji("Usuń", "usun", function () {
+        pdSesja = sesja;
+        usunSesje();
+      })
+    );
     pdSesje.appendChild(karta);
   });
 }

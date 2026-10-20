@@ -1483,3 +1483,24 @@ h1 {
   font-weight: 700;
   color: var(--tekst-szary);
 }
+
+/* Strzałka wstecz na górze formularzy */
+.naglowek-wstecz {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  margin: 0 0 8px -10px;
+}
+
+.naglowek-wstecz .wstecz {
+  flex: none;
+  cursor: pointer;
+}
+
+.naglowek-wstecz .tytul-formularza {
+  margin: 0;
+}
+
+.schowany {
+  display: none;
+}

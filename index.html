@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -50,7 +50,7 @@
       <button class="przycisk" id="przycisk-nowe">+ Dodaj ćwiczenie</button>
 
       <div class="formularz" id="formularz-cwiczenia" hidden>
-        <h2 class="tytul-formularza" id="tytul-formularza">Nowe ćwiczenie</h2>
+        <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-formularza">Nowe ćwiczenie</h2></div>
 
         <label for="pole-nazwa">Nazwa</label>
         <input type="text" id="pole-nazwa" placeholder="Np. Wiosłowanie">
@@ -97,7 +97,7 @@
 
         <div>
           <button class="przycisk" id="przycisk-zapisz">Zapisz</button>
-          <button class="przycisk drugi" id="przycisk-anuluj">Anuluj</button>
+          <button class="przycisk drugi schowany" id="przycisk-anuluj">Anuluj</button>
         </div>
       </div>
 
@@ -124,7 +124,7 @@
         <button class="przycisk" id="przycisk-nowy-trening">+ Dodaj trening</button>
 
         <div class="formularz" id="formularz-treningu" hidden>
-          <h2 class="tytul-formularza" id="tytul-treningu">Nowy trening</h2>
+          <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj-trening" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-treningu">Nowy trening</h2></div>
 
           <label for="pole-nazwa-treningu">Nazwa treningu</label>
           <input type="text" id="pole-nazwa-treningu" placeholder="Np. Plecy A">
@@ -153,7 +153,7 @@
 
           <div>
             <button class="przycisk" id="przycisk-zapisz-trening">Zapisz trening</button>
-            <button class="przycisk drugi" id="przycisk-anuluj-trening">Anuluj</button>
+            <button class="przycisk drugi schowany" id="przycisk-anuluj-trening">Anuluj</button>
           </div>
         </div>
 
@@ -210,7 +210,7 @@
         <button class="przycisk-przerywany" id="kr-dodaj">+ Dodaj aktywność</button>
 
         <div class="formularz" id="kr-formularz" hidden>
-          <h2 class="tytul-formularza" id="kr-tytul-formularza">Nowa aktywność</h2>
+          <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr-anuluj-aktywnosc" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr-tytul-formularza">Nowa aktywność</h2></div>
 
           <label for="kr-rodzaj">Rodzaj aktywności</label>
           <select id="kr-rodzaj"></select>
@@ -229,7 +229,7 @@
 
           <div>
             <button class="przycisk" id="kr-zapisz-aktywnosc">Zapisz</button>
-            <button class="przycisk drugi" id="kr-anuluj-aktywnosc">Anuluj</button>
+            <button class="przycisk drugi schowany" id="kr-anuluj-aktywnosc">Anuluj</button>
             <button class="przycisk drugi" id="kr-usun-aktywnosc" hidden>Usuń</button>
           </div>
         </div>
@@ -278,25 +278,25 @@
           </div>
 
           <div id="pd-widok-dodaj" hidden>
-            <h2 class="tytul-formularza">Dodaj sesję</h2>
+            <div class="naglowek-wstecz"><button class="wstecz" data-cel="pd-dodaj-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza">Dodaj sesję</h2></div>
             <div id="pd-wybor-aktywnosci"></div>
-            <button class="przycisk drugi wielki" id="pd-dodaj-anuluj">Anuluj</button>
+            <button class="przycisk drugi wielki schowany" id="pd-dodaj-anuluj">Anuluj</button>
           </div>
 
           <div id="pd-widok-sesja" hidden>
-            <h2 class="tytul-formularza" id="pd-sesja-tytul">Sesja</h2>
+            <div class="naglowek-wstecz"><button class="wstecz" data-cel="pd-sesja-wroc" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="pd-sesja-tytul">Sesja</h2></div>
             <div id="pd-sesja-trening"></div>
             <div id="pd-sesja-parametry"></div>
             <p class="blad" id="pd-sesja-blad"></p>
             <p class="opis" id="pd-sesja-info"></p>
             <button class="przycisk wielki" id="pd-sesja-zapisz">Zapisz sesję</button>
             <button class="przycisk drugi wielki" id="pd-sesja-kopiuj">Kopiuj do innych sesji</button>
-            <button class="przycisk drugi wielki" id="pd-sesja-wroc">Wróć</button>
+            <button class="przycisk drugi wielki schowany" id="pd-sesja-wroc">Wróć</button>
             <button class="akcja usun" id="pd-sesja-usun">Usuń sesję</button>
           </div>
 
           <div id="pd-widok-wybor" hidden>
-            <h2 class="tytul-formularza" id="kr2-wybor-tytul">Trening</h2>
+            <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr2-wybor-wstecz" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr2-wybor-tytul">Trening</h2></div>
             <label class="wybor wybor-pelny">
               <input type="checkbox" id="kr2-wszystkie-treningi">
               Pokaż wszystkie treningi
@@ -304,11 +304,11 @@
             <p class="opis" id="kr2-brak-treningow" hidden></p>
             <div id="kr2-treningi"></div>
             <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy trening</button>
-            <button class="przycisk drugi wielki" id="kr2-wybor-wstecz">Wróć</button>
+            <button class="przycisk drugi wielki schowany" id="kr2-wybor-wstecz">Wróć</button>
           </div>
 
           <div id="pd-widok-budowa" hidden>
-            <h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2>
+            <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr2-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2></div>
             <div class="formularz">
               <label for="kr2-nazwa">Nazwa treningu</label>
               <input type="text" id="kr2-nazwa" placeholder="Np. Plecy A">
@@ -324,7 +324,7 @@
               <p class="blad" id="kr2-blad-budowy"></p>
               <div>
                 <button class="przycisk" id="kr2-zapisz">Zapisz i wybierz</button>
-                <button class="przycisk drugi" id="kr2-anuluj">Anuluj</button>
+                <button class="przycisk drugi schowany" id="kr2-anuluj">Anuluj</button>
               </div>
             </div>
           </div>
@@ -466,16 +466,16 @@
     </div>
   </div>
 
-  <script src="dane.js?v=5"></script>
-  <script src="anatomia.js?v=5"></script>
-  <script src="cwiczenia.js?v=5"></script>
-  <script src="treningi.js?v=5"></script>
-  <script src="kreator.js?v=5"></script>
-  <script src="kreator2.js?v=5"></script>
-  <script src="dzis.js?v=5"></script>
-  <script src="postep.js?v=5"></script>
-  <script src="ustawienia.js?v=5"></script>
-  <script src="kopia.js?v=5"></script>
-  <script src="app.js?v=5"></script>
+  <script src="dane.js?v=6"></script>
+  <script src="anatomia.js?v=6"></script>
+  <script src="cwiczenia.js?v=6"></script>
+  <script src="treningi.js?v=6"></script>
+  <script src="kreator.js?v=6"></script>
+  <script src="kreator2.js?v=6"></script>
+  <script src="dzis.js?v=6"></script>
+  <script src="postep.js?v=6"></script>
+  <script src="ustawienia.js?v=6"></script>
+  <script src="kopia.js?v=6"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>
