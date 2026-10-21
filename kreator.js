@@ -24,6 +24,7 @@ const krPodpowiedz = document.getElementById("kr-podpowiedz");
 const krBladKroku = document.getElementById("kr-blad-kroku");
 const krDalej = document.getElementById("kr-dalej");
 const krOdNowa = document.getElementById("kr-od-nowa");
+const krTytul = document.getElementById("kr-tytul");
 
 // Formularz aktywności
 const krFormularz = document.getElementById("kr-formularz");
@@ -68,8 +69,53 @@ function odmiana(liczba, jeden, kilka, wiele) {
 }
 
 function zapiszSzkic() {
+  // Przy edycji zapisanego planu zmiany czekają w pamięci do "Zapisz plan"
+  if (szkic.edytowanyPlanId) {
+    return;
+  }
   dane.szkicPlanu = szkic;
   zapiszDane();
+}
+
+// ===== Pomocnicze o sesjach =====
+
+// Basen: etapy sesji [{ styl, dlugosci }]. Starsze sesje miały jeden styl i jedną liczbę długości.
+function etapySesji(s) {
+  if (Array.isArray(s.etapy) && s.etapy.length > 0) {
+    return s.etapy;
+  }
+  if (s.dlugosci) {
+    return [{ styl: s.styl || "", dlugosci: s.dlugosci }];
+  }
+  return [];
+}
+
+function sumaDlugosci(s) {
+  return etapySesji(s).reduce(function (suma, e) {
+    return suma + e.dlugosci;
+  }, 0);
+}
+
+// Tekst, np. "Kraul 10 dł. · Grzbietowy 6 dł. (razem 16)"
+function opisEtapow(s) {
+  const etapy = etapySesji(s);
+  const czesci = etapy.map(function (e) {
+    return (e.styl ? e.styl + " " : "") + e.dlugosci + " dł.";
+  });
+  let tekst = czesci.join(" · ");
+  if (etapy.length > 1) {
+    tekst += " (razem " + sumaDlugosci(s) + ")";
+  }
+  return tekst;
+}
+
+// Czy sesja ma już zapisany postęp (odhaczone ćwiczenia, wykonane wartości albo wynik)
+function sesjaMaPostep(s) {
+  return !!s.wynik ||
+    Object.keys(s.zrobione || {}).some(function (id) {
+      return s.zrobione[id];
+    }) ||
+    Object.keys(s.wykonane || {}).length > 0;
 }
 
 // Czy w szkicu coś już jest (żeby pokazać "Zacznij od nowa")
@@ -110,7 +156,7 @@ function opisAktywnosci(aktywnosc) {
 // Wersja ustawień w dane.js, której wymaga kreator
 const WYMAGANA_WERSJA_DANYCH = 4;
 
-function otworzKreator() {
+function otworzKreator(planDoEdycji) {
   // Jeśli plik dane.js jest w starej wersji, kreator nie ma ustawień i nie zadziała.
   // Zamiast milczeć, mówimy o tym wprost.
   if (dane.wersjaUstawien !== WYMAGANA_WERSJA_DANYCH || !Array.isArray(dane.stylePlywania)) {
@@ -121,13 +167,25 @@ function otworzKreator() {
     return;
   }
 
-  // Wznawiamy rozpoczęty szkic albo zaczynamy nowy
-  szkic = dane.szkicPlanu
-    ? JSON.parse(JSON.stringify(dane.szkicPlanu))
-    : { okres: "tydzien", aktywnosci: [], sesje: [] };
-  if (!Array.isArray(szkic.sesje)) {
-    szkic.sesje = [];
+  // Edycja zapisanego planu: pracujemy na kopii, a "Zapisz plan" podmieni oryginał
+  if (planDoEdycji) {
+    szkic = {
+      okres: planDoEdycji.okres,
+      start: planDoEdycji.start,
+      aktywnosci: JSON.parse(JSON.stringify(planDoEdycji.aktywnosci)),
+      sesje: JSON.parse(JSON.stringify(planDoEdycji.sesje)),
+      edytowanyPlanId: planDoEdycji.id
+    };
+  } else {
+    // Wznawiamy rozpoczęty szkic albo zaczynamy nowy
+    szkic = dane.szkicPlanu
+      ? JSON.parse(JSON.stringify(dane.szkicPlanu))
+      : { okres: "tydzien", aktywnosci: [], sesje: [] };
+    if (!Array.isArray(szkic.sesje)) {
+      szkic.sesje = [];
+    }
   }
+  krTytul.textContent = planDoEdycji ? "Edycja planu" : "Nowy plan";
 
   edytowanaAktywnoscId = null;
   krFormularz.hidden = true;
@@ -135,12 +193,25 @@ function otworzKreator() {
   przygotujSelectyAktywnosci();
   pokazKrok(1);
   rysujKrok1();
+  if (planDoEdycji) {
+    // Najczęściej poprawiamy kalendarz, więc od razu go pokazujemy
+    rysujKalendarz();
+    pokazKrok(2);
+  }
   kreator.hidden = false;
   kreator.querySelector(".kreator-tresc").scrollTop = 0;
 }
 
 function zamknijKreator() {
   kreator.hidden = true;
+}
+
+// Zamknięcie kreatora z wyjścia (strzałka): przy edycji pytamy o porzucenie zmian
+function wyjdzZKreatora() {
+  if (szkic.edytowanyPlanId && !confirm("Zamknąć bez zapisywania zmian w planie?")) {
+    return;
+  }
+  zamknijKreator();
 }
 
 function pokazKrok(numer) {
@@ -194,7 +265,9 @@ function rysujKrok1() {
     krPodpowiedz.textContent = tekst;
   }
 
-  krOdNowa.hidden = !szkicNiepusty();
+  // Przy edycji planu nie zmieniamy okresu i nie zaczynamy od nowa
+  krOkresTydzien.parentElement.hidden = !!szkic.edytowanyPlanId;
+  krOdNowa.hidden = !szkicNiepusty() || !!szkic.edytowanyPlanId;
   krDalej.hidden = !krFormularz.hidden;
   krDodaj.hidden = !krFormularz.hidden;
 }
@@ -360,6 +433,12 @@ function usunAktywnosc() {
   if (!edytowanaAktywnoscId) {
     return;
   }
+  if (szkic.sesje.some(function (s) {
+    return s.aktywnoscId === edytowanaAktywnoscId && sesjaMaPostep(s);
+  })) {
+    alert("Ta aktywność ma już zaliczone sesje, więc nie można jej usunąć z planu.");
+    return;
+  }
   if (confirm("Usunąć tę aktywność z planu (razem z jej sesjami w kalendarzu)?")) {
     szkic.aktywnosci = szkic.aktywnosci.filter(function (inna) {
       return inna.id !== edytowanaAktywnoscId;
@@ -398,7 +477,7 @@ function wstecz() {
   } else if (!krFormularz.hidden) {
     zamknijFormularzAktywnosci();
   } else {
-    zamknijKreator();
+    wyjdzZKreatora();
   }
 }
 
@@ -414,8 +493,12 @@ function zacznijOdNowa() {
 
 // ===== Podpięcie przycisków =====
 
-dzisUtworzPlan.addEventListener("click", otworzKreator);
-postepNowyPlan.addEventListener("click", otworzKreator);
+dzisUtworzPlan.addEventListener("click", function () {
+  otworzKreator();
+});
+postepNowyPlan.addEventListener("click", function () {
+  otworzKreator();
+});
 
 krWstecz.addEventListener("click", wstecz);
 krOkresTydzien.addEventListener("click", function () {

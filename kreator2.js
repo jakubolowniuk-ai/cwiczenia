@@ -33,12 +33,17 @@ const pdSesjaZapisz = document.getElementById("pd-sesja-zapisz");
 const pdSesjaKopiuj = document.getElementById("pd-sesja-kopiuj");
 const pdSesjaWroc = document.getElementById("pd-sesja-wroc");
 const pdSesjaUsun = document.getElementById("pd-sesja-usun");
+const pdSesjaPrzenies = document.getElementById("pd-sesja-przenies");
+const pdPrzeniesOpis = document.getElementById("pd-przenies-opis");
+const pdPrzeniesLista = document.getElementById("pd-przenies-lista");
+const pdPrzeniesWstecz = document.getElementById("pd-przenies-wstecz");
 
 // Widoki panelu
 const pdWidoki = {
   dzien: document.getElementById("pd-widok-dzien"),
   dodaj: document.getElementById("pd-widok-dodaj"),
   sesja: document.getElementById("pd-widok-sesja"),
+  przenies: document.getElementById("pd-widok-przenies"),
   wybor: document.getElementById("pd-widok-wybor"),
   budowa: document.getElementById("pd-widok-budowa")
 };
@@ -134,10 +139,7 @@ function cwiczeniaTreningu(trening) {
 function celUstawiony(sesja, aktywnosc) {
   const rodzaj = znajdzKategorie(aktywnosc.rodzajId);
   const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
-  if (pola.indexOf("styl") !== -1 && !sesja.styl) {
-    return false;
-  }
-  if (pola.indexOf("dlugosci") !== -1 && !(sesja.dlugosci >= 1)) {
+  if ((pola.indexOf("styl") !== -1 || pola.indexOf("dlugosci") !== -1) && !(sumaDlugosci(sesja) >= 1)) {
     return false;
   }
   if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1) {
@@ -203,11 +205,8 @@ function opisSesji(sesja) {
     return trening ? "Trening: " + trening.nazwa : "Nie wybrano treningu";
   }
   const czesci = [];
-  if (sesja.styl) {
-    czesci.push(sesja.styl);
-  }
-  if (sesja.dlugosci) {
-    czesci.push(sesja.dlugosci + " " + (sesja.dlugosci === 1 ? "długość" : "długości"));
+  if (etapySesji(sesja).length > 0) {
+    czesci.push(opisEtapow(sesja));
   }
   if (sesja.dystans) {
     czesci.push(sesja.dystans.wartosc + " " + sesja.dystans.jednostka);
@@ -281,7 +280,7 @@ function zrobZnacznik(kolor, pelny) {
 function rysujKalendarz() {
   kalBlad.textContent = "";
   // Jeśli nic jeszcze nie rozłożono, plan zaczyna się dzisiaj
-  if (!szkic.start || szkic.sesje.length === 0) {
+  if (!szkic.start || (szkic.sesje.length === 0 && !szkic.edytowanyPlanId)) {
     szkic.start = dzisISO();
     zapiszSzkic();
   }
@@ -422,19 +421,69 @@ function rysujPanelDnia() {
     dodajLinie(karta, gotowa ? "Gotowe ✓" : "Do uzupełnienia");
     karta.classList.add("karta-sesji");
     karta.style.borderLeftColor = kolorAktywnosci(aktywnosc);
-    karta.appendChild(
-      przyciskAkcji("Edytuj", "", function () {
-        otworzSesje(sesja);
-      })
-    );
-    karta.appendChild(
-      przyciskAkcji("Usuń", "usun", function () {
-        pdSesja = sesja;
-        usunSesje();
-      })
-    );
+    if (sesjaMaPostep(sesja)) {
+      // Sesja z zapisanym postępem zostaje bez zmian, żeby nie zepsuć historii
+      dodajLinie(karta, "Ma zapisany postęp, nie można jej zmienić");
+    } else {
+      karta.appendChild(
+        przyciskAkcji("Edytuj", "", function () {
+          otworzSesje(sesja);
+        })
+      );
+      karta.appendChild(
+        przyciskAkcji("Przenieś", "", function () {
+          otworzPrzenoszenie(sesja);
+        })
+      );
+      karta.appendChild(
+        przyciskAkcji("Usuń", "usun", function () {
+          pdSesja = sesja;
+          usunSesje();
+        })
+      );
+    }
     pdSesje.appendChild(karta);
   });
+}
+
+// ===== Panel: przenoszenie sesji na inny dzień =====
+
+function otworzPrzenoszenie(sesja) {
+  pdSesja = sesja;
+  const aktywnosc = znajdzAktywnosc(sesja.aktywnoscId);
+  pdPrzeniesOpis.textContent = "Sesja: " + opisAktywnosci(aktywnosc).tytul + ". Wybierz dzień, na który ją przenosisz.";
+  pdPrzeniesLista.innerHTML = "";
+  const liczbaDni = DNI_W_OKRESIE[szkic.okres];
+  for (let dzien = 0; dzien < liczbaDni; dzien++) {
+    const data = dataDnia(dzien);
+    const ileTam = szkic.sesje.filter(function (s) {
+      return s.dzien === dzien && s !== sesja;
+    }).length;
+    const opis = ileTam === 0 ? "wolny dzień" : ileTam + " " + odmiana(ileTam, "sesja", "sesje", "sesji");
+    const karta = zrobKarte(NAZWY_DNI[data.getDay()] + " " + etykietaDaty(data), opis);
+    if (dzien === sesja.dzien) {
+      karta.classList.add("przygaszona");
+      dodajLinie(karta, "Tu jest teraz");
+    } else {
+      karta.appendChild(
+        przyciskAkcji("Przenieś", "", function () {
+          przeniesSesje(sesja, dzien);
+        })
+      );
+    }
+    pdPrzeniesLista.appendChild(karta);
+  }
+  pokazWidokPanelu("przenies");
+}
+
+function przeniesSesje(sesja, dzien) {
+  sesja.dzien = dzien;
+  pdDzien = dzien;
+  pdSesja = null;
+  zapiszSzkic();
+  rysujPanelDnia();
+  pokazWidokPanelu("dzien");
+  rysujKalendarz();
 }
 
 // ===== Panel: dodawanie sesji =====
@@ -483,6 +532,7 @@ function nowaSesja(aktywnosc, dzien) {
     treningId: null,
     parametry: {},
     styl: null,
+    etapy: null,
     dlugosci: null,
     dystans: null,
     czas: null
@@ -760,6 +810,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
   let czasJedn = null;
 
   let wyborCwiczenia = null;
+  let polaEtapow = [];
   if (pola.indexOf("styl") !== -1) {
     // Ćwiczenia basenowe z bazy, które mają zapisane style
     const basenowe = dane.cwiczenia.filter(function (c) {
@@ -789,13 +840,24 @@ function zrobKarteSesji(sesja, aktywnosc) {
       karta.appendChild(blokC);
     }
 
-    const blok = document.createElement("div");
-    const opis = document.createElement("label");
-    opis.textContent = "Styl";
-    styl = document.createElement("select");
+    // Długości osobno dla każdego stylu (0 = ten styl nie jest pływany)
+    const blokE = document.createElement("div");
+    const opisE = document.createElement("label");
+    opisE.textContent = "Liczba długości basenu w każdym stylu";
+    const listaE = document.createElement("div");
+    blokE.appendChild(opisE);
+    blokE.appendChild(listaE);
+    karta.appendChild(blokE);
 
-    // Style do wyboru: z wybranego ćwiczenia albo wszystkie
-    const wypelnijStyle = function (wybrany) {
+    const wartosci = {};
+    etapySesji(sesja).forEach(function (e) {
+      wartosci[e.styl] = e.dlugosci;
+    });
+
+    const rysujEtapy = function () {
+      polaEtapow.forEach(function (p) {
+        wartosci[p.styl] = Number(p.pole.value) || 0;
+      });
       let dostepne = dane.stylePlywania;
       if (wyborCwiczenia && wyborCwiczenia.value !== "") {
         const c = basenowe.find(function (x) { return x.id === wyborCwiczenia.value; });
@@ -803,37 +865,21 @@ function zrobKarteSesji(sesja, aktywnosc) {
           dostepne = c.style;
         }
       }
-      styl.innerHTML = "";
-      const pusta = document.createElement("option");
-      pusta.value = "";
-      pusta.textContent = "Wybierz styl";
-      styl.appendChild(pusta);
-      dostepne.forEach(function (nazwa) {
-        const opcja = document.createElement("option");
-        opcja.value = nazwa;
-        opcja.textContent = nazwa;
-        styl.appendChild(opcja);
+      listaE.innerHTML = "";
+      polaEtapow = [];
+      dostepne.forEach(function (nazwaStylu) {
+        const pole = zrobPoleLiczbowe(nazwaStylu, wartosci[nazwaStylu] || 0, false);
+        polaEtapow.push({ styl: nazwaStylu, pole: pole.pole });
+        listaE.appendChild(pole.blok);
       });
-      if (dostepne.indexOf(wybrany) !== -1) {
-        styl.value = wybrany;
-      } else if (dostepne.length === 1 && wyborCwiczenia && wyborCwiczenia.value !== "") {
-        styl.value = dostepne[0];
-      } else {
-        styl.value = "";
-      }
     };
-    wypelnijStyle(sesja.styl || "");
+    rysujEtapy();
     if (wyborCwiczenia) {
-      wyborCwiczenia.addEventListener("change", function () {
-        wypelnijStyle("");
-      });
+      wyborCwiczenia.addEventListener("change", rysujEtapy);
     }
-    blok.appendChild(opis);
-    blok.appendChild(styl);
-    karta.appendChild(blok);
   }
 
-  if (pola.indexOf("dlugosci") !== -1) {
+  if (pola.indexOf("dlugosci") !== -1 && pola.indexOf("styl") === -1) {
     dlugosci = zrobPoleLiczbowe("Liczba długości basenu", sesja.dlugosci || 0, false);
     const rzad = zrobRzad();
     rzad.appendChild(dlugosci.blok);
@@ -865,12 +911,25 @@ function zrobKarteSesji(sesja, aktywnosc) {
     karta: karta,
     odczytaj: function () {
       const wynik = {};
-      if (styl) {
-        if (styl.value === "") {
-          blad.textContent = "Wybierz styl.";
+      if (pola.indexOf("styl") !== -1) {
+        const etapy = [];
+        for (let n = 0; n < polaEtapow.length; n++) {
+          const d = Number(polaEtapow[n].pole.value);
+          if (!(d >= 0) || Math.floor(d) !== d) {
+            blad.textContent = "Długości wpisz jako liczby całe (0 = bez tego stylu).";
+            return null;
+          }
+          if (d > 0) {
+            etapy.push({ styl: polaEtapow[n].styl, dlugosci: d });
+          }
+        }
+        if (etapy.length === 0) {
+          blad.textContent = "Wpisz liczbę długości w co najmniej jednym stylu.";
           return null;
         }
-        wynik.styl = styl.value;
+        wynik.etapy = etapy;
+        wynik.styl = null;
+        wynik.dlugosci = null;
         wynik.cwiczenieId = wyborCwiczenia && wyborCwiczenia.value !== "" ? wyborCwiczenia.value : null;
       }
       if (dlugosci) {
@@ -1021,7 +1080,7 @@ function kopiujDoInnych() {
       s.treningId = pdSesja.treningId;
       s.parametry = JSON.parse(JSON.stringify(pdSesja.parametry));
     } else {
-      ["styl", "cwiczenieId", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
+      ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
         s[klucz] = pdSesja[klucz] ? JSON.parse(JSON.stringify(pdSesja[klucz])) : null;
       });
     }
@@ -1225,6 +1284,12 @@ function zapiszLiczbeSesji() {
 }
 
 function usunAktywnoscZPlanu() {
+  if (szkic.sesje.some(function (s) {
+    return s.aktywnoscId === olAktywnosc.id && sesjaMaPostep(s);
+  })) {
+    alert("Ta aktywność ma już zaliczone sesje, więc nie można jej usunąć z planu.");
+    return;
+  }
   const rozlozone = sesjeAktywnosci(olAktywnosc).length;
   let pytanie = "Usunąć aktywność „" + opisAktywnosci(olAktywnosc).tytul + "” z planu?";
   if (rozlozone > 0) {
@@ -1336,6 +1401,23 @@ function zapiszPlan() {
     return;
   }
 
+  // Edycja zapisanego planu: podmieniamy aktywności i sesje, reszta planu zostaje
+  if (szkic.edytowanyPlanId) {
+    const edytowany = dane.plany.find(function (p) {
+      return p.id === szkic.edytowanyPlanId;
+    });
+    if (edytowany) {
+      edytowany.aktywnosci = JSON.parse(JSON.stringify(szkic.aktywnosci));
+      edytowany.sesje = JSON.parse(JSON.stringify(szkic.sesje));
+      edytowany.zmieniono = new Date().toISOString();
+    }
+    szkic = { okres: "tydzien", aktywnosci: [], sesje: [] };
+    zapiszDane();
+    zamknijKreator();
+    pokazEkran("ekran-dzis");
+    return;
+  }
+
   const plan = {
     id: "pl-" + Date.now(),
     okres: szkic.okres,
@@ -1377,7 +1459,7 @@ function krok2Wstecz() {
   } else if (pdWidok === "sesja") {
     rysujPanelDnia();
     pokazWidokPanelu("dzien");
-  } else if (pdWidok === "dodaj") {
+  } else if (pdWidok === "dodaj" || pdWidok === "przenies") {
     pokazWidokPanelu("dzien");
   } else {
     zamknijPanel();
@@ -1405,6 +1487,12 @@ pdSesjaWroc.addEventListener("click", function () {
   rysujKalendarz();
 });
 pdSesjaUsun.addEventListener("click", usunSesje);
+pdSesjaPrzenies.addEventListener("click", function () {
+  otworzPrzenoszenie(pdSesja);
+});
+pdPrzeniesWstecz.addEventListener("click", function () {
+  pokazWidokPanelu("dzien");
+});
 kr2Szukaj.addEventListener("input", rysujBudowe);
 kr2SzukajTreningow.addEventListener("input", rysujTreningiWyboru);
 

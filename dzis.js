@@ -11,6 +11,7 @@ const dzisBrakPlanu = document.getElementById("dzis-brak-planu");
 const dzisPlan = document.getElementById("dzis-plan");
 const dzisData = document.getElementById("dzis-data");
 const dzisSesje = document.getElementById("dzis-sesje");
+const dzisEdytujPlan = document.getElementById("dzis-edytuj-plan");
 const dzisPodsumowanie = document.getElementById("dzis-podsumowanie");
 
 const wynikTlo = document.getElementById("wynik-tlo");
@@ -107,11 +108,8 @@ function sesjaZaliczona(plan, sesja) {
 // Opis celu albo wyniku biegania i basenu, np. "Kraul · 20 długości" albo "5 km · 30 min"
 function opisCeluSesji(dane_) {
   const czesci = [];
-  if (dane_.styl) {
-    czesci.push(dane_.styl);
-  }
-  if (dane_.dlugosci) {
-    czesci.push(dane_.dlugosci + " " + (dane_.dlugosci === 1 ? "długość" : "długości"));
+  if (etapySesji(dane_).length > 0) {
+    czesci.push(opisEtapow(dane_));
   }
   if (dane_.dystans) {
     czesci.push(dane_.dystans.wartosc + " " + dane_.dystans.jednostka);
@@ -140,6 +138,7 @@ function rysujDzis() {
   if (!plan) {
     return;
   }
+  dzisEdytujPlan.hidden = false;
 
   const dzis = new Date();
   const nazwyDni = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
@@ -157,6 +156,7 @@ function rysujDzis() {
   }
 
   if (indeks >= liczbaDni) {
+    dzisEdytujPlan.hidden = true;
     rysujKoniecPlanu(plan);
     return;
   }
@@ -707,6 +707,8 @@ function otworzWynik(plan, sesja) {
   const start = sesja.wynik || sesja;
   const kopia = {
     styl: start.styl,
+    etapy: start.etapy,
+    cwiczenieId: start.cwiczenieId,
     dlugosci: start.dlugosci,
     dystans: start.dystans,
     czas: start.czas
@@ -741,5 +743,12 @@ wynikAnuluj.addEventListener("click", zamknijWynik);
 wynikTlo.addEventListener("click", function (zdarzenie) {
   if (zdarzenie.target === wynikTlo) {
     zamknijWynik();
+  }
+});
+
+dzisEdytujPlan.addEventListener("click", function () {
+  const plan = aktywnyPlan();
+  if (plan) {
+    otworzKreator(plan);
   }
 });

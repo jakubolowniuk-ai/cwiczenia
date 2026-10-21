@@ -40,8 +40,8 @@ function stosunekWyniku(cel, wynik) {
   if (cel.dystans && wynik.dystans) {
     return metry(wynik.dystans) / metry(cel.dystans);
   }
-  if (cel.dlugosci && wynik.dlugosci) {
-    return wynik.dlugosci / cel.dlugosci;
+  if (sumaDlugosci(cel) > 0 && sumaDlugosci(wynik) > 0) {
+    return sumaDlugosci(wynik) / sumaDlugosci(cel);
   }
   if (cel.czas && wynik.czas) {
     return sekundyZ(wynik.czas.wartosc, wynik.czas.jednostka) / sekundyZ(cel.czas.wartosc, cel.czas.jednostka);
@@ -217,6 +217,7 @@ function zakresDat(plan) {
 function rysujPostep() {
   postepTresc.innerHTML = "";
   const plan = aktywnyPlan();
+  postepEdytujPlan.hidden = !plan;
   if (!plan) {
     postepTresc.appendChild(tekstElement("p", "opis", "Gdy ułożysz plan i zaczniesz ćwiczyć, zobaczysz tutaj swoje wyniki."));
     return;
@@ -466,3 +467,11 @@ function otworzOknoDzis(plan, indeks) {
     postepOknoTresc.appendChild(karta);
   });
 }
+
+const postepEdytujPlan = document.getElementById("postep-edytuj-plan");
+postepEdytujPlan.addEventListener("click", function () {
+  const plan = aktywnyPlan();
+  if (plan) {
+    otworzKreator(plan);
+  }
+});
