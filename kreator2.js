@@ -510,8 +510,15 @@ function otworzDodawanie() {
           const sesja = nowaSesja(aktywnosc, pdDzien);
           szkic.sesje.push(sesja);
           zapiszSzkic();
-          otworzSesje(sesja);
           rysujKalendarz();
+          if (wymagaTreningu(aktywnosc)) {
+            // Od razu wybór treningu (gotowy albo nowy), potem parametry
+            pdSesja = sesja;
+            odswiezNaglowekPanelu();
+            otworzWybor(aktywnosc);
+          } else {
+            otworzSesje(sesja);
+          }
         })
       );
     } else {
