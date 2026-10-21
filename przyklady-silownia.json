@@ -1,0 +1,1249 @@
+{
+ "cwiczenia": [
+  {
+   "nazwa": "Wyciskanie sztangi na ławce poziomej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie hantli na ławce skośnej dodatniej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie sztangi na ławce skośnej ujemnej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Rozpiętki z hantlami na ławce poziomej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dipy na poręczach z obciążeniem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie na maszynie Hammer (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Rozpiętki na maszynie Pec Deck (butterfly)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Krzyżowanie linek wyciągu górnego w opadzie tułowia",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Piersiowy większy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie linek wyciągu dolnego przed siebie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Pullover z hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Najszerszy grzbietu",
+    "Zębaty przedni",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie hantli z rotacją",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie sztangi leżąc na podłodze (Floor Press)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Martwy ciąg klasyczny",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe",
+    "Czworogłowy uda",
+    "Czworoboczny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie na drążku z obciążeniem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie sztangą w opadzie tułowia",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Równoległoboczny",
+    "Naramienny tylny",
+    "Biceps",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie hantlą jednorącz w oparciu o ławkę",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Równoległoboczny",
+    "Czworoboczny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Ściąganie drążka wyciągu górnego do klatki",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie na maszynie siedząc (chwyt neutralny)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny",
+    "Naramienny tylny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie sztangą T-Bar",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Równoległoboczny",
+    "Czworoboczny",
+    "Najszerszy grzbietu",
+    "Naramienny tylny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przyciąganie linki wyciągu dolnego do brzucha (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Równoległoboczny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie tułowia na ławce rzymskiej z obciążeniem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Ściąganie prostych ramion na wyciągu górnym",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Równoległoboczny",
+    "Czworoboczny",
+    "Naramienny tylny",
+    "Najszerszy grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Szrugsy ze sztangą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Czworoboczny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Szrugsy z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Czworoboczny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Martwy ciąg rumuński ze sztangą (RDL)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wiosłowanie sztangą w landmine (jednorącz)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Czworoboczny",
+    "Równoległoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie żołnierskie ze sztangą (OHP)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie hantli siedząc",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie hantli bokiem w staniu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie hantli w opadzie tułowia",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Równoległoboczny",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Odwrotne rozpiętki na maszynie (Reverse Pec Deck)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Równoległoboczny",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie ramienia bokiem na wyciągu dolnym",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Face Pulls (przyciąganie liny do twarzy)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Czworoboczny",
+    "Równoległoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie na maszynie nad głowę (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie hantli przed siebie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie Arnolda",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Unoszenie talerza przed siebie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Podciąganie sztangi wzdłuż tułowia",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny środkowy",
+    "Czworoboczny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad ze sztangą na plecach (Back Squat)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Przywodziciele uda",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad ze sztangą z przodu (Front Squat)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad bułgarski z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wypychanie ciężaru na suwnicy (Leg Press)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad Hack na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykroki chodzone z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Zakroki ze sztangą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Czworogłowy uda",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Hip Thrust ze sztangą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie nóg na maszynie (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Czworogłowy uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad Goblet z kettlebellem lub hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad na maszynie Smitha",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie nogi w tył na wyciągu dolnym (Kickback)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Odwodzenie nóg na maszynie (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Pośladkowy mały"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przywodzenie nóg na maszynie (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Przywodziciele uda"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Hip Thrust na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przysiad sumo z hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Przywodziciele uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wejścia na podwyższenie z hantlami (Step-up)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Czworogłowy uda",
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Martwy ciąg na prostych nogach ze sztangą (SLDL)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe",
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie nóg leżąc na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie nóg siedząc na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Martwy ciąg rumuński z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe",
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wspięcia na palce stojąc ze sztangą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wspięcia na palce siedząc na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Płaszczkowaty",
+    "Brzuchaty łydki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wspięcia na palce na suwnicy",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie jednej nogi stojąc na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Kulszowo-goleniowe"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie sztangi wąskim chwytem leżąc",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie ramion na wyciągu górnym z liną (Pushdown)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie ramion na wyciągu z drążkiem prostym",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie francuskie ze sztangą łamaną leżąc",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie francuskie z hantlem jednorącz (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie ramion z liną wyciągu zza głowy",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Dipy na ławce z obciążeniem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona",
+    "Barki"
+   ],
+   "miesnie": [
+    "Triceps",
+    "Naramienny przedni",
+    "Piersiowy większy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wyciskanie francuskie z hantlami leżąc (Skull Crushers)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Prostowanie ramion na maszynie do tricepsu (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion ze sztangą prostą (stojąc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion z hantlami z supinacją",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Ramienny",
+    "Przedramiona",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion na modlitewniku ze sztangą łamaną",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion z hantlami na ławce skośnej dodatniej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion na wyciągu dolnym z liną (chwyt młotkowy)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Ramienny",
+    "Przedramiona",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie skoncentrowane z hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion na maszynie (Preacher Curl)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion nadchwytem ze sztangą (Reverse Curl)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Przedramiona",
+    "Ramienny",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Zginanie nadgarstków podchwytem ze sztangą (siedząc)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Zginanie nadgarstków nadchwytem ze sztangą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Przedramiona"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Uginanie ramion na wyciągu górnym oburącz",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Allahy (skłony tułowia z linką wyciągu górnego)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Skłony tułowia na ławce skośnej ujemnej z talerzem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Russian Twist z talerzem lub kettlebellem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośne brzucha",
+    "Prosty brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Spacer farmera z hantlami lub kettlebellami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Przedramiona",
+    "Czworoboczny",
+    "Poprzeczny brzucha",
+    "Skośne brzucha",
+    "Czworoboczny lędźwi"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Drwal (Woodchopper) na wyciągu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośne brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Skłony boczne z hantlem w staniu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Czworoboczny lędźwi",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Brzuszki na maszynie (Ab Crunch)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Kółko brzuszne (Ab Wheel Rollout) z kolan",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Najszerszy grzbietu",
+    "Naramienny przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Deska przodem z talerzem na plecach",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Poprzeczny brzucha",
+    "Prosty brzucha",
+    "Skośne brzucha"
+   ],
+   "link": ""
+  }
+ ]
+}

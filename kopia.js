@@ -197,6 +197,32 @@ function dodajCwiczeniaZListy(lista) {
   return wynik;
 }
 
+function dodajIPokaz(lista) {
+  const w = dodajCwiczeniaZListy(lista);
+  zapiszDane();
+  if (typeof rysujListe === "function") {
+    rysujFiltry();
+    rysujListe();
+  }
+  if (typeof odswiezPrzelacznik === "function") {
+    odswiezPrzelacznik();
+  }
+  let opis = "Dodano ćwiczeń: " + w.dodane + ".";
+  if (w.uzupelnione > 0) {
+    opis += " Uzupełniono mięśnie w istniejących ćwiczeniach: " + w.uzupelnione + ".";
+  }
+  if (w.duplikaty > 0) {
+    opis += " Pominięto (już są w bazie): " + w.duplikaty + ".";
+  }
+  if (w.nowePartie.length > 0) {
+    opis += " Nowe partie: " + w.nowePartie.join(", ") + ".";
+  }
+  if (w.bledy.length > 0) {
+    opis += " Nie dodano " + w.bledy.length + ": " + w.bledy.slice(0, 3).join("; ") + (w.bledy.length > 3 ? "…" : "") + ".";
+  }
+  pokazInfoKopii(opis, w.dodane === 0 && w.bledy.length > 0);
+}
+
 kopiaCwiczenia.addEventListener("click", function () {
   kopiaCwiczeniaPlik.click();
 });
@@ -215,29 +241,7 @@ kopiaCwiczeniaPlik.addEventListener("change", function () {
       pokazInfoKopii("W pliku nie znalazłem listy ćwiczeń. Pobierz wzór i porównaj.", true);
       return;
     }
-    const w = dodajCwiczeniaZListy(lista);
-    zapiszDane();
-    if (typeof rysujListe === "function") {
-      rysujFiltry();
-      rysujListe();
-    }
-    if (typeof odswiezPrzelacznik === "function") {
-      odswiezPrzelacznik();
-    }
-    let opis = "Dodano ćwiczeń: " + w.dodane + ".";
-    if (w.uzupelnione > 0) {
-      opis += " Uzupełniono mięśnie w istniejących ćwiczeniach: " + w.uzupelnione + ".";
-    }
-    if (w.duplikaty > 0) {
-      opis += " Pominięto (już są w bazie): " + w.duplikaty + ".";
-    }
-    if (w.nowePartie.length > 0) {
-      opis += " Nowe partie: " + w.nowePartie.join(", ") + ".";
-    }
-    if (w.bledy.length > 0) {
-      opis += " Nie dodano " + w.bledy.length + ": " + w.bledy.slice(0, 3).join("; ") + (w.bledy.length > 3 ? "…" : "") + ".";
-    }
-    pokazInfoKopii(opis, w.dodane === 0 && w.bledy.length > 0);
+    dodajIPokaz(lista);
   });
 });
 
@@ -256,4 +260,17 @@ kopiaWzor.addEventListener("click", function () {
   };
   pobierzPlik("cwiczenia-wzor.json", JSON.stringify(wzor, null, 1));
   pokazInfoKopii("Pobrano wzór. Rodzaj musi nazywać się tak jak w aplikacji, a nieznane partie zostaną dodane automatycznie.", false);
+});
+
+document.getElementById("kopia-przyklady").addEventListener("click", function () {
+  const adresy = ["przyklady-kalistenika.json", "przyklady-silownia.json"];
+  Promise.all(adresy.map(function (a) {
+    return fetch(a).then(function (o) { return o.json(); });
+  })).then(function (wyniki) {
+    let lista = [];
+    wyniki.forEach(function (w) { lista = lista.concat(w.cwiczenia || []); });
+    dodajIPokaz(lista);
+  }).catch(function () {
+    pokazInfoKopii("Nie udało się pobrać przykładów. Sprawdź internet i spróbuj ponownie.", true);
+  });
 });
