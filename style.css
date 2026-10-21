@@ -1536,3 +1536,70 @@ h1 {
 .wart-stepper input {
   min-width: 60px;
 }
+
+/* Mięśnie w Postępie: odcienie zależą od liczby ćwiczeń, kontur = jeszcze przed Tobą */
+.an-miesien.an-p1 { opacity: 0.5; }
+.an-miesien.an-p2 { opacity: 0.75; }
+.an-miesien.an-p3 { opacity: 1; }
+
+.an-miesien.an-plan {
+  stroke: var(--an-on);
+  stroke-width: 1.4;
+  stroke-dasharray: 3 2;
+}
+
+.pp-miesnie {
+  display: block;
+  width: 100%;
+  margin-bottom: 12px;
+  padding: 16px;
+  border: 0;
+  border-radius: 14px;
+  background: var(--karta);
+  color: var(--tekst);
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
+}
+
+.pp-miesnie .anatomia {
+  max-width: 220px;
+  margin: 8px auto 0;
+  pointer-events: none;
+}
+
+.pp-miesnie-tytul {
+  font-weight: 700;
+}
+
+.pp-miesnie-opis {
+  margin-top: 2px;
+  font-size: 14px;
+  color: var(--tekst-szary);
+}
+
+.mi-legenda {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px 16px;
+  margin: 12px 0;
+  font-size: 13px;
+  color: var(--tekst-szary);
+}
+
+.mi-legenda i {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  margin-right: 6px;
+  vertical-align: -2px;
+  border-radius: 3px;
+  background: var(--an-on);
+}
+
+.mi-legenda i.p1 { opacity: 0.5; }
+.mi-legenda i.p2 { opacity: 0.75; }
+.mi-legenda i.plan {
+  background: transparent;
+  border: 1.5px dashed var(--an-on);
+}

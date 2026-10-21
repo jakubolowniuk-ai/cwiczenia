@@ -81,25 +81,35 @@ function dodajPolowy(grupa, kszt, klasa, miesienId) {
 }
 
 // Rysuje jeden widok ("p" = przód, "t" = tył); zaznaczone to lista id mięśni
-function rysujWidok(widok, zaznaczone) {
+function rysujWidok(widok, zaznaczone, opcje) {
+  opcje = opcje || {};
   const g = elementSvg("g", { class: "an-widok" });
   dodajPolowy(g, ANATOMIA_SYLWETKA, "an-cialo", null);
   g.appendChild(elementSvg("ellipse", { cx: 100, cy: 26, rx: 16, ry: 20, class: "an-cialo" }));
   ANATOMIA_KOLEJNOSC.forEach(function (id) {
     const ksztalty = (ANATOMIA_KSZTALTY[id] || {})[widok] || [];
     const wlaczony = zaznaczone.indexOf(id) !== -1;
+    let klasa = wlaczony ? "an-miesien an-on" : "an-miesien";
+    // Odcień zależy od tego, ile razy mięsień był ćwiczony (1, 2, 3 i więcej)
+    if (wlaczony && opcje.poziomy && opcje.poziomy[id]) {
+      klasa += " an-p" + Math.min(3, opcje.poziomy[id]);
+    }
+    // Przerywany kontur: mięsień jest w planie, ale jeszcze nie ćwiczony
+    if (!wlaczony && opcje.plan && opcje.plan.indexOf(id) !== -1) {
+      klasa += " an-plan";
+    }
     ksztalty.forEach(function (d) {
-      dodajPolowy(g, d, wlaczony ? "an-miesien an-on" : "an-miesien", id);
+      dodajPolowy(g, d, klasa, id);
     });
   });
   return g;
 }
 
 // Tworzy gotowy rysunek: przód po lewej, tył po prawej
-function zrobAnatomie(zaznaczone) {
+function zrobAnatomie(zaznaczone, opcje) {
   const svg = elementSvg("svg", { viewBox: "0 0 420 430", class: "anatomia", role: "img" });
-  const przod = rysujWidok("p", zaznaczone);
-  const tyl = rysujWidok("t", zaznaczone);
+  const przod = rysujWidok("p", zaznaczone, opcje);
+  const tyl = rysujWidok("t", zaznaczone, opcje);
   tyl.setAttribute("transform", "translate(220 0)");
   svg.appendChild(przod);
   svg.appendChild(tyl);

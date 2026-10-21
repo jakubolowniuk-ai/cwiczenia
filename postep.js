@@ -178,6 +178,115 @@ function zrobWskazowke(znaczek, kolor, tlo, tytul, opis) {
   return blok;
 }
 
+// ===== Mięśnie w planie =====
+
+// Zlicza mięśnie ćwiczeń: zrobione (ile razy) i zaplanowane. Zwraca też liczbę ćwiczeń bez mięśni.
+function liczMiesnie(plan) {
+  const licznik = {};
+  const planowane = [];
+  let bezMiesni = 0;
+  plan.sesje.forEach(function (sesja) {
+    cwiczeniaSesjiIds(sesja).forEach(function (id) {
+      const cwiczenie = znajdzCwiczenie(id);
+      const miesnie = (cwiczenie && cwiczenie.miesnieIds) || [];
+      const zrobione = !!(sesja.zrobione && sesja.zrobione[id]);
+      if (miesnie.length === 0) {
+        bezMiesni += 1;
+        return;
+      }
+      miesnie.forEach(function (m) {
+        if (planowane.indexOf(m) === -1) {
+          planowane.push(m);
+        }
+        if (zrobione) {
+          licznik[m] = (licznik[m] || 0) + 1;
+        }
+      });
+    });
+  });
+  const zrobioneIds = Object.keys(licznik);
+  return {
+    licznik: licznik,
+    zrobione: zrobioneIds,
+    doZrobienia: planowane.filter(function (m) {
+      return zrobioneIds.indexOf(m) === -1;
+    }),
+    planowane: planowane,
+    bezMiesni: bezMiesni
+  };
+}
+
+function nazwyMiesni(ids) {
+  return ids.map(nazwaKategorii).join(", ");
+}
+
+// Karta na ekranie Postęp: mała sylwetka, dotknięcie otwiera szczegóły
+function zrobKarteMiesni(plan) {
+  const m = liczMiesnie(plan);
+  if (m.planowane.length === 0) {
+    return null;
+  }
+  const karta = document.createElement("button");
+  karta.className = "pp-miesnie";
+  karta.setAttribute("aria-label", "Mięśnie w planie, pokaż szczegóły");
+  karta.appendChild(tekstElement("div", "pp-miesnie-tytul", "Mięśnie"));
+  karta.appendChild(tekstElement(
+    "div",
+    "pp-miesnie-opis",
+    m.zrobione.length === 0
+      ? "Jeszcze żadnego nie ćwiczyłeś w tym planie."
+      : "Ćwiczone: " + m.zrobione.length + " z " + m.planowane.length + " mięśni z planu."
+  ));
+  karta.appendChild(zrobAnatomie(m.zrobione, { poziomy: m.licznik, plan: m.doZrobienia }));
+  karta.addEventListener("click", function () {
+    otworzOknoMiesni(plan);
+  });
+  return karta;
+}
+
+// Okno ze szczegółami: duża sylwetka, legenda i listy
+function otworzOknoMiesni(plan) {
+  const m = liczMiesnie(plan);
+  pokazOkno("Mięśnie", nazwaOkresu(plan) + " · " + zakresDat(plan));
+
+  postepOknoTresc.appendChild(zrobAnatomie(m.zrobione, { poziomy: m.licznik, plan: m.doZrobienia }));
+
+  const legenda = document.createElement("div");
+  legenda.className = "mi-legenda";
+  [["p1", "1 ćwiczenie"], ["p2", "2 ćwiczenia"], ["p3", "3 i więcej"], ["plan", "jeszcze przed Tobą"]].forEach(function (para) {
+    const el = document.createElement("span");
+    const znacznik = document.createElement("i");
+    znacznik.className = para[0];
+    el.appendChild(znacznik);
+    el.appendChild(document.createTextNode(para[1]));
+    legenda.appendChild(el);
+  });
+  postepOknoTresc.appendChild(legenda);
+
+  if (m.zrobione.length > 0) {
+    const posortowane = m.zrobione.slice().sort(function (a, b) {
+      return m.licznik[b] - m.licznik[a];
+    });
+    const lista = document.createElement("div");
+    lista.className = "pp-karta";
+    lista.appendChild(tekstElement("div", "pp-miesnie-tytul", "Ćwiczone"));
+    posortowane.forEach(function (id) {
+      lista.appendChild(tekstElement("div", "pp-miesnie-opis", nazwaKategorii(id) + " · " + m.licznik[id] + "×"));
+    });
+    postepOknoTresc.appendChild(lista);
+  }
+  if (m.doZrobienia.length > 0) {
+    postepOknoTresc.appendChild(zrobWskazowke("↗", "#D97706", "#FDEFD3", "Jeszcze przed Tobą", nazwyMiesni(m.doZrobienia)));
+  }
+  if (m.bezMiesni > 0) {
+    postepOknoTresc.appendChild(tekstElement(
+      "p",
+      "opis",
+      "Niektóre ćwiczenia w planie (" + m.bezMiesni + ") nie mają przypisanych mięśni, więc nie są tu liczone. Dodasz je w zakładce Ćwiczenia."
+    ));
+  }
+}
+
 // ===== Ekran główny: dwa kafelki =====
 
 function zrobKafelek(etykieta, duza, jednostka, p, akcja) {
@@ -260,6 +369,11 @@ function rysujPostep() {
     otworzOknoOkresu(plan, indeks);
   }));
   postepTresc.appendChild(kafle);
+
+  const kartaMiesni = zrobKarteMiesni(plan);
+  if (kartaMiesni) {
+    postepTresc.appendChild(kartaMiesni);
+  }
 
   const seria = liczSerie(plan, indeks);
   if (seria >= 2) {
