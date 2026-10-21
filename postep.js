@@ -109,7 +109,7 @@ function znajdzRekordy(aktywny) {
   wpisy.forEach(function (wpis) {
     const poprzedni = najlepsze[wpis.id];
     const miara = miaraIlosci(wpis.ilosc);
-    if (poprzedni && (poprzedni.ilosc.typ === wpis.ilosc.typ || (czyPowtorzenia(poprzedni.ilosc) && czyPowtorzenia(wpis.ilosc)))) {
+    if (poprzedni && rodzinaIlosci(poprzedni.ilosc) === rodzinaIlosci(wpis.ilosc)) {
       if (miara > poprzedni.miara) {
         if (wpis.wAktywnym) {
           rekordy.push({ id: wpis.id, ilosc: wpis.ilosc, poprzednio: poprzedni.ilosc, data: wpis.data });

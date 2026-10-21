@@ -456,10 +456,15 @@ function otworzPrzenoszenie(sesja) {
   const liczbaDni = DNI_W_OKRESIE[szkic.okres];
   for (let dzien = 0; dzien < liczbaDni; dzien++) {
     const data = dataDnia(dzien);
-    const ileTam = szkic.sesje.filter(function (s) {
+    const tamSesje = szkic.sesje.filter(function (s) {
       return s.dzien === dzien && s !== sesja;
-    }).length;
-    const opis = ileTam === 0 ? "wolny dzień" : ileTam + " " + odmiana(ileTam, "sesja", "sesje", "sesji");
+    });
+    const opis = tamSesje.length === 0
+      ? "wolny dzień"
+      : tamSesje.map(function (s) {
+        const akt = znajdzAktywnosc(s.aktywnoscId);
+        return akt ? opisAktywnosci(akt).tytul + " " + numerSesji(s) + "/" + akt.razy : "?";
+      }).join(" · ");
     const karta = zrobKarte(NAZWY_DNI[data.getDay()] + " " + etykietaDaty(data), opis);
     if (dzien === sesja.dzien) {
       karta.classList.add("przygaszona");
@@ -594,7 +599,7 @@ function ilosciStartowa(sesja, cwiczenie, miara) {
   }
   const stara = cwiczenie.ilosc;
   if (stara) {
-    if (miara === "statyczna" && stara.typ === "czas-powtorzenia") {
+    if (miara === "statyczna" && (stara.typ === "czas-powtorzenia" || stara.typ === "czas-serie")) {
       return stara;
     }
     if (miara === "serie" && (stara.typ === "powtorzenia" || stara.typ === "serie-lista" || stara.typ === "czas")) {
@@ -629,18 +634,107 @@ function zrobKarteParametrow(sesja, cwiczenie) {
   let odczytaj;
 
   if (miara === "statyczna") {
-    const pow = zrobPoleLiczbowe("Powtórzenia", start ? start.powtorzenia : 0, false);
-    const czas = zrobPoleLiczbowe("Czas jednego powtórzenia", start && start.czas ? start.czas.wartosc : 0, true);
-    const jedn = zrobWyborJednostkiZ("Jednostka czasu", [["s", "sekundy"], ["min", "minuty"]], start && start.czas ? start.czas.jednostka : "s");
+    // Startowe czasy: z zapisanej ilości (jeden czas albo lista)
+    const czasyStart = start ? listaCzasow(start) : [];
+    const jednStart = start ? jednostkaCzasu(start) : "s";
+
+    const trybBlok = document.createElement("div");
+    const trybOpis = document.createElement("label");
+    trybOpis.textContent = "Normy czasowe";
+    const tryb = document.createElement("select");
+    [["jedna", "Taki sam czas w każdej serii"], ["lista", "Różne czasy w seriach"]].forEach(function (para) {
+      const opcja = document.createElement("option");
+      opcja.value = para[0];
+      opcja.textContent = para[1];
+      tryb.appendChild(opcja);
+    });
+    tryb.value = start && start.typ === "czas-serie" ? "lista" : "jedna";
+    trybBlok.appendChild(trybOpis);
+    trybBlok.appendChild(tryb);
+    karta.appendChild(trybBlok);
+
+    const pow = zrobPoleLiczbowe("Powtórzenia", start && start.typ === "czas-powtorzenia" ? start.powtorzenia : 0, false);
+    const czas = zrobPoleLiczbowe("Czas jednego powtórzenia", start && start.typ === "czas-powtorzenia" ? start.czas.wartosc : 0, true);
+    const jedn = zrobWyborJednostkiZ("Jednostka czasu", [["s", "sekundy"], ["min", "minuty"]], jednStart);
     const rzad1 = zrobRzad();
     rzad1.appendChild(pow.blok);
     rzad1.appendChild(czas.blok);
+
+    // Czasy osobno dla każdej serii
+    const rzadLista = document.createElement("div");
+    let polaCzasow = [];
+    const odczytajCzasy = function () {
+      return polaCzasow.map(function (p) {
+        return Number(p.pole.value) || 0;
+      });
+    };
+    const rysujCzasy = function (czasy) {
+      rzadLista.innerHTML = "";
+      polaCzasow = [];
+      czasy.forEach(function (ile, i) {
+        const pole = zrobPoleLiczbowe("Seria " + (i + 1), ile, true);
+        polaCzasow.push(pole);
+        rzadLista.appendChild(pole.blok);
+      });
+      const przyciski = document.createElement("div");
+      const dodaj = document.createElement("button");
+      dodaj.type = "button";
+      dodaj.className = "akcja";
+      dodaj.textContent = "+ seria";
+      dodaj.addEventListener("click", function () {
+        const l = odczytajCzasy();
+        l.push(l.length > 0 ? l[l.length - 1] || 0 : 0);
+        rysujCzasy(l);
+      });
+      const usun = document.createElement("button");
+      usun.type = "button";
+      usun.className = "akcja usun";
+      usun.textContent = "− seria";
+      usun.disabled = czasy.length <= 1;
+      usun.addEventListener("click", function () {
+        const l = odczytajCzasy();
+        l.pop();
+        rysujCzasy(l);
+      });
+      przyciski.appendChild(dodaj);
+      przyciski.appendChild(usun);
+      rzadLista.appendChild(przyciski);
+    };
+    rysujCzasy(czasyStart.length > 0 ? czasyStart.slice() : [0, 0, 0]);
+
     const rzad2 = zrobRzad();
     rzad2.appendChild(jedn.blok);
     karta.appendChild(rzad1);
+    karta.appendChild(rzadLista);
     karta.appendChild(rzad2);
 
+    let poprzedniTryb = tryb.value;
+    const pokazTryb = function () {
+      // Przy przełączeniu przepisujemy wartości między polami
+      if (tryb.value === "lista" && poprzedniTryb === "jedna") {
+        const s = Math.max(1, Number(pow.pole.value) || 1);
+        rysujCzasy(new Array(s).fill(Number(czas.pole.value) || 0));
+      }
+      if (tryb.value === "jedna" && poprzedniTryb === "lista") {
+        const l = odczytajCzasy();
+        pow.pole.value = String(l.length);
+        czas.pole.value = String(l[0] || 0);
+      }
+      poprzedniTryb = tryb.value;
+      rzad1.hidden = tryb.value !== "jedna";
+      rzadLista.hidden = tryb.value !== "lista";
+    };
+    tryb.addEventListener("change", pokazTryb);
+    pokazTryb();
+
     odczytaj = function () {
+      if (tryb.value === "lista") {
+        const l = odczytajCzasy();
+        if (l.length < 1 || !l.every(function (x) { return x > 0; })) {
+          return "Wpisz czas większy od zera w każdej serii.";
+        }
+        return { typ: "czas-serie", czasy: l, jednostka: jedn.wybor.value };
+      }
       const p = Number(pow.pole.value);
       const c = Number(czas.pole.value);
       if (!(p >= 1) || Math.floor(p) !== p || !(c > 0)) {

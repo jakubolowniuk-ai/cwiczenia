@@ -338,6 +338,34 @@ function czyPowtorzenia(ilosc) {
   return ilosc.typ === "powtorzenia" || ilosc.typ === "serie-lista";
 }
 
+// Trening statyczny: czasy w kolejnych seriach i ich jednostka
+function listaCzasow(ilosc) {
+  if (ilosc.typ === "czas-serie") {
+    return ilosc.czasy;
+  }
+  const lista = [];
+  for (let i = 0; i < ilosc.powtorzenia; i++) {
+    lista.push(ilosc.czas.wartosc);
+  }
+  return lista;
+}
+
+function jednostkaCzasu(ilosc) {
+  return ilosc.typ === "czas-serie" ? ilosc.jednostka : ilosc.czas.jednostka;
+}
+
+function czyStatyczne(ilosc) {
+  return ilosc.typ === "czas-powtorzenia" || ilosc.typ === "czas-serie";
+}
+
+// Rodzaj miary: "powt", "czas" albo "stat" (do porównywania rekordów)
+function rodzinaIlosci(ilosc) {
+  if (czyPowtorzenia(ilosc)) {
+    return "powt";
+  }
+  return czyStatyczne(ilosc) ? "stat" : "czas";
+}
+
 // Jedna liczba opisująca "ile pracy": powtórzenia razem albo sekundy
 function miaraIlosci(ilosc) {
   if (ilosc.typ === "serie-lista") {
@@ -350,6 +378,11 @@ function miaraIlosci(ilosc) {
   }
   if (ilosc.typ === "czas") {
     return sekundyZ(ilosc.wartosc, ilosc.jednostka);
+  }
+  if (ilosc.typ === "czas-serie") {
+    return ilosc.czasy.reduce(function (suma, c) {
+      return suma + sekundyZ(c, ilosc.jednostka);
+    }, 0);
   }
   return ilosc.powtorzenia * sekundyZ(ilosc.czas.wartosc, ilosc.czas.jednostka);
 }
@@ -472,10 +505,20 @@ function odczytajWartosc(plan) {
     }
     return { typ: "czas", wartosc: v[0], jednostka: plan.jednostka };
   }
+  const jednostka = jednostkaCzasu(plan);
+  if (wartTryb === "lista") {
+    if (v.length < 1 || !v.every(function (x) { return x > 0; })) {
+      return null;
+    }
+    const jednakowe = v.every(function (x) { return x === v[0]; });
+    return jednakowe
+      ? { typ: "czas-powtorzenia", powtorzenia: v.length, czas: { wartosc: v[0], jednostka: jednostka } }
+      : { typ: "czas-serie", czasy: v, jednostka: jednostka };
+  }
   if (!(v[0] >= 1) || Math.floor(v[0]) !== v[0] || !(v[1] > 0)) {
     return null;
   }
-  return { typ: "czas-powtorzenia", powtorzenia: v[0], czas: { wartosc: v[1], jednostka: plan.czas.jednostka } };
+  return { typ: "czas-powtorzenia", powtorzenia: v[0], czas: { wartosc: v[1], jednostka: jednostka } };
 }
 
 function odswiezWartInfo() {
@@ -516,8 +559,9 @@ function otworzWartosc(sesja, id) {
   } else if (plan.typ === "czas") {
     wartPolaDane.push(zrobStepper("Czas (" + plan.jednostka + ")", start.wartosc, plan.jednostka === "min" ? 1 : 5));
   } else {
-    wartPolaDane.push(zrobStepper("Powtórzenia", start.powtorzenia, 1));
-    wartPolaDane.push(zrobStepper("Czas jednego (" + plan.czas.jednostka + ")", start.czas.wartosc, plan.czas.jednostka === "min" ? 1 : 5));
+    wartTryb = plan.typ === "czas-serie" || start.typ === "czas-serie" ? "lista" : "jednolite";
+    narysujPolaCzasow(listaCzasow(start), jednostkaCzasu(plan));
+    return koniecOtwarciaWartosci(sesja, id);
   }
   wartPolaDane.forEach(function (p) {
     wartPola.appendChild(p.blok);
@@ -532,6 +576,63 @@ function koniecOtwarciaWartosci(sesja, id) {
 }
 
 let wartStart = null;
+
+// Trening statyczny: dwa pola (powtórzenia i czas jednego) albo osobny czas dla każdej serii
+function narysujPolaCzasow(czasy, jednostka) {
+  const krok = jednostka === "min" ? 1 : 5;
+  wartPola.innerHTML = "";
+  wartPolaDane = [];
+  if (wartTryb === "jednolite") {
+    wartPolaDane.push(zrobStepper("Powtórzenia", czasy.length, 1));
+    wartPolaDane.push(zrobStepper("Czas jednego (" + jednostka + ")", czasy[0], krok));
+    wartPolaDane.forEach(function (p) {
+      wartPola.appendChild(p.blok);
+    });
+    const rozpisz = tekstElement("button", "akcja", "Różne czasy w seriach");
+    rozpisz.type = "button";
+    rozpisz.addEventListener("click", function () {
+      const serie = Math.max(1, Number(wartPolaDane[0].pole.value) || 1);
+      const czas = Number(wartPolaDane[1].pole.value) || krok;
+      wartTryb = "lista";
+      narysujPolaCzasow(new Array(serie).fill(czas), jednostka);
+      odswiezWartInfo();
+    });
+    wartPola.appendChild(rozpisz);
+    return;
+  }
+  czasy.forEach(function (ile, i) {
+    const p = zrobStepper("Seria " + (i + 1) + " (" + jednostka + ")", ile, krok);
+    wartPolaDane.push(p);
+    wartPola.appendChild(p.blok);
+  });
+  const rzad = document.createElement("div");
+  rzad.className = "wart-serie-akcje";
+  const odczytaj = function () {
+    return wartPolaDane.map(function (p) {
+      return Number(p.pole.value) || 0;
+    });
+  };
+  const dodaj = tekstElement("button", "akcja", "+ seria");
+  dodaj.type = "button";
+  dodaj.addEventListener("click", function () {
+    const lista = odczytaj();
+    lista.push(lista.length > 0 ? lista[lista.length - 1] || krok : krok);
+    narysujPolaCzasow(lista, jednostka);
+    odswiezWartInfo();
+  });
+  const usun = tekstElement("button", "akcja usun", "− seria");
+  usun.type = "button";
+  usun.disabled = czasy.length <= 1;
+  usun.addEventListener("click", function () {
+    const lista = odczytaj();
+    lista.pop();
+    narysujPolaCzasow(lista, jednostka);
+    odswiezWartInfo();
+  });
+  rzad.appendChild(dodaj);
+  rzad.appendChild(usun);
+  wartPola.appendChild(rzad);
+}
 
 // Pola powtórzeń: dwa pola (serie i powtórzenia) albo osobne pole dla każdej serii
 function narysujPolaPowtorzen(powtorzenia) {
