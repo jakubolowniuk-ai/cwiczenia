@@ -239,13 +239,13 @@ function zrobKarteMiesni(plan) {
   ));
   karta.appendChild(zrobAnatomie(m.zrobione, { poziomy: m.licznik, plan: m.doZrobienia }));
   karta.addEventListener("click", function () {
-    otworzOknoMiesni(plan);
+    otworzOknoMiesniPlanu(plan);
   });
   return karta;
 }
 
 // Okno ze szczegółami: duża sylwetka, legenda i listy
-function otworzOknoMiesni(plan) {
+function otworzOknoMiesniPlanu(plan) {
   const m = liczMiesnie(plan);
   pokazOkno("Mięśnie", nazwaOkresu(plan) + " · " + zakresDat(plan));
 
