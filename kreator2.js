@@ -511,7 +511,7 @@ function otworzDodawanie() {
           szkic.sesje.push(sesja);
           zapiszSzkic();
           rysujKalendarz();
-          if (wymagaTreningu(aktywnosc) && !sesja.treningId) {
+          if (wymagaTreningu(aktywnosc)) {
             // Od razu wybór treningu (gotowy albo nowy), potem parametry
             pdSesja = sesja;
             odswiezNaglowekPanelu();
@@ -541,7 +541,7 @@ function nowaSesja(aktywnosc, dzien) {
     id: "se-" + Date.now() + "-" + Math.floor(Math.random() * 100000),
     aktywnoscId: aktywnosc.id,
     dzien: dzien,
-    treningId: aktywnosc.treningId && znajdzTrening(aktywnosc.treningId) ? aktywnosc.treningId : null,
+    treningId: null,
     parametry: {},
     styl: null,
     etapy: null,

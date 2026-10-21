@@ -31,9 +31,6 @@ const krFormularz = document.getElementById("kr-formularz");
 const krTytulFormularza = document.getElementById("kr-tytul-formularza");
 const krRodzaj = document.getElementById("kr-rodzaj");
 const krPolePartia = document.getElementById("kr-pole-partia");
-const krPoleTrening = document.getElementById("kr-pole-trening");
-const krTrening = document.getElementById("kr-trening");
-const krTreningOpis = document.getElementById("kr-trening-opis");
 const krPartia = document.getElementById("kr-partia");
 const krRazy = document.getElementById("kr-razy");
 const krBlad = document.getElementById("kr-blad");
@@ -148,12 +145,6 @@ function opisAktywnosci(aktywnosc) {
   }
   if (aktywnosc.czas) {
     czesci.push(aktywnosc.czas.wartosc + " " + aktywnosc.czas.jednostka);
-  }
-  if (aktywnosc.treningId && typeof znajdzTrening === "function") {
-    const trening = znajdzTrening(aktywnosc.treningId);
-    if (trening) {
-      czesci.push(trening.nazwa);
-    }
   }
   czesci.push(aktywnosc.razy + "×");
 
@@ -319,54 +310,6 @@ function ustawPolaAktywnosci() {
   // W kroku 1 wybieramy tylko partię. Pozostałe parametry (dystans, czas, styl, długości)
   // ustawiamy w kroku 2, razem z parametrami ćwiczeń.
   krPolePartia.hidden = pola.indexOf("partia") === -1;
-  odswiezWyborTreningu(null);
-}
-
-// Lista treningów w formularzu aktywności: najpierw pasujące do rodzaju i partii, potem pozostałe.
-// Trening zostanie przypisany do wszystkich sesji tej aktywności (w kalendarzu można go zmienić).
-function odswiezWyborTreningu(wybranyId) {
-  const rodzaj = znajdzKategorie(krRodzaj.value);
-  const potrzebny = !!rodzaj && rodzaj.miara !== "sesja";
-  krPoleTrening.hidden = !potrzebny;
-  if (!potrzebny) {
-    return;
-  }
-  const poprzedni = wybranyId !== null ? wybranyId : krTrening.value;
-  const wzor = { rodzajId: rodzaj.id, partiaId: krPartia.value || null };
-
-  krTrening.innerHTML = "";
-  const pusta = document.createElement("option");
-  pusta.value = "";
-  pusta.textContent = "Wybiorę później";
-  krTrening.appendChild(pusta);
-
-  const pasujace = dane.treningi.filter(function (t) {
-    return treningPasuje(t, wzor);
-  });
-  const pozostale = dane.treningi.filter(function (t) {
-    return pasujace.indexOf(t) === -1;
-  });
-  [["Pasujące treningi", pasujace], ["Pozostałe treningi", pozostale]].forEach(function (grupa) {
-    if (grupa[1].length === 0) {
-      return;
-    }
-    const og = document.createElement("optgroup");
-    og.label = grupa[0];
-    grupa[1].forEach(function (t) {
-      const opcja = document.createElement("option");
-      opcja.value = t.id;
-      opcja.textContent = t.nazwa;
-      og.appendChild(opcja);
-    });
-    krTrening.appendChild(og);
-  });
-  krTrening.value = poprzedni;
-  if (krTrening.value !== poprzedni) {
-    krTrening.value = "";
-  }
-  krTreningOpis.textContent = dane.treningi.length === 0
-    ? "Nie masz jeszcze treningów. Zbudujesz je w kalendarzu albo w zakładce Ćwiczenia."
-    : "Wybrany trening trafi do wszystkich sesji tej aktywności.";
 }
 
 function pokazBladAktywnosci(tekst) {
@@ -382,7 +325,6 @@ function otworzFormularzAktywnosci(aktywnosc) {
   krRodzaj.value = "";
   krPartia.value = "";
   krRazy.value = "0";
-  let wybranyTrening = "";
 
   if (aktywnosc) {
     edytowanaAktywnoscId = aktywnosc.id;
@@ -390,7 +332,6 @@ function otworzFormularzAktywnosci(aktywnosc) {
     krRodzaj.value = aktywnosc.rodzajId;
     krPartia.value = aktywnosc.partiaId || "";
     krRazy.value = aktywnosc.razy;
-    wybranyTrening = aktywnosc.treningId || "";
     krUsunAktywnosc.hidden = false;
   } else {
     edytowanaAktywnoscId = null;
@@ -399,7 +340,6 @@ function otworzFormularzAktywnosci(aktywnosc) {
   }
 
   ustawPolaAktywnosci();
-  odswiezWyborTreningu(wybranyTrening);
   krFormularz.hidden = false;
   rysujKrok1();
   krFormularz.scrollIntoView({ behavior: "smooth", block: "start" });
@@ -439,7 +379,6 @@ function zapiszAktywnosc() {
     rodzajId: rodzaj.id,
     partiaId: null,
     razy: 0,
-    treningId: null,
     kolor: stara && stara.kolor ? stara.kolor : kolejnyKolor()
   };
 
@@ -457,9 +396,6 @@ function zapiszAktywnosc() {
     return;
   }
   wpis.razy = razy;
-  if (rodzaj.miara !== "sesja" && krTrening.value !== "") {
-    wpis.treningId = krTrening.value;
-  }
 
   // Edycja aktywności, która ma już sesje w kalendarzu
   if (stara) {
@@ -487,15 +423,6 @@ function zapiszAktywnosc() {
     });
   } else {
     szkic.aktywnosci.push(wpis);
-  }
-
-  // Wybrany trening dostają sesje, które jeszcze go nie mają (i nie mają postępu)
-  if (wpis.treningId) {
-    szkic.sesje.forEach(function (s) {
-      if (s.aktywnoscId === wpis.id && !s.treningId && !sesjaMaPostep(s)) {
-        s.treningId = wpis.treningId;
-      }
-    });
   }
 
   zapiszSzkic();
@@ -584,9 +511,6 @@ krDodaj.addEventListener("click", function () {
   otworzFormularzAktywnosci(null);
 });
 krRodzaj.addEventListener("change", ustawPolaAktywnosci);
-krPartia.addEventListener("change", function () {
-  odswiezWyborTreningu(null);
-});
 krZapiszAktywnosc.addEventListener("click", zapiszAktywnosc);
 krAnulujAktywnosc.addEventListener("click", zamknijFormularzAktywnosci);
 krUsunAktywnosc.addEventListener("click", usunAktywnosc);
