@@ -1603,3 +1603,7 @@ h1 {
   background: transparent;
   border: 1.5px dashed var(--an-on);
 }
+
+/* Sylwetka do dotykania w panelu wyboru mięśni */
+.an-wybor .an-miesien { cursor: pointer; }
+.an-wybor .an-miesien:not(.an-on) { stroke: var(--an-on); stroke-opacity: 0.25; stroke-width: 0.6; }

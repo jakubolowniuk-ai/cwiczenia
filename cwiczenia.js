@@ -188,11 +188,24 @@ function odswiezPoleStyli() {
 
 // ===== Mięśnie i rysunek =====
 
+// Wybrane mięśnie w kolejności zaznaczania (źródło prawdy dla listy i rysunku)
+let miesnieWybor = [];
+
 // Zwraca id zaznaczonych mięśni
 function zaznaczoneMiesnie() {
-  return Array.from(poleMiesnie.querySelectorAll("input:checked")).map(function (pole) {
-    return pole.value;
-  });
+  return miesnieWybor.slice();
+}
+
+// Zaznacza albo odznacza mięsień (z listy lub z rysunku) i odświeża panel
+function przelaczMiesien(id) {
+  const miejsce = miesnieWybor.indexOf(id);
+  if (miejsce === -1) {
+    miesnieWybor.push(id);
+  } else {
+    miesnieWybor.splice(miejsce, 1);
+  }
+  zbudujPanelMiesni();
+  odswiezMiesnieFormularza();
 }
 
 // Rysuje rysunek w podanym miejscu, mięśnie z listy na czerwono
@@ -208,12 +221,63 @@ function odswiezMiesnieFormularza() {
   tekstMiesni.textContent = ids.length === 0 ? "Nie wybrano mięśni." : ids.map(nazwaKategorii).join(", ");
 }
 
-// Panel wyboru: mięśnie pogrupowane według partii
+// Jedno pole wyboru mięśnia na liście
+function zrobWyborMiesnia(m) {
+  const etykieta = document.createElement("label");
+  etykieta.className = "wybor";
+  const pole = document.createElement("input");
+  pole.type = "checkbox";
+  pole.value = m.id;
+  pole.checked = miesnieWybor.indexOf(m.id) !== -1;
+  pole.addEventListener("change", function () {
+    przelaczMiesien(m.id);
+  });
+  etykieta.appendChild(pole);
+  etykieta.appendChild(document.createTextNode(" " + m.nazwa));
+  return etykieta;
+}
+
+// Panel wyboru: sylwetka do dotykania, potem wybrane mięśnie na górze, potem reszta według partii
 function zbudujPanelMiesni(wybrane) {
+  if (wybrane) {
+    miesnieWybor = wybrane.slice();
+  }
   poleMiesnie.innerHTML = "";
+
+  const rysunek = document.createElement("div");
+  rysunek.className = "an-ramka an-wybor";
+  const svg = zrobAnatomie(miesnieWybor);
+  svg.querySelectorAll("path[data-mi]").forEach(function (sciezka) {
+    sciezka.addEventListener("click", function () {
+      przelaczMiesien(sciezka.getAttribute("data-mi"));
+    });
+  });
+  rysunek.appendChild(svg);
+  poleMiesnie.appendChild(rysunek);
+  const podpowiedz = document.createElement("p");
+  podpowiedz.className = "opis";
+  podpowiedz.textContent = "Dotknij mięśnia na sylwetce albo wybierz go z listy.";
+  poleMiesnie.appendChild(podpowiedz);
+
+  if (miesnieWybor.length > 0) {
+    const naglowekWybrane = document.createElement("div");
+    naglowekWybrane.className = "miesnie-grupa";
+    naglowekWybrane.textContent = "Wybrane (" + miesnieWybor.length + ")";
+    poleMiesnie.appendChild(naglowekWybrane);
+    const wyboryWybrane = document.createElement("div");
+    wyboryWybrane.className = "wybory";
+    miesnieWybor.slice().reverse().forEach(function (id) {
+      const m = znajdzKategorie(id);
+      if (m) {
+        wyboryWybrane.appendChild(zrobWyborMiesnia(m));
+      }
+    });
+    poleMiesnie.appendChild(wyboryWybrane);
+  }
+
   kategorieTypu("partia").forEach(function (partia) {
     const miesnie = kategorieTypu("miesien").filter(function (m) {
-      return m.partiaId === partia.id;
+      return m.partiaId === partia.id && miesnieWybor.indexOf(m.id) === -1;
     });
     if (miesnie.length === 0) {
       return;
@@ -226,16 +290,7 @@ function zbudujPanelMiesni(wybrane) {
     const wybory = document.createElement("div");
     wybory.className = "wybory";
     miesnie.forEach(function (m) {
-      const etykieta = document.createElement("label");
-      etykieta.className = "wybor";
-      const pole = document.createElement("input");
-      pole.type = "checkbox";
-      pole.value = m.id;
-      pole.checked = wybrane.indexOf(m.id) !== -1;
-      pole.addEventListener("change", odswiezMiesnieFormularza);
-      etykieta.appendChild(pole);
-      etykieta.appendChild(document.createTextNode(" " + m.nazwa));
-      wybory.appendChild(etykieta);
+      wybory.appendChild(zrobWyborMiesnia(m));
     });
     poleMiesnie.appendChild(wybory);
   });
