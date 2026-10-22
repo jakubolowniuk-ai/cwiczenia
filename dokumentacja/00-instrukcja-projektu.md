@@ -50,7 +50,6 @@ Stan na październik 2026. Aplikacja działa i jest używana; ten plik opisuje z
 ## Otwarte kwestie
 1. **Sugerowany plan**: gotowy plan do edycji, zasady układania ćwiczeń na dni. Nie zbudowany.
 2. **Wygląd**: dopracowywany na bieżąco.
-3. **Filtr ćwiczeń po mięśniu** w bazie: pomysł, nie zbudowany.
 4. **Kolejne mięśnie** (np. reszta stożka rotatorów): do dodania, jeśli będą potrzebne.
 5. **Natywna aplikacja / prawdziwy alarm**: ewentualnie później, jeśli plik kalendarza przestanie wystarczać.
 6. **Wersja komercyjna** (rozważana jako pomysł): wymagałaby innej technologii i konta użytkowników, na razie nie planowana.

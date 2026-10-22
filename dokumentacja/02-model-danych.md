@@ -50,10 +50,10 @@ plan = { id, okres: "tydzien"|"miesiac", start, aktywnosci[], sesje[],
 aktywnosc = { id, rodzajId, partiaId|null, razy, kolor, ... pola zależne od rodzaju }
 
 sesja = { id, aktywnoscId, dzien, treningId|null, parametry{ idĆwiczenia: ilosc },
-          styl, etapy: [{ styl, dlugosci }], dlugosci, dystans, czas,   // bieganie, basen
+          styl, etapy: [{ styl, dlugosci }], dlugosci, dystans, kroki, czas,   // bieganie, basen
           zrobione{ idĆwiczenia: true },         // zaliczane ćwiczenia treningu
           wykonane{ idĆwiczenia: ilosc },        // faktycznie wykonane wartości
-          wynik{ dystans, czas, styl, dlugosci } // bieganie i basen, wpisany po sesji
+          wynik{ dystans, kroki, czas, styl, dlugosci } // bieganie i basen, wpisany po sesji
         }
 ```
 - Dawne sesje basenu miały pojedyncze `styl` i `dlugosci`; nowe mają `etapy`.

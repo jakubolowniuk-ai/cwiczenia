@@ -99,7 +99,7 @@ function domyslneDane() {
       { id: "rodzaj-bieganie", nazwa: "Bieganie", typ: "rodzaj", miara: "sesja", polaPlanu: ["dystans", "czas"] },
       { id: "rodzaj-basen", nazwa: "Basen", typ: "rodzaj", miara: "sesja", polaPlanu: ["styl", "dlugosci"] },
       { id: "rodzaj-rower", nazwa: "Rower", typ: "rodzaj", miara: "sesja", polaPlanu: ["dystans", "czas"] },
-      { id: "rodzaj-spacer", nazwa: "Spacer", typ: "rodzaj", miara: "sesja", polaPlanu: ["dystans", "czas"] },
+      { id: "rodzaj-spacer", nazwa: "Spacer", typ: "rodzaj", miara: "sesja", polaPlanu: ["kroki", "dystans", "czas"] },
       { id: "rodzaj-joga", nazwa: "Joga / mobilność", typ: "rodzaj", miara: "statyczna", polaPlanu: [] },
       { id: "partia-plecy", nazwa: "Plecy", typ: "partia" },
       { id: "partia-brzuch", nazwa: "Brzuch", typ: "partia" },
@@ -160,6 +160,14 @@ function uzupelnijDane(zapisane) {
     if (cialo && cialo.nazwa === "Trening ciała") {
       cialo.nazwa = "Siłownia";
     }
+  }
+
+  // Spacer dostał pole "kroki" (zapisane dane mają starą listę pól)
+  const spacer = zapisane.kategorie.find(function (k) {
+    return k.id === "rodzaj-spacer";
+  });
+  if (spacer && Array.isArray(spacer.polaPlanu) && spacer.polaPlanu.indexOf("kroki") === -1) {
+    spacer.polaPlanu = ["kroki", "dystans", "czas"];
   }
 
   // Wersja 5: mięśnie rozdzielone na części (np. triceps na dwie głowy). Przepisujemy ćwiczenia i usuwamy stare mięśnie

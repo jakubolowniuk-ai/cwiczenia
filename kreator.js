@@ -56,6 +56,13 @@ let edytowanaAktywnoscId = null;
 // ===== Pomocnicze =====
 
 // Poprawna forma słowa zależnie od liczby, np. 1 sesja, 2 sesje, 5 sesji
+// Tekst kroków, np. "8 000 kroków"
+function opisKrokow(kroki) {
+  const n = Number(kroki);
+  const koncowka = n === 1 ? "krok" : (n % 10 >= 2 && n % 10 <= 4 && (n % 100 < 10 || n % 100 >= 20) ? "kroki" : "kroków");
+  return n.toLocaleString("pl-PL") + " " + koncowka;
+}
+
 function odmiana(liczba, jeden, kilka, wiele) {
   if (liczba === 1) {
     return jeden;
@@ -139,6 +146,9 @@ function opisAktywnosci(aktywnosc) {
   }
   if (aktywnosc.dlugosci) {
     czesci.push(aktywnosc.dlugosci + " " + (aktywnosc.dlugosci === 1 ? "długość" : "długości"));
+  }
+  if (aktywnosc.kroki) {
+    czesci.push(opisKrokow(aktywnosc.kroki));
   }
   if (aktywnosc.dystans) {
     czesci.push(aktywnosc.dystans.wartosc + " " + aktywnosc.dystans.jednostka);

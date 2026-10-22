@@ -16,7 +16,7 @@ Dolny pasek z głównymi ekranami: **Dziś**, **Ćwiczenia**, **Postęp**. Ustaw
 | Bieganie | dystans i czas | dystans, czas |
 | Basen | style, długości | styl, długości |
 | Rower | dystans i czas | dystans, czas |
-| Spacer | dystans i czas | dystans, czas |
+| Spacer | kroki, dystans i czas (co najmniej jedno) | kroki, dystans, czas |
 | Joga / mobilność | powtórzenia i czas (pozycje trzymane) | brak |
 
 Zawsze dochodzi pole „ile razy w okresie”.
@@ -37,7 +37,7 @@ Zawsze dochodzi pole „ile razy w okresie”.
 
 ## Zakładka Ćwiczenia
 - Przełącznik **Baza** / **Moje treningi**.
-- **Baza ćwiczeń**: lista z wyszukiwaniem, filtrami (rodzaj, partia) i zwijaniem grup. Długie listy dopisują się porcjami.
+- **Baza ćwiczeń**: lista z wyszukiwaniem, filtrami (rodzaj, partia, **mięsień**) i zwijaniem grup. Filtr mięśnia to lista pogrupowana według partii, z liczbą ćwiczeń przy każdym mięśniu. Długie listy dopisują się porcjami.
 - Formularz ćwiczenia: nazwa, rodzaj, partie, mięśnie (sylwetka do dotykania i lista), link do filmu. Dla basenu: kilka stylów.
 - **Moje treningi**: trening to nazwa i lista ćwiczeń z bazy. Wybór ćwiczeń ma wyszukiwanie i filtry.
 

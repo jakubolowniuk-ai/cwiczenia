@@ -41,7 +41,8 @@ const chipyRodzaje = document.getElementById("chipy-rodzaje");
 const przyciskWyczysc = document.getElementById("przycisk-wyczysc");
 
 // Aktualnie wybrane filtry (tekst zapisujemy małymi literami)
-const filtr = { tekst: "", partiaId: null, rodzajId: null };
+const filtr = { tekst: "", partiaId: null, rodzajId: null, miesienId: null };
+const filtrMiesien = document.getElementById("filtr-miesien");
 
 // Id ćwiczenia, które właśnie edytujemy (null, gdy dodajemy nowe)
 let edytowaneId = null;
@@ -498,6 +499,9 @@ function pasujeDoFiltrow(cwiczenie) {
   if (filtr.partiaId && (cwiczenie.partieIds || []).indexOf(filtr.partiaId) === -1) {
     return false;
   }
+  if (filtr.miesienId && (cwiczenie.miesnieIds || []).indexOf(filtr.miesienId) === -1) {
+    return false;
+  }
   return true;
 }
 
@@ -526,7 +530,35 @@ function rysujFiltry() {
     chipyRodzaje.appendChild(zrobChip(kategoria, "rodzajId"));
   });
 
-  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId);
+  // Lista mięśni pogrupowana według partii, z liczbą ćwiczeń przy każdym
+  filtrMiesien.innerHTML = "";
+  const wszystkie = document.createElement("option");
+  wszystkie.value = "";
+  wszystkie.textContent = "Wszystkie mięśnie";
+  filtrMiesien.appendChild(wszystkie);
+  kategorieTypu("partia").forEach(function (partia) {
+    const miesnie = kategorieTypu("miesien").filter(function (m) {
+      return m.partiaId === partia.id;
+    });
+    if (miesnie.length === 0) {
+      return;
+    }
+    const grupa = document.createElement("optgroup");
+    grupa.label = partia.nazwa;
+    miesnie.forEach(function (m) {
+      const liczba = dane.cwiczenia.filter(function (c) {
+        return (c.miesnieIds || []).indexOf(m.id) !== -1;
+      }).length;
+      const opcja = document.createElement("option");
+      opcja.value = m.id;
+      opcja.textContent = m.nazwa + " (" + liczba + ")";
+      grupa.appendChild(opcja);
+    });
+    filtrMiesien.appendChild(grupa);
+  });
+  filtrMiesien.value = filtr.miesienId || "";
+
+  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.miesienId);
 }
 
 // Czyści wyszukiwarkę i wszystkie filtry
@@ -534,6 +566,7 @@ function wyczyscFiltry() {
   filtr.tekst = "";
   filtr.partiaId = null;
   filtr.rodzajId = null;
+  filtr.miesienId = null;
   poleSzukaj.value = "";
   rysujFiltry();
   rysujListe();
@@ -673,7 +706,7 @@ function rysujListe() {
     );
 
     return karta;
-  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId].join("|"));
+  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.miesienId].join("|"));
 }
 
 // ===== Podpięcie przycisków =====
@@ -696,6 +729,11 @@ anTlo.addEventListener("click", function (zdarzenie) {
   }
 });
 przyciskWyczysc.addEventListener("click", wyczyscFiltry);
+filtrMiesien.addEventListener("change", function () {
+  filtr.miesienId = filtrMiesien.value === "" ? null : filtrMiesien.value;
+  rysujFiltry();
+  rysujListe();
+});
 poleSzukaj.addEventListener("input", function () {
   filtr.tekst = poleSzukaj.value.trim().toLowerCase();
   rysujFiltry();

@@ -142,8 +142,8 @@ function celUstawiony(sesja, aktywnosc) {
   if ((pola.indexOf("styl") !== -1 || pola.indexOf("dlugosci") !== -1) && !(sumaDlugosci(sesja) >= 1)) {
     return false;
   }
-  if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1) {
-    if (!sesja.dystans && !sesja.czas) {
+  if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1 || pola.indexOf("kroki") !== -1) {
+    if (!sesja.dystans && !sesja.czas && !sesja.kroki) {
       return false;
     }
   }
@@ -207,6 +207,9 @@ function opisSesji(sesja) {
   const czesci = [];
   if (etapySesji(sesja).length > 0) {
     czesci.push(opisEtapow(sesja));
+  }
+  if (sesja.kroki) {
+    czesci.push(opisKrokow(sesja.kroki));
   }
   if (sesja.dystans) {
     czesci.push(sesja.dystans.wartosc + " " + sesja.dystans.jednostka);
@@ -540,6 +543,7 @@ function nowaSesja(aktywnosc, dzien) {
     etapy: null,
     dlugosci: null,
     dystans: null,
+    kroki: null,
     czas: null
   };
 }
@@ -898,6 +902,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
 
   let styl = null;
   let dlugosci = null;
+  let kroki = null;
   let dystans = null;
   let dystansJedn = null;
   let czas = null;
@@ -980,6 +985,13 @@ function zrobKarteSesji(sesja, aktywnosc) {
     karta.appendChild(rzad);
   }
 
+  if (pola.indexOf("kroki") !== -1) {
+    kroki = zrobPoleLiczbowe("Kroki", sesja.kroki || 0, false);
+    const rzad = zrobRzad();
+    rzad.appendChild(kroki.blok);
+    karta.appendChild(rzad);
+  }
+
   if (pola.indexOf("dystans") !== -1) {
     dystans = zrobPoleLiczbowe("Dystans", sesja.dystans ? sesja.dystans.wartosc : 0, true);
     dystansJedn = zrobWyborJednostkiZ("Jednostka", [["km", "kilometry"], ["m", "metry"]], sesja.dystans ? sesja.dystans.jednostka : "km");
@@ -1034,13 +1046,15 @@ function zrobKarteSesji(sesja, aktywnosc) {
         }
         wynik.dlugosci = d;
       }
-      if (dystans || czas) {
+      if (dystans || czas || kroki) {
         const dyst = dystans ? Number(dystans.pole.value) : 0;
         const cz = czas ? Number(czas.pole.value) : 0;
-        if (!(dyst >= 0) || !(cz >= 0) || (!(dyst > 0) && !(cz > 0))) {
-          blad.textContent = "Wpisz dystans lub czas (albo oba), większe od zera.";
+        const kr = kroki ? Number(kroki.pole.value) : 0;
+        if (!(dyst >= 0) || !(cz >= 0) || !(kr >= 0) || (kr > 0 && Math.floor(kr) !== kr) || (!(dyst > 0) && !(cz > 0) && !(kr > 0))) {
+          blad.textContent = kroki ? "Wpisz kroki (liczba całkowita), dystans lub czas, większe od zera." : "Wpisz dystans lub czas (albo oba), większe od zera.";
           return null;
         }
+        wynik.kroki = kr > 0 ? kr : null;
         wynik.dystans = dyst > 0 ? { wartosc: dyst, jednostka: dystansJedn.wybor.value } : null;
         wynik.czas = cz > 0 ? { wartosc: cz, jednostka: czasJedn.wybor.value } : null;
       }
@@ -1174,7 +1188,7 @@ function kopiujDoInnych() {
       s.treningId = pdSesja.treningId;
       s.parametry = JSON.parse(JSON.stringify(pdSesja.parametry));
     } else {
-      ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "czas"].forEach(function (klucz) {
+      ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "kroki", "czas"].forEach(function (klucz) {
         s[klucz] = pdSesja[klucz] ? JSON.parse(JSON.stringify(pdSesja[klucz])) : null;
       });
     }

@@ -2,7 +2,7 @@
 // Aktywny plan to ostatni zapisany plan, którego nie zamknięto (dane.plany).
 // Postęp sesji trzymamy w samej sesji planu:
 //   sesja.zrobione = { idĆwiczenia: true }   (trening ciała, rozciąganie, trening statyczny)
-//   sesja.wynik    = { dystans, czas, styl, dlugosci }   (bieganie, basen; wpisany po sesji)
+//   sesja.wynik    = { dystans, kroki, czas, styl, dlugosci }   (bieganie, basen; wpisany po sesji)
 // Sesja jest zaliczona dopiero, gdy zrobiono WSZYSTKIE ćwiczenia treningu albo wpisano wynik.
 
 // ===== Elementy strony =====
@@ -110,6 +110,9 @@ function opisCeluSesji(dane_) {
   const czesci = [];
   if (etapySesji(dane_).length > 0) {
     czesci.push(opisEtapow(dane_));
+  }
+  if (dane_.kroki) {
+    czesci.push(opisKrokow(dane_.kroki));
   }
   if (dane_.dystans) {
     czesci.push(dane_.dystans.wartosc + " " + dane_.dystans.jednostka);
@@ -812,6 +815,7 @@ function otworzWynik(plan, sesja) {
     cwiczenieId: start.cwiczenieId,
     dlugosci: start.dlugosci,
     dystans: start.dystans,
+    kroki: start.kroki,
     czas: start.czas
   };
   const wpis = zrobKarteSesji(kopia, aktywnosc);

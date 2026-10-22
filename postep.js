@@ -40,6 +40,9 @@ function stosunekWyniku(cel, wynik) {
   if (cel.dystans && wynik.dystans) {
     return metry(wynik.dystans) / metry(cel.dystans);
   }
+  if (cel.kroki && wynik.kroki) {
+    return wynik.kroki / cel.kroki;
+  }
   if (sumaDlugosci(cel) > 0 && sumaDlugosci(wynik) > 0) {
     return sumaDlugosci(wynik) / sumaDlugosci(cel);
   }
