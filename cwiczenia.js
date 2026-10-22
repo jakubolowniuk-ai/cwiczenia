@@ -17,12 +17,8 @@ const tekstPartii = document.getElementById("tekst-partii");
 const przyciskZmienPartie = document.getElementById("przycisk-zmien-partie");
 
 // Mięśnie i rysunek anatomiczny
-const rysunekFormularza = document.getElementById("an-formularz");
-const tekstMiesni = document.getElementById("tekst-miesni");
-const przyciskMiesnie = document.getElementById("przycisk-miesnie");
 const panelMiesni = document.getElementById("panel-miesni");
 const poleMiesnie = document.getElementById("pole-miesnie");
-const przyciskGotoweMiesnie = document.getElementById("przycisk-gotowe-miesnie");
 const anTlo = document.getElementById("an-tlo");
 const anTytul = document.getElementById("an-tytul");
 const anOknoRysunek = document.getElementById("an-okno-rysunek");
@@ -205,20 +201,13 @@ function przelaczMiesien(id) {
     miesnieWybor.splice(miejsce, 1);
   }
   zbudujPanelMiesni();
-  odswiezMiesnieFormularza();
+  synchronizujPartie();
 }
 
 // Rysuje rysunek w podanym miejscu, mięśnie z listy na czerwono
 function wstawRysunek(miejsce, miesnieIds) {
   miejsce.innerHTML = "";
   miejsce.appendChild(zrobAnatomie(miesnieIds));
-}
-
-// Odświeża rysunek i opis w formularzu
-function odswiezMiesnieFormularza() {
-  const ids = zaznaczoneMiesnie();
-  wstawRysunek(rysunekFormularza, ids);
-  tekstMiesni.textContent = ids.length === 0 ? "Nie wybrano mięśni." : ids.map(nazwaKategorii).join(", ");
 }
 
 // Jedno pole wyboru mięśnia na liście
@@ -256,7 +245,7 @@ function zbudujPanelMiesni(wybrane) {
   poleMiesnie.appendChild(rysunek);
   const podpowiedz = document.createElement("p");
   podpowiedz.className = "opis";
-  podpowiedz.textContent = "Dotknij mięśnia na sylwetce albo wybierz go z listy.";
+  podpowiedz.textContent = miesnieWybor.length === 0 ? "Dotknij mięśnia na sylwetce albo wybierz go z listy poniżej." : "Dotknij mięśnia, żeby go odznaczyć albo dodać kolejny.";
   poleMiesnie.appendChild(podpowiedz);
 
   if (miesnieWybor.length > 0) {
@@ -296,8 +285,8 @@ function zbudujPanelMiesni(wybrane) {
   });
 }
 
-// "Gotowe" w panelu mięśni: dopisuje też partie wybranych mięśni
-function zatwierdzMiesnie() {
+// Wybranie mięśnia dopisuje też jego partię do partii ćwiczenia
+function synchronizujPartie() {
   const ids = zaznaczoneMiesnie();
   const partie = [];
   ids.forEach(function (id) {
@@ -315,8 +304,6 @@ function zatwierdzMiesnie() {
     });
     pokazPodsumowaniePartii();
   }
-  panelMiesni.hidden = true;
-  przyciskMiesnie.hidden = false;
 }
 
 // Okno z rysunkiem mięśni ćwiczenia (z karty na liście)
@@ -372,10 +359,7 @@ function otworzFormularz(cwiczenie) {
   poleCzyPartie.checked = false;
   panelPartii.hidden = true;
   podsumowaniePartii.hidden = true;
-  panelMiesni.hidden = true;
-  przyciskMiesnie.hidden = false;
   zbudujPanelMiesni(cwiczenie ? cwiczenie.miesnieIds || [] : []);
-  odswiezMiesnieFormularza();
   zbudujStyle(cwiczenie ? cwiczenie.style || [] : []);
 
   if (cwiczenie) {
@@ -702,11 +686,6 @@ przyciskZapisz.addEventListener("click", zapiszCwiczenie);
 poleCzyPartie.addEventListener("change", zmianaPolaPartii);
 przyciskGotowe.addEventListener("click", zatwierdzPartie);
 przyciskZmienPartie.addEventListener("click", zmienPartie);
-przyciskMiesnie.addEventListener("click", function () {
-  panelMiesni.hidden = false;
-  przyciskMiesnie.hidden = true;
-});
-przyciskGotoweMiesnie.addEventListener("click", zatwierdzMiesnie);
 poleRodzaj.addEventListener("change", odswiezPoleStyli);
 anZamknij.addEventListener("click", function () {
   anTlo.hidden = true;

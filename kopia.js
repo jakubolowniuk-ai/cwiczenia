@@ -149,16 +149,38 @@ function dodajCwiczeniaZListy(lista) {
     // Mięśnie po nazwach; partie mięśni dopisują się automatycznie
     const miesnieIds = [];
     (Array.isArray(wpis.miesnie) ? wpis.miesnie : []).forEach(function (nazwaMiesnia) {
-      const miesien = dane.kategorie.find(function (k) {
-        return k.typ === "miesien" && nazwaKlucz(k.nazwa) === nazwaKlucz(nazwaMiesnia);
+      const klucz = nazwaKlucz(nazwaMiesnia);
+      let miesien = dane.kategorie.find(function (k) {
+        return k.typ === "miesien" && nazwaKlucz(k.nazwa) === klucz;
       });
+      let idy = miesien ? [miesien.id] : [];
+      // Dawne nazwy z plików sprzed podziału mięśni
       if (!miesien) {
+        if (klucz === "triceps") {
+          idy = MIESNIE_PODZIAL["mi-triceps"];
+        } else if (klucz === "skośne brzucha") {
+          idy = MIESNIE_PODZIAL["mi-skosne"];
+        } else if (klucz === "czworogłowy uda") {
+          idy = MIESNIE_PODZIAL["mi-czworoglowy"];
+        } else if (klucz === "kulszowo-goleniowe") {
+          idy = MIESNIE_PODZIAL["mi-kulszowo-goleniowe"];
+        } else if (klucz === "brzuchaty łydki") {
+          idy = MIESNIE_PODZIAL["mi-brzuchaty-lydki"];
+        } else if (klucz === "czworoboczny") {
+          idy = podzielCzworoboczny(nazwa);
+        } else if (klucz === "przedramiona") {
+          idy = podzielPrzedramiona(nazwa);
+        }
+      }
+      if (idy.length === 0) {
         wynik.bledy.push(nazwa + ": nieznany mięsień „" + nazwaMiesnia + "”");
         return;
       }
-      if (miesnieIds.indexOf(miesien.id) === -1) {
-        miesnieIds.push(miesien.id);
-      }
+      idy.forEach(function (id) {
+        if (miesnieIds.indexOf(id) === -1) {
+          miesnieIds.push(id);
+        }
+      });
     });
 
     // Ćwiczenie już jest w bazie: uzupełniamy tylko brakujące mięśnie

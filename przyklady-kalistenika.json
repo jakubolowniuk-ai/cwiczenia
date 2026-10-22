@@ -9,7 +9,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni"
    ],
    "link": ""
@@ -23,7 +24,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni"
    ],
    "link": ""
@@ -36,7 +38,8 @@
     "Klatka piersiowa"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Piersiowy większy",
     "Naramienny przedni"
    ],
@@ -52,7 +55,8 @@
    "miesnie": [
     "Piersiowy większy",
     "Naramienny przedni",
-    "Triceps"
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
    ],
    "link": ""
   },
@@ -65,7 +69,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni"
    ],
    "link": ""
@@ -79,7 +84,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni"
    ],
    "link": ""
@@ -94,7 +100,8 @@
    "miesnie": [
     "Naramienny przedni",
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Zębaty przedni"
    ],
    "link": ""
@@ -108,7 +115,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni",
     "Prostowniki grzbietu"
    ],
@@ -123,7 +131,8 @@
    "miesnie": [
     "Zębaty przedni",
     "Piersiowy większy",
-    "Triceps"
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
    ],
    "link": ""
   },
@@ -136,7 +145,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni"
    ],
    "link": ""
@@ -150,7 +160,8 @@
    "miesnie": [
     "Naramienny przedni",
     "Naramienny środkowy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Piersiowy większy"
    ],
    "link": ""
@@ -164,8 +175,10 @@
    "miesnie": [
     "Naramienny przedni",
     "Naramienny środkowy",
-    "Triceps",
-    "Czworoboczny"
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna"
    ],
    "link": ""
   },
@@ -178,8 +191,10 @@
    "miesnie": [
     "Naramienny przedni",
     "Naramienny środkowy",
-    "Triceps",
-    "Czworoboczny"
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna"
    ],
    "link": ""
   },
@@ -192,10 +207,12 @@
    "miesnie": [
     "Naramienny przedni",
     "Naramienny środkowy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Zębaty przedni",
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -207,7 +224,8 @@
     "Klatka piersiowa"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Piersiowy większy",
     "Naramienny przedni"
    ],
@@ -222,7 +240,8 @@
    ],
    "miesnie": [
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni"
    ],
    "link": ""
@@ -235,7 +254,8 @@
     "Klatka piersiowa"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Piersiowy większy",
     "Naramienny przedni"
    ],
@@ -249,7 +269,8 @@
     "Klatka piersiowa"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Piersiowy większy",
     "Naramienny przedni"
    ],
@@ -263,10 +284,12 @@
     "Barki"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny przedni",
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -278,7 +301,8 @@
     "Klatka piersiowa"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Piersiowy większy",
     "Naramienny przedni"
    ],
@@ -362,7 +386,8 @@
    ],
    "miesnie": [
     "Najszerszy grzbietu",
-    "Czworoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
     "Równoległoboczny",
     "Biceps",
     "Naramienny tylny"
@@ -393,7 +418,8 @@
    "miesnie": [
     "Najszerszy grzbietu",
     "Równoległoboczny",
-    "Czworoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
     "Biceps"
    ],
    "link": ""
@@ -409,7 +435,8 @@
     "Najszerszy grzbietu",
     "Biceps",
     "Ramienny",
-    "Przedramiona"
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia"
    ],
    "link": ""
   },
@@ -423,7 +450,8 @@
    "miesnie": [
     "Najszerszy grzbietu",
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Biceps",
     "Naramienny przedni",
     "Naramienny środkowy"
@@ -438,7 +466,8 @@
    ],
    "miesnie": [
     "Najszerszy grzbietu",
-    "Czworoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
     "Równoległoboczny"
    ],
    "link": ""
@@ -451,9 +480,11 @@
    ],
    "miesnie": [
     "Najszerszy grzbietu",
-    "Czworoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
     "Zębaty przedni",
-    "Przedramiona"
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia"
    ],
    "link": ""
   },
@@ -465,8 +496,10 @@
     "Plecy"
    ],
    "miesnie": [
-    "Przedramiona",
-    "Czworoboczny"
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna"
    ],
    "link": ""
   },
@@ -478,7 +511,8 @@
    ],
    "miesnie": [
     "Najszerszy grzbietu",
-    "Czworoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
     "Równoległoboczny",
     "Biceps",
     "Naramienny tylny"
@@ -494,9 +528,11 @@
    "miesnie": [
     "Najszerszy grzbietu",
     "Równoległoboczny",
-    "Czworoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
     "Biceps",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -509,7 +545,8 @@
    "miesnie": [
     "Biceps",
     "Ramienny",
-    "Przedramiona"
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia"
    ],
    "link": ""
   },
@@ -535,7 +572,8 @@
    "miesnie": [
     "Biceps",
     "Ramienny",
-    "Przedramiona"
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia"
    ],
    "link": ""
   },
@@ -549,7 +587,8 @@
     "Biceps",
     "Ramienny",
     "Najszerszy grzbietu",
-    "Przedramiona"
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia"
    ],
    "link": ""
   },
@@ -562,7 +601,8 @@
    "miesnie": [
     "Prosty brzucha",
     "Poprzeczny brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -574,7 +614,8 @@
     "Plecy"
    ],
    "miesnie": [
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Czworoboczny lędźwi",
     "Pośladkowy średni"
    ],
@@ -589,7 +630,8 @@
    "miesnie": [
     "Prosty brzucha",
     "Poprzeczny brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -601,7 +643,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Poprzeczny brzucha"
    ],
    "link": ""
@@ -614,7 +657,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Biodrowo-lędźwiowy"
    ],
    "link": ""
@@ -628,7 +672,8 @@
    "miesnie": [
     "Prosty brzucha",
     "Biodrowo-lędźwiowy",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -641,7 +686,8 @@
    "miesnie": [
     "Prosty brzucha",
     "Biodrowo-lędźwiowy",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -653,7 +699,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -665,7 +712,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -677,7 +725,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Biodrowo-lędźwiowy"
    ],
    "link": ""
@@ -689,7 +738,8 @@
     "Brzuch"
    ],
    "miesnie": [
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Prosty brzucha",
     "Poprzeczny brzucha"
    ],
@@ -704,7 +754,8 @@
    "miesnie": [
     "Poprzeczny brzucha",
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -718,7 +769,8 @@
    "miesnie": [
     "Prostowniki grzbietu",
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Pośladkowy wielki",
     "Naramienny przedni",
     "Naramienny środkowy"
@@ -733,7 +785,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Zębaty przedni",
     "Naramienny przedni",
     "Naramienny środkowy"
@@ -748,7 +801,8 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Biodrowo-lędźwiowy",
     "Naramienny przedni",
     "Naramienny środkowy"
@@ -764,7 +818,8 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
     "Prostowniki grzbietu"
    ],
    "link": ""
@@ -778,7 +833,8 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
     "Pośladkowy średni"
    ],
    "link": ""
@@ -792,7 +848,8 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
     "Przywodziciele uda"
    ],
    "link": ""
@@ -806,7 +863,8 @@
    "miesnie": [
     "Pośladkowy wielki",
     "Pośladkowy średni",
-    "Kulszowo-goleniowe"
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -832,7 +890,8 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe"
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -858,7 +917,8 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe"
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -871,7 +931,9 @@
    "miesnie": [
     "Pośladkowy średni",
     "Pośladkowy wielki",
-    "Czworogłowy uda"
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
    ],
    "link": ""
   },
@@ -887,8 +949,10 @@
     "Pośladkowy wielki",
     "Naramienny przedni",
     "Naramienny środkowy",
-    "Triceps",
-    "Kulszowo-goleniowe"
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -900,7 +964,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Przywodziciele uda"
    ],
@@ -914,7 +980,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Przywodziciele uda"
    ],
@@ -927,7 +995,9 @@
     "Nogi"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Przywodziciele uda",
     "Pośladkowy wielki"
    ],
@@ -941,7 +1011,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
@@ -955,9 +1027,12 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe"
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -970,8 +1045,11 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Czworogłowy uda",
-    "Kulszowo-goleniowe"
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -983,7 +1061,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
@@ -997,7 +1077,9 @@
    ],
    "miesnie": [
     "Przywodziciele uda",
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
    "link": ""
@@ -1010,7 +1092,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
@@ -1024,7 +1108,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
@@ -1038,7 +1124,9 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
    "link": ""
@@ -1051,9 +1139,12 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
-    "Brzuchaty łydki"
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna"
    ],
    "link": ""
   },
@@ -1065,9 +1156,12 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
-    "Brzuchaty łydki",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
    "link": ""
@@ -1080,7 +1174,9 @@
    ],
    "miesnie": [
     "Przywodziciele uda",
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
    "link": ""
@@ -1092,7 +1188,8 @@
     "Nogi"
    ],
    "miesnie": [
-    "Kulszowo-goleniowe"
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
    ],
    "link": ""
   },
@@ -1104,7 +1201,8 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Kulszowo-goleniowe",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
     "Pośladkowy wielki"
    ],
    "link": ""
@@ -1117,7 +1215,8 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Kulszowo-goleniowe",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
     "Pośladkowy wielki"
    ],
    "link": ""
@@ -1131,7 +1230,8 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Kulszowo-goleniowe",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
     "Pośladkowy średni",
     "Prostowniki grzbietu"
    ],
@@ -1144,7 +1244,8 @@
     "Nogi"
    ],
    "miesnie": [
-    "Brzuchaty łydki",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
    "link": ""
@@ -1156,7 +1257,8 @@
     "Nogi"
    ],
    "miesnie": [
-    "Brzuchaty łydki",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
    "link": ""
@@ -1169,7 +1271,8 @@
    ],
    "miesnie": [
     "Płaszczkowaty",
-    "Brzuchaty łydki"
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna"
    ],
    "link": ""
   },
@@ -1180,7 +1283,8 @@
     "Nogi"
    ],
    "miesnie": [
-    "Brzuchaty łydki",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
    "link": ""
@@ -1214,7 +1318,8 @@
     "Nogi"
    ],
    "miesnie": [
-    "Brzuchaty łydki",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty",
     "Piszczelowy przedni"
    ],
@@ -1228,12 +1333,16 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
     "Piersiowy większy",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -1245,9 +1354,12 @@
     "Pośladki"
    ],
    "miesnie": [
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Pośladkowy wielki",
-    "Brzuchaty łydki",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty",
     "Biodrowo-lędźwiowy"
    ],
@@ -1262,9 +1374,13 @@
    ],
    "miesnie": [
     "Pośladkowy wielki",
-    "Czworogłowy uda",
-    "Kulszowo-goleniowe",
-    "Brzuchaty łydki",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
    "link": ""
@@ -1278,7 +1394,9 @@
    "miesnie": [
     "Pośladkowy wielki",
     "Pośladkowy średni",
-    "Czworogłowy uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
     "Przywodziciele uda"
    ],
    "link": ""
@@ -1291,12 +1409,16 @@
    ],
    "miesnie": [
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Zębaty przedni",
     "Naramienny przedni",
     "Naramienny środkowy",
-    "Triceps",
-    "Czworogłowy uda"
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
    ],
    "link": ""
   },
@@ -1308,11 +1430,13 @@
     "Barki"
    ],
    "miesnie": [
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Naramienny tylny",
     "Pośladkowy wielki",
     "Prosty brzucha",
-    "Skośne brzucha"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
    ],
    "link": ""
   },
@@ -1325,8 +1449,11 @@
    "miesnie": [
     "Prosty brzucha",
     "Biodrowo-lędźwiowy",
-    "Czworogłowy uda",
-    "Triceps"
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
    ],
    "link": ""
   },
@@ -1340,7 +1467,8 @@
    "miesnie": [
     "Naramienny przedni",
     "Zębaty przedni",
-    "Triceps",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
     "Prosty brzucha"
    ],
    "link": ""
@@ -1355,7 +1483,8 @@
    "miesnie": [
     "Najszerszy grzbietu",
     "Prosty brzucha",
-    "Skośne brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
     "Obły większy",
     "Naramienny tylny",
     "Biceps"
@@ -1374,8 +1503,10 @@
     "Naramienny przedni",
     "Biceps",
     "Prosty brzucha",
-    "Skośne brzucha",
-    "Czworoboczny"
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna"
    ],
    "link": ""
   }

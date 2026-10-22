@@ -154,7 +154,7 @@ function opisAktywnosci(aktywnosc) {
 // ===== Otwieranie i zamykanie kreatora =====
 
 // Wersja ustawień w dane.js, której wymaga kreator
-const WYMAGANA_WERSJA_DANYCH = 4;
+const WYMAGANA_WERSJA_DANYCH = 5;
 
 function otworzKreator(planDoEdycji) {
   // Jeśli plik dane.js jest w starej wersji, kreator nie ma ustawień i nie zadziała.

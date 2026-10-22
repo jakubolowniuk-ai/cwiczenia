@@ -83,7 +83,7 @@ przyciskReset.addEventListener("click", function () {
   if (typeof zrobAnatomie === "undefined") {
     problemy.push("anatomia.js");
   }
-  if (typeof dane === "undefined" || dane.wersjaUstawien !== 4) {
+  if (typeof dane === "undefined" || dane.wersjaUstawien !== 5) {
     problemy.push("dane.js");
   }
 

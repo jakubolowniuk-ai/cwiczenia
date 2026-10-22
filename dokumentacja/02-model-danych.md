@@ -1,6 +1,6 @@
 # Model danych
 
-Wszystko jest zapisane w jednym obiekcie `dane` pod kluczem `localStorage` **`cwiczenia-dane-v1`** (JSON). Wartość `dane.wersjaUstawien` (obecnie **4**) pozwala przy zmianach ustawień zaktualizować starsze dane (`uzupelnijDane` w `dane.js`).
+Wszystko jest zapisane w jednym obiekcie `dane` pod kluczem `localStorage` **`cwiczenia-dane-v1`** (JSON). Wartość `dane.wersjaUstawien` (obecnie **5**) pozwala przy zmianach ustawień zaktualizować starsze dane (`uzupelnijDane` w `dane.js`).
 
 ```
 dane = {
@@ -16,7 +16,10 @@ Jedna lista, trzy typy:
 - **miesien**: `{ id, nazwa, typ: "miesien", partiaId }`. Id musi zgadzać się z kształtem w `anatomia.js`.
 
 Id rodzajów: `rodzaj-cialo` (nazwa „Siłownia”), `rodzaj-kalistenika`, `rodzaj-statyczny`, `rodzaj-rozciaganie`, `rodzaj-bieganie`, `rodzaj-basen`.
-Id partii: `partia-plecy`, `-brzuch`, `-klatka`, `-nogi`, `-barki`, `-ramiona`, `-posladki`.
+Id partii: `partia-plecy`, `-brzuch`, `-klatka`, `-nogi`, `-barki`, `-ramiona`, `-posladki`, `-szyja`.
+
+**Mięśnie (43)** są zdefiniowane w `MIESNIE_STARTOWE` (`dane.js`), a ich kształty w `ANATOMIA_KSZTALTY` (`anatomia.js`); id w obu miejscach muszą się zgadzać.
+**Wersja 5** rozdzieliła dawne mięśnie: triceps (2 głowy), skośne brzucha (2), czworogłowy uda (3), kulszowo-goleniowe (2), brzuchaty łydki (2), czworoboczny (3 części, dobór po nazwie ćwiczenia) i przedramiona (3, dobór po nazwie). Migracja przepisuje `miesnieIds` w ćwiczeniach i usuwa stare mięśnie. Import z pliku rozumie też dawne nazwy.
 
 ## stylePlywania
 Lista nazw: Kraul, Grzbietowy, Klasyczny, Motylkowy, Dowolny.

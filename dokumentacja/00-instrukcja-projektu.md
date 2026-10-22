@@ -38,18 +38,19 @@ Stan na październik 2026. Aplikacja działa i jest używana; ten plik opisuje z
 - **Zapisany plan można edytować** (aktywności i sesje). Sesje z wpisanym postępem są zablokowane przed zmianą.
 - **Sesję można przenieść** na inny dzień. Przy przenoszeniu widać, jakie sesje są w danym dniu.
 - **Po zakończeniu planu** licznik się resetuje. Plan można usunąć. Nowy plan zamyka poprzedni aktywny (zostaje w danych).
-- **Ćwiczenie** może należeć do kilku partii i może mieć wiele mięśni (do 28 do wyboru, z grafiką sylwetki).
+- **Ćwiczenie** może należeć do kilku partii i może mieć wiele mięśni (43 do wyboru, jedna grafika sylwetki do dotykania).
 - **Rodzaj „Siłownia”** to dawny „Trening ciała” (nazwa zmieniona w wersji ustawień 4).
 - **Treningi** użytkownik tworzy sam. Sesja zalicza się dopiero po zrobieniu wszystkich ćwiczeń treningu albo po wpisaniu wyniku (bieganie, basen).
 - **Powtórzenia w seriach mogą się różnić** w jednym treningu (lista serii), podobnie czasy w ćwiczeniach statycznych.
 - **Basen**: jedno ćwiczenie może mieć kilka stylów, a w sesji każdy styl ma własną liczbę długości.
 - **Przykładowe ćwiczenia** są dołączone do aplikacji (194 sztuki: kalistenika, trening statyczny, siłownia) i wczytuje się je jednym przyciskiem w Ustawieniach. Mięśnie przy nich sprawdzono anatomicznie.
+- **Mięśnie (wersja 5)**: zestaw z dokumentu „Mapa mięśni” (41) plus równoległoboczny i pośladkowy mały, razem 43. Bez widoku z boku.
 - Zrezygnowano z: wybierania treningu od razu przy dodawaniu sesji (komplikowało formularz).
 
 ## Otwarte kwestie
 1. **Sugerowany plan**: gotowy plan do edycji, zasady układania ćwiczeń na dni. Nie zbudowany.
 2. **Wygląd**: dopracowywany na bieżąco.
 3. **Filtr ćwiczeń po mięśniu** w bazie: pomysł, nie zbudowany.
-4. **Mięśnie spoza listy 28** (np. mięśnie stożka rotatorów, podgrzebieniowy): do dodania, jeśli będą potrzebne.
+4. **Kolejne mięśnie** (np. reszta stożka rotatorów): do dodania, jeśli będą potrzebne.
 5. **Natywna aplikacja / prawdziwy alarm**: ewentualnie później, jeśli plik kalendarza przestanie wystarczać.
 6. **Wersja komercyjna** (rozważana jako pomysł): wymagałaby innej technologii i konta użytkowników, na razie nie planowana.

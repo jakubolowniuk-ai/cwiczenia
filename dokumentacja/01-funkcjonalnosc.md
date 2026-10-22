@@ -19,14 +19,23 @@ Dolny pasek z głównymi ekranami: **Dziś**, **Ćwiczenia**, **Postęp**. Ustaw
 Zawsze dochodzi pole „ile razy w okresie”.
 
 ## Partie i mięśnie
-- **Partie** (7): Plecy, Brzuch, Klatka piersiowa, Nogi, Barki, Ramiona, Pośladki. Można dodawać własne.
-- **Mięśnie** (28), każdy przypisany do partii: Klatka (piersiowy większy, zębaty przedni); Barki (naramienny przedni, środkowy, tylny); Ramiona (biceps, triceps, ramienny, przedramiona); Plecy (najszerszy grzbietu, obły większy, czworoboczny, równoległoboczny, prostowniki grzbietu, czworoboczny lędźwi); Brzuch (prosty, skośne, poprzeczny, biodrowo-lędźwiowy); Pośladki (wielki, średni, mały); Nogi (czworogłowy uda, kulszowo-goleniowe, przywodziciele, brzuchaty łydki, płaszczkowaty, piszczelowy przedni).
-- Mięśnie wybiera się w formularzu ćwiczenia z listy lub z grafiki sylwetki (przód i tył). W oknie ćwiczenia widać zaznaczone mięśnie na sylwetce.
+- **Partie** (8): Plecy, Brzuch, Klatka piersiowa, Nogi, Barki, Ramiona, Pośladki, Szyja. Można dodawać własne.
+- **Mięśnie** (43), każdy przypisany do partii. Zestaw pochodzi z dokumentu „Mapa mięśni – baza wiedzy dla czatbota” (41 mięśni) plus **równoległoboczny** i **pośladkowy mały**, których tam brakowało, a używa ich wiele ćwiczeń.
+  - Klatka: piersiowy większy, zębaty przedni
+  - Barki: naramienny przedni, środkowy, tylny, podgrzebieniowy
+  - Ramiona: biceps, ramienny, triceps (głowa boczna, głowa długa), ramienno-promieniowy, zginacze i prostowniki przedramienia
+  - Plecy: czworoboczny (część górna, środkowa, dolna), najszerszy grzbietu, obły większy, równoległoboczny, prostowniki grzbietu, wielodzielny, czworoboczny lędźwi
+  - Brzuch: prosty, skośny zewnętrzny, skośny wewnętrzny, poprzeczny, biodrowo-lędźwiowy
+  - Pośladki: pośladkowy wielki, średni, mały, napinacz powięzi szerokiej
+  - Nogi: prosty uda, obszerny boczny, obszerny przyśrodkowy, dwugłowy uda, półścięgnisty i półbłoniasty, przywodziciele, brzuchaty łydki (dwie głowy), płaszczkowaty, strzałkowe, piszczelowy przedni
+  - Szyja: mostkowo-obojczykowo-sutkowy
+- **Jedna grafika**: sylwetka z przodu i z tyłu (bez widoku z boku). W formularzu ćwiczenia jest zawsze na wierzchu: dotknięcie mięśnia zaznacza go, a wybrane mięśnie przeskakują na górę listy w sekcji „Wybrane”. Ta sama sylwetka służy w oknie mięśni ćwiczenia i w Postępie.
+- Wybranie mięśnia dopisuje też jego partię do partii ćwiczenia.
 
 ## Zakładka Ćwiczenia
 - Przełącznik **Baza** / **Moje treningi**.
 - **Baza ćwiczeń**: lista z wyszukiwaniem, filtrami (rodzaj, partia) i zwijaniem grup. Długie listy dopisują się porcjami.
-- Formularz ćwiczenia: nazwa, rodzaj, partie, mięśnie, link do filmu. Dla basenu: kilka stylów.
+- Formularz ćwiczenia: nazwa, rodzaj, partie, mięśnie (sylwetka do dotykania i lista), link do filmu. Dla basenu: kilka stylów.
 - **Moje treningi**: trening to nazwa i lista ćwiczeń z bazy. Wybór ćwiczeń ma wyszukiwanie i filtry.
 
 ## Tworzenie planu (kreator)

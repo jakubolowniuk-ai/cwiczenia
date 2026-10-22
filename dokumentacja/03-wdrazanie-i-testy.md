@@ -15,7 +15,7 @@
 4. Commit i push na `main`. GitHub Pages publikuje po kilku minutach.
 5. Na telefonie pojawia się baner „Jest nowa wersja – Odśwież”.
 
-Gdy aplikacja pokazuje czerwony baner „Pliki aplikacji są w różnych wersjach”, kontrola w `app.js` wykryła niespójne pliki; pomaga ponowne wgranie wszystkich plików razem. W `app.js` jest też sprawdzenie `dane.wersjaUstawien`, które trzeba zmienić, gdy podbijamy wersję ustawień.
+Gdy aplikacja pokazuje czerwony baner „Pliki aplikacji są w różnych wersjach”, kontrola w `app.js` wykryła niespójne pliki; pomaga ponowne wgranie wszystkich plików razem. Wersja ustawień jest sprawdzana w dwóch miejscach, które trzeba zmieniać razem z `wersjaUstawien` w `dane.js`: `app.js` i `WYMAGANA_WERSJA_DANYCH` w `kreator.js` (przy złej wartości kreator planu się nie otwiera).
 
 ## Czego nie robić
 - Nie czyścić danych witryny w przeglądarce: kasuje wszystkie ćwiczenia i plany. Przed ryzykownymi krokami zapisać kopię zapasową w Ustawieniach.
