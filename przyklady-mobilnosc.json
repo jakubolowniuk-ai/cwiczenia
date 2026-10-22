@@ -1,0 +1,381 @@
+{
+ "cwiczenia": [
+  {
+   "nazwa": "Pies z głową w dół",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Płaszczkowaty",
+    "Najszerszy grzbietu",
+    "Naramienny przedni",
+    "Zębaty przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Kobra (Bhujangasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Wielodzielny",
+    "Pośladkowy wielki",
+    "Prosty brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza dziecka (Balasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Najszerszy grzbietu",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Kot i krowa",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Prostowniki grzbietu",
+    "Wielodzielny",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wojownik II",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Obszerny boczny",
+    "Prosty uda",
+    "Przywodziciele uda",
+    "Pośladkowy średni",
+    "Naramienny środkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wojownik III",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prostowniki grzbietu",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza gołębia",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Pośladki",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Pośladkowy średni",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykrok niski (rozciąganie zginaczy biodra)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Biodrowo-lędźwiowy",
+    "Prosty uda",
+    "Pośladkowy wielki"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Skręt kręgosłupa leżąc",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prostowniki grzbietu",
+    "Wielodzielny"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza trójkąta",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Dwugłowy uda",
+    "Przywodziciele uda",
+    "Czworoboczny lędźwi"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Mostek biodrowy (Setu Bandhasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza krzesła (Utkatasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza drzewa",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Pośladkowy mały",
+    "Strzałkowe",
+    "Przywodziciele uda",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Skłon w siadzie do prostych nóg",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prostowniki grzbietu",
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza motyla",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Otwarta książka (rotacja piersiowa)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Wielodzielny",
+    "Skośny zewnętrzny brzucha",
+    "Piersiowy większy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Krążenia ramion",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Naramienny tylny",
+    "Podgrzebieniowy",
+    "Zębaty przedni"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Rozciąganie klatki w futrynie",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Biceps"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Przechylenia głowy (rozciąganie karku)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Szyja",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Mostkowo-obojczykowo-sutkowy",
+    "Czworoboczny – część górna"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Głęboki przysiad (Malasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Przywodziciele uda",
+    "Płaszczkowaty",
+    "Piszczelowy przedni",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Wykrok boczny (Skandasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Pośladkowy wielki",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Rozciąganie łydek przy ścianie",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa",
+    "Płaszczkowaty"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Poza łodzi (Navasana)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Prosty uda",
+    "Poprzeczny brzucha",
+    "Prostowniki grzbietu"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Ptak i pies (Bird Dog)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Wielodzielny",
+    "Pośladkowy wielki",
+    "Naramienny przedni",
+    "Poprzeczny brzucha"
+   ],
+   "link": ""
+  },
+  {
+   "nazwa": "Figura „4” leżąc (rozciąganie pośladków)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": ""
+  }
+ ]
+}

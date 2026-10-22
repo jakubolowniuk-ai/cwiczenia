@@ -43,7 +43,7 @@ Stan na październik 2026. Aplikacja działa i jest używana; ten plik opisuje z
 - **Treningi** użytkownik tworzy sam. Sesja zalicza się dopiero po zrobieniu wszystkich ćwiczeń treningu albo po wpisaniu wyniku (bieganie, basen).
 - **Powtórzenia w seriach mogą się różnić** w jednym treningu (lista serii), podobnie czasy w ćwiczeniach statycznych.
 - **Basen**: jedno ćwiczenie może mieć kilka stylów, a w sesji każdy styl ma własną liczbę długości.
-- **Przykładowe ćwiczenia** są dołączone do aplikacji (194 sztuki: kalistenika, trening statyczny, siłownia) i wczytuje się je jednym przyciskiem w Ustawieniach. Mięśnie przy nich sprawdzono anatomicznie.
+- **Przykładowe ćwiczenia** są dołączone do aplikacji (219 sztuk: kalistenika, trening statyczny, siłownia, joga / mobilność) i wczytuje się je jednym przyciskiem w Ustawieniach. Mięśnie przy nich sprawdzono anatomicznie.
 - **Mięśnie (wersja 5)**: zestaw z dokumentu „Mapa mięśni” (41) plus równoległoboczny i pośladkowy mały, razem 43. Bez widoku z boku.
 - Zrezygnowano z: wybierania treningu od razu przy dodawaniu sesji (komplikowało formularz).
 

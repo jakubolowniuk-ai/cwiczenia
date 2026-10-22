@@ -285,7 +285,7 @@ kopiaWzor.addEventListener("click", function () {
 });
 
 document.getElementById("kopia-przyklady").addEventListener("click", function () {
-  const adresy = ["przyklady-kalistenika.json", "przyklady-silownia.json"];
+  const adresy = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
   Promise.all(adresy.map(function (a) {
     return fetch(a).then(function (o) { return o.json(); });
   })).then(function (wyniki) {

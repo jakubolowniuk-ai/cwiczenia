@@ -15,6 +15,9 @@ Dolny pasek z głównymi ekranami: **Dziś**, **Ćwiczenia**, **Postęp**. Ustaw
 | Rozciąganie | serie i powtórzenia albo czas | brak |
 | Bieganie | dystans i czas | dystans, czas |
 | Basen | style, długości | styl, długości |
+| Rower | dystans i czas | dystans, czas |
+| Spacer | dystans i czas | dystans, czas |
+| Joga / mobilność | powtórzenia i czas (pozycje trzymane) | brak |
 
 Zawsze dochodzi pole „ile razy w okresie”.
 
@@ -72,7 +75,7 @@ Przycisk edycji na ekranie „Dziś” i w „Postępie”. Zmienia się aktywno
 - **Dane**:
   - *Zapisz kopię zapasową*: cały stan do pliku `.json` na telefonie.
   - *Wczytaj kopię*: zastępuje wszystkie dane danymi z pliku.
-  - *Wczytaj przykładowe ćwiczenia*: dodaje 194 gotowe ćwiczenia. Istniejące o tej samej nazwie są pomijane (zostaje im tylko uzupełnienie brakujących mięśni).
+  - *Wczytaj przykładowe ćwiczenia*: dodaje 219 gotowych ćwiczeń. Istniejące o tej samej nazwie są pomijane (zostaje im tylko uzupełnienie brakujących mięśni).
   - *Dodaj ćwiczenia z pliku*: własna lista w formacie JSON (patrz niżej).
   - *Pobierz wzór pliku z ćwiczeniami*.
 
@@ -88,6 +91,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Przykładowe ćwiczenia (w aplikacji)
 - `przyklady-kalistenika.json`: 99 pozycji (kalistenika i trening statyczny).
 - `przyklady-silownia.json`: 95 pozycji (94 siłownia, 1 trening statyczny: deska z talerzem).
+- `przyklady-mobilnosc.json`: 25 pozycji jogi i mobilności (rodzaj „Joga / mobilność”).
 - Zasady: nazwy po polsku w spójnym stylu; ćwiczenia izometryczne w „Trening statyczny”; warianty z ciężarem i na maszynach osobno od wersji z masą ciała.
 
 ## Zasady prostoty
