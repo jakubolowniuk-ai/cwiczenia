@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=28">
+  <link rel="stylesheet" href="style.css?v=29">
 </head>
 <body>
 
@@ -336,16 +336,13 @@
             <input type="search" id="kr2-szukaj-treningow" placeholder="Szukaj treningu">
             <p class="opis" id="kr2-brak-treningow" hidden></p>
             <div id="kr2-treningi"></div>
-            <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy trening</button>
+            <button class="przycisk-przerywany" id="kr2-nowy">+ Zbuduj nowy zestaw</button>
             <button class="przycisk drugi wielki schowany" id="kr2-wybor-wstecz">Wróć</button>
           </div>
 
           <div id="pd-widok-budowa" hidden>
             <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr2-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2></div>
             <div class="formularz">
-              <label for="kr2-nazwa">Nazwa treningu</label>
-              <input type="text" id="kr2-nazwa" placeholder="Np. Plecy A">
-
               <div class="etykieta">Sugerowane ćwiczenia</div>
               <label class="wybor wybor-pelny">
                 <input type="checkbox" id="kr2-wszystkie">
@@ -355,9 +352,18 @@
               <div id="kr2-cwiczenia"></div>
               <p class="opis" id="kr2-wybrano"></p>
 
+              <label class="wybor wybor-pelny">
+                <input type="checkbox" id="kr2-zapisz-zestaw">
+                Zapisz w „Moich zestawach”, żeby użyć ponownie
+              </label>
+              <div id="kr2-pole-nazwy" hidden>
+                <label for="kr2-nazwa">Nazwa zestawu</label>
+                <input type="text" id="kr2-nazwa" placeholder="Np. Plecy A">
+              </div>
+
               <p class="blad" id="kr2-blad-budowy"></p>
               <div>
-                <button class="przycisk" id="kr2-zapisz">Zapisz i wybierz</button>
+                <button class="przycisk" id="kr2-zapisz">Gotowe</button>
                 <button class="przycisk drugi schowany" id="kr2-anuluj">Anuluj</button>
               </div>
             </div>
@@ -502,16 +508,16 @@
     </div>
   </div>
 
-  <script src="dane.js?v=28"></script>
-  <script src="anatomia.js?v=28"></script>
-  <script src="cwiczenia.js?v=28"></script>
-  <script src="treningi.js?v=28"></script>
-  <script src="kreator.js?v=28"></script>
-  <script src="kreator2.js?v=28"></script>
-  <script src="dzis.js?v=28"></script>
-  <script src="postep.js?v=28"></script>
-  <script src="ustawienia.js?v=28"></script>
-  <script src="kopia.js?v=28"></script>
-  <script src="app.js?v=28"></script>
+  <script src="dane.js?v=29"></script>
+  <script src="anatomia.js?v=29"></script>
+  <script src="cwiczenia.js?v=29"></script>
+  <script src="treningi.js?v=29"></script>
+  <script src="kreator.js?v=29"></script>
+  <script src="kreator2.js?v=29"></script>
+  <script src="dzis.js?v=29"></script>
+  <script src="postep.js?v=29"></script>
+  <script src="ustawienia.js?v=29"></script>
+  <script src="kopia.js?v=29"></script>
+  <script src="app.js?v=29"></script>
 </body>
 </html>

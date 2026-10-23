@@ -88,12 +88,19 @@ function dodajFilm(karta, cwiczenie) {
   karta.appendChild(film);
 }
 
+// Zestawy zapisane przez użytkownika (bez roboczych, które powstają przy układaniu planu)
+function treningiZapisane() {
+  return dane.treningi.filter(function (t) {
+    return !t.roboczy;
+  });
+}
+
 // Pokazuje w przełączniku liczbę ćwiczeń i treningów
 function odswiezPrzelacznik() {
   przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.filter(function (c) {
     return !c.ukryte;
   }).length + ")";
-  przelacznikTreningi.textContent = "Moje treningi (" + dane.treningi.length + ")";
+  przelacznikTreningi.textContent = "Moje treningi (" + treningiZapisane().length + ")";
 }
 
 // Tworzy kartę z nazwą i opisem (bez przycisków)
@@ -350,9 +357,9 @@ function zapiszTrening() {
 function rysujTreningi() {
   odswiezPrzelacznik();
   listaTreningow.innerHTML = "";
-  pusteTreningi.hidden = dane.treningi.length > 0;
+  pusteTreningi.hidden = treningiZapisane().length > 0;
 
-  const widoczneTreningi = dane.treningi.filter(function (trening) {
+  const widoczneTreningi = treningiZapisane().filter(function (trening) {
     if (szukajTreningow === "") {
       return true;
     }
@@ -362,8 +369,8 @@ function rysujTreningi() {
         return cw && cw.nazwa.toLowerCase().indexOf(szukajTreningow) !== -1;
       });
   });
-  poleSzukajTreningow.hidden = dane.treningi.length < 6;
-  if (dane.treningi.length > 0 && widoczneTreningi.length === 0) {
+  poleSzukajTreningow.hidden = treningiZapisane().length < 6;
+  if (treningiZapisane().length > 0 && widoczneTreningi.length === 0) {
     const brak = document.createElement("p");
     brak.className = "opis";
     brak.textContent = "Nie znaleziono treningu o takiej nazwie.";

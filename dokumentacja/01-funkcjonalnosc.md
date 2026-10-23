@@ -129,3 +129,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Prowadzenie przy tworzeniu planu
 - Ekran Dziś bez planu pokazuje 3 kroki (aktywności → rozkład na dni → ćwiczenia).
 - Każdy krok kreatora ma krótki wstęp u góry; puste sesje podpowiadają, co dotknąć („Dotknij, aby wybrać trening lub ćwiczenia").
+
+## Ćwiczenia w sesji planu (bez pojęcia „trening")
+- W sesji przycisk „Dodaj ćwiczenia" od razu otwiera listę ćwiczeń z bazy (sugerowane dla aktywności, albo wszystkie). „Zmień ćwiczenia" wczytuje obecny zestaw do edycji.
+- Zestaw powstaje automatycznie z flagą `roboczy: true` i nazwą „<aktywność> d.m"; nie pokazuje się w „Moje treningi". Pole „Zapisz w Moich zestawach" (z nazwą) zapisuje go na stałe.
+- „Z moich zestawów" (tylko gdy są zapisane zestawy) pozwala wybrać gotowy.

@@ -66,6 +66,8 @@ const kr2SzukajTreningow = document.getElementById("kr2-szukaj-treningow");
 const kr2Wybrano = document.getElementById("kr2-wybrano");
 const kr2BladBudowy = document.getElementById("kr2-blad-budowy");
 const kr2Zapisz = document.getElementById("kr2-zapisz");
+const kr2ZapiszZestaw = document.getElementById("kr2-zapisz-zestaw");
+const kr2PoleNazwy = document.getElementById("kr2-pole-nazwy");
 const kr2Anuluj = document.getElementById("kr2-anuluj");
 
 // Okno zmiany liczby sesji
@@ -202,7 +204,7 @@ function opisSesji(sesja) {
   const aktywnosc = znajdzAktywnosc(sesja.aktywnoscId);
   if (wymagaTreningu(aktywnosc)) {
     const trening = znajdzTrening(sesja.treningId);
-    return trening ? "Trening: " + trening.nazwa : "Dotknij, aby wybrać trening lub ćwiczenia";
+    return trening ? "Trening: " + trening.nazwa : "Dotknij, aby dodać ćwiczenia";
   }
   const czesci = [];
   if (etapySesji(sesja).length > 0) {
@@ -1195,14 +1197,22 @@ function otworzSesje(sesja) {
   if (wymagaTreningu(aktywnosc)) {
     const trening = znajdzTrening(sesja.treningId);
     const karta = zrobKarte(
-      trening ? trening.nazwa : "Nie wybrano treningu",
-      trening ? opisTreningu(trening).opis : "Wybierz gotowy trening albo zbuduj nowy."
+      trening ? (trening.roboczy ? "Ćwiczenia sesji" : "Zestaw: " + trening.nazwa) : "Nie wybrano ćwiczeń",
+      trening ? opisTreningu(trening).opis : "Dodaj ćwiczenia do tej sesji."
     );
     karta.appendChild(
-      przyciskAkcji(trening ? "Zmień" : "Wybierz", "", function () {
-        otworzWybor(aktywnosc);
+      przyciskAkcji(trening ? "Zmień ćwiczenia" : "Dodaj ćwiczenia", "", function () {
+        kr2Aktywnosc = aktywnosc;
+        otworzBudowe(trening ? trening.cwiczeniaIds : []);
       })
     );
+    if (treningiZapisane().length > 0) {
+      karta.appendChild(
+        przyciskAkcji("Z moich zestawów", "", function () {
+          otworzWybor(aktywnosc);
+        })
+      );
+    }
     pdSesjaTrening.appendChild(karta);
 
     if (trening) {
@@ -1333,7 +1343,7 @@ function usunSesje() {
 
 function otworzWybor(aktywnosc) {
   kr2Aktywnosc = aktywnosc;
-  kr2WyborTytul.textContent = "Trening dla: " + opisAktywnosci(aktywnosc).tytul;
+  kr2WyborTytul.textContent = "Zestawy dla: " + opisAktywnosci(aktywnosc).tytul;
   kr2WszystkieTreningi.checked = false;
   kr2SzukajTreningow.value = "";
   rysujTreningiWyboru();
@@ -1363,15 +1373,15 @@ function rysujTreningiWyboru() {
   kr2Treningi.innerHTML = "";
   const wszystkie = kr2WszystkieTreningi.checked;
 
-  const lista = dane.treningi.filter(function (trening) {
+  const lista = treningiZapisane().filter(function (trening) {
     return wszystkie || treningPasuje(trening, kr2Aktywnosc);
   });
 
   kr2BrakTreningow.hidden = lista.length > 0;
-  if (dane.treningi.length === 0) {
-    kr2BrakTreningow.textContent = "Nie masz jeszcze żadnych treningów. Zbuduj pierwszy poniżej.";
+  if (treningiZapisane().length === 0) {
+    kr2BrakTreningow.textContent = "Nie masz jeszcze żadnych zestawów. Zbuduj pierwszy poniżej.";
   } else {
-    kr2BrakTreningow.textContent = "Nie masz jeszcze pasującego treningu. Zbuduj nowy albo pokaż wszystkie treningi.";
+    kr2BrakTreningow.textContent = "Nie masz jeszcze pasującego treningu. Zbuduj nowy albo pokaż wszystkie zestawy.";
   }
 
   const tekstT = kr2SzukajTreningow.value.trim().toLowerCase();
@@ -1396,13 +1406,15 @@ function rysujTreningiWyboru() {
 
 // ===== Panel: budowa nowego treningu =====
 
-function otworzBudowe() {
-  kr2BudowaIds = [];
+function otworzBudowe(ids) {
+  kr2BudowaIds = Array.isArray(ids) ? ids.slice() : [];
   kr2Nazwa.value = "";
+  kr2ZapiszZestaw.checked = false;
+  kr2PoleNazwy.hidden = true;
   kr2Wszystkie.checked = false;
   kr2Szukaj.value = "";
   kr2BladBudowy.textContent = "";
-  kr2BudowaTytul.textContent = "Nowy trening dla: " + opisAktywnosci(kr2Aktywnosc).tytul;
+  kr2BudowaTytul.textContent = "Ćwiczenia dla: " + opisAktywnosci(kr2Aktywnosc).tytul;
   rysujBudowe();
   pokazWidokPanelu("budowa");
 }
@@ -1450,20 +1462,25 @@ function rysujBudowe() {
 
 // Zapisuje nowy trening w "Moje treningi" i od razu wybiera go dla sesji
 function zapiszNowyTrening() {
-  const nazwa = kr2Nazwa.value.trim();
-  if (nazwa === "") {
-    kr2BladBudowy.textContent = "Wpisz nazwę treningu.";
+  const zapisz = kr2ZapiszZestaw.checked;
+  let nazwa = kr2Nazwa.value.trim();
+  if (zapisz && nazwa === "") {
+    kr2BladBudowy.textContent = "Wpisz nazwę zestawu albo odznacz zapisywanie.";
     return;
   }
   if (kr2BudowaIds.length === 0) {
-    kr2BladBudowy.textContent = "Dodaj do treningu co najmniej jedno ćwiczenie.";
+    kr2BladBudowy.textContent = "Dodaj co najmniej jedno ćwiczenie.";
     return;
+  }
+  if (nazwa === "") {
+    nazwa = opisAktywnosci(kr2Aktywnosc).tytul + " " + etykietaDaty(new Date());
   }
 
   const trening = {
     id: "tr-" + Date.now(),
     nazwa: nazwa,
-    cwiczeniaIds: kr2BudowaIds.slice()
+    cwiczeniaIds: kr2BudowaIds.slice(),
+    roboczy: !zapisz
   };
   dane.treningi.push(trening);
   zapiszDane();
@@ -1721,7 +1738,12 @@ pdPrzeniesWstecz.addEventListener("click", function () {
 kr2Szukaj.addEventListener("input", rysujBudowe);
 kr2SzukajTreningow.addEventListener("input", rysujTreningiWyboru);
 
-kr2Nowy.addEventListener("click", otworzBudowe);
+kr2Nowy.addEventListener("click", function () {
+  otworzBudowe([]);
+});
+kr2ZapiszZestaw.addEventListener("change", function () {
+  kr2PoleNazwy.hidden = !kr2ZapiszZestaw.checked;
+});
 kr2WyborWstecz.addEventListener("click", function () {
   otworzSesje(pdSesja);
 });
@@ -1729,7 +1751,7 @@ kr2WszystkieTreningi.addEventListener("change", rysujTreningiWyboru);
 kr2Wszystkie.addEventListener("change", rysujBudowe);
 kr2Zapisz.addEventListener("click", zapiszNowyTrening);
 kr2Anuluj.addEventListener("click", function () {
-  pokazWidokPanelu("wybor");
+  otworzSesje(pdSesja);
 });
 
 olMniej.addEventListener("click", function () {
