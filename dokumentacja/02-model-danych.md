@@ -70,3 +70,8 @@ Zarezerwowane pole (obecnie nieużywane). Historię tworzą zamknięte i zakońc
 
 ## ustawienia
 `{ godzinaAlarmu: "18:30", alarmWlaczony, motyw: "jasny"|"ciemny" (brak = jak telefon) }`
+
+## Ciężary
+- Ćwiczenie: `zCiezarem` (boolean).
+- Ilość dla kształtów z seriami: opcjonalne `ciezary: [kg, ...]` (jedna liczba na serię; brak = bez ciężaru).
+- Wynik zaliczenia w `wykonane[cwiczenieId]` także może mieć `ciezary`.

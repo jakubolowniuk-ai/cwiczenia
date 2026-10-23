@@ -98,3 +98,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Mało głównych ekranów, jedna główna akcja na ekran.
 - Bez konta i logowania, dane tylko w telefonie.
 - Zmiana zbędna albo myląca jest cofana (patrz decyzje w `00-instrukcja-projektu.md`).
+
+## Ciężary (kg)
+- Ćwiczenie ma pole `zCiezarem` (włączane osobno przy każdym ćwiczeniu; domyślnie włączone dla Siłowni).
+- W planie przy takim ćwiczeniu jest blok ciężaru: jedna wartość albo osobny ciężar w każdej serii.
+- W oknie wartości na ekranie Dziś są kroki po 2,5 kg; „Różne powtórzenia i ciężary w seriach" rozpisuje je na serie.
+- Adnotacja „Ostatnio (dd.mm): …" pokazuje ostatnie wykonanie (w planie i po jego zakończeniu).
+- Sugerowany plan: jeszcze nie zrobiony (do omówienia).

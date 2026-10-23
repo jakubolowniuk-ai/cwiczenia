@@ -13,7 +13,8 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie hantli na ławce skośnej dodatniej",
@@ -28,7 +29,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie sztangi na ławce skośnej ujemnej",
@@ -43,7 +45,8 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Rozpiętki z hantlami na ławce poziomej",
@@ -56,7 +59,8 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Dipy na poręczach z obciążeniem",
@@ -71,7 +75,8 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie na maszynie Hammer (siedząc)",
@@ -86,7 +91,8 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Rozpiętki na maszynie Pec Deck (butterfly)",
@@ -99,7 +105,8 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Krzyżowanie linek wyciągu górnego w opadzie tułowia",
@@ -110,7 +117,8 @@
    "miesnie": [
     "Piersiowy większy"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Unoszenie linek wyciągu dolnego przed siebie",
@@ -123,7 +131,8 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Pullover z hantlem",
@@ -139,7 +148,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie hantli z rotacją",
@@ -154,7 +164,8 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie sztangi leżąc na podłodze (Floor Press)",
@@ -169,7 +180,8 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Martwy ciąg klasyczny",
@@ -190,7 +202,8 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Podciąganie na drążku z obciążeniem",
@@ -205,7 +218,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wiosłowanie sztangą w opadzie tułowia",
@@ -223,7 +237,8 @@
     "Biceps",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wiosłowanie hantlą jednorącz w oparciu o ławkę",
@@ -240,7 +255,8 @@
     "Czworoboczny – część dolna",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Ściąganie drążka wyciągu górnego do klatki",
@@ -255,7 +271,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wiosłowanie na maszynie siedząc (chwyt neutralny)",
@@ -272,7 +289,8 @@
     "Naramienny tylny",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wiosłowanie sztangą T-Bar",
@@ -289,7 +307,8 @@
     "Naramienny tylny",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przyciąganie linki wyciągu dolnego do brzucha (siedząc)",
@@ -305,7 +324,8 @@
     "Równoległoboczny",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie tułowia na ławce rzymskiej z obciążeniem",
@@ -320,7 +340,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Ściąganie prostych ramion na wyciągu górnym",
@@ -335,7 +356,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)",
@@ -351,7 +373,8 @@
     "Naramienny tylny",
     "Najszerszy grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Szrugsy ze sztangą",
@@ -365,7 +388,8 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Szrugsy z hantlami",
@@ -379,7 +403,8 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Martwy ciąg rumuński ze sztangą (RDL)",
@@ -394,7 +419,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wiosłowanie sztangą w landmine (jednorącz)",
@@ -408,7 +434,8 @@
     "Czworoboczny – część dolna",
     "Równoległoboczny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie żołnierskie ze sztangą (OHP)",
@@ -424,7 +451,8 @@
     "Triceps – głowa długa",
     "Czworoboczny – część górna"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie hantli siedząc",
@@ -439,7 +467,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Unoszenie hantli bokiem w staniu",
@@ -450,7 +479,8 @@
    "miesnie": [
     "Naramienny środkowy"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Unoszenie hantli w opadzie tułowia",
@@ -464,7 +494,8 @@
     "Podgrzebieniowy",
     "Równoległoboczny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Odwrotne rozpiętki na maszynie (Reverse Pec Deck)",
@@ -478,7 +509,8 @@
     "Podgrzebieniowy",
     "Równoległoboczny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Unoszenie ramienia bokiem na wyciągu dolnym",
@@ -489,7 +521,8 @@
    "miesnie": [
     "Naramienny środkowy"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Face Pulls (przyciąganie liny do twarzy)",
@@ -504,7 +537,8 @@
     "Czworoboczny – część środkowa",
     "Równoległoboczny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie na maszynie nad głowę (siedząc)",
@@ -519,7 +553,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Unoszenie hantli przed siebie",
@@ -530,7 +565,8 @@
    "miesnie": [
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie Arnolda",
@@ -545,7 +581,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Unoszenie talerza przed siebie",
@@ -556,7 +593,8 @@
    "miesnie": [
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Podciąganie sztangi wzdłuż tułowia",
@@ -569,7 +607,8 @@
     "Naramienny środkowy",
     "Czworoboczny – część górna"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad ze sztangą na plecach (Back Squat)",
@@ -586,7 +625,8 @@
     "Przywodziciele uda",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad ze sztangą z przodu (Front Squat)",
@@ -603,7 +643,8 @@
     "Prostowniki grzbietu",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad bułgarski z hantlami",
@@ -619,7 +660,8 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wypychanie ciężaru na suwnicy (Leg Press)",
@@ -635,7 +677,8 @@
     "Pośladkowy wielki",
     "Przywodziciele uda"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad Hack na maszynie",
@@ -650,7 +693,8 @@
     "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wykroki chodzone z hantlami",
@@ -666,7 +710,8 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Zakroki ze sztangą",
@@ -683,7 +728,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Hip Thrust ze sztangą",
@@ -697,7 +743,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie nóg na maszynie (siedząc)",
@@ -710,7 +757,8 @@
     "Obszerny boczny",
     "Obszerny przyśrodkowy"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad Goblet z kettlebellem lub hantlem",
@@ -725,7 +773,8 @@
     "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad na maszynie Smitha",
@@ -740,7 +789,8 @@
     "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie nogi w tył na wyciągu dolnym (Kickback)",
@@ -754,7 +804,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Odwodzenie nóg na maszynie (siedząc)",
@@ -767,7 +818,8 @@
     "Pośladkowy mały",
     "Napinacz powięzi szerokiej"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przywodzenie nóg na maszynie (siedząc)",
@@ -778,7 +830,8 @@
    "miesnie": [
     "Przywodziciele uda"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Hip Thrust na maszynie",
@@ -792,7 +845,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Przysiad sumo z hantlem",
@@ -808,7 +862,8 @@
     "Przywodziciele uda",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wejścia na podwyższenie z hantlami (Step-up)",
@@ -824,7 +879,8 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Martwy ciąg na prostych nogach ze sztangą (SLDL)",
@@ -839,7 +895,8 @@
     "Pośladkowy wielki",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie nóg leżąc na maszynie",
@@ -851,7 +908,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie nóg siedząc na maszynie",
@@ -863,7 +921,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Martwy ciąg rumuński z hantlami",
@@ -878,7 +937,8 @@
     "Pośladkowy wielki",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wspięcia na palce stojąc ze sztangą",
@@ -891,7 +951,8 @@
     "Brzuchaty łydki – głowa przyśrodkowa",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wspięcia na palce siedząc na maszynie",
@@ -902,7 +963,8 @@
    "miesnie": [
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wspięcia na palce na suwnicy",
@@ -915,7 +977,8 @@
     "Brzuchaty łydki – głowa przyśrodkowa",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie jednej nogi stojąc na maszynie",
@@ -927,7 +990,8 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie sztangi wąskim chwytem leżąc",
@@ -942,7 +1006,8 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie ramion na wyciągu górnym z liną (Pushdown)",
@@ -954,7 +1019,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie ramion na wyciągu z drążkiem prostym",
@@ -965,7 +1031,8 @@
    "miesnie": [
     "Triceps – głowa boczna"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie francuskie ze sztangą łamaną leżąc",
@@ -977,7 +1044,8 @@
     "Triceps – głowa długa",
     "Triceps – głowa boczna"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie francuskie z hantlem jednorącz (siedząc)",
@@ -988,7 +1056,8 @@
    "miesnie": [
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie ramion z liną wyciągu zza głowy",
@@ -999,7 +1068,8 @@
    "miesnie": [
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Dipy na ławce z obciążeniem",
@@ -1014,7 +1084,8 @@
     "Naramienny przedni",
     "Piersiowy większy"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)",
@@ -1026,7 +1097,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Wyciskanie francuskie z hantlami leżąc (Skull Crushers)",
@@ -1038,7 +1110,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Prostowanie ramion na maszynie do tricepsu (siedząc)",
@@ -1050,7 +1123,8 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion ze sztangą prostą (stojąc)",
@@ -1064,7 +1138,8 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion z hantlami z supinacją",
@@ -1076,7 +1151,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)",
@@ -1090,7 +1166,8 @@
     "Prostowniki przedramienia",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion na modlitewniku ze sztangą łamaną",
@@ -1102,7 +1179,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion z hantlami na ławce skośnej dodatniej",
@@ -1114,7 +1192,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion na wyciągu dolnym z liną (chwyt młotkowy)",
@@ -1128,7 +1207,8 @@
     "Prostowniki przedramienia",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie skoncentrowane z hantlem",
@@ -1140,7 +1220,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion na maszynie (Preacher Curl)",
@@ -1152,7 +1233,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion nadchwytem ze sztangą (Reverse Curl)",
@@ -1166,7 +1248,8 @@
     "Ramienny",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Zginanie nadgarstków podchwytem ze sztangą (siedząc)",
@@ -1177,7 +1260,8 @@
    "miesnie": [
     "Zginacze przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Zginanie nadgarstków nadchwytem ze sztangą",
@@ -1188,7 +1272,8 @@
    "miesnie": [
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Uginanie ramion na wyciągu górnym oburącz",
@@ -1200,7 +1285,8 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Allahy (skłony tułowia z linką wyciągu górnego)",
@@ -1213,7 +1299,8 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Skłony tułowia na ławce skośnej ujemnej z talerzem",
@@ -1225,7 +1312,8 @@
     "Prosty brzucha",
     "Biodrowo-lędźwiowy"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Russian Twist z talerzem lub kettlebellem",
@@ -1239,7 +1327,8 @@
     "Prosty brzucha",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Spacer farmera z hantlami lub kettlebellami",
@@ -1257,7 +1346,8 @@
     "Skośny wewnętrzny brzucha",
     "Czworoboczny lędźwi"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Drwal (Woodchopper) na wyciągu",
@@ -1270,7 +1360,8 @@
     "Skośny wewnętrzny brzucha",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Skłony boczne z hantlem w staniu",
@@ -1284,7 +1375,8 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Brzuszki na maszynie (Ab Crunch)",
@@ -1297,7 +1389,8 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Kółko brzuszne (Ab Wheel Rollout) z kolan",
@@ -1312,7 +1405,8 @@
     "Najszerszy grzbietu",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   },
   {
    "nazwa": "Deska przodem z talerzem na plecach",
@@ -1326,7 +1420,8 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "ciezar": true
   }
  ]
 }

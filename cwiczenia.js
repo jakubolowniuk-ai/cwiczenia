@@ -43,6 +43,7 @@ const przyciskWyczysc = document.getElementById("przycisk-wyczysc");
 // Aktualnie wybrane filtry (tekst zapisujemy małymi literami)
 const filtr = { tekst: "", partiaId: null, rodzajId: null, miesienId: null };
 const filtrMiesien = document.getElementById("filtr-miesien");
+const poleCiezar = document.getElementById("pole-ciezar");
 
 // Id ćwiczenia, które właśnie edytujemy (null, gdy dodajemy nowe)
 let edytowaneId = null;
@@ -69,8 +70,52 @@ function nazwaKategorii(id) {
   return kategoria ? kategoria.nazwa : "?";
 }
 
-// Zamienia zapisaną ilość na krótki tekst, np. "3 × 12", "30 s", "3 × 30 s"
+// Ile jest serii w ilości (tylko typy, które mogą mieć ciężar); 0 = ćwiczenie bez serii
+function liczbaSerii(ilosc) {
+  if (!ilosc) {
+    return 0;
+  }
+  if (ilosc.typ === "powtorzenia") {
+    return ilosc.serie;
+  }
+  if (ilosc.typ === "serie-lista") {
+    return ilosc.powtorzenia.length;
+  }
+  if (ilosc.typ === "czas-serie") {
+    return ilosc.czasy.length;
+  }
+  if (ilosc.typ === "czas-powtorzenia") {
+    return ilosc.powtorzenia;
+  }
+  return 0;
+}
+
+// Ciężary w seriach, np. [60, 60, 70]; pusta lista, gdy ćwiczenie jest bez ciężaru
+function ciezaryIlosci(ilosc) {
+  if (!ilosc || !Array.isArray(ilosc.ciezary)) {
+    return [];
+  }
+  return ilosc.ciezary.some(function (c) { return c > 0; }) ? ilosc.ciezary : [];
+}
+
+// Tekst ciężaru, np. "60 kg" albo "60 / 70 / 80 kg"; pusty, gdy brak
+function opisCiezarow(ilosc) {
+  const c = ciezaryIlosci(ilosc);
+  if (c.length === 0) {
+    return "";
+  }
+  const jednakowe = c.every(function (x) { return x === c[0]; });
+  return jednakowe ? c[0] + " kg" : c.join(" / ") + " kg";
+}
+
+// Zamienia zapisaną ilość na krótki tekst, np. "3 × 12", "30 s", "3 × 30 s" (z ciężarem: "3 × 12 · 60 kg")
 function opisIlosci(ilosc) {
+  const tekst = opisIlosciBezCiezaru(ilosc);
+  const ciezar = opisCiezarow(ilosc);
+  return ciezar ? tekst + " · " + ciezar : tekst;
+}
+
+function opisIlosciBezCiezaru(ilosc) {
   if (!ilosc) {
     return "";
   }
@@ -357,6 +402,7 @@ function otworzFormularz(cwiczenie) {
 
   poleNazwa.value = "";
   poleLink.value = "";
+  poleCiezar.checked = false;
   poleCzyPartie.checked = false;
   panelPartii.hidden = true;
   podsumowaniePartii.hidden = true;
@@ -368,6 +414,7 @@ function otworzFormularz(cwiczenie) {
     tytulFormularza.textContent = "Edycja ćwiczenia";
     poleNazwa.value = cwiczenie.nazwa;
     poleLink.value = cwiczenie.link || "";
+    poleCiezar.checked = !!cwiczenie.zCiezarem;
     poleRodzaj.value = cwiczenie.rodzajId;
     odswiezPoleStyli();
 
@@ -456,7 +503,8 @@ function zapiszCwiczenie() {
     ilosc: staraIlosc,
     partieIds: partie,
     miesnieIds: zaznaczoneMiesnie(),
-    link: link
+    link: link,
+    zCiezarem: poleCiezar.checked
   };
   if (style.length > 0) {
     wpis.style = style;
@@ -719,7 +767,13 @@ przyciskZapisz.addEventListener("click", zapiszCwiczenie);
 poleCzyPartie.addEventListener("change", zmianaPolaPartii);
 przyciskGotowe.addEventListener("click", zatwierdzPartie);
 przyciskZmienPartie.addEventListener("click", zmienPartie);
-poleRodzaj.addEventListener("change", odswiezPoleStyli);
+poleRodzaj.addEventListener("change", function () {
+  odswiezPoleStyli();
+  // Nowe ćwiczenie na siłownię zwykle jest z ciężarem
+  if (!edytowaneId) {
+    poleCiezar.checked = poleRodzaj.value === "rodzaj-cialo";
+  }
+});
 anZamknij.addEventListener("click", function () {
   anTlo.hidden = true;
 });

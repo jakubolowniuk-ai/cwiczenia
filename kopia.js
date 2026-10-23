@@ -210,7 +210,8 @@ function dodajCwiczeniaZListy(lista) {
       ilosc: null,
       partieIds: partieIds,
       miesnieIds: miesnieIds,
-      link: typeof wpis.link === "string" ? wpis.link.trim() : ""
+      link: typeof wpis.link === "string" ? wpis.link.trim() : "",
+      zCiezarem: wpis.ciezar === true || (wpis.ciezar !== false && rodzaj.id === "rodzaj-cialo")
     });
     zajete[nazwaKlucz(nazwa)] = true;
     wynik.dodane++;

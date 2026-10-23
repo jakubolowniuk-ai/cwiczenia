@@ -1621,3 +1621,20 @@ h1 {
   font-size: 16px;
   font-family: inherit;
 }
+
+.wybor-ciezar { display: inline-flex; margin-top: 12px; }
+
+/* Adnotacja o poprzednim wykonaniu ćwiczenia */
+.ostatnio-info {
+  font-size: 13px;
+  color: var(--tekst-szary);
+  margin-top: 2px;
+}
+.ciezar-blok { margin-top: 12px; }
+
+/* Okno wartości: powtórzenia (lub czas) i ciężar jednej serii obok siebie */
+.wart-seria-rzad {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 8px;
+}

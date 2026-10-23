@@ -162,6 +162,13 @@ function uzupelnijDane(zapisane) {
     }
   }
 
+  // Pole "ćwiczenie z ciężarem": siłownia i ćwiczenia "z obciążeniem" dostają je domyślnie
+  (zapisane.cwiczenia || []).forEach(function (c) {
+    if (!("zCiezarem" in c)) {
+      c.zCiezarem = c.rodzajId === "rodzaj-cialo" || (/obciąż|z talerz/i.test(c.nazwa || "") && !/bez obciążenia/i.test(c.nazwa || ""));
+    }
+  });
+
   // Spacer dostał pole "kroki" (zapisane dane mają starą listę pól)
   const spacer = zapisane.kategorie.find(function (k) {
     return k.id === "rodzaj-spacer";

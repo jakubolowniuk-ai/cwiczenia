@@ -306,6 +306,11 @@ function zrobWierszCwiczenia(sesja, id) {
   });
   tekst.appendChild(opis);
 
+  const ostatnio = tekstOstatnio(id, sesja.id);
+  if (ostatnio) {
+    tekst.appendChild(tekstElement("div", "ostatnio-info", ostatnio));
+  }
+
   if (wykonane) {
     const roznica = opisRoznicy(plan, wykonane);
     if (roznica) {
@@ -316,6 +321,29 @@ function zrobWierszCwiczenia(sesja, id) {
 
   dodajFilm(wiersz, cwiczenie);
   return wiersz;
+}
+
+// Adnotacja "Ostatnio (22.10): 4 × 8 · 60 kg" z najnowszego wcześniejszego wykonania ćwiczenia
+// (szukamy we wszystkich planach, także zakończonych); pusty tekst, gdy go jeszcze nie robiono
+function tekstOstatnio(id, pomijanaSesjaId) {
+  let najnowsza = null;
+  dane.plany.forEach(function (plan) {
+    plan.sesje.forEach(function (s) {
+      if (s.id === pomijanaSesjaId || !s.zrobione || !s.zrobione[id] || !s.parametry || !s.parametry[id]) {
+        return;
+      }
+      const data = dataPlanu(plan, s.dzien);
+      if (!najnowsza || data > najnowsza.data) {
+        najnowsza = { data: data, ilosc: (s.wykonane && s.wykonane[id]) || s.parametry[id] };
+      }
+    });
+  });
+  if (!najnowsza) {
+    return "";
+  }
+  const d = najnowsza.data;
+  const dzien = String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0");
+  return "Ostatnio (" + dzien + "): " + opisIlosci(najnowsza.ilosc);
 }
 
 // ===== Porównanie wykonanej wartości z planem =====
@@ -445,6 +473,8 @@ let wartSesja = null;
 let wartId = null;
 let wartPolaDane = [];
 let wartTryb = "jednolite"; // "lista": powtórzenia osobno dla każdej serii
+let wartZCiezarem = false; // czy ćwiczenie ma pola ciężaru
+let wartCiezary = []; // pola ciężaru: jedno (tryb jednolity) albo po jednym na serię
 
 // Jedno pole z przyciskami − i +
 function zrobStepper(etykieta, wartosc, krok) {
@@ -481,6 +511,28 @@ function zrobStepper(etykieta, wartosc, krok) {
 
 // Składa wykonaną ilość z pól okna; null, gdy wartości są błędne
 function odczytajWartosc(plan) {
+  const wynik = odczytajWartoscBaza(plan);
+  if (wynik === null || !wartZCiezarem || liczbaSerii(wynik) < 1) {
+    return wynik;
+  }
+  const n = liczbaSerii(wynik);
+  const c = wartCiezary.map(function (p) {
+    return Number(p.pole.value);
+  });
+  if (c.some(function (x) { return !(x >= 0); })) {
+    return null;
+  }
+  const lista = wartTryb === "lista" ? c.slice(0, n) : new Array(n).fill(c[0] || 0);
+  while (lista.length < n) {
+    lista.push(lista.length > 0 ? lista[lista.length - 1] : 0);
+  }
+  if (lista.some(function (x) { return x > 0; })) {
+    wynik.ciezary = lista;
+  }
+  return wynik;
+}
+
+function odczytajWartoscBaza(plan) {
   const v = wartPolaDane.map(function (p) {
     return Number(p.pole.value);
   });
@@ -535,7 +587,8 @@ function odswiezWartInfo() {
   }
   const roznica = opisRoznicy(plan, wynik);
   if (!roznica) {
-    wartInfo.textContent = "Zgodnie z planem.";
+    const innyCiezar = JSON.stringify(ciezaryIlosci(plan)) !== JSON.stringify(ciezaryIlosci(wynik));
+    wartInfo.textContent = innyCiezar ? "Ciężar inny niż w planie." : "Zgodnie z planem.";
   } else if (roznica.wiecej) {
     wartInfo.className = "wart-info ponad";
     wartInfo.textContent = "To " + roznica.tekst + ". Brawo!";
@@ -554,16 +607,20 @@ function otworzWartosc(sesja, id) {
   wartPlan.textContent = "Zaplanowano: " + opisIlosci(plan);
   wartPola.innerHTML = "";
   wartPolaDane = [];
-  wartTryb = plan.typ === "serie-lista" || start.typ === "serie-lista" ? "lista" : "jednolite";
+  wartCiezary = [];
+  wartZCiezarem = !!znajdzCwiczenie(id).zCiezarem && liczbaSerii(plan) > 0;
+  const ciezaryStart = ciezaryIlosci(start).length > 0 ? ciezaryIlosci(start) : ciezaryIlosci(plan);
+  const rozneCiezary = ciezaryStart.some(function (c) { return c !== ciezaryStart[0]; });
+  wartTryb = plan.typ === "serie-lista" || start.typ === "serie-lista" || (wartZCiezarem && rozneCiezary) ? "lista" : "jednolite";
   if (czyPowtorzenia(plan)) {
     wartStart = start;
-    narysujPolaPowtorzen(listaPowtorzen(start));
+    narysujPolaPowtorzen(listaPowtorzen(start), ciezaryStart);
     return koniecOtwarciaWartosci(sesja, id);
   } else if (plan.typ === "czas") {
     wartPolaDane.push(zrobStepper("Czas (" + plan.jednostka + ")", start.wartosc, plan.jednostka === "min" ? 1 : 5));
   } else {
-    wartTryb = plan.typ === "czas-serie" || start.typ === "czas-serie" ? "lista" : "jednolite";
-    narysujPolaCzasow(listaCzasow(start), jednostkaCzasu(plan));
+    wartTryb = plan.typ === "czas-serie" || start.typ === "czas-serie" || (wartZCiezarem && rozneCiezary) ? "lista" : "jednolite";
+    narysujPolaCzasow(listaCzasow(start), jednostkaCzasu(plan), ciezaryStart);
     return koniecOtwarciaWartosci(sesja, id);
   }
   wartPolaDane.forEach(function (p) {
@@ -581,23 +638,30 @@ function koniecOtwarciaWartosci(sesja, id) {
 let wartStart = null;
 
 // Trening statyczny: dwa pola (powtórzenia i czas jednego) albo osobny czas dla każdej serii
-function narysujPolaCzasow(czasy, jednostka) {
+function narysujPolaCzasow(czasy, jednostka, ciezary) {
+  ciezary = ciezary || [];
   const krok = jednostka === "min" ? 1 : 5;
   wartPola.innerHTML = "";
   wartPolaDane = [];
+  wartCiezary = [];
   if (wartTryb === "jednolite") {
     wartPolaDane.push(zrobStepper("Powtórzenia", czasy.length, 1));
     wartPolaDane.push(zrobStepper("Czas jednego (" + jednostka + ")", czasy[0], krok));
     wartPolaDane.forEach(function (p) {
       wartPola.appendChild(p.blok);
     });
-    const rozpisz = tekstElement("button", "akcja", "Różne czasy w seriach");
+    if (wartZCiezarem) {
+      wartCiezary.push(zrobStepper("Ciężar (kg)", ciezary[0] || 0, 2.5));
+      wartPola.appendChild(wartCiezary[0].blok);
+    }
+    const rozpisz = tekstElement("button", "akcja", wartZCiezarem ? "Różne czasy i ciężary w seriach" : "Różne czasy w seriach");
     rozpisz.type = "button";
     rozpisz.addEventListener("click", function () {
       const serie = Math.max(1, Number(wartPolaDane[0].pole.value) || 1);
       const czas = Number(wartPolaDane[1].pole.value) || krok;
+      const kg = wartCiezary.length > 0 ? Number(wartCiezary[0].pole.value) || 0 : 0;
       wartTryb = "lista";
-      narysujPolaCzasow(new Array(serie).fill(czas), jednostka);
+      narysujPolaCzasow(new Array(serie).fill(czas), jednostka, new Array(serie).fill(kg));
       odswiezWartInfo();
     });
     wartPola.appendChild(rozpisz);
@@ -606,7 +670,17 @@ function narysujPolaCzasow(czasy, jednostka) {
   czasy.forEach(function (ile, i) {
     const p = zrobStepper("Seria " + (i + 1) + " (" + jednostka + ")", ile, krok);
     wartPolaDane.push(p);
-    wartPola.appendChild(p.blok);
+    if (wartZCiezarem) {
+      const kg = zrobStepper("Ciężar serii " + (i + 1) + " (kg)", i < ciezary.length ? ciezary[i] : (ciezary.length > 0 ? ciezary[ciezary.length - 1] : 0), 2.5);
+      wartCiezary.push(kg);
+      const rzadSerii = document.createElement("div");
+      rzadSerii.className = "wart-seria-rzad";
+      rzadSerii.appendChild(p.blok);
+      rzadSerii.appendChild(kg.blok);
+      wartPola.appendChild(rzadSerii);
+    } else {
+      wartPola.appendChild(p.blok);
+    }
   });
   const rzad = document.createElement("div");
   rzad.className = "wart-serie-akcje";
@@ -615,12 +689,19 @@ function narysujPolaCzasow(czasy, jednostka) {
       return Number(p.pole.value) || 0;
     });
   };
+  const odczytajKg = function () {
+    return wartCiezary.map(function (p) {
+      return Number(p.pole.value) || 0;
+    });
+  };
   const dodaj = tekstElement("button", "akcja", "+ seria");
   dodaj.type = "button";
   dodaj.addEventListener("click", function () {
     const lista = odczytaj();
+    const kgLista = odczytajKg();
     lista.push(lista.length > 0 ? lista[lista.length - 1] || krok : krok);
-    narysujPolaCzasow(lista, jednostka);
+    kgLista.push(kgLista.length > 0 ? kgLista[kgLista.length - 1] : 0);
+    narysujPolaCzasow(lista, jednostka, kgLista);
     odswiezWartInfo();
   });
   const usun = tekstElement("button", "akcja usun", "− seria");
@@ -628,8 +709,10 @@ function narysujPolaCzasow(czasy, jednostka) {
   usun.disabled = czasy.length <= 1;
   usun.addEventListener("click", function () {
     const lista = odczytaj();
+    const kgLista = odczytajKg();
     lista.pop();
-    narysujPolaCzasow(lista, jednostka);
+    kgLista.pop();
+    narysujPolaCzasow(lista, jednostka, kgLista);
     odswiezWartInfo();
   });
   rzad.appendChild(dodaj);
@@ -638,26 +721,35 @@ function narysujPolaCzasow(czasy, jednostka) {
 }
 
 // Pola powtórzeń: dwa pola (serie i powtórzenia) albo osobne pole dla każdej serii
-function narysujPolaPowtorzen(powtorzenia) {
+function narysujPolaPowtorzen(powtorzenia, ciezary) {
+  ciezary = ciezary || [];
   wartPola.innerHTML = "";
   wartPolaDane = [];
+  wartCiezary = [];
   if (wartTryb === "jednolite") {
     wartPolaDane.push(zrobStepper("Serie", powtorzenia.length, 1));
     wartPolaDane.push(zrobStepper("Powtórzenia", powtorzenia[0], 1));
     wartPolaDane.forEach(function (p) {
       wartPola.appendChild(p.blok);
     });
-    const rozpisz = tekstElement("button", "akcja", "Różne powtórzenia w seriach");
+    if (wartZCiezarem) {
+      wartCiezary.push(zrobStepper("Ciężar (kg)", ciezary[0] || 0, 2.5));
+      wartPola.appendChild(wartCiezary[0].blok);
+    }
+    const rozpisz = tekstElement("button", "akcja", wartZCiezarem ? "Różne powtórzenia i ciężary w seriach" : "Różne powtórzenia w seriach");
     rozpisz.type = "button";
     rozpisz.addEventListener("click", function () {
       const serie = Math.max(1, Number(wartPolaDane[0].pole.value) || 1);
       const powt = Math.max(1, Number(wartPolaDane[1].pole.value) || 1);
+      const kg = wartCiezary.length > 0 ? Number(wartCiezary[0].pole.value) || 0 : 0;
       const lista = [];
+      const kgLista = [];
       for (let i = 0; i < serie; i++) {
         lista.push(powt);
+        kgLista.push(kg);
       }
       wartTryb = "lista";
-      narysujPolaPowtorzen(lista);
+      narysujPolaPowtorzen(lista, kgLista);
       odswiezWartInfo();
     });
     wartPola.appendChild(rozpisz);
@@ -666,18 +758,35 @@ function narysujPolaPowtorzen(powtorzenia) {
   powtorzenia.forEach(function (ile, i) {
     const p = zrobStepper("Seria " + (i + 1), ile, 1);
     wartPolaDane.push(p);
-    wartPola.appendChild(p.blok);
+    if (wartZCiezarem) {
+      const kg = zrobStepper("Ciężar serii " + (i + 1) + " (kg)", i < ciezary.length ? ciezary[i] : (ciezary.length > 0 ? ciezary[ciezary.length - 1] : 0), 2.5);
+      wartCiezary.push(kg);
+      const rzadSerii = document.createElement("div");
+      rzadSerii.className = "wart-seria-rzad";
+      rzadSerii.appendChild(p.blok);
+      rzadSerii.appendChild(kg.blok);
+      wartPola.appendChild(rzadSerii);
+    } else {
+      wartPola.appendChild(p.blok);
+    }
   });
   const rzad = document.createElement("div");
   rzad.className = "wart-serie-akcje";
   const dodaj = tekstElement("button", "akcja", "+ seria");
   dodaj.type = "button";
+  const odczytajKgP = function () {
+    return wartCiezary.map(function (p) {
+      return Number(p.pole.value) || 0;
+    });
+  };
   dodaj.addEventListener("click", function () {
     const lista = wartPolaDane.map(function (p) {
       return Number(p.pole.value) || 0;
     });
+    const kgLista = odczytajKgP();
     lista.push(lista.length > 0 ? lista[lista.length - 1] || 1 : 1);
-    narysujPolaPowtorzen(lista);
+    kgLista.push(kgLista.length > 0 ? kgLista[kgLista.length - 1] : 0);
+    narysujPolaPowtorzen(lista, kgLista);
     odswiezWartInfo();
   });
   const usun = tekstElement("button", "akcja usun", "− seria");
@@ -687,8 +796,10 @@ function narysujPolaPowtorzen(powtorzenia) {
     const lista = wartPolaDane.map(function (p) {
       return Number(p.pole.value) || 0;
     });
+    const kgLista = odczytajKgP();
     lista.pop();
-    narysujPolaPowtorzen(lista);
+    kgLista.pop();
+    narysujPolaPowtorzen(lista, kgLista);
     odswiezWartInfo();
   });
   rzad.appendChild(dodaj);
