@@ -433,11 +433,11 @@ function opisRoznicy(plan, wykonane) {
   const znak = roznica > 0 ? "+" : "−";
   const ile = Math.abs(roznica);
   let tekst;
+  let dopisek = "";
   if (czyPowtorzenia(plan)) {
-    if (plan.typ === "powtorzenia" && wykonane.typ === "powtorzenia" && wykonane.serie === plan.serie) {
-      tekst = znak + Math.abs(wykonane.powtorzenia - plan.powtorzenia) + " powt.";
-    } else {
-      tekst = znak + ile + " powt. łącznie";
+    tekst = znak + ile + " powt. łącznie";
+    if (plan.typ === "powtorzenia" && wykonane.typ === "powtorzenia") {
+      dopisek = " (" + wykonane.serie + " × " + wykonane.powtorzenia + " zamiast " + plan.serie + " × " + plan.powtorzenia + ")";
     }
   } else if (plan.typ === "czas") {
     tekst = znak + (Math.round(ile * 10) / 10) + " s";
@@ -445,9 +445,9 @@ function opisRoznicy(plan, wykonane) {
     tekst = znak + (Math.round(ile * 10) / 10) + " s łącznie";
   }
   if (roznica > 0) {
-    return { wiecej: true, tekst: tekst + " ponad plan" };
+    return { wiecej: true, tekst: tekst + " ponad plan" + dopisek };
   }
-  return { wiecej: false, tekst: tekst };
+  return { wiecej: false, tekst: tekst + dopisek };
 }
 
 // Czy w zaliczonej sesji treningowej jakieś ćwiczenie zrobiono poniżej planu
