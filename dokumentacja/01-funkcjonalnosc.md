@@ -125,3 +125,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - „Ukryj" ustawia `ukryte: true`: ćwiczenie znika z listy, wyboru do treningów i planu oraz z liczników. „Pokaż ukryte (n)" na liście pokazuje ukryte z przyciskiem „Przywróć".
 - Ukryte ćwiczenie w istniejącym treningu zostaje (z dopiskiem „(ukryte)"); historia jest bez zmian.
 - Przycisk „Uzupełnij bazę ćwiczeń przykładowych" w Ustawieniach dopisuje brakujące ćwiczenia z bazy.
+
+## Prowadzenie przy tworzeniu planu
+- Ekran Dziś bez planu pokazuje 3 kroki (aktywności → rozkład na dni → ćwiczenia).
+- Każdy krok kreatora ma krótki wstęp u góry; puste sesje podpowiadają, co dotknąć („Dotknij, aby wybrać trening lub ćwiczenia").

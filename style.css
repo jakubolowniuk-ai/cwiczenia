@@ -1666,3 +1666,15 @@ h1 {
 .pp-historia-wiersz .pp-podpis { width: 100%; }
 
 .karta-ukryta { opacity: 0.65; }
+
+/* Ekran startowy bez planu i wstępy w kreatorze */
+.kroki-start {
+  text-align: left;
+  margin: 12px auto 16px;
+  padding-left: 22px;
+  max-width: 320px;
+  font-size: 0.95rem;
+  line-height: 1.45;
+}
+.kroki-start li { margin-bottom: 6px; }
+.kr-wstep { margin: 0 0 12px; }

@@ -202,7 +202,7 @@ function opisSesji(sesja) {
   const aktywnosc = znajdzAktywnosc(sesja.aktywnoscId);
   if (wymagaTreningu(aktywnosc)) {
     const trening = znajdzTrening(sesja.treningId);
-    return trening ? "Trening: " + trening.nazwa : "Nie wybrano treningu";
+    return trening ? "Trening: " + trening.nazwa : "Dotknij, aby wybrać trening lub ćwiczenia";
   }
   const czesci = [];
   if (etapySesji(sesja).length > 0) {
@@ -217,7 +217,7 @@ function opisSesji(sesja) {
   if (sesja.czas) {
     czesci.push(sesja.czas.wartosc + " " + sesja.czas.jednostka);
   }
-  return czesci.length > 0 ? czesci.join(" · ") : "Cel: do ustawienia";
+  return czesci.length > 0 ? czesci.join(" · ") : "Dotknij, aby ustawić kroki, dystans lub czas";
 }
 
 // Dodaje do karty dodatkową linię tekstu pod nazwą

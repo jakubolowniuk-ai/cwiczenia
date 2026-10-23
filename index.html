@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=27">
+  <link rel="stylesheet" href="style.css?v=28">
 </head>
 <body>
 
@@ -27,6 +27,11 @@
         </div>
         <div class="pusty-tytul">Nie masz jeszcze planu</div>
         <p class="opis">Ułóż plan na tydzień lub miesiąc, a tutaj pojawią się Twoje sesje.</p>
+        <ol class="kroki-start">
+          <li><b>Wybierz aktywności</b> i ile razy w okresie chcesz je zrobić.</li>
+          <li><b>Rozłóż sesje na dni</b> w kalendarzu (możesz użyć „Zaproponuj rozkład").</li>
+          <li><b>Wybierz ćwiczenia</b> do każdej sesji i odhaczaj je tutaj.</li>
+        </ol>
         <button class="przycisk wielki" id="dzis-utworz-plan">Utwórz plan</button>
       </div>
 
@@ -214,6 +219,7 @@
 
       <!-- Krok 1: okres i aktywności -->
       <div id="kr-krok1">
+        <p class="opis kr-wstep">Wybierz okres i dodaj aktywności. Przy każdej wpisz, ile razy w okresie chcesz ją zrobić.</p>
         <div class="etykieta-pola">Okres</div>
         <div class="przelacznik">
           <button class="segment aktywny" id="kr-okres-tydzien">Tydzień</button>
@@ -260,6 +266,7 @@
 
       <!-- Krok 2: kalendarz -->
       <div id="kr-krok2" hidden>
+        <p class="opis kr-wstep">Rozłóż sesje na dni: dotknij dnia w kalendarzu i dodaj sesję. Potem uzupełnij każdą o trening, ćwiczenia i parametry.</p>
         <div class="etykieta-pola">Do rozłożenia</div>
         <div class="legenda" id="kal-legenda"></div>
         <div class="kal-oznaczenia">
@@ -495,16 +502,16 @@
     </div>
   </div>
 
-  <script src="dane.js?v=27"></script>
-  <script src="anatomia.js?v=27"></script>
-  <script src="cwiczenia.js?v=27"></script>
-  <script src="treningi.js?v=27"></script>
-  <script src="kreator.js?v=27"></script>
-  <script src="kreator2.js?v=27"></script>
-  <script src="dzis.js?v=27"></script>
-  <script src="postep.js?v=27"></script>
-  <script src="ustawienia.js?v=27"></script>
-  <script src="kopia.js?v=27"></script>
-  <script src="app.js?v=27"></script>
+  <script src="dane.js?v=28"></script>
+  <script src="anatomia.js?v=28"></script>
+  <script src="cwiczenia.js?v=28"></script>
+  <script src="treningi.js?v=28"></script>
+  <script src="kreator.js?v=28"></script>
+  <script src="kreator2.js?v=28"></script>
+  <script src="dzis.js?v=28"></script>
+  <script src="postep.js?v=28"></script>
+  <script src="ustawienia.js?v=28"></script>
+  <script src="kopia.js?v=28"></script>
+  <script src="app.js?v=28"></script>
 </body>
 </html>
