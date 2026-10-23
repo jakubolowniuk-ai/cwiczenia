@@ -41,10 +41,20 @@ const sciezka = require("path").resolve(__dirname, "..");
   await p.locator("#kr2-cwiczenia .akcja").nth(0).tap();
   await p.locator("#kr2-cwiczenia .akcja").nth(1).tap();
   await zrzut("4-cwiczenia-w-sesji");
+  await p.check("#kr2-zapisz-zestaw");
+  await p.fill("#kr2-nazwa", "Klatka i plecy A");
   await p.tap("#kr2-zapisz");
   await p.waitForTimeout(300);
   const wejscia = p.locator("#pd-sesja-parametry input:visible");
   for (let i = 0; i < (await wejscia.count()); i++) await wejscia.nth(i).fill("8");
+  const bloki = p.locator("#pd-sesja-parametry .ciezar-blok select");
+  for (let i = 0; i < (await bloki.count()); i++) {
+    await bloki.nth(i).selectOption("jeden");
+    await p.locator("#pd-sesja-parametry .ciezar-blok").nth(i).locator("input:visible").first().fill(i === 0 ? "60" : "24");
+  }
+  await p.locator("#arkusz-tresc").evaluate((e) => (e.scrollTop = 130));
+  await p.waitForTimeout(200);
+  await zrzut("5-parametry");
   await p.tap("#pd-sesja-zapisz");
   await p.tap("#pd-zamknij");
 
@@ -87,11 +97,20 @@ const sciezka = require("path").resolve(__dirname, "..");
   await p.waitForTimeout(300);
   await p.locator("#dzis-sesje .odhacz").first().tap();
   await p.waitForTimeout(300);
-  await zrzut("5-dzis");
+  await zrzut("6-dzis");
+  // Okno wartości: zrobione inaczej niż w planie
+  await p.locator("#dzis-sesje .wartosc-przycisk").nth(1).tap();
+  await p.waitForTimeout(200);
+  await p.locator("#wart-pola .wart-stepper button").nth(3).tap();
+  await p.locator("#wart-pola .wart-stepper button").nth(3).tap();
+  await p.locator("#wart-pola .wart-stepper button").nth(5).tap();
+  await p.waitForTimeout(200);
+  await zrzut("7-inne-wartosci");
+  await p.tap("#wart-anuluj");
 
   await p.evaluate(() => pokazEkran("ekran-postep"));
   await p.waitForTimeout(300);
-  await zrzut("6-postep");
+  await zrzut("8-postep");
 
   await p.evaluate(() => pokazEkran("ekran-cwiczenia"));
   await p.waitForTimeout(300);
@@ -100,7 +119,10 @@ const sciezka = require("path").resolve(__dirname, "..");
   await p.locator("#chipy-partie .chip", { hasText: "Plecy" }).tap();
   await p.locator("#chipy-miesnie .chip").nth(3).tap();
   await p.waitForTimeout(300);
-  await zrzut("7-baza");
+  await zrzut("9-baza");
+  await p.tap("#przelacznik-treningi");
+  await p.waitForTimeout(300);
+  await zrzut("10-moje-treningi");
   await b.close();
   // PNG -> WEBP (mniejsze pliki)
   require("child_process").execSync(

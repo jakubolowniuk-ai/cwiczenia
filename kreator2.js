@@ -237,7 +237,7 @@ function pasujeDoAktywnosci(cwiczenie, aktywnosc) {
   }
   const partie = partieAktywnosci(aktywnosc);
   if (partie.length > 0) {
-    return partie.some(function (id) {
+    return cwiczenie.rodzajId === aktywnosc.rodzajId && partie.some(function (id) {
       return (cwiczenie.partieIds || []).indexOf(id) !== -1;
     });
   }

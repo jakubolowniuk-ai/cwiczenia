@@ -1714,3 +1714,7 @@ h1 {
 .prz-kropki span { width: 8px; height: 8px; border-radius: 50%; background: var(--linia); }
 .prz-kropki span.aktywna { background: var(--akcent); }
 .prz-przyciski { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; margin-top: auto; padding-bottom: 8px; }
+
+/* Karta ćwiczeń sesji: tekst na całą szerokość, przyciski pod spodem */
+#pd-sesja-trening .karta { flex-wrap: wrap; }
+#pd-sesja-trening .karta-tekst { flex: 1 1 100%; }

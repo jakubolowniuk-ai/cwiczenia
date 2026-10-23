@@ -136,6 +136,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - „Z moich zestawów" (tylko gdy są zapisane zestawy) pozwala wybrać gotowy.
 
 ## Przewodnik „Jak to działa?"
-- 7 kart ze zrzutami ekranu (`przewodnik/*.webp`), tekst w `przewodnik.js`. Otwiera się sam przy pierwszym uruchomieniu (`dane.przewodnikWidziany`), potem pod przyciskami „Jak to działa?" (ekran Dziś bez planu) i w Ustawieniach → Pomoc.
+- 10 kart ze zrzutami ekranu (`przewodnik/*.webp`), tekst w `przewodnik.js`. Otwiera się sam przy pierwszym uruchomieniu (`dane.przewodnikWidziany`), potem pod przyciskami „Jak to działa?" (ekran Dziś bez planu) i w Ustawieniach → Pomoc.
 - Nie pokazuje się w automatycznych testach (`navigator.webdriver`).
 - Zrzuty odświeża skrypt `narzedzia/zrzuty-przewodnika.js` (dane demonstracyjne z działającej aplikacji); po zmianach wyglądu uruchomić go ponownie i podnieść wersję.
+- Podpowiedzi ćwiczeń w sesji dla aktywności z partiami dopasowują też rodzaj (Siłownia → tylko ćwiczenia siłowni); reszta pod „Pokaż wszystkie ćwiczenia z bazy".

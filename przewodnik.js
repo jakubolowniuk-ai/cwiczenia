@@ -3,13 +3,16 @@
 // Zrzuty generuje narzedzia/zrzuty-przewodnika.js z działającej aplikacji.
 
 const KARTY_PRZEWODNIKA = [
-  { obraz: "przewodnik/1-start.webp", tytul: "Witaj w aplikacji do ćwiczeń", tekst: "Układasz plan na tydzień lub miesiąc, a na ekranie Dziś odhaczasz ćwiczenia. Aplikacja ma trzy zakładki: Dziś, Ćwiczenia (baza ćwiczeń) i Postęp. Zacznij od „Utwórz plan”." },
+  { obraz: "przewodnik/1-start.webp", tytul: "Witaj w aplikacji do ćwiczeń", tekst: "Układasz plan na tydzień lub miesiąc, a na ekranie Dziś odhaczasz ćwiczenia. Aplikacja ma trzy zakładki: Dziś, Ćwiczenia (baza ćwiczeń i Moje treningi) oraz Postęp. Zacznij od „Utwórz plan”." },
   { obraz: "przewodnik/2-aktywnosci.webp", tytul: "1. Wybierz aktywności", tekst: "Dodaj aktywności (siłownia, kalistenika, spacer, bieganie…) i wpisz, ile razy w okresie chcesz je zrobić. Przy siłowni i kalistenice wybierz partie mięśni (można kilka) albo „Ogólnorozwojowy”." },
   { obraz: "przewodnik/3-kalendarz.webp", tytul: "2. Rozłóż sesje na dni", tekst: "Dotknij dnia w kalendarzu i dodaj sesję albo użyj „Zaproponuj rozkład”. Puste kwadraciki to sesje do uzupełnienia." },
-  { obraz: "przewodnik/4-cwiczenia-w-sesji.webp", tytul: "3. Dodaj ćwiczenia do sesji", tekst: "Dotknij sesji i wybierz „Dodaj ćwiczenia”. Aplikacja podpowiada ćwiczenia pasujące do partii, a „Pokaż wszystkie” otwiera całą bazę. Potem ustawisz serie, powtórzenia i ciężary." },
-  { obraz: "przewodnik/5-dzis.webp", tytul: "Odhaczaj na ekranie Dziś", tekst: "Dotknij kwadracika, aby zaliczyć ćwiczenie. Dotknij wartości (np. 8 × 8), jeśli zrobiłeś coś innego niż w planie albo użyłeś innego ciężaru." },
-  { obraz: "przewodnik/6-postep.webp", tytul: "Śledź postęp", tekst: "Zakładka Postęp pokazuje realizację planu, ćwiczone mięśnie i serię dni. Poprzednie plany zostają w historii, a przy każdym ćwiczeniu jest przycisk „Historia”." },
-  { obraz: "przewodnik/7-baza.webp", tytul: "Baza ćwiczeń", tekst: "Wybierz partię i mięśnie, aby znaleźć ćwiczenie. Niepotrzebne ćwiczenia możesz ukryć i przywrócić przyciskiem „Pokaż ukryte”. Możesz też dodać własne." }
+  { obraz: "przewodnik/4-cwiczenia-w-sesji.webp", tytul: "3. Dodaj ćwiczenia do sesji", tekst: "Dotknij sesji i wybierz „Dodaj ćwiczenia”. Aplikacja podpowiada ćwiczenia pasujące do aktywności, a „Pokaż wszystkie” otwiera całą bazę. Zaznacz „Zapisz w Moich zestawach”, jeśli chcesz użyć tego zestawu ponownie." },
+  { obraz: "przewodnik/5-parametry.webp", tytul: "4. Ustaw serie, powtórzenia i ciężary", tekst: "Dla każdego ćwiczenia wybierz miarę (serie i powtórzenia, czas…) i wpisz ile razy. Przy ćwiczeniach z ciężarem ustaw kilogramy: ten sam w każdej serii albo różny w seriach. To jest plan, który zobaczysz na ekranie Dziś." },
+  { obraz: "przewodnik/6-dzis.webp", tytul: "Odhaczaj na ekranie Dziś", tekst: "Dotknij kwadracika, aby zaliczyć ćwiczenie dokładnie tak, jak w planie. Pod ćwiczeniem widzisz zaplanowane serie i powtórzenia, a po zaliczeniu pasek postępu rośnie." },
+  { obraz: "przewodnik/7-inne-wartosci.webp", tytul: "Zrobiłeś inaczej niż w planie?", tekst: "Dotknij podkreślonej wartości (np. 8 × 8), a pojawią się pola serii, powtórzeń i ciężaru. Zmień je tak, jak było naprawdę, a aplikacja policzy różnicę („+16 powt. ponad plan” albo mniej). „Zapisz i zalicz” zapisuje wynik." },
+  { obraz: "przewodnik/8-postep.webp", tytul: "Śledź postęp", tekst: "Zakładka Postęp pokazuje realizację planu, ćwiczone mięśnie i serię dni. Poprzednie plany zostają w historii, a przy każdym ćwiczeniu jest przycisk „Historia”." },
+  { obraz: "przewodnik/9-baza.webp", tytul: "Baza ćwiczeń", tekst: "Wybierz partię i mięśnie, aby znaleźć ćwiczenie. Niepotrzebne ćwiczenia możesz ukryć i przywrócić przyciskiem „Pokaż ukryte”. Możesz też dodać własne." },
+  { obraz: "przewodnik/10-moje-treningi.webp", tytul: "Moje treningi", tekst: "To zestawy ćwiczeń, które zapisałeś, żeby używać ich w kolejnych planach, np. „Klatka i plecy A”. Dodasz je w sesji przyciskiem „Z moich zestawów”. Tutaj możesz je też pokazać, edytować albo usunąć." }
 ];
 
 const przewodnikTlo = document.getElementById("przewodnik");
