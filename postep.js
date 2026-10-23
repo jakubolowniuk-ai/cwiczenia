@@ -332,6 +332,7 @@ function rysujPostep() {
   postepEdytujPlan.hidden = !plan;
   if (!plan) {
     postepTresc.appendChild(tekstElement("p", "opis", "Gdy ułożysz plan i zaczniesz ćwiczyć, zobaczysz tutaj swoje wyniki."));
+    dodajPoprzedniePlany();
     return;
   }
 
@@ -390,6 +391,97 @@ function rysujPostep() {
     otworzUsuwanie(plan);
   });
   postepTresc.appendChild(usun);
+  dodajPoprzedniePlany();
+}
+
+// ===== Poprzednie (zamknięte) plany =====
+
+function realizacjaPlanu(plan) {
+  let suma = 0;
+  plan.sesje.forEach(function (s) {
+    suma += stosunekSesji(plan, s);
+  });
+  return procent(suma, plan.sesje.length);
+}
+
+function dodajPoprzedniePlany() {
+  const zamkniete = dane.plany.filter(function (p) {
+    return p.zamkniety;
+  }).reverse();
+  if (zamkniete.length === 0) {
+    return;
+  }
+  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Poprzednie plany"));
+  zamkniete.forEach(function (plan) {
+    const przycisk = document.createElement("button");
+    przycisk.className = "pp-poprzedni";
+    const zal = plan.sesje.filter(function (s) {
+      return sesjaZaliczona(plan, s);
+    }).length;
+    przycisk.appendChild(tekstElement("b", "", (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " · " + zakresDat(plan)));
+    przycisk.appendChild(tekstElement("span", "opis", realizacjaPlanu(plan) + "% · " + zal + " z " + plan.sesje.length + " sesji"));
+    przycisk.addEventListener("click", function () {
+      otworzOknoOkresu(plan, DNI_W_OKRESIE[plan.okres] - 1);
+    });
+    postepTresc.appendChild(przycisk);
+  });
+}
+
+// ===== Historia jednego ćwiczenia =====
+
+function historiaCwiczenia(id) {
+  const wpisy = [];
+  dane.plany.forEach(function (plan) {
+    plan.sesje.forEach(function (s) {
+      if (!s.zrobione || !s.zrobione[id] || !s.parametry || !s.parametry[id]) {
+        return;
+      }
+      wpisy.push({
+        data: dataPlanu(plan, s.dzien),
+        ilosc: (s.wykonane && s.wykonane[id]) || s.parametry[id],
+        plan: s.parametry[id]
+      });
+    });
+  });
+  return wpisy.sort(function (a, b) {
+    return b.data - a.data;
+  });
+}
+
+function formatDaty(d) {
+  return String(d.getDate()).padStart(2, "0") + "." + String(d.getMonth() + 1).padStart(2, "0") + "." + d.getFullYear();
+}
+
+function otworzHistorieCwiczenia(cwiczenie) {
+  const wpisy = historiaCwiczenia(cwiczenie.id);
+  pokazOkno("Historia", cwiczenie.nazwa);
+  if (wpisy.length === 0) {
+    postepOknoTresc.appendChild(zrobPustyKomunikat("Brak historii", "Tego ćwiczenia nie zaliczono jeszcze w żadnym planie."));
+    return;
+  }
+  let najlepszy = null;
+  wpisy.forEach(function (w) {
+    const maks = Math.max.apply(null, [0].concat(ciezaryIlosci(w.ilosc)));
+    if (maks > 0 && (!najlepszy || maks > najlepszy.kg)) {
+      najlepszy = { kg: maks, data: w.data };
+    }
+  });
+  if (najlepszy) {
+    postepOknoTresc.appendChild(zrobWskazowke("★", "#0B6B5F", "#DDF1E8", "Największy ciężar", najlepszy.kg + " kg (" + formatDaty(najlepszy.data) + ")"));
+  }
+  const lista = document.createElement("div");
+  lista.className = "pp-karta";
+  wpisy.forEach(function (w) {
+    const wiersz = document.createElement("div");
+    wiersz.className = "pp-historia-wiersz";
+    wiersz.appendChild(tekstElement("b", "", formatDaty(w.data)));
+    wiersz.appendChild(tekstElement("span", "", opisIlosci(w.ilosc)));
+    if (JSON.stringify(w.plan) !== JSON.stringify(w.ilosc)) {
+      wiersz.appendChild(tekstElement("span", "pp-podpis", "plan: " + opisIlosci(w.plan)));
+    }
+    lista.appendChild(wiersz);
+  });
+  postepOknoTresc.appendChild(lista);
 }
 
 // ===== Usuwanie planu =====
@@ -405,7 +497,7 @@ function otworzUsuwanie(plan) {
   const zaliczone = plan.sesje.filter(function (s) {
     return sesjaZaliczona(plan, s);
   }).length;
-  usunOpis.textContent = (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " i jego postęp zostaną usunięte. Zaliczone sesje: " + zaliczone + " z " + plan.sesje.length + ".";
+  usunOpis.textContent = (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " i jego postęp zostaną usunięte razem z historią ćwiczeń z tego planu. Zaliczone sesje: " + zaliczone + " z " + plan.sesje.length + ". Jeśli chcesz zachować historię, zamknij plan zamiast go usuwać.";
   usunTlo.hidden = false;
 }
 
@@ -415,6 +507,12 @@ function zamknijUsuwanie() {
 }
 
 usunAnuluj.addEventListener("click", zamknijUsuwanie);
+document.getElementById("usun-zamknij").addEventListener("click", function () {
+  const plan = usuwanyPlan;
+  zamknijUsuwanie();
+  zamknijPlan(plan);
+  rysujPostep();
+});
 usunTlo.addEventListener("click", function (zdarzenie) {
   if (zdarzenie.target === usunTlo) {
     zamknijUsuwanie();

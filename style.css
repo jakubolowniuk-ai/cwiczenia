@@ -1638,3 +1638,29 @@ h1 {
   grid-template-columns: 1fr 1fr;
   gap: 8px;
 }
+
+/* Postęp: poprzednie plany i historia ćwiczenia */
+.pp-naglowek { margin: 20px 0 8px; font-size: 1rem; }
+.pp-poprzedni {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  width: 100%;
+  text-align: left;
+  margin-bottom: 8px;
+  padding: 12px 14px;
+  border: 1px solid var(--ramka, #d8e2de);
+  border-radius: 12px;
+  background: var(--tlo-karty, #fff);
+  color: inherit;
+  font: inherit;
+}
+.pp-historia-wiersz {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 4px 12px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--ramka, #e4ebe8);
+}
+.pp-historia-wiersz:last-child { border-bottom: 0; }
+.pp-historia-wiersz .pp-podpis { width: 100%; }

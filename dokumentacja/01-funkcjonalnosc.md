@@ -113,3 +113,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Filtr mięśni w bazie ćwiczeń
 - Po wybraniu partii pod nią pojawiają się chipy jej mięśni z licznikami; można zaznaczyć kilka (pasuje ćwiczenie z którymkolwiek). Zmiana partii czyści wybór mięśni.
 - Bez wybranej partii działa lista rozwijana „Wybierz mięsień" (ustawia też partię).
+
+## Historia
+- Postęp → „Poprzednie plany": zamknięte plany z procentem realizacji; dotknięcie otwiera szczegóły okresu.
+- Ćwiczenia → „Historia" przy ćwiczeniu: lista wykonań (data, serie × powt., ciężar, plan) i największy ciężar.
+- „Usuń plan" ostrzega, że kasuje historię, i proponuje „Zamknij plan (zachowaj historię)".

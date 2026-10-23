@@ -742,6 +742,12 @@ function rysujListe() {
       );
     }
 
+    karta.appendChild(
+      przyciskAkcji("Historia", "", function () {
+        otworzHistorieCwiczenia(cwiczenie);
+      })
+    );
+
     if (cwiczenie.link) {
       const film = document.createElement("a");
       film.className = "akcja film";
