@@ -134,3 +134,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - W sesji przycisk „Dodaj ćwiczenia" od razu otwiera listę ćwiczeń z bazy (sugerowane dla aktywności, albo wszystkie). „Zmień ćwiczenia" wczytuje obecny zestaw do edycji.
 - Zestaw powstaje automatycznie z flagą `roboczy: true` i nazwą „<aktywność> d.m"; nie pokazuje się w „Moje treningi". Pole „Zapisz w Moich zestawach" (z nazwą) zapisuje go na stałe.
 - „Z moich zestawów" (tylko gdy są zapisane zestawy) pozwala wybrać gotowy.
+
+## Przewodnik „Jak to działa?"
+- 7 kart ze zrzutami ekranu (`przewodnik/*.webp`), tekst w `przewodnik.js`. Otwiera się sam przy pierwszym uruchomieniu (`dane.przewodnikWidziany`), potem pod przyciskami „Jak to działa?" (ekran Dziś bez planu) i w Ustawieniach → Pomoc.
+- Nie pokazuje się w automatycznych testach (`navigator.webdriver`).
+- Zrzuty odświeża skrypt `narzedzia/zrzuty-przewodnika.js` (dane demonstracyjne z działającej aplikacji); po zmianach wyglądu uruchomić go ponownie i podnieść wersję.

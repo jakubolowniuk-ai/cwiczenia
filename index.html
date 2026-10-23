@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=29">
+  <link rel="stylesheet" href="style.css?v=30">
 </head>
 <body>
 
@@ -33,6 +33,7 @@
           <li><b>Wybierz ćwiczenia</b> do każdej sesji i odhaczaj je tutaj.</li>
         </ol>
         <button class="przycisk wielki" id="dzis-utworz-plan">Utwórz plan</button>
+        <button class="akcja" id="dzis-jak-to-dziala">Jak to działa?</button>
       </div>
 
       <div id="dzis-plan" hidden>
@@ -434,6 +435,10 @@
           <p class="opis" id="ust-ics-info"></p>
         </div>
       </div>
+      <div class="ust-naglowek">Pomoc</div>
+      <div class="pp-karta">
+        <button class="przycisk drugi" id="ust-przewodnik">Jak to działa? (przewodnik)</button>
+      </div>
       <div class="ust-naglowek">Dane</div>
       <div class="pp-karta">
         <button class="przycisk" id="kopia-zapisz">Zapisz kopię zapasową</button>
@@ -508,16 +513,31 @@
     </div>
   </div>
 
-  <script src="dane.js?v=29"></script>
-  <script src="anatomia.js?v=29"></script>
-  <script src="cwiczenia.js?v=29"></script>
-  <script src="treningi.js?v=29"></script>
-  <script src="kreator.js?v=29"></script>
-  <script src="kreator2.js?v=29"></script>
-  <script src="dzis.js?v=29"></script>
-  <script src="postep.js?v=29"></script>
-  <script src="ustawienia.js?v=29"></script>
-  <script src="kopia.js?v=29"></script>
-  <script src="app.js?v=29"></script>
+  <script src="dane.js?v=30"></script>
+  <script src="anatomia.js?v=30"></script>
+  <script src="cwiczenia.js?v=30"></script>
+  <script src="treningi.js?v=30"></script>
+  <script src="kreator.js?v=30"></script>
+  <script src="kreator2.js?v=30"></script>
+  <script src="dzis.js?v=30"></script>
+  <script src="postep.js?v=30"></script>
+  <script src="ustawienia.js?v=30"></script>
+  <script src="kopia.js?v=30"></script>
+  <div class="przewodnik" id="przewodnik" hidden>
+    <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
+      <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
+      <img id="prz-obraz" alt="" class="prz-obraz">
+      <h2 id="prz-tytul"></h2>
+      <p class="opis" id="prz-tekst"></p>
+      <div class="prz-kropki" id="prz-kropki"></div>
+      <div class="prz-przyciski">
+        <button class="przycisk drugi" id="prz-wstecz">Wstecz</button>
+        <button class="przycisk" id="prz-dalej">Dalej</button>
+      </div>
+    </div>
+  </div>
+
+  <script src="przewodnik.js?v=30"></script>
+  <script src="app.js?v=30"></script>
 </body>
 </html>
