@@ -140,3 +140,11 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Nie pokazuje się w automatycznych testach (`navigator.webdriver`).
 - Zrzuty odświeża skrypt `narzedzia/zrzuty-przewodnika.js` (dane demonstracyjne z działającej aplikacji); po zmianach wyglądu uruchomić go ponownie i podnieść wersję.
 - Podpowiedzi ćwiczeń w sesji dla aktywności z partiami dopasowują też rodzaj (Siłownia → tylko ćwiczenia siłowni); reszta pod „Pokaż wszystkie ćwiczenia z bazy".
+
+## Rekordy
+- Przycisk „Rekord" przy ćwiczeniu: ręczny wpis (ciężar × powtórzenia + liczba serii; albo powtórzenia; albo czas) i opcjonalna data. Zapis w `cwiczenie.rekord = {typ, ciezar, powtorzenia, serie, czas(s), data}`.
+- Definicja: siłownia (ćwiczenia z ciężarem) = najcięższa seria (przy równym ciężarze więcej powtórzeń); bez ciężaru = najwięcej powtórzeń w serii; na czas = najdłuższy czas.
+- Po zaliczeniu ćwiczenia lepiej niż rekord (a gdy go nie ma: lepiej niż najlepszy wynik z historii) aplikacja pyta „Nowy rekord! Zapisać?". Ręczny rekord zmienia się tylko za zgodą.
+- Rekord widać na karcie ćwiczenia, na ekranie Dziś i w oknie Historia.
+- Postęp → „Rekordy aktywności": najdłuższy dystans, najwięcej kroków i najdłuższy czas dla biegania, roweru, spaceru itd. (liczone automatycznie z wyników).
+- Kod: `rekordy.js`.

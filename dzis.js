@@ -293,6 +293,11 @@ function zrobWierszCwiczenia(sesja, id) {
     }
     zapiszDane();
     rysujDzis();
+    if (sesja.zrobione[id]) {
+      setTimeout(function () {
+        sprawdzRekord(sesja, id);
+      }, 50);
+    }
   });
   wiersz.appendChild(odhacz);
 
@@ -309,6 +314,10 @@ function zrobWierszCwiczenia(sesja, id) {
   const ostatnio = tekstOstatnio(id, sesja.id);
   if (ostatnio) {
     tekst.appendChild(tekstElement("div", "ostatnio-info", ostatnio));
+  }
+
+  if (cwiczenie.rekord) {
+    tekst.appendChild(tekstElement("div", "ostatnio-info", "★ Rekord: " + opisRekordu(cwiczenie.rekord)));
   }
 
   if (wykonane) {
@@ -832,8 +841,13 @@ wartZapisz.addEventListener("click", function () {
     wartSesja.wykonane[wartId] = wynik;
   }
   zapiszDane();
+  const sesjaRekordu = wartSesja;
+  const idRekordu = wartId;
   zamknijWartosc();
   rysujDzis();
+  setTimeout(function () {
+    sprawdzRekord(sesjaRekordu, idRekordu);
+  }, 50);
 });
 
 wartCofnij.addEventListener("click", function () {

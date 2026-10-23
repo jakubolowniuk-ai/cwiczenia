@@ -774,6 +774,12 @@ function rysujListe() {
 
     tekst.appendChild(nazwa);
     tekst.appendChild(opis);
+    if (cwiczenie.rekord) {
+      const linia = document.createElement("div");
+      linia.className = "karta-opis";
+      linia.textContent = "★ Rekord: " + opisRekordu(cwiczenie.rekord);
+      tekst.appendChild(linia);
+    }
     karta.appendChild(tekst);
 
     if (cwiczenie.ukryte) {
@@ -804,6 +810,12 @@ function rysujListe() {
         })
       );
     }
+
+    karta.appendChild(
+      przyciskAkcji("Rekord", "", function () {
+        otworzRekord(cwiczenie);
+      })
+    );
 
     karta.appendChild(
       przyciskAkcji("Historia", "", function () {

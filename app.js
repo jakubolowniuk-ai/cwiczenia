@@ -80,6 +80,9 @@ przyciskReset.addEventListener("click", function () {
   if (!document.getElementById("kopia-zapisz") && problemy.indexOf("index.html") === -1) {
     problemy.push("index.html");
   }
+  if (typeof sprawdzRekord === "undefined") {
+    problemy.push("rekordy.js");
+  }
   if (typeof zrobAnatomie === "undefined") {
     problemy.push("anatomia.js");
   }

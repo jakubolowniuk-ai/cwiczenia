@@ -332,6 +332,7 @@ function rysujPostep() {
   postepEdytujPlan.hidden = !plan;
   if (!plan) {
     postepTresc.appendChild(tekstElement("p", "opis", "Gdy ułożysz plan i zaczniesz ćwiczyć, zobaczysz tutaj swoje wyniki."));
+    dodajRekordyAktywnosci();
     dodajPoprzedniePlany();
     return;
   }
@@ -391,6 +392,7 @@ function rysujPostep() {
     otworzUsuwanie(plan);
   });
   postepTresc.appendChild(usun);
+  dodajRekordyAktywnosci();
   dodajPoprzedniePlany();
 }
 
@@ -458,6 +460,9 @@ function otworzHistorieCwiczenia(cwiczenie) {
   if (wpisy.length === 0) {
     postepOknoTresc.appendChild(zrobPustyKomunikat("Brak historii", "Tego ćwiczenia nie zaliczono jeszcze w żadnym planie."));
     return;
+  }
+  if (cwiczenie.rekord) {
+    postepOknoTresc.appendChild(zrobWskazowke("★", "#B45309", "#FDEFD3", "Twój rekord", opisRekordu(cwiczenie.rekord) + (cwiczenie.rekord.data ? " (" + cwiczenie.rekord.data + ")" : "")));
   }
   let najlepszy = null;
   wpisy.forEach(function (w) {

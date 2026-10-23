@@ -1,11 +1,11 @@
 // Service worker: aplikacja działa bez internetu, ale zawsze najpierw próbuje pobrać nowe pliki.
 // Przy każdej wgranej paczce zmień numer wersji poniżej.
-const WERSJA = "cwiczenia-v32";
+const WERSJA = "cwiczenia-v33";
 
 const PLIKI = [
   "./", "index.html", "style.css", "manifest.webmanifest",
   "dane.js", "anatomia.js", "cwiczenia.js", "treningi.js", "kreator.js", "kreator2.js",
-  "dzis.js", "postep.js", "ustawienia.js", "kopia.js", "przewodnik.js", "app.js",
+  "dzis.js", "postep.js", "rekordy.js", "ustawienia.js", "kopia.js", "przewodnik.js", "app.js",
   "przewodnik/1-start.webp", "przewodnik/2-aktywnosci.webp", "przewodnik/3-kalendarz.webp", "przewodnik/4-cwiczenia-w-sesji.webp", "przewodnik/5-parametry.webp", "przewodnik/6-dzis.webp", "przewodnik/7-inne-wartosci.webp", "przewodnik/8-postep.webp", "przewodnik/9-baza.webp", "przewodnik/10-moje-treningi.webp",
   "przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json",
   "ikona-192.png", "ikona-512.png"
