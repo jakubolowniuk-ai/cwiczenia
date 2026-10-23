@@ -41,8 +41,11 @@ const chipyRodzaje = document.getElementById("chipy-rodzaje");
 const przyciskWyczysc = document.getElementById("przycisk-wyczysc");
 
 // Aktualnie wybrane filtry (tekst zapisujemy małymi literami)
-const filtr = { tekst: "", partiaId: null, rodzajId: null, miesienId: null };
+const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [] };
 const filtrMiesien = document.getElementById("filtr-miesien");
+const chipyMiesnie = document.getElementById("chipy-miesnie");
+const blokMiesnieChipy = document.getElementById("blok-miesnie-chipy");
+const blokMiesnieLista = document.getElementById("blok-miesnie-lista");
 const poleCiezar = document.getElementById("pole-ciezar");
 
 // Id ćwiczenia, które właśnie edytujemy (null, gdy dodajemy nowe)
@@ -547,7 +550,9 @@ function pasujeDoFiltrow(cwiczenie) {
   if (filtr.partiaId && (cwiczenie.partieIds || []).indexOf(filtr.partiaId) === -1) {
     return false;
   }
-  if (filtr.miesienId && (cwiczenie.miesnieIds || []).indexOf(filtr.miesienId) === -1) {
+  if (filtr.miesnieIds.length > 0 && !filtr.miesnieIds.some(function (id) {
+    return (cwiczenie.miesnieIds || []).indexOf(id) !== -1;
+  })) {
     return false;
   }
   return true;
@@ -560,6 +565,9 @@ function zrobChip(kategoria, klucz) {
   chip.textContent = kategoria.nazwa;
   chip.addEventListener("click", function () {
     filtr[klucz] = filtr[klucz] === kategoria.id ? null : kategoria.id;
+    if (klucz === "partiaId") {
+      filtr.miesnieIds = [];
+    }
     rysujFiltry();
     rysujListe();
   });
@@ -578,35 +586,62 @@ function rysujFiltry() {
     chipyRodzaje.appendChild(zrobChip(kategoria, "rodzajId"));
   });
 
-  // Lista mięśni pogrupowana według partii, z liczbą ćwiczeń przy każdym
-  filtrMiesien.innerHTML = "";
-  const wszystkie = document.createElement("option");
-  wszystkie.value = "";
-  wszystkie.textContent = "Wszystkie mięśnie";
-  filtrMiesien.appendChild(wszystkie);
-  kategorieTypu("partia").forEach(function (partia) {
-    const miesnie = kategorieTypu("miesien").filter(function (m) {
-      return m.partiaId === partia.id;
+  // Mięśnie: po wybraniu partii chipy jej mięśni (można kilka); bez partii lista rozwijana
+  const liczbaCwiczen = function (m) {
+    return dane.cwiczenia.filter(function (c) {
+      return (c.miesnieIds || []).indexOf(m.id) !== -1;
+    }).length;
+  };
+  chipyMiesnie.innerHTML = "";
+  blokMiesnieChipy.hidden = !filtr.partiaId;
+  blokMiesnieLista.hidden = !!filtr.partiaId;
+  if (filtr.partiaId) {
+    kategorieTypu("miesien").filter(function (m) {
+      return m.partiaId === filtr.partiaId;
+    }).forEach(function (m) {
+      const chip = document.createElement("button");
+      const aktywny = filtr.miesnieIds.indexOf(m.id) !== -1;
+      chip.className = "chip" + (aktywny ? " aktywny" : "");
+      chip.textContent = m.nazwa + " " + liczbaCwiczen(m);
+      chip.addEventListener("click", function () {
+        const i = filtr.miesnieIds.indexOf(m.id);
+        if (i === -1) {
+          filtr.miesnieIds.push(m.id);
+        } else {
+          filtr.miesnieIds.splice(i, 1);
+        }
+        rysujFiltry();
+        rysujListe();
+      });
+      chipyMiesnie.appendChild(chip);
     });
-    if (miesnie.length === 0) {
-      return;
-    }
-    const grupa = document.createElement("optgroup");
-    grupa.label = partia.nazwa;
-    miesnie.forEach(function (m) {
-      const liczba = dane.cwiczenia.filter(function (c) {
-        return (c.miesnieIds || []).indexOf(m.id) !== -1;
-      }).length;
-      const opcja = document.createElement("option");
-      opcja.value = m.id;
-      opcja.textContent = m.nazwa + " (" + liczba + ")";
-      grupa.appendChild(opcja);
+  } else {
+    filtrMiesien.innerHTML = "";
+    const wszystkie = document.createElement("option");
+    wszystkie.value = "";
+    wszystkie.textContent = "Wybierz mięsień";
+    filtrMiesien.appendChild(wszystkie);
+    kategorieTypu("partia").forEach(function (partia) {
+      const miesnie = kategorieTypu("miesien").filter(function (m) {
+        return m.partiaId === partia.id;
+      });
+      if (miesnie.length === 0) {
+        return;
+      }
+      const grupa = document.createElement("optgroup");
+      grupa.label = partia.nazwa;
+      miesnie.forEach(function (m) {
+        const opcja = document.createElement("option");
+        opcja.value = m.id;
+        opcja.textContent = m.nazwa + " (" + liczbaCwiczen(m) + ")";
+        grupa.appendChild(opcja);
+      });
+      filtrMiesien.appendChild(grupa);
     });
-    filtrMiesien.appendChild(grupa);
-  });
-  filtrMiesien.value = filtr.miesienId || "";
+    filtrMiesien.value = "";
+  }
 
-  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.miesienId);
+  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.miesnieIds.length > 0);
 }
 
 // Czyści wyszukiwarkę i wszystkie filtry
@@ -614,7 +649,7 @@ function wyczyscFiltry() {
   filtr.tekst = "";
   filtr.partiaId = null;
   filtr.rodzajId = null;
-  filtr.miesienId = null;
+  filtr.miesnieIds = [];
   poleSzukaj.value = "";
   rysujFiltry();
   rysujListe();
@@ -754,7 +789,7 @@ function rysujListe() {
     );
 
     return karta;
-  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.miesienId].join("|"));
+  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.miesnieIds.join(",")].join("|"));
 }
 
 // ===== Podpięcie przycisków =====
@@ -784,7 +819,11 @@ anTlo.addEventListener("click", function (zdarzenie) {
 });
 przyciskWyczysc.addEventListener("click", wyczyscFiltry);
 filtrMiesien.addEventListener("change", function () {
-  filtr.miesienId = filtrMiesien.value === "" ? null : filtrMiesien.value;
+  const m = znajdzKategorie(filtrMiesien.value);
+  if (m) {
+    filtr.partiaId = m.partiaId;
+    filtr.miesnieIds = [m.id];
+  }
   rysujFiltry();
   rysujListe();
 });

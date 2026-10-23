@@ -109,3 +109,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Partie w aktywności planu
 - W kreatorze (krok 1) można wybrać kilka partii naraz albo „Ogólnorozwojowy (całe ciało)" (Siłownia, Kalistenika).
 - Ćwiczenie pasuje do aktywności, gdy ma choć jedną z wybranych partii; ogólnorozwojowa pasuje do każdego ćwiczenia tego rodzaju.
+
+## Filtr mięśni w bazie ćwiczeń
+- Po wybraniu partii pod nią pojawiają się chipy jej mięśni z licznikami; można zaznaczyć kilka (pasuje ćwiczenie z którymkolwiek). Zmiana partii czyści wybór mięśni.
+- Bez wybranej partii działa lista rozwijana „Wybierz mięsień" (ustawia też partię).
