@@ -118,3 +118,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Postęp → „Poprzednie plany": zamknięte plany z procentem realizacji; dotknięcie otwiera szczegóły okresu.
 - Ćwiczenia → „Historia" przy ćwiczeniu: lista wykonań (data, serie × powt., ciężar, plan) i największy ciężar.
 - „Usuń plan" ostrzega, że kasuje historię, i proponuje „Zamknij plan (zachowaj historię)".
+
+## Baza startowa i ukrywanie ćwiczeń
+- Przy pierwszym starcie aplikacja sama wczytuje bazę (3 pliki `przyklady-*.json`, 219 ćwiczeń); `dane.wersjaBazy` zapamiętuje, że to zrobiono. Brak internetu: ponowna próba przy następnym starcie. Kto ma już ćwiczenia, dostaje tylko oznaczenie `zBazy` na pasujących nazwach.
+- Ćwiczenia z bazy (`zBazy: true`) można tylko ukryć; własne można ukryć lub usunąć.
+- „Ukryj" ustawia `ukryte: true`: ćwiczenie znika z listy, wyboru do treningów i planu oraz z liczników. „Pokaż ukryte (n)" na liście pokazuje ukryte z przyciskiem „Przywróć".
+- Ukryte ćwiczenie w istniejącym treningu zostaje (z dopiskiem „(ukryte)"); historia jest bez zmian.
+- Przycisk „Uzupełnij bazę ćwiczeń przykładowych" w Ustawieniach dopisuje brakujące ćwiczenia z bazy.

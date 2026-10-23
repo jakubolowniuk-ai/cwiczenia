@@ -1030,7 +1030,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
   if (pola.indexOf("styl") !== -1) {
     // Ćwiczenia basenowe z bazy, które mają zapisane style
     const basenowe = dane.cwiczenia.filter(function (c) {
-      return c.rodzajId === aktywnosc.rodzajId && Array.isArray(c.style) && c.style.length > 0;
+      return !c.ukryte && c.rodzajId === aktywnosc.rodzajId && Array.isArray(c.style) && c.style.length > 0;
     });
 
     if (basenowe.length > 0) {
@@ -1413,7 +1413,7 @@ function rysujBudowe() {
 
   const tekstC = kr2Szukaj.value.trim().toLowerCase();
   const lista = dane.cwiczenia.filter(function (cwiczenie) {
-    return (kr2Wszystkie.checked || pasujeDoAktywnosci(cwiczenie, kr2Aktywnosc)) &&
+    return !cwiczenie.ukryte && (kr2Wszystkie.checked || pasujeDoAktywnosci(cwiczenie, kr2Aktywnosc)) &&
       (tekstC === "" || cwiczenie.nazwa.toLowerCase().indexOf(tekstC) !== -1);
   });
 

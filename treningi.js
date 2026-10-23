@@ -90,7 +90,9 @@ function dodajFilm(karta, cwiczenie) {
 
 // Pokazuje w przełączniku liczbę ćwiczeń i treningów
 function odswiezPrzelacznik() {
-  przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.length + ")";
+  przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.filter(function (c) {
+    return !c.ukryte;
+  }).length + ")";
   przelacznikTreningi.textContent = "Moje treningi (" + dane.treningi.length + ")";
 }
 
@@ -153,7 +155,7 @@ function rysujWybrane() {
 
   wybraneIds.forEach(function (id, indeks) {
     const cwiczenie = znajdzCwiczenie(id);
-    const karta = zrobKarte((indeks + 1) + ". " + cwiczenie.nazwa, opisCwiczenia(cwiczenie));
+    const karta = zrobKarte((indeks + 1) + ". " + cwiczenie.nazwa + (cwiczenie.ukryte ? " (ukryte)" : ""), opisCwiczenia(cwiczenie));
 
     const wyzej = przyciskAkcji("↑", "strzalka", function () {
       przesunWybrane(indeks, -1);
@@ -184,6 +186,9 @@ function rysujWybrane() {
 // ===== Panel wyboru ćwiczeń z bazy =====
 
 function pasujeDoWyboru(cwiczenie) {
+  if (cwiczenie.ukryte) {
+    return false;
+  }
   if (filtrWyboru.tekst !== "" && cwiczenie.nazwa.toLowerCase().indexOf(filtrWyboru.tekst) === -1) {
     return false;
   }

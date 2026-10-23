@@ -41,7 +41,8 @@ const chipyRodzaje = document.getElementById("chipy-rodzaje");
 const przyciskWyczysc = document.getElementById("przycisk-wyczysc");
 
 // Aktualnie wybrane filtry (tekst zapisujemy małymi literami)
-const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [] };
+const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [], ukryte: false };
+const przyciskUkryte = document.getElementById("przycisk-ukryte");
 const filtrMiesien = document.getElementById("filtr-miesien");
 const chipyMiesnie = document.getElementById("chipy-miesnie");
 const blokMiesnieChipy = document.getElementById("blok-miesnie-chipy");
@@ -541,6 +542,9 @@ function przyciskAkcji(tekst, dodatkowaKlasa, poKliknieciu) {
 
 // Sprawdza, czy ćwiczenie pasuje do wpisanego tekstu i wybranych filtrów
 function pasujeDoFiltrow(cwiczenie) {
+  if (!!cwiczenie.ukryte !== filtr.ukryte) {
+    return false;
+  }
   if (filtr.tekst !== "" && cwiczenie.nazwa.toLowerCase().indexOf(filtr.tekst) === -1) {
     return false;
   }
@@ -589,7 +593,7 @@ function rysujFiltry() {
   // Mięśnie: po wybraniu partii chipy jej mięśni (można kilka); bez partii lista rozwijana
   const liczbaCwiczen = function (m) {
     return dane.cwiczenia.filter(function (c) {
-      return (c.miesnieIds || []).indexOf(m.id) !== -1;
+      return !c.ukryte && (c.miesnieIds || []).indexOf(m.id) !== -1;
     }).length;
   };
   chipyMiesnie.innerHTML = "";
@@ -641,6 +645,15 @@ function rysujFiltry() {
     filtrMiesien.value = "";
   }
 
+  const liczbaUkrytych = dane.cwiczenia.filter(function (c) {
+    return c.ukryte;
+  }).length;
+  if (filtr.ukryte && liczbaUkrytych === 0) {
+    filtr.ukryte = false;
+  }
+  przyciskUkryte.hidden = liczbaUkrytych === 0 && !filtr.ukryte;
+  przyciskUkryte.textContent = filtr.ukryte ? "← Wróć do listy ćwiczeń" : "Pokaż ukryte (" + liczbaUkrytych + ")";
+
   przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.miesnieIds.length > 0);
 }
 
@@ -650,6 +663,7 @@ function wyczyscFiltry() {
   filtr.partiaId = null;
   filtr.rodzajId = null;
   filtr.miesnieIds = [];
+  filtr.ukryte = false;
   poleSzukaj.value = "";
   rysujFiltry();
   rysujListe();
@@ -693,6 +707,34 @@ function dopiszPorcjami(kontener, lista, zrobKarteElementu, klucz) {
 // ===== Lista ćwiczeń =====
 
 // Rysuje listę ćwiczeń na ekranie (tylko te, które pasują do filtrów)
+function usunCwiczenie(cwiczenie) {
+  // Sprawdzamy, w ilu treningach jest to ćwiczenie
+  const uzycia = dane.treningi.filter(function (trening) {
+    return trening.cwiczeniaIds.indexOf(cwiczenie.id) !== -1;
+  }).length;
+
+  let pytanie = "Usunąć ćwiczenie „" + cwiczenie.nazwa + "”?";
+  if (uzycia > 0) {
+    pytanie += "\n\nZostanie też usunięte z treningów (" + uzycia + ").";
+  }
+
+  if (confirm(pytanie)) {
+    dane.cwiczenia = dane.cwiczenia.filter(function (inne) {
+      return inne.id !== cwiczenie.id;
+    });
+    dane.treningi.forEach(function (trening) {
+      trening.cwiczeniaIds = trening.cwiczeniaIds.filter(function (id) {
+        return id !== cwiczenie.id;
+      });
+    });
+    zapiszDane();
+    rysujListe();
+    if (typeof rysujTreningi === "function") {
+      rysujTreningi();
+    }
+  }
+}
+
 function rysujListe() {
   listaCwiczen.innerHTML = "";
   if (typeof odswiezPrzelacznik === "function") {
@@ -734,6 +776,27 @@ function rysujListe() {
     tekst.appendChild(opis);
     karta.appendChild(tekst);
 
+    if (cwiczenie.ukryte) {
+      karta.classList.add("karta-ukryta");
+      karta.appendChild(
+        przyciskAkcji("Przywróć", "", function () {
+          cwiczenie.ukryte = false;
+          zapiszDane();
+          rysujFiltry();
+          rysujListe();
+          if (typeof rysujTreningi === "function") {
+            rysujTreningi();
+          }
+        })
+      );
+      if (!cwiczenie.zBazy) {
+        karta.appendChild(przyciskAkcji("Usuń", "usun", function () {
+          usunCwiczenie(cwiczenie);
+        }));
+      }
+      return karta;
+    }
+
     if ((cwiczenie.miesnieIds || []).length > 0) {
       karta.appendChild(
         przyciskAkcji("Mięśnie", "", function () {
@@ -765,37 +828,27 @@ function rysujListe() {
     );
 
     karta.appendChild(
-      przyciskAkcji("Usuń", "usun", function () {
-        // Sprawdzamy, w ilu treningach jest to ćwiczenie
-        const uzycia = dane.treningi.filter(function (trening) {
-          return trening.cwiczeniaIds.indexOf(cwiczenie.id) !== -1;
-        }).length;
-
-        let pytanie = "Usunąć ćwiczenie „" + cwiczenie.nazwa + "”?";
-        if (uzycia > 0) {
-          pytanie += "\n\nZostanie też usunięte z treningów (" + uzycia + ").";
-        }
-
-        if (confirm(pytanie)) {
-          dane.cwiczenia = dane.cwiczenia.filter(function (inne) {
-            return inne.id !== cwiczenie.id;
-          });
-          dane.treningi.forEach(function (trening) {
-            trening.cwiczeniaIds = trening.cwiczeniaIds.filter(function (id) {
-              return id !== cwiczenie.id;
-            });
-          });
-          zapiszDane();
-          rysujListe();
-          if (typeof rysujTreningi === "function") {
-            rysujTreningi();
-          }
+      przyciskAkcji("Ukryj", "", function () {
+        cwiczenie.ukryte = true;
+        zapiszDane();
+        rysujFiltry();
+        rysujListe();
+        if (typeof rysujTreningi === "function") {
+          rysujTreningi();
         }
       })
     );
 
+    if (!cwiczenie.zBazy) {
+      karta.appendChild(
+        przyciskAkcji("Usuń", "usun", function () {
+          usunCwiczenie(cwiczenie);
+        })
+      );
+    }
+
     return karta;
-  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.miesnieIds.join(",")].join("|"));
+  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.miesnieIds.join(","), filtr.ukryte].join("|"));
 }
 
 // ===== Podpięcie przycisków =====
@@ -824,6 +877,11 @@ anTlo.addEventListener("click", function (zdarzenie) {
   }
 });
 przyciskWyczysc.addEventListener("click", wyczyscFiltry);
+przyciskUkryte.addEventListener("click", function () {
+  filtr.ukryte = !filtr.ukryte;
+  rysujFiltry();
+  rysujListe();
+});
 filtrMiesien.addEventListener("change", function () {
   const m = znajdzKategorie(filtrMiesien.value);
   if (m) {

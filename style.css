@@ -1664,3 +1664,5 @@ h1 {
 }
 .pp-historia-wiersz:last-child { border-bottom: 0; }
 .pp-historia-wiersz .pp-podpis { width: 100%; }
+
+.karta-ukryta { opacity: 0.65; }

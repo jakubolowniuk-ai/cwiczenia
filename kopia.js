@@ -106,7 +106,8 @@ function nazwaKlucz(tekst) {
 }
 
 // Dopisuje ćwiczenia z listy; zwraca podsumowanie
-function dodajCwiczeniaZListy(lista) {
+function dodajCwiczeniaZListy(lista, opcje) {
+  opcje = opcje || {};
   const wynik = { dodane: 0, duplikaty: 0, bledy: [], nowePartie: [] };
   const zajete = {};
   dane.cwiczenia.forEach(function (c) {
@@ -188,6 +189,9 @@ function dodajCwiczeniaZListy(lista) {
       const istniejace = dane.cwiczenia.find(function (c) {
         return nazwaKlucz(c.nazwa) === nazwaKlucz(nazwa);
       });
+      if (istniejace && opcje.zBazy) {
+        istniejace.zBazy = true;
+      }
       if (istniejace && miesnieIds.length > 0 && !(istniejace.miesnieIds || []).length) {
         istniejace.miesnieIds = miesnieIds;
         istniejace.partieIds = istniejace.partieIds || [];
@@ -203,6 +207,9 @@ function dodajCwiczeniaZListy(lista) {
       return;
     }
 
+    if (opcje.tylkoOznacz) {
+      return;
+    }
     dane.cwiczenia.push({
       id: "cw-" + Date.now() + "-" + dane.cwiczenia.length,
       nazwa: nazwa,
@@ -211,6 +218,7 @@ function dodajCwiczeniaZListy(lista) {
       partieIds: partieIds,
       miesnieIds: miesnieIds,
       link: typeof wpis.link === "string" ? wpis.link.trim() : "",
+      zBazy: !!opcje.zBazy,
       zCiezarem: wpis.ciezar === true || (wpis.ciezar !== false && rodzaj.id === "rodzaj-cialo")
     });
     zajete[nazwaKlucz(nazwa)] = true;
@@ -220,8 +228,8 @@ function dodajCwiczeniaZListy(lista) {
   return wynik;
 }
 
-function dodajIPokaz(lista) {
-  const w = dodajCwiczeniaZListy(lista);
+function dodajIPokaz(lista, opcje) {
+  const w = dodajCwiczeniaZListy(lista, opcje);
   zapiszDane();
   if (typeof rysujListe === "function") {
     rysujFiltry();
@@ -292,8 +300,40 @@ document.getElementById("kopia-przyklady").addEventListener("click", function ()
   })).then(function (wyniki) {
     let lista = [];
     wyniki.forEach(function (w) { lista = lista.concat(w.cwiczenia || []); });
-    dodajIPokaz(lista);
+    dodajIPokaz(lista, { zBazy: true });
   }).catch(function () {
     pokazInfoKopii("Nie udało się pobrać przykładów. Sprawdź internet i spróbuj ponownie.", true);
   });
 });
+
+// ===== Baza ćwiczeń wczytywana przy starcie =====
+// Nowa osoba dostaje gotową bazę. Kto ma już ćwiczenia, dostaje tylko oznaczenie, które z nich
+// pochodzą z bazy (takie można ukryć, ale nie usunąć). Brak internetu: spróbujemy przy następnym starcie.
+
+const WERSJA_BAZY = 1;
+const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
+
+function wczytajBazeStartowa() {
+  if ((dane.wersjaBazy || 0) >= WERSJA_BAZY) {
+    return;
+  }
+  const mialaCwiczenia = dane.cwiczenia.length > 0;
+  Promise.all(PLIKI_BAZY.map(function (a) {
+    return fetch(a).then(function (o) { return o.json(); });
+  })).then(function (wyniki) {
+    let lista = [];
+    wyniki.forEach(function (w) { lista = lista.concat(w.cwiczenia || []); });
+    dodajCwiczeniaZListy(lista, { zBazy: true, tylkoOznacz: mialaCwiczenia });
+    dane.wersjaBazy = WERSJA_BAZY;
+    zapiszDane();
+    if (typeof rysujListe === "function") {
+      rysujFiltry();
+      rysujListe();
+    }
+    if (typeof odswiezPrzelacznik === "function") {
+      odswiezPrzelacznik();
+    }
+  }).catch(function () {});
+}
+
+wczytajBazeStartowa();
