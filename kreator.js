@@ -137,8 +137,11 @@ function opisAktywnosci(aktywnosc) {
   const czesci = [];
   let tytul = nazwaRodzaju;
 
-  if (aktywnosc.partiaId) {
-    tytul = nazwaKategorii(aktywnosc.partiaId);
+  if (aktywnosc.ogolny) {
+    tytul = "Ogólnorozwojowy";
+    czesci.push(nazwaRodzaju);
+  } else if (partieAktywnosci(aktywnosc).length > 0) {
+    tytul = partieAktywnosci(aktywnosc).map(nazwaKategorii).join(", ");
     czesci.push(nazwaRodzaju);
   }
   if (aktywnosc.styl) {
@@ -298,18 +301,51 @@ function przygotujSelectyAktywnosci() {
     krRodzaj.appendChild(opcja);
   });
 
-  krPartia.innerHTML = "";
-  const pustaPartia = document.createElement("option");
-  pustaPartia.value = "";
-  pustaPartia.textContent = "Wybierz partię";
-  krPartia.appendChild(pustaPartia);
-  kategorieTypu("partia").forEach(function (kategoria) {
-    const opcja = document.createElement("option");
-    opcja.value = kategoria.id;
-    opcja.textContent = kategoria.nazwa;
-    krPartia.appendChild(opcja);
-  });
+  rysujWyborPartii();
 
+}
+
+// Wybór partii w formularzu aktywności: kilka partii albo "Ogólnorozwojowy"
+let krPartieWybor = [];
+let krOgolny = false;
+
+function rysujWyborPartii() {
+  krPartia.innerHTML = "";
+  const dodajChip = function (tekst, aktywny, akcja) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip" + (aktywny ? " aktywny" : "");
+    chip.textContent = tekst;
+    chip.addEventListener("click", akcja);
+    krPartia.appendChild(chip);
+  };
+  dodajChip("Ogólnorozwojowy (całe ciało)", krOgolny, function () {
+    krOgolny = !krOgolny;
+    if (krOgolny) {
+      krPartieWybor = [];
+    }
+    rysujWyborPartii();
+  });
+  kategorieTypu("partia").forEach(function (kategoria) {
+    dodajChip(kategoria.nazwa, krPartieWybor.indexOf(kategoria.id) !== -1, function () {
+      krOgolny = false;
+      const i = krPartieWybor.indexOf(kategoria.id);
+      if (i === -1) {
+        krPartieWybor.push(kategoria.id);
+      } else {
+        krPartieWybor.splice(i, 1);
+      }
+      rysujWyborPartii();
+    });
+  });
+}
+
+// Partie aktywności (stare plany mają jedno pole partiaId)
+function partieAktywnosci(aktywnosc) {
+  if (Array.isArray(aktywnosc.partieIds)) {
+    return aktywnosc.partieIds;
+  }
+  return aktywnosc.partiaId ? [aktywnosc.partiaId] : [];
 }
 
 // Pokazuje tylko te pola, których wymaga wybrany rodzaj aktywności
@@ -333,14 +369,16 @@ function otworzFormularzAktywnosci(aktywnosc) {
 
   // Zerujemy pola
   krRodzaj.value = "";
-  krPartia.value = "";
+  krPartieWybor = [];
+  krOgolny = false;
   krRazy.value = "0";
 
   if (aktywnosc) {
     edytowanaAktywnoscId = aktywnosc.id;
     krTytulFormularza.textContent = "Edycja aktywności";
     krRodzaj.value = aktywnosc.rodzajId;
-    krPartia.value = aktywnosc.partiaId || "";
+    krPartieWybor = partieAktywnosci(aktywnosc).slice();
+    krOgolny = !!aktywnosc.ogolny;
     krRazy.value = aktywnosc.razy;
     krUsunAktywnosc.hidden = false;
   } else {
@@ -349,6 +387,7 @@ function otworzFormularzAktywnosci(aktywnosc) {
     krUsunAktywnosc.hidden = true;
   }
 
+  rysujWyborPartii();
   ustawPolaAktywnosci();
   krFormularz.hidden = false;
   rysujKrok1();
@@ -388,16 +427,20 @@ function zapiszAktywnosc() {
     id: edytowanaAktywnoscId || "ak-" + Date.now(),
     rodzajId: rodzaj.id,
     partiaId: null,
+    partieIds: [],
+    ogolny: false,
     razy: 0,
     kolor: stara && stara.kolor ? stara.kolor : kolejnyKolor()
   };
 
   if (pola.indexOf("partia") !== -1) {
-    if (krPartia.value === "") {
-      pokazBladAktywnosci("Wybierz partię mięśni.");
+    if (!krOgolny && krPartieWybor.length === 0) {
+      pokazBladAktywnosci("Wybierz partię mięśni albo „Ogólnorozwojowy”.");
       return;
     }
-    wpis.partiaId = krPartia.value;
+    wpis.ogolny = krOgolny;
+    wpis.partieIds = krOgolny ? [] : krPartieWybor.slice();
+    wpis.partiaId = wpis.partieIds[0] || null;
   }
 
   const razy = Number(krRazy.value);
@@ -412,7 +455,7 @@ function zapiszAktywnosc() {
     const rozlozone = szkic.sesje.filter(function (s) {
       return s.aktywnoscId === stara.id;
     }).length;
-    const zmienionaTresc = stara.rodzajId !== wpis.rodzajId || stara.partiaId !== wpis.partiaId;
+    const zmienionaTresc = stara.rodzajId !== wpis.rodzajId || (stara.ogolny !== wpis.ogolny || partieAktywnosci(stara).join() !== wpis.partieIds.join());
 
     if (zmienionaTresc && rozlozone > 0) {
       if (!confirm("Ta aktywność ma już " + rozlozone + " sesji w kalendarzu. Zmiana rodzaju lub partii usunie je z kalendarza. Kontynuować?")) {

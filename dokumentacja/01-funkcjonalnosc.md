@@ -105,3 +105,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - W oknie wartości na ekranie Dziś są kroki po 2,5 kg; „Różne powtórzenia i ciężary w seriach" rozpisuje je na serie.
 - Adnotacja „Ostatnio (dd.mm): …" pokazuje ostatnie wykonanie (w planie i po jego zakończeniu).
 - Sugerowany plan: jeszcze nie zrobiony (do omówienia).
+
+## Partie w aktywności planu
+- W kreatorze (krok 1) można wybrać kilka partii naraz albo „Ogólnorozwojowy (całe ciało)" (Siłownia, Kalistenika).
+- Ćwiczenie pasuje do aktywności, gdy ma choć jedną z wybranych partii; ogólnorozwojowa pasuje do każdego ćwiczenia tego rodzaju.

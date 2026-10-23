@@ -230,8 +230,14 @@ function dodajLinie(karta, tekst) {
 
 // Czy ćwiczenie pasuje do aktywności: po partii (np. Plecy) albo po rodzaju (np. Rozciąganie)
 function pasujeDoAktywnosci(cwiczenie, aktywnosc) {
-  if (aktywnosc.partiaId) {
-    return (cwiczenie.partieIds || []).indexOf(aktywnosc.partiaId) !== -1;
+  if (aktywnosc.ogolny) {
+    return cwiczenie.rodzajId === aktywnosc.rodzajId;
+  }
+  const partie = partieAktywnosci(aktywnosc);
+  if (partie.length > 0) {
+    return partie.some(function (id) {
+      return (cwiczenie.partieIds || []).indexOf(id) !== -1;
+    });
   }
   return cwiczenie.rodzajId === aktywnosc.rodzajId;
 }

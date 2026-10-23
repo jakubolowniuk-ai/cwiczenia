@@ -75,3 +75,6 @@ Zarezerwowane pole (obecnie nieużywane). Historię tworzą zamknięte i zakońc
 - Ćwiczenie: `zCiezarem` (boolean).
 - Ilość dla kształtów z seriami: opcjonalne `ciezary: [kg, ...]` (jedna liczba na serię; brak = bez ciężaru).
 - Wynik zaliczenia w `wykonane[cwiczenieId]` także może mieć `ciezary`.
+
+## Aktywność w planie: partie
+- `partieIds: []` (kilka partii) i `ogolny: boolean`; `partiaId` = pierwsza partia (zgodność ze starymi planami; brak `partieIds` = jedna partia z `partiaId`).
