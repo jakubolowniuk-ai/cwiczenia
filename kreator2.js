@@ -141,10 +141,10 @@ function cwiczeniaTreningu(trening) {
 function celUstawiony(sesja, aktywnosc) {
   const rodzaj = znajdzKategorie(aktywnosc.rodzajId);
   const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
-  if ((pola.indexOf("styl") !== -1 || pola.indexOf("dlugosci") !== -1) && !(sumaDlugosci(sesja) >= 1)) {
+  if (pola.indexOf("styl") !== -1 && !(sumaMetrow(sesja) >= 1)) {
     return false;
   }
-  if (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1 || pola.indexOf("kroki") !== -1) {
+  if (pola.indexOf("styl") === -1 && (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1 || pola.indexOf("kroki") !== -1)) {
     if (!sesja.dystans && !sesja.czas && !sesja.kroki) {
       return false;
     }
@@ -1020,7 +1020,6 @@ function zrobKarteSesji(sesja, aktywnosc) {
   blad.className = "blad";
 
   let styl = null;
-  let dlugosci = null;
   let kroki = null;
   let dystans = null;
   let dystansJedn = null;
@@ -1061,7 +1060,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
     // Długości osobno dla każdego stylu (0 = ten styl nie jest pływany)
     const blokE = document.createElement("div");
     const opisE = document.createElement("label");
-    opisE.textContent = "Liczba długości basenu w każdym stylu";
+    opisE.textContent = "Dystans w każdym stylu (m)";
     const listaE = document.createElement("div");
     blokE.appendChild(opisE);
     blokE.appendChild(listaE);
@@ -1069,7 +1068,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
 
     const wartosci = {};
     etapySesji(sesja).forEach(function (e) {
-      wartosci[e.styl] = e.dlugosci;
+      wartosci[e.styl] = e.metry;
     });
 
     const rysujEtapy = function () {
@@ -1095,13 +1094,6 @@ function zrobKarteSesji(sesja, aktywnosc) {
     if (wyborCwiczenia) {
       wyborCwiczenia.addEventListener("change", rysujEtapy);
     }
-  }
-
-  if (pola.indexOf("dlugosci") !== -1 && pola.indexOf("styl") === -1) {
-    dlugosci = zrobPoleLiczbowe("Liczba długości basenu", sesja.dlugosci || 0, false);
-    const rzad = zrobRzad();
-    rzad.appendChild(dlugosci.blok);
-    karta.appendChild(rzad);
   }
 
   if (pola.indexOf("kroki") !== -1) {
@@ -1141,15 +1133,15 @@ function zrobKarteSesji(sesja, aktywnosc) {
         for (let n = 0; n < polaEtapow.length; n++) {
           const d = Number(polaEtapow[n].pole.value);
           if (!(d >= 0) || Math.floor(d) !== d) {
-            blad.textContent = "Długości wpisz jako liczby całe (0 = bez tego stylu).";
+            blad.textContent = "Metry wpisz jako liczby całe (0 = bez tego stylu).";
             return null;
           }
           if (d > 0) {
-            etapy.push({ styl: polaEtapow[n].styl, dlugosci: d });
+            etapy.push({ styl: polaEtapow[n].styl, metry: d });
           }
         }
         if (etapy.length === 0) {
-          blad.textContent = "Wpisz liczbę długości w co najmniej jednym stylu.";
+          blad.textContent = "Wpisz dystans w metrach w co najmniej jednym stylu.";
           return null;
         }
         wynik.etapy = etapy;
@@ -1157,15 +1149,15 @@ function zrobKarteSesji(sesja, aktywnosc) {
         wynik.dlugosci = null;
         wynik.cwiczenieId = wyborCwiczenia && wyborCwiczenia.value !== "" ? wyborCwiczenia.value : null;
       }
-      if (dlugosci) {
-        const d = Number(dlugosci.pole.value);
-        if (!(d >= 1) || Math.floor(d) !== d) {
-          blad.textContent = "Wpisz liczbę długości basenu (co najmniej 1).";
+      if (pola.indexOf("styl") !== -1 && czas) {
+        // Basen: czas jest opcjonalny (potrzebny do rekordów na dystansie)
+        const cz = Number(czas.pole.value);
+        if (!(cz >= 0)) {
+          blad.textContent = "Czas musi być liczbą (albo zostaw puste).";
           return null;
         }
-        wynik.dlugosci = d;
-      }
-      if (dystans || czas || kroki) {
+        wynik.czas = cz > 0 ? { wartosc: cz, jednostka: czasJedn.wybor.value } : null;
+      } else if (dystans || czas || kroki) {
         const dyst = dystans ? Number(dystans.pole.value) : 0;
         const cz = czas ? Number(czas.pole.value) : 0;
         const kr = kroki ? Number(kroki.pole.value) : 0;

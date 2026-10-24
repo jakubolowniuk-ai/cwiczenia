@@ -43,8 +43,8 @@ function stosunekWyniku(cel, wynik) {
   if (cel.kroki && wynik.kroki) {
     return wynik.kroki / cel.kroki;
   }
-  if (sumaDlugosci(cel) > 0 && sumaDlugosci(wynik) > 0) {
-    return sumaDlugosci(wynik) / sumaDlugosci(cel);
+  if (sumaMetrow(cel) > 0 && sumaMetrow(wynik) > 0) {
+    return sumaMetrow(wynik) / sumaMetrow(cel);
   }
   if (cel.czas && wynik.czas) {
     return sekundyZ(wynik.czas.wartosc, wynik.czas.jednostka) / sekundyZ(cel.czas.wartosc, cel.czas.jednostka);
@@ -462,7 +462,7 @@ function otworzHistorieCwiczenia(cwiczenie) {
     return;
   }
   if (cwiczenie.rekord) {
-    postepOknoTresc.appendChild(zrobWskazowke("★", "#B45309", "#FDEFD3", "Twój rekord", opisRekordu(cwiczenie.rekord) + (cwiczenie.rekord.data ? " (" + cwiczenie.rekord.data + ")" : "")));
+    postepOknoTresc.appendChild(zrobWskazowke("★", "#B45309", "#FDEFD3", "Twój rekord", opisRekordu(cwiczenie.rekord) + (cwiczenie.rekord.data ? " (" + dataPL(cwiczenie.rekord.data) + ")" : "")));
   }
   let najlepszy = null;
   wpisy.forEach(function (w) {

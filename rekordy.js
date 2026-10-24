@@ -3,6 +3,12 @@
 // Siłownia (ćwiczenia z ciężarem): najcięższa seria. Bez ciężaru: najwięcej powtórzeń w serii. Na czas: najdłuższy czas.
 // Aplikacja pyta "Zapisać nowy rekord?", gdy zaliczysz ćwiczenie lepiej niż dotychczasowy rekord (albo najlepszy wynik z historii).
 
+// "2026-10-24" -> "24.10.2026"
+function dataPL(iso) {
+  const c = String(iso || "").split("-");
+  return c.length === 3 ? c[2] + "." + c[1] + "." + c[0] : String(iso || "");
+}
+
 function slowoSerii(n) {
   if (n === 1) {
     return "seria";
@@ -276,15 +282,12 @@ function rekordyAktywnosci() {
       if (!akt) {
         return;
       }
-      const r = wg[akt.rodzajId] || (wg[akt.rodzajId] = { dystans: 0, kroki: 0, czas: 0 });
+      const r = wg[akt.rodzajId] || (wg[akt.rodzajId] = { dystans: 0, kroki: 0 });
       if (s.wynik.dystans) {
         r.dystans = Math.max(r.dystans, metry(s.wynik.dystans));
       }
       if (s.wynik.kroki) {
         r.kroki = Math.max(r.kroki, s.wynik.kroki);
-      }
-      if (s.wynik.czas) {
-        r.czas = Math.max(r.czas, sekundyZ(s.wynik.czas.wartosc, s.wynik.czas.jednostka));
       }
     });
   });
@@ -292,6 +295,7 @@ function rekordyAktywnosci() {
 }
 
 function dodajRekordyAktywnosci() {
+  dodajRekordyDystansu();
   const wg = rekordyAktywnosci();
   const wiersze = [];
   Object.keys(wg).forEach(function (rodzajId) {
@@ -303,9 +307,6 @@ function dodajRekordyAktywnosci() {
     if (r.kroki > 0) {
       czesci.push("najwięcej kroków " + r.kroki);
     }
-    if (r.czas > 0) {
-      czesci.push("najdłuższy czas " + opisCzasuSekund(r.czas));
-    }
     if (czesci.length > 0) {
       wiersze.push([nazwaKategorii(rodzajId), czesci.join(" · ")]);
     }
@@ -313,8 +314,268 @@ function dodajRekordyAktywnosci() {
   if (wiersze.length === 0) {
     return;
   }
-  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Rekordy aktywności"));
+  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Najdłuższe wyniki"));
   wiersze.forEach(function (w) {
     postepTresc.appendChild(zrobWskazowke("★", "#0B6B5F", "#DDF1E8", w[0], w[1]));
   });
+}
+
+// ===== Rekordy na wybranym dystansie (bieganie, rower, basen) =====
+// dane.rekordyDystans = [{ id, rodzajId, dystansM, styl, czas (sekundy albo null), data }]
+// Użytkownik sam wybiera dystanse (podpowiadamy popularne). Czas jest lepszy, gdy jest krótszy.
+
+const DYSTANSE_PODPOWIEDZI = {
+  "rodzaj-bieganie": [[1000, "1 km"], [3000, "3 km"], [5000, "5 km"], [10000, "10 km"], [21097.5, "Półmaraton"], [42195, "Maraton"]],
+  "rodzaj-rower": [[10000, "10 km"], [20000, "20 km"], [40000, "40 km"], [50000, "50 km"], [100000, "100 km"]],
+  "rodzaj-basen": [[50, "50 m"], [100, "100 m"], [200, "200 m"], [400, "400 m"], [800, "800 m"], [1500, "1500 m"]]
+};
+const RODZAJE_REKORDOW_DYSTANSU = ["rodzaj-bieganie", "rodzaj-rower", "rodzaj-basen"];
+const TOLERANCJA_DYSTANSU = 0.02;
+
+function liczbaPL(x) {
+  return String(Math.round(x * 100) / 100).replace(".", ",");
+}
+
+function opisDystansuM(m) {
+  const pods = Object.keys(DYSTANSE_PODPOWIEDZI).reduce(function (acc, k) {
+    return acc.concat(DYSTANSE_PODPOWIEDZI[k]);
+  }, []).find(function (p) {
+    return p[0] === m && p[1].indexOf("km") === -1 && p[1].indexOf(" m") === -1;
+  });
+  if (pods) {
+    return pods[1] + " (" + liczbaPL(m / 1000) + " km)";
+  }
+  return m >= 1000 ? liczbaPL(m / 1000) + " km" : liczbaPL(m) + " m";
+}
+
+// Czas jak w wynikach zawodów: 24:10 albo 1:05:30 (setne części sekundy tylko, gdy są)
+function opisCzasuRekordu(s) {
+  const calk = Math.floor(s);
+  const ulamek = Math.round((s - calk) * 10) / 10;
+  const h = Math.floor(calk / 3600);
+  const m = Math.floor((calk % 3600) / 60);
+  const sek = calk % 60;
+  const dwie = function (x) {
+    return x < 10 ? "0" + x : String(x);
+  };
+  const koncowka = ulamek > 0 ? String(ulamek).slice(1).replace(".", ",") : "";
+  return h > 0 ? h + ":" + dwie(m) + ":" + dwie(sek) + koncowka : m + ":" + dwie(sek) + koncowka;
+}
+
+function opisRekorduDystansu(r) {
+  const nazwa = nazwaKategorii(r.rodzajId) + (r.styl ? " " + r.styl.toLowerCase() : "");
+  return nazwa + " · " + opisDystansuM(r.dystansM);
+}
+
+function dodajRekordyDystansu() {
+  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Moje rekordy na dystansie"));
+  const lista = dane.rekordyDystans || [];
+  if (lista.length === 0) {
+    postepTresc.appendChild(tekstElement("p", "opis", "Wybierz dystans (np. 5 km, 100 m kraulem), wpisz swój rekord, a aplikacja zapyta, gdy go poprawisz."));
+  }
+  lista.forEach(function (r) {
+    const przycisk = document.createElement("button");
+    przycisk.className = "pp-poprzedni";
+    przycisk.appendChild(tekstElement("b", "", opisRekorduDystansu(r)));
+    przycisk.appendChild(tekstElement("span", "opis", r.czas ? "★ " + opisCzasuRekordu(r.czas) + (r.data ? " (" + dataPL(r.data) + ")" : "") : "Jeszcze bez wyniku"));
+    przycisk.addEventListener("click", function () {
+      otworzRekordDystansu(r);
+    });
+    postepTresc.appendChild(przycisk);
+  });
+  const dodaj = document.createElement("button");
+  dodaj.className = "przycisk-przerywany";
+  dodaj.textContent = "+ Dodaj rekord na dystansie";
+  dodaj.addEventListener("click", function () {
+    otworzRekordDystansu(null);
+  });
+  postepTresc.appendChild(dodaj);
+}
+
+// ----- Okno dodawania / edycji -----
+
+const rdTlo = document.getElementById("rd-tlo");
+const rdRodzaj = document.getElementById("rd-rodzaj");
+const rdChipy = document.getElementById("rd-chipy");
+const rdDystans = document.getElementById("rd-dystans");
+const rdJednostka = document.getElementById("rd-jednostka");
+const rdStylBlok = document.getElementById("rd-styl-blok");
+const rdStyl = document.getElementById("rd-styl");
+const rdGodz = document.getElementById("rd-godz");
+const rdMin = document.getElementById("rd-min");
+const rdSek = document.getElementById("rd-sek");
+const rdData = document.getElementById("rd-data");
+const rdBlad = document.getElementById("rd-blad");
+const rdUsun = document.getElementById("rd-usun");
+let rdEdytowany = null;
+
+function ustawDystansWOknie(m) {
+  if (m >= 1000) {
+    rdDystans.value = String(Math.round(m / 10) / 100);
+    rdJednostka.value = "km";
+  } else {
+    rdDystans.value = String(m);
+    rdJednostka.value = "m";
+  }
+}
+
+function odczytajDystansM() {
+  const x = Number(String(rdDystans.value).replace(",", "."));
+  return rdJednostka.value === "km" ? x * 1000 : x;
+}
+
+function rysujChipyDystansow() {
+  rdChipy.innerHTML = "";
+  const wybrany = odczytajDystansM();
+  (DYSTANSE_PODPOWIEDZI[rdRodzaj.value] || []).forEach(function (p) {
+    const chip = document.createElement("button");
+    chip.type = "button";
+    chip.className = "chip" + (Math.abs(wybrany - p[0]) < 0.5 ? " aktywny" : "");
+    chip.textContent = p[1];
+    chip.addEventListener("click", function () {
+      ustawDystansWOknie(p[0]);
+      rysujChipyDystansow();
+    });
+    rdChipy.appendChild(chip);
+  });
+  rdStylBlok.hidden = rdRodzaj.value !== "rodzaj-basen";
+}
+
+function otworzRekordDystansu(rekord) {
+  rdEdytowany = rekord;
+  rdBlad.textContent = "";
+  rdRodzaj.innerHTML = "";
+  RODZAJE_REKORDOW_DYSTANSU.forEach(function (id) {
+    const o = document.createElement("option");
+    o.value = id;
+    o.textContent = nazwaKategorii(id);
+    rdRodzaj.appendChild(o);
+  });
+  rdStyl.innerHTML = "";
+  dane.stylePlywania.forEach(function (n) {
+    const o = document.createElement("option");
+    o.value = n;
+    o.textContent = n;
+    rdStyl.appendChild(o);
+  });
+  rdRodzaj.value = rekord ? rekord.rodzajId : "rodzaj-bieganie";
+  rdRodzaj.disabled = !!rekord;
+  if (rekord) {
+    ustawDystansWOknie(rekord.dystansM);
+    rdStyl.value = rekord.styl || dane.stylePlywania[0];
+    const c = rekord.czas || 0;
+    rdGodz.value = c ? String(Math.floor(c / 3600)) : "";
+    rdMin.value = c ? String(Math.floor((c % 3600) / 60)) : "";
+    rdSek.value = c ? String(Math.round((c % 60) * 10) / 10) : "";
+    rdData.value = rekord.data || "";
+  } else {
+    rdDystans.value = "";
+    rdJednostka.value = "km";
+    rdGodz.value = "";
+    rdMin.value = "";
+    rdSek.value = "";
+    rdData.value = "";
+  }
+  rdUsun.hidden = !rekord;
+  rysujChipyDystansow();
+  rdTlo.hidden = false;
+}
+
+function zamknijRekordDystansu() {
+  rdTlo.hidden = true;
+  rdEdytowany = null;
+}
+
+rdRodzaj.addEventListener("change", function () {
+  rdDystans.value = "";
+  rysujChipyDystansow();
+});
+rdDystans.addEventListener("input", rysujChipyDystansow);
+rdJednostka.addEventListener("change", rysujChipyDystansow);
+document.getElementById("rd-anuluj").addEventListener("click", zamknijRekordDystansu);
+rdTlo.addEventListener("click", function (z) {
+  if (z.target === rdTlo) {
+    zamknijRekordDystansu();
+  }
+});
+rdUsun.addEventListener("click", function () {
+  dane.rekordyDystans = dane.rekordyDystans.filter(function (r) {
+    return r !== rdEdytowany;
+  });
+  zapiszDane();
+  zamknijRekordDystansu();
+  rysujPostep();
+});
+document.getElementById("rd-zapisz").addEventListener("click", function () {
+  const m = odczytajDystansM();
+  if (!(m > 0)) {
+    rdBlad.textContent = "Wpisz dystans albo wybierz z podpowiedzi.";
+    return;
+  }
+  const czas = (Number(rdGodz.value) || 0) * 3600 + (Number(rdMin.value) || 0) * 60 + (Number(String(rdSek.value).replace(",", ".")) || 0);
+  if (czas < 0) {
+    rdBlad.textContent = "Czas nie może być ujemny.";
+    return;
+  }
+  const rodzajId = rdRodzaj.value;
+  const styl = rodzajId === "rodzaj-basen" ? rdStyl.value : "";
+  const taki = dane.rekordyDystans.find(function (r) {
+    return r !== rdEdytowany && r.rodzajId === rodzajId && r.styl === styl && Math.abs(r.dystansM - m) / m <= 0.001;
+  });
+  if (taki) {
+    rdBlad.textContent = "Taki rekord już jest na liście.";
+    return;
+  }
+  const wpis = { id: rdEdytowany ? rdEdytowany.id : "rd-" + Date.now(), rodzajId: rodzajId, dystansM: m, styl: styl, czas: czas > 0 ? czas : null, data: rdData.value || "" };
+  if (rdEdytowany) {
+    dane.rekordyDystans = dane.rekordyDystans.map(function (r) {
+      return r === rdEdytowany ? wpis : r;
+    });
+  } else {
+    dane.rekordyDystans.push(wpis);
+  }
+  zapiszDane();
+  zamknijRekordDystansu();
+  rysujPostep();
+});
+
+// Po zapisaniu wyniku sesji: jeśli dystans i czas pasują do wybranego dystansu i czas jest lepszy, pytamy o zapis rekordu
+function sprawdzRekordDystansu(rodzajId, wynik) {
+  if (!wynik || !wynik.czas || !Array.isArray(dane.rekordyDystans)) {
+    return;
+  }
+  let metrySesji = null;
+  let styl = "";
+  if (rodzajId === "rodzaj-basen") {
+    const etapy = etapySesji(wynik);
+    if (etapy.length !== 1) {
+      return;
+    }
+    metrySesji = etapy[0].metry;
+    styl = etapy[0].styl || "";
+  } else if (wynik.dystans) {
+    metrySesji = metry(wynik.dystans);
+  }
+  if (!(metrySesji > 0)) {
+    return;
+  }
+  const czas = sekundyZ(wynik.czas.wartosc, wynik.czas.jednostka);
+  let pasujacy = null;
+  dane.rekordyDystans.forEach(function (r) {
+    if (r.rodzajId === rodzajId && (r.styl || "") === styl && Math.abs(metrySesji - r.dystansM) / r.dystansM <= TOLERANCJA_DYSTANSU) {
+      if (!pasujacy || Math.abs(metrySesji - r.dystansM) < Math.abs(metrySesji - pasujacy.dystansM)) {
+        pasujacy = r;
+      }
+    }
+  });
+  if (!pasujacy || (pasujacy.czas && czas >= pasujacy.czas)) {
+    return;
+  }
+  const poprzednio = pasujacy.czas ? " (poprzednio " + opisCzasuRekordu(pasujacy.czas) + ")" : "";
+  if (confirm("Nowy rekord! " + opisRekorduDystansu(pasujacy) + ": " + opisCzasuRekordu(czas) + poprzednio + ".\n\nZapisać jako Twój rekord?")) {
+    pasujacy.czas = czas;
+    pasujacy.data = dzisISO();
+    zapiszDane();
+    rysujPostep();
+  }
 }

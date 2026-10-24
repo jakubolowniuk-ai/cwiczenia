@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=33">
+  <link rel="stylesheet" href="style.css?v=34">
 </head>
 <body>
 
@@ -513,6 +513,40 @@
     </div>
   </div>
 
+  <div class="wynik-tlo" id="rd-tlo" hidden>
+    <div class="okno" role="dialog" aria-label="Rekord na dystansie">
+      <h2>Rekord na dystansie</h2>
+      <div class="formularz">
+        <label for="rd-rodzaj">Aktywność</label>
+        <select id="rd-rodzaj"></select>
+        <div id="rd-styl-blok" hidden>
+          <label for="rd-styl">Styl</label>
+          <select id="rd-styl"></select>
+        </div>
+        <div class="etykieta">Dystans (wybierz albo wpisz własny)</div>
+        <div class="chipy" id="rd-chipy"></div>
+        <div class="rd-rzad">
+          <input type="number" id="rd-dystans" inputmode="decimal" min="0" step="any" placeholder="Własny dystans">
+          <select id="rd-jednostka"><option value="km">km</option><option value="m">m</option></select>
+        </div>
+        <div class="etykieta">Twój rekord (opcjonalnie)</div>
+        <div class="rd-rzad rd-czas">
+          <input type="number" id="rd-godz" inputmode="numeric" min="0" placeholder="godz.">
+          <input type="number" id="rd-min" inputmode="numeric" min="0" placeholder="min">
+          <input type="number" id="rd-sek" inputmode="decimal" min="0" step="any" placeholder="s">
+        </div>
+        <label for="rd-data">Data (opcjonalnie)</label>
+        <input type="date" id="rd-data">
+        <p class="blad" id="rd-blad"></p>
+        <div>
+          <button class="przycisk drugi" id="rd-anuluj">Anuluj</button>
+          <button class="przycisk" id="rd-zapisz">Zapisz</button>
+        </div>
+        <button class="akcja usun" id="rd-usun" hidden>Usuń rekord</button>
+      </div>
+    </div>
+  </div>
+
   <div class="wynik-tlo" id="rek-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Rekord">
       <h2 id="rek-tytul">Rekord</h2>
@@ -526,17 +560,17 @@
     </div>
   </div>
 
-  <script src="dane.js?v=33"></script>
-  <script src="anatomia.js?v=33"></script>
-  <script src="cwiczenia.js?v=33"></script>
-  <script src="treningi.js?v=33"></script>
-  <script src="kreator.js?v=33"></script>
-  <script src="kreator2.js?v=33"></script>
-  <script src="dzis.js?v=33"></script>
-  <script src="postep.js?v=33"></script>
-  <script src="rekordy.js?v=33"></script>
-  <script src="ustawienia.js?v=33"></script>
-  <script src="kopia.js?v=33"></script>
+  <script src="dane.js?v=34"></script>
+  <script src="anatomia.js?v=34"></script>
+  <script src="cwiczenia.js?v=34"></script>
+  <script src="treningi.js?v=34"></script>
+  <script src="kreator.js?v=34"></script>
+  <script src="kreator2.js?v=34"></script>
+  <script src="dzis.js?v=34"></script>
+  <script src="postep.js?v=34"></script>
+  <script src="rekordy.js?v=34"></script>
+  <script src="ustawienia.js?v=34"></script>
+  <script src="kopia.js?v=34"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -551,7 +585,7 @@
     </div>
   </div>
 
-  <script src="przewodnik.js?v=33"></script>
-  <script src="app.js?v=33"></script>
+  <script src="przewodnik.js?v=34"></script>
+  <script src="app.js?v=34"></script>
 </body>
 </html>

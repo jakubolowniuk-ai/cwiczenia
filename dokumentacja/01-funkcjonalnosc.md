@@ -148,3 +148,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Rekord widać na karcie ćwiczenia, na ekranie Dziś i w oknie Historia.
 - Postęp → „Rekordy aktywności": najdłuższy dystans, najwięcej kroków i najdłuższy czas dla biegania, roweru, spaceru itd. (liczone automatycznie z wyników).
 - Kod: `rekordy.js`.
+
+## Rekordy na dystansie i basen w metrach
+- Basen: dystans w metrach osobno dla każdego stylu (`etapy: [{styl, metry}]`), opcjonalny czas sesji. Stare sesje z długościami basenu są liczone jako 25 m na długość (`etapySesji`). Pole rodzaju: `polaPlanu: ["styl","czas"]` (migracja w dane.js).
+- Postęp → „Moje rekordy na dystansie": użytkownik sam dodaje dystans (podpowiedzi: bieganie 1/3/5/10 km, półmaraton, maraton; rower 10/20/40/50/100 km; basen 50–1500 m + styl; własny dystans w km lub m) i opcjonalnie rekord (czas). Zapis: `dane.rekordyDystans = [{id, rodzajId, dystansM, styl, czas(s), data}]`.
+- Po wpisaniu wyniku sesji (bieganie/rower z dystansem i czasem; basen z jednym stylem i czasem) dystans w tolerancji 2% i krótszy czas → „Nowy rekord! Zapisać?".
+- „Najdłuższe wyniki" (automatycznie): najdłuższy dystans i najwięcej kroków; bez „najdłuższego czasu" (dłuższy czas to nie postęp przy biegu, rowerze, spacerze i pływaniu). Dłuższy czas zostaje rekordem tylko w ćwiczeniach (statyka, joga).

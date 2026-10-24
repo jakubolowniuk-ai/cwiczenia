@@ -86,32 +86,34 @@ function zapiszSzkic() {
 
 // ===== Pomocnicze o sesjach =====
 
-// Basen: etapy sesji [{ styl, dlugosci }]. Starsze sesje miały jeden styl i jedną liczbę długości.
+// Basen: etapy sesji [{ styl, metry }]. Starsze sesje miały długości basenu: liczymy je jako 25 m.
 function etapySesji(s) {
   if (Array.isArray(s.etapy) && s.etapy.length > 0) {
-    return s.etapy;
+    return s.etapy.map(function (e) {
+      return { styl: e.styl, metry: e.metry !== undefined ? e.metry : (e.dlugosci || 0) * 25 };
+    });
   }
   if (s.dlugosci) {
-    return [{ styl: s.styl || "", dlugosci: s.dlugosci }];
+    return [{ styl: s.styl || "", metry: s.dlugosci * 25 }];
   }
   return [];
 }
 
-function sumaDlugosci(s) {
+function sumaMetrow(s) {
   return etapySesji(s).reduce(function (suma, e) {
-    return suma + e.dlugosci;
+    return suma + e.metry;
   }, 0);
 }
 
-// Tekst, np. "Kraul 10 dł. · Grzbietowy 6 dł. (razem 16)"
+// Tekst, np. "Kraul 400 m · Grzbietowy 200 m (razem 600 m)"
 function opisEtapow(s) {
   const etapy = etapySesji(s);
   const czesci = etapy.map(function (e) {
-    return (e.styl ? e.styl + " " : "") + e.dlugosci + " dł.";
+    return (e.styl ? e.styl + " " : "") + e.metry + " m";
   });
   let tekst = czesci.join(" · ");
   if (etapy.length > 1) {
-    tekst += " (razem " + sumaDlugosci(s) + ")";
+    tekst += " (razem " + sumaMetrow(s) + " m)";
   }
   return tekst;
 }
@@ -146,9 +148,6 @@ function opisAktywnosci(aktywnosc) {
   }
   if (aktywnosc.styl) {
     czesci.push(aktywnosc.styl);
-  }
-  if (aktywnosc.dlugosci) {
-    czesci.push(aktywnosc.dlugosci + " " + (aktywnosc.dlugosci === 1 ? "długość" : "długości"));
   }
   if (aktywnosc.kroki) {
     czesci.push(opisKrokow(aktywnosc.kroki));

@@ -28,6 +28,7 @@ const MIESIACE_DOPELNIACZ = [
 
 // Sesja, której wynik teraz wpisujemy, i odczyt pól formularza wyniku
 let wynikSesja = null;
+let wynikRodzajId = null;
 let wynikOdczyt = null;
 
 // ===== Pomocnicze =====
@@ -105,7 +106,7 @@ function sesjaZaliczona(plan, sesja) {
   return wszystkie > 0 && liczbaZrobionych(sesja) === wszystkie;
 }
 
-// Opis celu albo wyniku biegania i basenu, np. "Kraul · 20 długości" albo "5 km · 30 min"
+// Opis celu albo wyniku biegania i basenu, np. "Kraul 400 m" albo "5 km · 30 min"
 function opisCeluSesji(dane_) {
   const czesci = [];
   if (etapySesji(dane_).length > 0) {
@@ -928,6 +929,7 @@ function zamknijPlan(plan) {
 function otworzWynik(plan, sesja) {
   const aktywnosc = aktywnoscPlanu(plan, sesja.aktywnoscId);
   wynikSesja = sesja;
+  wynikRodzajId = aktywnosc.rodzajId;
   wynikTytul.textContent = "Wynik: " + opisAktywnosci(aktywnosc).tytul;
   wynikBlad.textContent = "";
   wynikPola.innerHTML = "";
@@ -964,8 +966,12 @@ function zapiszWynik() {
   wynikSesja.wynik = wynik;
   wynikSesja.dataWykonania = dzisISO();
   zapiszDane();
+  const rodzajWyniku = wynikRodzajId;
   zamknijWynik();
   rysujDzis();
+  setTimeout(function () {
+    sprawdzRekordDystansu(rodzajWyniku, wynik);
+  }, 50);
 }
 
 wynikZapisz.addEventListener("click", zapiszWynik);

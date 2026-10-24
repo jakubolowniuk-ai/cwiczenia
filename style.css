@@ -1718,3 +1718,8 @@ h1 {
 /* Karta ćwiczeń sesji: tekst na całą szerokość, przyciski pod spodem */
 #pd-sesja-trening .karta { flex-wrap: wrap; }
 #pd-sesja-trening .karta-tekst { flex: 1 1 100%; }
+
+/* Rekord na dystansie */
+.rd-rzad { display: flex; gap: 8px; }
+.rd-rzad input { flex: 1; min-width: 0; }
+.rd-czas input { text-align: center; }

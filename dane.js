@@ -97,7 +97,7 @@ function domyslneDane() {
       { id: "rodzaj-statyczny", nazwa: "Trening statyczny", typ: "rodzaj", miara: "statyczna", polaPlanu: [] },
       { id: "rodzaj-rozciaganie", nazwa: "Rozciąganie", typ: "rodzaj", miara: "serie", polaPlanu: [] },
       { id: "rodzaj-bieganie", nazwa: "Bieganie", typ: "rodzaj", miara: "sesja", polaPlanu: ["dystans", "czas"] },
-      { id: "rodzaj-basen", nazwa: "Basen", typ: "rodzaj", miara: "sesja", polaPlanu: ["styl", "dlugosci"] },
+      { id: "rodzaj-basen", nazwa: "Basen", typ: "rodzaj", miara: "sesja", polaPlanu: ["styl", "czas"] },
       { id: "rodzaj-rower", nazwa: "Rower", typ: "rodzaj", miara: "sesja", polaPlanu: ["dystans", "czas"] },
       { id: "rodzaj-spacer", nazwa: "Spacer", typ: "rodzaj", miara: "sesja", polaPlanu: ["kroki", "dystans", "czas"] },
       { id: "rodzaj-joga", nazwa: "Joga / mobilność", typ: "rodzaj", miara: "statyczna", polaPlanu: [] },
@@ -118,6 +118,7 @@ function domyslneDane() {
     szkicPlanu: null,
     plany: [],
     historia: [],
+    rekordyDystans: [],
     ustawienia: { godzinaAlarmu: "18:30" }
   };
 }
@@ -175,6 +176,17 @@ function uzupelnijDane(zapisane) {
   });
   if (spacer && Array.isArray(spacer.polaPlanu) && spacer.polaPlanu.indexOf("kroki") === -1) {
     spacer.polaPlanu = ["kroki", "dystans", "czas"];
+  }
+
+  // Basen: metry zamiast długości basenu, czas opcjonalny
+  const basen = zapisane.kategorie.find(function (k) {
+    return k.id === "rodzaj-basen";
+  });
+  if (basen && Array.isArray(basen.polaPlanu) && basen.polaPlanu.indexOf("dlugosci") !== -1) {
+    basen.polaPlanu = ["styl", "czas"];
+  }
+  if (!Array.isArray(zapisane.rekordyDystans)) {
+    zapisane.rekordyDystans = [];
   }
 
   // Wersja 5: mięśnie rozdzielone na części (np. triceps na dwie głowy). Przepisujemy ćwiczenia i usuwamy stare mięśnie
