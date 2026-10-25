@@ -371,6 +371,8 @@ function otworzOknoMiesni(cwiczenie) {
 // ===== Formularz =====
 
 // Wypełnia listę rodzajów i pola wyboru partii na podstawie kategorii z danych
+let cwiczenieEdytowane = null;
+
 function przygotujFormularz() {
   poleRodzaj.innerHTML = "";
   const pustaOpcja = document.createElement("option");
@@ -378,7 +380,10 @@ function przygotujFormularz() {
   pustaOpcja.textContent = "Wybierz rodzaj";
   poleRodzaj.appendChild(pustaOpcja);
 
-  kategorieTypu("rodzaj").forEach(function (kategoria) {
+  // Bieganie, rower, spacer i basen nie mają ćwiczeń (są sesjami z dystansem i czasem)
+  kategorieTypu("rodzaj").filter(function (kategoria) {
+    return kategoria.miara !== "sesja" || (cwiczenieEdytowane && cwiczenieEdytowane.rodzajId === kategoria.id);
+  }).forEach(function (kategoria) {
     const opcja = document.createElement("option");
     opcja.value = kategoria.id;
     opcja.textContent = kategoria.nazwa;
@@ -409,6 +414,7 @@ let poZapisieCwiczenia = null;
 function otworzFormularz(cwiczenie, opcje) {
   opcje = opcje || {};
   poZapisieCwiczenia = typeof opcje.poZapisie === "function" ? opcje.poZapisie : null;
+  cwiczenieEdytowane = cwiczenie || null;
   przygotujFormularz();
   pokazBlad("");
 
@@ -612,7 +618,9 @@ function rysujFiltry() {
   });
 
   chipyRodzaje.innerHTML = "";
-  kategorieTypu("rodzaj").forEach(function (kategoria) {
+  kategorieTypu("rodzaj").filter(function (k) {
+    return k.miara !== "sesja";
+  }).forEach(function (kategoria) {
     chipyRodzaje.appendChild(zrobChip(kategoria, "rodzajId"));
   });
 
