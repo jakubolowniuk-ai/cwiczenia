@@ -169,3 +169,12 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Rekordy automatyczne i kolejność ćwiczeń (v38)
 - Rekord ćwiczenia zapisuje się sam po zaliczeniu w planie: pierwszy wynik (albo najlepszy z historii), gdy rekordu nie ma, i każdy kolejny, który go poprawia. Bez pytania; wynik widać w wierszu „★ Rekord". Rekord to rekordowa seria: największy ciężar (z powtórzeniami), a bez ciężaru najwięcej powtórzeń w serii.
 - Dziś: uchwyt „⋮⋮" przy ćwiczeniu pozwala przeciągnąć je palcem w inne miejsce; kolejność zapisuje się w sesji (`sesja.kolejnosc`).
+
+## Tryb „Ćwicz" (v39, plik cwicz.js)
+- Przycisk „Ćwicz" (albo „Kontynuuj ćwiczenie") na karcie sesji na ekranie Dziś otwiera pełny ekran treningu: jedno ćwiczenie, seria po serii, w kolejności z ekranu Dziś.
+- Seria z powtórzeniami: pola powtórzeń i ciężaru (kg) wypełnione planem z przyciskami − i +; „Zrobione ✓" zapisuje wynik serii i włącza przerwę.
+- Ćwiczenia na czas (statyczne): stoper liczy w górę; po osiągnięciu celu daje sygnał, ale liczy dalej; „Stop" zapisuje czas serii i włącza przerwę (żeby można było bić rekordy).
+- Przerwa: odliczanie, −15 s / +15 s (zmiana zapamiętuje się w `cwiczenie.przerwa`), „Pomiń przerwę"; po czasie dźwięk i wibracja, napis „Zaczynaj!". Domyślna przerwa: `ustawienia.przerwa` (60 s).
+- Dodatkowe: „← Poprzednia", „+ seria", „Pomiń ćwiczenie", podsumowanie na końcu. Ekran nie wygasza się (Wake Lock).
+- Dane: `sesja.przebieg = {wyniki: {id: [{p, kg, t}]}, extra: {id: n}, pominiete: {id: true}}` (pozycja wyliczana, więc po zamknięciu aplikacji wracasz w to samo miejsce). Po ostatniej serii ćwiczenie jest odhaczane (`zrobione`, `wykonane`) i sprawdzany jest rekord.
+- Ustawienia → Trening: dźwięk, wibracja (`ustawienia.dzwiek`, `ustawienia.wibracja`), domyślna przerwa.

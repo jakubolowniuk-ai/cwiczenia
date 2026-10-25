@@ -253,6 +253,17 @@ function zrobKarteDzis(plan, sesja) {
     pasek.appendChild(wypelnienie);
     karta.appendChild(pasek);
 
+    if (ids.length > 0 && zrobione < ids.length && typeof otworzCwicz === "function") {
+      const rozpoczete = zrobione > 0 || (sesja.przebieg && Object.keys(sesja.przebieg.wyniki || {}).length > 0);
+      const cwicz = document.createElement("button");
+      cwicz.className = "przycisk wielki";
+      cwicz.textContent = rozpoczete ? "Kontynuuj ćwiczenie" : "Ćwicz";
+      cwicz.addEventListener("click", function () {
+        otworzCwicz(sesja);
+      });
+      karta.appendChild(cwicz);
+    }
+
     ids.forEach(function (id) {
       karta.appendChild(zrobWierszCwiczenia(sesja, id));
     });

@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=38">
+  <link rel="stylesheet" href="style.css?v=39">
 </head>
 <body>
 
@@ -438,6 +438,22 @@
           <p class="opis" id="ust-ics-info"></p>
         </div>
       </div>
+      <div class="ust-naglowek">Trening</div>
+      <div class="pp-karta">
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Dźwięk po przerwie</div>
+          <button class="przelacznik-wl" id="ust-dzwiek" role="switch" aria-checked="true" aria-label="Dźwięk po przerwie"><span></span></button>
+        </div>
+        <div class="ust-linia"></div>
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Wibracja po przerwie</div>
+          <button class="przelacznik-wl" id="ust-wibracja" role="switch" aria-checked="true" aria-label="Wibracja po przerwie"><span></span></button>
+        </div>
+        <div class="ust-linia"></div>
+        <label class="ust-nazwa" for="ust-przerwa">Domyślna przerwa między seriami (s)</label>
+        <input type="number" id="ust-przerwa" class="ust-godzina" min="5" max="900" step="5" value="60" inputmode="numeric">
+        <p class="opis">Przerwę dla konkretnego ćwiczenia zmienisz w trakcie ćwiczenia przyciskami −15 s i +15 s. Aplikacja ją zapamięta.</p>
+      </div>
       <div class="ust-naglowek">Pomoc</div>
       <div class="pp-karta">
         <button class="przycisk drugi" id="ust-przewodnik">Jak to działa? (przewodnik)</button>
@@ -563,17 +579,28 @@
     </div>
   </div>
 
-  <script src="dane.js?v=38"></script>
-  <script src="anatomia.js?v=38"></script>
-  <script src="cwiczenia.js?v=38"></script>
-  <script src="treningi.js?v=38"></script>
-  <script src="kreator.js?v=38"></script>
-  <script src="kreator2.js?v=38"></script>
-  <script src="dzis.js?v=38"></script>
-  <script src="postep.js?v=38"></script>
-  <script src="rekordy.js?v=38"></script>
-  <script src="ustawienia.js?v=38"></script>
-  <script src="kopia.js?v=38"></script>
+  <script src="dane.js?v=39"></script>
+  <!-- Tryb ćwiczenia: pełny ekran nad aplikacją -->
+  <div class="cwicz" id="cwicz" hidden>
+    <div class="cwicz-gora">
+      <button class="wstecz" id="cwicz-zamknij" aria-label="Zamknij tryb ćwiczenia">✕</button>
+      <h2 class="cwicz-tytul" id="cwicz-tytul">Ćwiczenie</h2>
+    </div>
+    <div class="cwicz-pasek"><div id="cwicz-pasek"></div></div>
+    <div class="cwicz-tresc" id="cwicz-tresc"></div>
+  </div>
+
+  <script src="anatomia.js?v=39"></script>
+  <script src="cwiczenia.js?v=39"></script>
+  <script src="treningi.js?v=39"></script>
+  <script src="kreator.js?v=39"></script>
+  <script src="kreator2.js?v=39"></script>
+  <script src="dzis.js?v=39"></script>
+  <script src="postep.js?v=39"></script>
+  <script src="rekordy.js?v=39"></script>
+  <script src="cwicz.js?v=39"></script>
+  <script src="ustawienia.js?v=39"></script>
+  <script src="kopia.js?v=39"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -588,7 +615,7 @@
     </div>
   </div>
 
-  <script src="przewodnik.js?v=38"></script>
-  <script src="app.js?v=38"></script>
+  <script src="przewodnik.js?v=39"></script>
+  <script src="app.js?v=39"></script>
 </body>
 </html>

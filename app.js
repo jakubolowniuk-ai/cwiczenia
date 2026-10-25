@@ -83,6 +83,9 @@ przyciskReset.addEventListener("click", function () {
   if (typeof sprawdzRekord === "undefined") {
     problemy.push("rekordy.js");
   }
+  if (typeof otworzCwicz === "undefined") {
+    problemy.push("cwicz.js");
+  }
   if (typeof zrobAnatomie === "undefined") {
     problemy.push("anatomia.js");
   }
