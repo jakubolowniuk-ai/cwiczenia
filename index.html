@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=35">
+  <link rel="stylesheet" href="style.css?v=36">
 </head>
 <body>
 
@@ -57,7 +57,7 @@
       <button class="przycisk" id="przycisk-nowe">+ Dodaj ćwiczenie</button>
 
       <div class="formularz" id="formularz-cwiczenia" hidden>
-        <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-formularza">Nowe ćwiczenie</h2></div>
+        <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-formularza">Nowe ćwiczenie</h2><button class="przycisk maly zapisz-gora" id="przycisk-zapisz-gora" type="button">Zapisz</button></div>
 
         <label for="pole-nazwa">Nazwa</label>
         <input type="text" id="pole-nazwa" placeholder="Np. Wiosłowanie">
@@ -93,7 +93,8 @@
 
         <!-- Mięśnie: jedna sylwetka do dotykania, wybrane mięśnie na górze listy -->
         <div class="etykieta-pola">Mięśnie</div>
-        <div class="panel" id="panel-miesni">
+        <button class="akcja" id="przycisk-pokaz-miesnie" type="button">Pokaż listę mięśni</button>
+        <div class="panel" id="panel-miesni" hidden>
           <div id="pole-miesnie"></div>
         </div>
 
@@ -145,7 +146,7 @@
         <button class="przycisk" id="przycisk-nowy-trening">+ Dodaj trening</button>
 
         <div class="formularz" id="formularz-treningu" hidden>
-          <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj-trening" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-treningu">Nowy trening</h2></div>
+          <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj-trening" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-treningu">Nowy trening</h2><button class="przycisk maly zapisz-gora" id="przycisk-zapisz-trening-gora" type="button">Zapisz</button></div>
 
           <label for="pole-nazwa-treningu">Nazwa treningu</label>
           <input type="text" id="pole-nazwa-treningu" placeholder="Np. Plecy A">
@@ -154,7 +155,8 @@
           <p class="opis" id="puste-wybrane">Nie dodano jeszcze ćwiczeń.</p>
           <div id="wybrane-cwiczenia"></div>
 
-          <button class="przycisk drugi" id="przycisk-dodaj-cwiczenia">+ Dodaj ćwiczenia</button>
+          <button class="przycisk drugi" id="przycisk-dodaj-cwiczenia">+ Dodaj ćwiczenia z bazy</button>
+          <button class="przycisk-przerywany" id="przycisk-nowe-w-treningu" type="button">+ Utwórz nowe ćwiczenie</button>
 
           <div class="panel" id="panel-wyboru" hidden>
             <label for="pole-szukaj-wyboru" class="etykieta-pola">Szukaj ćwiczenia</label>
@@ -342,7 +344,7 @@
           </div>
 
           <div id="pd-widok-budowa" hidden>
-            <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr2-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2></div>
+            <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr2-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr2-budowa-tytul">Nowy trening</h2><button class="przycisk maly zapisz-gora" id="kr2-zapisz-gora" type="button">Gotowe</button></div>
             <div class="formularz">
               <div class="etykieta">Sugerowane ćwiczenia</div>
               <label class="wybor wybor-pelny">
@@ -350,6 +352,7 @@
                 Pokaż wszystkie ćwiczenia z bazy
               </label>
               <input type="search" id="kr2-szukaj" placeholder="Szukaj ćwiczenia">
+              <button class="przycisk-przerywany" id="kr2-nowe-cwiczenie" type="button">+ Utwórz nowe ćwiczenie</button>
               <div id="kr2-cwiczenia"></div>
               <p class="opis" id="kr2-wybrano"></p>
 
@@ -560,17 +563,17 @@
     </div>
   </div>
 
-  <script src="dane.js?v=35"></script>
-  <script src="anatomia.js?v=35"></script>
-  <script src="cwiczenia.js?v=35"></script>
-  <script src="treningi.js?v=35"></script>
-  <script src="kreator.js?v=35"></script>
-  <script src="kreator2.js?v=35"></script>
-  <script src="dzis.js?v=35"></script>
-  <script src="postep.js?v=35"></script>
-  <script src="rekordy.js?v=35"></script>
-  <script src="ustawienia.js?v=35"></script>
-  <script src="kopia.js?v=35"></script>
+  <script src="dane.js?v=36"></script>
+  <script src="anatomia.js?v=36"></script>
+  <script src="cwiczenia.js?v=36"></script>
+  <script src="treningi.js?v=36"></script>
+  <script src="kreator.js?v=36"></script>
+  <script src="kreator2.js?v=36"></script>
+  <script src="dzis.js?v=36"></script>
+  <script src="postep.js?v=36"></script>
+  <script src="rekordy.js?v=36"></script>
+  <script src="ustawienia.js?v=36"></script>
+  <script src="kopia.js?v=36"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -585,7 +588,7 @@
     </div>
   </div>
 
-  <script src="przewodnik.js?v=35"></script>
-  <script src="app.js?v=35"></script>
+  <script src="przewodnik.js?v=36"></script>
+  <script src="app.js?v=36"></script>
 </body>
 </html>

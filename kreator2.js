@@ -1388,7 +1388,7 @@ function rysujBudowe() {
 
   const tekstC = kr2Szukaj.value.trim().toLowerCase();
   const lista = dane.cwiczenia.filter(function (cwiczenie) {
-    return !cwiczenie.ukryte && (kr2Wszystkie.checked || pasujeDoAktywnosci(cwiczenie, kr2Aktywnosc)) &&
+    return !cwiczenie.ukryte && (kr2Wszystkie.checked ? rodzajZCwiczeniami(cwiczenie.rodzajId) : pasujeDoAktywnosci(cwiczenie, kr2Aktywnosc)) &&
       (tekstC === "" || cwiczenie.nazwa.toLowerCase().indexOf(tekstC) !== -1);
   });
 
@@ -1731,3 +1731,21 @@ olUsun.addEventListener("click", usunAktywnoscZPlanu);
 
 kalPropozycja.addEventListener("click", zaproponujRozklad);
 kalZapisz.addEventListener("click", zapiszPlan);
+
+// Nowe ćwiczenie utworzone w trakcie układania zestawu: od razu trafia do zestawu
+document.getElementById("kr2-nowe-cwiczenie").addEventListener("click", function () {
+  const opcje = {
+    poZapisie: function (wpis) {
+      kr2BudowaIds.push(wpis.id);
+      rysujBudowe();
+    }
+  };
+  if (kr2Aktywnosc) {
+    opcje.rodzajId = kr2Aktywnosc.rodzajId;
+    opcje.partieIds = partieAktywnosci(kr2Aktywnosc).filter(function (id) { return id && id !== "ogolny"; });
+  }
+  otworzFormularz(null, opcje);
+});
+document.getElementById("kr2-zapisz-gora").addEventListener("click", function () {
+  document.getElementById("kr2-zapisz").click();
+});

@@ -192,11 +192,20 @@ function rysujWybrane() {
 
 // ===== Panel wyboru ćwiczeń z bazy =====
 
+// Zestawy są tylko dla aktywności z ćwiczeniami (bez biegania, roweru, spaceru, basenu)
+function rodzajZCwiczeniami(rodzajId) {
+  const rodzaj = znajdzKategorie(rodzajId);
+  return !rodzaj || rodzaj.miara !== "sesja";
+}
+
 function pasujeDoWyboru(cwiczenie) {
   if (cwiczenie.ukryte) {
     return false;
   }
   if (filtrWyboru.tekst !== "" && cwiczenie.nazwa.toLowerCase().indexOf(filtrWyboru.tekst) === -1) {
+    return false;
+  }
+  if (!rodzajZCwiczeniami(cwiczenie.rodzajId)) {
     return false;
   }
   if (filtrWyboru.rodzajId && cwiczenie.rodzajId !== filtrWyboru.rodzajId) {
@@ -228,7 +237,9 @@ function rysujFiltryWyboru() {
   });
 
   chipyRodzajeWyboru.innerHTML = "";
-  kategorieTypu("rodzaj").forEach(function (kategoria) {
+  kategorieTypu("rodzaj").filter(function (k) {
+    return k.miara !== "sesja";
+  }).forEach(function (kategoria) {
     chipyRodzajeWyboru.appendChild(zrobChipWyboru(kategoria, "rodzajId"));
   });
 }
@@ -493,3 +504,15 @@ poleSzukajTreningow.addEventListener("input", function () {
 });
 
 rysujTreningi();
+
+// Nowe ćwiczenie utworzone prosto z formularza treningu: od razu trafia do treningu
+document.getElementById("przycisk-nowe-w-treningu").addEventListener("click", function () {
+  otworzFormularz(null, {
+    poZapisie: function (wpis) {
+      wybraneIds.push(wpis.id);
+      rysujWybrane();
+      rysujWybor();
+    }
+  });
+});
+document.getElementById("przycisk-zapisz-trening-gora").addEventListener("click", zapiszTrening);

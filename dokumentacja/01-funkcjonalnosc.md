@@ -160,3 +160,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Przyciski na karcie ćwiczenia (Mięśnie, Rekord, Historia, Film, Edytuj, Ukryj, Usuń) ułożone w siatce 3 kolumn pod nazwą, zamiast w jednym wąskim rzędzie.
 - Ciężar przy planowaniu: pole „Ciężar (kg)" obok „Serie" i „Powtórzenia"; przy różnych powtórzeniach w seriach każda seria ma parę „powtórzenia + ciężar". Ćwiczenia statyczne: jedno pole ciężaru obok jednostki.
 - Czas aktywności w formularzu sesji wpisuje się jako minuty i sekundy (mm:ss); zapis w danych w sekundach, wyświetlany jako „24 min 30 s".
+
+## Zestawy i formularz ćwiczenia (v36)
+- Zestawy (Moje treningi i budowa zestawu w planie) obejmują tylko aktywności z ćwiczeniami; bieganie, rower, spacer i basen nie są dostępne w wyborze ćwiczeń do zestawu (mają własne cele: dystans, czas).
+- „+ Utwórz nowe ćwiczenie" w formularzu zestawu i w budowie zestawu w kreatorze: otwiera formularz ćwiczenia (okno na cały ekran, `poZapisieCwiczenia`), a zapisane ćwiczenie od razu trafia do zestawu. W kreatorze rodzaj i partie są podpowiedziane z aktywności.
+- Formularz ćwiczenia: lista mięśni schowana („Pokaż listę mięśni"), przycisk „Zapisz" także na górze; w formularzu zestawu „Zapisz", w budowie zestawu „Gotowe" także na górze.

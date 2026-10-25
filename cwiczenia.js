@@ -18,6 +18,9 @@ const przyciskZmienPartie = document.getElementById("przycisk-zmien-partie");
 
 // Mięśnie i rysunek anatomiczny
 const panelMiesni = document.getElementById("panel-miesni");
+const przyciskPokazMiesnie = document.getElementById("przycisk-pokaz-miesnie");
+// Formularz ćwiczenia działa jak okno na całym ekranie: można go otworzyć z bazy, z zestawów i z kreatora planu
+document.body.appendChild(document.getElementById("formularz-cwiczenia"));
 const poleMiesnie = document.getElementById("pole-miesnie");
 const anTlo = document.getElementById("an-tlo");
 const anTytul = document.getElementById("an-tytul");
@@ -400,7 +403,12 @@ function pokazBlad(tekst) {
 }
 
 // Otwiera formularz: pusty (nowe ćwiczenie) albo wypełniony (edycja)
-function otworzFormularz(cwiczenie) {
+// opcje (tylko przy nowym ćwiczeniu): rodzajId, partieIds - podpowiedź; poZapisie(wpis) - co zrobić po zapisaniu
+let poZapisieCwiczenia = null;
+
+function otworzFormularz(cwiczenie, opcje) {
+  opcje = opcje || {};
+  poZapisieCwiczenia = typeof opcje.poZapisie === "function" ? opcje.poZapisie : null;
   przygotujFormularz();
   pokazBlad("");
 
@@ -411,6 +419,8 @@ function otworzFormularz(cwiczenie) {
   panelPartii.hidden = true;
   podsumowaniePartii.hidden = true;
   zbudujPanelMiesni(cwiczenie ? cwiczenie.miesnieIds || [] : []);
+  panelMiesni.hidden = true;
+  przyciskPokazMiesnie.textContent = "Pokaż listę mięśni";
   zbudujStyle(cwiczenie ? cwiczenie.style || [] : []);
 
   if (cwiczenie) {
@@ -433,7 +443,18 @@ function otworzFormularz(cwiczenie) {
   } else {
     edytowaneId = null;
     tytulFormularza.textContent = "Nowe ćwiczenie";
+    if (opcje.rodzajId && poleRodzaj.querySelector('option[value="' + opcje.rodzajId + '"]')) {
+      poleRodzaj.value = opcje.rodzajId;
+      poleCiezar.checked = opcje.rodzajId === "rodzaj-cialo";
+    }
     odswiezPoleStyli();
+    if (opcje.partieIds && opcje.partieIds.length > 0) {
+      poleCzyPartie.checked = true;
+      polePartie.querySelectorAll("input").forEach(function (pole) {
+        pole.checked = opcje.partieIds.indexOf(pole.value) !== -1;
+      });
+      pokazPodsumowaniePartii();
+    }
   }
 
   formularz.hidden = false;
@@ -443,6 +464,7 @@ function otworzFormularz(cwiczenie) {
 }
 
 function ukryjFormularz() {
+  poZapisieCwiczenia = null;
   formularz.hidden = true;
   przyciskNowe.hidden = false;
   edytowaneId = null;
@@ -523,8 +545,12 @@ function zapiszCwiczenie() {
   }
 
   zapiszDane();
+  const poZapisie = poZapisieCwiczenia;
   ukryjFormularz();
   rysujListe();
+  if (poZapisie) {
+    poZapisie(wpis);
+  }
 }
 
 // ===== Przyciski na karcie ćwiczenia =====
@@ -873,6 +899,11 @@ przyciskNowe.addEventListener("click", function () {
   otworzFormularz(null);
 });
 przyciskAnuluj.addEventListener("click", ukryjFormularz);
+przyciskPokazMiesnie.addEventListener("click", function () {
+  panelMiesni.hidden = !panelMiesni.hidden;
+  przyciskPokazMiesnie.textContent = panelMiesni.hidden ? "Pokaż listę mięśni" : "Schowaj listę mięśni";
+});
+document.getElementById("przycisk-zapisz-gora").addEventListener("click", zapiszCwiczenie);
 przyciskZapisz.addEventListener("click", zapiszCwiczenie);
 poleCzyPartie.addEventListener("change", zmianaPolaPartii);
 przyciskGotowe.addEventListener("click", zatwierdzPartie);
