@@ -119,14 +119,18 @@ function sprawdzRekord(sesja, id) {
   } else {
     dotychczasowy = najlepszyZHistorii(cwiczenie, kandydat.typ, sesja.id);
   }
-  if (!dotychczasowy || !lepszyRekord(kandydat, dotychczasowy)) {
+  // Rekord zapisuje się sam: pierwszy wynik (najlepszy z historii), gdy nie ma jeszcze rekordu,
+  // i każdy kolejny, który go poprawia
+  if (!cwiczenie.rekord) {
+    const najlepszy = dotychczasowy && !lepszyRekord(kandydat, dotychczasowy) ? dotychczasowy : kandydat;
+    cwiczenie.rekord = Object.assign({}, najlepszy, { data: najlepszy.data || dzisISO() });
+  } else if (lepszyRekord(kandydat, cwiczenie.rekord)) {
+    cwiczenie.rekord = Object.assign({}, kandydat, { data: dzisISO() });
+  } else {
     return;
   }
-  if (confirm("Nowy rekord! " + cwiczenie.nazwa + ": " + opisRekordu(kandydat) + " (poprzednio " + opisRekordu(dotychczasowy) + ").\n\nZapisać jako Twój rekord?")) {
-    cwiczenie.rekord = Object.assign({}, kandydat, { data: dzisISO() });
-    zapiszDane();
-    rysujDzis();
-  }
+  zapiszDane();
+  rysujDzis();
 }
 
 // ===== Okno wpisywania rekordu =====

@@ -143,3 +143,6 @@ if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
 if (typeof rysujDzis === "function" && document.getElementById("dzis-sesje")) {
   rysujDzis();
 }
+
+// Wszystkie pliki są już wczytane (rekordy.js ładuje się po cwiczenia.js): odśwież listę ćwiczeń z rekordami
+rysujListe();

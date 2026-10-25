@@ -1757,3 +1757,21 @@ h1 {
 #formularz-cwiczenia[hidden] { display: none; }
 .naglowek-wstecz .zapisz-gora { margin-left: auto; width: auto; min-height: 40px; padding: 0 18px; }
 .naglowek-wstecz .zapisz-gora { margin-top: 0; margin-right: 0; height: 40px; }
+
+.uchwyt {
+  flex: none;
+  width: 36px;
+  height: 44px;
+  border: 0;
+  background: none;
+  color: var(--tekst-szary);
+  font-size: 20px;
+  letter-spacing: -3px;
+  touch-action: none;
+  cursor: grab;
+}
+.cw-wiersz.przeciagany {
+  background: var(--tlo);
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+}

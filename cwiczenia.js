@@ -811,7 +811,7 @@ function rysujListe() {
     if (cwiczenie.rekord) {
       const linia = document.createElement("div");
       linia.className = "karta-opis";
-      linia.textContent = "★ Rekord: " + opisRekordu(cwiczenie.rekord);
+      linia.textContent = "★ Rekord: " + (typeof opisRekordu === "function" ? opisRekordu(cwiczenie.rekord) : "");
       tekst.appendChild(linia);
     }
     karta.appendChild(tekst);

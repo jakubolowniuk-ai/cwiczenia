@@ -165,3 +165,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Zestawy (Moje treningi i budowa zestawu w planie) obejmują tylko aktywności z ćwiczeniami; bieganie, rower, spacer i basen nie są dostępne w wyborze ćwiczeń do zestawu (mają własne cele: dystans, czas).
 - „+ Utwórz nowe ćwiczenie" w formularzu zestawu i w budowie zestawu w kreatorze: otwiera formularz ćwiczenia (okno na cały ekran, `poZapisieCwiczenia`), a zapisane ćwiczenie od razu trafia do zestawu. W kreatorze rodzaj i partie są podpowiedziane z aktywności.
 - Formularz ćwiczenia: lista mięśni schowana („Pokaż listę mięśni"), przycisk „Zapisz" także na górze; w formularzu zestawu „Zapisz", w budowie zestawu „Gotowe" także na górze.
+
+## Rekordy automatyczne i kolejność ćwiczeń (v38)
+- Rekord ćwiczenia zapisuje się sam po zaliczeniu w planie: pierwszy wynik (albo najlepszy z historii), gdy rekordu nie ma, i każdy kolejny, który go poprawia. Bez pytania; wynik widać w wierszu „★ Rekord". Rekord to rekordowa seria: największy ciężar (z powtórzeniami), a bez ciężaru najwięcej powtórzeń w serii.
+- Dziś: uchwyt „⋮⋮" przy ćwiczeniu pozwala przeciągnąć je palcem w inne miejsce; kolejność zapisuje się w sesji (`sesja.kolejnosc`).

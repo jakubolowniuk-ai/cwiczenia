@@ -81,8 +81,18 @@ function cwiczeniaSesjiIds(sesja) {
       ids.push(id);
     }
   });
-  return ids.filter(function (id) {
+  const wazne = ids.filter(function (id) {
     return parametry[id] && znajdzCwiczenie(id);
+  });
+  // Własna kolejność ustawiona przeciąganiem na ekranie Dziś
+  const wlasna = sesja.kolejnosc || [];
+  if (wlasna.length === 0) {
+    return wazne;
+  }
+  return wazne.slice().sort(function (a, b) {
+    const ia = wlasna.indexOf(a);
+    const ib = wlasna.indexOf(b);
+    return (ia === -1 ? 1000 + wazne.indexOf(a) : ia) - (ib === -1 ? 1000 + wazne.indexOf(b) : ib);
   });
 }
 
@@ -278,6 +288,7 @@ function zrobWierszCwiczenia(sesja, id) {
 
   const wiersz = document.createElement("div");
   wiersz.className = "cw-wiersz";
+  wiersz.setAttribute("data-id", id);
 
   const odhacz = document.createElement("button");
   odhacz.className = "odhacz" + (zrobione ? " zrobione" : "");
@@ -330,7 +341,46 @@ function zrobWierszCwiczenia(sesja, id) {
   wiersz.appendChild(tekst);
 
   dodajFilm(wiersz, cwiczenie);
+  wiersz.appendChild(zrobUchwyt(sesja, wiersz));
   return wiersz;
+}
+
+// Uchwyt "⋮⋮": przytrzymaj i przeciągnij palcem, żeby zmienić kolejność ćwiczeń w sesji
+function zrobUchwyt(sesja, wiersz) {
+  const uchwyt = document.createElement("button");
+  uchwyt.className = "uchwyt";
+  uchwyt.textContent = "⋮⋮";
+  uchwyt.setAttribute("aria-label", "Przeciągnij, aby zmienić kolejność");
+
+  // Zdarzenia śledzimy na całym dokumencie: przesunięcie wiersza w DOM zrywa przechwycenie wskaźnika
+  const ruch = function (zdarzenie) {
+    const cel = document.elementFromPoint(zdarzenie.clientX, zdarzenie.clientY);
+    const inny = cel ? cel.closest(".cw-wiersz") : null;
+    if (!inny || inny === wiersz || inny.parentNode !== wiersz.parentNode) {
+      return;
+    }
+    const ramka = inny.getBoundingClientRect();
+    const wGorze = zdarzenie.clientY < ramka.top + ramka.height / 2;
+    wiersz.parentNode.insertBefore(wiersz, wGorze ? inny : inny.nextSibling);
+  };
+  const koniec = function () {
+    document.removeEventListener("pointermove", ruch);
+    document.removeEventListener("pointerup", koniec);
+    document.removeEventListener("pointercancel", koniec);
+    sesja.kolejnosc = Array.from(wiersz.parentNode.querySelectorAll(".cw-wiersz")).map(function (w) {
+      return w.getAttribute("data-id");
+    });
+    zapiszDane();
+    rysujDzis();
+  };
+  uchwyt.addEventListener("pointerdown", function (zdarzenie) {
+    wiersz.classList.add("przeciagany");
+    document.addEventListener("pointermove", ruch);
+    document.addEventListener("pointerup", koniec);
+    document.addEventListener("pointercancel", koniec);
+    zdarzenie.preventDefault();
+  });
+  return uchwyt;
 }
 
 // Adnotacja "Ostatnio (22.10): 4 × 8 · 60 kg" z najnowszego wcześniejszego wykonania ćwiczenia
