@@ -141,11 +141,15 @@ let rekOdczyt = null;
 
 function poleRekordu(etykieta, wartosc, atrybuty) {
   const blok = document.createElement("div");
-  blok.className = "wart-blok";
-  blok.appendChild(tekstElement("div", "wart-etykieta", etykieta));
+  const opis = document.createElement("label");
+  opis.textContent = etykieta;
+  blok.appendChild(opis);
   const pole = document.createElement("input");
   pole.type = "number";
   pole.inputMode = "decimal";
+  pole.addEventListener("focus", function () {
+    pole.select();
+  });
   pole.min = "0";
   if (atrybuty && atrybuty.step) {
     pole.step = atrybuty.step;
@@ -173,8 +177,9 @@ function rysujPolaRekordu(typ, r) {
   }
   pola.data = document.createElement("input");
   const blokData = document.createElement("div");
-  blokData.className = "wart-blok";
-  blokData.appendChild(tekstElement("div", "wart-etykieta", "Data (opcjonalnie)"));
+  const etykietaData = document.createElement("label");
+  etykietaData.textContent = "Data (opcjonalnie)";
+  blokData.appendChild(etykietaData);
   pola.data.type = "date";
   pola.data.value = r.data || "";
   blokData.appendChild(pola.data);
@@ -218,7 +223,12 @@ function otworzRekord(cwiczenie) {
     ? cwiczenie.rekord.typ
     : cwiczenie.zCiezarem ? "ciezar" : rodzaj && rodzaj.miara === "statyczna" ? "czas" : "powtorzenia";
 
+  const wyborBlok = document.createElement("div");
+  const wyborEtykieta = document.createElement("label");
+  wyborEtykieta.textContent = "Rodzaj rekordu";
+  wyborBlok.appendChild(wyborEtykieta);
   const wybor = document.createElement("select");
+  wyborBlok.appendChild(wybor);
   [["ciezar", "Ciężar i powtórzenia"], ["powtorzenia", "Powtórzenia"], ["czas", "Czas"]].forEach(function (para) {
     const opcja = document.createElement("option");
     opcja.value = para[0];
@@ -228,10 +238,10 @@ function otworzRekord(cwiczenie) {
   wybor.value = typStart;
   wybor.addEventListener("change", function () {
     rysujPolaRekordu(wybor.value, cwiczenie.rekord);
-    rekPola.insertBefore(wybor, rekPola.firstChild);
+    rekPola.insertBefore(wyborBlok, rekPola.firstChild);
   });
   rysujPolaRekordu(typStart, cwiczenie.rekord);
-  rekPola.insertBefore(wybor, rekPola.firstChild);
+  rekPola.insertBefore(wyborBlok, rekPola.firstChild);
   rekUsun.hidden = !cwiczenie.rekord;
   rekTlo.hidden = false;
 }

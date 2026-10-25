@@ -217,7 +217,7 @@ function opisSesji(sesja) {
     czesci.push(sesja.dystans.wartosc + " " + sesja.dystans.jednostka);
   }
   if (sesja.czas) {
-    czesci.push(sesja.czas.wartosc + " " + sesja.czas.jednostka);
+    czesci.push(opisCzasuSesji(sesja.czas));
   }
   return czesci.length > 0 ? czesci.join(" · ") : "Dotknij, aby ustawić kroki, dystans lub czas";
 }
@@ -722,6 +722,10 @@ function zrobKarteParametrow(sesja, cwiczenie) {
 
     const rzad2 = zrobRzad();
     rzad2.appendChild(jedn.blok);
+    const kgStat = zrobPoleLiczbowe("Ciężar (kg)", start && Array.isArray(start.ciezary) && start.ciezary.length > 0 ? start.ciezary[0] : 0, true);
+    if (cwiczenie.zCiezarem) {
+      rzad2.appendChild(kgStat.blok);
+    }
     karta.appendChild(rzad1);
     karta.appendChild(rzadLista);
     karta.appendChild(rzad2);
@@ -751,14 +755,24 @@ function zrobKarteParametrow(sesja, cwiczenie) {
         if (l.length < 1 || !l.every(function (x) { return x > 0; })) {
           return "Wpisz czas większy od zera w każdej serii.";
         }
-        return { typ: "czas-serie", czasy: l, jednostka: jedn.wybor.value };
+        const wynikC = { typ: "czas-serie", czasy: l, jednostka: jedn.wybor.value };
+        const kgS = cwiczenie.zCiezarem ? Number(kgStat.pole.value) : 0;
+        if (kgS > 0) {
+          wynikC.ciezary = new Array(l.length).fill(kgS);
+        }
+        return wynikC;
       }
       const p = Number(pow.pole.value);
       const c = Number(czas.pole.value);
       if (!(p >= 1) || Math.floor(p) !== p || !(c > 0)) {
         return "Wpisz liczbę powtórzeń i czas, większe od zera.";
       }
-      return { typ: "czas-powtorzenia", powtorzenia: p, czas: { wartosc: c, jednostka: jedn.wybor.value } };
+      const wynikP = { typ: "czas-powtorzenia", powtorzenia: p, czas: { wartosc: c, jednostka: jedn.wybor.value } };
+      const kgP = cwiczenie.zCiezarem ? Number(kgStat.pole.value) : 0;
+      if (kgP > 0) {
+        wynikP.ciezary = new Array(p).fill(kgP);
+      }
+      return wynikP;
     };
   } else {
     const typBlok = document.createElement("div");
@@ -776,11 +790,18 @@ function zrobKarteParametrow(sesja, cwiczenie) {
     typBlok.appendChild(typ);
     karta.appendChild(typBlok);
 
+    const maCiezar = !!cwiczenie.zCiezarem;
+    const startKg = start && Array.isArray(start.ciezary) ? start.ciezary.slice() : [];
+    const kgRozne = startKg.some(function (c) { return c !== startKg[0]; });
     const serie = zrobPoleLiczbowe("Serie", start && start.typ === "powtorzenia" ? start.serie : 0, false);
     const pow = zrobPoleLiczbowe("Powtórzenia", start && start.typ === "powtorzenia" ? start.powtorzenia : 0, false);
+    const kgJeden = zrobPoleLiczbowe("Ciężar (kg)", startKg.length > 0 ? startKg[0] : 0, true);
     const rzadSerie = zrobRzad();
     rzadSerie.appendChild(serie.blok);
     rzadSerie.appendChild(pow.blok);
+    if (maCiezar) {
+      rzadSerie.appendChild(kgJeden.blok);
+    }
 
     const czas = zrobPoleLiczbowe("Czas", start && start.typ === "czas" ? start.wartosc : 0, true);
     const jedn = zrobWyborJednostkiZ("Jednostka", [["s", "sekundy"], ["min", "minuty"]], start && start.typ === "czas" ? start.jednostka : "s");
@@ -788,16 +809,38 @@ function zrobKarteParametrow(sesja, cwiczenie) {
     rzadCzas.appendChild(czas.blok);
     rzadCzas.appendChild(jedn.blok);
 
-    // Powtórzenia osobno dla każdej serii
+    // Powtórzenia (i ciężar) osobno dla każdej serii
     const rzadLista = document.createElement("div");
     let polaSerii = [];
-    const rysujListeSerii = function (powtorzenia) {
+    let polaKg = [];
+    const odczytajPolaSerii = function () {
+      return polaSerii.map(function (p) {
+        return Number(p.pole.value) || 0;
+      });
+    };
+    const odczytajPolaKg = function () {
+      return polaKg.map(function (p) {
+        return Number(p.pole.value) || 0;
+      });
+    };
+    const rysujListeSerii = function (powtorzenia, kg) {
       rzadLista.innerHTML = "";
       polaSerii = [];
+      polaKg = [];
       powtorzenia.forEach(function (ile, i) {
         const pole = zrobPoleLiczbowe("Seria " + (i + 1), ile, false);
         polaSerii.push(pole);
-        rzadLista.appendChild(pole.blok);
+        if (maCiezar) {
+          const w = i < kg.length ? kg[i] : (kg.length > 0 ? kg[kg.length - 1] : 0);
+          const poleKg = zrobPoleLiczbowe("Ciężar (kg)", w, true);
+          polaKg.push(poleKg);
+          const rzad = zrobRzad();
+          rzad.appendChild(pole.blok);
+          rzad.appendChild(poleKg.blok);
+          rzadLista.appendChild(rzad);
+        } else {
+          rzadLista.appendChild(pole.blok);
+        }
       });
       const przyciski = document.createElement("div");
       const dodaj = document.createElement("button");
@@ -806,8 +849,10 @@ function zrobKarteParametrow(sesja, cwiczenie) {
       dodaj.textContent = "+ seria";
       dodaj.addEventListener("click", function () {
         const lista = odczytajPolaSerii();
+        const kgLista = odczytajPolaKg();
         lista.push(lista.length > 0 ? lista[lista.length - 1] || 0 : 0);
-        rysujListeSerii(lista);
+        kgLista.push(kgLista.length > 0 ? kgLista[kgLista.length - 1] : 0);
+        rysujListeSerii(lista, kgLista);
       });
       const usun = document.createElement("button");
       usun.type = "button";
@@ -816,17 +861,14 @@ function zrobKarteParametrow(sesja, cwiczenie) {
       usun.disabled = powtorzenia.length <= 1;
       usun.addEventListener("click", function () {
         const lista = odczytajPolaSerii();
+        const kgLista = odczytajPolaKg();
         lista.pop();
-        rysujListeSerii(lista);
+        kgLista.pop();
+        rysujListeSerii(lista, kgLista);
       });
       przyciski.appendChild(dodaj);
       przyciski.appendChild(usun);
       rzadLista.appendChild(przyciski);
-    };
-    const odczytajPolaSerii = function () {
-      return polaSerii.map(function (p) {
-        return Number(p.pole.value) || 0;
-      });
     };
     // Lista startowa: zapisana, albo z pól "serie × powtórzenia"
     const listaStartowa = function () {
@@ -837,23 +879,29 @@ function zrobKarteParametrow(sesja, cwiczenie) {
       const p = Number(pow.pole.value) || 0;
       return new Array(s).fill(p);
     };
-    rysujListeSerii(listaStartowa());
+    rysujListeSerii(listaStartowa(), startKg);
 
     karta.appendChild(rzadSerie);
     karta.appendChild(rzadLista);
     karta.appendChild(rzadCzas);
+
+    // Różne ciężary w seriach wymagają listy serii (każda seria ma swój ciężar)
+    if (maCiezar && kgRozne && start && start.typ === "powtorzenia") {
+      typ.value = "lista";
+    }
 
     let poprzedniTyp = typ.value;
     const pokazPola = function () {
       // Przejście ze "zwykłych" serii na listę: przepisz wartości z pól
       if (typ.value === "lista" && poprzedniTyp === "powtorzenia") {
         const s = Math.max(1, Number(serie.pole.value) || 1);
-        rysujListeSerii(new Array(s).fill(Number(pow.pole.value) || 0));
+        rysujListeSerii(new Array(s).fill(Number(pow.pole.value) || 0), new Array(s).fill(Number(kgJeden.pole.value) || 0));
       }
       if (typ.value === "powtorzenia" && poprzedniTyp === "lista") {
         const l = odczytajPolaSerii();
         serie.pole.value = String(l.length);
         pow.pole.value = String(l[0] || 0);
+        kgJeden.pole.value = String(odczytajPolaKg()[0] || 0);
       }
       poprzedniTyp = typ.value;
       rzadSerie.hidden = typ.value !== "powtorzenia";
@@ -869,7 +917,17 @@ function zrobKarteParametrow(sesja, cwiczenie) {
         if (l.length < 1 || !l.every(function (x) { return x >= 1 && Math.floor(x) === x; })) {
           return "Wpisz powtórzenia większe od zera w każdej serii.";
         }
-        return { typ: "serie-lista", powtorzenia: l };
+        const wynik = { typ: "serie-lista", powtorzenia: l };
+        if (maCiezar) {
+          const kg = odczytajPolaKg();
+          if (polaKg.some(function (p) { return !(Number(p.pole.value) >= 0); })) {
+            return "Wpisz ciężar w kg (0 albo więcej) w każdej serii.";
+          }
+          if (kg.some(function (x) { return x > 0; })) {
+            wynik.ciezary = kg;
+          }
+        }
+        return wynik;
       }
       if (typ.value === "powtorzenia") {
         const s = Number(serie.pole.value);
@@ -877,118 +935,23 @@ function zrobKarteParametrow(sesja, cwiczenie) {
         if (!(s >= 1) || !(p >= 1) || Math.floor(s) !== s || Math.floor(p) !== p) {
           return "Wpisz liczbę serii i powtórzeń większą od zera.";
         }
-        return { typ: "powtorzenia", serie: s, powtorzenia: p };
+        const wynik = { typ: "powtorzenia", serie: s, powtorzenia: p };
+        if (maCiezar) {
+          const kg = Number(kgJeden.pole.value);
+          if (!(kg >= 0)) {
+            return "Wpisz ciężar w kg (0 albo więcej).";
+          }
+          if (kg > 0) {
+            wynik.ciezary = new Array(s).fill(kg);
+          }
+        }
+        return wynik;
       }
       const c = Number(czas.pole.value);
       if (!(c > 0)) {
         return "Wpisz czas większy od zera.";
       }
       return { typ: "czas", wartosc: c, jednostka: jedn.wybor.value };
-    };
-  }
-
-  // Ciężar w seriach: tylko dla ćwiczeń oznaczonych jako "z ciężarem"
-  if (cwiczenie.zCiezarem) {
-    const odczytajBaza = odczytaj;
-    const startCiezary = start && Array.isArray(start.ciezary) ? start.ciezary.slice() : [];
-    const maCiezar = startCiezary.some(function (c) { return c > 0; });
-    const jednakowe = startCiezary.every(function (c) { return c === startCiezary[0]; });
-
-    const blokC = document.createElement("div");
-    blokC.className = "ciezar-blok";
-    const opisC = document.createElement("label");
-    opisC.textContent = "Ciężar";
-    const trybC = document.createElement("select");
-    [["brak", "Bez ciężaru"], ["jeden", "Taki sam w każdej serii"], ["lista", "Różny w seriach"]].forEach(function (para) {
-      const opcja = document.createElement("option");
-      opcja.value = para[0];
-      opcja.textContent = para[1];
-      trybC.appendChild(opcja);
-    });
-    trybC.value = !maCiezar ? "brak" : jednakowe ? "jeden" : "lista";
-    const jedenC = zrobPoleLiczbowe("Ciężar (kg)", maCiezar ? startCiezary[0] : 0, true);
-    const listaC = document.createElement("div");
-    let polaC = [];
-
-    const ileSerii = function () {
-      const o = odczytajBaza();
-      return o && typeof o === "object" ? liczbaSerii(o) : (polaC.length || 1);
-    };
-    const wartosciC = function () {
-      return polaC.map(function (p) {
-        return Number(p.pole.value) || 0;
-      });
-    };
-    const rysujC = function (n, wartosci) {
-      listaC.innerHTML = "";
-      polaC = [];
-      for (let i = 0; i < n; i++) {
-        const w = i < wartosci.length ? wartosci[i] : (wartosci.length > 0 ? wartosci[wartosci.length - 1] : 0);
-        const pole = zrobPoleLiczbowe("Seria " + (i + 1) + " (kg)", w, true);
-        polaC.push(pole);
-        listaC.appendChild(pole.blok);
-      }
-    };
-    const odswiezC = function () {
-      const n = ileSerii();
-      blokC.hidden = n < 1;
-      if (trybC.value === "lista" && polaC.length !== n) {
-        rysujC(n, wartosciC());
-      }
-      jedenC.blok.hidden = trybC.value !== "jeden";
-      listaC.hidden = trybC.value !== "lista";
-    };
-    trybC.addEventListener("change", function () {
-      if (trybC.value === "lista" && polaC.length === 0) {
-        rysujC(ileSerii(), new Array(1).fill(Number(jedenC.pole.value) || 0));
-      }
-      odswiezC();
-    });
-    // Liczba serii mogła się zmienić: odświeżamy pola ciężarów, zanim ktoś ich dotknie
-    blokC.addEventListener("pointerdown", odswiezC, true);
-    blokC.addEventListener("focusin", odswiezC);
-
-    blokC.appendChild(opisC);
-    blokC.appendChild(trybC);
-    blokC.appendChild(jedenC.blok);
-    blokC.appendChild(listaC);
-    karta.appendChild(blokC);
-    if (trybC.value === "lista") {
-      rysujC(Math.max(1, liczbaSerii(start) || startCiezary.length), startCiezary);
-    }
-    odswiezC();
-
-    odczytaj = function () {
-      const w = odczytajBaza();
-      if (typeof w === "string") {
-        return w;
-      }
-      const n = liczbaSerii(w);
-      delete w.ciezary;
-      if (n < 1 || trybC.value === "brak") {
-        return w;
-      }
-      let c;
-      if (trybC.value === "jeden") {
-        const v = Number(jedenC.pole.value);
-        if (!(v >= 0)) {
-          return "Wpisz ciężar w kg (0 albo więcej).";
-        }
-        c = new Array(n).fill(v);
-      } else {
-        const v = wartosciC();
-        if (polaC.some(function (p) { return !(Number(p.pole.value) >= 0); })) {
-          return "Wpisz ciężar w kg (0 albo więcej) w każdej serii.";
-        }
-        c = [];
-        for (let i = 0; i < n; i++) {
-          c.push(i < v.length ? v[i] : (v.length > 0 ? v[v.length - 1] : 0));
-        }
-      }
-      if (c.some(function (x) { return x > 0; })) {
-        w.ciezary = c;
-      }
-      return w;
     };
   }
 
@@ -1024,7 +987,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
   let dystans = null;
   let dystansJedn = null;
   let czas = null;
-  let czasJedn = null;
+  let czasSek = null;
 
   let wyborCwiczenia = null;
   let polaEtapow = [];
@@ -1113,15 +1076,23 @@ function zrobKarteSesji(sesja, aktywnosc) {
   }
 
   if (pola.indexOf("czas") !== -1) {
-    czas = zrobPoleLiczbowe("Czas", sesja.czas ? sesja.czas.wartosc : 0, true);
-    czasJedn = zrobWyborJednostkiZ("Jednostka", [["min", "minuty"], ["s", "sekundy"]], sesja.czas ? sesja.czas.jednostka : "min");
+    // Czas jako minuty i sekundy (mm:ss); w danych zapisujemy sekundy
+    const czasS = sesja.czas ? sekundyZ(sesja.czas.wartosc, sesja.czas.jednostka) : 0;
+    czas = zrobPoleLiczbowe("Czas: minuty", czasS ? Math.floor(czasS / 60) : 0, false);
+    czasSek = zrobPoleLiczbowe("sekundy", czasS ? Math.round((czasS % 60) * 10) / 10 : 0, true);
     const rzad = zrobRzad();
     rzad.appendChild(czas.blok);
-    rzad.appendChild(czasJedn.blok);
+    rzad.appendChild(czasSek.blok);
     karta.appendChild(rzad);
   }
 
   karta.appendChild(blad);
+
+  function odczytajCzasS() {
+    const m = Number(czas.pole.value) || 0;
+    const sek = Number(czasSek.pole.value) || 0;
+    return m < 0 || sek < 0 ? NaN : m * 60 + sek;
+  }
 
   return {
     sesja: true,
@@ -1151,15 +1122,15 @@ function zrobKarteSesji(sesja, aktywnosc) {
       }
       if (pola.indexOf("styl") !== -1 && czas) {
         // Basen: czas jest opcjonalny (potrzebny do rekordów na dystansie)
-        const cz = Number(czas.pole.value);
+        const cz = odczytajCzasS();
         if (!(cz >= 0)) {
-          blad.textContent = "Czas musi być liczbą (albo zostaw puste).";
+          blad.textContent = "Czas wpisz jako minuty i sekundy (albo zostaw puste).";
           return null;
         }
-        wynik.czas = cz > 0 ? { wartosc: cz, jednostka: czasJedn.wybor.value } : null;
+        wynik.czas = cz > 0 ? { wartosc: cz, jednostka: "s" } : null;
       } else if (dystans || czas || kroki) {
         const dyst = dystans ? Number(dystans.pole.value) : 0;
-        const cz = czas ? Number(czas.pole.value) : 0;
+        const cz = czas ? odczytajCzasS() : 0;
         const kr = kroki ? Number(kroki.pole.value) : 0;
         if (!(dyst >= 0) || !(cz >= 0) || !(kr >= 0) || (kr > 0 && Math.floor(kr) !== kr) || (!(dyst > 0) && !(cz > 0) && !(kr > 0))) {
           blad.textContent = kroki ? "Wpisz kroki (liczba całkowita), dystans lub czas, większe od zera." : "Wpisz dystans lub czas (albo oba), większe od zera.";
@@ -1167,7 +1138,7 @@ function zrobKarteSesji(sesja, aktywnosc) {
         }
         wynik.kroki = kr > 0 ? kr : null;
         wynik.dystans = dyst > 0 ? { wartosc: dyst, jednostka: dystansJedn.wybor.value } : null;
-        wynik.czas = cz > 0 ? { wartosc: cz, jednostka: czasJedn.wybor.value } : null;
+        wynik.czas = cz > 0 ? { wartosc: cz, jednostka: "s" } : null;
       }
       blad.textContent = "";
       return wynik;

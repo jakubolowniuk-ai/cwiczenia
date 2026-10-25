@@ -154,3 +154,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Postęp → „Moje rekordy na dystansie": użytkownik sam dodaje dystans (podpowiedzi: bieganie 1/3/5/10 km, półmaraton, maraton; rower 10/20/40/50/100 km; basen 50–1500 m + styl; własny dystans w km lub m) i opcjonalnie rekord (czas). Zapis: `dane.rekordyDystans = [{id, rodzajId, dystansM, styl, czas(s), data}]`.
 - Po wpisaniu wyniku sesji (bieganie/rower z dystansem i czasem; basen z jednym stylem i czasem) dystans w tolerancji 2% i krótszy czas → „Nowy rekord! Zapisać?".
 - „Najdłuższe wyniki" (automatycznie): najdłuższy dystans i najwięcej kroków; bez „najdłuższego czasu" (dłuższy czas to nie postęp przy biegu, rowerze, spacerze i pływaniu). Dłuższy czas zostaje rekordem tylko w ćwiczeniach (statyka, joga).
+
+## Poprawki interfejsu (v35)
+- Okna rekordów (ćwiczenie i dystans) mają taki sam wygląd pól jak formularze kart (etykieta nad polem, wysokie pola); pole „własny dystans" jest szersze od wyboru jednostki.
+- Przyciski na karcie ćwiczenia (Mięśnie, Rekord, Historia, Film, Edytuj, Ukryj, Usuń) ułożone w siatce 3 kolumn pod nazwą, zamiast w jednym wąskim rzędzie.
+- Ciężar przy planowaniu: pole „Ciężar (kg)" obok „Serie" i „Powtórzenia"; przy różnych powtórzeniach w seriach każda seria ma parę „powtórzenia + ciężar". Ćwiczenia statyczne: jedno pole ciężaru obok jednostki.
+- Czas aktywności w formularzu sesji wpisuje się jako minuty i sekundy (mm:ss); zapis w danych w sekundach, wyświetlany jako „24 min 30 s".

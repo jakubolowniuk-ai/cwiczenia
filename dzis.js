@@ -119,7 +119,7 @@ function opisCeluSesji(dane_) {
     czesci.push(dane_.dystans.wartosc + " " + dane_.dystans.jednostka);
   }
   if (dane_.czas) {
-    czesci.push(dane_.czas.wartosc + " " + dane_.czas.jednostka);
+    czesci.push(opisCzasuSesji(dane_.czas));
   }
   return czesci.join(" · ");
 }

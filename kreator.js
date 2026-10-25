@@ -99,6 +99,11 @@ function etapySesji(s) {
   return [];
 }
 
+// Czas celu albo wyniku sesji: "25 min", "24 min 30 s", "45 s"
+function opisCzasuSesji(czas) {
+  return opisCzasuSekund(sekundyZ(czas.wartosc, czas.jednostka));
+}
+
 function sumaMetrow(s) {
   return etapySesji(s).reduce(function (suma, e) {
     return suma + e.metry;
@@ -156,7 +161,7 @@ function opisAktywnosci(aktywnosc) {
     czesci.push(aktywnosc.dystans.wartosc + " " + aktywnosc.dystans.jednostka);
   }
   if (aktywnosc.czas) {
-    czesci.push(aktywnosc.czas.wartosc + " " + aktywnosc.czas.jednostka);
+    czesci.push(opisCzasuSesji(aktywnosc.czas));
   }
   czesci.push(aktywnosc.razy + "×");
 

@@ -782,9 +782,13 @@ function rysujListe() {
     }
     karta.appendChild(tekst);
 
+    const akcje = document.createElement("div");
+    akcje.className = "karta-akcje";
+    karta.appendChild(akcje);
+
     if (cwiczenie.ukryte) {
       karta.classList.add("karta-ukryta");
-      karta.appendChild(
+      akcje.appendChild(
         przyciskAkcji("Przywróć", "", function () {
           cwiczenie.ukryte = false;
           zapiszDane();
@@ -796,7 +800,7 @@ function rysujListe() {
         })
       );
       if (!cwiczenie.zBazy) {
-        karta.appendChild(przyciskAkcji("Usuń", "usun", function () {
+        akcje.appendChild(przyciskAkcji("Usuń", "usun", function () {
           usunCwiczenie(cwiczenie);
         }));
       }
@@ -804,20 +808,20 @@ function rysujListe() {
     }
 
     if ((cwiczenie.miesnieIds || []).length > 0) {
-      karta.appendChild(
+      akcje.appendChild(
         przyciskAkcji("Mięśnie", "", function () {
           otworzOknoMiesni(cwiczenie);
         })
       );
     }
 
-    karta.appendChild(
+    akcje.appendChild(
       przyciskAkcji("Rekord", "", function () {
         otworzRekord(cwiczenie);
       })
     );
 
-    karta.appendChild(
+    akcje.appendChild(
       przyciskAkcji("Historia", "", function () {
         otworzHistorieCwiczenia(cwiczenie);
       })
@@ -830,16 +834,16 @@ function rysujListe() {
       film.target = "_blank";
       film.rel = "noopener";
       film.textContent = "▶ Film";
-      karta.appendChild(film);
+      akcje.appendChild(film);
     }
 
-    karta.appendChild(
+    akcje.appendChild(
       przyciskAkcji("Edytuj", "", function () {
         otworzFormularz(cwiczenie);
       })
     );
 
-    karta.appendChild(
+    akcje.appendChild(
       przyciskAkcji("Ukryj", "", function () {
         cwiczenie.ukryte = true;
         zapiszDane();
@@ -852,7 +856,7 @@ function rysujListe() {
     );
 
     if (!cwiczenie.zBazy) {
-      karta.appendChild(
+      akcje.appendChild(
         przyciskAkcji("Usuń", "usun", function () {
           usunCwiczenie(cwiczenie);
         })
