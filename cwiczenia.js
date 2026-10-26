@@ -28,6 +28,9 @@ const anOknoRysunek = document.getElementById("an-okno-rysunek");
 const anOknoLista = document.getElementById("an-okno-lista");
 const anZamknij = document.getElementById("an-zamknij");
 
+const poleOpisStart = document.getElementById("pole-opis-start");
+const poleOpisRuch = document.getElementById("pole-opis-ruch");
+const poleOpisUwaga = document.getElementById("pole-opis-uwaga");
 const poleLink = document.getElementById("pole-link");
 const komunikatBledu = document.getElementById("komunikat-bledu");
 const przyciskZapisz = document.getElementById("przycisk-zapisz");
@@ -420,6 +423,9 @@ function otworzFormularz(cwiczenie, opcje) {
 
   poleNazwa.value = "";
   poleLink.value = "";
+  poleOpisStart.value = "";
+  poleOpisRuch.value = "";
+  poleOpisUwaga.value = "";
   poleCiezar.checked = false;
   poleCzyPartie.checked = false;
   panelPartii.hidden = true;
@@ -434,6 +440,9 @@ function otworzFormularz(cwiczenie, opcje) {
     tytulFormularza.textContent = "Edycja ćwiczenia";
     poleNazwa.value = cwiczenie.nazwa;
     poleLink.value = cwiczenie.link || "";
+    poleOpisStart.value = (cwiczenie.opis && cwiczenie.opis.start) || "";
+    poleOpisRuch.value = (cwiczenie.opis && cwiczenie.opis.ruch) || "";
+    poleOpisUwaga.value = (cwiczenie.opis && cwiczenie.opis.uwaga) || "";
     poleCiezar.checked = !!cwiczenie.zCiezarem;
     poleRodzaj.value = cwiczenie.rodzajId;
     odswiezPoleStyli();
@@ -540,6 +549,25 @@ function zapiszCwiczenie() {
   };
   if (style.length > 0) {
     wpis.style = style;
+  }
+  const opis = {
+    start: poleOpisStart.value.trim(),
+    ruch: poleOpisRuch.value.trim(),
+    uwaga: poleOpisUwaga.value.trim()
+  };
+  if (opis.start || opis.ruch || opis.uwaga) {
+    wpis.opis = opis;
+  }
+  // Pola, których formularz nie zmienia, przechodzą bez zmian przy edycji
+  if (edytowaneId) {
+    const stare2 = dane.cwiczenia.find(function (inne) {
+      return inne.id === edytowaneId;
+    });
+    ["zBazy", "ukryte", "rekord", "przerwa"].forEach(function (klucz) {
+      if (stare2 && stare2[klucz] !== undefined) {
+        wpis[klucz] = stare2[klucz];
+      }
+    });
   }
 
   if (edytowaneId) {
@@ -861,14 +889,10 @@ function rysujListe() {
       })
     );
 
-    if (cwiczenie.link) {
-      const film = document.createElement("a");
-      film.className = "akcja film";
-      film.href = cwiczenie.link;
-      film.target = "_blank";
-      film.rel = "noopener";
-      film.textContent = "▶ Film";
-      akcje.appendChild(film);
+    if (maOpis(cwiczenie)) {
+      akcje.appendChild(przyciskAkcji("Opis", "film", function () {
+        otworzOpis(cwiczenie);
+      }));
     }
 
     akcje.appendChild(
@@ -961,3 +985,98 @@ formularz.querySelectorAll('input[type="number"]').forEach(function (pole) {
 
 rysujFiltry();
 rysujListe();
+
+
+// ===== Opis ćwiczenia: tekst i miniatura filmu =====
+// cwiczenie.opis = { start, ruch, uwaga } (każde pole opcjonalne), cwiczenie.link = film
+
+const opisTlo = document.getElementById("opis-tlo");
+const opisTytul = document.getElementById("opis-tytul");
+const opisFilm = document.getElementById("opis-film");
+const opisTresc = document.getElementById("opis-tresc");
+const opisLink = document.getElementById("opis-link");
+
+function maOpis(cwiczenie) {
+  const o = cwiczenie.opis;
+  return !!(cwiczenie.link || (o && (o.start || o.ruch || o.uwaga)));
+}
+
+// Id filmu YouTube z linku (watch, youtu.be, shorts, embed, live); null dla innych serwisów
+function idYoutube(link) {
+  const m = String(link || "").match(/(?:youtu\.be\/|youtube\.com\/(?:watch\?(?:.*&)?v=|shorts\/|embed\/|live\/))([\w-]{11})/);
+  return m ? m[1] : null;
+}
+
+function otworzOpis(cwiczenie) {
+  opisTytul.textContent = cwiczenie.nazwa;
+  opisFilm.innerHTML = "";
+  opisTresc.innerHTML = "";
+
+  const id = idYoutube(cwiczenie.link);
+  if (id) {
+    const miniatura = document.createElement("button");
+    miniatura.type = "button";
+    miniatura.className = "opis-miniatura";
+    miniatura.setAttribute("aria-label", "Odtwórz film");
+    const obraz = document.createElement("img");
+    obraz.src = "https://i.ytimg.com/vi/" + id + "/hqdefault.jpg";
+    obraz.alt = "";
+    obraz.addEventListener("error", function () {
+      obraz.remove();
+    });
+    miniatura.appendChild(obraz);
+    miniatura.appendChild(document.createElement("span")).textContent = "▶";
+    miniatura.addEventListener("click", function () {
+      opisFilm.innerHTML = "";
+      const ramka = document.createElement("iframe");
+      ramka.className = "opis-ramka";
+      ramka.src = "https://www.youtube-nocookie.com/embed/" + id + "?autoplay=1&rel=0&playsinline=1";
+      ramka.allow = "autoplay; encrypted-media; picture-in-picture";
+      ramka.allowFullscreen = true;
+      opisFilm.appendChild(ramka);
+    });
+    opisFilm.appendChild(miniatura);
+  }
+
+  const o = cwiczenie.opis || {};
+  [["Ustawienie", o.start], ["Ruch", o.ruch], ["Uwaga", o.uwaga]].forEach(function (para) {
+    if (!para[1]) {
+      return;
+    }
+    const blok = document.createElement("div");
+    blok.className = "opis-blok";
+    const etykieta = document.createElement("div");
+    etykieta.className = "etykieta";
+    etykieta.textContent = para[0];
+    const tekst = document.createElement("p");
+    tekst.textContent = para[1];
+    blok.appendChild(etykieta);
+    blok.appendChild(tekst);
+    opisTresc.appendChild(blok);
+  });
+  if (!opisTresc.firstChild) {
+    const brak = document.createElement("p");
+    brak.className = "opis";
+    brak.textContent = "Ćwiczenie nie ma jeszcze opisu. Dopiszesz go w Edytuj.";
+    opisTresc.appendChild(brak);
+  }
+  document.querySelector(".opis-uwaga").hidden = !opisTresc.querySelector(".opis-blok");
+
+  opisLink.hidden = !cwiczenie.link;
+  if (cwiczenie.link) {
+    opisLink.href = cwiczenie.link;
+  }
+  opisTlo.hidden = false;
+}
+
+function zamknijOpis() {
+  opisFilm.innerHTML = "";
+  opisTlo.hidden = true;
+}
+
+document.getElementById("opis-zamknij").addEventListener("click", zamknijOpis);
+opisTlo.addEventListener("click", function (zdarzenie) {
+  if (zdarzenie.target === opisTlo) {
+    zamknijOpis();
+  }
+});

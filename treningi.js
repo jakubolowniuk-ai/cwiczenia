@@ -73,19 +73,20 @@ function opisCwiczenia(cwiczenie) {
     .join(" · ");
 }
 
-// Dodaje do karty przycisk "▶ Film" (otwiera link), jeśli ćwiczenie ma film
+// Dodaje do karty przycisk "Opis" (opis wykonania i film), jeśli ćwiczenie ma opis albo link
 function dodajFilm(karta, cwiczenie) {
-  if (!cwiczenie.link) {
+  if (!maOpis(cwiczenie)) {
     return;
   }
-  const film = document.createElement("a");
-  film.className = "akcja film";
-  film.href = cwiczenie.link;
-  film.target = "_blank";
-  film.rel = "noopener";
-  film.textContent = "▶ Film";
-  film.setAttribute("aria-label", "Obejrzyj film: " + cwiczenie.nazwa);
-  karta.appendChild(film);
+  const przycisk = document.createElement("button");
+  przycisk.type = "button";
+  przycisk.className = "akcja film";
+  przycisk.textContent = "Opis";
+  przycisk.setAttribute("aria-label", "Opis ćwiczenia: " + cwiczenie.nazwa);
+  przycisk.addEventListener("click", function () {
+    otworzOpis(cwiczenie);
+  });
+  karta.appendChild(przycisk);
 }
 
 // Zestawy zapisane przez użytkownika (bez roboczych, które powstają przy układaniu planu)

@@ -1820,3 +1820,27 @@ h1 {
 .cw-stepper { min-width: 0; }
 .cw-stepper-rzad input { width: auto; padding: 0; }
 .cw-krok { width: 44px; }
+
+/* Opis ćwiczenia */
+.opis-tlo { z-index: 1200; }
+.opis-tlo .okno { max-height: 90vh; overflow-y: auto; }
+.opis-miniatura {
+  position: relative; display: block; width: 100%; aspect-ratio: 16 / 9; padding: 0; border: 0;
+  border-radius: 12px; overflow: hidden; background: #000; margin-bottom: 12px;
+}
+.opis-miniatura img { width: 100%; height: 100%; object-fit: cover; display: block; }
+.opis-miniatura span {
+  position: absolute; inset: 0; display: flex; align-items: center; justify-content: center;
+  color: #fff; font-size: 44px; text-shadow: 0 2px 8px rgba(0, 0, 0, 0.6);
+}
+.opis-ramka { width: 100%; aspect-ratio: 16 / 9; border: 0; border-radius: 12px; margin-bottom: 12px; display: block; }
+.opis-blok { margin-bottom: 10px; }
+.opis-blok p { margin: 2px 0 0; font-size: 16px; line-height: 1.4; }
+.opis-uwaga { font-size: 13px; }
+.formularz textarea {
+  width: 100%; padding: 10px 12px; border: 1px solid var(--linia); border-radius: 12px;
+  background: var(--tlo); color: var(--tekst); font: inherit; font-size: 16px; resize: vertical;
+}
+.cw-opis { align-self: flex-start; }
+.opis-blok .etykieta { padding: 0; margin: 0; }
+.opis-tlo .akcja.film { display: inline-block; padding-left: 0; margin-bottom: 12px; }

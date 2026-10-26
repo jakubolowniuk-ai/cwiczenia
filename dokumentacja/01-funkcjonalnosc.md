@@ -178,3 +178,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Dodatkowe: „← Poprzednia", „+ seria", „Pomiń ćwiczenie", podsumowanie na końcu. Ekran nie wygasza się (Wake Lock).
 - Dane: `sesja.przebieg = {wyniki: {id: [{p, kg, t}]}, extra: {id: n}, pominiete: {id: true}}` (pozycja wyliczana, więc po zamknięciu aplikacji wracasz w to samo miejsce). Po ostatniej serii ćwiczenie jest odhaczane (`zrobione`, `wykonane`) i sprawdzany jest rekord.
 - Ustawienia → Trening: dźwięk, wibracja (`ustawienia.dzwiek`, `ustawienia.wibracja`), domyślna przerwa.
+
+## Opis ćwiczenia (v40)
+- `cwiczenie.opis = {start, ruch, uwaga}` (opcjonalne, edytowalne w formularzu ćwiczenia). Przycisk „▶ Film" zastąpiony kafelkiem „Opis" (karta ćwiczenia, wiersz na Dziś, lista w zestawach, tryb Ćwicz), widocznym, gdy jest opis albo link.
+- Okno opisu: miniatura filmu YouTube (po dotknięciu odtwarza się w oknie, youtube-nocookie), trzy pola opisu, adnotacja o technice, „Otwórz film w przeglądarce" (inne serwisy tylko jako link).
+- Naprawa: edycja ćwiczenia zachowuje `zBazy`, `ukryte`, `rekord`, `przerwa`.

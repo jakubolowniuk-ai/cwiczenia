@@ -369,12 +369,11 @@ function cwNaglowekCwiczenia(b, serie) {
   cwPasek.style.width = Math.round(zrobione * 100 / ids.length) + "%";
 
   cwTresc.appendChild(cwEl("h2", "cw-nazwa", cw.nazwa));
-  if (cw.link) {
-    const film = cwEl("a", "akcja film", "▶ Film");
-    film.href = cw.link;
-    film.target = "_blank";
-    film.rel = "noopener";
-    cwTresc.appendChild(film);
+  if (maOpis(cw)) {
+    const opis = cwPrzycisk("Opis ćwiczenia", "akcja film cw-opis", function () {
+      otworzOpis(cw);
+    });
+    cwTresc.appendChild(opis);
   }
   cwTresc.appendChild(cwEl("div", "cw-seria", "Seria " + (b.nr + 1) + " z " + serie.length));
 }
