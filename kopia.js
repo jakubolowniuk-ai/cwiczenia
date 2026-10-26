@@ -192,6 +192,10 @@ function dodajCwiczeniaZListy(lista, opcje) {
       if (istniejace && opcje.zBazy) {
         istniejace.zBazy = true;
       }
+      // Opis z bazy uzupełnia tylko ćwiczenia, które nie mają własnego opisu
+      if (istniejace && opcje.zBazy && wpis.opis && !istniejace.opis) {
+        istniejace.opis = wpis.opis;
+      }
       if (istniejace && miesnieIds.length > 0 && !(istniejace.miesnieIds || []).length) {
         istniejace.miesnieIds = miesnieIds;
         istniejace.partieIds = istniejace.partieIds || [];
@@ -219,6 +223,7 @@ function dodajCwiczeniaZListy(lista, opcje) {
       miesnieIds: miesnieIds,
       link: typeof wpis.link === "string" ? wpis.link.trim() : "",
       zBazy: !!opcje.zBazy,
+      opis: wpis.opis && typeof wpis.opis === "object" ? wpis.opis : undefined,
       zCiezarem: wpis.ciezar === true || (wpis.ciezar !== false && rodzaj.id === "rodzaj-cialo")
     });
     zajete[nazwaKlucz(nazwa)] = true;
@@ -310,7 +315,7 @@ document.getElementById("kopia-przyklady").addEventListener("click", function ()
 // Nowa osoba dostaje gotową bazę. Kto ma już ćwiczenia, dostaje tylko oznaczenie, które z nich
 // pochodzą z bazy (takie można ukryć, ale nie usunąć). Brak internetu: spróbujemy przy następnym starcie.
 
-const WERSJA_BAZY = 1;
+const WERSJA_BAZY = 2;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
 
 function wczytajBazeStartowa() {

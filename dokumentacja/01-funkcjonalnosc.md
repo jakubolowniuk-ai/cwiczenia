@@ -183,3 +183,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - `cwiczenie.opis = {start, ruch, uwaga}` (opcjonalne, edytowalne w formularzu ćwiczenia). Przycisk „▶ Film" zastąpiony kafelkiem „Opis" (karta ćwiczenia, wiersz na Dziś, lista w zestawach, tryb Ćwicz), widocznym, gdy jest opis albo link.
 - Okno opisu: miniatura filmu YouTube (po dotknięciu odtwarza się w oknie, youtube-nocookie), trzy pola opisu, adnotacja o technice, „Otwórz film w przeglądarce" (inne serwisy tylko jako link).
 - Naprawa: edycja ćwiczenia zachowuje `zBazy`, `ukryte`, `rekord`, `przerwa`.
+
+## Pierwsze opisy (v41)
+- Opisy (`opis: {start, ruch, uwaga}`) w `przyklady-kalistenika.json` dla 10 ćwiczeń: pompki klasyczne, przysiad klasyczny, wykroki w tył, podciąganie nachwytem, podciąganie australijskie, dipy na poręczach, deska przodem, most biodrowy, dead bug, spięcia brzucha. Język bez terminów anatomicznych, nacisk na technikę.
+- `WERSJA_BAZY = 2`: starsze dane dostają opisy z bazy przy starcie, ale tylko tam, gdzie ćwiczenie nie ma własnego opisu.

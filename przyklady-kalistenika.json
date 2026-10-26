@@ -13,7 +13,12 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Dłonie na podłodze nieco szerzej niż barki, ciało w jednej prostej linii od głowy do pięt. Brzuch i pośladki napięte.",
+    "ruch": "Zegnij łokcie i opuść klatkę prawie do podłogi, łokcie lekko skierowane do tyłu, nie na boki. Wypchnij się w górę do prostych rąk. Wdech w dół, wydech w górę.",
+    "uwaga": "Biodra nie zwisają i nie sterczą w górę, głowa się nie opuszcza. Za trudno? Połóż dłonie na podwyższeniu (ławka, schody)."
+   }
   },
   {
    "nazwa": "Pompki szerokie",
@@ -229,7 +234,12 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć poręcze, wyprostuj ręce i unieś ciało. Barki daleko od uszu, nogi ugięte lub skrzyżowane, tułów lekko pochylony do przodu.",
+    "ruch": "Zegnij łokcie i opuść się, aż ramiona będą mniej więcej równoległe do podłogi. Wypchnij się w górę do prostych rąk. Wdech w dół, wydech w górę.",
+    "uwaga": "Łokcie blisko ciała, nie na boki. Przy bólu w barkach nie schodź tak nisko. To trudne ćwiczenie, zacznij od dipów na ławce."
+   }
   },
   {
    "nazwa": "Dipy z pochyleniem tułowia",
@@ -320,7 +330,12 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć drążek dłońmi skierowanymi od siebie, nieco szerzej niż barki. Zwis na prostych rękach, brzuch napięty, łopatki ściągnięte w dół (barki nie przy uszach).",
+    "ruch": "Pociągnij łokcie w dół, do boków, i unieś ciało, aż broda będzie nad drążkiem. Opuść się powoli (2–3 sekundy) do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez bujania nogami i szarpania. Nie wyciągaj szyi do drążka. Za trudno? Rób podciąganie australijskie albo samo powolne opuszczanie z góry."
+   }
   },
   {
    "nazwa": "Podciąganie podchwytem",
@@ -392,7 +407,12 @@
     "Biceps",
     "Naramienny tylny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Niski drążek na wysokości bioder. Połóż się pod nim i chwyć go dłońmi skierowanymi od siebie, na szerokość barków. Ciało w prostej linii od głowy do pięt, pięty na podłodze, ręce proste.",
+    "ruch": "Przyciągnij klatkę do drążka, ściągając łopatki do siebie. Zatrzymaj na chwilę i opuść powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie opadają, ciało zostaje proste jak deska. Łatwiej: zegnij kolana i ustaw stopy bliżej. Trudniej: połóż się bardziej poziomo."
+   }
   },
   {
    "nazwa": "Podciąganie australijskie podchwytem",
@@ -604,7 +624,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Oprzyj się na przedramionach (łokcie pod barkami) i palcach stóp. Ciało w jednej prostej linii od głowy do pięt.",
+    "ruch": "Utrzymaj pozycję: napnij brzuch i pośladki, patrz w podłogę, oddychaj spokojnie i równo.",
+    "uwaga": "Biodra nie opadają i nie sterczą w górę. Jeśli boli dolna część pleców, skończ i odpocznij. Łatwiej: oprzyj kolana na podłodze."
+   }
   },
   {
    "nazwa": "Deska bokiem (Side Plank)",
@@ -715,7 +740,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, kolana ugięte, stopy na podłodze. Dłonie przy skroniach albo skrzyżowane na klatce.",
+    "ruch": "Napnij brzuch i unieś barki oraz łopatki kilka centymetrów nad podłogę (nie musisz siadać). Zatrzymaj na chwilę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Szyja luźna, nie ciągnij głowy rękami, patrz w sufit. Ruch ma iść z brzucha, a nie z szarpnięcia."
+   }
   },
   {
    "nazwa": "Rowerki brzucha",
@@ -757,7 +787,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach. Ręce wyprostowane w górę, kolana ugięte nad biodrami (łydki równolegle do podłogi). Dolna część pleców dociśnięta do podłogi.",
+    "ruch": "Jednocześnie opuść prawą rękę za głowę i wyprostuj lewą nogę tuż nad podłogą. Wróć i zrób to samo drugą stroną. Wydech przy wyciąganiu, wdech przy powrocie. Powoli.",
+    "uwaga": "Jeśli plecy odrywają się od podłogi, zmniejsz zakres ruchu. Brzuch cały czas napięty."
+   }
   },
   {
    "nazwa": "Bird Dog",
@@ -822,7 +857,12 @@
     "Półścięgnisty i półbłoniasty",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, kolana ugięte, stopy płasko przy pośladkach na szerokość bioder. Ręce wzdłuż ciała.",
+    "ruch": "Dociśnij stopy do podłogi i unieś biodra, aż ciało od kolan do barków będzie prostą linią. Na górze mocno ściśnij pośladki, zatrzymaj na 1–2 sekundy i powoli opuść. Wydech w górę, wdech w dół.",
+    "uwaga": "Nie wyginaj mocno dolnej części pleców, ruch ma iść z pośladków. Pięty zostają na podłodze, kolana nie uciekają na boki."
+   }
   },
   {
    "nazwa": "Most biodrowy jednonóż",
@@ -970,7 +1010,12 @@
     "Pośladkowy wielki",
     "Przywodziciele uda"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stopy na szerokość barków, palce lekko na zewnątrz. Plecy proste, wzrok przed siebie, ręce złączone przed sobą.",
+    "ruch": "Odsuń biodra do tyłu, jakbyś siadał na krześle, i zegnij kolana, aż uda będą równoległe do podłogi (głębiej tylko jeśli nic nie boli). Wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Kolana idą w stronę palców i nie zapadają się do środka. Pięty zostają na podłodze, plecy się nie zaokrąglają."
+   }
   },
   {
    "nazwa": "Przysiad głęboki",
@@ -1051,7 +1096,12 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty.",
+    "ruch": "Zrób duży krok do tyłu i opuść tylne kolano prawie do podłogi. Przednie kolano jest nad stopą. Odepchnij się przednią nogą i wróć do stania. Potem zmień nogę.",
+    "uwaga": "Tułów pionowo, nie pochylaj się do przodu. Przednie kolano nie ucieka do środka. Dla równowagi możesz trzymać się ściany."
+   }
   },
   {
    "nazwa": "Wykroki chodzone",
