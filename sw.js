@@ -1,6 +1,6 @@
 // Service worker: aplikacja działa bez internetu, ale zawsze najpierw próbuje pobrać nowe pliki.
 // Przy każdej wgranej paczce zmień numer wersji poniżej.
-const WERSJA = "cwiczenia-v41";
+const WERSJA = "cwiczenia-v42";
 
 const PLIKI = [
   "./", "index.html", "style.css", "manifest.webmanifest",

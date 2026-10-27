@@ -187,3 +187,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Pierwsze opisy (v41)
 - Opisy (`opis: {start, ruch, uwaga}`) w `przyklady-kalistenika.json` dla 10 ćwiczeń: pompki klasyczne, przysiad klasyczny, wykroki w tył, podciąganie nachwytem, podciąganie australijskie, dipy na poręczach, deska przodem, most biodrowy, dead bug, spięcia brzucha. Język bez terminów anatomicznych, nacisk na technikę.
 - `WERSJA_BAZY = 2`: starsze dane dostają opisy z bazy przy starcie, ale tylko tam, gdzie ćwiczenie nie ma własnego opisu.
+
+## Opisy dla 50 ćwiczeń (v42)
+- Opisy (start/ruch/uwaga) dla 50 najpopularniejszych ćwiczeń: kalistenika (25), siłownia (20), joga/mobilność (5) w plikach `przyklady-*.json`. Pierwsze 10 z v41 przejrzane i uzupełnione (kąt łokci w pompkach, nieblokowanie oddechu w desce, krok w wykrokach itd.).
+- `WERSJA_BAZY = 3`. Opis z bazy ma znacznik `opisZBazy`: baza może go później zaktualizować; własny opis (zapisany w formularzu) nigdy nie jest nadpisywany. Opisy z v41 bez znacznika są aktualizowane, jeśli ich początek zgadza się z `STARE_OPISY_START`.

@@ -14,7 +14,12 @@
     "Naramienny przedni"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Połóż się na ławce, oczy pod drążkiem, stopy mocno na podłodze. Ściągnij łopatki do siebie i w dół, klatka wypchnięta. Chwyć sztangę nieco szerzej niż barki, kciuki wokół drążka.",
+    "ruch": "Zdejmij sztangę i opuść ją kontrolowanie do dolnej części klatki, łokcie ok. 45° do ciała. Wypchnij w górę do prostych rąk. Wdech w dół, wydech w górę.",
+    "uwaga": "Pośladki i łopatki cały czas na ławce, nadgarstki proste. Przy dużym ciężarze ćwicz z osobą asekurującą albo ogranicznikami."
+   }
   },
   {
    "nazwa": "Wyciskanie hantli na ławce skośnej dodatniej",
@@ -30,7 +35,12 @@
     "Triceps – głowa długa"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Ławka ustawiona pod kątem ok. 30–45°. Usiądź, hantle oprzyj na udach i połóż się, wciągając je do barków. Łopatki ściągnięte, stopy na podłodze.",
+    "ruch": "Wypchnij hantle w górę nad górną część klatki, aż ręce będą proste. Opuść powoli do poziomu klatki, łokcie ok. 45° do ciała. Wdech w dół, wydech w górę.",
+    "uwaga": "Nadgarstki proste, plecy nie wyginają się mocno w łuk. Nie schodź zbyt nisko, jeśli barki bolą."
+   }
   },
   {
    "nazwa": "Wyciskanie sztangi na ławce skośnej ujemnej",
@@ -203,7 +213,12 @@
     "Prostowniki przedramienia"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stopy na szerokość bioder, sztanga nad środkiem stopy, tuż przy goleniach. Zegnij się w biodrach i kolanach, chwyć sztangę na szerokość barków. Plecy proste, klatka wysoko, wzrok przed siebie lekko w dół.",
+    "ruch": "Napnij brzuch, odepchnij się nogami i wyprostuj biodra i kolana jednocześnie, sztanga sunie tuż przy ciele. Na górze stań prosto, bez wyginania pleców. Opuść tą samą drogą, odsuwając biodra do tyłu. Wdech przed podniesieniem, wydech na górze.",
+    "uwaga": "Plecy nigdy się nie zaokrąglają, sztanga cały czas blisko nóg. Zacznij od lekkiego ciężaru i ćwicz technikę."
+   }
   },
   {
    "nazwa": "Podciąganie na drążku z obciążeniem",
@@ -238,7 +253,12 @@
     "Prostowniki grzbietu"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stopy na szerokość bioder, kolana lekko ugięte. Pochyl tułów prawie do poziomu, plecy proste, brzuch napięty. Sztanga w rękach nachwytem, nieco szerzej niż barki.",
+    "ruch": "Przyciągnij sztangę do dolnej części brzucha, łokcie do tyłu, ściągając łopatki. Opuść powoli do prostych rąk. Wydech przy przyciąganiu, wdech przy opuszczaniu.",
+    "uwaga": "Tułów się nie podnosi i nie bujasz. Plecy proste przez cały ruch. Przy bólu pleców zmniejsz ciężar."
+   }
   },
   {
    "nazwa": "Wiosłowanie hantlą jednorącz w oparciu o ławkę",
@@ -256,7 +276,12 @@
     "Biceps"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Jedną dłoń i kolano oprzyj na ławce, plecy proste i równoległe do podłogi. Hantla w drugiej ręce, ręka prosta.",
+    "ruch": "Przyciągnij hantlę do biodra, łokieć do tyłu blisko ciała. Zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół. Potem druga ręka.",
+    "uwaga": "Tułów się nie obraca i nie szarpiesz. Wybierz ciężar, który pozwala trzymać plecy proste."
+   }
   },
   {
    "nazwa": "Ściąganie drążka wyciągu górnego do klatki",
@@ -272,7 +297,12 @@
     "Ramienny"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Usiądź, uda zablokuj pod wałkami. Chwyć drążek nachwytem szerzej niż barki. Tułów lekko odchylony do tyłu, klatka wysoko.",
+    "ruch": "Ściągnij drążek do górnej części klatki, łokcie w dół i do boków, łopatki ściągnięte. Powoli wróć do prostych rąk. Wydech przy ściąganiu, wdech przy powrocie.",
+    "uwaga": "Nie szarp i nie odchylaj się mocno do tyłu. Nie ciągnij drążka za kark. Ruch idzie z łopatek i pleców, nie z samych rąk."
+   }
   },
   {
    "nazwa": "Wiosłowanie na maszynie siedząc (chwyt neutralny)",
@@ -420,7 +450,12 @@
     "Półścięgnisty i półbłoniasty"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, sztanga w rękach przy udach (nachwyt). Kolana lekko ugięte, klatka wysoko, brzuch napięty.",
+    "ruch": "Odsuń biodra do tyłu i pochylaj tułów, prowadząc sztangę blisko nóg, aż poczujesz mocne rozciągnięcie z tyłu ud (zwykle poniżej kolan). Plecy proste. Wróć, wypychając biodra do przodu. Wdech w dół, wydech w górę.",
+    "uwaga": "To ruch w biodrach, nie przysiad. Plecy się nie zaokrąglają, sztanga sunie po nogach."
+   }
   },
   {
    "nazwa": "Wiosłowanie sztangą w landmine (jednorącz)",
@@ -452,7 +487,12 @@
     "Czworoboczny – część górna"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość barków. Sztanga na górnej części klatki i barkach, chwyt nieco szerzej niż barki. Brzuch i pośladki napięte.",
+    "ruch": "Wypchnij sztangę prosto w górę nad głowę, na chwilę odsuwając głowę do tyłu, by sztanga przeszła blisko twarzy. Na górze ręce proste, głowa z powrotem między ramionami. Opuść do barków. Wdech przed wyciśnięciem, wydech na górze.",
+    "uwaga": "Nie wyginaj mocno dolnych pleców (napnij pośladki i brzuch). Sztanga porusza się nad środkiem stóp."
+   }
   },
   {
    "nazwa": "Wyciskanie hantli siedząc",
@@ -480,7 +520,12 @@
     "Naramienny środkowy"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stań prosto, hantle przy bokach, łokcie lekko ugięte, brzuch napięty.",
+    "ruch": "Unieś ręce w bok do wysokości barków (nie wyżej), jakbyś rozlewał wodę z dzbanków. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez bujania tułowiem. Lekki ciężar wystarczy. Barki daleko od uszu."
+   }
   },
   {
    "nazwa": "Unoszenie hantli w opadzie tułowia",
@@ -538,7 +583,12 @@
     "Równoległoboczny"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Lina na wyciągu na wysokości twarzy. Chwyć końce dłońmi do siebie, odejdź krok, ręce proste, stopy na szerokość bioder, brzuch napięty.",
+    "ruch": "Przyciągnij linę do twarzy, rozchylając końce na boki, łokcie wysoko, łopatki ściągnięte. Zatrzymaj sekundę i wróć powoli. Wydech przy przyciąganiu, wdech przy powrocie.",
+    "uwaga": "Lekki ciężar i płynny ruch. Bez odchylania tułowia."
+   }
   },
   {
    "nazwa": "Wyciskanie na maszynie nad głowę (siedząc)",
@@ -626,7 +676,12 @@
     "Prostowniki grzbietu"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Sztanga na górnej części pleców (nie na karku), ręce mocno trzymają drążek, łokcie w dół. Stopy na szerokość barków, palce lekko na zewnątrz.",
+    "ruch": "Weź wdech, napnij brzuch, odsuń biodra do tyłu i zegnij kolana, aż uda będą równoległe do podłogi. Wstań, odpychając się całą stopą. Wydech na górze.",
+    "uwaga": "Kolana idą w stronę palców, plecy proste, pięty na podłodze. Przy dużym ciężarze używaj stojaków z ogranicznikami albo asekuracji."
+   }
   },
   {
    "nazwa": "Przysiad ze sztangą z przodu (Front Squat)",
@@ -678,7 +733,12 @@
     "Przywodziciele uda"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Usiądź, plecy i pośladki oparte o oparcie. Stopy na platformie na szerokość barków, palce lekko na zewnątrz. Zwolnij zabezpieczenie.",
+    "ruch": "Zegnij kolana i opuść platformę kontrolowanie, aż kolana będą ugięte ok. 90°. Wypchnij platformę, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Pośladki i plecy nie odrywają się od oparcia. Kolana nie zapadają się do środka i nie blokują całkowicie na górze."
+   }
   },
   {
    "nazwa": "Przysiad Hack na maszynie",
@@ -744,7 +804,12 @@
     "Półścięgnisty i półbłoniasty"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Usiądź na podłodze plecami do ławki, łopatki o krawędź. Sztanga (z nakładką) na biodrach, przytrzymuj ją rękami. Stopy płasko na szerokość bioder, kolana ugięte.",
+    "ruch": "Dociśnij stopy i unieś biodra, aż tułów i uda będą w jednej linii. Zatrzymaj sekundę, mocno ściskając pośladki, i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Broda lekko do klatki. Dolne plecy nie wyginają się mocno. Pięty zostają na podłodze."
+   }
   },
   {
    "nazwa": "Prostowanie nóg na maszynie (siedząc)",
@@ -758,7 +823,12 @@
     "Obszerny przyśrodkowy"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Usiądź, plecy oparte, kolana w linii z osią maszyny, wałek tuż nad kostkami.",
+    "ruch": "Wyprostuj nogi do góry, zatrzymaj sekundę i opuść powoli, nie kładąc ciężaru na stos. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez szarpania i bez odrywania pośladków od siedzenia. Nie blokuj mocno kolan na górze."
+   }
   },
   {
    "nazwa": "Przysiad Goblet z kettlebellem lub hantlem",
@@ -774,7 +844,12 @@
     "Pośladkowy wielki"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Trzymaj hantlę lub kettlebell pionowo przy klatce, łokcie w dół. Stopy nieco szerzej niż barki, palce lekko na zewnątrz, plecy proste.",
+    "ruch": "Zegnij kolana i zejdź w dół między kolana, aż uda będą równoległe do podłogi lub niżej. Wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Ciężar blisko klatki, tułów wysoko. Kolana w stronę palców, pięty na podłodze."
+   }
   },
   {
    "nazwa": "Przysiad na maszynie Smitha",
@@ -909,7 +984,12 @@
     "Półścięgnisty i półbłoniasty"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Połóż się brzuchem na ławce, kolana tuż za jej krawędzią, wałek nad piętami.",
+    "ruch": "Zegnij nogi, przyciągając pięty do pośladków, zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra przyklejone do ławki, nie unoś ich. Bez szarpania."
+   }
   },
   {
    "nazwa": "Uginanie nóg siedząc na maszynie",
@@ -952,7 +1032,12 @@
     "Płaszczkowaty"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Sztanga na górnej części pleców jak do przysiadu (albo hantle w rękach), stopy na szerokość bioder, najlepiej palce na stopniu.",
+    "ruch": "Wspinaj się wysoko na palce, zatrzymaj sekundę i opuść pięty powoli, niżej niż poziom stopnia. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez podskoków. Kolana proste, ale nie zablokowane. Przy dużym ciężarze użyj stojaków."
+   }
   },
   {
    "nazwa": "Wspięcia na palce siedząc na maszynie",
@@ -1020,7 +1105,12 @@
     "Triceps – głowa długa"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stań przy wyciągu, chwyć linę. Łokcie przy bokach, zgięte do ok. 90°, tułów lekko pochylony, brzuch napięty.",
+    "ruch": "Prostuj ręce w dół, rozchylając końce liny na boki na dole. Zatrzymaj sekundę i wróć powoli do zgięcia 90°. Wydech w dół, wdech w górę.",
+    "uwaga": "Łokcie nie odrywają się od boków. Bez kołysania tułowiem i pomagania sobie ciężarem ciała."
+   }
   },
   {
    "nazwa": "Prostowanie ramion na wyciągu z drążkiem prostym",
@@ -1139,7 +1229,12 @@
     "Prostowniki przedramienia"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder. Sztanga dłońmi skierowanymi do góry, na szerokość barków, ręce wyprostowane, łokcie przy bokach.",
+    "ruch": "Zegnij ręce i unieś sztangę do barków, łokcie nadal przy tułowiu. Opuść powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez kołysania tułowiem i odchylania pleców. Łokcie nie uciekają do przodu. Zmniejsz ciężar, jeśli musisz bujać."
+   }
   },
   {
    "nazwa": "Uginanie ramion z hantlami z supinacją",
@@ -1167,7 +1262,12 @@
     "Biceps"
    ],
    "link": "",
-   "ciezar": true
+   "ciezar": true,
+   "opis": {
+    "start": "Stań prosto, hantle przy bokach, dłonie zwrócone do ciała (jak przy trzymaniu młotka), łokcie przy tułowiu.",
+    "ruch": "Zegnij jedną rękę, unosząc hantlę do barku, dłoń cały czas zwrócona do siebie. Opuść powoli. Na przemian lub obie naraz. Wydech w górę, wdech w dół.",
+    "uwaga": "Łokcie nieruchome przy bokach, tułów bez bujania."
+   }
   },
   {
    "nazwa": "Uginanie ramion na modlitewniku ze sztangą łamaną",

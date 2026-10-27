@@ -192,9 +192,11 @@ function dodajCwiczeniaZListy(lista, opcje) {
       if (istniejace && opcje.zBazy) {
         istniejace.zBazy = true;
       }
-      // Opis z bazy uzupełnia tylko ćwiczenia, które nie mają własnego opisu
-      if (istniejace && opcje.zBazy && wpis.opis && !istniejace.opis) {
+      // Opis z bazy: uzupełnia brakujący i aktualizuje wcześniejszy opis z bazy, ale nigdy nie nadpisuje własnego
+      if (istniejace && opcje.zBazy && wpis.opis &&
+          (!istniejace.opis || istniejace.opisZBazy || STARE_OPISY_START.indexOf(istniejace.opis.start) !== -1)) {
         istniejace.opis = wpis.opis;
+        istniejace.opisZBazy = true;
       }
       if (istniejace && miesnieIds.length > 0 && !(istniejace.miesnieIds || []).length) {
         istniejace.miesnieIds = miesnieIds;
@@ -224,6 +226,7 @@ function dodajCwiczeniaZListy(lista, opcje) {
       link: typeof wpis.link === "string" ? wpis.link.trim() : "",
       zBazy: !!opcje.zBazy,
       opis: wpis.opis && typeof wpis.opis === "object" ? wpis.opis : undefined,
+      opisZBazy: wpis.opis && opcje.zBazy ? true : undefined,
       zCiezarem: wpis.ciezar === true || (wpis.ciezar !== false && rodzaj.id === "rodzaj-cialo")
     });
     zajete[nazwaKlucz(nazwa)] = true;
@@ -315,7 +318,21 @@ document.getElementById("kopia-przyklady").addEventListener("click", function ()
 // Nowa osoba dostaje gotową bazę. Kto ma już ćwiczenia, dostaje tylko oznaczenie, które z nich
 // pochodzą z bazy (takie można ukryć, ale nie usunąć). Brak internetu: spróbujemy przy następnym starcie.
 
-const WERSJA_BAZY = 2;
+// Początki opisów z wersji 41 (bez znacznika): dopóki ich nie zmieniono, baza może je zaktualizować
+const STARE_OPISY_START = [
+ "Dłonie na podłodze nieco szerzej niż barki, ciało w jednej prostej linii od głowy do pięt. Brzuch i pośladki napięte.",
+ "Chwyć poręcze, wyprostuj ręce i unieś ciało. Barki daleko od uszu, nogi ugięte lub skrzyżowane, tułów lekko pochylony do przodu.",
+ "Chwyć drążek dłońmi skierowanymi od siebie, nieco szerzej niż barki. Zwis na prostych rękach, brzuch napięty, łopatki ściągnięte w dół (barki nie przy uszach).",
+ "Niski drążek na wysokości bioder. Połóż się pod nim i chwyć go dłońmi skierowanymi od siebie, na szerokość barków. Ciało w prostej linii od głowy do pięt, pięty na podłodze, ręce proste.",
+ "Oprzyj się na przedramionach (łokcie pod barkami) i palcach stóp. Ciało w jednej prostej linii od głowy do pięt.",
+ "Połóż się na plecach, kolana ugięte, stopy na podłodze. Dłonie przy skroniach albo skrzyżowane na klatce.",
+ "Połóż się na plecach. Ręce wyprostowane w górę, kolana ugięte nad biodrami (łydki równolegle do podłogi). Dolna część pleców dociśnięta do podłogi.",
+ "Połóż się na plecach, kolana ugięte, stopy płasko przy pośladkach na szerokość bioder. Ręce wzdłuż ciała.",
+ "Stopy na szerokość barków, palce lekko na zewnątrz. Plecy proste, wzrok przed siebie, ręce złączone przed sobą.",
+ "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
+];
+
+const WERSJA_BAZY = 3;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
 
 function wczytajBazeStartowa() {

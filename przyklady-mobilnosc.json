@@ -17,7 +17,12 @@
     "Naramienny przedni",
     "Zębaty przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zacznij na czworakach, dłonie pod barkami, kolana pod biodrami, palce rozstawione szeroko.",
+    "ruch": "Wypchnij biodra w górę i do tyłu, wyprostuj ręce i nogi tak, by ciało tworzyło odwróconą literę V. Głowa między ramionami, pięty dążą do podłogi. Oddychaj spokojnie przez 20–60 sekund.",
+    "uwaga": "Proste plecy są ważniejsze niż proste nogi (kolana mogą być ugięte). Ciężar rozłóż równo na całych dłoniach."
+   }
   },
   {
    "nazwa": "Kobra (Bhujangasana)",
@@ -32,7 +37,12 @@
     "Pośladkowy wielki",
     "Prosty brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na brzuchu, nogi razem lub lekko rozstawione, dłonie pod barkami, łokcie przy bokach.",
+    "ruch": "Wdech: unieś głowę i klatkę, prostując ręce tylko tyle, na ile jest wygodnie. Biodra zostają na podłodze. Utrzymaj kilka oddechów, a na wydechu opuść powoli.",
+    "uwaga": "Barki daleko od uszu, nie wyginaj mocno dolnych pleców. Niskie uniesienie wystarczy. Przy bólu pleców opuść się niżej."
+   }
   },
   {
    "nazwa": "Poza dziecka (Balasana)",
@@ -46,7 +56,12 @@
     "Najszerszy grzbietu",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij, duże palce stóp razem, kolana rozstawione szeroko albo razem.",
+    "ruch": "Usiądź pośladkami na piętach i pochyl tułów do przodu, kładąc czoło na podłodze. Ręce wyciągnięte do przodu albo wzdłuż ciała. Oddychaj głęboko i spokojnie, rozluźnij plecy.",
+    "uwaga": "Jeśli pośladki nie sięgają pięt, podłóż zwiniętą matę lub poduszkę pod pośladki albo czoło. Przy bólu kolan wyjdź z pozy."
+   }
   },
   {
    "nazwa": "Kot i krowa",
@@ -61,7 +76,12 @@
     "Wielodzielny",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Czworaki: dłonie pod barkami, kolana pod biodrami, plecy proste.",
+    "ruch": "Wdech: opuść brzuch w dół, unieś klatkę i głowę (krowa). Wydech: wypchnij plecy do góry jak kot, głowa luźno w dół, brzuch wciągnięty. Płynnie na przemian.",
+    "uwaga": "Ruch powolny, w tempie oddechu. Nie forsuj zakresu, jeśli coś boli."
+   }
   },
   {
    "nazwa": "Wojownik II",
@@ -121,7 +141,12 @@
     "Prosty uda",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zrób duży krok do przodu. Tylne kolano oprzyj na macie (podłóż zwiniętą matę lub poduszkę), przednie kolano ugięte nad kostką.",
+    "ruch": "Przesuń biodra lekko do przodu i w dół, tułów wysoko, ręce na przednim udzie albo w górze. Poczuj rozciąganie z przodu biodra tylnej nogi. Oddychaj spokojnie 20–40 sekund, potem druga strona.",
+    "uwaga": "Nie wyginaj mocno dolnych pleców, napnij brzuch. Przednie kolano nie ucieka do środka."
+   }
   },
   {
    "nazwa": "Skręt kręgosłupa leżąc",
