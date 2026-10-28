@@ -191,3 +191,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## Opisy dla 50 ćwiczeń (v42)
 - Opisy (start/ruch/uwaga) dla 50 najpopularniejszych ćwiczeń: kalistenika (25), siłownia (20), joga/mobilność (5) w plikach `przyklady-*.json`. Pierwsze 10 z v41 przejrzane i uzupełnione (kąt łokci w pompkach, nieblokowanie oddechu w desce, krok w wykrokach itd.).
 - `WERSJA_BAZY = 3`. Opis z bazy ma znacznik `opisZBazy`: baza może go później zaktualizować; własny opis (zapisany w formularzu) nigdy nie jest nadpisywany. Opisy z v41 bez znacznika są aktualizowane, jeśli ich początek zgadza się z `STARE_OPISY_START`.
+
+## Opisy dla całej bazy (v43)
+- Wszystkie 219 ćwiczeń bazowych mają opis (start/ruch/uwaga), średnio ok. 55 słów. `WERSJA_BAZY = 4`: starsze dane dostają brakujące opisy; opisy zapisane w formularzu (bez znacznika `opisZBazy`) nie są nadpisywane.

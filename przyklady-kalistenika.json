@@ -33,7 +33,12 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, ale dłonie wyraźnie szerzej niż barki. Ciało w prostej linii od głowy do pięt, brzuch i pośladki napięte.",
+    "ruch": "Zegnij łokcie na boki i opuść klatkę prawie do podłogi, potem wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Nie rozstawiaj dłoni skrajnie szeroko, bo barki bardzo to odczuwają. Biodra nie zwisają. Przy bólu barków wróć do zwykłych pompek."
+   }
   },
   {
    "nazwa": "Pompki diamentowe",
@@ -68,7 +73,12 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, ale stopy na stabilnej ławce lub schodku. Dłonie nieco szerzej niż barki, ciało w prostej linii.",
+    "ruch": "Zegnij łokcie pod kątem ok. 45° do ciała i opuść głowę w stronę podłogi, potem wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Biodra nie opadają. Im wyżej stopy, tym większe obciążenie barków, więc zaczynaj od niskiego podwyższenia."
+   }
   },
   {
    "nazwa": "Pompki z rękami na podwyższeniu",
@@ -103,7 +113,12 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, dłonie bardzo szeroko. Ciało w prostej linii, brzuch napięty.",
+    "ruch": "Zegnij jeden łokieć i opuść klatkę nad tę rękę, druga ręka zostaje prosta jak podpora. Wypchnij się i zmień stronę. Wdech w dół, wydech w górę.",
+    "uwaga": "Prosta ręka tylko pomaga w równowadze. Nie skręcaj tułowia. To trudne ćwiczenie: zacznij od niskiego zakresu ruchu."
+   }
   },
   {
    "nazwa": "Pompki pseudo-planche",
@@ -119,7 +134,12 @@
     "Triceps – głowa długa",
     "Zębaty przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, dłonie przy talii skierowane palcami na boki lub do tyłu. Ciało pochylone do przodu, barki przed dłońmi.",
+    "ruch": "Utrzymuj pochylenie i zegnij łokcie blisko ciała, opuszczając klatkę. Wypchnij się. Wdech w dół, wydech w górę.",
+    "uwaga": "Mocno obciąża nadgarstki i barki, więc rozgrzej je wcześniej. Przy bólu zmniejsz pochylenie."
+   }
   },
   {
    "nazwa": "Pompki hinduskie",
@@ -135,7 +155,12 @@
     "Naramienny przedni",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja „pies z głową w dół”: dłonie na szerokość barków, biodra wysoko, nogi prawie proste.",
+    "ruch": "Zegnij łokcie i przesuń głowę oraz klatkę w dół i do przodu, wzdłuż podłogi, aż biodra są nisko, a ręce proste (jak kobra). Odwróć ruch tą samą drogą. Płynnie, wdech w dół, wydech w górę.",
+    "uwaga": "Ruch ma być płynny, bez szarpania. Przy bólu pleców lub barków zmniejsz zakres. Rozgrzej barki."
+   }
   },
   {
    "nazwa": "Pompki z wypchnięciem łopatek (Push-Up Plus)",
@@ -149,7 +174,12 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, ręce proste, ciało w prostej linii, brzuch napięty.",
+    "ruch": "Z prostymi rękami wypchnij plecy w górę, rozsuwając łopatki szeroko (jak koci grzbiet w górnej części pleców). Wróć do pozycji wyjściowej, łopatki ściągnięte. Łokcie nie zginają się.",
+    "uwaga": "Ruch jest mały i dzieje się tylko w łopatkach. Nie uginaj łokci ani nie opuszczaj bioder."
+   }
   },
   {
    "nazwa": "Pompki z klaśnięciem",
@@ -164,7 +194,12 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, ciało w prostej linii, brzuch napięty. Ćwiczenie dla osób, które swobodnie robią zwykłe pompki.",
+    "ruch": "Zegnij łokcie, a potem wybij się dłońmi w górę z podłogi tak, by w powietrzu klasnąć. Wyląduj miękko, z lekko ugiętymi łokciami, i od razu zegnij ręce.",
+    "uwaga": "Lądowanie na ugiętych łokciach, nie na prostych. Zacznij od wybicia bez klaśnięcia. Przy bólu nadgarstków lub barków zakończ."
+   }
   },
   {
    "nazwa": "Pompki pike",
@@ -200,7 +235,12 @@
     "Czworoboczny – część środkowa",
     "Czworoboczny – część dolna"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Dłonie na podłodze na szerokość barków, stopy na stabilnym podwyższeniu. Biodra wysoko, ciało tworzy odwróconą literę V.",
+    "ruch": "Zegnij łokcie i opuść głowę w stronę podłogi przed dłońmi, potem wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Najpierw opanuj zwykłe pompki pike. Nie opieraj ciężko głowy, nie wyginaj mocno pleców. Przy bólu barków wróć do niższych stóp."
+   }
   },
   {
    "nazwa": "Pompki w staniu na rękach przy ścianie",
@@ -216,7 +256,12 @@
     "Czworoboczny – część środkowa",
     "Czworoboczny – część dolna"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stanie na rękach przy ścianie, brzuchem do ściany: dłonie na szerokość barków, ciało proste, brzuch i pośladki napięte.",
+    "ruch": "Zegnij łokcie i opuść głowę w stronę podłogi, potem wypchnij się do prostych rąk. Wdech w dół, wydech w górę.",
+    "uwaga": "Ćwiczenie zaawansowane: najpierw opanuj pompki pike z nogami na podwyższeniu. Pod głowę podłóż zwiniętą matę. Nie wyginaj mocno pleców."
+   }
   },
   {
    "nazwa": "Stanie na rękach",
@@ -234,7 +279,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań przy ścianie, dłonie na podłodze na szerokość barków, palce szeroko. Odejdź nogami w górę po ścianie, brzuchem do ściany.",
+    "ruch": "Utrzymaj ciało w prostej linii, ręce proste, barki wysoko (pchasz podłogę). Patrz między dłonie, napnij brzuch i pośladki, oddychaj spokojnie.",
+    "uwaga": "Nie wyginaj mocno pleców (bananowa pozycja). Naucz się bezpiecznie schodzić. Przerwij przy bólu nadgarstków lub zawrotach głowy."
+   }
   },
   {
    "nazwa": "Dipy na poręczach",
@@ -269,7 +319,12 @@
     "Triceps – głowa długa",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć poręcze, wyprostuj ręce i unieś ciało. Pochyl tułów mocno do przodu, nogi ugięte lub skrzyżowane.",
+    "ruch": "Zegnij łokcie i opuść się, kierując klatkę między poręcze, aż ramiona są mniej więcej równoległe do podłogi. Wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Łokcie lekko na boki, barki nie unoszą się do uszu. Przy bólu w barkach nie schodź tak nisko. Zaawansowane."
+   }
   },
   {
    "nazwa": "Dipy z pionowym tułowiem",
@@ -284,7 +339,12 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć poręcze, wyprostuj ręce i unieś ciało. Tułów pionowo, nogi lekko za sobą, łokcie blisko ciała.",
+    "ruch": "Zegnij łokcie wzdłuż tułowia i opuść się, aż ramiona są mniej więcej równoległe do podłogi. Wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Łokcie nie uciekają na boki, barki daleko od uszu. Przy bólu w barkach zmniejsz zakres ruchu."
+   }
   },
   {
    "nazwa": "Dipy na ławce",
@@ -321,7 +381,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć kółka gimnastyczne (zawieszone na wysokości bioder), wyprostuj ręce i unieś ciało. Kółka przy biodrach, dłonie skierowane do przodu lub lekko na zewnątrz.",
+    "ruch": "Utrzymaj pozycję z prostymi rękami, barki mocno w dół (nie przy uszach), brzuch napięty, nogi razem. Oddychaj spokojnie.",
+    "uwaga": "Kółka nie rozjeżdżają się. Zakończ, gdy barki lub nadgarstki zaczynają boleć. Łatwiej: oprzyj stopy na podłodze."
+   }
   },
   {
    "nazwa": "Pompki z wąskim rozstawem dłoni",
@@ -336,7 +401,12 @@
     "Piersiowy większy",
     "Naramienny przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, dłonie pod barkami lub bliżej, ciało w prostej linii, brzuch napięty.",
+    "ruch": "Zegnij łokcie, trzymając je przy ciele, i opuść klatkę prawie do podłogi. Wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Łokcie blisko ciała, nie na boki. Biodra nie zwisają. Jeśli bolą nadgarstki, rozstaw dłonie szerzej."
+   }
   },
   {
    "nazwa": "Podciąganie nachwytem",
@@ -389,7 +459,12 @@
     "Ramienny",
     "Obły większy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć uchwyty dłońmi zwróconymi do siebie (jak do uścisku dłoni), zwis na prostych rękach, brzuch napięty, łopatki ściągnięte w dół.",
+    "ruch": "Pociągnij łokcie w dół do boków i unieś ciało, aż broda będzie nad uchwytami. Opuść się powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez bujania i szarpania. Nie wyciągaj szyi. To dobry wariant, gdy bolą barki lub nadgarstki."
+   }
   },
   {
    "nazwa": "Podciąganie szerokim nachwytem",
@@ -402,7 +477,12 @@
     "Obły większy",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć drążek dłońmi od siebie, wyraźnie szerzej niż barki. Zwis na prostych rękach, brzuch napięty, łopatki w dół.",
+    "ruch": "Pociągnij łokcie w dół i do boków, unieś ciało, aż broda będzie nad drążkiem. Opuść się powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez szarpania. Skrócony zakres ruchu to częsty błąd. Przy bólu barków zwęż chwyt."
+   }
   },
   {
    "nazwa": "Podciąganie wąskim nachwytem",
@@ -416,7 +496,12 @@
     "Biceps",
     "Ramienny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć drążek dłońmi od siebie, wąsko (węziej niż barki). Zwis na prostych rękach, brzuch napięty, łopatki w dół.",
+    "ruch": "Pociągnij łokcie w dół i do tyłu, unieś ciało, aż broda będzie nad drążkiem. Opuść się powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez bujania. Jeśli nadgarstki lub łokcie bolą, rozszerz chwyt."
+   }
   },
   {
    "nazwa": "Podciąganie australijskie",
@@ -452,7 +537,12 @@
     "Ramienny",
     "Równoległoboczny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Niski drążek na wysokości bioder. Połóż się pod nim i chwyć go dłońmi skierowanymi do siebie, na szerokość barków. Ciało proste od głowy do pięt, pięty na podłodze.",
+    "ruch": "Przyciągnij klatkę do drążka, łokcie blisko ciała, łopatki ściągnięte. Zatrzymaj sekundę i opuść powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie opadają. Wariant mocniej obciąża przód ramion. Łatwiej: ugnij kolana."
+   }
   },
   {
    "nazwa": "Podciąganie australijskie z nogami na podwyższeniu",
@@ -467,7 +557,12 @@
     "Czworoboczny – część dolna",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Niski drążek na wysokości bioder. Połóż się pod nim, stopy oprzyj na ławce lub schodku, chwyć drążek dłońmi od siebie na szerokość barków. Ciało proste.",
+    "ruch": "Przyciągnij klatkę do drążka, ściągając łopatki. Zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Ciało proste jak deska, biodra nie opadają. To trudniejszy wariant niż ze stopami na podłodze."
+   }
   },
   {
    "nazwa": "Podciąganie łucznicze",
@@ -483,7 +578,12 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć drążek bardzo szeroko, dłonie od siebie. Zwis na prostych rękach, brzuch napięty, łopatki w dół.",
+    "ruch": "Pociągnij się w jedną stronę, zginając jedną rękę, a drugą zostawiając prostą jak podporę. Opuść się powoli i zmień stronę. Wydech w górę, wdech w dół.",
+    "uwaga": "Ćwiczenie zaawansowane: najpierw swobodne podciąganie szerokim nachwytem. Bez szarpania."
+   }
   },
   {
    "nazwa": "Muscle-up",
@@ -501,7 +601,12 @@
     "Naramienny przedni",
     "Naramienny środkowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć drążek lub kółka mocnym chwytem, zwis na prostych rękach. Ćwiczenie dla zaawansowanych, wymaga swobodnych podciągnięć i dipów.",
+    "ruch": "Pociągnij się dynamicznie wysoko, tak aby klatka sięgnęła drążka, przerzuć łokcie nad drążek i wypchnij się do prostych rąk w podporze. Opuść się kontrolowanie tą samą drogą.",
+    "uwaga": "Bez kołysania całym ciałem. Ćwicz najpierw wysokie podciąganie i dipy. Rozgrzej barki i łokcie. Przy bólu przerwij."
+   }
   },
   {
    "nazwa": "Podciąganie łopatkowe",
@@ -515,7 +620,12 @@
     "Czworoboczny – część dolna",
     "Równoległoboczny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, dłonie na szerokość barków.",
+    "ruch": "Nie zginając rąk, ściągnij łopatki w dół, tak aby ciało uniosło się o kilka centymetrów. Opuść powoli do pełnego zwisu. Wydech w górę, wdech w dół.",
+    "uwaga": "Ruch jest bardzo mały i dzieje się tylko w łopatkach. Ręce zostają proste."
+   }
   },
   {
    "nazwa": "Zwis aktywny na drążku",
@@ -531,7 +641,12 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć drążek dłońmi od siebie na szerokość barków lub nieco szerzej i zwiśnij.",
+    "ruch": "Utrzymaj zwis z ręką prostą, ściągając łopatki w dół (barki nie przy uszach), brzuch napięty. Oddychaj spokojnie.",
+    "uwaga": "Nie bujaj się. Zejdź kontrolowanie, gdy chwyt słabnie. Przy bólu barków przerwij."
+   }
   },
   {
    "nazwa": "Zwis bierny na drążku",
@@ -567,7 +682,12 @@
     "Biceps",
     "Naramienny tylny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć kółka wiszące na wysokości bioder, dłonie zwrócone do siebie. Odchyl ciało do tyłu, ręce proste, ciało w prostej linii, stopy na podłodze.",
+    "ruch": "Przyciągnij klatkę do kółek, łokcie blisko ciała, ściągając łopatki. Zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie opadają. Im bardziej ciało jest poziome, tym trudniej. Kółka nie rozchylają się na boki."
+   }
   },
   {
    "nazwa": "Wiosłowanie australijskie jednorącz",
@@ -584,7 +704,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Niski drążek na wysokości bioder. Połóż się pod nim, jedną ręką chwyć drążek, drugą trzymaj z boku lub przy biodrze. Ciało proste, stopy na podłodze.",
+    "ruch": "Przyciągnij klatkę do drążka jedną ręką, łokieć blisko ciała, bez obracania tułowia. Opuść powoli. Wydech w górę, wdech w dół. Potem druga ręka.",
+    "uwaga": "Tułów prawie się nie skręca. Biodra nie opadają. Za trudno? Rób zwykłe podciąganie australijskie."
+   }
   },
   {
    "nazwa": "Uginanie ramion na kółkach gimnastycznych",
@@ -598,7 +723,12 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć kółka podchwytem na wysokości głowy, odchyl ciało do tyłu, ręce proste, ciało proste, stopy na podłodze.",
+    "ruch": "Zegnij łokcie, przyciągając dłonie do czoła, a łokcie trzymaj nieruchomo w górze. Wyprostuj powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie opadają. Łokcie nie spadają w dół. Im bardziej poziomo ciało, tym trudniej."
+   }
   },
   {
    "nazwa": "Uginanie ramion w australijskim podciąganiu podchwytem",
@@ -611,7 +741,12 @@
     "Ramienny",
     "Najszerszy grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Niski drążek na wysokości bioder. Połóż się pod nim, chwyć dłońmi do siebie, ciało proste, stopy na podłodze.",
+    "ruch": "Zegnij łokcie i przyciągnij ciało do drążka, trzymając łokcie nisko przy bokach. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Ruch ma iść z ramion, bez bujania biodrami. Ciało proste jak deska."
+   }
   },
   {
    "nazwa": "Uginanie ramion na niskim drążku podchwytem",
@@ -625,7 +760,12 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Niski drążek na wysokości klatki. Stań lub połóż się pod nim, chwyć dłońmi do siebie, ciało proste, ręce wyprostowane.",
+    "ruch": "Zegnij łokcie i przyciągnij czoło do drążka, łokcie nieruchomo w górze. Wyprostuj powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie opadają. Łokcie nie uciekają na boki. Mniejszy kąt ciała to łatwiejsze ćwiczenie."
+   }
   },
   {
    "nazwa": "Utrzymanie zwisu z ugiętymi łokciami",
@@ -640,7 +780,12 @@
     "Zginacze przedramienia",
     "Prostowniki przedramienia"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Podciągnij się na drążek, tak aby broda była nad nim, ręce ugięte. Zwis ze ściągniętymi łopatkami.",
+    "ruch": "Utrzymaj górną pozycję z brodą nad drążkiem, brzuch napięty, nogi razem. Oddychaj spokojnie, nie wstrzymuj oddechu.",
+    "uwaga": "Bez bujania. Zakończ, gdy broda opada poniżej drążka. Zejdź powoli do prostych rąk."
+   }
   },
   {
    "nazwa": "Deska przodem (Front Plank)",
@@ -712,7 +857,12 @@
     "Skośny wewnętrzny brzucha",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach w pozycji Hollow Body: dolne plecy dociśnięte, ręce za głową, nogi razem kilka centymetrów nad podłogą, łopatki uniesione.",
+    "ruch": "Utrzymując napięte ciało jak łódka, kołysz się lekko w przód i w tył, bez zmiany kształtu ciała. Oddychaj równo.",
+    "uwaga": "Dolne plecy cały czas przyklejone do podłogi. Jeśli się odrywają, ugnij kolana lub unieś nogi wyżej."
+   }
   },
   {
    "nazwa": "Unoszenie kolan w zwisie",
@@ -745,7 +895,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, łopatki lekko w dół. Nogi razem.",
+    "ruch": "Napnij brzuch i unieś proste nogi do poziomu bioder lub wyżej, lekko podwijając miednicę. Opuść powoli, bez bujania. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez huśtania. Opuszczaj wolniej, niż unosisz. Za trudno? Unoś ugięte kolana."
+   }
   },
   {
    "nazwa": "Unoszenie kolan w podporze na poręczach",
@@ -759,7 +914,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Chwyć poręcze, wyprostuj ręce i unieś ciało, barki w dół. Plecy oparte lub proste, nogi razem.",
+    "ruch": "Napnij brzuch i unieś kolana do klatki, lekko podwijając miednicę. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez bujania. Barki nie wędrują do uszu. Przy bólu barków zakończ."
+   }
   },
   {
    "nazwa": "Odwrotne spięcia brzucha",
@@ -772,7 +932,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, ręce wzdłuż ciała lub trzymające się za coś nad głową, kolana ugięte nad biodrami.",
+    "ruch": "Napnij brzuch i oderwij miednicę kilka centymetrów od podłogi, przyciągając kolana do klatki. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Ruch ma iść z brzucha, nie z rozmachu nóg. Bez szarpania."
+   }
   },
   {
    "nazwa": "Spięcia brzucha",
@@ -804,7 +969,12 @@
     "Skośny wewnętrzny brzucha",
     "Biodrowo-lędźwiowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, dłonie przy skroniach, kolana ugięte nad biodrami, lekko oderwane łopatki.",
+    "ruch": "Na przemian przyciągaj kolano do przeciwnego łokcia, prostując drugą nogę tuż nad podłogą. Tułów skręca się powoli, a nie szarpie. Oddychaj równo.",
+    "uwaga": "Nie ciągnij szyi rękami. Dolne plecy dociśnięte do podłogi. Tempo spokojne."
+   }
   },
   {
    "nazwa": "Russian Twist",
@@ -818,7 +988,12 @@
     "Prosty brzucha",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź, kolana ugięte, stopy lekko nad podłogą (łatwiej: na podłodze). Pochyl tułów do tyłu, plecy proste. Dłonie złączone przed klatką.",
+    "ruch": "Skręcaj tułów raz w jedną, raz w drugą stronę, prowadząc dłonie obok bioder. Oddychaj równo.",
+    "uwaga": "Plecy proste, nie zaokrąglaj ich. Ruch ma iść z tułowia, nie z samych rąk. Łatwiej: stopy na podłodze."
+   }
   },
   {
    "nazwa": "Dead Bug",
@@ -876,7 +1051,12 @@
     "Naramienny przedni",
     "Naramienny środkowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Pozycja jak do pompki, dłonie pod barkami, nogi nieco szerzej niż zwykle dla stabilności, ciało proste.",
+    "ruch": "Unieś jedną rękę i dotknij nią przeciwnego barku, bez obracania bioder, i odstaw. Zmień stronę. Oddychaj równo.",
+    "uwaga": "Biodra prawie się nie kołyszą. Brzuch napięty. Szersze rozstawienie stóp ułatwia."
+   }
   },
   {
    "nazwa": "Mountain Climbers",
@@ -932,7 +1112,12 @@
     "Półścięgnisty i półbłoniasty",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, jedna stopa płasko przy pośladku, druga noga wyprostowana w górę. Ręce wzdłuż ciała.",
+    "ruch": "Dociśnij stopę do podłogi i unieś biodra, aż ciało będzie prostą linią. Zatrzymaj sekundę, ściskając pośladek, opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra pozostają poziomo, nie opadają na bok. Nie wyginaj mocno dolnych pleców."
+   }
   },
   {
    "nazwa": "Hip Thrust",
@@ -966,7 +1151,12 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze plecami do ławki, łopatki o krawędź. Jedna stopa płasko, druga noga wyprostowana lub podniesiona.",
+    "ruch": "Dociśnij stopę i unieś biodra, aż tułów i uda będą w jednej linii. Zatrzymaj sekundę, ściskając pośladek. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra poziomo, bez opadania na bok. Nie wyginaj mocno dolnych pleców. Najpierw opanuj wersję obunóż."
+   }
   },
   {
    "nazwa": "Odwodzenie biodra w leżeniu bokiem",
@@ -979,7 +1169,12 @@
     "Pośladkowy mały",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na boku, nogi proste i złączone, głowa na dolnej ręce, górna ręka z przodu dla równowagi. Ciało proste.",
+    "ruch": "Unieś górną nogę do boku, tak aby stopa była równoległa do podłogi, bez przechylania bioder. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie obracają się do tyłu. Noga idzie w bok, nie do przodu. Niski ruch wystarczy."
+   }
   },
   {
    "nazwa": "Donkey Kicks",
@@ -993,7 +1188,12 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na czworakach: dłonie pod barkami, kolana pod biodrami, plecy proste. Brzuch napięty.",
+    "ruch": "Zegnij jedną nogę w kolanie i unieś ją w górę, podeszwą do sufitu, aż udo będzie w linii z plecami. Zatrzymaj sekundę, opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Nie wyginaj dolnych pleców i nie obracaj bioder. Ruch ma iść z pośladka, nie z odginania pleców."
+   }
   },
   {
    "nazwa": "Fire Hydrant",
@@ -1006,7 +1206,12 @@
     "Pośladkowy mały",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na czworakach: dłonie pod barkami, kolana pod biodrami, plecy proste. Brzuch napięty.",
+    "ruch": "Unieś jedno zgięte kolano w bok, jak pies przy hydrancie, aż udo będzie równoległe do podłogi. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Biodra nie przechylają się, plecy nie uginają. Ruch ma być mały, ale kontrolowany."
+   }
   },
   {
    "nazwa": "Prostowanie biodra w staniu",
@@ -1020,7 +1225,12 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, oprzyj ręce o ścianę lub oparcie. Brzuch napięty, plecy proste, stopy na szerokość bioder.",
+    "ruch": "Wyprostowaną nogę unieś w tył, ściskając pośladek, bez odchylania tułowia. Wróć powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Plecy proste, dolny odcinek nie wygina się. Mały ruch jest lepszy niż duży z wygięciem pleców."
+   }
   },
   {
    "nazwa": "Chód bokiem w półprzysiadzie",
@@ -1035,7 +1245,12 @@
     "Obszerny boczny",
     "Obszerny przyśrodkowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań w półprzysiadzie: stopy na szerokość bioder, kolana lekko ugięte, plecy proste. Opcjonalnie guma nad kolanami.",
+    "ruch": "Rób kroki w bok, nie wyprostowując kolan i nie opuszczając się wyżej. Nogi na przemian, stopy przy stopach. Oddychaj równo.",
+    "uwaga": "Kolana nie zapadają się do środka. Plecy proste, głowa na wysokości stałej."
+   }
   },
   {
    "nazwa": "Mostek gimnastyczny",
@@ -1054,7 +1269,12 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, kolana ugięte, stopy na szerokość barków przy pośladkach. Dłonie przy uszach, palcami do ramion.",
+    "ruch": "Wypchnij dłonie i stopy w podłogę, unosząc biodra i klatkę tak, by ciało utworzyło łuk. Ręce możliwie proste. Utrzymaj, oddychaj spokojnie. Zejdź powoli.",
+    "uwaga": "Ćwiczenie dla osób z ruchomymi barkami i plecami. Przy bólu pleców, szyi lub barków przerwij. Najpierw ćwicz most biodrowy."
+   }
   },
   {
    "nazwa": "Przysiad klasyczny",
@@ -1091,7 +1311,12 @@
     "Pośladkowy wielki",
     "Przywodziciele uda"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stopy nieco szerzej niż barki, palce na zewnątrz. Plecy proste, klatka wysoko, ręce złączone przed klatką.",
+    "ruch": "Zegnij kolana i opuść biodra jak najniżej, między stopy, pięty na podłodze. Utrzymaj lub wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Pięty zostają na podłodze, kolana w stronę palców. Jeśli pięty się unoszą, podłóż pod nie coś płaskiego. Przy bólu kolan zmniejsz głębokość."
+   }
   },
   {
    "nazwa": "Przysiad sumo",
@@ -1106,7 +1331,12 @@
     "Przywodziciele uda",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stopy bardzo szeroko, palce skierowane na zewnątrz pod kątem ok. 45°. Plecy proste, klatka wysoko.",
+    "ruch": "Zegnij kolana w stronę palców i opuść biodra prosto w dół, aż uda będą równoległe do podłogi. Wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Kolana idą w stronę palców, nie zapadają się. Tułów prosto. Nie schodź niżej, niż pozwala technika."
+   }
   },
   {
    "nazwa": "Przysiad bułgarski",
@@ -1187,7 +1417,12 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty.",
+    "ruch": "Zrób duży krok do przodu i opuść tylne kolano prawie do podłogi, odepchnij się i przejdź do kroku drugą nogą. Idź do przodu na przemian. Wdech w dół, wydech w górę.",
+    "uwaga": "Tułów pionowo. Przednie kolano nad kostką, nie ucieka do środka. Krok na tyle duży, by przednia łydka była prawie pionowo."
+   }
   },
   {
    "nazwa": "Wykrok boczny",
@@ -1202,7 +1437,12 @@
     "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy razem lub na szerokość bioder, ręce przed sobą.",
+    "ruch": "Zrób duży krok w bok i zegnij kolano tej nogi, odsuwając biodra do tyłu. Druga noga zostaje prosta, obie stopy całe na podłodze. Odepchnij się i wróć. Wdech w dół, wydech w górę.",
+    "uwaga": "Kolano idzie w stronę palców, pięta zostaje na podłodze. Plecy proste."
+   }
   },
   {
    "nazwa": "Pistol Squat",
@@ -1218,7 +1458,12 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, drugą wyprostowaną trzymaj przed sobą. Ręce wyciągnięte do przodu dla równowagi.",
+    "ruch": "Zegnij kolano nogi stojącej i zejdź jak najniżej, prostując drugą nogę przed sobą. Wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Pięta zostaje na podłodze, kolano idzie w stronę palców. Zaawansowane: najpierw opanuj wersję z podparciem."
+   }
   },
   {
    "nazwa": "Pistol Squat z podparciem",
@@ -1234,7 +1479,12 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze przy ścianie, słupku lub z uchwytem. Drugą nogę wyprostuj przed sobą.",
+    "ruch": "Zegnij kolano nogi stojącej i zejdź w dół, pomagając sobie rękami tylko tyle, ile trzeba. Wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Pięta zostaje na podłodze. Z czasem zmniejszaj pomoc rąk."
+   }
   },
   {
    "nazwa": "Wall Sit",
@@ -1249,7 +1499,12 @@
     "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Oprzyj plecy o ścianę, stopy na szerokość bioder i ok. 60 cm od ściany.",
+    "ruch": "Zsuń się po ścianie, aż kolana będą ugięte pod kątem ok. 90°, uda równoległe do podłogi. Utrzymaj, plecy przy ścianie, oddychaj spokojnie.",
+    "uwaga": "Kolana nad stopami, nie przed nimi. Nie opieraj rąk na udach. Przy bólu kolan wstań wyżej."
+   }
   },
   {
    "nazwa": "Przysiad z wyskokiem",
@@ -1266,7 +1521,12 @@
     "Brzuchaty łydki – głowa przyśrodkowa",
     "Brzuchaty łydki – głowa boczna"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań, stopy na szerokość barków, ręce przed sobą lub przy biodrach. Plecy proste, brzuch napięty.",
+    "ruch": "Zegnij kolana do ok. półprzysiadu i wybij się mocno w górę, prostując całe ciało. Wylądowanie miękkie, na lekko ugiętych nogach, i od razu zejdź do kolejnego powtórzenia.",
+    "uwaga": "Lądowanie cicho i miękko, kolana nie zapadają się. Przy bólu kolan lub kostek wróć do zwykłych przysiadów."
+   }
   },
   {
    "nazwa": "Wyskoki z półprzysiadu",
@@ -1284,7 +1544,12 @@
     "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań w półprzysiadzie: stopy na szerokość barków, plecy proste, ręce z tyłu lub z boku.",
+    "ruch": "Wybij się wysoko w górę z półprzysiadu, prostując ciało. Wylądowanie miękkie, z powrotem w półprzysiad. Oddychaj równo.",
+    "uwaga": "Miękkie lądowanie. Kolana w stronę palców. Zmniejsz wysokość skoku, jeśli czujesz ból."
+   }
   },
   {
    "nazwa": "Przysiad kozacki (Cossack Squat)",
@@ -1299,7 +1564,12 @@
     "Obszerny przyśrodkowy",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań bardzo szeroko, palce na zewnątrz, ręce złączone przed klatką.",
+    "ruch": "Przenieś ciężar na jedną nogę i zegnij to kolano, siadając w bok. Druga noga zostaje prosta, stopa może oderwać piętę. Wróć do środka i zmień stronę. Wdech w dół, wydech w górę.",
+    "uwaga": "Pięta nogi zgiętej zostaje na podłodze. Kolano idzie w stronę palców. Nie schodź niżej, niż pozwala ruchomość."
+   }
   },
   {
    "nazwa": "Nordic Hamstring Curl",
@@ -1311,7 +1581,12 @@
     "Dwugłowy uda",
     "Półścięgnisty i półbłoniasty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na macie, stopy zablokowane (ktoś je trzyma lub zaczepione pod stabilnym oparciem). Tułów prosty, ręce przed sobą.",
+    "ruch": "Pochylaj się powoli do przodu, jak najdłużej utrzymując proste ciało od kolan do głowy, hamując opadanie mięśniami z tyłu ud. Złap się rękami o podłogę i wróć, pomagając sobie rękami.",
+    "uwaga": "Bardzo mocno obciąża tył ud: zaczynaj od krótkiego zakresu i wolnych powtórzeń. Biodra nie uginają się. Przy bólu z tyłu uda przerwij."
+   }
   },
   {
    "nazwa": "Sliding Leg Curl",
@@ -1325,7 +1600,12 @@
     "Półścięgnisty i półbłoniasty",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, stopy (na ślizgach lub ręczniku) przy pośladkach, kolana ugięte. Ręce wzdłuż ciała.",
+    "ruch": "Unieś biodra, wyprostuj nogi, zsuwając stopy po podłodze, i przyciągnij je z powrotem do pośladków bez opuszczania bioder. Wydech przy prostowaniu, wdech przy powrocie.",
+    "uwaga": "Biodra cały czas wysoko. Wolny ruch. Łatwiej: zmniejsz zakres."
+   }
   },
   {
    "nazwa": "Ring Hamstring Curl",
@@ -1339,7 +1619,12 @@
     "Półścięgnisty i półbłoniasty",
     "Pośladkowy wielki"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, stopy w kółkach gimnastycznych (zawieszonych nisko), kolana ugięte, ręce wzdłuż ciała.",
+    "ruch": "Unieś biodra, wyprostuj nogi, odsuwając kółka, i przyciągnij je z powrotem bez opuszczania bioder. Wydech przy prostowaniu, wdech przy powrocie.",
+    "uwaga": "Biodra cały czas wysoko. Kółka nie bujają się. Zacznij od krótkiego zakresu."
+   }
   },
   {
    "nazwa": "Martwy ciąg na jednej nodze bez obciążenia",
@@ -1355,7 +1640,12 @@
     "Pośladkowy średni",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, kolano lekko ugięte, ręce przed sobą lub na biodrach. Brzuch napięty, plecy proste.",
+    "ruch": "Pochylaj tułów do przodu, unosząc drugą nogę prosto do tyłu, aż ciało i noga będą w jednej linii poziomej. Wróć. Wdech w dół, wydech w górę.",
+    "uwaga": "Plecy proste, biodra równo (nie obracają się). Dla równowagi trzymaj się ściany. Kolano stojącej nogi nie jest zablokowane."
+   }
   },
   {
    "nazwa": "Wspięcia na palce obunóż",
@@ -1386,7 +1676,12 @@
     "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, najlepiej na krawędzi schodka (pięta w powietrzu), druga noga ugięta. Trzymaj się ściany dla równowagi.",
+    "ruch": "Wspinaj się na palec jak najwyżej, zatrzymaj sekundę i opuść piętę powoli, niżej niż poziom stopnia. Wydech w górę, wdech w dół.",
+    "uwaga": "Pełny zakres, bez podskoków. Kolano proste, ale nie zablokowane."
+   }
   },
   {
    "nazwa": "Wspięcia na palce z ugiętymi kolanami",
@@ -1399,7 +1694,12 @@
     "Brzuchaty łydki – głowa przyśrodkowa",
     "Brzuchaty łydki – głowa boczna"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na krawędzi schodka (pięty w powietrzu), kolana lekko ugięte i tak zostają. Trzymaj się ściany dla równowagi.",
+    "ruch": "Wspinaj się na palce jak najwyżej, zatrzymaj sekundę i opuść pięty powoli niżej niż schodek. Wydech w górę, wdech w dół.",
+    "uwaga": "Kąt kolan się nie zmienia. Pełny zakres, bez podskoków."
+   }
   },
   {
    "nazwa": "Ekscentryczne opuszczanie pięt ze stopnia",
@@ -1412,7 +1712,12 @@
     "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na krawędzi schodka na palcach obu stóp, pięty uniesione, trzymaj się ściany. Wejdź na palce obiema nogami.",
+    "ruch": "Przenieś ciężar na jedną nogę i bardzo powoli (3–5 sekund) opuść piętę poniżej schodka. Wróć na palce obiema nogami i powtórz. Wdech w dół, wydech w górę.",
+    "uwaga": "Opuszczanie bardzo powolne. Przy bólu ścięgna Achillesa (nad piętą) zakończ."
+   }
   },
   {
    "nazwa": "Tibialis Raise",
@@ -1423,7 +1728,12 @@
    "miesnie": [
     "Piszczelowy przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Oprzyj plecy o ścianę, stopy ok. 30–40 cm od ściany, nogi proste, pięty na podłodze.",
+    "ruch": "Unieś palce stóp w górę jak najwyżej, pięty zostają na podłodze. Zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Pięty cały czas na podłodze. Ruch jest niewielki, ale kontrolowany. Palce nie ciągną się z kolan."
+   }
   },
   {
    "nazwa": "Chód na piętach",
@@ -1434,7 +1744,12 @@
    "miesnie": [
     "Piszczelowy przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, wspinając palce stóp w górę, stopy na szerokość bioder, ręce na biodrach.",
+    "ruch": "Idź powoli do przodu na piętach, palce stóp zostają uniesione. Brzuch napięty, plecy proste, patrz przed siebie.",
+    "uwaga": "Idź powoli, żeby zachować równowagę. Nie opuszczaj palców na podłogę."
+   }
   },
   {
    "nazwa": "Chód na palcach",
@@ -1448,7 +1763,12 @@
     "Płaszczkowaty",
     "Piszczelowy przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto na palcach, pięty wysoko, stopy na szerokość bioder, ręce na biodrach.",
+    "ruch": "Idź powoli na palcach, pięty cały czas uniesione. Brzuch napięty, plecy proste, oddychaj równo.",
+    "uwaga": "Pięty nie opadają. Nie garb się. Przy skurczach łydek zwolnij."
+   }
   },
   {
    "nazwa": "Burpees",
@@ -1469,7 +1789,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość barków.",
+    "ruch": "Przykucnij i połóż dłonie na podłodze, wyrzuć nogi do tyłu w pozycję pompki. Zrób pompkę (opcjonalnie), wskocz nogami do dłoni i wyskocz w górę z rękami nad głową. Wdech w dół, wydech przy wyskoku.",
+    "uwaga": "Plecy proste, biodra nie opadają w deskę. Miękkie lądowanie. Łatwiej: bez pompki i bez wyskoku, krok zamiast skoku."
+   }
   },
   {
    "nazwa": "Tuck Jumps",
@@ -1488,7 +1813,12 @@
     "Płaszczkowaty",
     "Biodrowo-lędźwiowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań, stopy na szerokość bioder, ręce przy bokach. Ćwiczenie dynamiczne, wymaga rozgrzanych kolan i kostek.",
+    "ruch": "Zegnij kolana i wybij się wysoko, przyciągając kolana do klatki w powietrzu. Wylądowanie miękkie na lekko ugiętych nogach i od razu kolejny skok.",
+    "uwaga": "Miękkie lądowanie, kolana nie zapadają się. Przy bólu kolan lub kostek wróć do zwykłych skoków."
+   }
   },
   {
    "nazwa": "Skoki w dal z miejsca",
@@ -1508,7 +1838,12 @@
     "Brzuchaty łydki – głowa boczna",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań, stopy na szerokość bioder, ręce przy bokach.",
+    "ruch": "Zegnij kolana, odchylając ręce do tyłu, i wybij się mocno do przodu, wyrzucając ręce w przód. Wylądowanie miękkie, w półprzysiadzie, oba stopy naraz.",
+    "uwaga": "Miękkie lądowanie na lekko ugiętych nogach. Plecy proste. Zrób skok dalej dopiero, gdy lądowanie jest stabilne."
+   }
   },
   {
    "nazwa": "Skoki łyżwiarskie na boki",
@@ -1524,7 +1859,12 @@
     "Obszerny przyśrodkowy",
     "Przywodziciele uda"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, kolano lekko ugięte, tułów lekko pochylony, ręce przed sobą.",
+    "ruch": "Wybij się w bok na drugą nogę, lądując na niej miękko i zatrzymaj się na sekundę, druga noga za sobą. Rób na przemian, jak łyżwiarz.",
+    "uwaga": "Lądowanie miękkie i stabilne, kolano w stronę palców. Zwolnij, jeśli tracisz równowagę."
+   }
   },
   {
    "nazwa": "Bear Crawl",
@@ -1545,7 +1885,12 @@
     "Obszerny boczny",
     "Obszerny przyśrodkowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na czworakach, ręce pod barkami, kolana pod biodrami. Unieś kolana kilka centymetrów nad podłogę.",
+    "ruch": "Idź do przodu na przemian prawą rękę i lewą nogę, potem odwrotnie, kolana nisko nad podłogą. Plecy płaskie, brzuch napięty.",
+    "uwaga": "Biodra niziutko, plecy nie kołyszą się na boki. Kroki małe i kontrolowane."
+   }
   },
   {
    "nazwa": "Crab Walk",
@@ -1563,7 +1908,12 @@
     "Skośny zewnętrzny brzucha",
     "Skośny wewnętrzny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze, dłonie za sobą, stopy płasko, kolana ugięte. Unieś biodra, tak aby ciało tworzyło stół.",
+    "ruch": "Idź w jedną stronę, przestawiając na przemian ręce i nogi, biodra utrzymując wysoko. Oddychaj równo.",
+    "uwaga": "Biodra nie opadają. Barki daleko od uszu. Przy bólu nadgarstków lub barków przerwij."
+   }
   },
   {
    "nazwa": "L-Sit",
@@ -1580,7 +1930,12 @@
     "Triceps – głowa boczna",
     "Triceps – głowa długa"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze, nogi proste, dłonie obok bioder (lub na paralettach). Ręce proste.",
+    "ruch": "Wypchnij dłonie w podłogę i unieś biodra i nogi nad podłogę, nogi proste i razem, ciało tworzy literę L. Utrzymaj, barki w dół, oddychaj spokojnie.",
+    "uwaga": "Ręce proste, barki nie unoszą się do uszu. Łatwiej: ugnij kolana. Przy bólu nadgarstków przerwij."
+   }
   },
   {
    "nazwa": "Tuck Planche Hold",
@@ -1596,7 +1951,12 @@
     "Triceps – głowa długa",
     "Prosty brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij, dłonie na podłodze, palce lekko na zewnątrz. Nachyl się do przodu, tak aby barki były przed dłońmi.",
+    "ruch": "Pochyl ciało do przodu i unieś stopy nad podłogę, kolana przyciągnięte do klatki, plecy zaokrąglone. Ręce proste. Utrzymaj, oddychaj spokojnie.",
+    "uwaga": "Ćwiczenie zaawansowane. Rozgrzej nadgarstki. Ręce proste, nie blokuj łokci siłą. Przerwij przy bólu nadgarstków lub barków."
+   }
   },
   {
    "nazwa": "Front Lever Hold",
@@ -1614,7 +1974,12 @@
     "Naramienny tylny",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, łopatki ściągnięte w dół. Ćwiczenie dla zaawansowanych.",
+    "ruch": "Unieś ciało do poziomu, proste jak deska, brzuchem do góry, ręce proste. Utrzymaj z napiętym brzuchem i pośladkami. Oddychaj spokojnie.",
+    "uwaga": "Zacznij od wersji z ugiętymi kolanami. Ciało proste, biodra nie opadają. Przy bólu barków lub łokci przerwij."
+   }
   },
   {
    "nazwa": "Back Lever Hold",
@@ -1633,7 +1998,12 @@
     "Czworoboczny – część środkowa",
     "Czworoboczny – część dolna"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku lub kółkach, ręce proste. Ćwiczenie dla zaawansowanych, wymaga ruchomych barków.",
+    "ruch": "Obróć ciało do tyłu i opuść się plecami do podłogi, aż ciało będzie proste i poziome, brzuchem do podłogi. Ręce proste. Utrzymaj, napięty brzuch, pośladki.",
+    "uwaga": "Zacznij od wersji z ugiętymi kolanami. Rozgrzej barki i łokcie. Przy bólu w barkach lub łokciach przerwij."
+   }
   }
  ]
 }

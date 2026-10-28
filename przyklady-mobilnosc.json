@@ -97,7 +97,12 @@
     "Pośladkowy średni",
     "Naramienny środkowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań szeroko w rozkroku (ok. 1 m), prawa stopa na zewnątrz pod kątem 90°, lewa lekko do środka. Ręce wyprostowane na boki na wysokości barków.",
+    "ruch": "Zegnij prawe kolano nad kostką, aż udo będzie prawie równoległe do podłogi. Tułów pionowo między biodrami, wzrok nad prawą dłonią. Utrzymaj kilka oddechów, potem druga strona.",
+    "uwaga": "Kolano nie ucieka do środka, tułów nie przechyla się do przodu. Barki daleko od uszu. Nie schodź niżej, niż pozwala ruchomość."
+   }
   },
   {
    "nazwa": "Wojownik III",
@@ -113,7 +118,12 @@
     "Prostowniki grzbietu",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, kolano lekko ugięte, ręce przed klatką. Druga noga lekko z tyłu na palcach.",
+    "ruch": "Pochylaj tułów do przodu, unosząc drugą nogę prosto do tyłu, aż ciało i noga będą w jednej linii poziomej. Ręce przed sobą lub wzdłuż ciała. Utrzymaj kilka oddechów, potem druga strona.",
+    "uwaga": "Biodra równo, nie obracają się. Kolano stojącej nogi nie jest zablokowane. Dla równowagi wyznacz punkt do patrzenia na podłodze."
+   }
   },
   {
    "nazwa": "Poza gołębia",
@@ -127,7 +137,12 @@
     "Pośladkowy średni",
     "Biodrowo-lędźwiowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Zacznij na czworakach. Przesuń prawe kolano do przodu między dłonie, prawa łydka skośnie przed sobą. Lewa noga wyprostowana do tyłu.",
+    "ruch": "Opuść biodra w dół, tułów pochyl do przodu, oprzyj ręce lub czoło na podłodze. Poczuj rozciąganie w pośladku prawej nogi. Oddychaj spokojnie 30–60 sekund, potem druga strona.",
+    "uwaga": "Biodra poziomo. Przy bólu kolana nie schodź głęboko, podłóż poduszkę pod biodro. Nie wymuszaj ruchu."
+   }
   },
   {
    "nazwa": "Wykrok niski (rozciąganie zginaczy biodra)",
@@ -161,7 +176,12 @@
     "Prostowniki grzbietu",
     "Wielodzielny"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, ręce rozłożone na boki, kolana ugięte i przyciągnięte do klatki.",
+    "ruch": "Opuść kolana na jedną stronę, głowę obróć w przeciwną. Barki przy podłodze. Oddychaj głęboko i spokojnie 20–40 sekund, potem druga strona.",
+    "uwaga": "Obie łopatki zostają na podłodze. Nie wymuszaj skrętu. Przy bólu pleców zmniejsz zakres."
+   }
   },
   {
    "nazwa": "Poza trójkąta",
@@ -176,7 +196,12 @@
     "Przywodziciele uda",
     "Czworoboczny lędźwi"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań w szerokim rozkroku, prawa stopa na zewnątrz pod kątem 90°, lewa lekko do środka. Ręce wyprostowane na boki.",
+    "ruch": "Wypchnij biodra w lewo i pochyl tułów w prawo, prawa ręka sięga w dół (do kostki lub piszczeli), lewa w górę. Wzrok do lewej dłoni. Oddychaj 5 oddechów, potem druga strona.",
+    "uwaga": "Ruch idzie z boku, nie z przodu. Ręka dolna nie ciągnie za kolano. Nie schodź za nisko, jeśli plecy się garbią."
+   }
   },
   {
    "nazwa": "Mostek biodrowy (Setu Bandhasana)",
@@ -191,7 +216,12 @@
     "Półścięgnisty i półbłoniasty",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, kolana ugięte, stopy blisko pośladków na szerokość bioder, ręce wzdłuż ciała.",
+    "ruch": "Dociśnij stopy i unieś biodra, aż ciało będzie prostą linią od kolan do barków. Ręce możesz splątać pod plecami. Utrzymaj kilka oddechów, opuść powoli.",
+    "uwaga": "Nie wyginaj mocno dolnych pleców, nie odwracaj głowy na boki. Kolana nie uciekają na boki."
+   }
   },
   {
    "nazwa": "Poza krzesła (Utkatasana)",
@@ -207,7 +237,12 @@
     "Pośladkowy wielki",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań, stopy razem lub na szerokość bioder, ręce wyciągnięte w górę nad głowę.",
+    "ruch": "Zegnij kolana, jakbyś siadał na krześle, biodra odsuń do tyłu, ciężar na piętach. Plecy proste, ręce w górze, patrz przed siebie. Utrzymaj kilka oddechów.",
+    "uwaga": "Kolana nad kostkami, nie wychodzą daleko przed palce. Barki daleko od uszu. Brzuch napięty, nie wyginaj mocno dolnych pleców."
+   }
   },
   {
    "nazwa": "Poza drzewa",
@@ -223,7 +258,12 @@
     "Przywodziciele uda",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto na jednej nodze, ręce przy klatce, wzrok w jednym punkcie przed sobą.",
+    "ruch": "Oprzyj podeszwę drugiej stopy o łydkę lub udo (nigdy o kolano), kolano na zewnątrz. Ręce złącz przed klatką lub wznieś nad głową. Oddychaj spokojnie, potem druga strona.",
+    "uwaga": "Nie opieraj stopy o kolano. Biodra poziomo. Łatwiej: oprzyj palce drugiej stopy o podłogę lub trzymaj się ściany."
+   }
   },
   {
    "nazwa": "Skłon w siadzie do prostych nóg",
@@ -239,7 +279,12 @@
     "Brzuchaty łydki – głowa boczna",
     "Brzuchaty łydki – głowa przyśrodkowa"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze, nogi proste i razem, stopy skierowane w górę, plecy proste.",
+    "ruch": "Pochylaj tułów do przodu, prowadząc ręce w stronę stóp, aż poczujesz rozciąganie z tyłu nóg. Plecy możliwie proste. Oddychaj spokojnie 20–40 sekund.",
+    "uwaga": "Nie wymuszaj ruchu i nie garb się. Kolana mogą być lekko ugięte. Złap się za łydki lub kostki, jeśli nie sięgasz stóp."
+   }
   },
   {
    "nazwa": "Poza motyla",
@@ -252,7 +297,12 @@
     "Przywodziciele uda",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze, podeszwy stóp złącz przed sobą, kolana na boki. Plecy proste, ręce na stopach.",
+    "ruch": "Pochyl tułów do przodu z prostymi plecami, kolana opadają w stronę podłogi. Oddychaj spokojnie 20–40 sekund.",
+    "uwaga": "Nie dociskaj kolan rękami. Plecy proste, nie garb się. Podłóż poduszkę pod pośladki, jeśli kolana są wysoko."
+   }
   },
   {
    "nazwa": "Otwarta książka (rotacja piersiowa)",
@@ -266,7 +316,12 @@
     "Skośny zewnętrzny brzucha",
     "Piersiowy większy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na boku, kolana ugięte i złączone, ręce wyciągnięte przed sobą, dłonie razem.",
+    "ruch": "Unieś górną rękę i otwórz ją szerokim łukiem na drugą stronę, obracając klatkę i głowę za dłonią. Kolana zostają na miejscu. Wróć powoli. Wdech przy otwieraniu, wydech przy powrocie. Potem druga strona.",
+    "uwaga": "Kolana nie rozjeżdżają się. Nie wymuszaj zakresu, jeśli bolą plecy lub barki."
+   }
   },
   {
    "nazwa": "Krążenia ramion",
@@ -282,7 +337,12 @@
     "Podgrzebieniowy",
     "Zębaty przedni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, ręce wyprostowane na boki.",
+    "ruch": "Kreśl ręką małe, potem coraz większe koła w jedną stronę, 10–15 razy, potem w drugą. Oddychaj spokojnie.",
+    "uwaga": "Barki daleko od uszu, tułów nie kołysze się. Zacznij od małych kół. Przy bólu w barku zmniejsz zakres."
+   }
   },
   {
    "nazwa": "Rozciąganie klatki w futrynie",
@@ -296,7 +356,12 @@
     "Naramienny przedni",
     "Biceps"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań w drzwiach, przedramię oprzyj o futrynę, łokieć na wysokości barku, jedna stopa przed drugą.",
+    "ruch": "Przesuń tułów lekko do przodu, aż poczujesz rozciąganie z przodu barku i klatki. Oddychaj spokojnie 20–30 sekund, potem druga strona.",
+    "uwaga": "Nie wyginaj dolnych pleców. Rozciąganie ma być przyjemne, nie bolesne. Przy ostrym bólu barku przerwij."
+   }
   },
   {
    "nazwa": "Przechylenia głowy (rozciąganie karku)",
@@ -309,7 +374,12 @@
     "Mostkowo-obojczykowo-sutkowy",
     "Czworoboczny – część górna"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź lub stań prosto, barki rozluźnione, ręce na udach lub przy bokach.",
+    "ruch": "Powoli pochyl ucho w stronę barku, aż poczujesz delikatne rozciąganie z boku szyi. Oddychaj spokojnie 15–30 sekund, potem druga strona.",
+    "uwaga": "Delikatnie, bez dociskania ręką. Barki nie unoszą się. Przy zawrotach lub bólu promieniującym do ręki przerwij."
+   }
   },
   {
    "nazwa": "Głęboki przysiad (Malasana)",
@@ -328,7 +398,12 @@
     "Piszczelowy przedni",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stopy nieco szerzej niż barki, palce na zewnątrz. Ręce złączone przed klatką.",
+    "ruch": "Zegnij kolana i opuść biodra jak najniżej między stopy, łokcie dociskają kolana na zewnątrz, plecy proste. Oddychaj spokojnie 30–60 sekund.",
+    "uwaga": "Pięty zostają na podłodze (podłóż coś, jeśli się unoszą). Przy bólu kolan nie schodź tak nisko."
+   }
   },
   {
    "nazwa": "Wykrok boczny (Skandasana)",
@@ -343,7 +418,12 @@
     "Obszerny boczny",
     "Obszerny przyśrodkowy"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań szeroko w rozkroku, stopy na zewnątrz. Ręce złączone przed klatką.",
+    "ruch": "Przenieś ciężar na jedną nogę i zegnij kolano, siadając w bok, a druga noga prosta. Tułów prosto. Oddychaj 3–5 oddechów, potem druga strona.",
+    "uwaga": "Pięta zgiętej nogi na podłodze, kolano w stronę palców. Plecy proste. Nie schodź niżej, niż pozwala ruchomość."
+   }
   },
   {
    "nazwa": "Rozciąganie łydek przy ścianie",
@@ -356,7 +436,12 @@
     "Brzuchaty łydki – głowa przyśrodkowa",
     "Płaszczkowaty"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Stań przodem do ściany, dłonie oparte o ścianę na wysokości klatki. Jedna stopa przed drugą.",
+    "ruch": "Wyprostuj tylną nogę, pięta na podłodze, i zegnij przednie kolano, przesuwając biodra do ściany, aż poczujesz rozciąganie łydki. Oddychaj 20–40 sekund, potem druga noga.",
+    "uwaga": "Pięta tylnej nogi nie unosi się, stopa skierowana prosto. Nie wymuszaj ruchu."
+   }
   },
   {
    "nazwa": "Poza łodzi (Navasana)",
@@ -372,7 +457,12 @@
     "Poprzeczny brzucha",
     "Prostowniki grzbietu"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze, kolana ugięte, stopy płasko, plecy proste, ręce za udami.",
+    "ruch": "Odchyl lekko tułów do tyłu i unieś stopy, tak aby łydki były równoległe do podłogi, ręce wyprostowane przed siebie. Utrzymaj kilka oddechów.",
+    "uwaga": "Plecy proste, klatka wysoko. Łatwiej: trzymaj ręce za udami. Przy bólu pleców przerwij."
+   }
   },
   {
    "nazwa": "Ptak i pies (Bird Dog)",
@@ -388,7 +478,12 @@
     "Naramienny przedni",
     "Poprzeczny brzucha"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na czworakach: dłonie pod barkami, kolana pod biodrami, plecy proste jak stół, wzrok w podłogę.",
+    "ruch": "Jednocześnie wyprostuj prawą rękę do przodu i lewą nogę do tyłu, do linii pleców. Zatrzymaj na sekundę, wróć i zmień stronę. Wydech przy wyciąganiu, wdech przy powrocie.",
+    "uwaga": "Biodra się nie obracają, plecy nie uginają. Nie unoś nogi wyżej niż plecy. Ruch powolny."
+   }
   },
   {
    "nazwa": "Figura „4” leżąc (rozciąganie pośladków)",
@@ -400,7 +495,12 @@
     "Pośladkowy wielki",
     "Pośladkowy średni"
    ],
-   "link": ""
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, kolana ugięte, stopy na podłodze. Połóż kostkę jednej nogi na kolanie drugiej, tworząc cyfrę 4.",
+    "ruch": "Chwyć udo nogi stojącej i przyciągnij je do klatki, aż poczujesz rozciąganie w pośladku. Oddychaj spokojnie 20–40 sekund, potem druga strona.",
+    "uwaga": "Głowa i barki na podłodze. Nie dociskaj kolana na siłę. Przy bólu kolana zmniejsz zakres."
+   }
   }
  ]
 }
