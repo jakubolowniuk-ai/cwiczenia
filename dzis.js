@@ -33,14 +33,26 @@ let wynikOdczyt = null;
 
 // ===== Pomocnicze =====
 
-// Aktywny plan: ostatni niezamknięty
+// Plany otwarte (niezamknięte) i włączone; plan można wyłączyć (plan.wylaczony), wtedy znika z ekranu Dziś
+function planyOtwarte() {
+  return dane.plany.filter(function (p) { return !p.zamkniety; });
+}
+
+function planyWlaczone() {
+  return planyOtwarte().filter(function (p) { return !p.wylaczony; });
+}
+
+// Główny plan: ostatni włączony
 function aktywnyPlan() {
-  for (let i = dane.plany.length - 1; i >= 0; i--) {
-    if (!dane.plany[i].zamkniety) {
-      return dane.plany[i];
-    }
+  const w = planyWlaczone();
+  return w.length > 0 ? w[w.length - 1] : null;
+}
+
+function nazwaPlanu(plan) {
+  if (plan.nazwa) {
+    return plan.nazwa;
   }
-  return null;
+  return plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny";
 }
 
 function aktywnoscPlanu(plan, id) {
@@ -146,13 +158,14 @@ function tekstElement(tag, klasa, tekst) {
 // ===== Rysowanie ekranu =====
 
 function rysujDzis() {
-  const plan = aktywnyPlan();
-  dzisBrakPlanu.hidden = !!plan;
-  dzisPlan.hidden = !plan;
-  if (!plan) {
+  const otwarte = planyOtwarte();
+  const wlaczone = planyWlaczone();
+  dzisBrakPlanu.hidden = otwarte.length > 0;
+  dzisPlan.hidden = otwarte.length === 0;
+  if (otwarte.length === 0) {
     return;
   }
-  dzisEdytujPlan.hidden = false;
+  dzisEdytujPlan.hidden = true;
 
   const dzis = new Date();
   const nazwyDni = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
@@ -160,18 +173,48 @@ function rysujDzis() {
 
   dzisSesje.innerHTML = "";
   dzisPodsumowanie.textContent = "";
+  if (wlaczone.length === 0) {
+    dzisSesje.appendChild(zrobPustyKomunikat("Wszystkie plany są wyłączone", "Włącz plan w zakładce Postęp (sekcja „Moje plany”), a jego sesje pojawią się tutaj."));
+    return;
+  }
+  wlaczone.forEach(function (plan) {
+    const blok = document.createElement("div");
+    blok.className = "dzis-plan-blok";
+    if (otwarte.length > 1) {
+      const gora = document.createElement("div");
+      gora.className = "dzis-plan-gora";
+      gora.appendChild(tekstElement("h2", "dzis-plan-nazwa", nazwaPlanu(plan)));
+      const edytuj = tekstElement("button", "akcja", "Edytuj");
+      edytuj.addEventListener("click", function () {
+        otworzKreator(plan);
+      });
+      gora.appendChild(edytuj);
+      blok.appendChild(gora);
+    } else {
+      const edytuj = tekstElement("button", "akcja", "Edytuj plan");
+      edytuj.addEventListener("click", function () {
+        otworzKreator(plan);
+      });
+      blok.appendChild(edytuj);
+    }
+    rysujPlanDzis(plan, blok);
+    dzisSesje.appendChild(blok);
+  });
+}
 
+function rysujPlanDzis(plan, kontener) {
+  const dzis = new Date();
+  const nazwyDni = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
   const indeks = dzisiejszyDzienPlanu(plan);
   const liczbaDni = DNI_W_OKRESIE[plan.okres];
 
   if (indeks < 0) {
-    dzisSesje.appendChild(zrobPustyKomunikat("Plan jeszcze się nie zaczął", "Zaczyna się " + dataPlanu(plan, 0).getDate() + " " + MIESIACE_DOPELNIACZ[dataPlanu(plan, 0).getMonth()] + "."));
+    kontener.appendChild(zrobPustyKomunikat("Plan jeszcze się nie zaczął", "Zaczyna się " + dataPlanu(plan, 0).getDate() + " " + MIESIACE_DOPELNIACZ[dataPlanu(plan, 0).getMonth()] + "."));
     return;
   }
 
   if (indeks >= liczbaDni) {
-    dzisEdytujPlan.hidden = true;
-    rysujKoniecPlanu(plan);
+    rysujKoniecPlanu(plan, kontener);
     return;
   }
 
@@ -192,10 +235,10 @@ function rysujDzis() {
       const aktywnosc = aktywnoscPlanu(plan, nastepna.aktywnoscId);
       opis += " Następna sesja: " + nazwyDni[data.getDay()] + " " + data.getDate() + "." + (data.getMonth() + 1) + ", " + opisAktywnosci(aktywnosc).tytul + ".";
     }
-    dzisSesje.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", opis));
+    kontener.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", opis));
   } else {
     sesjeDzis.forEach(function (sesja) {
-      dzisSesje.appendChild(zrobKarteDzis(plan, sesja));
+      kontener.appendChild(zrobKarteDzis(plan, sesja));
     });
   }
 
@@ -203,7 +246,7 @@ function rysujDzis() {
   const zaliczone = plan.sesje.filter(function (s) {
     return sesjaZaliczona(plan, s);
   }).length;
-  dzisPodsumowanie.textContent = "Plan: zaliczone sesje " + zaliczone + " z " + plan.sesje.length + ". Dzień " + (indeks + 1) + " z " + liczbaDni + ".";
+  kontener.appendChild(tekstElement("p", "opis", "Plan: zaliczone sesje " + zaliczone + " z " + plan.sesje.length + ". Dzień " + (indeks + 1) + " z " + liczbaDni + "."));
 }
 
 function zrobPustyKomunikat(tytul, opis) {
@@ -934,7 +977,7 @@ wartTlo.addEventListener("click", function (zdarzenie) {
 
 // ===== Koniec planu =====
 
-function rysujKoniecPlanu(plan) {
+function rysujKoniecPlanu(plan, kontener) {
   const blok = document.createElement("div");
   blok.className = "dzis-karta koniec";
   blok.appendChild(tekstElement("div", "dzis-tytul", "Plan zakończony"));
@@ -977,7 +1020,7 @@ function rysujKoniecPlanu(plan) {
   });
   blok.appendChild(zamknij);
 
-  dzisSesje.appendChild(blok);
+  (kontener || dzisSesje).appendChild(blok);
 }
 
 // Zamyka plan: zostaje w danych (historia), ale przestaje być aktywny

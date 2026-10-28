@@ -203,3 +203,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 ## v45: Moje rekordy
 - Postęp: przycisk „★ Moje rekordy (N)" otwiera listę ćwiczeń, które mają rekord (pogrupowaną wg rodzaju), plus rekordy aktywności; dotknięcie ćwiczenia otwiera jego historię. Ćwiczenia bez rekordu się nie wyświetlają.
 - Jednorazowe przeliczenie rekordów z całej historii planów (`dane.rekordyPrzeliczone`) uzupełnia rekordy ćwiczeń zaliczonych wcześniej oraz podnosi te słabsze od historii.
+
+## v46: wiele planów naraz
+- Plan ma nazwę (`plan.nazwa`, pole „Nazwa planu" w kroku 1 kreatora; bez nazwy: „Plan N"; starsze plany: „Plan tygodniowy/miesięczny") i może być wyłączony (`plan.wylaczony`).
+- Nowy plan nie zamyka już poprzedniego. Plan zamyka się ręcznie (po zakończeniu okresu albo „Zamknij").
+- Dziś pokazuje sesje wszystkich włączonych planów, każdy w bloku z nazwą i „Edytuj". Gdy wszystkie są wyłączone, jest komunikat.
+- Postęp: sekcja „Moje plany" z przełącznikiem włącz/wyłącz; dotknięcie planu wybiera, którego dotyczą statystyki.

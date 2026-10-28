@@ -326,9 +326,53 @@ function zakresDat(plan) {
   return a.getDate() + "." + (a.getMonth() + 1) + " – " + b.getDate() + "." + (b.getMonth() + 1);
 }
 
+// Plan, którego dotyczą statystyki: wybrany na liście „Moje plany”, a w razie braku główny
+let postepPlanId = null;
+
+function planPostepu() {
+  const wybrany = planyOtwarte().find(function (p) { return p.id === postepPlanId; });
+  return wybrany || aktywnyPlan() || planyOtwarte()[planyOtwarte().length - 1] || null;
+}
+
+function dodajMojePlany() {
+  const otwarte = planyOtwarte();
+  if (otwarte.length === 0) {
+    return;
+  }
+  const wybrany = planPostepu();
+  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Moje plany"));
+  otwarte.forEach(function (plan) {
+    const wiersz = document.createElement("div");
+    wiersz.className = "pp-plan-wiersz" + (wybrany && wybrany.id === plan.id ? " wybrany" : "");
+    const tekst = document.createElement("button");
+    tekst.className = "pp-plan-tekst";
+    tekst.appendChild(tekstElement("b", "", nazwaPlanu(plan)));
+    tekst.appendChild(tekstElement("span", "opis", (plan.okres === "tydzien" ? "Tydzień" : "Miesiąc") + " · " + zakresDat(plan) + (plan.wylaczony ? " · wyłączony" : "")));
+    tekst.addEventListener("click", function () {
+      postepPlanId = plan.id;
+      rysujPostep();
+    });
+    wiersz.appendChild(tekst);
+    const wl = document.createElement("button");
+    wl.className = "pp-przelacznik" + (plan.wylaczony ? "" : " wlaczony");
+    wl.setAttribute("role", "switch");
+    wl.setAttribute("aria-checked", plan.wylaczony ? "false" : "true");
+    wl.setAttribute("aria-label", "Plan włączony: " + nazwaPlanu(plan));
+    wl.addEventListener("click", function () {
+      plan.wylaczony = !plan.wylaczony;
+      zapiszDane();
+      rysujPostep();
+      rysujDzis();
+    });
+    wiersz.appendChild(wl);
+    postepTresc.appendChild(wiersz);
+  });
+}
+
 function rysujPostep() {
   postepTresc.innerHTML = "";
-  const plan = aktywnyPlan();
+  const plan = planPostepu();
+  dodajMojePlany();
   postepEdytujPlan.hidden = !plan;
   if (!plan) {
     postepTresc.appendChild(tekstElement("p", "opis", "Gdy ułożysz plan i zaczniesz ćwiczyć, zobaczysz tutaj swoje wyniki."));
@@ -338,7 +382,7 @@ function rysujPostep() {
   }
 
   const indeks = dzisiejszyDzienPlanu(plan);
-  postepTresc.appendChild(tekstElement("p", "opis", (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " · " + zakresDat(plan)));
+  postepTresc.appendChild(tekstElement("p", "opis", nazwaPlanu(plan) + " · " + zakresDat(plan)));
 
   const kafle = document.createElement("div");
   kafle.className = "pp-kafle";
@@ -420,7 +464,7 @@ function dodajPoprzedniePlany() {
     const zal = plan.sesje.filter(function (s) {
       return sesjaZaliczona(plan, s);
     }).length;
-    przycisk.appendChild(tekstElement("b", "", (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " · " + zakresDat(plan)));
+    przycisk.appendChild(tekstElement("b", "", nazwaPlanu(plan) + " · " + zakresDat(plan)));
     przycisk.appendChild(tekstElement("span", "opis", realizacjaPlanu(plan) + "% · " + zal + " z " + plan.sesje.length + " sesji"));
     przycisk.addEventListener("click", function () {
       otworzOknoOkresu(plan, DNI_W_OKRESIE[plan.okres] - 1);
@@ -690,7 +734,7 @@ function otworzOknoDzis(plan, indeks) {
 
 const postepEdytujPlan = document.getElementById("postep-edytuj-plan");
 postepEdytujPlan.addEventListener("click", function () {
-  const plan = aktywnyPlan();
+  const plan = planPostepu();
   if (plan) {
     otworzKreator(plan);
   }

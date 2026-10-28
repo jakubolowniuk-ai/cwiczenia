@@ -188,6 +188,7 @@ function otworzKreator(planDoEdycji) {
   if (planDoEdycji) {
     szkic = {
       okres: planDoEdycji.okres,
+      nazwa: planDoEdycji.nazwa || "",
       start: planDoEdycji.start,
       aktywnosci: JSON.parse(JSON.stringify(planDoEdycji.aktywnosci)),
       sesje: JSON.parse(JSON.stringify(planDoEdycji.sesje)),
@@ -249,7 +250,14 @@ function ustawOkres(okres) {
   rysujKrok1();
 }
 
+const krNazwaPlanu = document.getElementById("kr-nazwa-planu");
+krNazwaPlanu.addEventListener("input", function () {
+  szkic.nazwa = krNazwaPlanu.value.trim();
+  zapiszSzkic();
+});
+
 function rysujKrok1() {
+  krNazwaPlanu.value = szkic.nazwa || "";
   krOkresTydzien.classList.toggle("aktywny", szkic.okres === "tydzien");
   krOkresMiesiac.classList.toggle("aktywny", szkic.okres === "miesiac");
 

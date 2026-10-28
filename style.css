@@ -1854,3 +1854,15 @@ h1 {
 }
 .ocena-przycisk.wybrana { background: var(--akcent); border-color: var(--akcent); color: #fff; }
 .pp-rekordy-przycisk { width: 100%; margin: 8px 0 12px; }
+
+/* Wiele planów */
+.dzis-plan-blok { margin-bottom: 20px; }
+.dzis-plan-gora { display: flex; align-items: center; justify-content: space-between; gap: 8px; margin: 8px 0; }
+.dzis-plan-nazwa { margin: 0; font-size: 20px; }
+.pp-plan-wiersz { display: flex; align-items: center; gap: 8px; border: 1px solid var(--linia); border-radius: 12px; padding: 4px 8px 4px 4px; margin-bottom: 8px; background: var(--karta, var(--tlo)); }
+.pp-plan-wiersz.wybrany { border-color: var(--akcent); border-width: 2px; }
+.pp-plan-tekst { flex: 1; min-width: 0; text-align: left; background: none; border: 0; padding: 8px; color: inherit; font: inherit; display: flex; flex-direction: column; gap: 2px; }
+.pp-przelacznik { position: relative; width: 52px; height: 30px; flex: none; border-radius: 15px; border: 0; background: var(--linia); }
+.pp-przelacznik::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: left 0.15s; }
+.pp-przelacznik.wlaczony { background: var(--akcent); }
+.pp-przelacznik.wlaczony::after { left: 25px; }

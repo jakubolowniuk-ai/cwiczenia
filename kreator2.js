@@ -1612,6 +1612,7 @@ function zapiszPlan() {
       return p.id === szkic.edytowanyPlanId;
     });
     if (edytowany) {
+      edytowany.nazwa = szkic.nazwa || "";
       edytowany.aktywnosci = JSON.parse(JSON.stringify(szkic.aktywnosci));
       edytowany.sesje = JSON.parse(JSON.stringify(szkic.sesje));
       edytowany.zmieniono = new Date().toISOString();
@@ -1626,18 +1627,13 @@ function zapiszPlan() {
   const plan = {
     id: "pl-" + Date.now(),
     okres: szkic.okres,
+    nazwa: szkic.nazwa || "Plan " + (dane.plany.length + 1),
     start: szkic.start,
     aktywnosci: JSON.parse(JSON.stringify(szkic.aktywnosci)),
     sesje: JSON.parse(JSON.stringify(szkic.sesje)),
     utworzono: new Date().toISOString()
   };
-  // Poprzedni aktywny plan zostaje zamknięty (zostaje w historii), nowy staje się aktywny
-  dane.plany.forEach(function (stary) {
-    if (!stary.zamkniety) {
-      stary.zamkniety = true;
-      stary.zamknieto = new Date().toISOString();
-    }
-  });
+  // Inne otwarte plany zostają (można je wyłączyć w Postępie)
   dane.plany.push(plan);
   dane.szkicPlanu = null;
   szkic = { okres: "tydzien", aktywnosci: [], sesje: [] };
