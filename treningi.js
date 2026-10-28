@@ -12,6 +12,7 @@ const przyciskNowyTrening = document.getElementById("przycisk-nowy-trening");
 const formularzTreningu = document.getElementById("formularz-treningu");
 const tytulTreningu = document.getElementById("tytul-treningu");
 const poleNazwaTreningu = document.getElementById("pole-nazwa-treningu");
+const poleBlokTreningu = document.getElementById("pole-blok-treningu");
 const pusteWybrane = document.getElementById("puste-wybrane");
 const wybraneCwiczenia = document.getElementById("wybrane-cwiczenia");
 const przyciskDodajCwiczenia = document.getElementById("przycisk-dodaj-cwiczenia");
@@ -313,11 +314,13 @@ function otworzFormularzTreningu(trening) {
     edytowanyTreningId = trening.id;
     tytulTreningu.textContent = "Edycja treningu";
     poleNazwaTreningu.value = trening.nazwa;
+    poleBlokTreningu.value = trening.blok || "";
     wybraneIds = trening.cwiczeniaIds.slice();
   } else {
     edytowanyTreningId = null;
     tytulTreningu.textContent = "Nowy trening";
     poleNazwaTreningu.value = "";
+    poleBlokTreningu.value = "";
     wybraneIds = [];
   }
 
@@ -351,7 +354,20 @@ function zapiszTrening() {
     cwiczeniaIds: wybraneIds.slice()
   };
 
+  if (poleBlokTreningu.value) {
+    wpis.blok = poleBlokTreningu.value;
+  }
+
   if (edytowanyTreningId) {
+    // Zachowujemy dane, których formularz nie zmienia (blok, domyślne wartości, oznaczenie z bazy)
+    const stary = dane.treningi.find(function (t) { return t.id === edytowanyTreningId; });
+    if (stary) {
+      ["parametry", "zBazy", "opis"].forEach(function (klucz) {
+        if (stary[klucz] !== undefined) {
+          wpis[klucz] = stary[klucz];
+        }
+      });
+    }
     dane.treningi = dane.treningi.map(function (inny) {
       return inny.id === edytowanyTreningId ? wpis : inny;
     });
@@ -405,7 +421,8 @@ function rysujTreningi() {
       });
     });
 
-    let opis = cwiczenia.length + " " + slowoCwiczen(cwiczenia.length);
+    let opis = (trening.blok === "rozgrzewka" ? "Blok rozgrzewki · " : trening.blok === "rozciaganie" ? "Blok rozciągania · " : "") +
+      cwiczenia.length + " " + slowoCwiczen(cwiczenia.length);
     if (partie.length > 0) {
       opis += " · " + partie.join(", ");
     }

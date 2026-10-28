@@ -1,0 +1,1089 @@
+{
+ "cwiczenia": [
+  {
+   "nazwa": "Marsz w miejscu z unoszeniem kolan",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, ręce zgięte w łokciach jak przy marszu.",
+    "ruch": "Maszeruj w miejscu, unosząc kolana coraz wyżej i pracując rękami. Zacznij spokojnie, po kilkunastu sekundach przyspiesz, aż poczujesz ciepło i lekko przyspieszony oddech.",
+    "uwaga": "Plecy proste, lądujesz miękko na przedniej części stopy. Oddychaj swobodnie, powinieneś móc rozmawiać."
+   }
+  },
+  {
+   "nazwa": "Pajacyki",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny środkowy",
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy razem, ręce wzdłuż ciała.",
+    "ruch": "Podskocz, rozstawiając nogi na boki i unosząc ręce nad głowę, potem wróć do pozycji wyjściowej. Powtarzaj płynnie, w równym rytmie.",
+    "uwaga": "Lądowanie miękkie, kolana lekko ugięte. Przy problemach ze stawami skacz mniej: stawiaj nogi na boki po kolei, bez podskoku."
+   }
+  },
+  {
+   "nazwa": "Krążenia bioder",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Biodrowo-lędźwiowy",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość barków, dłonie na biodrach, kolana lekko ugięte.",
+    "ruch": "Zataczaj biodrami szerokie koła, jakbyś kręcił obręczą hula-hop. Po kilku kółkach zmień kierunek.",
+    "uwaga": "Tułów prawie nieruchomo, pracują tylko biodra. Ruch powolny i kontrolowany."
+   }
+  },
+  {
+   "nazwa": "Krążenia kolan, kostek i nadgarstków",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Płaszczkowaty",
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto. Do krążeń kostek oprzyj czubek stopy o podłogę, do nadgarstków spleć dłonie.",
+    "ruch": "Krąż każdym stawem po 8–10 razy w jedną i drugą stronę: nadgarstki, kostki, a na koniec kolana (ręce na kolanach, kolana razem). Pracuj powoli.",
+    "uwaga": "Kolana krąż tylko w małym zakresie i bez bólu. Ruch ma być płynny, bez nacisku."
+   }
+  },
+  {
+   "nazwa": "Skręty tułowia stojąc",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Wielodzielny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość barków, kolana lekko ugięte, ręce zgięte przed klatką.",
+    "ruch": "Obracaj tułów raz w prawo, raz w lewo, a ręce niech lekko podążają za ruchem. Biodra obracają się tylko troszkę. Zacznij małym zakresem, potem zwiększaj.",
+    "uwaga": "Ruch z tułowia, nie z rzucania rękami. Bez gwałtownych szarpnięć, szczególnie jeśli plecy są sztywne."
+   }
+  },
+  {
+   "nazwa": "Wymachy nogą w przód i w tył",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prosty uda",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań bokiem do ściany, przytrzymaj się jedną ręką. Wolna noga luźna, tułów prosty.",
+    "ruch": "Wymachuj wyprostowaną nogą swobodnie do przodu i do tyłu, jak wahadło. Za każdym razem nieco większym zakresem. Po serii zmień nogę.",
+    "uwaga": "Nie wyginaj dolnych pleców w tył. Zakres zwiększaj stopniowo, bez szarpania."
+   }
+  },
+  {
+   "nazwa": "Wymachy nogą w bok",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Pośladkowy średni",
+    "Napinacz powięzi szerokiej"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań twarzą do ściany, oprzyj o nią dłonie. Tułów prosty, brzuch napięty.",
+    "ruch": "Wymachuj prostą nogą w bok i w poprzek ciała, jak wahadło, za każdym razem odrobinę szerzej. Potem zmień nogę.",
+    "uwaga": "Biodra stoją prosto, nie skręcaj ich. Ruch płynny, bez zamachu całym ciałem."
+   }
+  },
+  {
+   "nazwa": "Przysiad rozgrzewkowy z uniesionymi rękami",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań, stopy na szerokość barków, palce lekko na zewnątrz, ręce przed sobą.",
+    "ruch": "Zegnij kolana i odsuń biodra do tyłu, jakbyś siadał na krześle, unosząc ręce przed siebie. Zejdź na tyle, na ile możesz bez bólu i wstań, wypychając biodra do przodu.",
+    "uwaga": "Pięty na podłodze, kolana idą w stronę palców. Plecy proste. To rozgrzewka, więc ruch lekki i płynny."
+   }
+  },
+  {
+   "nazwa": "Wykrok z rotacją tułowia",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Pośladkowy wielki",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy razem, ręce złączone przed klatką.",
+    "ruch": "Zrób duży krok do przodu i zegnij oba kolana, skręć tułów nad nogą wykroczną. Wróć do pionu i powtórz drugą nogą. Chodź w ten sposób do przodu.",
+    "uwaga": "Kolano z przodu nad stopą, nie za palce. Tułów prosty, skręt płynny."
+   }
+  },
+  {
+   "nazwa": "Spacer rąk (Inchworm)",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Plecy",
+    "Nogi",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prosty brzucha",
+    "Płaszczkowaty"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder.",
+    "ruch": "Pochyl się i połóż dłonie na podłodze, idź rękami do przodu aż do pozycji podporu przodem, zatrzymaj się na sekundę, potem drobnymi krokami podejdź stopami do rąk i wstań. Powtórz.",
+    "uwaga": "Kolana mogą być lekko ugięte. Brzuch napięty w podporze, biodra nie opadają."
+   }
+  },
+  {
+   "nazwa": "Wysokie kolana",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Biodrowo-lędźwiowy",
+    "Brzuchaty łydki – głowa boczna"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, ręce zgięte jak do biegu.",
+    "ruch": "Biegnij w miejscu, unosząc kolana jak najwyżej do poziomu bioder. Ręce pracują na przemian. Rób to rytmicznie i lekko.",
+    "uwaga": "Lądujesz na przedniej części stopy. Plecy proste, nie przechylaj się do tyłu."
+   }
+  },
+  {
+   "nazwa": "Skip A",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Biodrowo-lędźwiowy",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, ręce zgięte jak do biegu.",
+    "ruch": "Idź lekkim, sprężystym skipem: unieś kolano do poziomu bioder, a przeciwna ręka pracuje do przodu, potem szybko opuść stopę i zmień nogę. Poruszaj się do przodu.",
+    "uwaga": "Lądowanie na przedniej części stopy, plecy proste. Zacznij wolno, nabierz rytmu dopiero po kilku krokach."
+   }
+  },
+  {
+   "nazwa": "Pięty do pośladków",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Brzuchaty łydki – głowa boczna"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, ręce wzdłuż ciała.",
+    "ruch": "Biegnij w miejscu, unosząc pięty do pośladków. Kolana kierują się do podłogi, ruch jest lekki i rytmiczny.",
+    "uwaga": "Plecy proste, nie odchylaj się. Ruch z kolan, nie z rzucania nóg do tyłu."
+   }
+  },
+  {
+   "nazwa": "Krótkie przyspieszenia (strides)",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Dwugłowy uda",
+    "Pośladkowy wielki",
+    "Płaszczkowaty"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Wybierz ok. 20–30 m prostej drogi. Zacznij od truchtu.",
+    "ruch": "Stopniowo przyspieszaj przez ok. 20 m do szybkiego, ale kontrolowanego biegu (ok. 80% wysiłku), potem zwolnij i wróć truchtem. Rób 3–5 takich odcinków.",
+    "uwaga": "To nie sprint. Biegnij lekko, bez spinania. Dobre przed bieganiem i treningiem nóg."
+   }
+  },
+  {
+   "nazwa": "Skakanka",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Płaszczkowaty",
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, trzymaj skakankę przy biodrach, łokcie przy bokach.",
+    "ruch": "Obracaj skakankę nadgarstkami i skacz niewysoko na przedniej części stopy. Zacznij spokojnie, z czasem przyspiesz. Ten sposób dobrze podnosi tętno.",
+    "uwaga": "Skacz tylko tyle, by skakanka przeszła pod stopami. Ręce pracują nadgarstkami, nie całymi ramionami. Miękkie lądowanie."
+   }
+  },
+  {
+   "nazwa": "Przeciąganie gumy nad głową",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Podgrzebieniowy",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, chwyć gumę oburącz szerzej niż barki, ręce przed udami, brzuch napięty.",
+    "ruch": "Powoli unieś proste ręce nad głowę, a potem za głowę i z powrotem przed uda, trzymając gumę napiętą. Chwyt dobierz tak, by ruch był lekki.",
+    "uwaga": "Nie wyginaj dolnych pleców. Jeśli guma ciągnie za mocno, chwyć szerzej. To rozgrzewka, więc ruch bez wysiłku."
+   }
+  },
+  {
+   "nazwa": "Wielki rozkrok z rotacją (World's Greatest Stretch)",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Nogi",
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Biodrowo-lędźwiowy",
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Zębaty przedni",
+    "Wielodzielny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Wejdź w pozycję podporu przodem, jak do pompki.",
+    "ruch": "Wystaw jedną stopę do zewnętrznej strony dłoni, opuść biodra. Sięgnij ręką od strony nogi wykrocznej w górę, skręcając klatkę, potem wróć i wyprostuj nogę z tyłu. Zmień stronę.",
+    "uwaga": "Ruchy powolne, oddychaj głęboko. Zakres dobierz do swoich możliwości, nie zmuszaj ciała do końca zakresu."
+   }
+  },
+  {
+   "nazwa": "Rozgrzewkowe wymachy ramion (obejmowanie się)",
+   "rodzaj": "Rozgrzewka",
+   "partie": [
+    "Klatka piersiowa",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Równoległoboczny",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, ręce rozłożone szeroko na boki na wysokości barków.",
+    "ruch": "Szeroko rozłóż ręce, potem objmij się nimi przed klatką, jakbyś się przytulał, na zmianę raz jedna ręka na górze, raz druga. Wracaj do szerokiego otwarcia.",
+    "uwaga": "Pracuj płynnie, nie szarp. Plecy proste, głowa w osi ciała."
+   }
+  },
+  {
+   "nazwa": "Wall Angels (aniołki przy ścianie)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Czworoboczny – część dolna",
+    "Czworoboczny – część środkowa",
+    "Zębaty przedni",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Oprzyj plecy, pośladki i głowę o ścianę, stopy kilka cm od niej. Ręce zgięte w łokciach, wierzch dłoni i łokcie przy ścianie.",
+    "ruch": "Powoli wyprostuj ręce w górę wzdłuż ściany, nie odrywając pleców, łokci ani nadgarstków, a potem wróć do zgięcia. Rób powoli.",
+    "uwaga": "Dolne plecy nie odrywają się od ściany (lekko napnij brzuch). Jeśli nie możesz dotknąć ręką ściany, pracuj w mniejszym zakresie."
+   }
+  },
+  {
+   "nazwa": "Odwodzenie łopatek (ściąganie łopatek)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań albo usiądź prosto, ręce zgięte w łokciach przy bokach, klatka wysoko.",
+    "ruch": "Ściągnij łopatki do siebie i lekko w dół, jakbyś chciał ścisnąć ołówek między nimi. Zatrzymaj 3–5 sekund i rozluźnij.",
+    "uwaga": "Barki nie idą do uszu. Nie wyginaj pleców. Ruch jest niewielki, ale czujesz go między łopatkami."
+   }
+  },
+  {
+   "nazwa": "Y-T-W na brzuchu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Czworoboczny – część dolna",
+    "Czworoboczny – część środkowa",
+    "Równoległoboczny",
+    "Naramienny tylny",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na brzuchu, czoło na podłodze albo na ręczniku, ręce wyprostowane przed głową w literę Y.",
+    "ruch": "Unieś ręce kilka cm nad podłogę, zatrzymaj sekundę i opuść. Potem powtórz z rękami na boki w literę T, a na końcu zgięte w łokciach w literę W.",
+    "uwaga": "Kciuki skierowane w górę, szyja luźna (patrz w podłogę). Ruch niewielki, z łopatek. Nie unoś bardzo wysoko."
+   }
+  },
+  {
+   "nazwa": "Face Pull z gumą",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Czworoboczny – część środkowa",
+    "Podgrzebieniowy",
+    "Równoległoboczny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Zaczep gumę na wysokości twarzy, chwyć jej końce, odejdź krok, tak by była napięta. Stopy na szerokość barków.",
+    "ruch": "Przyciągnij gumę do twarzy, łokcie szeroko i na wysokości barków, ściągnij łopatki. Rozciągnij końce na boki obok uszu i wróć powoli.",
+    "uwaga": "Ruch z łopatek i tylnych barków. Tułów prosty, nie odchylaj się. Dobierz taką gumę, by dało się zrobić ruch czysto."
+   }
+  },
+  {
+   "nazwa": "Wiosłowanie gumą w siadzie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Biceps"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Usiądź na podłodze z prostymi nogami, owiń gumę wokół stóp, chwyć końce. Plecy proste.",
+    "ruch": "Przyciągnij końce gumy do boków brzucha, ściągając łopatki, łokcie do tyłu przy tułowiu. Wróć powoli do prostych rąk.",
+    "uwaga": "Plecy proste, nie odchylaj się do tyłu. Barki z dala od uszu."
+   }
+  },
+  {
+   "nazwa": "Band Pull-Apart (rozciąganie gumy na boki)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, chwyć gumę oburącz przed sobą na wysokości klatki, ręce proste, dłonie na szerokość barków.",
+    "ruch": "Rozciągnij gumę na boki, ściągając łopatki, aż ręce będą rozłożone na boki. Wróć powoli. Wydech przy rozciąganiu, wdech przy powrocie.",
+    "uwaga": "Ręce proste, nie unoś barków. Ruch z łopatek. Jeśli guma jest za mocna, chwyć szerzej."
+   }
+  },
+  {
+   "nazwa": "Rotacja zewnętrzna barku z gumą",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Podgrzebieniowy",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Zaczep gumę na wysokości łokcia. Stań bokiem do niej, łokieć zgięty pod kątem prostym przy tułowiu, pod pachą mały ręcznik.",
+    "ruch": "Odciągnij przedramię na zewnątrz, obracając ramię, łokieć cały czas przy tułowiu. Zatrzymaj sekundę i wróć powoli.",
+    "uwaga": "Łokieć przy boku, ręcznik nie spada. Lekki opór i wolny ruch. Ćwiczenie wzmacnia „rotatory” barku."
+   }
+  },
+  {
+   "nazwa": "Superman (unoszenie rąk i nóg na brzuchu)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Czworoboczny lędźwi",
+    "Wielodzielny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na brzuchu, ręce wyprostowane przed głową, nogi proste.",
+    "ruch": "Unieś jednocześnie ręce, klatkę i nogi kilka cm nad podłogę, zatrzymaj 2–3 sekundy i opuść powoli.",
+    "uwaga": "Szyja w osi (patrz w podłogę). Nie unoś zbyt wysoko, by nie przeciążać dolnych pleców. Przy bólu zrób wersję z jedną ręką i przeciwną nogą."
+   }
+  },
+  {
+   "nazwa": "Kegel – długie napięcia",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Mięśnie dna miednicy",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na plecach z ugiętymi kolanami albo usiądź wygodnie. Opróżnij pęcherz. Rozluźnij brzuch, pośladki i uda.",
+    "ruch": "Napnij mięśnie dna miednicy, jakbyś zatrzymywał gazy, i unieś je delikatnie „do środka”. Trzymaj 5 sekund (z czasem do 10), potem rozluźnij na tyle samo. Oddychaj normalnie.",
+    "uwaga": "Ćwiczenie nie zastępuje porady lekarza ani fizjoterapeuty. Nie napinaj brzucha, ud ani pośladków i nie wstrzymuj oddechu. Nie ćwicz przy pełnym pęcherzu ani przez ból. Nie ćwicz przerywaniem strumienia moczu."
+   }
+  },
+  {
+   "nazwa": "Kegel – szybkie skurcze",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Mięśnie dna miednicy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Usiądź albo połóż się wygodnie, rozluźnij brzuch, uda i pośladki.",
+    "ruch": "Napnij mięśnie dna miednicy na 1–2 sekundy i szybko rozluźnij. Powtórz serię 10 razy w równym tempie. Pomaga przy kaszlu i kichaniu.",
+    "uwaga": "Ćwiczenie nie zastępuje porady lekarza ani fizjoterapeuty. Po każdym skurczu rozluźnij mięśnie do końca. Przy bólu przerwij. Nie rób zbyt dużo serii dziennie."
+   }
+  },
+  {
+   "nazwa": "Odwrotny Kegel (rozluźnienie dna miednicy)",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Mięśnie dna miednicy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Usiądź albo połóż się na plecach z ugiętymi kolanami. Jedną rękę połóż na brzuchu.",
+    "ruch": "Weź głęboki wdech nosem, tak by brzuch lekko się uniósł, a dno miednicy rozluźniło się i „opadło”. Przy wydechu rozluźniaj dalej, bez napinania. Powtarzaj 10 oddechów.",
+    "uwaga": "Ćwiczenie nie zastępuje porady lekarza ani fizjoterapeuty. To ćwiczenie jest dla osób z napiętym dnem miednicy. Nie wypychaj na siłę. Przy bólu miednicy lub problemach z oddawaniem moczu skonsultuj się ze specjalistą."
+   }
+  },
+  {
+   "nazwa": "Mostek biodrowy z napięciem dna miednicy",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Pośladki",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Mięśnie dna miednicy",
+    "Pośladkowy wielki",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na plecach, kolana ugięte, stopy na podłodze na szerokość bioder, ręce wzdłuż ciała.",
+    "ruch": "Wydychając powietrze, delikatnie napnij dno miednicy i unieś biodra do prostej linii od ramion do kolan. Zatrzymaj 2–3 sekundy i opuść powoli, rozluźniając.",
+    "uwaga": "Ćwiczenie nie zastępuje porady lekarza ani fizjoterapeuty. Nie wyginaj dolnych pleców. Napinaj pośladki, ale nie ściskaj ud. Ruch kontrolowany."
+   }
+  },
+  {
+   "nazwa": "Oddychanie przeponowe z dnem miednicy",
+   "rodzaj": "Joga / mobilność",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Mięśnie dna miednicy",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na plecach z ugiętymi kolanami, jedna dłoń na klatce, druga na brzuchu.",
+    "ruch": "Wdech nosem: brzuch unosi się, dno miednicy rozluźnia. Wydech ustami: brzuch opada, dno miednicy lekko się unosi. Powtórz 8–10 oddechów spokojnym rytmem.",
+    "uwaga": "Ćwiczenie nie zastępuje porady lekarza ani fizjoterapeuty. Klatka porusza się niewiele, pracuje brzuch. Oddychaj spokojnie, bez wysiłku i bez napinania pośladków."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie czworogłowego stojąc",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, przytrzymaj się ściany albo krzesła. Zegnij jedną nogę w kolanie i chwyć stopę ręką.",
+    "ruch": "Przyciągnij piętę do pośladka, kolana trzymaj blisko siebie, biodra lekko wypchnij do przodu. Utrzymaj 30 sekund, potem druga noga.",
+    "uwaga": "Czuj rozciąganie, nie ból. Plecy proste, nie wyginaj dolnych pleców. Jeśli nie sięgasz stopy, użyj paska lub ręcznika."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie tyłu uda leżąc z ręcznikiem",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na plecach, jedna noga zgięta, stopa na podłodze. Drugą nogę wyprostuj i owiń stopę ręcznikiem lub paskiem.",
+    "ruch": "Unieś prostą nogę w górę, ciągnąc ręcznik do siebie, aż poczujesz rozciąganie z tyłu uda. Utrzymaj 30 sekund i zmień nogę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Kolano prawie proste (może być lekko ugięte). Głowa i plecy rozluźnione na podłodze."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie tyłu uda ze stopą na podwyższeniu",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Płaszczkowaty"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań przed stopniem lub ławką, połóż na niej piętę wyprostowanej nogi, palce w górę.",
+    "ruch": "Z prostymi plecami pochyl się do przodu w biodrach nad nogą, aż poczujesz rozciąganie z tyłu uda. Utrzymaj 30 sekund i zmień nogę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Pochylaj się z bioder, nie zaokrąglaj pleców. Noga oparta nie musi być sztywna jak kłoda."
+   }
+  },
+  {
+   "nazwa": "Półszpagat (Half Splits)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Płaszczkowaty"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Uklęknij na jednym kolanie, drugą nogę wyprostuj do przodu piętą na podłodze, ręce po bokach.",
+    "ruch": "Odsuń biodra do tyłu nad piętę kolana, prostując przednią nogę, i pochyl tułów nad nią z prostymi plecami. Utrzymaj 30 sekund i zmień nogę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Plecy proste. Jeśli nie sięgasz do podłogi, oprzyj dłonie na klockach lub książkach."
+   }
+  },
+  {
+   "nazwa": "Rozkrok w siadzie (rozciąganie przywodzicieli)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Usiądź na podłodze z nogami szeroko w rozkroku, plecy proste, ręce przed sobą.",
+    "ruch": "Pochyl tułów do przodu z prostymi plecami i idź rękami po podłodze przed siebie, aż poczujesz rozciąganie po wewnętrznej stronie ud. Utrzymaj 30 sekund.",
+    "uwaga": "Czuj rozciąganie, nie ból. Nogi mogą być ugięte, jeśli to trudne. Nie opuszczaj się na siłę. Usiądź na złożonym kocu, jeśli biodra sztywnieją."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie pasma biodrowo-piszczelowego",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Napinacz powięzi szerokiej",
+    "Pośladkowy średni"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, skrzyżuj nogi w kostkach: jedna noga przed drugą, ręce nad głową.",
+    "ruch": "Odchyl biodro tylnej nogi na bok i pochyl tułów w przeciwną stronę, aż poczujesz rozciąganie z boku biodra i uda. Utrzymaj 30 sekund i zmień stronę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Stopy stabilnie na podłodze. Przy zawrotach głowy oprzyj się o ścianę."
+   }
+  },
+  {
+   "nazwa": "Kolano do klatki leżąc",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Pośladki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu",
+    "Czworoboczny lędźwi"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na plecach, nogi wyprostowane, plecy dociśnięte do podłogi.",
+    "ruch": "Przyciągnij jedno kolano obiema rękami do klatki, drugą nogę zostaw prostą na podłodze. Utrzymaj 30 sekund i zmień nogę. Potem przyciągnij oba kolana.",
+    "uwaga": "Czuj rozciąganie, nie ból. Głowa i barki rozluźnione na podłodze. Oddychaj spokojnie."
+   }
+  },
+  {
+   "nazwa": "Siad skrzyżny (rozciąganie rotatorów biodra)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Pośladkowy średni",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Usiądź na podłodze, plecy proste, kolana ugięte, stopy blisko ciała.",
+    "ruch": "Skrzyżuj nogi jak do medytacji, jedna stopa pod przeciwnym kolanem, a potem pochyl tułów do przodu z prostymi plecami. Utrzymaj 30 sekund, zmień ułożenie nóg.",
+    "uwaga": "Czuj rozciąganie, nie ból. Jeśli kolana są wysoko, usiądź na złożonym kocu. Nie dociskaj kolan na siłę."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie piszczeli i przodu stopy (klęk na piętach)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Piszczelowy przedni"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Uklęknij na miękkiej macie, stopy wyprostowane tak, że wierzch stopy leży na podłodze.",
+    "ruch": "Usiądź powoli na piętach i delikatnie podnieś kolana (np. dłońmi z przodu), aż poczujesz rozciąganie przodu goleni. Utrzymaj 20–30 sekund.",
+    "uwaga": "Czuj rozciąganie, nie ból. Przy bólu kolan nie siadaj na piętach. Wsuń zwinięty ręcznik pod kolana lub wybierz inną pozycję."
+   }
+  },
+  {
+   "nazwa": "Skłon w przód stojąc (rag doll)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Plecy",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań, stopy na szerokość bioder, kolana lekko ugięte.",
+    "ruch": "Pochyl się powoli, zwijając kręgosłup, pozwól rękom zwisać do podłogi. Chwyć łokcie przeciwnymi dłońmi i kołysz się lekko. Utrzymaj 30 sekund i wstań powoli, odbudowując kręgosłup.",
+    "uwaga": "Czuj rozciąganie, nie ból. Wstawaj wolno, zwłaszcza przy ciśnieniu. Kolana mogą pozostać ugięte, jeśli tył ud jest sztywny."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie najszerszego grzbietu przy ścianie",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań przodem do ściany, kilka kroków od niej. Połóż obie dłonie na ścianie na wysokości bioder lub wyżej.",
+    "ruch": "Pochyl tułów do przodu, odsuwając biodra do tyłu i opuszczając klatkę w dół, a ręce zostają prosto. Poczujesz rozciąganie boków pleców. Utrzymaj 30 sekund.",
+    "uwaga": "Czuj rozciąganie, nie ból. Plecy proste, głowa między rękami. Możesz przesunąć biodra w bok, by rozciągnąć jedną stronę mocniej."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie dolnych pleców (kolana na bok leżąc)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Czworoboczny lędźwi",
+    "Prostowniki grzbietu",
+    "Wielodzielny"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na plecach, ramiona rozłożone na boki, kolana ugięte.",
+    "ruch": "Opuść oba kolana razem na jedną stronę, głowa patrzy w przeciwną stronę. Zostań 30 sekund i zmień stronę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Barki zostają na podłodze. Nie dociskaj kolan, niech zwisają swobodnie. Wydech pogłębia rozciąganie."
+   }
+  },
+  {
+   "nazwa": "Wyprost piersiowy na wałku lub zwiniętym ręczniku",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Plecy",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Wielodzielny",
+    "Prostowniki grzbietu",
+    "Piersiowy większy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż zwinięty ręcznik lub wałek w poprzek pleców, pod łopatkami. Połóż się na nim, kolana ugięte, ręce za głową.",
+    "ruch": "Odchyl się powoli nad wałkiem, otwierając klatkę, oddychaj głęboko 30 sekund. Przesuń wałek wyżej lub niżej i powtórz.",
+    "uwaga": "Czuj rozciąganie, nie ból. Podpieraj głowę rękami. Dolne plecy nie wyginają się. Brzuch lekko napięty. Nie rób tego przy bólu karku."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie barku w poprzek klatki",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Podgrzebieniowy",
+    "Obły większy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań albo usiądź prosto. Jedną rękę wyprostuj przed sobą na wysokości barku.",
+    "ruch": "Drugą ręką przyciągnij wyprostowaną rękę w poprzek klatki do siebie, aż poczujesz rozciąganie z tyłu barku. Utrzymaj 30 sekund i zmień rękę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Barki opuszczone, ramię trzymasz poniżej łokcia, nie za łokieć. Nie obracaj tułowia."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie tricepsa za głową",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań albo usiądź prosto. Unieś jedną rękę, zegnij łokieć i opuść dłoń za głowę, między łopatki.",
+    "ruch": "Drugą ręką delikatnie dociśnij łokieć w tył i w dół, aż poczujesz rozciąganie z tyłu ramienia. Utrzymaj 30 sekund i zmień rękę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Nie odchylaj głowy ani nie wyginaj pleców. Łokieć wskazuje w górę."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie bicepsa przy ścianie",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Piersiowy większy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań bokiem do ściany. Połóż dłoń na ścianie na wysokości barku, palce wskazują do tyłu, ręka prosta.",
+    "ruch": "Powoli obracaj tułów od ściany, aż poczujesz rozciąganie z przodu ramienia i klatki. Utrzymaj 30 sekund i zmień rękę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Ręka prosta, nie szarp. Zwiększaj obrót stopniowo."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie zginaczy przedramienia",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Uklęknij lub stań. Wyprostuj rękę przed sobą dłonią do góry, palce w dół.",
+    "ruch": "Drugą ręką delikatnie odciągnij palce w dół i do siebie, aż poczujesz rozciąganie po wewnętrznej stronie przedramienia. Utrzymaj 20–30 sekund i zmień rękę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Łokieć prosty. Dobre po podciąganiu i ćwiczeniach z chwytem. Przy bólu nadgarstka zmniejsz nacisk."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie prostowników przedramienia",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Prostowniki przedramienia",
+    "Ramienno-promieniowy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Wyprostuj rękę przed sobą dłonią do dołu, palce skierowane w dół.",
+    "ruch": "Drugą ręką delikatnie dociśnij grzbiet dłoni do siebie, aż poczujesz rozciąganie na wierzchu przedramienia. Utrzymaj 20–30 sekund i zmień rękę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Łokieć prosty. Nie wyginaj nadgarstka na siłę. Dobre po pracy przy komputerze."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie klatki z rękami splecionymi za plecami",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Mostkowo-obojczykowo-sutkowy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, spleć dłonie za plecami na wysokości pośladków, ręce proste.",
+    "ruch": "Ściągnij łopatki i unieś splecione ręce lekko w górę i w tył, otwierając klatkę. Utrzymaj 30 sekund, oddychaj głęboko.",
+    "uwaga": "Czuj rozciąganie, nie ból. Nie wyginaj dolnych pleców. Jeśli nie możesz spleść dłoni, chwyć za ręcznik."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie barku z ręką za plecami",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Podgrzebieniowy",
+    "Naramienny przedni",
+    "Obły większy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, trzymaj ręcznik w prawej ręce nad głową, a lewą rękę zegnij za plecami i chwyć drugi koniec.",
+    "ruch": "Delikatnie pociągnij ręcznik w górę prawą ręką, tak by lewa ręka powędrowała wyżej za plecami. Utrzymaj 20–30 sekund i zmień strony.",
+    "uwaga": "Czuj rozciąganie, nie ból. Barki nisko, plecy proste. Rozciąganie ma być delikatne. Przy bólu barku zrezygnuj."
+   }
+  },
+  {
+   "nazwa": "Sfinks (rozciąganie brzucha leżąc na brzuchu)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Połóż się na brzuchu, oprzyj przedramiona na podłodze, łokcie pod barkami.",
+    "ruch": "Delikatnie unieś klatkę, odsuwając ją od podłogi i opuszczając barki, aż poczujesz rozciąganie z przodu brzucha. Utrzymaj 30 sekund i oddychaj spokojnie.",
+    "uwaga": "Czuj rozciąganie, nie ból. Biodra zostają na podłodze. Przy bólu dolnych pleców unieś się mniej albo opuść ciało."
+   }
+  },
+  {
+   "nazwa": "Skłon boczny stojąc z ręką nad głową",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Najszerszy grzbietu"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, jedna ręka nad głową, druga wzdłuż ciała.",
+    "ruch": "Pochyl tułów na bok, ciągnąc ramię nad głową w kierunku przeciwnym do pochylenia, aż poczujesz rozciąganie boku tułowia. Utrzymaj 30 sekund i zmień stronę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Nie skręcaj tułowia, ruch tylko w bok (jak między dwiema szybami). Biodra stabilne."
+   }
+  },
+  {
+   "nazwa": "Poza żaby (Frog Stretch)",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Uklęknij na czworakach, rozsuń kolana szeroko na boki, stopy skierowane na zewnątrz, na wysokości kolan.",
+    "ruch": "Wypchnij biodra do tyłu, opuszczając tułów na przedramiona, aż poczujesz rozciąganie po wewnętrznej stronie ud. Utrzymaj 30 sekund i oddychaj spokojnie.",
+    "uwaga": "Czuj rozciąganie, nie ból. Pod kolana podłóż koc. Rozsuń kolana tylko tyle, ile to wygodne. Nie sprężynuj biodrami."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie pośladków w siadzie na krześle",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Pośladkowy średni"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Usiądź na krześle, plecy proste. Połóż kostkę jednej nogi na kolanie drugiej.",
+    "ruch": "Pochyl tułów do przodu z prostymi plecami, aż poczujesz rozciąganie w pośladku. Możesz dodatkowo delikatnie docisnąć kolano ręką. Utrzymaj 30 sekund i zmień nogę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Plecy proste. Dobre rozwiązanie w pracy, bez kładzenia się na podłodze."
+   }
+  },
+  {
+   "nazwa": "Rozciąganie łydek w wykroku przy ścianie",
+   "rodzaj": "Rozciąganie",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Płaszczkowaty",
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": "",
+   "ciezar": false,
+   "opis": {
+    "start": "Stań przodem do ściany w wykroku, ręce oparte na ścianie. Tylna noga prosta, pięta na podłodze.",
+    "ruch": "Zegnij przednie kolano, przesuwając ciężar do przodu, aż poczujesz rozciąganie łydki tylnej nogi. Utrzymaj 30 sekund. Następnie lekko zegnij tylne kolano, by poczuć dolną część łydki. Zmień nogę.",
+    "uwaga": "Czuj rozciąganie, nie ból. Pięty cały czas na podłodze, stopy skierowane prosto do przodu."
+   }
+  }
+ ]
+}

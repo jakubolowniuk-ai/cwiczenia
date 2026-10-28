@@ -101,8 +101,14 @@ function najlepszyZHistorii(cwiczenie, typ, pomijanaSesjaId) {
 }
 
 // Po zaliczeniu ćwiczenia: jeśli wynik bije rekord, pytamy, czy go zapisać
+// Rekordy nie dotyczą rozgrzewki, rozciągania ani jogi (tam nie chodzi o wynik)
+const RODZAJE_BEZ_REKORDOW = ["rodzaj-rozgrzewka", "rodzaj-rozciaganie", "rodzaj-joga"];
+
 function sprawdzRekord(sesja, id) {
   const cwiczenie = znajdzCwiczenie(id);
+  if (cwiczenie && RODZAJE_BEZ_REKORDOW.indexOf(cwiczenie.rodzajId) !== -1) {
+    return;
+  }
   if (!cwiczenie || !sesja.zrobione || !sesja.zrobione[id] || !sesja.parametry || !sesja.parametry[id]) {
     return;
   }
@@ -601,6 +607,9 @@ function sprawdzRekordDystansu(rodzajId, wynik) {
 function przeliczRekordyZHistorii() {
   let zmiany = 0;
   dane.cwiczenia.forEach(function (cw) {
+    if (RODZAJE_BEZ_REKORDOW.indexOf(cw.rodzajId) !== -1) {
+      return;
+    }
     const typy = cw.rekord ? [cw.rekord.typ] : ["ciezar", "powtorzenia", "czas"];
     let najlepszy = null;
     let dataNajlepszego = "";

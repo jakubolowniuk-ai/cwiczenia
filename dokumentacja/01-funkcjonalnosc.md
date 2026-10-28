@@ -220,3 +220,12 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## v49: dodatkowy ciężar
 - W kalistenice i ćwiczeniach statycznych pole ciężaru nazywa się „Dodatkowy ciężar (kg), opcjonalnie" (kreator, wpis wartości, tryb Ćwicz); w siłowni zostaje „Ciężar (kg)". Pole w formularzu ćwiczenia: „Można dodać ciężar (kg)".
+
+## v51–v53: rozgrzewka, rozciąganie, postawa, dno miednicy, bloki
+- Baza ma 307 ćwiczeń (+56 w `przyklady-zdrowie.json`, każde z opisem): 18 rozgrzewkowych (nowy rodzaj „Rozgrzewka"), 24 rozciągające (rodzaj „Rozciąganie"), 8 na postawę (Kalistenika: wall angels, Y-T-W, face pull z gumą, band pull-apart…), 5 na dno miednicy (Joga / mobilność, nowy mięsień „Mięśnie dna miednicy" w partii Brzuch). Szyja pominięta. `WERSJA_BAZY = 7`.
+- Gotowe zestawy w `przyklady-zestawy.json` (10): 4 bloki rozgrzewki, 3 bloki rozciągania po treningu, „Mobilność: biodra i plecy", „Postawa: plecy i barki", „Dno miednicy". Dodawane po nazwie (`dodajZestawyBazy`), z domyślnymi wartościami (`trening.parametry`), oznaczone `zBazy`.
+- Zestaw może być blokiem: `trening.blok` = "rozgrzewka" | "rozciaganie" (wybór w formularzu zestawu).
+- Sesja ma opcjonalne `blokPrzedId` (rozgrzewka) i `blokPoId` (rozciąganie po treningu); wybór w panelu sesji w kreatorze. Parametry ćwiczeń bloku trafiają do `sesja.parametry`.
+- Dziś: bloki jako osobne sekcje nad i pod ćwiczeniami głównymi; w trybie Ćwicz sesja idzie: rozgrzewka → ćwiczenia → rozciąganie, z krótką przerwą (5 s) w blokach i bez oceny.
+- Ćwiczenia z bloków nie wliczają się do zaliczenia sesji, statystyk mięśni ani rekordów; rodzaje Rozgrzewka, Rozciąganie i Joga nie mają rekordów.
+- Rozciąganie na osobny dzień: zwykła aktywność „Rozciąganie" z zestawem (np. „Mobilność: biodra i plecy").

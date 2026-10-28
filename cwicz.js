@@ -142,7 +142,12 @@ function cwSerie(id) {
 }
 
 function cwIds() {
-  return cwiczeniaSesjiIds(cwSesja);
+  return wszystkieIdSesji(cwSesja);
+}
+
+// Czy ćwiczenie jest z bloku rozgrzewki albo rozciągania (krótsze przerwy, bez oceny)
+function cwBlokowe(id) {
+  return idyBloku(cwSesja, "przed").concat(idyBloku(cwSesja, "po")).indexOf(id) !== -1;
 }
 
 function cwWykonane(id) {
@@ -162,6 +167,9 @@ function cwBiezace() {
 }
 
 function cwPrzerwaDla(id) {
+  if (cwBlokowe(id)) {
+    return 5;
+  }
   const cw = znajdzCwiczenie(id);
   return (cw && cw.przerwa) || dane.ustawienia.przerwa || 60;
 }
@@ -362,7 +370,8 @@ function cwStepper(etykieta, wartosc, krok, ulamki) {
 function cwNaglowekCwiczenia(b, serie) {
   const cw = znajdzCwiczenie(b.id);
   const ids = cwIds();
-  cwTytul.textContent = "Ćwiczenie " + (b.indeks + 1) + " z " + ids.length;
+  const etykietaBloku = idyBloku(cwSesja, "przed").indexOf(b.id) !== -1 ? "Rozgrzewka · " : idyBloku(cwSesja, "po").indexOf(b.id) !== -1 ? "Rozciąganie · " : "";
+  cwTytul.textContent = etykietaBloku + "Ćwiczenie " + (b.indeks + 1) + " z " + ids.length;
   const zrobione = ids.filter(function (id) {
     return cwWykonane(id) || cwPrzebieg().pominiete[id];
   }).length;
@@ -480,7 +489,7 @@ function cwRysujPrzerwe() {
   const licznik = cwEl("div", "cw-stoper", "0:00");
   licznik.id = "cw-licznik";
   cwTresc.appendChild(licznik);
-  if (cwSesja.zrobione && cwSesja.zrobione[poprzednieId]) {
+  if (cwSesja.zrobione && cwSesja.zrobione[poprzednieId] && !cwBlokowe(poprzednieId)) {
     const cwPoprz = znajdzCwiczenie(poprzednieId);
     cwTresc.appendChild(cwEl("div", "cw-plan", "Skończone: " + (cwPoprz ? cwPoprz.nazwa : "")));
     cwTresc.appendChild(ocenaPasek(cwSesja, poprzednieId));
@@ -523,7 +532,9 @@ function cwRysujKoniec() {
     const wiersz = cwEl("div", "cw-podsumowanie");
     wiersz.appendChild(cwEl("div", "karta-nazwa", cw.nazwa));
     wiersz.appendChild(cwEl("div", "ostatnio-info", opisIlosci(cwSesja.wykonane && cwSesja.wykonane[id] ? cwSesja.wykonane[id] : cwSesja.parametry[id])));
-    wiersz.appendChild(ocenaPasek(cwSesja, id));
+    if (!cwBlokowe(id)) {
+      wiersz.appendChild(ocenaPasek(cwSesja, id));
+    }
     cwTresc.appendChild(wiersz);
   });
   const pominiete = ids.filter(function (id) { return !cwWykonane(id); });

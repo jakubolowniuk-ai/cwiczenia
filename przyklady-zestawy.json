@@ -1,0 +1,618 @@
+{
+ "zestawy": [
+  {
+   "nazwa": "Rozgrzewka ogólna (ok. 6 min)",
+   "blok": "rozgrzewka",
+   "opis": "Na początek każdego treningu: podniesienie tętna i rozruszanie stawów.",
+   "cwiczenia": [
+    {
+     "nazwa": "Marsz w miejscu z unoszeniem kolan",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 60,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Pajacyki",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 45,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Krążenia ramion",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Krążenia bioder",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Skręty tułowia stojąc",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Przysiad rozgrzewkowy z uniesionymi rękami",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Spacer rąk (Inchworm)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 5
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Rozgrzewka górnej części ciała (ok. 5 min)",
+   "blok": "rozgrzewka",
+   "opis": "Barki, łopatki i klatka przed ćwiczeniami na górę ciała.",
+   "cwiczenia": [
+    {
+     "nazwa": "Krążenia ramion",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Przeciąganie gumy nad głową",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Band Pull-Apart (rozciąganie gumy na boki)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 15
+     }
+    },
+    {
+     "nazwa": "Rozgrzewkowe wymachy ramion (obejmowanie się)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Wall Angels (aniołki przy ścianie)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Krążenia kolan, kostek i nadgarstków",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Rozgrzewka nóg i pośladków (ok. 6 min)",
+   "blok": "rozgrzewka",
+   "opis": "Biodra, kolana i pośladki przed przysiadami, martwymi ciągami i wykrokami.",
+   "cwiczenia": [
+    {
+     "nazwa": "Marsz w miejscu z unoszeniem kolan",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 45,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Wymachy nogą w przód i w tył",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Wymachy nogą w bok",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Przysiad rozgrzewkowy z uniesionymi rękami",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 12
+     }
+    },
+    {
+     "nazwa": "Wykrok z rotacją tułowia",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 8
+     }
+    },
+    {
+     "nazwa": "Most biodrowy",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 12
+     }
+    },
+    {
+     "nazwa": "Krążenia kolan, kostek i nadgarstków",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Rozgrzewka przed bieganiem (ok. 7 min)",
+   "blok": "rozgrzewka",
+   "opis": "Stopniowe przejście od marszu do szybkiego biegu.",
+   "cwiczenia": [
+    {
+     "nazwa": "Marsz w miejscu z unoszeniem kolan",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 45,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Wymachy nogą w przód i w tył",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Wykrok z rotacją tułowia",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 8
+     }
+    },
+    {
+     "nazwa": "Wysokie kolana",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Pięty do pośladków",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Skip A",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Krótkie przyspieszenia (strides)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 4
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Rozciąganie po treningu: nogi (ok. 6 min)",
+   "blok": "rozciaganie",
+   "opis": "Krótki blok po treningu nóg. Każda pozycja 30 s, na stronę osobno.",
+   "cwiczenia": [
+    {
+     "nazwa": "Rozciąganie czworogłowego stojąc",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie tyłu uda ze stopą na podwyższeniu",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozkrok w siadzie (rozciąganie przywodzicieli)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie łydek w wykroku przy ścianie",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza gołębia",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie pasma biodrowo-piszczelowego",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Rozciąganie po treningu: góra ciała (ok. 5 min)",
+   "blok": "rozciaganie",
+   "opis": "Krótki blok po treningu klatki, pleców, barków i ramion.",
+   "cwiczenia": [
+    {
+     "nazwa": "Rozciąganie klatki w futrynie",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie barku w poprzek klatki",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie tricepsa za głową",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie bicepsa przy ścianie",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie najszerszego grzbietu przy ścianie",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza dziecka (Balasana)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Rozciąganie po treningu: całe ciało (ok. 8 min)",
+   "blok": "rozciaganie",
+   "opis": "Uniwersalny blok na koniec dowolnego treningu.",
+   "cwiczenia": [
+    {
+     "nazwa": "Skłon w przód stojąc (rag doll)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Wykrok niski (rozciąganie zginaczy biodra)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie czworogłowego stojąc",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza gołębia",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Kolano do klatki leżąc",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Skręt kręgosłupa leżąc",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie klatki w futrynie",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza dziecka (Balasana)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 40,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Mobilność: biodra i plecy (osobny dzień, ok. 12 min)",
+   "blok": "zestaw",
+   "opis": "Zestaw na dzień bez treningu: otwiera biodra i rozluźnia plecy.",
+   "cwiczenia": [
+    {
+     "nazwa": "Kot i krowa",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 60,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Wykrok niski (rozciąganie zginaczy biodra)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 40,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza gołębia",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 45,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Siad skrzyżny (rozciąganie rotatorów biodra)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 40,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza żaby (Frog Stretch)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 45,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Kolano do klatki leżąc",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Rozciąganie dolnych pleców (kolana na bok leżąc)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 40,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Poza dziecka (Balasana)",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 60,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Postawa: plecy i barki (ok. 12 min)",
+   "blok": "zestaw",
+   "opis": "Wzmacnia mięśnie między łopatkami i otwiera klatkę. Robić 2–3 razy w tygodniu.",
+   "cwiczenia": [
+    {
+     "nazwa": "Odwodzenie łopatek (ściąganie łopatek)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 1,
+      "powtorzenia": 12
+     }
+    },
+    {
+     "nazwa": "Band Pull-Apart (rozciąganie gumy na boki)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 3,
+      "powtorzenia": 15
+     }
+    },
+    {
+     "nazwa": "Face Pull z gumą",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 3,
+      "powtorzenia": 15
+     }
+    },
+    {
+     "nazwa": "Y-T-W na brzuchu",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 8
+     }
+    },
+    {
+     "nazwa": "Wall Angels (aniołki przy ścianie)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Rotacja zewnętrzna barku z gumą",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 12
+     }
+    },
+    {
+     "nazwa": "Superman (unoszenie rąk i nóg na brzuchu)",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Rozciąganie klatki w futrynie",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 30,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Wyprost piersiowy na wałku lub zwiniętym ręczniku",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 40,
+      "jednostka": "s"
+     }
+    }
+   ]
+  },
+  {
+   "nazwa": "Dno miednicy: krótki zestaw (ok. 6 min)",
+   "blok": "zestaw",
+   "opis": "Delikatny zestaw z ćwiczeniami Kegla. Nie zastępuje porady lekarza lub fizjoterapeuty.",
+   "cwiczenia": [
+    {
+     "nazwa": "Oddychanie przeponowe z dnem miednicy",
+     "ilosc": {
+      "typ": "czas",
+      "wartosc": 60,
+      "jednostka": "s"
+     }
+    },
+    {
+     "nazwa": "Kegel – długie napięcia",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 5
+     }
+    },
+    {
+     "nazwa": "Kegel – szybkie skurcze",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 10
+     }
+    },
+    {
+     "nazwa": "Mostek biodrowy z napięciem dna miednicy",
+     "ilosc": {
+      "typ": "powtorzenia",
+      "serie": 2,
+      "powtorzenia": 10
+     }
+    }
+   ]
+  }
+ ]
+}

@@ -306,7 +306,7 @@ kopiaWzor.addEventListener("click", function () {
 });
 
 document.getElementById("kopia-przyklady").addEventListener("click", function () {
-  const adresy = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
+  const adresy = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json"];
   Promise.all(adresy.map(function (a) {
     return fetch(a).then(function (o) { return o.json(); });
   })).then(function (wyniki) {
@@ -336,20 +336,65 @@ const STARE_OPISY_START = [
  "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
 ];
 
-const WERSJA_BAZY = 6;
-const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
+const WERSJA_BAZY = 7;
+const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json"];
+const PLIK_ZESTAWOW = "przyklady-zestawy.json";
+
+// Gotowe zestawy (rozgrzewki, rozciąganie, postawa): dodajemy te, których jeszcze nie ma (po nazwie)
+function dodajZestawyBazy(zestawy) {
+  let dodane = 0;
+  (zestawy || []).forEach(function (zestaw, i) {
+    const klucz = nazwaKlucz(zestaw.nazwa);
+    if (dane.treningi.some(function (t) { return nazwaKlucz(t.nazwa) === klucz; })) {
+      return;
+    }
+    const ids = [];
+    const parametry = {};
+    (zestaw.cwiczenia || []).forEach(function (wpis) {
+      const cw = dane.cwiczenia.find(function (c) { return nazwaKlucz(c.nazwa) === nazwaKlucz(wpis.nazwa); });
+      if (cw && ids.indexOf(cw.id) === -1) {
+        ids.push(cw.id);
+        parametry[cw.id] = wpis.ilosc;
+      }
+    });
+    if (ids.length === 0) {
+      return;
+    }
+    const trening = {
+      id: "tr-baza-" + Date.now() + "-" + i,
+      nazwa: zestaw.nazwa,
+      cwiczeniaIds: ids,
+      parametry: parametry,
+      zBazy: true
+    };
+    if (zestaw.blok === "rozgrzewka" || zestaw.blok === "rozciaganie") {
+      trening.blok = zestaw.blok;
+    }
+    if (zestaw.opis) {
+      trening.opis = zestaw.opis;
+    }
+    dane.treningi.push(trening);
+    dodane++;
+  });
+  return dodane;
+}
 
 function wczytajBazeStartowa() {
   if ((dane.wersjaBazy || 0) >= WERSJA_BAZY) {
     return;
   }
   const mialaCwiczenia = dane.cwiczenia.length > 0;
-  Promise.all(PLIKI_BAZY.map(function (a) {
+  Promise.all(PLIKI_BAZY.concat([PLIK_ZESTAWOW]).map(function (a) {
     return fetch(a).then(function (o) { return o.json(); });
   })).then(function (wyniki) {
     let lista = [];
+    const zestawy = wyniki.pop().zestawy;
     wyniki.forEach(function (w) { lista = lista.concat(w.cwiczenia || []); });
-    dodajCwiczeniaZListy(lista, { zBazy: true, tylkoOznacz: mialaCwiczenia && !((dane.wersjaBazy || 0) > 0) });
+    const tylkoOznacz = mialaCwiczenia && !((dane.wersjaBazy || 0) > 0);
+    dodajCwiczeniaZListy(lista, { zBazy: true, tylkoOznacz: tylkoOznacz });
+    if (!tylkoOznacz) {
+      dodajZestawyBazy(zestawy);
+    }
     dane.wersjaBazy = WERSJA_BAZY;
     zapiszDane();
     if (typeof rysujListe === "function") {

@@ -1213,6 +1213,10 @@ function otworzSesje(sesja) {
     pdSesjaTrening.appendChild(karta);
 
     if (trening) {
+      pdSesjaTrening.appendChild(zrobKarteBlokow(sesja));
+    }
+
+    if (trening) {
       const cwiczenia = cwiczeniaTreningu(trening);
       if (cwiczenia.length === 0) {
         const info = document.createElement("p");
@@ -1238,6 +1242,65 @@ function otworzSesje(sesja) {
   pdSesjaKopiuj.hidden = inne < 1 || pdSesjaZapisz.hidden;
   pdSesjaKopiuj.textContent = "Kopiuj do innych sesji: " + opisAktywnosci(aktywnosc).tytul;
   pokazWidokPanelu("sesja");
+}
+
+// Gdy zestaw (blok) nie ma zapisanych wartości, ćwiczenie dostaje 30 sekund
+const DOMYSLNA_ILOSC_BLOKU = { typ: "czas", wartosc: 30, jednostka: "s" };
+
+// Wybór bloku rozgrzewki (przed treningiem) i rozciągania (po treningu) dla sesji
+function zrobKarteBlokow(sesja) {
+  const karta = document.createElement("div");
+  karta.className = "formularz kr-bloki";
+  const glowny = znajdzTrening(sesja.treningId);
+  const glowne = glowny ? glowny.cwiczeniaIds : [];
+
+  const zrobWybor = function (etykieta, rodzajBloku, klucz) {
+    const dostepne = dane.treningi.filter(function (t) { return t.blok === rodzajBloku && !t.roboczy; });
+    const blok = document.createElement("div");
+    const opis = document.createElement("label");
+    opis.textContent = etykieta;
+    blok.appendChild(opis);
+    const wybor = document.createElement("select");
+    const brak = document.createElement("option");
+    brak.value = "";
+    brak.textContent = "Bez bloku";
+    wybor.appendChild(brak);
+    dostepne.forEach(function (t) {
+      const o = document.createElement("option");
+      o.value = t.id;
+      o.textContent = t.nazwa;
+      wybor.appendChild(o);
+    });
+    wybor.value = sesja[klucz] && dostepne.some(function (t) { return t.id === sesja[klucz]; }) ? sesja[klucz] : "";
+    wybor.addEventListener("change", function () {
+      // Usuń parametry poprzedniego bloku (poza ćwiczeniami głównymi), dodaj parametry nowego
+      const stary = sesja[klucz] ? znajdzTrening(sesja[klucz]) : null;
+      if (stary && sesja.parametry) {
+        stary.cwiczeniaIds.forEach(function (id) {
+          if (glowne.indexOf(id) === -1) {
+            delete sesja.parametry[id];
+          }
+        });
+      }
+      sesja[klucz] = wybor.value || null;
+      const nowy = wybor.value ? znajdzTrening(wybor.value) : null;
+      if (nowy) {
+        sesja.parametry = sesja.parametry || {};
+        nowy.cwiczeniaIds.forEach(function (id) {
+          if (!sesja.parametry[id]) {
+            sesja.parametry[id] = JSON.parse(JSON.stringify((nowy.parametry && nowy.parametry[id]) || DOMYSLNA_ILOSC_BLOKU));
+          }
+        });
+      }
+      zapiszSzkic();
+    });
+    blok.appendChild(wybor);
+    karta.appendChild(blok);
+  };
+
+  zrobWybor("Rozgrzewka przed treningiem", "rozgrzewka", "blokPrzedId");
+  zrobWybor("Rozciąganie po treningu", "rozciaganie", "blokPoId");
+  return karta;
 }
 
 // Sprawdza pola i zapisuje je w sesji. Zwraca true, gdy się udało.
@@ -1276,6 +1339,21 @@ function zapiszSesjeZPol() {
     return false;
   }
 
+  // Parametry ćwiczeń z bloków (rozgrzewka, rozciąganie) zostają obok głównych
+  ["blokPrzedId", "blokPoId"].forEach(function (klucz) {
+    const blok = pdSesja[klucz] ? znajdzTrening(pdSesja[klucz]) : null;
+    if (!blok) {
+      return;
+    }
+    blok.cwiczeniaIds.forEach(function (id) {
+      if (!(id in wyniki)) {
+        const p = (pdSesja.parametry && pdSesja.parametry[id]) || (blok.parametry && blok.parametry[id]) || DOMYSLNA_ILOSC_BLOKU;
+        if (p) {
+          wyniki[id] = p;
+        }
+      }
+    });
+  });
   pdSesja.parametry = wyniki;
   zapiszSzkic();
   return true;
@@ -1310,6 +1388,8 @@ function kopiujDoInnych() {
   inne.forEach(function (s) {
     if (wymagaTreningu(aktywnosc)) {
       s.treningId = pdSesja.treningId;
+      s.blokPrzedId = pdSesja.blokPrzedId || null;
+      s.blokPoId = pdSesja.blokPoId || null;
       s.parametry = JSON.parse(JSON.stringify(pdSesja.parametry));
     } else {
       ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "kroki", "czas"].forEach(function (klucz) {

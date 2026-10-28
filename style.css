@@ -1872,3 +1872,8 @@ h1 {
   border-radius: 12px; background: var(--tlo); color: var(--tekst); font-size: 16px; font-family: inherit;
 }
 #kr-nazwa-planu:focus { outline: 2px solid var(--akcent); outline-offset: 1px; }
+
+/* Bloki rozgrzewki i rozciągania na Dziś */
+.dzis-blok-naglowek { display: flex; justify-content: space-between; align-items: baseline; margin: 14px 0 4px; padding-top: 10px; border-top: 1px solid var(--linia); }
+.dzis-blok-naglowek b { font-size: 15px; }
+.kr-bloki { margin: 12px 0; display: grid; gap: 12px; }

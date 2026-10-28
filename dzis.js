@@ -83,13 +83,41 @@ function numerSesjiWPlanie(plan, sesja) {
   return wszystkie.indexOf(sesja) + 1;
 }
 
+// Bloki przy sesji: rozgrzewka przed treningiem (sesja.blokPrzedId) i rozciąganie po nim (sesja.blokPoId).
+// To zestawy z oznaczeniem trening.blok; ich ćwiczenia mają parametry w sesja.parametry, ale nie wchodzą
+// do statystyk ćwiczeń głównych (zaliczenie sesji, mięśnie, rekordy).
+function idyBloku(sesja, miejsce) {
+  const idTreningu = miejsce === "przed" ? sesja.blokPrzedId : sesja.blokPoId;
+  const blok = idTreningu ? znajdzTrening(idTreningu) : null;
+  if (!blok) {
+    return [];
+  }
+  const parametry = sesja.parametry || {};
+  const glowny = znajdzTrening(sesja.treningId);
+  const glowne = glowny ? glowny.cwiczeniaIds : [];
+  const wynik = blok.cwiczeniaIds.filter(function (id) {
+    return parametry[id] && znajdzCwiczenie(id) && glowne.indexOf(id) === -1;
+  });
+  if (miejsce === "po") {
+    const przed = idyBloku(sesja, "przed");
+    return wynik.filter(function (id) { return przed.indexOf(id) === -1; });
+  }
+  return wynik;
+}
+
+// Wszystkie ćwiczenia sesji w kolejności wykonywania: rozgrzewka, ćwiczenia główne, rozciąganie
+function wszystkieIdSesji(sesja) {
+  return idyBloku(sesja, "przed").concat(cwiczeniaSesjiIds(sesja), idyBloku(sesja, "po"));
+}
+
 // Id ćwiczeń sesji, w kolejności treningu (tylko te, które mają parametry i nadal istnieją w bazie)
 function cwiczeniaSesjiIds(sesja) {
   const parametry = sesja.parametry || {};
   const trening = znajdzTrening(sesja.treningId);
   const ids = trening ? trening.cwiczeniaIds.slice() : [];
+  const blokowe = idyBloku(sesja, "przed").concat(idyBloku(sesja, "po"));
   Object.keys(parametry).forEach(function (id) {
-    if (ids.indexOf(id) === -1) {
+    if (ids.indexOf(id) === -1 && blokowe.indexOf(id) === -1) {
       ids.push(id);
     }
   });
@@ -285,6 +313,10 @@ function zrobKarteDzis(plan, sesja) {
     const ids = cwiczeniaSesjiIds(sesja);
     const zrobione = liczbaZrobionych(sesja);
     const procent = ids.length === 0 ? 0 : Math.round(zrobione * 100 / ids.length);
+    const przed = idyBloku(sesja, "przed");
+    const po = idyBloku(sesja, "po");
+    const wszystkie = przed.concat(ids, po);
+    const zrobioneWszystkie = wszystkie.filter(function (id) { return sesja.zrobione && sesja.zrobione[id]; }).length;
 
     const postep = document.createElement("div");
     postep.className = "dzis-postep";
@@ -299,8 +331,8 @@ function zrobKarteDzis(plan, sesja) {
     pasek.appendChild(wypelnienie);
     karta.appendChild(pasek);
 
-    if (ids.length > 0 && zrobione < ids.length && typeof otworzCwicz === "function") {
-      const rozpoczete = zrobione > 0 || (sesja.przebieg && Object.keys(sesja.przebieg.wyniki || {}).length > 0);
+    if (wszystkie.length > 0 && zrobioneWszystkie < wszystkie.length && typeof otworzCwicz === "function") {
+      const rozpoczete = zrobioneWszystkie > 0 || (sesja.przebieg && Object.keys(sesja.przebieg.wyniki || {}).length > 0);
       const cwicz = document.createElement("button");
       cwicz.className = "przycisk wielki";
       cwicz.textContent = rozpoczete ? "Kontynuuj ćwiczenie" : "Ćwicz";
@@ -310,13 +342,39 @@ function zrobKarteDzis(plan, sesja) {
       karta.appendChild(cwicz);
     }
 
+    const dodajBlok = function (tytul, idBloku, lista) {
+      if (lista.length === 0) {
+        return;
+      }
+      const blok = znajdzTrening(idBloku);
+      const zr = lista.filter(function (id) { return sesja.zrobione && sesja.zrobione[id]; }).length;
+      const naglowekBloku = document.createElement("div");
+      naglowekBloku.className = "dzis-blok-naglowek";
+      naglowekBloku.appendChild(tekstElement("b", "", blok ? blok.nazwa.replace(/\s*\(.*\)\s*$/, "") : tytul));
+      naglowekBloku.appendChild(tekstElement("span", "opis", zr + " z " + lista.length));
+      karta.appendChild(naglowekBloku);
+      const pojemnik = document.createElement("div");
+      pojemnik.className = "dzis-blok";
+      lista.forEach(function (id) {
+        pojemnik.appendChild(zrobWierszCwiczenia(sesja, id, true));
+      });
+      karta.appendChild(pojemnik);
+    };
+
+    dodajBlok("Rozgrzewka", sesja.blokPrzedId, przed);
+
+    const glowne = document.createElement("div");
+    glowne.className = "dzis-glowne";
     ids.forEach(function (id) {
-      karta.appendChild(zrobWierszCwiczenia(sesja, id));
+      glowne.appendChild(zrobWierszCwiczenia(sesja, id));
     });
+    karta.appendChild(glowne);
 
     if (ids.length === 0) {
       karta.appendChild(tekstElement("p", "opis", "Ta sesja nie ma ćwiczeń z parametrami."));
     }
+
+    dodajBlok("Rozciąganie po treningu", sesja.blokPoId, po);
   } else {
     const cel = opisCeluSesji(sesja);
     if (sesja.wynik) {
@@ -337,7 +395,7 @@ function zrobKarteDzis(plan, sesja) {
   return karta;
 }
 
-function zrobWierszCwiczenia(sesja, id) {
+function zrobWierszCwiczenia(sesja, id, wBloku) {
   const cwiczenie = znajdzCwiczenie(id);
   const zrobione = !!(sesja.zrobione || {})[id];
   const plan = sesja.parametry[id];
@@ -384,7 +442,7 @@ function zrobWierszCwiczenia(sesja, id) {
   if (ostatnio) {
     tekst.appendChild(tekstElement("div", "ostatnio-info", ostatnio));
   }
-  if (zrobione) {
+  if (zrobione && !wBloku) {
     tekst.appendChild(ocenaPasek(sesja, id));
   }
 
@@ -401,7 +459,9 @@ function zrobWierszCwiczenia(sesja, id) {
   wiersz.appendChild(tekst);
 
   dodajFilm(wiersz, cwiczenie);
-  wiersz.appendChild(zrobUchwyt(sesja, wiersz));
+  if (!wBloku) {
+    wiersz.appendChild(zrobUchwyt(sesja, wiersz));
+  }
   return wiersz;
 }
 
