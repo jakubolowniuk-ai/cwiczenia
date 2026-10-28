@@ -191,6 +191,10 @@ function dodajCwiczeniaZListy(lista, opcje) {
       });
       if (istniejace && opcje.zBazy) {
         istniejace.zBazy = true;
+        // Ćwiczenia, które można obciążyć (kamizelka, plecak, hantel): włączamy pole ciężaru
+        if (wpis.ciezar === true && !istniejace.zCiezarem) {
+          istniejace.zCiezarem = true;
+        }
       }
       // Opis z bazy: uzupełnia brakujący i aktualizuje wcześniejszy opis z bazy, ale nigdy nie nadpisuje własnego
       if (istniejace && opcje.zBazy && wpis.opis &&
@@ -332,7 +336,7 @@ const STARE_OPISY_START = [
  "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
 ];
 
-const WERSJA_BAZY = 5;
+const WERSJA_BAZY = 6;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
 
 function wczytajBazeStartowa() {

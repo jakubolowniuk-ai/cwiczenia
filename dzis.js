@@ -143,6 +143,9 @@ function opisCeluSesji(dane_) {
   if (dane_.czas) {
     czesci.push(opisCzasuSesji(dane_.czas));
   }
+  if (dane_.obciazenie) {
+    czesci.push("z obciążeniem " + dane_.obciazenie + " kg");
+  }
   return czesci.join(" · ");
 }
 
@@ -1050,6 +1053,7 @@ function otworzWynik(plan, sesja) {
     dlugosci: start.dlugosci,
     dystans: start.dystans,
     kroki: start.kroki,
+    obciazenie: start.obciazenie,
     czas: start.czas
   };
   const wpis = zrobKarteSesji(kopia, aktywnosc);

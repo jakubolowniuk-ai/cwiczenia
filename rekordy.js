@@ -60,7 +60,7 @@ function kandydatRekordu(cwiczenie, ilosc) {
     const powt = listaPowtorzen(ilosc);
     const kg = ciezaryIlosci(ilosc);
     const n = liczbaSerii(ilosc);
-    if (cwiczenie.zCiezarem && kg.length > 0) {
+    if (cwiczenie.zCiezarem && Math.max.apply(null, [0].concat(kg)) > 0) {
       let najlepsza = null;
       powt.forEach(function (p, i) {
         const c = kg[i] !== undefined ? kg[i] : kg[kg.length - 1];

@@ -219,6 +219,9 @@ function opisSesji(sesja) {
   if (sesja.czas) {
     czesci.push(opisCzasuSesji(sesja.czas));
   }
+  if (sesja.obciazenie) {
+    czesci.push("z obciążeniem " + sesja.obciazenie + " kg");
+  }
   return czesci.length > 0 ? czesci.join(" · ") : "Dotknij, aby ustawić kroki, dystans lub czas";
 }
 
@@ -1102,6 +1105,13 @@ function zrobKarteSesji(sesja, aktywnosc) {
     karta.appendChild(rzad);
   }
 
+  // Opcjonalne obciążenie (plecak, kamizelka) dla biegania i spaceru
+  let obciazenie = null;
+  if (aktywnosc.rodzajId === "rodzaj-bieganie" || aktywnosc.rodzajId === "rodzaj-spacer") {
+    obciazenie = zrobPoleLiczbowe("Obciążenie (kg) – plecak, kamizelka; zostaw 0, jeśli bez", sesja.obciazenie || 0, true);
+    karta.appendChild(obciazenie.blok);
+  }
+
   karta.appendChild(blad);
 
   function odczytajCzasS() {
@@ -1155,6 +1165,14 @@ function zrobKarteSesji(sesja, aktywnosc) {
         wynik.kroki = kr > 0 ? kr : null;
         wynik.dystans = dyst > 0 ? { wartosc: dyst, jednostka: dystansJedn.wybor.value } : null;
         wynik.czas = cz > 0 ? { wartosc: cz, jednostka: "s" } : null;
+      }
+      if (obciazenie) {
+        const ob = Number(obciazenie.pole.value) || 0;
+        if (!(ob >= 0)) {
+          blad.textContent = "Obciążenie wpisz w kg (0 albo więcej).";
+          return null;
+        }
+        wynik.obciazenie = ob > 0 ? ob : null;
       }
       blad.textContent = "";
       return wynik;

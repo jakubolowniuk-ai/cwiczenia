@@ -212,3 +212,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## v47: „Jak wyżej" w seriach
 - W kreatorze, w serii z różnymi powtórzeniami/ciężarem, od drugiej serii pod każdym polem (powtórzenia, ciężar) jest przycisk „↑ Jak wyżej", który kopiuje wartość z poprzedniej serii.
+
+## v48: ciężar w kalistenice i bieganiu
+- 52 ćwiczenia kalisteniki i treningu statycznego, które można obciążyć (pompki, dipy, podciąganie, przysiady, wykroki, mosty, deska, unoszenie nóg i in.), mają włączone pole ciężaru (`ciezar: true` w plikach bazy, `WERSJA_BAZY = 6`). Istniejącym użytkownikom włącza się raz przy aktualizacji bazy; w formularzu ćwiczenia można je wyłączyć.
+- Ciężar 0 kg nie zmienia typu rekordu (rekord powtórzeń zostaje rekordem powtórzeń).
+- Bieganie i spacer: opcjonalne „Obciążenie (kg)" (plecak, kamizelka) w parametrach sesji i w wyniku (`sesja.obciazenie`); widoczne w opisie celu i wyniku.
