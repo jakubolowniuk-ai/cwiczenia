@@ -2004,6 +2004,176 @@
     "ruch": "Obróć ciało do tyłu i opuść się plecami do podłogi, aż ciało będzie proste i poziome, brzuchem do podłogi. Ręce proste. Utrzymaj, napięty brzuch, pośladki.",
     "uwaga": "Zacznij od wersji z ugiętymi kolanami. Rozgrzej barki i łokcie. Przy bólu w barkach lub łokciach przerwij."
    }
+  },
+  {
+   "nazwa": "Unoszenie nóg na krzesełku rzymskim (Captain's Chair)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Oprzyj przedramiona na podporach, plecy przy oparciu, ręce chwytają uchwyty. Nogi wiszą swobodnie, barki w dół.",
+    "ruch": "Napnij brzuch i unieś kolana (łatwiej) lub proste nogi (trudniej) do wysokości bioder lub wyżej, lekko podwijając miednicę. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez bujania i szarpania. Plecy cały czas przy oparciu. Opuszczaj wolniej, niż unosisz. Ruch ma iść z brzucha, a nie z rozmachu nóg."
+   }
+  },
+  {
+   "nazwa": "Unoszenie nóg leżąc",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, nogi proste i razem, ręce wzdłuż ciała lub pod pośladkami. Dolne plecy dociśnięte do podłogi.",
+    "ruch": "Unieś proste nogi do pionu, zatrzymaj sekundę i opuść powoli, niemal do podłogi, bez odrywania dolnych pleców. Wydech w górę, wdech w dół.",
+    "uwaga": "Jeśli dolne plecy odrywają się od podłogi, nie opuszczaj nóg tak nisko albo ugnij kolana. Bez szarpania."
+   }
+  },
+  {
+   "nazwa": "Scyzoryk (V-up)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, ręce wyprostowane za głową, nogi proste i razem.",
+    "ruch": "Jednocześnie unieś proste nogi i tułów, sięgając rękami do stóp, tak aby ciało utworzyło literę V. Opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Ruch kontrolowany, bez zamachu. Łatwiej: ugnij kolana. Przy bólu dolnej części pleców przerwij."
+   }
+  },
+  {
+   "nazwa": "Spięcia brzucha na ławce skośnej",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce skośnej (głową w górę, kąt 30–45°), stopy zablokowane lub oparte, kolana ugięte, dłonie przy skroniach lub na klatce.",
+    "ruch": "Napnij brzuch i unieś barki oraz łopatki, zginając górną część tułowia. Zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Szyja luźna, nie ciągnij głowy rękami. Ruch idzie z brzucha, nie z szarpnięcia. Im bardziej pochylona ławka, tym trudniej."
+   }
+  },
+  {
+   "nazwa": "Odwrotne spięcia brzucha na ławce skośnej",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce skośnej głową w górę, chwyć rękami uchwyt za głową, kolana ugięte nad biodrami.",
+    "ruch": "Napnij brzuch i unieś miednicę, przyciągając kolana do klatki. Opuść powoli, aż prawie do ławki. Wydech w górę, wdech w dół.",
+    "uwaga": "Ruch z brzucha, nie z rozmachu nóg. Bez szarpania. Zacznij od niewielkiego kąta ławki."
+   }
+  },
+  {
+   "nazwa": "Toes to Bar",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, łopatki ściągnięte w dół. Nogi razem. Ćwiczenie dla zaawansowanych, wymaga mocnego chwytu i swobodnego unoszenia nóg.",
+    "ruch": "Napnij brzuch i unieś proste nogi, aż palce dotkną drążka, podwijając miednicę. Opuść powoli, kontrolowanie. Wydech w górę, wdech w dół.",
+    "uwaga": "Najpierw opanuj unoszenie prostych nóg w zwisie. Bez bujania. Przy bólu barków lub pleców przerwij."
+   }
+  },
+  {
+   "nazwa": "Wycieraczki w zwisie (Windshield Wipers)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, nogi razem i uniesione prosto przed sobą do poziomu bioder. Ćwiczenie dla zaawansowanych.",
+    "ruch": "Opuszczaj nogi jak wycieraczki raz w jedną, raz w drugą stronę, napinając boki brzucha. Wracaj przez środek. Oddychaj równo.",
+    "uwaga": "Tułów prawie się nie huśta. Łatwiej: ugnij kolana. Najpierw opanuj unoszenie prostych nóg w zwisie."
+   }
+  },
+  {
+   "nazwa": "Dragon Flag",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce, chwyć rękami uchwyt nad głową, barki oparte, ciało proste. Ćwiczenie dla zaawansowanych.",
+    "ruch": "Unieś całe ciało prosto w górę, opierając się na barkach, i opuszczaj powoli, utrzymując sztywną linię od ramion do pięt. Zatrzymaj tuż nad ławką. Oddychaj równo.",
+    "uwaga": "Ciało proste jak deska, biodra nie zginają się. Zacznij od wersji z ugiętymi kolanami. Przy bólu pleców lub szyi przerwij."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne ze stania",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Najszerszy grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, trzymaj kółko obiema rękami przed stopami, plecy proste, brzuch napięty, miednica lekko podwinięta. Ćwiczenie dla zaawansowanych.",
+    "ruch": "Pochylaj się do przodu, rozwijając kółko, aż ciało będzie prawie poziome, plecy proste. Zatrzymaj i wróć napięciem brzucha. Wydech w przód, wdech w tył.",
+    "uwaga": "Nie wyginaj dolnych pleców w dół. Zacznij od wersji z kolan. Zmniejsz zakres, jeśli plecy się uginają."
+   }
   }
  ]
 }

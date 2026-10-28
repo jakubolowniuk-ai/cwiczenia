@@ -338,6 +338,9 @@ function zrobWierszCwiczenia(sesja, id) {
   if (ostatnio) {
     tekst.appendChild(tekstElement("div", "ostatnio-info", ostatnio));
   }
+  if (zrobione) {
+    tekst.appendChild(ocenaPasek(sesja, id));
+  }
 
   if (cwiczenie.rekord) {
     tekst.appendChild(tekstElement("div", "ostatnio-info", "★ Rekord: " + opisRekordu(cwiczenie.rekord)));
@@ -1049,3 +1052,45 @@ dzisEdytujPlan.addEventListener("click", function () {
     otworzKreator(plan);
   }
 });
+
+
+// ===== Własna ocena ćwiczenia: łatwo / w sam raz / ciężko (sesja.ocena[id]) =====
+const OCENY = [["latwo", "Łatwo"], ["wsam", "W sam raz"], ["ciezko", "Ciężko"]];
+
+function ocenaPasek(sesja, id) {
+  const rzad = document.createElement("div");
+  rzad.className = "ocena-pasek";
+  const pytanie = document.createElement("span");
+  pytanie.className = "ocena-pytanie";
+  pytanie.textContent = "Jak poszło?";
+  rzad.appendChild(pytanie);
+  const przyciski = [];
+  OCENY.forEach(function (o) {
+    const p = document.createElement("button");
+    p.type = "button";
+    p.className = "ocena-przycisk";
+    p.setAttribute("data-ocena", o[0]);
+    p.textContent = o[1];
+    const odswiez = function () {
+      const wybrana = sesja.ocena && sesja.ocena[id] === o[0];
+      p.classList.toggle("wybrana", !!wybrana);
+      p.setAttribute("aria-pressed", wybrana ? "true" : "false");
+    };
+    przyciski.push(odswiez);
+    odswiez();
+    p.addEventListener("click", function () {
+      if (!sesja.ocena) {
+        sesja.ocena = {};
+      }
+      if (sesja.ocena[id] === o[0]) {
+        delete sesja.ocena[id];
+      } else {
+        sesja.ocena[id] = o[0];
+      }
+      zapiszDane();
+      przyciski.forEach(function (f) { f(); });
+    });
+    rzad.appendChild(p);
+  });
+  return rzad;
+}

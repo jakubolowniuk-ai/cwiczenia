@@ -194,3 +194,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## Opisy dla całej bazy (v43)
 - Wszystkie 219 ćwiczeń bazowych mają opis (start/ruch/uwaga), średnio ok. 55 słów. `WERSJA_BAZY = 4`: starsze dane dostają brakujące opisy; opisy zapisane w formularzu (bez znacznika `opisZBazy`) nie są nadpisywane.
+
+## v44: własna ocena ćwiczenia i 32 nowe ćwiczenia w bazie
+- Po skończeniu ćwiczenia (ekran przerwy i podsumowanie w trybie Ćwicz oraz wiersz zaliczonego ćwiczenia na Dziś) są trzy przyciski: Łatwo / W sam raz / Ciężko. Ponowne dotknięcie zdejmuje ocenę. Zapis: `sesja.ocena[idĆwiczenia]` = "latwo" | "wsam" | "ciezko". Ocena posłuży później do podpowiedzi progresji.
+- Baza ma 251 ćwiczeń (+32, każde z opisem): 11 na brzuch, 10 na maszynach i wyciągach, 11 podstawowych. `WERSJA_BAZY = 5`.
+- Osoby, które już mają bazę (wersja ≥ 1), dostają brakujące ćwiczenia z bazy automatycznie; kto miał własne ćwiczenia przed bazą, nadal dostaje tylko oznaczenia.

@@ -480,6 +480,11 @@ function cwRysujPrzerwe() {
   const licznik = cwEl("div", "cw-stoper", "0:00");
   licznik.id = "cw-licznik";
   cwTresc.appendChild(licznik);
+  if (cwSesja.zrobione && cwSesja.zrobione[poprzednieId]) {
+    const cwPoprz = znajdzCwiczenie(poprzednieId);
+    cwTresc.appendChild(cwEl("div", "cw-plan", "Skończone: " + (cwPoprz ? cwPoprz.nazwa : "")));
+    cwTresc.appendChild(ocenaPasek(cwSesja, poprzednieId));
+  }
 
   const nastepne = cwEl("div", "cw-cel");
   const serie = cwSerie(b.id);
@@ -518,6 +523,7 @@ function cwRysujKoniec() {
     const wiersz = cwEl("div", "cw-podsumowanie");
     wiersz.appendChild(cwEl("div", "karta-nazwa", cw.nazwa));
     wiersz.appendChild(cwEl("div", "ostatnio-info", opisIlosci(cwSesja.wykonane && cwSesja.wykonane[id] ? cwSesja.wykonane[id] : cwSesja.parametry[id])));
+    wiersz.appendChild(ocenaPasek(cwSesja, id));
     cwTresc.appendChild(wiersz);
   });
   const pominiete = ids.filter(function (id) { return !cwWykonane(id); });

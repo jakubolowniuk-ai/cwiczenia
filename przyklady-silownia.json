@@ -1897,6 +1897,488 @@
     "ruch": "Utrzymaj pozycję z napiętym brzuchem i pośladkami, oddychaj spokojnie, nie wstrzymuj oddechu.",
     "uwaga": "Biodra nie opadają. Zacznij od lekkiego talerza. Przy bólu pleców przerwij. Partner stoi obok i nie dociska."
    }
+  },
+  {
+   "nazwa": "Pallof Press (wyciskanie linki w bok)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem do wyciągu, rączka przy klatce, obie ręce na rączce. Stopy na szerokość barków, kolana lekko ugięte, brzuch napięty.",
+    "ruch": "Wyprostuj ręce przed siebie, nie pozwalając, aby linka obróciła tułów. Zatrzymaj 2 sekundy i wróć do klatki. Wydech przy wyciąganiu, wdech przy powrocie. Potem druga strona.",
+    "uwaga": "Biodra i barki cały czas skierowane do przodu. Ćwiczenie ma „opierać się” obrotowi, więc ciężar ma być lekki. Bez szarpania."
+   },
+   "ciezar": false
+  },
+  {
+   "nazwa": "Skręty tułowia na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na maszynie do skrętów, plecy oparte, stopy na podłodze, ręce na uchwytach lub poduszkach, biodra nieruchomo.",
+    "ruch": "Skręć tułów w jedną stronę, napinając brzuch, zatrzymaj sekundę i wróć powoli. Potem druga strona. Wydech przy skręcie, wdech przy powrocie.",
+    "uwaga": "Biodra się nie obracają. Bez szarpania i przeciążania pleców. Zacznij od lekkiego ciężaru."
+   }
+  },
+  {
+   "nazwa": "Podciąganie z asystą na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Ustaw ciężar asysty (im większy, tym łatwiej). Uklęknij lub stań na platformie, chwyć uchwyty nachwytem, ręce proste, łopatki w dół.",
+    "ruch": "Pociągnij łokcie w dół, unieś ciało, aż broda będzie nad uchwytami. Opuść powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Z czasem zmniejszaj asystę. Bez szarpania. Nie wyciągaj szyi."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Ściąganie drążka V (wąski chwyt neutralny)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź przy wyciągu górnym, uda zablokuj pod wałkami, chwyć uchwyt V dłońmi do siebie. Tułów lekko odchylony do tyłu, klatka wysoko.",
+    "ruch": "Ściągnij uchwyt do górnej części klatki, łokcie w dół i wzdłuż tułowia, łopatki ściągnięte. Wróć powoli do prostych rąk. Wydech przy ściąganiu, wdech przy powrocie.",
+    "uwaga": "Nie szarp i nie odchylaj się mocno do tyłu. Ruch z łopatek i pleców, nie z samych rąk."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiosłowanie na maszynie z oparciem klatki",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
+    "Naramienny tylny",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź twarzą do oparcia, klatka oparta o poduszkę, stopy na podłodze. Chwyć uchwyty, ręce proste.",
+    "ruch": "Przyciągnij uchwyty do boków klatki, łokcie do tyłu, ściągając łopatki. Zatrzymaj sekundę i wróć powoli. Wydech przy przyciąganiu, wdech przy powrocie.",
+    "uwaga": "Klatka cały czas przy poduszce. Nie szarp, nie unoś barków do uszu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Unoszenie ramion bokiem na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny środkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na maszynie, plecy oparte, ramiona oparte o poduszki na zewnętrznej stronie, łokcie lekko ugięte.",
+    "ruch": "Unieś ramiona na boki do wysokości barków, zatrzymaj sekundę i opuść powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Nie unoś wyżej niż barki. Bez szarpania i bez bujania tułowiem. Lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie na maszynie skośnej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź, plecy oparte, uchwyty na wysokości górnej części klatki. Stopy na podłodze, łopatki ściągnięte.",
+    "ruch": "Wypchnij uchwyty w górę i do przodu do prawie prostych rąk, potem wróć powoli. Wdech przy powrocie, wydech przy wypchnięciu.",
+    "uwaga": "Plecy i pośladki nie odrywają się od oparcia. Nie blokuj mocno łokci na górze."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie na maszynie Smitha na ławce poziomej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Ustaw ławkę pod sztangą maszyny Smitha, oczy pod drążkiem, stopy mocno na podłodze, łopatki ściągnięte. Chwyć sztangę nieco szerzej niż barki.",
+    "ruch": "Zwolnij zabezpieczenie, opuść sztangę do dolnej części klatki, łokcie ok. 45° do ciała, i wypchnij w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Pośladki i łopatki na ławce. Ustaw zabezpieczenia maszyny na odpowiedniej wysokości. Przy dużym ciężarze ćwicz z asekuracją."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyprost tułowia na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Czworoboczny lędźwi"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na maszynie, plecy oparte o poduszkę, stopy na podpórkach, ramiona skrzyżowane lub na uchwytach. Ustaw ciężar lekki.",
+    "ruch": "Odchyl tułów do tyłu, napinając dolne plecy i pośladki, do pozycji prostej. Wróć powoli. Wydech przy odchylaniu, wdech przy powrocie.",
+    "uwaga": "Nie przeprost, zatrzymaj się w linii ciała. Bez szarpania. Przy bólu pleców przerwij."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Odwodzenie nogi w tył na maszynie (pośladki)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań lub oprzyj się na maszynie do odwodzenia w tył, trzymaj uchwyty, stopa jednej nogi na podporze. Brzuch napięty, plecy proste.",
+    "ruch": "Wypchnij nogę do tyłu, ściskając pośladek, bez wyginania dolnych pleców. Zatrzymaj sekundę i wróć powoli. Wydech w tył, wdech w przód. Potem druga noga.",
+    "uwaga": "Biodra prosto, nie obracają się. Mały ruch z pośladka lepszy niż duży z wyginania pleców."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Pull-Through na wyciągu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań tyłem do wyciągu dolnego, linka między nogami, chwyć linę oburącz. Odejdź krok do przodu, kolana lekko ugięte, plecy proste.",
+    "ruch": "Odsuń biodra do tyłu, pochylając tułów, linkę prowadź między nogami. Wyprostuj się, wypychając biodra do przodu i ściskając pośladki. Wdech w dół, wydech w górę.",
+    "uwaga": "To ruch w biodrach, nie przysiad. Plecy się nie zaokrąglają, ręce pozostają proste."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiosłowanie jednorącz na wyciągu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź przy wyciągu dolnym, stopy oparte o podpórki, kolana lekko ugięte. Chwyć uchwyt jedną ręką, ręka prosta, plecy proste.",
+    "ruch": "Przyciągnij uchwyt do boku brzucha, łokieć do tyłu blisko ciała, łopatka ściągnięta. Wróć powoli. Wydech przy przyciąganiu, wdech przy powrocie. Potem druga ręka.",
+    "uwaga": "Tułów prawie się nie obraca. Nie garb się, nie unoś barku do ucha."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie hantli na ławce poziomej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na ławce, hantle oprzyj na udach i połóż się, wciągając je do barków. Łopatki ściągnięte, stopy mocno na podłodze.",
+    "ruch": "Wypchnij hantle w górę nad klatkę do prawie prostych rąk. Opuść powoli do poziomu klatki, łokcie ok. 45° do ciała. Wdech w dół, wydech w górę.",
+    "uwaga": "Nadgarstki proste, łopatki cały czas ściągnięte. Nie opuszczaj hantli za nisko, jeśli barki bolą. Zacznij od lekkiego ciężaru."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie sztangi na ławce skośnej dodatniej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Ławka pod kątem ok. 30–45°. Połóż się, oczy pod drążkiem, stopy mocno na podłodze, łopatki ściągnięte. Chwyć sztangę nieco szerzej niż barki.",
+    "ruch": "Zdejmij sztangę i opuść ją do górnej części klatki, łokcie ok. 45° do ciała. Wypchnij w górę do prostych rąk. Wdech w dół, wydech w górę.",
+    "uwaga": "Pośladki na ławce, nadgarstki proste. Przy dużym ciężarze ćwicz z asekuracją lub ogranicznikami."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rozpiętki z hantlami na skosie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Barki"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce skośnej (30–45°), hantle nad klatką, ręce lekko ugięte, dłonie zwrócone do siebie. Łopatki ściągnięte.",
+    "ruch": "Rozchylaj ręce szerokim łukiem na boki, aż poczujesz rozciąganie klatki, łokcie lekko ugięte. Wróć łukiem do góry. Wdech w dół, wydech w górę.",
+    "uwaga": "Nie opuszczaj hantli niżej niż poziom klatki. Zgięcie łokci się nie zmienia. Lżejszy ciężar niż do wyciskania."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg sumo",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Przywodziciele uda",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Prostowniki grzbietu",
+    "Dwugłowy uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stopy bardzo szeroko, palce na zewnątrz pod kątem ok. 45°, sztanga nad środkiem stóp. Zegnij się w biodrach i kolanach, chwyć sztangę wąsko między nogami. Plecy proste, klatka wysoko.",
+    "ruch": "Napnij brzuch, odepchnij się nogami, rozpychając kolana na boki, i wyprostuj biodra, sztanga sunie blisko ciała. Na górze stań prosto. Opuść tą samą drogą. Wdech przed podniesieniem, wydech na górze.",
+    "uwaga": "Plecy się nie zaokrąglają, kolana idą w stronę palców. Zacznij od lekkiego ciężaru i ćwicz technikę."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg ze sztangą trap bar",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Dwugłowy uda",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań we wnętrzu sztangi trap bar, stopy na szerokość bioder. Zegnij się w biodrach i kolanach, chwyć uchwyty po bokach. Plecy proste, klatka wysoko.",
+    "ruch": "Napnij brzuch, odepchnij się nogami i wyprostuj biodra i kolana jednocześnie. Na górze stań prosto. Opuść kontrolowanie. Wdech przed podniesieniem, wydech na górze.",
+    "uwaga": "Plecy proste, barki nad uchwytami. To dobry wariant dla początkujących, ale zacznij od lekkiego ciężaru."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiosłowanie sztangą z podłogi (Pendlay)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Czworoboczny – część dolna",
+    "Naramienny tylny",
+    "Prostowniki grzbietu",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga na podłodze przy goleniach. Stopy na szerokość bioder, pochyl tułów prawie do poziomu, plecy proste, chwyt nachwytem nieco szerzej niż barki.",
+    "ruch": "Szarpnięciem przyciągnij sztangę do dolnej części klatki, łokcie do tyłu. Opuść ją kontrolowanie na podłogę i zacznij od nowa. Wydech przy przyciąganiu, wdech przy opuszczaniu.",
+    "uwaga": "Tułów prawie nieruchomo, plecy proste. Każde powtórzenie zaczynasz od podłogi. Zmniejsz ciężar, jeśli musisz się podrywać."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Good Morning",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder, sztanga na górnej części pleców, kolana lekko ugięte. Brzuch napięty, plecy proste.",
+    "ruch": "Odsuń biodra do tyłu i pochyl tułów do przodu z prostymi plecami, aż poczujesz rozciągnięcie z tyłu ud. Wróć, wypychając biodra. Wdech w dół, wydech w górę.",
+    "uwaga": "Plecy się nie zaokrąglają. Użyj bardzo lekkiego ciężaru i ćwicz technikę. Przy bólu pleców przerwij."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Swing z kettlebellem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Prostowniki grzbietu",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, stopy nieco szerzej niż barki, kettlebell na podłodze przed sobą. Zegnij się w biodrach, chwyć go obiema rękami, plecy proste. Odciągnij go między nogi.",
+    "ruch": "Gwałtownie wyprostuj biodra, wypychając je do przodu, a kettlebell uniesie się do wysokości klatki, ręce tylko go prowadzą. Pozwól mu opaść i odsuń biodra do tyłu. Wydech przy wyproście, wdech przy opadaniu.",
+    "uwaga": "Ruch idzie z bioder, nie z ramion i nie z przysiadu. Plecy proste. Zacznij od lekkiego ciężaru."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie hantli nad głowę stojąc",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość barków, hantle na wysokości barków, dłonie do przodu. Brzuch i pośladki napięte.",
+    "ruch": "Wypchnij hantle prosto w górę nad głowę do prawie prostych rąk. Opuść powoli do barków. Wdech przed wyciśnięciem, wydech na górze.",
+    "uwaga": "Nie wyginaj mocno dolnych pleców (napnij brzuch). Nie blokuj łokci na górze. Zacznij od lekkich hantli."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Uginanie ramion ze sztangą łamaną stojąc",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, stopy na szerokość bioder. Sztanga łamana dłońmi skierowanymi do góry, ręce wyprostowane, łokcie przy bokach.",
+    "ruch": "Zegnij ręce i unieś sztangę do barków, łokcie nadal przy tułowiu. Opuść powoli do prostych rąk. Wydech w górę, wdech w dół.",
+    "uwaga": "Bez kołysania tułowiem i odchylania pleców. Łokcie nie uciekają do przodu. Sztanga łamana jest łagodniejsza dla nadgarstków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, stopy na szerokość barków, palce lekko na zewnątrz. Hantle trzymaj przy bokach (ręce proste) lub na barkach. Plecy proste.",
+    "ruch": "Odsuń biodra do tyłu i zegnij kolana, aż uda będą równoległe do podłogi. Wstań, odpychając się całą stopą. Wdech w dół, wydech w górę.",
+    "uwaga": "Kolana idą w stronę palców, pięty na podłodze, plecy proste. Zacznij od lekkich hantli."
+   },
+   "ciezar": true
   }
  ]
 }

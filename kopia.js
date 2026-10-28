@@ -332,7 +332,7 @@ const STARE_OPISY_START = [
  "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
 ];
 
-const WERSJA_BAZY = 4;
+const WERSJA_BAZY = 5;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json"];
 
 function wczytajBazeStartowa() {
@@ -345,7 +345,7 @@ function wczytajBazeStartowa() {
   })).then(function (wyniki) {
     let lista = [];
     wyniki.forEach(function (w) { lista = lista.concat(w.cwiczenia || []); });
-    dodajCwiczeniaZListy(lista, { zBazy: true, tylkoOznacz: mialaCwiczenia });
+    dodajCwiczeniaZListy(lista, { zBazy: true, tylkoOznacz: mialaCwiczenia && !((dane.wersjaBazy || 0) > 0) });
     dane.wersjaBazy = WERSJA_BAZY;
     zapiszDane();
     if (typeof rysujListe === "function") {
