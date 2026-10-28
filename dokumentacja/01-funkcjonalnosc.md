@@ -209,3 +209,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Nowy plan nie zamyka już poprzedniego. Plan zamyka się ręcznie (po zakończeniu okresu albo „Zamknij").
 - Dziś pokazuje sesje wszystkich włączonych planów, każdy w bloku z nazwą i „Edytuj". Gdy wszystkie są wyłączone, jest komunikat.
 - Postęp: sekcja „Moje plany" z przełącznikiem włącz/wyłącz; dotknięcie planu wybiera, którego dotyczą statystyki.
+
+## v47: „Jak wyżej" w seriach
+- W kreatorze, w serii z różnymi powtórzeniami/ciężarem, od drugiej serii pod każdym polem (powtórzenia, ciężar) jest przycisk „↑ Jak wyżej", który kopiuje wartość z poprzedniej serii.

@@ -1866,3 +1866,4 @@ h1 {
 .pp-przelacznik::after { content: ""; position: absolute; top: 3px; left: 3px; width: 24px; height: 24px; border-radius: 50%; background: #fff; transition: left 0.15s; }
 .pp-przelacznik.wlaczony { background: var(--akcent); }
 .pp-przelacznik.wlaczony::after { left: 25px; }
+.jak-wyzej { display: block; min-height: 36px; padding: 0 4px; font-size: 14px; text-align: left; }

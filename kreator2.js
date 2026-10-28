@@ -827,13 +827,29 @@ function zrobKarteParametrow(sesja, cwiczenie) {
       rzadLista.innerHTML = "";
       polaSerii = [];
       polaKg = [];
+      const dodajJakWyzej = function (pola, i) {
+        if (i === 0) {
+          return;
+        }
+        const p = document.createElement("button");
+        p.type = "button";
+        p.className = "akcja jak-wyzej";
+        p.textContent = "↑ Jak wyżej";
+        p.addEventListener("click", function () {
+          pola[i].pole.value = pola[i - 1].pole.value;
+          pola[i].pole.dispatchEvent(new Event("input", { bubbles: true }));
+        });
+        pola[i].blok.appendChild(p);
+      };
       powtorzenia.forEach(function (ile, i) {
         const pole = zrobPoleLiczbowe("Seria " + (i + 1), ile, false);
         polaSerii.push(pole);
+        dodajJakWyzej(polaSerii, i);
         if (maCiezar) {
           const w = i < kg.length ? kg[i] : (kg.length > 0 ? kg[kg.length - 1] : 0);
           const poleKg = zrobPoleLiczbowe("Ciężar (kg)", w, true);
           polaKg.push(poleKg);
+          dodajJakWyzej(polaKg, i);
           const rzad = zrobRzad();
           rzad.appendChild(pole.blok);
           rzad.appendChild(poleKg.blok);
