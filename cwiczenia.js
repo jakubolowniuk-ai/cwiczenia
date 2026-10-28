@@ -135,6 +135,9 @@ function opisIlosciBezCiezaru(ilosc) {
     return "";
   }
   if (ilosc.typ === "powtorzenia") {
+    if (ilosc.zakres && ilosc.zakres[0] !== ilosc.zakres[1]) {
+      return ilosc.serie + " × " + ilosc.zakres[0] + "–" + ilosc.zakres[1];
+    }
     return ilosc.serie + " × " + ilosc.powtorzenia;
   }
   if (ilosc.typ === "serie-lista") {

@@ -383,6 +383,9 @@ function zrobKarteDzis(plan, sesja) {
     } else {
       karta.appendChild(tekstElement("div", "karta-opis", "Cel: " + cel));
     }
+    if (sesja.notatka) {
+      karta.appendChild(tekstElement("div", "karta-opis", sesja.notatka));
+    }
     const przycisk = document.createElement("button");
     przycisk.className = "przycisk wielki" + (sesja.wynik ? " drugi" : "");
     przycisk.textContent = sesja.wynik ? "Zmień wynik" : "Wpisz wynik";

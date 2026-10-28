@@ -229,3 +229,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Dziś: bloki jako osobne sekcje nad i pod ćwiczeniami głównymi; w trybie Ćwicz sesja idzie: rozgrzewka → ćwiczenia → rozciąganie, z krótką przerwą (5 s) w blokach i bez oceny.
 - Ćwiczenia z bloków nie wliczają się do zaliczenia sesji, statystyk mięśni ani rekordów; rodzaje Rozgrzewka, Rozciąganie i Joga nie mają rekordów.
 - Rozciąganie na osobny dzień: zwykła aktywność „Rozciąganie" z zestawem (np. „Mobilność: biodra i plecy").
+
+## v54: kreator „Ułóż mi plan" (generator planów)
+- Przycisk „Ułóż mi plan" na pustym ekranie Dziś i w Postępie (ręczne tworzenie planu zostaje jako „Utwórz plan ręcznie"). Nakładka z pytaniami krok po kroku (`plan-kreator.js`): cel, doświadczenie, dni (2–6), czas treningu, sprzęt (siłownia / dom z hantlami / masa ciała z drążkiem), bolące miejsca, priorytet partii, kardio, długość (4/8/12 tyg.), ciężary startowe, podsumowanie z „Dlaczego ten plan?" i przyciskiem „Zacznij".
+- Generator (`plan-generator.js`): podział zależny od dni i doświadczenia (całe ciało A/B, góra/dół, push/pull/legs), ćwiczenia wybierane z bazy z listą zamienników (pomijane są kolidujące z bólem: kolana, plecy, barki, nadgarstki), serie i zakresy powtórzeń wg celu (masa/rzeźba 6–12, siła 4–6, zdrowie 10–15), przerwy, dopasowanie liczby ćwiczeń do czasu. Rozgrzewka i rozciąganie dołączane domyślnie.
+- Ciężary startowe: z trzech „kotwic" (10 powtórzeń z zapasem) przez proporcje (np. suwnica ≈ 1,4 × przysiad); brak odpowiedzi = łagodne wartości domyślne. Kalistenika: stopień trudności z maksa pompek i podciągnięć (drabinki wariantów). Bieganie: marszobieg albo biegi ciągłe + krótki trening siłowy nóg.
+- Plan zapisuje się jako zwykły, edytowalny plan na 28 dni (`plan.kreator` trzyma profil). Ilość w sesji ma opcjonalne `zakres: [od, do]` (np. „3 × 8–10"), sesja może mieć `notatka` (np. opis marszobiegu).
+- Jeszcze nie ma: propozycji progresji na Dziś i generowania kolejnych 4-tygodniowych bloków (dla 8 i 12 tygodni powstaje na razie pierwszy blok).

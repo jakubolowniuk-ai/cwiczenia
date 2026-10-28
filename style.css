@@ -1877,3 +1877,39 @@ h1 {
 .dzis-blok-naglowek { display: flex; justify-content: space-between; align-items: baseline; margin: 14px 0 4px; padding-top: 10px; border-top: 1px solid var(--linia); }
 .dzis-blok-naglowek b { font-size: 15px; }
 .kr-bloki { margin: 12px 0; display: grid; gap: 12px; }
+
+/* ===== Kreator "Ułóż mi plan" ===== */
+.pk-nakladka {
+  position: fixed;
+  inset: 0;
+  z-index: 200;
+  background: var(--tlo);
+  overflow-y: auto;
+  padding: 16px 20px 32px;
+}
+.pk-nakladka[hidden] { display: none; }
+.pk-gora { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+.pk-tresc { display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px; }
+.pk-opcja {
+  display: flex; flex-direction: column; gap: 2px; text-align: left;
+  min-height: 56px; padding: 12px 16px; font: inherit; color: var(--tekst);
+  background: var(--karta); border: 2px solid var(--linia); border-radius: 14px; cursor: pointer;
+}
+.pk-opcja b { font-size: 17px; }
+.pk-opcja.wybrana { border-color: var(--akcent); }
+.pk-lista { display: flex; flex-direction: column; gap: 8px; }
+.pk-wiersz {
+  display: flex; align-items: center; gap: 12px; min-height: 52px; padding: 8px 16px;
+  background: var(--karta); border: 1px solid var(--linia); border-radius: 14px;
+}
+.pk-wiersz input { width: 22px; height: 22px; }
+.pk-rzad { display: flex; flex-wrap: wrap; gap: 8px; }
+.pk-pole { display: flex; flex-direction: column; gap: 4px; }
+.pk-pole input {
+  min-height: 48px; padding: 8px 12px; font: inherit; font-size: 18px; color: var(--tekst);
+  background: var(--karta); border: 1px solid var(--linia); border-radius: 12px;
+}
+.pk-uwaga { margin: 0; padding: 10px 12px; border-radius: 12px; background: var(--an-cialo); color: var(--tekst); }
+.pk-sesja { display: flex; flex-direction: column; gap: 4px; }
+.pk-cw { color: var(--tekst-szary); font-size: 14px; }
+.pk-powody { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
