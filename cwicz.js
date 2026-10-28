@@ -422,7 +422,7 @@ function cwRysujSerie() {
   const pola = cwEl("div", "cw-pola");
   let poleKg = null;
   if (cw.zCiezarem) {
-    poleKg = cwStepper("Ciężar (kg)", s.kg || 0, 2.5, true);
+    poleKg = cwStepper(etykietaCiezaru(cw), s.kg || 0, 2.5, true);
   }
 
   if (s.p !== undefined) {

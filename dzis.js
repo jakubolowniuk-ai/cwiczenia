@@ -771,7 +771,7 @@ function narysujPolaCzasow(czasy, jednostka, ciezary) {
       wartPola.appendChild(p.blok);
     });
     if (wartZCiezarem) {
-      wartCiezary.push(zrobStepper("Ciężar (kg)", ciezary[0] || 0, 2.5));
+      wartCiezary.push(zrobStepper(etykietaCiezaru(znajdzCwiczenie(wartId)), ciezary[0] || 0, 2.5));
       wartPola.appendChild(wartCiezary[0].blok);
     }
     const rozpisz = tekstElement("button", "akcja", wartZCiezarem ? "Różne czasy i ciężary w seriach" : "Różne czasy w seriach");
@@ -853,7 +853,7 @@ function narysujPolaPowtorzen(powtorzenia, ciezary) {
       wartPola.appendChild(p.blok);
     });
     if (wartZCiezarem) {
-      wartCiezary.push(zrobStepper("Ciężar (kg)", ciezary[0] || 0, 2.5));
+      wartCiezary.push(zrobStepper(etykietaCiezaru(znajdzCwiczenie(wartId)), ciezary[0] || 0, 2.5));
       wartPola.appendChild(wartCiezary[0].blok);
     }
     const rozpisz = tekstElement("button", "akcja", wartZCiezarem ? "Różne powtórzenia i ciężary w seriach" : "Różne powtórzenia w seriach");

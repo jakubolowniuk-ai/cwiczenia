@@ -725,7 +725,7 @@ function zrobKarteParametrow(sesja, cwiczenie) {
 
     const rzad2 = zrobRzad();
     rzad2.appendChild(jedn.blok);
-    const kgStat = zrobPoleLiczbowe("Ciężar (kg)", start && Array.isArray(start.ciezary) && start.ciezary.length > 0 ? start.ciezary[0] : 0, true);
+    const kgStat = zrobPoleLiczbowe(etykietaCiezaru(cwiczenie), start && Array.isArray(start.ciezary) && start.ciezary.length > 0 ? start.ciezary[0] : 0, true);
     if (cwiczenie.zCiezarem) {
       rzad2.appendChild(kgStat.blok);
     }
@@ -798,7 +798,7 @@ function zrobKarteParametrow(sesja, cwiczenie) {
     const kgRozne = startKg.some(function (c) { return c !== startKg[0]; });
     const serie = zrobPoleLiczbowe("Serie", start && start.typ === "powtorzenia" ? start.serie : 0, false);
     const pow = zrobPoleLiczbowe("Powtórzenia", start && start.typ === "powtorzenia" ? start.powtorzenia : 0, false);
-    const kgJeden = zrobPoleLiczbowe("Ciężar (kg)", startKg.length > 0 ? startKg[0] : 0, true);
+    const kgJeden = zrobPoleLiczbowe(etykietaCiezaru(cwiczenie), startKg.length > 0 ? startKg[0] : 0, true);
     const rzadSerie = zrobRzad();
     rzadSerie.appendChild(serie.blok);
     rzadSerie.appendChild(pow.blok);
@@ -850,7 +850,7 @@ function zrobKarteParametrow(sesja, cwiczenie) {
         dodajJakWyzej(polaSerii, i);
         if (maCiezar) {
           const w = i < kg.length ? kg[i] : (kg.length > 0 ? kg[kg.length - 1] : 0);
-          const poleKg = zrobPoleLiczbowe("Ciężar (kg)", w, true);
+          const poleKg = zrobPoleLiczbowe(etykietaCiezaru(cwiczenie), w, true);
           polaKg.push(poleKg);
           dodajJakWyzej(polaKg, i);
           const rzad = zrobRzad();

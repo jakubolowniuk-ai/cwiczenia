@@ -53,6 +53,11 @@ const filtrMiesien = document.getElementById("filtr-miesien");
 const chipyMiesnie = document.getElementById("chipy-miesnie");
 const blokMiesnieChipy = document.getElementById("blok-miesnie-chipy");
 const blokMiesnieLista = document.getElementById("blok-miesnie-lista");
+// Podpis pola ciężaru: w kalistenice i ćwiczeniach statycznych to ciężar dodatkowy (opcjonalny)
+function etykietaCiezaru(cwiczenie) {
+  return cwiczenie && cwiczenie.rodzajId !== "rodzaj-cialo" ? "Dodatkowy ciężar (kg), opcjonalnie" : "Ciężar (kg)";
+}
+
 const poleCiezar = document.getElementById("pole-ciezar");
 
 // Id ćwiczenia, które właśnie edytujemy (null, gdy dodajemy nowe)

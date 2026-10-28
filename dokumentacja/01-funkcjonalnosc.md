@@ -217,3 +217,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - 52 ćwiczenia kalisteniki i treningu statycznego, które można obciążyć (pompki, dipy, podciąganie, przysiady, wykroki, mosty, deska, unoszenie nóg i in.), mają włączone pole ciężaru (`ciezar: true` w plikach bazy, `WERSJA_BAZY = 6`). Istniejącym użytkownikom włącza się raz przy aktualizacji bazy; w formularzu ćwiczenia można je wyłączyć.
 - Ciężar 0 kg nie zmienia typu rekordu (rekord powtórzeń zostaje rekordem powtórzeń).
 - Bieganie i spacer: opcjonalne „Obciążenie (kg)" (plecak, kamizelka) w parametrach sesji i w wyniku (`sesja.obciazenie`); widoczne w opisie celu i wyniku.
+
+## v49: dodatkowy ciężar
+- W kalistenice i ćwiczeniach statycznych pole ciężaru nazywa się „Dodatkowy ciężar (kg), opcjonalnie" (kreator, wpis wartości, tryb Ćwicz); w siłowni zostaje „Ciężar (kg)". Pole w formularzu ćwiczenia: „Można dodać ciężar (kg)".
