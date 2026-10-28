@@ -309,6 +309,7 @@ function rekordyAktywnosci() {
 }
 
 function dodajRekordyAktywnosci() {
+  dodajPrzyciskMoichRekordow();
   dodajRekordyDystansu();
   const wg = rekordyAktywnosci();
   const wiersze = [];
@@ -591,5 +592,96 @@ function sprawdzRekordDystansu(rodzajId, wynik) {
     pasujacy.data = dzisISO();
     zapiszDane();
     rysujPostep();
+  }
+}
+
+
+// ===== Przeliczenie rekordów z historii (jednorazowo) =====
+// Uzupełnia rekordy ćwiczeń zaliczonych wcześniej (np. przed automatycznym zapisem) i poprawia te słabsze od historii.
+function przeliczRekordyZHistorii() {
+  let zmiany = 0;
+  dane.cwiczenia.forEach(function (cw) {
+    const typy = cw.rekord ? [cw.rekord.typ] : ["ciezar", "powtorzenia", "czas"];
+    let najlepszy = null;
+    let dataNajlepszego = "";
+    typy.forEach(function (typ) {
+      dane.plany.forEach(function (plan) {
+        plan.sesje.forEach(function (s) {
+          if (!s.zrobione || !s.zrobione[cw.id] || !s.parametry || !s.parametry[cw.id]) {
+            return;
+          }
+          const k = kandydatRekordu(cw, (s.wykonane && s.wykonane[cw.id]) || s.parametry[cw.id]);
+          if (k && k.typ === typ && (!najlepszy || (najlepszy.typ === k.typ && lepszyRekord(k, najlepszy)))) {
+            najlepszy = k;
+            const d = dataPlanu(plan, s.dzien);
+            dataNajlepszego = d.getFullYear() + "-" + String(d.getMonth() + 1).padStart(2, "0") + "-" + String(d.getDate()).padStart(2, "0");
+          }
+        });
+      });
+    });
+    if (najlepszy && (!cw.rekord || lepszyRekord(najlepszy, cw.rekord))) {
+      cw.rekord = Object.assign({}, najlepszy, { data: dataNajlepszego });
+      zmiany++;
+    }
+  });
+  return zmiany;
+}
+
+// ===== Okno „Moje rekordy" w Postępie =====
+function dodajPrzyciskMoichRekordow() {
+  const lista = dane.cwiczenia.filter(function (c) { return c.rekord; });
+  const przycisk = document.createElement("button");
+  przycisk.className = "przycisk drugi wielki pp-rekordy-przycisk";
+  przycisk.textContent = "★ Moje rekordy (" + lista.length + ")";
+  przycisk.addEventListener("click", otworzMojeRekordy);
+  postepTresc.appendChild(przycisk);
+}
+
+function otworzMojeRekordy() {
+  const lista = dane.cwiczenia.filter(function (c) { return c.rekord; });
+  pokazOkno("Moje rekordy", "Ćwiczenia, w których masz wynik");
+  if (lista.length === 0) {
+    postepOknoTresc.appendChild(zrobPustyKomunikat("Brak rekordów", "Rekord pojawi się sam po pierwszym zaliczonym ćwiczeniu."));
+    return;
+  }
+  const grupy = {};
+  lista.forEach(function (c) {
+    (grupy[c.rodzajId] = grupy[c.rodzajId] || []).push(c);
+  });
+  Object.keys(grupy).forEach(function (rodzajId) {
+    postepOknoTresc.appendChild(tekstElement("h3", "pp-naglowek", nazwaKategorii(rodzajId)));
+    grupy[rodzajId].sort(function (a, b) {
+      return a.nazwa.localeCompare(b.nazwa, "pl");
+    }).forEach(function (c) {
+      const wiersz = document.createElement("button");
+      wiersz.className = "pp-poprzedni";
+      wiersz.appendChild(tekstElement("b", "", c.nazwa));
+      wiersz.appendChild(tekstElement("span", "opis", "★ " + opisRekordu(c.rekord) + (c.rekord.data ? " · " + dataPL(c.rekord.data) : "")));
+      wiersz.addEventListener("click", function () {
+        otworzHistorieCwiczenia(c);
+      });
+      postepOknoTresc.appendChild(wiersz);
+    });
+  });
+  const wg = rekordyAktywnosci();
+  const wiersze = [];
+  Object.keys(wg).forEach(function (rodzajId) {
+    const r = wg[rodzajId];
+    const czesci = [];
+    if (r.dystans > 0) {
+      czesci.push("najdłuższy dystans " + (r.dystans >= 1000 ? Math.round(r.dystans / 10) / 100 + " km" : r.dystans + " m"));
+    }
+    if (r.kroki > 0) {
+      czesci.push("najwięcej kroków " + r.kroki);
+    }
+    if (czesci.length > 0) {
+      wiersze.push([nazwaKategorii(rodzajId), czesci.join(" · ")]);
+    }
+  });
+  if (wiersze.length > 0) {
+    postepOknoTresc.appendChild(tekstElement("h3", "pp-naglowek", "Aktywności"));
+    wiersze.forEach(function (w) {
+      postepOknoTresc.appendChild(zrobWskazowke("★", "#0B6B5F", "#DDF1E8", w[0], w[1]));
+    });
   }
 }

@@ -199,3 +199,7 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Po skończeniu ćwiczenia (ekran przerwy i podsumowanie w trybie Ćwicz oraz wiersz zaliczonego ćwiczenia na Dziś) są trzy przyciski: Łatwo / W sam raz / Ciężko. Ponowne dotknięcie zdejmuje ocenę. Zapis: `sesja.ocena[idĆwiczenia]` = "latwo" | "wsam" | "ciezko". Ocena posłuży później do podpowiedzi progresji.
 - Baza ma 251 ćwiczeń (+32, każde z opisem): 11 na brzuch, 10 na maszynach i wyciągach, 11 podstawowych. `WERSJA_BAZY = 5`.
 - Osoby, które już mają bazę (wersja ≥ 1), dostają brakujące ćwiczenia z bazy automatycznie; kto miał własne ćwiczenia przed bazą, nadal dostaje tylko oznaczenia.
+
+## v45: Moje rekordy
+- Postęp: przycisk „★ Moje rekordy (N)" otwiera listę ćwiczeń, które mają rekord (pogrupowaną wg rodzaju), plus rekordy aktywności; dotknięcie ćwiczenia otwiera jego historię. Ćwiczenia bez rekordu się nie wyświetlają.
+- Jednorazowe przeliczenie rekordów z całej historii planów (`dane.rekordyPrzeliczone`) uzupełnia rekordy ćwiczeń zaliczonych wcześniej oraz podnosi te słabsze od historii.

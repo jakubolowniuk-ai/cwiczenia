@@ -142,6 +142,13 @@ if ("serviceWorker" in navigator && location.protocol.indexOf("http") === 0) {
   });
 }
 
+// Jednorazowo: rekordy ćwiczeń zaliczonych wcześniej (z historii planów)
+if (!dane.rekordyPrzeliczone && typeof przeliczRekordyZHistorii === "function") {
+  przeliczRekordyZHistorii();
+  dane.rekordyPrzeliczone = true;
+  zapiszDane();
+}
+
 // Pierwsze narysowanie ekranu Dziś
 if (typeof rysujDzis === "function" && document.getElementById("dzis-sesje")) {
   rysujDzis();

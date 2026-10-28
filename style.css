@@ -1853,3 +1853,4 @@ h1 {
   background: var(--tlo); color: var(--tekst); font: inherit; font-size: 14px;
 }
 .ocena-przycisk.wybrana { background: var(--akcent); border-color: var(--akcent); color: #fff; }
+.pp-rekordy-przycisk { width: 100%; margin: 8px 0 12px; }
