@@ -268,6 +268,9 @@ function rysujPlanDzis(plan, kontener) {
     }
     kontener.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", opis));
   } else {
+    if (typeof prDodajKarte === "function") {
+      prDodajKarte(plan, sesjeDzis, kontener);
+    }
     sesjeDzis.forEach(function (sesja) {
       kontener.appendChild(zrobKarteDzis(plan, sesja));
     });

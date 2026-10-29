@@ -236,3 +236,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Ciężary startowe: z trzech „kotwic" (10 powtórzeń z zapasem) przez proporcje (np. suwnica ≈ 1,4 × przysiad); brak odpowiedzi = łagodne wartości domyślne. Kalistenika: stopień trudności z maksa pompek i podciągnięć (drabinki wariantów). Bieganie: marszobieg albo biegi ciągłe + krótki trening siłowy nóg.
 - Plan zapisuje się jako zwykły, edytowalny plan na 28 dni (`plan.kreator` trzyma profil). Ilość w sesji ma opcjonalne `zakres: [od, do]` (np. „3 × 8–10"), sesja może mieć `notatka` (np. opis marszobiegu).
 - Jeszcze nie ma: propozycji progresji na Dziś i generowania kolejnych 4-tygodniowych bloków (dla 8 i 12 tygodni powstaje na razie pierwszy blok).
+
+## v55: propozycje progresji (`plan-progresja.js`)
+- Na ekranie Dziś, nad dzisiejszymi niezaliczonymi sesjami planu, karta „Propozycje na dziś": ćwiczenie, zmiana (np. „40 → 42,5 kg"), jedno zdanie powodu, przyciski „Przyjmij" / „Zostaw" (+ „Przyjmij wszystkie"). Nic nie zmienia się bez zgody.
+- Dotyczy ćwiczeń z zakresem powtórzeń (`ilosc.zakres`, z kreatora „Ułóż mi plan"). Źródło: ostatnie wykonanie tego ćwiczenia w planie (`wykonane`) i ocena (`ocena`).
+- Zasady: wszystkie serie na górze zakresu → +ciężar (hantle +1/2 kg, sztanga +2,5 kg góra / +5 kg nogi, maszyny +2,5/5 kg), powtórzenia wracają na początek zakresu; ocena „Łatwo" → +ciężar od razu; w zakresie, ale nie na górze → +1 powtórzenie; dwa razy z rzędu „Ciężko" → ok. −7,5% ciężaru; „Ciężko" raz → bez propozycji. Kalistenika: po osiągnięciu góry zakresu trudniejszy wariant z drabinki `PR_DRABINKA` (zestaw dla przyszłych sesji jest klonowany, historia zostaje). Ćwiczenia statyczne: +5 s w każdej serii.
+- Przyjęcie zmienia parametry wszystkich przyszłych niewykonanych sesji z tym ćwiczeniem w planie. Rozstrzygnięcie zapisane w `plan.progresja[idĆwiczenia] = {sesjaId, stan}`, więc ta sama propozycja nie wraca.
+- Powtórzenia w planie z zakresem pokazują się jako „3 × 9 (zakres 8–10)" (cel i zakres).

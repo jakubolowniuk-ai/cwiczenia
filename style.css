@@ -1913,3 +1913,15 @@ h1 {
 .pk-sesja { display: flex; flex-direction: column; gap: 4px; }
 .pk-cw { color: var(--tekst-szary); font-size: 14px; }
 .pk-powody { margin: 0; padding-left: 20px; display: flex; flex-direction: column; gap: 8px; }
+
+/* ===== Propozycje progresji na ekranie Dziś ===== */
+.pr-karta {
+  display: flex; flex-direction: column; gap: 12px; margin-bottom: 12px; padding: 14px 16px;
+  background: var(--karta); border: 2px solid var(--akcent); border-radius: 16px;
+}
+.pr-naglowek { font-size: 18px; font-weight: 700; }
+.pr-wiersz { display: flex; flex-direction: column; gap: 4px; padding-top: 10px; border-top: 1px solid var(--linia); }
+.pr-nazwa { font-weight: 600; }
+.pr-zmiana { font-size: 18px; font-weight: 700; color: var(--akcent); }
+.pr-przyciski { display: flex; gap: 8px; margin-top: 6px; }
+.pr-przyciski .przycisk { flex: 1; min-height: 44px; }

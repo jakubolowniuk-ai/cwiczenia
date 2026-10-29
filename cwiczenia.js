@@ -136,7 +136,7 @@ function opisIlosciBezCiezaru(ilosc) {
   }
   if (ilosc.typ === "powtorzenia") {
     if (ilosc.zakres && ilosc.zakres[0] !== ilosc.zakres[1]) {
-      return ilosc.serie + " × " + ilosc.zakres[0] + "–" + ilosc.zakres[1];
+      return ilosc.serie + " × " + ilosc.powtorzenia + " (zakres " + ilosc.zakres[0] + "–" + ilosc.zakres[1] + ")";
     }
     return ilosc.serie + " × " + ilosc.powtorzenia;
   }
