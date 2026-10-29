@@ -410,6 +410,35 @@ function pgMinuty(wpisy) {
   return sek / 60;
 }
 
+// Czas bloku (rozgrzewki albo rozciągania) w minutach, zaokrąglony; ok. 10 s na przejście między ćwiczeniami
+function pgMinutyBloku(blok) {
+  let sek = 0;
+  blok.cwiczeniaIds.forEach(function (id) {
+    const il = (blok.parametry && blok.parametry[id]) || DOMYSLNA_ILOSC_BLOKU;
+    const m = il.jednostka === "min" ? 60 : 1;
+    if (il.typ === "czas") {
+      sek += il.wartosc * m;
+    } else if (il.typ === "czas-powtorzenia") {
+      sek += il.powtorzenia * il.czas.wartosc * (il.czas.jednostka === "min" ? 60 : 1);
+    } else if (il.typ === "czas-serie") {
+      il.czasy.forEach(function (c) { sek += c * m; });
+    } else if (il.typ === "powtorzenia") {
+      sek += il.serie * il.powtorzenia * 3;
+    } else {
+      sek += 30;
+    }
+    sek += 10;
+  });
+  return Math.round(sek / 60);
+}
+
+// Orientacyjny czas rozgrzewki i rozciągania dla kroku kreatora (średnio, z gotowych zestawów)
+function pgCzasyBlokow() {
+  const ogolna = pgZnajdzBlok("Rozgrzewka ogólna", "rozgrzewka");
+  const calosc = pgZnajdzBlok("Rozciąganie po treningu: całe ciało", "rozciaganie");
+  return { rozgrzewka: ogolna ? pgMinutyBloku(ogolna) : 5, rozciaganie: calosc ? pgMinutyBloku(calosc) : 8 };
+}
+
 function pgCzasStatyczny(dosw) {
   return [20, 30, 40, 45][dosw || 0];
 }
@@ -456,10 +485,10 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
     }
   }
 
-  // Dopasowanie do czasu: bez rozgrzewki i rozciągania (ok. 12 min), ostatnie ćwiczenia odpadają pierwsze
-  const budzet = Math.max(20, p.czas - 12);
+  // Dopasowanie do czasu treningu (rozgrzewka i rozciąganie są liczone osobno, ponad ten czas)
+  const budzet = Math.max(20, p.czas);
   const pelne = wpisy.slice();
-  const pelnyCzas = Math.ceil(pgMinuty(pelne) + 12);
+  const pelnyCzas = Math.ceil(pgMinuty(pelne));
   // Ćwiczenia na brzuch (rdzeń) nie odpadają; usuwamy od końca zwykłe ćwiczenia dodatkowe (pierwsze 3 zostają)
   while (pgMinuty(wpisy) > budzet) {
     let idx = -1;
@@ -581,13 +610,16 @@ function pgBuduj(p) {
   });
 
   // Bloki rozgrzewki i rozciągania
-  if (p.bloki !== false) {
+  wynik.czasBlokow = { rozgrzewka: 0, rozciaganie: 0 };
+  if (p.rozgrzewka !== false || p.rozciaganie !== false) {
     Object.keys(wynik.treningi).forEach(function (k) {
       const t = wynik.treningi[k];
       const przed = t.gora ? "Rozgrzewka górnej części ciała" : t.dol ? "Rozgrzewka nóg i pośladków" : "Rozgrzewka ogólna";
       const po = t.gora ? "Rozciąganie po treningu: góra ciała" : t.dol ? "Rozciąganie po treningu: nogi" : "Rozciąganie po treningu: całe ciało";
-      t.blokPrzed = pgZnajdzBlok(przed, "rozgrzewka") || pgZnajdzBlok("Rozgrzewka ogólna", "rozgrzewka") || null;
-      t.blokPo = pgZnajdzBlok(po, "rozciaganie") || null;
+      t.blokPrzed = p.rozgrzewka !== false ? (pgZnajdzBlok(przed, "rozgrzewka") || pgZnajdzBlok("Rozgrzewka ogólna", "rozgrzewka") || null) : null;
+      t.blokPo = p.rozciaganie !== false ? (pgZnajdzBlok(po, "rozciaganie") || null) : null;
+      wynik.czasBlokow.rozgrzewka = Math.max(wynik.czasBlokow.rozgrzewka, t.blokPrzed ? pgMinutyBloku(t.blokPrzed) : 0);
+      wynik.czasBlokow.rozciaganie = Math.max(wynik.czasBlokow.rozciaganie, t.blokPo ? pgMinutyBloku(t.blokPo) : 0);
     });
   }
 
@@ -635,7 +667,7 @@ function pgBuduj(p) {
     klucze.forEach(function (k) {
       wynik.treningi[k].pominiete.forEach(function (w) { nazwy[w.cw.nazwa] = true; });
     });
-    wynik.uwagi.unshift("W " + p.czas + " minutach mieszczą się ćwiczenia podstawowe (nogi, pchanie, ciągnięcie, brzuch). Żeby trening był pełniejszy i dawał lepszy efekt, wydłuż go do ok. " + Math.ceil(potrzeba / 5) * 5 + " minut. Wtedy dołożę: " + Object.keys(nazwy).slice(0, 6).join(", ").toLowerCase() + (Object.keys(nazwy).length > 6 ? " i inne" : "") + ".");
+    wynik.uwagi.unshift("W " + p.czas + " minutach treningu mieszczą się ćwiczenia podstawowe (nogi, pchanie, ciągnięcie, brzuch). Żeby trening był pełniejszy i dawał lepszy efekt, wydłuż go do ok. " + Math.ceil(potrzeba / 5) * 5 + " minut. Wtedy dołożę: " + Object.keys(nazwy).slice(0, 6).join(", ").toLowerCase() + (Object.keys(nazwy).length > 6 ? " i inne" : "") + ".");
   }
 
   // Nazwa planu
@@ -710,7 +742,9 @@ function pgPowody(wynik, p, podzial, kotw) {
       powody.push("Powtórzenia 6–12 w większości serii i ok. 2 powtórzenia zapasu na koniec serii to sprawdzony zakres dla budowy mięśni.");
     }
   }
-  powody.push("Rozgrzewka przed i krótkie rozciąganie po treningu są dołączone do każdej sesji. Możesz je wyłączyć w edycji planu.");
+  if (wynik.czasBlokow && (wynik.czasBlokow.rozgrzewka || wynik.czasBlokow.rozciaganie)) {
+    powody.push("Rozgrzewka (ok. " + wynik.czasBlokow.rozgrzewka + " min) i rozciąganie (ok. " + wynik.czasBlokow.rozciaganie + " min) są dołączone poza czasem treningu. Możesz je wyłączyć w edycji planu.");
+  }
   powody.push("Po każdym treningu ocenisz ćwiczenia (łatwo / w sam raz / ciężko), a aplikacja zaproponuje, kiedy dołożyć ciężar.");
 
   if (p.sprzet !== "c" && kotw.domyslne && p.cel !== "bieg") {

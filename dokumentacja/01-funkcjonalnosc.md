@@ -252,3 +252,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - „Serie w tygodniu" liczą klatkę, plecy, nogi i pośladki, barki, ramiona, brzuch i łydki; partie bez bezpośrednich ćwiczeń są wymienione jako pracujące „tylko pośrednio".
 - Krok „Czas treningu" ostrzega, że plan na całe ciało potrzebuje ok. 60 minut.
 - Zamienniki dla bólu nie powtarzają tego samego ruchu (np. dwóch Hip Thrustów w jednym treningu).
+
+## v58: czas treningu bez rozgrzewki, ćwiczenia jednostronne, opis w przerwie
+- Kreator „Ułóż mi plan": czas treningu to sam trening. Nowy krok „Rozgrzewka i rozciąganie?" (tak / tylko rozgrzewka / tylko rozciąganie / nie) z orientacyjnym czasem bloków; podsumowanie pokazuje „Trening do 60 min plus ok. 14 min rozgrzewki i rozciągania". Profil: `rozgrzewka`, `rozciaganie` (zamiast `bloki`).
+- Gotowe zestawy: ćwiczenia jednostronne (rozciąganie czworogłowego, gołębia, wykrok niski, barku, tricepsa i in.; wymachy nogą, wykrok z rotacją) mają 2 serie (np. 2 × 30 s, po jednej na stronę). Czasy w nazwach zestawów przeliczone („ok. 5 min" itd.).
+- `WERSJA_BAZY = 8`: `odswiezZestawyBazy` aktualizuje istniejące zestawy z bazy (nazwa z czasem, parametry) oraz niewykonane sesje, w których wartość nie była zmieniona przez użytkownika. Nazwy zestawów porównywane są bez czasu w nawiasie (`nazwaBezCzasu`).
+- Tryb Ćwicz: na ekranie przerwy, pod „Następnie: …", przycisk „Opis następnego ćwiczenia".

@@ -46,7 +46,7 @@ const PK_PRIORYTET = [
 function pkKroki() {
   const cel = pkProfil.cel || "masa";
   const kroki = ["cel"];
-  kroki.push("dosw", "dni", "czas");
+  kroki.push("dosw", "dni", "czas", "bloki");
   if (cel !== "kalistenika") {
     kroki.push("sprzet");
   }
@@ -89,7 +89,7 @@ function pkOtworz() {
   pkProfil = {
     cel: null, dosw: dosw, dni: 3, czas: 60, sprzet: "s", bole: [], priorytet: null,
     kardio: { ile: 0, rodzaj: "spacer" }, tygodni: 4, kotwice: {}, maxPompek: null, maxPodciagniec: null,
-    bieg20: false, bloki: true
+    bieg20: false, rozgrzewka: true, rozciaganie: true
   };
   pkKrok = 0;
   pkWynik = null;
@@ -190,10 +190,30 @@ function pkRysuj() {
     });
   } else if (krok === "czas") {
     pokazDalej = false;
-    wybor("Ile czasu masz na jeden trening?", "Razem z rozgrzewką i rozciąganiem. Plan na całe ciało potrzebuje ok. 60 minut. Przy krótszym czasie zostaną ćwiczenia podstawowe, a powiem Ci, co pominąłem.", [30, 45, 60, 90].map(function (n) {
+    wybor("Ile czasu masz na jeden trening?", "Sam trening, bez rozgrzewki i rozciągania (o nich zapytam za chwilę). Plan na całe ciało potrzebuje ok. 60 minut. Przy krótszym czasie zostaną ćwiczenia podstawowe, a powiem Ci, co pominąłem.", [30, 45, 60, 90].map(function (n) {
       return [n, n + " minut", ""];
     }), pkProfil.czas, function (w) {
       pkProfil.czas = w;
+    });
+  } else if (krok === "bloki") {
+    pokazDalej = false;
+    const t = pgCzasyBlokow();
+    tresc.appendChild(pkEl("h1", "", "Rozgrzewka i rozciąganie?"));
+    tresc.appendChild(pkEl("p", "opis", "Rozgrzewka przed treningiem przygotowuje stawy i mięśnie. Rozciąganie po nim pomaga się wyciszyć. Oba bloki są poza czasem treningu, który wybrałeś(aś), więc wydłużą sesję."));
+    const r = pkProfil.rozgrzewka;
+    const z = pkProfil.rozciaganie;
+    [
+      [true, true, "Tak, jedno i drugie", "Dodatkowo ok. " + (t.rozgrzewka + t.rozciaganie) + " min (rozgrzewka " + t.rozgrzewka + ", rozciąganie " + t.rozciaganie + ")"],
+      [true, false, "Tylko rozgrzewka", "Dodatkowo ok. " + t.rozgrzewka + " min"],
+      [false, true, "Tylko rozciąganie", "Dodatkowo ok. " + t.rozciaganie + " min"],
+      [false, false, "Nie, sam trening", "Możesz dodać je później w edycji planu"]
+    ].forEach(function (o) {
+      tresc.appendChild(pkOpcja(o[2], o[3], r === o[0] && z === o[1], function () {
+        pkProfil.rozgrzewka = o[0];
+        pkProfil.rozciaganie = o[1];
+        pkKrok++;
+        pkRysuj();
+      }));
     });
   } else if (krok === "sprzet") {
     pokazDalej = false;
@@ -349,7 +369,12 @@ function pkRysujPodsumowanie(tresc) {
 
   tresc.appendChild(pkEl("h1", "", wynik.nazwa));
   const liczba = wynik.sesje.length;
-  tresc.appendChild(pkEl("p", "opis", "Plan na 4 tygodnie · " + liczba + " sesji. Pierwsza dziś."));
+  let czasTekst = "";
+  if (pkProfil.cel !== "bieg") {
+    const dod = (wynik.czasBlokow.rozgrzewka || 0) + (wynik.czasBlokow.rozciaganie || 0);
+    czasTekst = " Trening do " + pkProfil.czas + " min" + (dod > 0 ? " plus ok. " + dod + " min rozgrzewki i rozciągania." : ".");
+  }
+  tresc.appendChild(pkEl("p", "opis", "Plan na 4 tygodnie · " + liczba + " sesji. Pierwsza dziś." + czasTekst));
 
   wynik.uwagi.forEach(function (u) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));

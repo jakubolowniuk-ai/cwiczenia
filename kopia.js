@@ -336,16 +336,57 @@ const STARE_OPISY_START = [
  "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
 ];
 
-const WERSJA_BAZY = 7;
+const WERSJA_BAZY = 8;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json"];
 const PLIK_ZESTAWOW = "przyklady-zestawy.json";
 
 // Gotowe zestawy (rozgrzewki, rozciąganie, postawa): dodajemy te, których jeszcze nie ma (po nazwie)
+// Nazwa zestawu bez czasu w nawiasie, np. "Rozgrzewka ogólna (ok. 5 min)" → "Rozgrzewka ogólna"
+function nazwaBezCzasu(nazwa) {
+  return String(nazwa).replace(/\s*\([^()]*ok\.[^()]*\)\s*$/, "").trim();
+}
+
+// Aktualizuje gotowe zestawy z bazy (nazwa z czasem, ćwiczenia jednostronne = 2 serie) oraz sesje, które ich używają
+function odswiezZestawyBazy(zestawy) {
+  (zestawy || []).forEach(function (zestaw) {
+    const klucz = nazwaKlucz(nazwaBezCzasu(zestaw.nazwa));
+    dane.treningi.filter(function (t) {
+      return t.zBazy && nazwaKlucz(nazwaBezCzasu(t.nazwa)) === klucz;
+    }).forEach(function (t) {
+      t.nazwa = zestaw.nazwa;
+      if (!t.parametry) {
+        t.parametry = {};
+      }
+      (zestaw.cwiczenia || []).forEach(function (wpis) {
+        const cw = dane.cwiczenia.find(function (c) { return nazwaKlucz(c.nazwa) === nazwaKlucz(wpis.nazwa); });
+        if (!cw || t.cwiczeniaIds.indexOf(cw.id) === -1) {
+          return;
+        }
+        const stara = JSON.stringify(t.parametry[cw.id] || null);
+        const nowa = JSON.stringify(wpis.ilosc);
+        if (stara === nowa) {
+          return;
+        }
+        t.parametry[cw.id] = JSON.parse(nowa);
+        // Niewykonane sesje, w których użytkownik nie zmienił wartości
+        dane.plany.forEach(function (plan) {
+          plan.sesje.forEach(function (s) {
+            if ((s.blokPrzedId === t.id || s.blokPoId === t.id) && s.parametry && !(s.zrobione && s.zrobione[cw.id]) &&
+              (JSON.stringify(s.parametry[cw.id] || null) === stara || !s.parametry[cw.id])) {
+              s.parametry[cw.id] = JSON.parse(nowa);
+            }
+          });
+        });
+      });
+    });
+  });
+}
+
 function dodajZestawyBazy(zestawy) {
   let dodane = 0;
   (zestawy || []).forEach(function (zestaw, i) {
-    const klucz = nazwaKlucz(zestaw.nazwa);
-    if (dane.treningi.some(function (t) { return nazwaKlucz(t.nazwa) === klucz; })) {
+    const klucz = nazwaKlucz(nazwaBezCzasu(zestaw.nazwa));
+    if (dane.treningi.some(function (t) { return nazwaKlucz(nazwaBezCzasu(t.nazwa)) === klucz; })) {
       return;
     }
     const ids = [];
@@ -395,6 +436,7 @@ function wczytajBazeStartowa() {
     if (!tylkoOznacz) {
       dodajZestawyBazy(zestawy);
     }
+    odswiezZestawyBazy(zestawy);
     dane.wersjaBazy = WERSJA_BAZY;
     zapiszDane();
     if (typeof rysujListe === "function") {

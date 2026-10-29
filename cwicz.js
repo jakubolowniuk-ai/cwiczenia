@@ -500,6 +500,11 @@ function cwRysujPrzerwe() {
   const cw = znajdzCwiczenie(b.id);
   nastepne.textContent = "Następnie: " + cw.nazwa + " · seria " + (b.nr + 1) + " z " + serie.length + " (" + cwOpisSerii(serie[Math.min(b.nr, serie.length - 1)], cw) + ")";
   cwTresc.appendChild(nastepne);
+  if (maOpis(cw)) {
+    cwTresc.appendChild(cwPrzycisk("Opis następnego ćwiczenia", "akcja film cw-opis", function () {
+      otworzOpis(cw);
+    }));
+  }
 
   const rzad = cwEl("div", "cw-dol");
   const zmien = function (ile) {
