@@ -13,8 +13,8 @@
 // (pierwsze dostępne i bezpieczne jest wybierane). null = brak takiego ćwiczenia dla sprzętu.
 // Nazwy zaczynające się od "@" to drabinki trudności kalisteniki (pgDrabinka).
 
-function pgS(s, d, c, serie, od, do_, przerwa) {
-  return { s: s, d: d, c: c, serie: serie, od: od, do: do_, przerwa: przerwa };
+function pgS(s, d, c, serie, od, do_, przerwa, rdzen) {
+  return { s: s, d: d, c: c, serie: serie, od: od, do: do_, przerwa: przerwa, r: !!rdzen };
 }
 
 const PG_PRZYSIAD = pgS(
@@ -34,7 +34,12 @@ const PG_BICEPS = pgS(
   ["Uginanie ramion z hantlami z supinacją"], ["Uginanie ramion z hantlami z supinacją"],
   ["Uginanie ramion w australijskim podciąganiu podchwytem"], 2, 10, 12, 60);
 const PG_BRZUCH = pgS(
-  ["Unoszenie nóg leżąc"], ["Unoszenie nóg leżąc"], ["Deska przodem (Front Plank)"], 2, 10, 15, 60);
+  ["Unoszenie nóg leżąc"], ["Unoszenie nóg leżąc"], ["Deska przodem (Front Plank)"], 3, 10, 15, 60, true);
+const PG_BRZUCH_B = pgS(
+  ["Pallof Press (wyciskanie linki w bok)", "Deska przodem (Front Plank)"], ["Deska przodem (Front Plank)"],
+  ["Hollow Body Hold", "Dead Bug"], 3, 10, 12, 60, true);
+const PG_CORE_G = pgS(
+  ["Deska przodem (Front Plank)"], ["Deska przodem (Front Plank)"], ["Dead Bug"], 2, 10, 12, 45, true);
 
 const PG_RDL = pgS(
   ["Martwy ciąg rumuński ze sztangą (RDL)", "Uginanie nóg leżąc na maszynie"],
@@ -100,7 +105,7 @@ const PG_D_LYDKI = pgS(
   ["Wspięcia na palce obunóż"], ["Wspięcia na palce jednonóż"], 4, 10, 15, 60);
 const PG_D_BRZUCH = pgS(
   ["Allahy (skłony tułowia z linką wyciągu górnego)", "Unoszenie nóg leżąc"],
-  ["Unoszenie nóg leżąc"], ["Unoszenie kolan w zwisie"], 3, 10, 15, 60);
+  ["Unoszenie nóg leżąc"], ["Unoszenie kolan w zwisie"], 3, 10, 15, 60, true);
 const PG_D2_NOGI = pgS(
   ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Hack na maszynie", "Uginanie nóg siedząc na maszynie"],
   ["Przysiad bułgarski z hantlami", "Martwy ciąg rumuński z hantlami"], ["Wykroki w tył", "Most biodrowy"], 4, 10, 12, 120);
@@ -114,12 +119,12 @@ const PG_D2_LYDKI = pgS(
   ["Wspięcia na palce obunóż"], ["Wspięcia na palce z ugiętymi kolanami"], 3, 12, 15, 45);
 const PG_D2_CORE = pgS(
   ["Pallof Press (wyciskanie linki w bok)", "Deska przodem z talerzem na plecach"],
-  ["Deska przodem (Front Plank)"], ["Hollow Body Hold"], 3, 10, 12, 60);
+  ["Deska przodem (Front Plank)"], ["Hollow Body Hold"], 3, 10, 12, 60, true);
 
 const PG_SZABLONY = {
   fb: {
     A: [PG_PRZYSIAD, PG_WYCISKANIE, PG_WIOSLO, PG_BARKI, PG_BICEPS, PG_BRZUCH],
-    B: [PG_RDL, PG_SKOS, PG_PION, PG_NOGI2, PG_BOKI, PG_TRICEPS, PG_LYDKI, PG_UGINANIE_NOG]
+    B: [PG_RDL, PG_SKOS, PG_PION, PG_NOGI2, PG_BOKI, PG_TRICEPS, PG_LYDKI, PG_UGINANIE_NOG, PG_BRZUCH_B]
   },
   ul: {
     GA: [PG_G_PRZOD, PG_G_WIOSLO, PG_G_OHP, PG_G_PION, PG_G_BICEPS, PG_G_TRICEPS],
@@ -129,7 +134,7 @@ const PG_SZABLONY = {
   },
   ppl: {
     Push: [PG_G_PRZOD, PG_G_OHP, PG_G_SKOS, PG_G_BOKI, PG_G_TRICEPS, PG_G_TRICEPS2],
-    Pull: [PG_G_WIOSLO, PG_G_PION, PG_G_WIOSLO2, PG_G_TYL, PG_G_BICEPS, PG_G_MLOTEK],
+    Pull: [PG_G_WIOSLO, PG_G_PION, PG_G_WIOSLO2, PG_G_TYL, PG_G_BICEPS, PG_G_MLOTEK, PG_CORE_G],
     Legs: [PG_D_PRZYSIAD, PG_D_RDL, PG_D2_NOGI, PG_D_UGINANIE, PG_D_LYDKI, PG_D_BRZUCH]
   },
   bsila: {
@@ -138,7 +143,7 @@ const PG_SZABLONY = {
       pgS(PG_RDL.s, PG_RDL.d, PG_RDL.c, 2, 10, 12, 90),
       pgS(PG_D_WYKROKI.s, PG_D_WYKROKI.d, PG_D_WYKROKI.c, 2, 10, 12, 75),
       pgS(PG_LYDKI.s, PG_LYDKI.d, PG_LYDKI.c, 2, 12, 15, 45),
-      pgS(PG_BRZUCH.s, PG_BRZUCH.d, PG_BRZUCH.c, 2, 10, 15, 60)
+      pgS(PG_BRZUCH.s, PG_BRZUCH.d, PG_BRZUCH.c, 2, 10, 15, 60, true)
     ]
   }
 };
@@ -427,7 +432,8 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
       do: par.do,
       przerwa: par.przerwa,
       kg: p.sprzet === "c" ? 0 : pgCiezar(cw.nazwa, kotw),
-      statyczne: cw.rodzajId === "rodzaj-statyczny"
+      statyczne: cw.rodzajId === "rodzaj-statyczny",
+      rdzen: !!slot.r
     });
   });
 
@@ -451,8 +457,19 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
 
   // Dopasowanie do czasu: bez rozgrzewki i rozciągania (ok. 12 min), ostatnie ćwiczenia odpadają pierwsze
   const budzet = Math.max(20, p.czas - 12);
-  while (wpisy.length > 3 && pgMinuty(wpisy) > budzet) {
-    wpisy.pop();
+  // Ćwiczenia na brzuch (rdzeń) nie odpadają; usuwamy od końca zwykłe ćwiczenia dodatkowe (pierwsze 3 zostają)
+  while (pgMinuty(wpisy) > budzet) {
+    let idx = -1;
+    for (let i = wpisy.length - 1; i >= 3; i--) {
+      if (!wpisy[i].rdzen) {
+        idx = i;
+        break;
+      }
+    }
+    if (idx === -1) {
+      break;
+    }
+    wpisy.splice(idx, 1);
   }
   wpisy.forEach(function (w) {
     if (w.statyczne) {

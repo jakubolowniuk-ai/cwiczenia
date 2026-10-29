@@ -243,3 +243,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Zasady: wszystkie serie na górze zakresu → +ciężar (hantle +1/2 kg, sztanga +2,5 kg góra / +5 kg nogi, maszyny +2,5/5 kg), powtórzenia wracają na początek zakresu; ocena „Łatwo" → +ciężar od razu; w zakresie, ale nie na górze → +1 powtórzenie; dwa razy z rzędu „Ciężko" → ok. −7,5% ciężaru; „Ciężko" raz → bez propozycji. Kalistenika: po osiągnięciu góry zakresu trudniejszy wariant z drabinki `PR_DRABINKA` (zestaw dla przyszłych sesji jest klonowany, historia zostaje). Ćwiczenia statyczne: +5 s w każdej serii.
 - Przyjęcie zmienia parametry wszystkich przyszłych niewykonanych sesji z tym ćwiczeniem w planie. Rozstrzygnięcie zapisane w `plan.progresja[idĆwiczenia] = {sesjaId, stan}`, więc ta sama propozycja nie wraca.
 - Powtórzenia w planie z zakresem pokazują się jako „3 × 9 (zakres 8–10)" (cel i zakres).
+
+## v56: brzuch w każdym treningu
+- Ćwiczenia na brzuch (rdzeń) są oznaczone w szablonach (`pgS(..., true)`) i nie odpadają przy skracaniu treningu do zadeklarowanego czasu (wcześniej brzuch był ostatni na liście i znikał pierwszy). Trening B (całe ciało) i Pull (PPL) dostały ćwiczenie na brzuch; masa 3×: 2 treningi × 3 serie tygodniowo.
