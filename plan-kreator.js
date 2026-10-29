@@ -190,7 +190,7 @@ function pkRysuj() {
     });
   } else if (krok === "czas") {
     pokazDalej = false;
-    wybor("Ile czasu masz na jeden trening?", "Razem z rozgrzewką i rozciąganiem.", [30, 45, 60, 90].map(function (n) {
+    wybor("Ile czasu masz na jeden trening?", "Razem z rozgrzewką i rozciąganiem. Plan na całe ciało potrzebuje ok. 60 minut. Przy krótszym czasie zostaną ćwiczenia podstawowe, a powiem Ci, co pominąłem.", [30, 45, 60, 90].map(function (n) {
       return [n, n + " minut", ""];
     }), pkProfil.czas, function (w) {
       pkProfil.czas = w;

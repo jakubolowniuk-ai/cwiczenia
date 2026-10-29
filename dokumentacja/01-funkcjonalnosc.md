@@ -246,3 +246,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## v56: brzuch w każdym treningu
 - Ćwiczenia na brzuch (rdzeń) są oznaczone w szablonach (`pgS(..., true)`) i nie odpadają przy skracaniu treningu do zadeklarowanego czasu (wcześniej brzuch był ostatni na liście i znikał pierwszy). Trening B (całe ciało) i Pull (PPL) dostały ćwiczenie na brzuch; masa 3×: 2 treningi × 3 serie tygodniowo.
+
+## v57: czytelność planu przy krótkim czasie
+- Generator zwraca dla każdego treningu listę pominiętych ćwiczeń i czas pełnego treningu. Gdy czas jest za krótki (pominięto ≥ 2 ćwiczenia; nie dotyczy planu na siłę), podsumowanie mówi wprost: co się mieści, ile minut potrzeba na pełny trening i co zostanie dołożone.
+- „Serie w tygodniu" liczą klatkę, plecy, nogi i pośladki, barki, ramiona, brzuch i łydki; partie bez bezpośrednich ćwiczeń są wymienione jako pracujące „tylko pośrednio".
+- Krok „Czas treningu" ostrzega, że plan na całe ciało potrzebuje ok. 60 minut.
+- Zamienniki dla bólu nie powtarzają tego samego ruchu (np. dwóch Hip Thrustów w jednym treningu).

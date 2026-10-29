@@ -360,7 +360,7 @@ function pgWybierzCwiczenie(slot, p, uzyte, przesun) {
   lista = lista.map(function (n) {
     return n.charAt(0) === "@" ? pgDrabinka(n, p) : n;
   }).filter(function (n) {
-    return n && !uzyte[n] && !pgKoliduje(n, p.bole) && pgZnajdz(n);
+    return n && !uzyte[n] && !uzyte["~" + n.split(" ").slice(0, 2).join(" ")] && !pgKoliduje(n, p.bole) && pgZnajdz(n);
   });
   if (lista.length === 0) {
     return null;
@@ -424,6 +424,7 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
       return;
     }
     uzyte[cw.nazwa] = true;
+    uzyte["~" + cw.nazwa.split(" ").slice(0, 2).join(" ")] = true;
     const par = pgParametryCelu(slot, i, p);
     wpisy.push({
       cw: cw,
@@ -457,6 +458,8 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
 
   // Dopasowanie do czasu: bez rozgrzewki i rozciągania (ok. 12 min), ostatnie ćwiczenia odpadają pierwsze
   const budzet = Math.max(20, p.czas - 12);
+  const pelne = wpisy.slice();
+  const pelnyCzas = Math.ceil(pgMinuty(pelne) + 12);
   // Ćwiczenia na brzuch (rdzeń) nie odpadają; usuwamy od końca zwykłe ćwiczenia dodatkowe (pierwsze 3 zostają)
   while (pgMinuty(wpisy) > budzet) {
     let idx = -1;
@@ -477,7 +480,10 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
       w.czasy = new Array(w.serie).fill(t);
     }
   });
-  return wpisy;
+  const pominiete = pelne.filter(function (w) {
+    return wpisy.indexOf(w) === -1;
+  });
+  return { wpisy: wpisy, pominiete: pominiete, pelnyCzas: pelnyCzas };
 }
 
 // Ilość do zapisania w sesji
@@ -547,7 +553,7 @@ function pgBuduj(p) {
       licznik++;
       if (!typyUzyte[ts.klucz + ts.przesun]) {
         const sloty = PG_SZABLONY[ts.szablon][ts.klucz];
-        typyUzyte[ts.klucz + ts.przesun] = { ts: ts, wpisy: pgBudujTrening(sloty, p, kotw, ts.przesun) };
+        typyUzyte[ts.klucz + ts.przesun] = Object.assign({ ts: ts }, pgBudujTrening(sloty, p, kotw, ts.przesun));
       }
       wynik.sesje.push({ dzien: dzien, trening: ts.klucz + ts.przesun, szablon: ts.szablon, klucz: ts.klucz });
     });
@@ -567,6 +573,8 @@ function pgBuduj(p) {
     wynik.treningi[k] = {
       nazwa: nazwa,
       wpisy: t.wpisy,
+      pominiete: t.pominiete,
+      pelnyCzas: t.pelnyCzas,
       gora: ["GA", "GB", "Push", "Pull"].indexOf(t.ts.klucz) !== -1,
       dol: ["DA", "DB", "Legs", "S"].indexOf(t.ts.klucz) !== -1
     };
@@ -617,6 +625,19 @@ function pgBuduj(p) {
   wynik.sesje.sort(function (a, b) { return a.dzien - b.dzien; });
   pgPowody(wynik, p, podzial, kotw);
 
+  // Za krótki czas: mówimy wprost, co pominięto i ile czasu potrzeba na pełny trening
+  const klucze = Object.keys(wynik.treningi);
+  const pominiete = klucze.some(function (k) { return wynik.treningi[k].pominiete.length > 0; });
+  const liczbaPominietych = klucze.reduce(function (suma, k) { return Math.max(suma, wynik.treningi[k].pominiete.length); }, 0);
+  if (pominiete && liczbaPominietych >= 2 && p.cel !== "sila") {
+    const potrzeba = Math.max.apply(null, klucze.map(function (k) { return wynik.treningi[k].pelnyCzas; }));
+    const nazwy = {};
+    klucze.forEach(function (k) {
+      wynik.treningi[k].pominiete.forEach(function (w) { nazwy[w.cw.nazwa] = true; });
+    });
+    wynik.uwagi.unshift("W " + p.czas + " minutach mieszczą się ćwiczenia podstawowe (nogi, pchanie, ciągnięcie, brzuch). Żeby trening był pełniejszy i dawał lepszy efekt, wydłuż go do ok. " + Math.ceil(potrzeba / 5) * 5 + " minut. Wtedy dołożę: " + Object.keys(nazwy).slice(0, 6).join(", ").toLowerCase() + (Object.keys(nazwy).length > 6 ? " i inne" : "") + ".");
+  }
+
   // Nazwa planu
   const etykietaPodzialu = {
     fb: "całe ciało", ul: "góra / dół", ppl: "push / pull / legs", bieg: p.bieg20 ? "bieg ciągły" : "marszobieg"
@@ -626,6 +647,18 @@ function pgBuduj(p) {
     wynik.nazwa += " (blok 1/" + (p.tygodni / 4) + ")";
   }
   return wynik;
+}
+
+// Grupa mięśni ćwiczenia do liczenia serii: klatka, plecy, barki, ramiona, nogi (z pośladkami), brzuch, lydki
+function pgGrupa(cw) {
+  if (/Wspięcia|Tibialis/i.test(cw.nazwa)) {
+    return "lydki";
+  }
+  const mapa = {
+    "partia-klatka": "klatka", "partia-plecy": "plecy", "partia-barki": "barki", "partia-ramiona": "ramiona",
+    "partia-nogi": "nogi", "partia-posladki": "nogi", "partia-brzuch": "brzuch"
+  };
+  return mapa[(cw.partieIds || [])[0]] || null;
 }
 
 // "Dlaczego ten plan?" i ostrzeżenia
@@ -642,22 +675,30 @@ function pgPowody(wynik, p, podzial, kotw) {
   } else {
     const nazwaPodzialu = { fb: "całe ciało 2–3 razy w tygodniu", ul: "podział góra / dół", ppl: "podział push / pull / legs" }[podzial.typ];
     powody.push("Dla " + poziomy[p.dosw] + " przy " + p.dni + " dniach dobrze działa " + nazwaPodzialu + ": każda duża partia jest trenowana regularnie, a między treningami ma czas na regenerację.");
-    // Objętość: serie tygodniowo na partię w pierwszym tygodniu
+    // Objętość: serie tygodniowo na grupę mięśni w pierwszym tygodniu
     const serie = {};
     wynik.sesje.filter(function (s) { return s.dzien < 7 && s.trening; }).forEach(function (s) {
       wynik.treningi[s.trening].wpisy.forEach(function (w) {
-        const partia = (w.cw.partieIds || [])[0];
-        if (partia && !w.statyczne) {
-          serie[partia] = (serie[partia] || 0) + w.serie;
+        const g = pgGrupa(w.cw);
+        if (g && !w.statyczne) {
+          serie[g] = (serie[g] || 0) + w.serie;
+        }
+        if (g === "brzuch" || (w.statyczne && (w.cw.partieIds || [])[0] === "partia-brzuch")) {
+          serie.brzuch = (serie.brzuch || 0) + (w.statyczne ? w.serie : 0);
         }
       });
     });
-    const nazwy = ["partia-klatka", "partia-plecy", "partia-nogi", "partia-barki"];
-    const opis = nazwy.filter(function (id) { return serie[id]; }).map(function (id) {
-      return nazwaKategorii(id).toLowerCase() + " " + serie[id];
+    wynik.serieTygodniowo = serie;
+    const kolejnosc = [["klatka", "klatka"], ["plecy", "plecy"], ["nogi", "nogi i pośladki"], ["barki", "barki"], ["ramiona", "ramiona"], ["brzuch", "brzuch"], ["lydki", "łydki"]];
+    const opis = kolejnosc.filter(function (g) { return serie[g[0]]; }).map(function (g) {
+      return g[1] + " " + serie[g[0]];
     });
     if (opis.length > 0) {
-      powody.push("Objętość w tygodniu (serie): " + opis.join(", ") + ". Badania pokazują, że dla wzrostu mięśni najlepiej sprawdza się ok. 10–20 serii tygodniowo na partię, zależnie od poziomu.");
+      powody.push("Serie w tygodniu: " + opis.join(", ") + ". Badania pokazują, że dla wzrostu mięśni najlepiej sprawdza się ok. 10–20 serii tygodniowo na dużą partię, zależnie od poziomu.");
+    }
+    const brak = kolejnosc.filter(function (g) { return !serie[g[0]] && ["ramiona", "lydki", "barki"].indexOf(g[0]) !== -1; }).map(function (g) { return g[1]; });
+    if (brak.length > 0 && p.cel !== "sila") {
+      wynik.uwagi.push("Ćwiczenia na " + brak.join(", ") + " pracują tu tylko pośrednio (przy innych ruchach), bo nie mieszczą się w " + p.czas + " minutach.");
     }
     if (p.cel === "sila") {
       powody.push("Siłę buduje się ciężkimi seriami po 4–6 powtórzeń i długimi przerwami (3 min), dlatego główne ćwiczenia są właśnie takie.");
