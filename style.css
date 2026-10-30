@@ -306,7 +306,8 @@ h1 {
 }
 
 #pole-szukaj,
-#pole-szukaj-wyboru {
+#pole-szukaj-wyboru,
+#szukaj-treningow {
   width: 100%;
   height: 48px;
   padding: 0 12px;
@@ -1925,3 +1926,24 @@ h1 {
 .pr-zmiana { font-size: 18px; font-weight: 700; color: var(--akcent); }
 .pr-przyciski { display: flex; gap: 8px; margin-top: 6px; }
 .pr-przyciski .przycisk { flex: 1; min-height: 44px; }
+
+#szukaj-treningow {
+  display: block;
+  margin: 12px 0;
+}
+
+#szukaj-treningow[hidden] {
+  display: none;
+}
+
+/* Moje treningi: nazwa i opis na całą szerokość, przyciski w wierszu pod spodem, lista ćwiczeń skrócona do 3 linii */
+#lista-treningow .karta.zwijana > .karta-tekst {
+  flex-basis: 100%;
+}
+
+#lista-treningow .karta.zwijana > .karta-tekst > .karta-opis:last-child {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

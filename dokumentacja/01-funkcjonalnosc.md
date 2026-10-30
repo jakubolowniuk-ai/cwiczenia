@@ -287,3 +287,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Bieganie: biegi nie dzień po dniu, marszobieg max 3× w tygodniu.
 - 2 dni w tygodniu: główne ćwiczenia +1 seria. Nazwa planu podaje rzeczywistą liczbę dni.
 - Usunięte nieużywane zmienne (dzis.js, kreator2.js, plan-kreator.js), wspólna stała `NAZWY_DNI`.
+
+## v63 – nowy przewodnik
+- Przewodnik ma 14 kart z aktualnymi zrzutami: Ułóż mi plan, gotowy plan, Dziś, tryb Ćwicz, przerwa, ocena, propozycje progresji, inne wartości, plan ręczny, Postęp, baza, Moje treningi, kolejny blok. Zrzuty generuje `narzedzia/zrzuty-przewodnika.js`.
+- Ekran startowy (brak planu) opisuje „Ułóż mi plan”, plan ręczny i „Ćwicz”.
+- Poprawki znalezione przy zrzutach: lista Moje treningi odświeża się po przełączeniu (zestawy z kreatora były widoczne dopiero po ponownym uruchomieniu); własne zestawy na górze (najnowsze pierwsze), rozgrzewki i rozciągania na końcu; przyciski Pokaż/Edytuj/Usuń pod nazwą, lista ćwiczeń skrócona do 3 linii; pole wyszukiwania zestawów ma normalny wygląd; zmiana zakładki przewija ekran na górę.

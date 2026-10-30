@@ -13,6 +13,12 @@ function pokazEkran(idEkranu) {
   zakladki.forEach(function (zakladka) {
     zakladka.classList.toggle("aktywna", zakladka.dataset.ekran === idEkranu);
   });
+  // Nowy ekran zawsze od góry (inaczej zostaje przewinięcie z poprzedniego)
+  window.scrollTo(0, 0);
+  const glowna = document.querySelector("main");
+  if (glowna) {
+    glowna.scrollTop = 0;
+  }
 
   if (idEkranu === "ekran-dzis" && typeof rysujDzis === "function") {
     rysujDzis();

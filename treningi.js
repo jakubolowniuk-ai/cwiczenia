@@ -137,6 +137,10 @@ function pokazWidok(nazwa) {
   widokTreningi.hidden = !treningi;
   przelacznikBaza.classList.toggle("aktywny", !treningi);
   przelacznikTreningi.classList.toggle("aktywny", treningi);
+  if (treningi) {
+    // Zestawy mogły dojść w innym miejscu (np. z kreatora planu), więc rysujemy listę od nowa
+    rysujTreningi();
+  }
 }
 
 // ===== Ćwiczenia wybrane do treningu =====
@@ -387,7 +391,14 @@ function rysujTreningi() {
   listaTreningow.innerHTML = "";
   pusteTreningi.hidden = treningiZapisane().length > 0;
 
-  const widoczneTreningi = treningiZapisane().filter(function (trening) {
+  // Najpierw własne zestawy (najnowsze na górze), potem gotowe z bazy, na końcu rozgrzewki i rozciągania
+  const kolejnosc = function (t) {
+    return t.blok ? 2 : t.zBazy ? 1 : 0;
+  };
+  const wszystkie = treningiZapisane();
+  const widoczneTreningi = wszystkie.slice().sort(function (a, b) {
+    return kolejnosc(a) - kolejnosc(b) || wszystkie.indexOf(b) - wszystkie.indexOf(a);
+  }).filter(function (trening) {
     if (szukajTreningow === "") {
       return true;
     }

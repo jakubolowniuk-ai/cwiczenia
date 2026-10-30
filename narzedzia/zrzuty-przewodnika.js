@@ -1,130 +1,169 @@
-// Generuje zrzuty ekranu do przewodnika (przewodnik/*.png) z działającej aplikacji.
+// Generuje zrzuty ekranu do przewodnika (przewodnik/*.webp) z działającej aplikacji.
 // Uruchomienie: node narzedzia/zrzuty-przewodnika.js  (potrzebny Playwright i Chromium)
 const { chromium } = require("/home/claude/.npm-global/lib/node_modules/playwright");
 const sciezka = require("path").resolve(__dirname, "..");
+const fs = require("fs");
+
 (async () => {
   const b = await chromium.launch({ executablePath: "/opt/pw-browsers/chromium", args: ["--no-sandbox", "--allow-file-access-from-files"] });
-  const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true })).newPage();
-  p.on("dialog", (d) => d.accept());
-  const zrzut = (n) => p.screenshot({ path: sciezka + "/przewodnik/" + n + ".png" });
-  await p.goto("file://" + sciezka + "/index.html");
-  await p.waitForTimeout(2000);
-  await zrzut("1-start");
+  const nowa = async () => {
+    const p = await (await b.newContext({ viewport: { width: 390, height: 844 }, deviceScaleFactor: 2, hasTouch: true })).newPage();
+    p.on("dialog", (d) => d.accept());
+    p.on("pageerror", (e) => console.log("BŁĄD:", e.message));
+    await p.goto("file://" + sciezka + "/index.html");
+    await p.waitForTimeout(2000);
+    return p;
+  };
+  const zrzut = (p, n) => p.screenshot({ path: sciezka + "/przewodnik/" + n + ".png" });
+  fs.readdirSync(sciezka + "/przewodnik").forEach((f) => fs.unlinkSync(sciezka + "/przewodnik/" + f));
 
-  await p.tap("#dzis-utworz-plan");
+  // ===== Plan z kreatora =====
+  const p = await nowa();
+  await zrzut(p, "01-start");
+
+  await p.tap("#dzis-uloz-plan");
+  await p.waitForTimeout(300);
+  await p.locator(".pk-opcja").nth(0).tap();
+  await p.waitForTimeout(300);
+  await zrzut(p, "02-kreator");
+
+  await p.evaluate(() => {
+    Object.assign(pkProfil, { cel: "masa", dosw: 1, dni: 3, czas: 60, sprzet: "s", kotwice: { pch: 50, wio: 45, prz: 60 } });
+    pkKrok = pkKroki().length - 1;
+    pkRysuj();
+  });
+  await p.waitForTimeout(300);
+  await zrzut(p, "03-gotowy-plan");
+  await p.locator(".pk-nakladka button:text-is('Zacznij')").tap();
+  await p.waitForTimeout(500);
+
+  // Dziś: sesja z rozgrzewką i ćwiczeniami
+  await p.evaluate(() => window.scrollTo(0, 0));
+  await p.waitForTimeout(200);
+  await zrzut(p, "04-dzis");
+
+  // Tryb Ćwicz: rozgrzewkę pomijamy, pokazujemy serię i przerwę
+  await p.locator("#dzis-sesje button:text-is('Ćwicz')").first().tap();
+  await p.waitForTimeout(400);
+  for (let i = 0; i < 12; i++) {
+    const nazwa = await p.locator("#cwicz-tresc .cw-nazwa").first().textContent();
+    if (/Przysiad ze sztangą/.test(nazwa)) break;
+    await p.locator("#cwicz-tresc button:text-is('Pomiń ćwiczenie')").tap();
+    await p.waitForTimeout(250);
+  }
+  await zrzut(p, "05-cwicz");
+  await p.locator("#cwicz-tresc button:text-is('Zrobione ✓')").tap();
+  await p.waitForTimeout(1500);
+  await zrzut(p, "06-przerwa");
+
+  // Koniec sesji z oceną
+  await p.evaluate(() => {
+    const ids = cwSesja.treningId ? znajdzTrening(cwSesja.treningId).cwiczeniaIds : [];
+    cwSesja.zrobione = cwSesja.zrobione || {};
+    cwIds().forEach((id) => { cwSesja.zrobione[id] = true; });
+    cwSesja.ocena = { [ids[0]]: "latwo", [ids[1]]: "wsam", [ids[2]]: "wsam" };
+    zapiszDane();
+    cwFaza = "koniec";
+    cwRysuj();
+  });
+  await p.waitForTimeout(300);
+  await p.locator("#cwicz-tresc .cw-podsumowanie").nth(7).evaluate((e) => e.scrollIntoView());
+  await p.waitForTimeout(200);
+  await zrzut(p, "07-ocena");
+  await p.locator("#cwicz-tresc button:text-is('Zamknij')").tap();
+  await p.waitForTimeout(300);
+
+  // Propozycje progresji: dzisiejszy trening A po poprzednim A z górą zakresu
+  await p.evaluate(() => {
+    const plan = aktywnyPlan();
+    const d = new Date();
+    d.setDate(d.getDate() - 4);
+    plan.start = d.toISOString().slice(0, 10);
+    const a = plan.sesje.find((s) => s.dzien === 0);
+    a.zrobione = {};
+    a.wykonane = {};
+    Object.keys(a.parametry).forEach((id) => {
+      a.zrobione[id] = true;
+      const il = JSON.parse(JSON.stringify(a.parametry[id]));
+      if (il.zakres) il.powtorzenia = il.zakres[1];
+      a.wykonane[id] = il;
+    });
+    plan.sesje.filter((s) => s.dzien === 2).forEach((s) => { s.zrobione = {}; Object.keys(s.parametry || {}).forEach((id) => { s.zrobione[id] = true; }); });
+    zapiszDane();
+    pokazEkran("ekran-dzis");
+    rysujDzis();
+  });
+  await p.waitForTimeout(400);
+  await p.locator(".pr-karta").evaluate((e) => e.scrollIntoView());
+  await p.evaluate(() => window.scrollBy(0, -70));
+  await p.waitForTimeout(200);
+  await zrzut(p, "08-propozycje");
+
+  // Inna wartość niż w planie
+  await p.locator(".pr-karta button:text-is('Przyjmij wszystkie')").tap();
+  await p.waitForTimeout(300);
+  const glowne = p.locator("#dzis-sesje .wartosc-przycisk");
+  const n = await glowne.count();
+  await glowne.nth(Math.min(8, n - 1)).tap();
+  await p.waitForTimeout(200);
+  await p.locator("#wart-pola .wart-stepper button").nth(3).tap();
+  await p.locator("#wart-pola .wart-stepper button").nth(3).tap();
+  await p.waitForTimeout(200);
+  await zrzut(p, "09-inne-wartosci");
+  await p.tap("#wart-anuluj");
+
+  // Postęp
+  await p.evaluate(() => pokazEkran("ekran-postep"));
+  await p.waitForTimeout(400);
+  await zrzut(p, "11-postep");
+
+  // Baza ćwiczeń
+  await p.evaluate(() => pokazEkran("ekran-cwiczenia"));
+  await p.waitForTimeout(300);
+  if (await p.locator("#blok-filtrow").isHidden()) await p.evaluate(() => (document.getElementById("blok-filtrow").hidden = false));
+  await p.locator("#chipy-partie .chip", { hasText: "Plecy" }).tap();
+  await p.locator("#chipy-miesnie .chip").nth(3).tap();
+  await p.waitForTimeout(300);
+  await zrzut(p, "12-baza");
+  await p.tap("#przelacznik-treningi");
+  await p.waitForTimeout(300);
+  await zrzut(p, "13-moje-zestawy");
+
+  // Koniec planu: kolejny blok
+  await p.evaluate(() => {
+    const plan = aktywnyPlan();
+    const d = new Date();
+    d.setDate(d.getDate() - 31);
+    plan.start = d.toISOString().slice(0, 10);
+    zapiszDane();
+    pokazEkran("ekran-dzis");
+    rysujDzis();
+  });
+  await p.waitForTimeout(400);
+  await p.locator(".dzis-karta.koniec").evaluate((e) => e.scrollIntoView());
+  await p.evaluate(() => window.scrollBy(0, -70));
+  await p.waitForTimeout(200);
+  await zrzut(p, "14-kolejny-blok");
+
+  // ===== Plan ręczny: kalendarz =====
+  const r = await nowa();
+  await r.tap("#dzis-utworz-plan");
   const dodaj = async (rodzaj, partie, razy) => {
-    await p.tap("#kr-dodaj");
-    await p.selectOption("#kr-rodzaj", rodzaj);
-    for (const x of partie) await p.locator("#kr-partia .chip", { hasText: x }).first().tap();
-    await p.fill("#kr-razy", String(razy));
-    await p.tap("#kr-zapisz-aktywnosc");
+    await r.tap("#kr-dodaj");
+    await r.selectOption("#kr-rodzaj", rodzaj);
+    for (const x of partie) await r.locator("#kr-partia .chip", { hasText: x }).first().tap();
+    await r.fill("#kr-razy", String(razy));
+    await r.tap("#kr-zapisz-aktywnosc");
   };
   await dodaj("rodzaj-cialo", ["Klatka", "Plecy"], 2);
   await dodaj("rodzaj-kalistenika", ["Ogólnorozwojowy"], 1);
   await dodaj("rodzaj-spacer", [], 3);
-  await p.waitForTimeout(300);
-  await zrzut("2-aktywnosci");
+  await r.tap("#kr-dalej");
+  await r.tap("#kal-propozycja");
+  await r.waitForTimeout(400);
+  await zrzut(r, "10-recznie");
 
-  await p.tap("#kr-dalej");
-  await p.tap("#kal-propozycja");
-  await p.waitForTimeout(400);
-  await zrzut("3-kalendarz");
-
-  // Pierwsza sesja z ćwiczeniami: pokazujemy ekran z dodanymi ćwiczeniami
-  const dzien = await p.evaluate(() => szkic.sesje.find((s) => wymagaTreningu(znajdzAktywnosc(s.aktywnoscId))).dzien);
-  await p.locator(".kafelek").nth(dzien).tap();
-  const idx = await p.evaluate(() => pdSesje && 0);
-  const lista = await p.evaluate(() => szkic.sesje.filter((s) => s.dzien === pdDzien).findIndex((s) => wymagaTreningu(znajdzAktywnosc(s.aktywnoscId))));
-  await p.locator("#pd-sesje .akcja").nth(lista).tap();
-  await p.locator("#pd-sesja-trening .akcja").first().tap();
-  await p.waitForTimeout(200);
-  await p.locator("#kr2-cwiczenia .akcja").nth(0).tap();
-  await p.locator("#kr2-cwiczenia .akcja").nth(1).tap();
-  await zrzut("4-cwiczenia-w-sesji");
-  await p.check("#kr2-zapisz-zestaw");
-  await p.fill("#kr2-nazwa", "Klatka i plecy A");
-  await p.tap("#kr2-zapisz");
-  await p.waitForTimeout(300);
-  const wejscia = p.locator("#pd-sesja-parametry input:visible");
-  for (let i = 0; i < (await wejscia.count()); i++) await wejscia.nth(i).fill("8");
-  const bloki = p.locator("#pd-sesja-parametry .ciezar-blok select");
-  for (let i = 0; i < (await bloki.count()); i++) {
-    await bloki.nth(i).selectOption("jeden");
-    await p.locator("#pd-sesja-parametry .ciezar-blok").nth(i).locator("input:visible").first().fill(i === 0 ? "60" : "24");
-  }
-  await p.locator("#arkusz-tresc").evaluate((e) => (e.scrollTop = 130));
-  await p.waitForTimeout(200);
-  await zrzut("5-parametry");
-  await p.tap("#pd-sesja-zapisz");
-  await p.tap("#pd-zamknij");
-
-  // Reszta sesji: wypełniamy automatycznie
-  for (let g = 0; g < 12; g++) {
-    const n = await p.evaluate(() => szkic.sesje.filter((s) => !sesjaGotowa(s)).length);
-    if (!n) break;
-    const dz = await p.evaluate(() => szkic.sesje.find((s) => !sesjaGotowa(s)).dzien);
-    await p.locator(".kafelek").nth(dz).tap();
-    const ix = await p.evaluate(() => szkic.sesje.filter((s) => s.dzien === pdDzien).findIndex((s) => !sesjaGotowa(s)));
-    await p.locator("#pd-sesje .akcja").nth(ix).tap();
-    const typ = await p.evaluate(() => (wymagaTreningu(znajdzAktywnosc(pdSesja.aktywnoscId)) ? "cw" : "x"));
-    if (typ === "cw") {
-      await p.locator("#pd-sesja-trening .akcja").first().tap();
-      await p.locator("#kr2-wszystkie").check();
-      await p.locator("#kr2-cwiczenia .akcja").nth(0).tap();
-      await p.locator("#kr2-cwiczenia .akcja").nth(1).tap();
-      await p.tap("#kr2-zapisz");
-      const w = p.locator("#pd-sesja-parametry input:visible");
-      for (let i = 0; i < (await w.count()); i++) await w.nth(i).fill("8");
-    } else {
-      await p.fill("#pd-sesja-parametry input >> nth=0", "6000");
-    }
-    await p.tap("#pd-sesja-zapisz");
-    await p.tap("#pd-zamknij");
-  }
-  await p.tap("#kal-zapisz");
-  await p.waitForTimeout(400);
-
-  // Dziś: pierwsza sesja przesunięta na dzisiaj, jedno ćwiczenie zaliczone
-  await p.evaluate(() => {
-    const plan = aktywnyPlan();
-    const kolejne = plan.sesje.slice().sort((a, b) => a.dzien - b.dzien);
-    const cw = kolejne.find((s) => s.treningId);
-    cw.dzien = 0;
-    zapiszDane();
-    rysujDzis();
-  });
-  await p.evaluate(() => pokazEkran("ekran-dzis"));
-  await p.waitForTimeout(300);
-  await p.locator("#dzis-sesje .odhacz").first().tap();
-  await p.waitForTimeout(300);
-  await zrzut("6-dzis");
-  // Okno wartości: zrobione inaczej niż w planie
-  await p.locator("#dzis-sesje .wartosc-przycisk").nth(1).tap();
-  await p.waitForTimeout(200);
-  await p.locator("#wart-pola .wart-stepper button").nth(3).tap();
-  await p.locator("#wart-pola .wart-stepper button").nth(3).tap();
-  await p.locator("#wart-pola .wart-stepper button").nth(5).tap();
-  await p.waitForTimeout(200);
-  await zrzut("7-inne-wartosci");
-  await p.tap("#wart-anuluj");
-
-  await p.evaluate(() => pokazEkran("ekran-postep"));
-  await p.waitForTimeout(300);
-  await zrzut("8-postep");
-
-  await p.evaluate(() => pokazEkran("ekran-cwiczenia"));
-  await p.waitForTimeout(300);
-  const filtry = await p.$("#blok-filtrow");
-  if (await filtry.isHidden()) await p.evaluate(() => (document.getElementById("blok-filtrow").hidden = false));
-  await p.locator("#chipy-partie .chip", { hasText: "Plecy" }).tap();
-  await p.locator("#chipy-miesnie .chip").nth(3).tap();
-  await p.waitForTimeout(300);
-  await zrzut("9-baza");
-  await p.tap("#przelacznik-treningi");
-  await p.waitForTimeout(300);
-  await zrzut("10-moje-treningi");
   await b.close();
-  // PNG -> WEBP (mniejsze pliki)
   require("child_process").execSync(
     "python3 -c \"import glob,os;from PIL import Image\nfor f in glob.glob('" + sciezka + "/przewodnik/*.png'):\n Image.open(f).convert('RGB').save(f[:-4]+'.webp','WEBP',quality=78,method=6);os.remove(f)\""
   );
