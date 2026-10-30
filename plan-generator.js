@@ -148,6 +148,33 @@ const PG_SZABLONY = {
   }
 };
 
+// ===== Szablony kalisteniki (masa ciała) =====
+// Ćwiczenia wybierane z drabinek wg maksów użytkownika i doświadczenia (pgDrabinka), nie z jednej stałej listy.
+function pgK(kod, serie, rdzen) {
+  return pgS(null, null, ["@k:" + kod], serie, 8, 12, 90, rdzen);
+}
+
+const PG_KAL = {
+  fb: {
+    A: [pgK("squat", 3), pgK("push", 3), pgK("pullV", 3), pgK("pushV", 2), pgK("core1", 3, true), pgK("biceps", 2), pgK("calf", 2), pgK("core3", 2), pgK("lunge", 2), pgK("dip", 2)],
+    B: [pgK("hinge", 3), pgK("pushB", 3), pgK("pullVB", 3), pgK("lunge", 2), pgK("dip", 3), pgK("core2", 3, true), pgK("ham", 2), pgK("core4", 2), pgK("squatB", 2), pgK("biceps", 2), pgK("pushV", 2)]
+  },
+  ul: {
+    GA: [pgK("push", 4), pgK("pullV", 4), pgK("pushV", 3), pgK("dip", 3), pgK("biceps", 2), pgK("core3", 2), pgK("pullH", 2)],
+    DA: [pgK("squat", 4), pgK("hinge", 3), pgK("ham", 3), pgK("calf", 3), pgK("core2", 3, true), pgK("lunge", 2)],
+    GB: [pgK("pushB", 4), pgK("pullVB", 4), pgK("pullH", 3), pgK("pushV", 3), pgK("dip", 3), pgK("core4", 2), pgK("biceps", 2)],
+    DB: [pgK("lunge", 4), pgK("hinge", 3), pgK("squatB", 3), pgK("calf", 3), pgK("core1", 3, true), pgK("ham", 2), pgK("core3", 2)]
+  },
+  ppl: {
+    Push: [pgK("push", 4), pgK("pushV", 3), pgK("dip", 3), pgK("pushB", 3), pgK("core3", 2)],
+    Pull: [pgK("pullV", 4), pgK("pullH", 3), pgK("pullVB", 3), pgK("biceps", 3), pgK("core2", 3, true)],
+    Legs: [pgK("squat", 4), pgK("hinge", 3), pgK("lunge", 3), pgK("ham", 3), pgK("calf", 3), pgK("core1", 3, true)]
+  },
+  bsila: {
+    S: [pgK("squat", 2), pgK("hinge", 2), pgK("lunge", 2), pgK("calf", 2), pgK("core1", 2, true)]
+  }
+};
+
 // Dodatkowe ćwiczenie dla wybranej partii (priorytet)
 const PG_PRIORYTET = {
   "partia-klatka": pgS(["Rozpiętki na maszynie Pec Deck (butterfly)", "Rozpiętki z hantlami na ławce poziomej"], ["Rozpiętki z hantlami na ławce poziomej"], ["Pompki szerokie"], 2, 10, 15, 60),
@@ -161,22 +188,88 @@ const PG_PRIORYTET = {
 
 // ===== Drabinki trudności (kalistenika) =====
 
-function pgDrabinka(kod, p) {
-  const push = p.maxPompek == null ? 8 : p.maxPompek;
-  const pull = p.maxPodciagniec == null ? 0 : p.maxPodciagniec;
-  if (kod === "@push") {
-    return push < 6 ? "Pompki z rękami na podwyższeniu" : push < 20 ? "Pompki klasyczne" : push < 30 ? "Pompki z nogami na podwyższeniu" : "Pompki łucznicze";
+// Drabinki: kolejne warianty od najłatwiejszego do najtrudniejszego (indeks = "szczebel")
+const PG_KAL_LAD = {
+  push: ["Pompki z rękami na podwyższeniu", "Pompki klasyczne", "Pompki z nogami na podwyższeniu", "Pompki łucznicze", "Pompki pseudo-planche"],
+  pushB: ["Pompki z wypchnięciem łopatek (Push-Up Plus)", "Pompki z wąskim rozstawem dłoni", "Pompki diamentowe", "Pompki hinduskie", "Pompki pseudo-planche"],
+  pushV: ["Pompki pike", "Pompki pike", "Pompki pike z nogami na podwyższeniu", "Pompki w staniu na rękach przy ścianie", "Pompki w staniu na rękach przy ścianie"],
+  dip: ["Dipy na ławce", "Dipy na ławce", "Dipy na poręczach", "Dipy z pochyleniem tułowia", "Dipy z pionowym tułowiem"],
+  pullV: ["Podciąganie australijskie", "Podciąganie australijskie z nogami na podwyższeniu", "Podciąganie nachwytem", "Podciąganie szerokim nachwytem", "Podciąganie łucznicze"],
+  pullVB: ["Podciąganie australijskie podchwytem", "Podciąganie australijskie podchwytem", "Podciąganie podchwytem", "Podciąganie chwytem neutralnym", "Podciąganie wąskim nachwytem"],
+  pullH: ["Podciąganie australijskie", "Podciąganie australijskie z nogami na podwyższeniu", "Podciąganie australijskie z nogami na podwyższeniu", "Wiosłowanie australijskie jednorącz", "Wiosłowanie australijskie jednorącz"],
+  biceps: ["Uginanie ramion w australijskim podciąganiu podchwytem", "Uginanie ramion w australijskim podciąganiu podchwytem", "Uginanie ramion na niskim drążku podchwytem", "Uginanie ramion na niskim drążku podchwytem", "Podciąganie podchwytem"],
+  squat: ["Przysiad klasyczny", "Przysiad bułgarski", "Przysiad kozacki (Cossack Squat)", "Pistol Squat z podparciem", "Pistol Squat"],
+  squatB: ["Przysiad sumo", "Przysiad głęboki", "Przysiad kozacki (Cossack Squat)", "Pistol Squat z podparciem", "Pistol Squat"],
+  lunge: ["Wykroki w tył", "Wykroki chodzone", "Wykroki chodzone", "Przysiad bułgarski", "Przysiad bułgarski"],
+  hinge: ["Most biodrowy", "Most biodrowy jednonóż", "Hip Thrust jednonóż", "Hip Thrust jednonóż", "Hip Thrust jednonóż"],
+  ham: ["Sliding Leg Curl", "Sliding Leg Curl", "Sliding Leg Curl", "Nordic Hamstring Curl", "Nordic Hamstring Curl"],
+  calf: ["Wspięcia na palce obunóż", "Wspięcia na palce obunóż", "Wspięcia na palce jednonóż", "Wspięcia na palce jednonóż", "Wspięcia na palce jednonóż"],
+  core1: ["Deska przodem (Front Plank)", "Deska przodem (Front Plank)", "Hollow Body Hold", "Hollow Body Hold", "L-Sit"],
+  core2: ["Odwrotne spięcia brzucha", "Unoszenie nóg leżąc", "Unoszenie kolan w zwisie", "Unoszenie prostych nóg w zwisie", "Toes to Bar"],
+  core2bez: ["Odwrotne spięcia brzucha", "Unoszenie nóg leżąc", "Scyzoryk (V-up)", "Scyzoryk (V-up)", "Scyzoryk (V-up)"],
+  core3: ["Deska bokiem (Side Plank)", "Deska bokiem (Side Plank)", "Russian Twist", "Russian Twist", "Wycieraczki w zwisie (Windshield Wipers)"],
+  core4: ["Dead Bug", "Dead Bug", "Rowerki brzucha", "Hollow Body Rocks", "Hollow Body Rocks"]
+};
+
+// Szczebel na drabince z maksymalnej liczby powtórzeń; bez danych: z doświadczenia
+function pgSzczebelPchania(p) {
+  const m = p.maxPompek;
+  if (m == null) {
+    return [0, 1, 2, 2][p.dosw || 0];
   }
-  if (kod === "@pushB") {
-    return push < 6 ? "Pompki z wypchnięciem łopatek (Push-Up Plus)" : push < 20 ? "Pompki z wąskim rozstawem dłoni" : "Pompki diamentowe";
+  return m < 5 ? 0 : m < 15 ? 1 : m < 25 ? 2 : m < 35 ? 3 : 4;
+}
+
+function pgSzczebelCiagniecia(p) {
+  const m = p.maxPodciagniec;
+  if (m == null) {
+    return [0, 1, 2, 2][p.dosw || 0];
   }
-  if (kod === "@pull") {
-    return pull < 1 ? "Podciąganie australijskie" : pull < 5 ? "Podciąganie australijskie z nogami na podwyższeniu" : "Podciąganie nachwytem";
+  return m < 1 ? 0 : m < 5 ? 1 : m < 10 ? 2 : m < 15 ? 3 : 4;
+}
+
+// Kod "@k:nazwa" → nazwa ćwiczenia dla profilu (szczebel zależy od maksów i doświadczenia, sprzęt zawęża wybór)
+function pgDrabinka(kod, p, kandydaci) {
+  if (kod.indexOf("@k:") !== 0) {
+    return null;
   }
-  if (kod === "@pullB") {
-    return pull < 5 ? "Podciąganie australijskie podchwytem" : "Podciąganie podchwytem";
+  const jedna = function (n) {
+    return kandydaci ? (n ? [n] : []) : n;
+  };
+  const klucz = kod.slice(3);
+  const dosw = p.dosw || 0;
+  const dosw2 = Math.min(dosw, 2);
+  const zDraz = p.drazek !== false;
+  const zPor = !!p.poreczy;
+  let r = dosw2;
+  if (/^push|^dip/.test(klucz)) {
+    r = pgSzczebelPchania(p);
+    if (klucz === "pushV") {
+      r = Math.min(4, Math.max(dosw2, r - 1));
+    }
+    if (klucz === "dip" && !zPor) {
+      r = 0;
+    }
+  } else if (/^pull|^biceps/.test(klucz)) {
+    if (!zDraz) {
+      return jedna(klucz === "pullVB" ? "Podciąganie australijskie podchwytem" : klucz === "biceps" ? null : "Podciąganie australijskie");
+    }
+    r = pgSzczebelCiagniecia(p);
+  } else if (klucz === "core2") {
+    return jedna(PG_KAL_LAD[zDraz ? "core2" : "core2bez"][dosw]);
+  } else if (klucz === "core3" && !zDraz) {
+    r = Math.min(r, 3);
   }
-  return null;
+  const lad = PG_KAL_LAD[klucz];
+  if (!lad) {
+    return jedna(null);
+  }
+  const idx = Math.min(r, lad.length - 1);
+  if (kandydaci) {
+    // wariant z drabinki, a gdy jest już użyty w treningu, łatwiejsze szczeble poniżej
+    return lad.slice(0, idx + 1).reverse().filter(function (n, i, t) { return t.indexOf(n) === i; });
+  }
+  return lad[idx];
 }
 
 // ===== Bezpieczeństwo: ćwiczenia kolidujące z bolącym miejscem =====
@@ -352,20 +445,27 @@ function pgTypSesji(podzial, j) {
 
 // ===== Budowa treningu z szablonu =====
 
+// Klucz "tego samego ruchu": np. dwa Hip Thrusty nie trafią do jednego treningu
+function pgKlucz(nazwa) {
+  return /^Hip Thrust/.test(nazwa) ? "Hip Thrust" : nazwa;
+}
+
 function pgWybierzCwiczenie(slot, p, uzyte, przesun) {
   let lista = slot[p.sprzet];
   if (!lista) {
     return null;
   }
-  lista = lista.map(function (n) {
-    return n.charAt(0) === "@" ? pgDrabinka(n, p) : n;
-  }).filter(function (n) {
-    return n && !uzyte[n] && !uzyte["~" + n.split(" ").slice(0, 2).join(" ")] && !pgKoliduje(n, p.bole) && pgZnajdz(n);
+  let plaska = [];
+  lista.forEach(function (n) {
+    plaska = plaska.concat(n.indexOf("@k:") === 0 ? pgDrabinka(n, p, true) : [n]);
+  });
+  lista = plaska.filter(function (n) {
+    return n && !uzyte[n] && !uzyte["~" + pgKlucz(n)] && !pgKoliduje(n, p.bole) && pgZnajdz(n);
   });
   if (lista.length === 0) {
     return null;
   }
-  return pgZnajdz(lista[Math.min(przesun || 0, lista.length - 1)]);
+  return pgZnajdz(lista[Math.min(p.sprzet === "c" ? 0 : (przesun || 0), lista.length - 1)]);
 }
 
 function pgParametryCelu(slot, indeks, p) {
@@ -394,9 +494,31 @@ function pgParametryCelu(slot, indeks, p) {
     serie = Math.max(2, serie - 1);
   }
   if (p.sprzet === "c") {
-    od = Math.max(od, 8);
-    do_ = Math.max(do_, 12);
-    przerwa = Math.min(przerwa, 90);
+    // Masa ciała: serie i zakresy zależą od doświadczenia (zaawansowani robią trudniejsze warianty, więc mniej powtórzeń)
+    const poz = p.dosw || 0;
+    const rdz = !!slot.r;
+    if (p.cel !== "zdrowie") {
+      if (glowne) {
+        serie = [3, 3, 4, 4][poz];
+        od = [8, 8, 6, 5][poz];
+        do_ = [12, 12, 10, 8][poz];
+        przerwa = 90;
+      } else if (rdz) {
+        serie = 3;
+        od = 10;
+        do_ = 15;
+        przerwa = 60;
+      } else {
+        serie = Math.min(slot.serie, 2) + (poz >= 2 ? 1 : 0);
+        od = [10, 10, 8, 8][poz];
+        do_ = [15, 15, 12, 12][poz];
+        przerwa = 60;
+      }
+    } else {
+      od = 10;
+      do_ = 15;
+      przerwa = 60;
+    }
   }
   return { serie: serie, od: od, do: do_, przerwa: przerwa };
 }
@@ -453,7 +575,7 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
       return;
     }
     uzyte[cw.nazwa] = true;
-    uzyte["~" + cw.nazwa.split(" ").slice(0, 2).join(" ")] = true;
+    uzyte["~" + pgKlucz(cw.nazwa)] = true;
     const par = pgParametryCelu(slot, i, p);
     wpisy.push({
       cw: cw,
@@ -581,7 +703,7 @@ function pgBuduj(p) {
       }
       licznik++;
       if (!typyUzyte[ts.klucz + ts.przesun]) {
-        const sloty = PG_SZABLONY[ts.szablon][ts.klucz];
+        const sloty = (p.sprzet === "c" ? PG_KAL : PG_SZABLONY)[ts.szablon][ts.klucz];
         typyUzyte[ts.klucz + ts.przesun] = Object.assign({ ts: ts }, pgBudujTrening(sloty, p, kotw, ts.przesun));
       }
       wynik.sesje.push({ dzien: dzien, trening: ts.klucz + ts.przesun, szablon: ts.szablon, klucz: ts.klucz });
@@ -750,6 +872,12 @@ function pgPowody(wynik, p, podzial, kotw) {
   if (p.sprzet !== "c" && kotw.domyslne && p.cel !== "bieg") {
     wynik.uwagi.push("Ciężary startowe dobrałem ostrożnie. Jeśli któryś jest za lekki albo za ciężki, popraw go w trakcie treningu. Zaczynaj lżej, jeśli masz wątpliwości.");
   }
+  if (p.sprzet === "c" && p.drazek === false) {
+    wynik.uwagi.push("Bez drążka podciąganie australijskie zrobisz pod stabilnym stołem albo na bardzo niskim drążku. Z drążkiem plan będzie pełniejszy.");
+  }
+  if (p.sprzet === "c" && p.drazek !== false && !p.poreczy) {
+    wynik.uwagi.push("Bez poręczy dipy wykonasz na ławce lub krześle. Z poręczami zrobisz trudniejsze wersje.");
+  }
   if (p.bole && p.bole.length > 0) {
     wynik.uwagi.push("Wyłączyłem ćwiczenia obciążające bolące miejsca (" + p.bole.join(", ") + "). Przy bólu skonsultuj się z lekarzem lub fizjoterapeutą.");
   }
@@ -757,7 +885,8 @@ function pgPowody(wynik, p, podzial, kotw) {
 
 // ===== Zapis planu do danych aplikacji =====
 
-function pgZapisz(wynik) {
+function pgZapisz(wynik, opcje) {
+  const zapiszZestawy = !!(opcje && opcje.zapiszZestawy);
   const p = wynik.profil;
   const znacznik = Date.now();
   const rodzajSily = p.sprzet === "c" ? "rodzaj-kalistenika" : "rodzaj-cialo";
@@ -785,8 +914,12 @@ function pgZapisz(wynik) {
       id: "tr-pg-" + znacznik + "-" + i,
       nazwa: t.nazwa + " – " + wynik.nazwa,
       cwiczeniaIds: t.wpisy.map(function (w) { return w.cw.id; }),
-      roboczy: true
+      roboczy: !zapiszZestawy
     };
+    if (zapiszZestawy) {
+      trening.parametry = {};
+      t.wpisy.forEach(function (w) { trening.parametry[w.cw.id] = pgIlosc(w); });
+    }
     dane.treningi.push(trening);
     treningiId[k] = trening.id;
     // Ćwiczenia z ciężarem muszą mieć włączone pole ciężaru; zapisujemy też zalecaną przerwę

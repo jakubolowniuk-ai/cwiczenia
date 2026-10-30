@@ -28,6 +28,18 @@ const PR_DRABINKA = {
   "Wspięcia na palce obunóż": "Wspięcia na palce jednonóż"
 };
 
+// Drabinki kalisteniki z generatora: każdy wariant ma następny, trudniejszy
+if (typeof PG_KAL_LAD !== "undefined") {
+  Object.keys(PG_KAL_LAD).forEach(function (k) {
+    const lad = PG_KAL_LAD[k];
+    for (let i = 0; i < lad.length - 1; i++) {
+      if (lad[i] !== lad[i + 1] && !PR_DRABINKA[lad[i]]) {
+        PR_DRABINKA[lad[i]] = lad[i + 1];
+      }
+    }
+  });
+}
+
 function prLiczba(kg) {
   return String(Math.round(kg * 100) / 100).replace(".", ",");
 }

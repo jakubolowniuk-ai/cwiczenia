@@ -50,6 +50,9 @@ function pkKroki() {
   if (cel !== "kalistenika") {
     kroki.push("sprzet");
   }
+  if (cel === "kalistenika" || pkProfil.sprzet === "c") {
+    kroki.push("sprzetc");
+  }
   kroki.push("bole");
   if (cel !== "bieg" && cel !== "zdrowie") {
     kroki.push("priorytet");
@@ -89,7 +92,7 @@ function pkOtworz() {
   pkProfil = {
     cel: null, dosw: dosw, dni: 3, czas: 60, sprzet: "s", bole: [], priorytet: null,
     kardio: { ile: 0, rodzaj: "spacer" }, tygodni: 4, kotwice: {}, maxPompek: null, maxPodciagniec: null,
-    bieg20: false, rozgrzewka: true, rozciaganie: true
+    bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true
   };
   pkKrok = 0;
   pkWynik = null;
@@ -220,6 +223,16 @@ function pkRysuj() {
     wybor("Gdzie będziesz ćwiczyć?", "", PK_SPRZET, pkProfil.sprzet, function (w) {
       pkProfil.sprzet = w;
     });
+  } else if (krok === "sprzetc") {
+    pokazDalej = false;
+    wybor("Jaki sprzęt masz do ćwiczeń z masą ciała?", "Od tego zależy, czy dostaniesz podciąganie, dipy na poręczach i ćwiczenia w zwisie.", [
+      ["dp", "Drążek i poręcze", "Podciąganie, dipy na poręczach, unoszenie nóg w zwisie"],
+      ["d", "Tylko drążek", "Podciąganie i zwis, dipy na ławce lub krześle"],
+      ["n", "Bez sprzętu", "Tylko podłoga, krzesło lub stół"]
+    ], pkProfil.poreczy ? "dp" : pkProfil.drazek ? "d" : "n", function (w) {
+      pkProfil.drazek = w !== "n";
+      pkProfil.poreczy = w === "dp";
+    });
   } else if (krok === "bole") {
     tresc.appendChild(pkEl("h1", "", "Czy coś Cię boli?"));
     tresc.appendChild(pkEl("p", "opis", "Zaznacz miejsca, które mają być oszczędzane. Pominę ćwiczenia, które je mocno obciążają. Jeśli lekarz zakazał jakichś ruchów, wybierz też te miejsca."));
@@ -342,7 +355,9 @@ function pkRysujKotwice(tresc, ustawWalidacje) {
     tresc.appendChild(pkEl("h1", "", "Sprawdźmy Twoją siłę"));
     tresc.appendChild(pkEl("p", "opis", "Wpisz, ile razy dasz radę zrobić dane ćwiczenie z poprawną techniką. Jeśli nie wiesz, zostaw puste, ułożę łagodny start."));
     tresc.appendChild(pkPoleLiczba("Pompki klasyczne (maksymalnie powtórzeń)", "Z prostym ciałem, klatka do podłogi", p.maxPompek, function (v) { p.maxPompek = v; }));
-    tresc.appendChild(pkPoleLiczba("Podciągnięcia na drążku (maksymalnie)", "0 jeśli jeszcze nie dajesz rady", p.maxPodciagniec, function (v) { p.maxPodciagniec = v; }));
+    if (p.drazek) {
+      tresc.appendChild(pkPoleLiczba("Podciągnięcia na drążku (maksymalnie)", "0 jeśli jeszcze nie dajesz rady", p.maxPodciagniec, function (v) { p.maxPodciagniec = v; }));
+    }
     ustawWalidacje(function () { return true; });
     return;
   }
@@ -412,13 +427,24 @@ function pkRysujPodsumowanie(tresc) {
 
   tresc.appendChild(pkEl("p", "opis", "To plan ogólny, a nie porada indywidualna. Jeśli masz choroby albo kontuzje, skonsultuj trening z lekarzem lub trenerem."));
 
+  const wierszZ = pkEl("label", "pk-wiersz");
+  const poleZ = document.createElement("input");
+  poleZ.type = "checkbox";
+  poleZ.checked = pkProfil.zapiszZestawy !== false;
+  poleZ.addEventListener("change", function () {
+    pkProfil.zapiszZestawy = poleZ.checked;
+  });
+  wierszZ.appendChild(poleZ);
+  wierszZ.appendChild(pkEl("span", "", "Zapisz treningi jako moje zestawy (zakładka Ćwiczenia → Moje treningi)"));
+  tresc.appendChild(wierszZ);
+
   const zacznij = pkEl("button", "przycisk wielki", "Zacznij");
   zacznij.type = "button";
   zacznij.addEventListener("click", function () {
     if (!pkWynik) {
       return;
     }
-    pgZapisz(pkWynik);
+    pgZapisz(pkWynik, { zapiszZestawy: pkProfil.zapiszZestawy !== false });
     pkWynik = null;
     pkZamknij();
     pokazEkran("ekran-dzis");

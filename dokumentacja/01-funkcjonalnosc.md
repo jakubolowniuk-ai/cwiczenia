@@ -258,3 +258,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Gotowe zestawy: ćwiczenia jednostronne (rozciąganie czworogłowego, gołębia, wykrok niski, barku, tricepsa i in.; wymachy nogą, wykrok z rotacją) mają 2 serie (np. 2 × 30 s, po jednej na stronę). Czasy w nazwach zestawów przeliczone („ok. 5 min" itd.).
 - `WERSJA_BAZY = 8`: `odswiezZestawyBazy` aktualizuje istniejące zestawy z bazy (nazwa z czasem, parametry) oraz niewykonane sesje, w których wartość nie była zmieniona przez użytkownika. Nazwy zestawów porównywane są bez czasu w nawiasie (`nazwaBezCzasu`).
 - Tryb Ćwicz: na ekranie przerwy, pod „Następnie: …", przycisk „Opis następnego ćwiczenia".
+
+## v59: nowy generator kalisteniki + zapis zestawów
+- Kalistenika (każdy plan ze sprzętem „masa ciała") ma własne szablony `PG_KAL` zamiast przeróbki szablonu siłowni: ćwiczenia wybierane z drabinek trudności `PG_KAL_LAD` (pompki, pompki pionowe, dipy, podciąganie pionowe/poziome, biceps, przysiady, wykroki, mostki, uginanie nóg, łydki, 4 drabinki brzucha). Szczebel wynika z maksów (pompki, podciągnięcia) lub, gdy brak danych, z doświadczenia (ostrożnie, max do szczebla 2); zajęty wariant zastępowany łatwiejszym.
+- Nowy krok „Sprzęt do masy ciała": drążek i poręcze / tylko drążek / bez sprzętu (`p.drazek`, `p.poreczy`): bez poręczy dipy na ławce, bez drążka podciąganie australijskie pod stołem i brak ćwiczeń w zwisie.
+- Serie i zakresy zależą od doświadczenia: 3×8–12 → 4×5–8 w głównych ćwiczeniach; rdzeń 3 serie, nie odpada przy skracaniu. Więcej ćwiczeń na brzuch (deska, deska boczna, Hollow Body, odwrotne spięcia, unoszenie kolan/nóg w zwisie, Dead Bug, Russian Twist, L-Sit, Toes to Bar) i dodatkowe ćwiczenia wypełniające czas.
+- Progresja kalisteniki korzysta z tych samych drabinek (`PR_DRABINKA` uzupełniana z `PG_KAL_LAD`).
+- Podsumowanie planu: pole „Zapisz treningi jako moje zestawy" (domyślnie włączone): treningi planu trafiają do Ćwiczenia → Moje treningi z parametrami (`pgZapisz(wynik, {zapiszZestawy})`).
