@@ -199,8 +199,7 @@ function rysujDzis() {
   dzisEdytujPlan.hidden = true;
 
   const dzis = new Date();
-  const nazwyDni = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
-  dzisData.textContent = nazwyDni[dzis.getDay()] + ", " + dzis.getDate() + " " + MIESIACE_DOPELNIACZ[dzis.getMonth()];
+  dzisData.textContent = NAZWY_DNI[dzis.getDay()] + ", " + dzis.getDate() + " " + MIESIACE_DOPELNIACZ[dzis.getMonth()];
 
   dzisSesje.innerHTML = "";
   dzisPodsumowanie.textContent = "";
@@ -234,8 +233,6 @@ function rysujDzis() {
 }
 
 function rysujPlanDzis(plan, kontener) {
-  const dzis = new Date();
-  const nazwyDni = ["Niedziela", "Poniedziałek", "Wtorek", "Środa", "Czwartek", "Piątek", "Sobota"];
   const indeks = dzisiejszyDzienPlanu(plan);
   const liczbaDni = DNI_W_OKRESIE[plan.okres];
 
@@ -264,7 +261,7 @@ function rysujPlanDzis(plan, kontener) {
     if (nastepna) {
       const data = dataPlanu(plan, nastepna.dzien);
       const aktywnosc = aktywnoscPlanu(plan, nastepna.aktywnoscId);
-      opis += " Następna sesja: " + nazwyDni[data.getDay()] + " " + data.getDate() + "." + (data.getMonth() + 1) + ", " + opisAktywnosci(aktywnosc).tytul + ".";
+      opis += " Następna sesja: " + NAZWY_DNI[data.getDay()] + " " + data.getDate() + "." + (data.getMonth() + 1) + ", " + opisAktywnosci(aktywnosc).tytul + ".";
     }
     kontener.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", opis));
   } else {

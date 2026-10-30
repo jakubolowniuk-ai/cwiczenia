@@ -399,7 +399,6 @@ function pkRysujPodsumowanie(tresc) {
 
   // Pierwszy tydzień
   tresc.appendChild(pkEl("h3", "pp-naglowek", "Pierwszy tydzień"));
-  const dniTyg = ["Dziś"];
   const nazwyDni = ["Niedz.", "Pon.", "Wt.", "Śr.", "Czw.", "Pt.", "Sob."];
   wynik.sesje.filter(function (s) { return s.dzien < 7; }).forEach(function (s) {
     const karta = pkEl("div", "formularz pk-sesja");

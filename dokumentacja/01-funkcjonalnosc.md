@@ -275,3 +275,15 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Po zakończeniu planu ekran „Plan zakończony” ma przycisk „Ułóż kolejny blok” (`pkNastepnyBlok`, `pgProfilKolejnegoBloku`).
 - Profil zostaje z poprzedniego bloku, ciężary startowe pochodzą z ostatnio wykonanych serii (`profil.ostatnie`), a ćwiczenia dodatkowe (od 4. miejsca) zmieniają się na kolejne warianty. Główne ćwiczenia zostają.
 - Poprzedni plan zamyka się po „Zacznij”. Nazwa: „(blok 2/3)”. Nie dotyczy jeszcze kalisteniki (tam progresję robią propozycje) ani biegania.
+
+## v62 – przegląd kodu i generatorów
+- Błąd: przy doświadczeniu do 6 mies. i 5–6 dniach aplikacja pisała „wystarczą 4 treningi”, ale układała 5–6. Teraz układa 4, a wolne dni może zająć kardio.
+- 5 dni: podział góra/dół + push/pull/legs (wcześniej push/pull/legs dawał nogi raz w tygodniu, ok. 11 serii).
+- Górny limit serii tygodniowo na partię (`pgOgraniczObjetosc`): 14/16/20/22 wg poziomu, nogi +4.
+- Dni góry (góra/dół, push) mają krótkie ćwiczenie na brzuch (`COREG`); dni góry mają drugie ćwiczenie na klatkę (`FLY`), bo klatka miała 6–9 serii tygodniowo.
+- Dom z hantlami: ćwiczenia zależne od poziomu (`PG_TD`), więcej zamienników przy bólach kolana i pleców; usunięte martwe listy siłowni w `pgS` (zastąpione `PG_T`).
+- Martwe ciągi liczone do nóg (wcześniej RDL liczył się do pleców i zaniżał serie nóg).
+- Kalistenika: drabinka `pushC` (pompki szerokie/łucznicze) dla klatki; brzuch w dniach góry chroniony przed przycinaniem; przy bolącym nadgarstku pompki i dipy zostają z zaleceniem uchwytów/pięści (wcześniej dzień push był pusty).
+- Bieganie: biegi nie dzień po dniu, marszobieg max 3× w tygodniu.
+- 2 dni w tygodniu: główne ćwiczenia +1 seria. Nazwa planu podaje rzeczywistą liczbę dni.
+- Usunięte nieużywane zmienne (dzis.js, kreator2.js, plan-kreator.js), wspólna stała `NAZWY_DNI`.

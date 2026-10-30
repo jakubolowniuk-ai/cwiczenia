@@ -1001,7 +1001,6 @@ function zrobKarteSesji(sesja, aktywnosc) {
   const blad = document.createElement("p");
   blad.className = "blad";
 
-  let styl = null;
   let kroki = null;
   let dystans = null;
   let dystansJedn = null;

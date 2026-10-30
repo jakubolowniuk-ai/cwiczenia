@@ -3,126 +3,18 @@
 // Zasady (skrót):
 //  - objętość: początkujący ok. 10–12 serii tygodniowo na dużą partię, średni 13–15, zaawansowany 16–20
 //  - masa i rzeźba: 6–12 powtórzeń, przerwy 1–2 min; siła: 4–6 powtórzeń, przerwy 3 min
-//  - każda duża partia co najmniej 2× w tygodniu (poza planami 5–6-dniowymi o podziale push/pull/legs)
+//  - każda duża partia co najmniej 2× w tygodniu (5 dni: góra/dół + push/pull/legs, 6 dni: push/pull/legs 2×)
+//  - górny limit serii tygodniowo na partię (pgOgraniczObjetosc), brzuch w każdym treningu siłowym
+//  - ćwiczenia zależne od poziomu i sprzętu (PG_T siłownia, PG_TD dom, drabinki kalisteniki)
 //  - serie kończymy 2–3 powtórzenia przed upadkiem mięśniowym
 // Ciężary startowe wyliczamy z kilku "kotwic" (ciężar, który użytkownik zrobi 10 razy z zapasem)
 // przez proporcje między ćwiczeniami.
 
 // ===== Szablony ćwiczeń =====
-// pgS(siłownia, dom, ciało, serie, od, do, przerwa) — jedno "miejsce" w treningu z listą zamienników
-// (pierwsze dostępne i bezpieczne jest wybierane). null = brak takiego ćwiczenia dla sprzętu.
-// Nazwy zaczynające się od "@" to drabinki trudności kalisteniki (pgDrabinka).
 
-function pgS(s, d, c, serie, od, do_, przerwa, rdzen) {
-  return { s: s, d: d, c: c, serie: serie, od: od, do: do_, przerwa: przerwa, r: !!rdzen };
-}
-
-const PG_PRZYSIAD = pgS(
-  ["Przysiad ze sztangą na plecach (Back Squat)", "Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Goblet z kettlebellem lub hantlem", "Hip Thrust ze sztangą"],
-  ["Przysiad Goblet z kettlebellem lub hantlem", "Przysiad bułgarski z hantlami", "Martwy ciąg rumuński z hantlami"],
-  ["Przysiad klasyczny", "Przysiad bułgarski", "Most biodrowy"], 3, 8, 10, 120);
-const PG_WYCISKANIE = pgS(
-  ["Wyciskanie sztangi na ławce poziomej", "Wyciskanie hantli na ławce poziomej", "Wyciskanie na maszynie Hammer (siedząc)"],
-  ["Wyciskanie hantli na ławce poziomej", "Pompki klasyczne"], ["@push"], 3, 8, 10, 120);
-const PG_WIOSLO = pgS(
-  ["Wiosłowanie sztangą w opadzie tułowia", "Wiosłowanie na maszynie siedząc (chwyt neutralny)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
-  ["Wiosłowanie hantlą jednorącz w oparciu o ławkę"], ["@pull"], 3, 8, 10, 120);
-const PG_BARKI = pgS(
-  ["Wyciskanie hantli siedząc", "Wyciskanie na maszynie nad głowę (siedząc)"],
-  ["Wyciskanie hantli nad głowę stojąc", "Unoszenie hantli bokiem w staniu"], ["Pompki pike", "Podciąganie łopatkowe"], 2, 10, 12, 90);
-const PG_BICEPS = pgS(
-  ["Uginanie ramion z hantlami z supinacją"], ["Uginanie ramion z hantlami z supinacją"],
-  ["Uginanie ramion w australijskim podciąganiu podchwytem"], 2, 10, 12, 60);
-const PG_BRZUCH = pgS(
-  ["Unoszenie nóg leżąc"], ["Unoszenie nóg leżąc"], ["Deska przodem (Front Plank)"], 3, 10, 15, 60, true);
-const PG_BRZUCH_B = pgS(
-  ["Pallof Press (wyciskanie linki w bok)", "Deska przodem (Front Plank)"], ["Deska przodem (Front Plank)"],
-  ["Hollow Body Hold", "Dead Bug"], 3, 10, 12, 60, true);
-const PG_CORE_G = pgS(
-  ["Deska przodem (Front Plank)"], ["Deska przodem (Front Plank)"], ["Dead Bug"], 2, 10, 12, 45, true);
-
-const PG_RDL = pgS(
-  ["Martwy ciąg rumuński ze sztangą (RDL)", "Uginanie nóg leżąc na maszynie"],
-  ["Martwy ciąg rumuński z hantlami"], ["Most biodrowy jednonóż", "Hip Thrust"], 3, 8, 10, 120);
-const PG_SKOS = pgS(
-  ["Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie na maszynie skośnej", "Wyciskanie hantli na ławce poziomej"],
-  ["Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie hantli na ławce poziomej"], ["@pushB"], 3, 8, 12, 120);
-const PG_PION = pgS(
-  ["Ściąganie drążka wyciągu górnego do klatki", "Podciąganie z asystą na maszynie"],
-  ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)"], ["@pullB"], 3, 8, 12, 90);
-const PG_NOGI2 = pgS(
-  ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad bułgarski z hantlami", "Uginanie nóg siedząc na maszynie"],
-  ["Przysiad bułgarski z hantlami", "Martwy ciąg rumuński z hantlami"], ["Wykroki w tył", "Most biodrowy"], 2, 10, 12, 90);
-const PG_BOKI = pgS(
-  ["Unoszenie hantli bokiem w staniu"], ["Unoszenie hantli bokiem w staniu"], null, 2, 12, 15, 60);
-const PG_TRICEPS = pgS(
-  ["Prostowanie ramion na wyciągu górnym z liną (Pushdown)"],
-  ["Wyciskanie francuskie z hantlem jednorącz (siedząc)"], ["Dipy na ławce"], 2, 10, 12, 60);
-const PG_LYDKI = pgS(
-  ["Wspięcia na palce siedząc na maszynie", "Wspięcia na palce stojąc ze sztangą"],
-  ["Wspięcia na palce obunóż"], ["Wspięcia na palce jednonóż"], 2, 12, 15, 45);
-const PG_UGINANIE_NOG = pgS(
-  ["Uginanie nóg leżąc na maszynie"], null, ["Sliding Leg Curl"], 2, 10, 12, 75);
-
-// Góra / dół (4 dni)
-const PG_G_PRZOD = pgS(PG_WYCISKANIE.s, PG_WYCISKANIE.d, PG_WYCISKANIE.c, 4, 6, 10, 150);
-const PG_G_WIOSLO = pgS(
-  ["Wiosłowanie sztangą w opadzie tułowia", "Wiosłowanie na maszynie z oparciem klatki", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
-  PG_WIOSLO.d, PG_WIOSLO.c, 4, 8, 10, 120);
-const PG_G_OHP = pgS(
-  ["Wyciskanie żołnierskie ze sztangą (OHP)", "Wyciskanie hantli siedząc", "Unoszenie hantli bokiem w staniu"],
-  ["Wyciskanie hantli nad głowę stojąc", "Unoszenie hantli bokiem w staniu"], ["Pompki pike", "Podciąganie łopatkowe"], 3, 8, 10, 120);
-const PG_G_PION = pgS(PG_PION.s, PG_PION.d, ["@pullB"], 3, 8, 12, 90);
-const PG_G_BICEPS = pgS(
-  ["Uginanie ramion ze sztangą łamaną stojąc", "Uginanie ramion z hantlami z supinacją"],
-  PG_BICEPS.d, PG_BICEPS.c, 3, 8, 12, 60);
-const PG_G_TRICEPS = pgS(PG_TRICEPS.s, PG_TRICEPS.d, PG_TRICEPS.c, 3, 10, 12, 60);
-const PG_G_SKOS = pgS(PG_SKOS.s, PG_SKOS.d, PG_SKOS.c, 4, 8, 12, 120);
-const PG_G_WIOSLO2 = pgS(
-  ["Wiosłowanie na maszynie siedząc (chwyt neutralny)", "Przyciąganie linki wyciągu dolnego do brzucha (siedząc)"],
-  ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)"], ["Wiosłowanie australijskie jednorącz"], 3, 10, 12, 90);
-const PG_G_BOKI = pgS(PG_BOKI.s, PG_BOKI.d, ["Pompki pike z nogami na podwyższeniu"], 3, 12, 15, 60);
-const PG_G_TYL = pgS(
-  ["Face Pulls (przyciąganie liny do twarzy)"], ["Unoszenie hantli w opadzie tułowia"], ["Podciąganie łopatkowe"], 3, 12, 15, 60);
-const PG_G_MLOTEK = pgS(
-  ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"],
-  ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"],
-  ["Uginanie ramion na niskim drążku podchwytem"], 2, 10, 12, 60);
-const PG_G_TRICEPS2 = pgS(
-  ["Prostowanie ramion z liną wyciągu zza głowy"],
-  ["Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)"], ["Pompki z wąskim rozstawem dłoni"], 2, 10, 12, 60);
-
-const PG_D_PRZYSIAD = pgS(
-  ["Przysiad ze sztangą na plecach (Back Squat)", "Wypychanie ciężaru na suwnicy (Leg Press)", "Hip Thrust ze sztangą"],
-  ["Przysiad Goblet z kettlebellem lub hantlem", "Martwy ciąg rumuński z hantlami"], ["Przysiad bułgarski", "Most biodrowy"], 4, 6, 10, 150);
-const PG_D_RDL = pgS(PG_RDL.s.slice(0, 1), PG_RDL.d, ["Most biodrowy jednonóż"], 3, 8, 10, 120);
-const PG_D_WYKROKI = pgS(
-  ["Wykroki chodzone z hantlami", "Przysiad bułgarski z hantlami", "Hip Thrust na maszynie"],
-  ["Przysiad bułgarski z hantlami", "Martwy ciąg rumuński z hantlami"], ["Wykroki chodzone", "Most biodrowy jednonóż"], 3, 10, 12, 90);
-const PG_D_UGINANIE = pgS(["Uginanie nóg leżąc na maszynie"], null, ["Sliding Leg Curl"], 3, 10, 12, 75);
-const PG_D_LYDKI = pgS(
-  ["Wspięcia na palce stojąc ze sztangą", "Wspięcia na palce siedząc na maszynie"],
-  ["Wspięcia na palce obunóż"], ["Wspięcia na palce jednonóż"], 4, 10, 15, 60);
-const PG_D_BRZUCH = pgS(
-  ["Allahy (skłony tułowia z linką wyciągu górnego)", "Unoszenie nóg leżąc"],
-  ["Unoszenie nóg leżąc"], ["Unoszenie kolan w zwisie"], 3, 10, 15, 60, true);
-const PG_D2_NOGI = pgS(
-  ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Hack na maszynie", "Uginanie nóg siedząc na maszynie"],
-  ["Przysiad bułgarski z hantlami", "Martwy ciąg rumuński z hantlami"], ["Wykroki w tył", "Most biodrowy"], 4, 10, 12, 120);
-const PG_D2_POSLADKI = pgS(
-  ["Hip Thrust ze sztangą", "Hip Thrust na maszynie"],
-  ["Martwy ciąg rumuński z hantlami"], ["Hip Thrust jednonóż"], 3, 8, 12, 120);
-const PG_D2_UGINANIE = pgS(["Uginanie nóg siedząc na maszynie"], null, null, 3, 10, 12, 75);
-const PG_D2_PROSTOWANIE = pgS(["Prostowanie nóg na maszynie (siedząc)"], null, ["Przysiad kozacki (Cossack Squat)"], 3, 12, 15, 60);
-const PG_D2_LYDKI = pgS(
-  ["Wspięcia na palce na suwnicy", "Wspięcia na palce siedząc na maszynie"],
-  ["Wspięcia na palce obunóż"], ["Wspięcia na palce z ugiętymi kolanami"], 3, 12, 15, 45);
-const PG_D2_CORE = pgS(
-  ["Pallof Press (wyciskanie linki w bok)", "Deska przodem z talerzem na plecach"],
-  ["Deska przodem (Front Plank)"], ["Hollow Body Hold"], 3, 10, 12, 60, true);
-
-// ===== Siłownia: ćwiczenia zależne od poziomu =====
-// Każde "miejsce" w treningu ma listy dla poziomów 0–3 (pierwsze dostępne i bezpieczne jest wybierane).
+// ===== Ćwiczenia zależne od poziomu =====
+// Każde "miejsce" w treningu ma listy dla poziomów 0–3 (pierwsze dostępne i bezpieczne jest wybierane,
+// kolejne służą jako zamienniki przy bólach i jako warianty w kolejnych blokach).
 // Początkujący: maszyny i hantle (stabilne, łatwa technika) oraz podstawowe ruchy ze sztangą dopiero od poziomu 1.
 // Średniozaawansowani: ciężkie wielostawowe ze sztangą. Zaawansowani: więcej wariantów (front squat, Pendlay, martwy ciąg...).
 function pgT(l0, l1, l2, l3) {
@@ -141,8 +33,8 @@ const PG_T = {
     ["Przysiad bułgarski z hantlami", "Wykroki chodzone z hantlami", "Wypychanie ciężaru na suwnicy (Leg Press)", "Hip Thrust na maszynie"],
     ["Przysiad bułgarski z hantlami", "Wykroki chodzone z hantlami", "Przysiad Hack na maszynie", "Hip Thrust na maszynie"]),
   SQB: pgT(
-    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Goblet z kettlebellem lub hantlem", "Uginanie nóg siedząc na maszynie"],
-    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Hack na maszynie", "Uginanie nóg siedząc na maszynie"],
+    ["Przysiad Hack na maszynie", "Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Goblet z kettlebellem lub hantlem"],
+    ["Przysiad Hack na maszynie", "Wypychanie ciężaru na suwnicy (Leg Press)", "Uginanie nóg siedząc na maszynie"],
     ["Przysiad Hack na maszynie", "Wypychanie ciężaru na suwnicy (Leg Press)", "Uginanie nóg siedząc na maszynie"],
     ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Hack na maszynie", "Uginanie nóg siedząc na maszynie"]),
   HING: pgT(
@@ -160,6 +52,11 @@ const PG_T = {
     ["Wyciskanie hantli na ławce poziomej", "Wyciskanie sztangi na ławce poziomej", "Wyciskanie na maszynie Hammer (siedząc)"],
     ["Wyciskanie sztangi na ławce poziomej", "Wyciskanie hantli na ławce poziomej", "Wyciskanie na maszynie Hammer (siedząc)"],
     ["Wyciskanie sztangi na ławce poziomej", "Wyciskanie hantli na ławce poziomej", "Wyciskanie sztangi leżąc na podłodze (Floor Press)"]),
+  FLY: pgT(
+    ["Rozpiętki na maszynie Pec Deck (butterfly)", "Wyciskanie na maszynie skośnej"],
+    ["Rozpiętki na maszynie Pec Deck (butterfly)", "Rozpiętki z hantlami na ławce poziomej"],
+    ["Rozpiętki z hantlami na skosie", "Rozpiętki na maszynie Pec Deck (butterfly)"],
+    ["Dipy z pochyleniem tułowia", "Rozpiętki z hantlami na skosie", "Rozpiętki na maszynie Pec Deck (butterfly)"]),
   INCL: pgT(
     ["Wyciskanie na maszynie skośnej", "Wyciskanie hantli na ławce skośnej dodatniej"],
     ["Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie na maszynie skośnej"],
@@ -244,23 +141,188 @@ const PG_T = {
     ["Deska przodem (Front Plank)", "Pallof Press (wyciskanie linki w bok)"],
     ["Pallof Press (wyciskanie linki w bok)", "Deska przodem (Front Plank)"],
     ["Pallof Press (wyciskanie linki w bok)", "Deska przodem z talerzem na plecach", "Drwal (Woodchopper) na wyciągu"],
-    ["Drwal (Woodchopper) na wyciągu", "Deska przodem z talerzem na plecach", "Pallof Press (wyciskanie linki w bok)"])
+    ["Drwal (Woodchopper) na wyciągu", "Deska przodem z talerzem na plecach", "Pallof Press (wyciskanie linki w bok)"]),
+  // Krótki brzuch na koniec treningu góry (inny niż w dniach nóg, żeby było różnorodnie)
+  COREG: pgT(
+    ["Dead Bug", "Deska przodem (Front Plank)"],
+    ["Deska przodem (Front Plank)", "Dead Bug"],
+    ["Deska bokiem (Side Plank)", "Drwal (Woodchopper) na wyciągu"],
+    ["Deska przodem z talerzem na plecach", "Deska bokiem (Side Plank)"])
 };
 
-// Przypisanie list poziomowych do miejsc w szablonach siłowni
-(function () {
-  const P = PG_T;
-  [[PG_PRZYSIAD, P.SQ], [PG_WYCISKANIE, P.PRESS], [PG_WIOSLO, P.ROW], [PG_BARKI, P.OHP], [PG_BICEPS, P.BIC], [PG_BRZUCH, P.CORE],
-    [PG_RDL, P.HING], [PG_SKOS, P.INCL], [PG_PION, P.PION], [PG_NOGI2, P.SQ2], [PG_BOKI, P.LAT], [PG_TRICEPS, P.TRI], [PG_LYDKI, P.CALF],
-    [PG_UGINANIE_NOG, P.CURL], [PG_BRZUCH_B, P.COREB], [PG_CORE_G, P.COREB],
-    [PG_G_PRZOD, P.PRESS], [PG_G_WIOSLO, P.ROW], [PG_G_OHP, P.OHP], [PG_G_PION, P.PION], [PG_G_BICEPS, P.BIC], [PG_G_TRICEPS, P.TRI],
-    [PG_G_SKOS, P.INCL], [PG_G_WIOSLO2, P.ROW2], [PG_G_BOKI, P.LAT], [PG_G_TYL, P.REAR], [PG_G_MLOTEK, P.BIC2], [PG_G_TRICEPS2, P.TRI2],
-    [PG_D_PRZYSIAD, P.SQ], [PG_D_RDL, P.HING], [PG_D_WYKROKI, P.SQ2], [PG_D_UGINANIE, P.CURL], [PG_D_LYDKI, P.CALF], [PG_D_BRZUCH, P.CORE],
-    [PG_D2_NOGI, P.SQB], [PG_D2_POSLADKI, P.GLUTE], [PG_D2_UGINANIE, P.CURL2], [PG_D2_LYDKI, P.CALF2], [PG_D2_CORE, P.COREB]
-  ].forEach(function (para) {
-    para[0].s = para[1];
-  });
-})();
+
+// Dom z hantlami (i ławką): ten sam układ, inne ćwiczenia; trudniejsze warianty dla bardziej zaawansowanych
+const PG_TD = {
+  SQ: pgT(
+    ["Przysiad Goblet z kettlebellem lub hantlem", "Przysiad z hantlami", "Most biodrowy"],
+    ["Przysiad Goblet z kettlebellem lub hantlem", "Przysiad z hantlami", "Most biodrowy"],
+    ["Przysiad bułgarski z hantlami", "Przysiad Goblet z kettlebellem lub hantlem", "Most biodrowy jednonóż"],
+    ["Przysiad bułgarski z hantlami", "Przysiad z hantlami", "Most biodrowy jednonóż"]),
+  SQ2: pgT(
+    ["Wejścia na podwyższenie z hantlami (Step-up)", "Przysiad sumo z hantlem", "Most biodrowy", "Most biodrowy jednonóż"],
+    ["Wykroki chodzone z hantlami", "Wejścia na podwyższenie z hantlami (Step-up)", "Most biodrowy"],
+    ["Wykroki chodzone z hantlami", "Wejścia na podwyższenie z hantlami (Step-up)", "Hip Thrust jednonóż"],
+    ["Wejścia na podwyższenie z hantlami (Step-up)", "Wykroki chodzone z hantlami", "Hip Thrust jednonóż"]),
+  SQB: pgT(
+    ["Przysiad sumo z hantlem", "Przysiad Goblet z kettlebellem lub hantlem", "Most biodrowy"],
+    ["Przysiad bułgarski z hantlami", "Przysiad sumo z hantlem", "Most biodrowy"],
+    ["Przysiad Goblet z kettlebellem lub hantlem", "Przysiad sumo z hantlem", "Hip Thrust jednonóż"],
+    ["Przysiad Goblet z kettlebellem lub hantlem", "Przysiad z hantlami", "Hip Thrust jednonóż"]),
+  HING: pgT(
+    ["Martwy ciąg rumuński z hantlami", "Most biodrowy", "Most biodrowy jednonóż"],
+    ["Martwy ciąg rumuński z hantlami", "Most biodrowy jednonóż"],
+    ["Martwy ciąg rumuński z hantlami", "Swing z kettlebellem", "Hip Thrust jednonóż"],
+    ["Martwy ciąg rumuński z hantlami", "Swing z kettlebellem", "Hip Thrust jednonóż"]),
+  GLUTE: pgT(
+    ["Most biodrowy", "Martwy ciąg rumuński z hantlami"],
+    ["Most biodrowy jednonóż", "Swing z kettlebellem"],
+    ["Hip Thrust jednonóż", "Swing z kettlebellem"],
+    ["Hip Thrust jednonóż", "Swing z kettlebellem"]),
+  PRESS: pgT(
+    ["Wyciskanie hantli na ławce poziomej", "Pompki z rękami na podwyższeniu"],
+    ["Wyciskanie hantli na ławce poziomej", "Pompki klasyczne"],
+    ["Wyciskanie hantli na ławce poziomej", "Pompki z nogami na podwyższeniu"],
+    ["Wyciskanie hantli na ławce poziomej", "Pompki z nogami na podwyższeniu"]),
+  FLY: pgT(
+    ["Rozpiętki z hantlami na ławce poziomej", "Pompki z rękami na podwyższeniu"],
+    ["Rozpiętki z hantlami na ławce poziomej", "Pompki klasyczne"],
+    ["Rozpiętki z hantlami na skosie", "Pompki szerokie"],
+    ["Pompki łucznicze", "Rozpiętki z hantlami na skosie"]),
+  INCL: pgT(
+    ["Wyciskanie hantli na ławce skośnej dodatniej", "Pompki klasyczne"],
+    ["Wyciskanie hantli na ławce skośnej dodatniej", "Pompki klasyczne"],
+    ["Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie hantli z rotacją"],
+    ["Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie hantli z rotacją"]),
+  ROW: pgT(
+    ["Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlą jednorącz w oparciu o ławkę", "Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)"],
+    ["Wiosłowanie hantlą jednorącz w oparciu o ławkę", "Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)"]),
+  // Bez drążka nie ma ciągnięcia pionowego, więc plecy dostają dwa rodzaje wiosłowania
+  ROW2: pgT(
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"]),
+  PION: pgT(
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"]),
+  OHP: pgT(
+    ["Wyciskanie hantli siedząc", "Wyciskanie hantli nad głowę stojąc", "Unoszenie hantli bokiem w staniu"],
+    ["Wyciskanie hantli siedząc", "Wyciskanie hantli nad głowę stojąc", "Unoszenie hantli bokiem w staniu"],
+    ["Wyciskanie hantli nad głowę stojąc", "Wyciskanie hantli siedząc", "Unoszenie hantli bokiem w staniu"],
+    ["Wyciskanie Arnolda", "Wyciskanie hantli nad głowę stojąc", "Unoszenie hantli bokiem w staniu"]),
+  LAT: pgT(
+    ["Unoszenie hantli bokiem w staniu"], ["Unoszenie hantli bokiem w staniu"],
+    ["Unoszenie hantli bokiem w staniu", "Unoszenie hantli przed siebie"], ["Unoszenie hantli bokiem w staniu", "Unoszenie hantli przed siebie"]),
+  REAR: pgT(
+    ["Unoszenie hantli w opadzie tułowia"], ["Unoszenie hantli w opadzie tułowia"],
+    ["Unoszenie hantli w opadzie tułowia"], ["Unoszenie hantli w opadzie tułowia"]),
+  BIC: pgT(
+    ["Uginanie ramion z hantlami z supinacją"],
+    ["Uginanie ramion z hantlami z supinacją", "Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"],
+    ["Uginanie ramion z hantlami na ławce skośnej dodatniej", "Uginanie ramion z hantlami z supinacją"],
+    ["Uginanie ramion z hantlami na ławce skośnej dodatniej", "Uginanie skoncentrowane z hantlem"]),
+  BIC2: pgT(
+    ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"],
+    ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"],
+    ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)", "Uginanie skoncentrowane z hantlem"],
+    ["Uginanie skoncentrowane z hantlem", "Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"]),
+  TRI: pgT(
+    ["Wyciskanie francuskie z hantlem jednorącz (siedząc)", "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)"],
+    ["Wyciskanie francuskie z hantlem jednorącz (siedząc)", "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)"],
+    ["Wyciskanie francuskie z hantlami leżąc (Skull Crushers)", "Wyciskanie francuskie z hantlem jednorącz (siedząc)"],
+    ["Wyciskanie francuskie z hantlami leżąc (Skull Crushers)", "Wyciskanie francuskie z hantlem jednorącz (siedząc)"]),
+  TRI2: pgT(
+    ["Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)", "Dipy na ławce"],
+    ["Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)", "Dipy na ławce"],
+    ["Dipy na ławce", "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)"],
+    ["Dipy na ławce", "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)"]),
+  CALF: pgT(
+    ["Wspięcia na palce obunóż"], ["Wspięcia na palce obunóż"],
+    ["Wspięcia na palce jednonóż", "Wspięcia na palce obunóż"], ["Wspięcia na palce jednonóż", "Wspięcia na palce obunóż"]),
+  CALF2: pgT(
+    ["Wspięcia na palce obunóż"], ["Wspięcia na palce obunóż"],
+    ["Wspięcia na palce z ugiętymi kolanami", "Wspięcia na palce obunóż"], ["Wspięcia na palce z ugiętymi kolanami", "Wspięcia na palce jednonóż"]),
+  CURL: pgT(
+    ["Most biodrowy", "Sliding Leg Curl"], ["Sliding Leg Curl", "Most biodrowy jednonóż"],
+    ["Sliding Leg Curl", "Most biodrowy jednonóż"], ["Nordic Hamstring Curl", "Sliding Leg Curl"]),
+  CURL2: pgT(
+    ["Most biodrowy jednonóż", "Most biodrowy"], ["Sliding Leg Curl", "Most biodrowy jednonóż"],
+    ["Sliding Leg Curl", "Hip Thrust jednonóż"], ["Sliding Leg Curl", "Nordic Hamstring Curl"]),
+  CORE: pgT(
+    ["Unoszenie nóg leżąc", "Deska przodem (Front Plank)"],
+    ["Unoszenie nóg leżąc", "Odwrotne spięcia brzucha"],
+    ["Scyzoryk (V-up)", "Russian Twist z talerzem lub kettlebellem", "Unoszenie nóg leżąc"],
+    ["Scyzoryk (V-up)", "Hollow Body Rocks", "Russian Twist z talerzem lub kettlebellem"]),
+  COREB: pgT(
+    ["Deska przodem (Front Plank)", "Dead Bug"],
+    ["Deska przodem (Front Plank)", "Dead Bug"],
+    ["Hollow Body Hold", "Deska bokiem (Side Plank)"],
+    ["Hollow Body Hold", "Skłony boczne z hantlem w staniu", "Deska bokiem (Side Plank)"]),
+  COREG: pgT(
+    ["Dead Bug", "Deska bokiem (Side Plank)"],
+    ["Dead Bug", "Deska bokiem (Side Plank)"],
+    ["Deska bokiem (Side Plank)", "Russian Twist z talerzem lub kettlebellem"],
+    ["Russian Twist z talerzem lub kettlebellem", "Deska bokiem (Side Plank)"])
+};
+
+// pgS(siłownia, dom, ciało, serie, od, do, przerwa, rdzeń) — jedno "miejsce" w treningu.
+// Siłownia i dom: listy dla poziomów 0–3 (PG_T, PG_TD). Ciało: lista albo drabinka "@...". null = brak ćwiczenia dla sprzętu.
+function pgS(s, d, c, serie, od, do_, przerwa, rdzen) {
+  return { s: s, d: d, c: c, serie: serie, od: od, do: do_, przerwa: przerwa, r: !!rdzen };
+}
+const T = PG_T;
+const TD = PG_TD;
+
+// Całe ciało
+const PG_PRZYSIAD = pgS(T.SQ, TD.SQ, ["Przysiad klasyczny", "Przysiad bułgarski", "Most biodrowy"], 3, 8, 10, 120);
+const PG_WYCISKANIE = pgS(T.PRESS, TD.PRESS, ["@push"], 3, 8, 10, 120);
+const PG_WIOSLO = pgS(T.ROW, TD.ROW, ["@pull"], 3, 8, 10, 120);
+const PG_BARKI = pgS(T.OHP, TD.OHP, ["Pompki pike", "Podciąganie łopatkowe"], 2, 10, 12, 90);
+const PG_BICEPS = pgS(T.BIC, TD.BIC, ["Uginanie ramion w australijskim podciąganiu podchwytem"], 2, 10, 12, 60);
+const PG_BRZUCH = pgS(T.CORE, TD.CORE, ["Deska przodem (Front Plank)"], 3, 10, 15, 60, true);
+const PG_BRZUCH_B = pgS(T.COREB, TD.COREB, ["Hollow Body Hold", "Dead Bug"], 3, 10, 12, 60, true);
+const PG_CORE_G = pgS(T.COREG, TD.COREG, ["Dead Bug"], 2, 10, 12, 45, true);
+const PG_RDL = pgS(T.HING, TD.HING, ["Most biodrowy jednonóż", "Hip Thrust"], 3, 8, 10, 120);
+const PG_SKOS = pgS(T.INCL, TD.INCL, ["@pushB"], 3, 8, 12, 120);
+const PG_PION = pgS(T.PION, TD.PION, ["@pullB"], 3, 8, 12, 90);
+const PG_NOGI2 = pgS(T.SQ2, TD.SQ2, ["Wykroki w tył", "Most biodrowy"], 2, 10, 12, 90);
+const PG_BOKI = pgS(T.LAT, TD.LAT, null, 2, 12, 15, 60);
+const PG_TRICEPS = pgS(T.TRI, TD.TRI, ["Dipy na ławce"], 2, 10, 12, 60);
+const PG_LYDKI = pgS(T.CALF, TD.CALF, ["Wspięcia na palce jednonóż"], 2, 12, 15, 45);
+const PG_UGINANIE_NOG = pgS(T.CURL, TD.CURL, ["Sliding Leg Curl"], 2, 10, 12, 75);
+
+// Góra (podział góra / dół i push / pull / legs)
+const PG_G_PRZOD = pgS(T.PRESS, TD.PRESS, ["@push"], 4, 6, 10, 150);
+const PG_G_WIOSLO = pgS(T.ROW, TD.ROW, ["@pull"], 4, 8, 10, 120);
+const PG_G_OHP = pgS(T.OHP, TD.OHP, ["Pompki pike", "Podciąganie łopatkowe"], 3, 8, 10, 120);
+const PG_G_PION = pgS(T.PION, TD.PION, ["@pullB"], 3, 8, 12, 90);
+const PG_G_KLATKA2 = pgS(T.FLY, TD.FLY, ["Pompki szerokie"], 2, 10, 15, 60);
+const PG_G_BICEPS = pgS(T.BIC, TD.BIC, ["Uginanie ramion w australijskim podciąganiu podchwytem"], 3, 8, 12, 60);
+const PG_G_TRICEPS = pgS(T.TRI, TD.TRI, ["Dipy na ławce"], 3, 10, 12, 60);
+const PG_G_SKOS = pgS(T.INCL, TD.INCL, ["@pushB"], 4, 8, 12, 120);
+const PG_G_WIOSLO2 = pgS(T.ROW2, TD.ROW2, ["Wiosłowanie australijskie jednorącz"], 3, 10, 12, 90);
+const PG_G_BOKI = pgS(T.LAT, TD.LAT, ["Pompki pike z nogami na podwyższeniu"], 3, 12, 15, 60);
+const PG_G_TYL = pgS(T.REAR, TD.REAR, ["Podciąganie łopatkowe"], 3, 12, 15, 60);
+const PG_G_MLOTEK = pgS(T.BIC2, TD.BIC2, ["Uginanie ramion na niskim drążku podchwytem"], 2, 10, 12, 60);
+const PG_G_TRICEPS2 = pgS(T.TRI2, TD.TRI2, ["Pompki z wąskim rozstawem dłoni"], 2, 10, 12, 60);
+
+// Dół
+const PG_D_PRZYSIAD = pgS(T.SQ, TD.SQ, ["Przysiad bułgarski", "Most biodrowy"], 4, 6, 10, 150);
+const PG_D_RDL = pgS(T.HING, TD.HING, ["Most biodrowy jednonóż"], 3, 8, 10, 120);
+const PG_D_WYKROKI = pgS(T.SQ2, TD.SQ2, ["Wykroki chodzone", "Most biodrowy jednonóż"], 3, 10, 12, 90);
+const PG_D_UGINANIE = pgS(T.CURL, TD.CURL, ["Sliding Leg Curl"], 3, 10, 12, 75);
+const PG_D_LYDKI = pgS(T.CALF, TD.CALF, ["Wspięcia na palce jednonóż"], 4, 10, 15, 60);
+const PG_D_BRZUCH = pgS(T.CORE, TD.CORE, ["Unoszenie kolan w zwisie"], 3, 10, 15, 60, true);
+const PG_D2_NOGI = pgS(T.SQB, TD.SQB, ["Wykroki w tył", "Most biodrowy"], 4, 10, 12, 120);
+const PG_D2_POSLADKI = pgS(T.GLUTE, TD.GLUTE, ["Hip Thrust jednonóż"], 3, 8, 12, 120);
+const PG_D2_UGINANIE = pgS(T.CURL2, TD.CURL2, null, 3, 10, 12, 75);
+const PG_D2_PROSTOWANIE = pgS(["Prostowanie nóg na maszynie (siedząc)"], ["Wejścia na podwyższenie z hantlami (Step-up)", "Przysiad sumo z hantlem"], ["Przysiad kozacki (Cossack Squat)"], 3, 12, 15, 60);
+const PG_D2_LYDKI = pgS(T.CALF2, TD.CALF2, ["Wspięcia na palce z ugiętymi kolanami"], 3, 12, 15, 45);
+const PG_D2_CORE = pgS(T.COREB, TD.COREB, ["Hollow Body Hold"], 3, 10, 12, 60, true);
 
 const PG_SZABLONY = {
   fb: {
@@ -268,13 +330,13 @@ const PG_SZABLONY = {
     B: [PG_RDL, PG_SKOS, PG_PION, PG_NOGI2, PG_BOKI, PG_TRICEPS, PG_LYDKI, PG_UGINANIE_NOG, PG_BRZUCH_B]
   },
   ul: {
-    GA: [PG_G_PRZOD, PG_G_WIOSLO, PG_G_OHP, PG_G_PION, PG_G_BICEPS, PG_G_TRICEPS],
+    GA: [PG_G_PRZOD, PG_G_WIOSLO, PG_G_OHP, PG_G_PION, PG_G_KLATKA2, PG_G_BICEPS, PG_G_TRICEPS, PG_CORE_G],
     DA: [PG_D_PRZYSIAD, PG_D_RDL, PG_D_WYKROKI, PG_D_UGINANIE, PG_D_LYDKI, PG_D_BRZUCH],
-    GB: [PG_G_SKOS, PG_G_PION, PG_G_WIOSLO2, PG_G_BOKI, PG_G_TYL, PG_G_MLOTEK, PG_G_TRICEPS2],
+    GB: [PG_G_SKOS, PG_G_PION, PG_G_WIOSLO2, PG_G_KLATKA2, PG_G_BOKI, PG_G_TYL, PG_G_MLOTEK, PG_G_TRICEPS2, PG_CORE_G],
     DB: [PG_D2_NOGI, PG_D2_POSLADKI, PG_D2_UGINANIE, PG_D2_PROSTOWANIE, PG_D2_LYDKI, PG_D2_CORE]
   },
   ppl: {
-    Push: [PG_G_PRZOD, PG_G_OHP, PG_G_SKOS, PG_G_BOKI, PG_G_TRICEPS, PG_G_TRICEPS2],
+    Push: [PG_G_PRZOD, PG_G_OHP, PG_G_SKOS, PG_G_KLATKA2, PG_G_BOKI, PG_G_TRICEPS, PG_G_TRICEPS2, PG_CORE_G],
     Pull: [PG_G_WIOSLO, PG_G_PION, PG_G_WIOSLO2, PG_G_TYL, PG_G_BICEPS, PG_G_MLOTEK, PG_CORE_G],
     Legs: [PG_D_PRZYSIAD, PG_D_RDL, PG_D2_NOGI, PG_D_UGINANIE, PG_D_LYDKI, PG_D_BRZUCH]
   },
@@ -298,16 +360,16 @@ function pgK(kod, serie, rdzen) {
 const PG_KAL = {
   fb: {
     A: [pgK("squat", 3), pgK("push", 3), pgK("pullV", 3), pgK("pushV", 2), pgK("core1", 3, true), pgK("biceps", 2), pgK("calf", 2), pgK("core3", 2), pgK("lunge", 2), pgK("dip", 2)],
-    B: [pgK("hinge", 3), pgK("pushB", 3), pgK("pullVB", 3), pgK("lunge", 2), pgK("dip", 3), pgK("core2", 3, true), pgK("ham", 2), pgK("core4", 2), pgK("squatB", 2), pgK("biceps", 2), pgK("pushV", 2)]
+    B: [pgK("hinge", 3), pgK("pushC", 3), pgK("pullVB", 3), pgK("lunge", 2), pgK("dip", 3), pgK("core2", 3, true), pgK("ham", 2), pgK("core4", 2), pgK("squatB", 2), pgK("biceps", 2), pgK("pushV", 2)]
   },
   ul: {
-    GA: [pgK("push", 4), pgK("pullV", 4), pgK("pushV", 3), pgK("dip", 3), pgK("biceps", 2), pgK("core3", 2), pgK("pullH", 2)],
+    GA: [pgK("push", 4), pgK("pullV", 4), pgK("pushV", 3), pgK("dip", 3), pgK("biceps", 2), pgK("core3", 2, true), pgK("pushC", 2), pgK("pullH", 2)],
     DA: [pgK("squat", 4), pgK("hinge", 3), pgK("ham", 3), pgK("calf", 3), pgK("core2", 3, true), pgK("lunge", 2)],
-    GB: [pgK("pushB", 4), pgK("pullVB", 4), pgK("pullH", 3), pgK("pushV", 3), pgK("dip", 3), pgK("core4", 2), pgK("biceps", 2)],
+    GB: [pgK("pushC", 4), pgK("pullVB", 4), pgK("pullH", 3), pgK("pushV", 3), pgK("dip", 3), pgK("core4", 2, true), pgK("biceps", 2), pgK("pushB", 2)],
     DB: [pgK("lunge", 4), pgK("hinge", 3), pgK("squatB", 3), pgK("calf", 3), pgK("core1", 3, true), pgK("ham", 2), pgK("core3", 2)]
   },
   ppl: {
-    Push: [pgK("push", 4), pgK("pushV", 3), pgK("dip", 3), pgK("pushB", 3), pgK("core3", 2)],
+    Push: [pgK("push", 4), pgK("pushV", 3), pgK("dip", 3), pgK("pushC", 3), pgK("core3", 2, true), pgK("pushB", 2)],
     Pull: [pgK("pullV", 4), pgK("pullH", 3), pgK("pullVB", 3), pgK("biceps", 3), pgK("core2", 3, true)],
     Legs: [pgK("squat", 4), pgK("hinge", 3), pgK("lunge", 3), pgK("ham", 3), pgK("calf", 3), pgK("core1", 3, true)]
   },
@@ -332,6 +394,7 @@ const PG_PRIORYTET = {
 // Drabinki: kolejne warianty od najłatwiejszego do najtrudniejszego (indeks = "szczebel")
 const PG_KAL_LAD = {
   push: ["Pompki z rękami na podwyższeniu", "Pompki klasyczne", "Pompki z nogami na podwyższeniu", "Pompki łucznicze", "Pompki pseudo-planche"],
+  pushC: ["Pompki z rękami na podwyższeniu", "Pompki szerokie", "Pompki szerokie", "Pompki łucznicze", "Pompki pseudo-planche"],
   pushB: ["Pompki z wypchnięciem łopatek (Push-Up Plus)", "Pompki z wąskim rozstawem dłoni", "Pompki diamentowe", "Pompki hinduskie", "Pompki pseudo-planche"],
   pushV: ["Pompki pike", "Pompki pike", "Pompki pike z nogami na podwyższeniu", "Pompki w staniu na rękach przy ścianie", "Pompki w staniu na rękach przy ścianie"],
   dip: ["Dipy na ławce", "Dipy na ławce", "Dipy na poręczach", "Dipy z pochyleniem tułowia", "Dipy z pionowym tułowiem"],
@@ -422,9 +485,14 @@ const PG_BOLE = {
   nadgarstek: /Pompki|Dipy|Uginanie ramion ze sztangą|Zginanie nadgarstków|Planche|Bear|Crab/i
 };
 
-function pgKoliduje(nazwa, bole) {
+// Przy treningu z masą ciała pompki i dipy są podstawą, więc przy bolącym nadgarstku zostają,
+// ale z zaleceniem robienia ich na uchwytach do pompek lub na pięściach (nadgarstek prosto)
+const PG_BOLE_NADGARSTEK_CIALO = /Uginanie ramion ze sztangą|Zginanie nadgarstków|Planche|Bear|Crab/i;
+
+function pgKoliduje(nazwa, bole, sprzet) {
   return (bole || []).some(function (b) {
-    return PG_BOLE[b] && PG_BOLE[b].test(nazwa);
+    const wzor = b === "nadgarstek" && sprzet === "c" ? PG_BOLE_NADGARSTEK_CIALO : PG_BOLE[b];
+    return wzor && wzor.test(nazwa);
   });
 }
 
@@ -537,6 +605,15 @@ const PG_DNI = {
   6: [0, 1, 2, 3, 4, 5]
 };
 
+// Bieganie: b = dni biegu, s = dni siły (nogi i brzuch)
+const PG_DNI_BIEG = {
+  2: { b: [0, 3], s: [] },
+  3: { b: [0, 2, 4], s: [] },
+  4: { b: [0, 2, 4], s: [5] },
+  5: { b: [0, 2, 4], s: [1, 5] },
+  6: { b: [0, 2, 4, 6], s: [1, 5] }
+};
+
 const PG_NAZWY_CELI = {
   masa: "Masa",
   rzezba: "Rzeźba",
@@ -569,6 +646,10 @@ function pgPodzial(p) {
   if (dni === 4) {
     return { typ: "ul", dni: dni, uwagi: uwagi };
   }
+  if (dni === 5) {
+    // Góra / dół + push / pull / legs: każda partia 2× w tygodniu (sam push/pull/legs przy 5 dniach daje nogi raz na tydzień)
+    return { typ: "ulppl", dni: dni, uwagi: uwagi };
+  }
   return { typ: "ppl", dni: dni, uwagi: uwagi };
 }
 
@@ -579,6 +660,10 @@ function pgTypSesji(podzial, j) {
   }
   if (podzial.typ === "ul") {
     return { klucz: ["GA", "DA", "GB", "DB"][j % 4], szablon: "ul", przesun: 0 };
+  }
+  if (podzial.typ === "ulppl") {
+    const k = j % 5;
+    return k < 2 ? { klucz: ["GA", "DA"][k], szablon: "ul", przesun: 0 } : { klucz: ["Push", "Pull", "Legs"][k - 2], szablon: "ppl", przesun: 1 };
   }
   const klucze = ["Push", "Pull", "Legs"];
   return { klucz: klucze[j % 3], szablon: "ppl", przesun: Math.floor(j / 3) % 2 };
@@ -604,7 +689,7 @@ function pgWybierzCwiczenie(slot, p, uzyte, przesun) {
     plaska = plaska.concat(n.indexOf("@k:") === 0 ? pgDrabinka(n, p, true) : [n]);
   });
   lista = plaska.filter(function (n) {
-    return n && !uzyte[n] && !uzyte["~" + pgKlucz(n)] && !pgKoliduje(n, p.bole) && pgZnajdz(n);
+    return n && !uzyte[n] && !uzyte["~" + pgKlucz(n)] && !pgKoliduje(n, p.bole, p.sprzet) && pgZnajdz(n);
   });
   if (lista.length === 0) {
     return null;
@@ -639,7 +724,8 @@ function pgParametryCelu(slot, indeks, p) {
     const poz = p.dosw || 0;
     if (!slot.r) {
       if (glowne) {
-        serie = [3, 3, 4, 4][poz];
+        // Przy 2 treningach w tygodniu każda partia jest ćwiczona rzadziej, więc główne ćwiczenia dostają serię więcej
+        serie = [3, 3, 4, 4][poz] + (p.dni <= 2 ? 1 : 0);
         od = [10, 8, 6, 5][poz];
         do_ = [12, 10, 10, 8][poz];
         przerwa = [90, 120, 150, 150][poz];
@@ -723,6 +809,14 @@ function pgCzasStatyczny(dosw) {
   return [20, 30, 40, 45][dosw || 0];
 }
 
+// Ciężar startowy: z ostatnich wyników (kolejny blok) albo wyliczony z kotwic
+function pgKg(cw, p, kotw) {
+  if (p.sprzet === "c") {
+    return 0;
+  }
+  return p.ostatnie && p.ostatnie[cw.nazwa] > 0 ? p.ostatnie[cw.nazwa] : pgCiezar(cw.nazwa, kotw);
+}
+
 // Zwraca listę wpisów treningu: { cw, serie, od, do, przerwa, kg, statyczne, czasy }
 function pgBudujTrening(sloty, p, kotw, przesun) {
   const uzyte = {};
@@ -743,7 +837,7 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
       od: par.od,
       do: par.do,
       przerwa: par.przerwa,
-      kg: p.sprzet === "c" ? 0 : (p.ostatnie && p.ostatnie[cw.nazwa] > 0 ? p.ostatnie[cw.nazwa] : pgCiezar(cw.nazwa, kotw)),
+      kg: pgKg(cw, p, kotw),
       statyczne: cw.rodzajId === "rodzaj-statyczny",
       rdzen: !!slot.r
     });
@@ -761,7 +855,7 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
         uzyte[cw.nazwa] = true;
         wpisy.splice(Math.min(wpisy.length, 4), 0, {
           cw: cw, serie: slot.serie, od: slot.od, do: slot.do, przerwa: slot.przerwa,
-          kg: p.sprzet === "c" ? 0 : pgCiezar(cw.nazwa, kotw), statyczne: cw.rodzajId === "rodzaj-statyczny"
+          kg: pgKg(cw, p, kotw), statyczne: cw.rodzajId === "rodzaj-statyczny"
         });
       }
     }
@@ -828,25 +922,24 @@ function pgBuduj(p) {
   const kotw = pgKotwice(p);
   const podzial = pgPodzial(p);
   const wynik = { treningi: {}, sesje: [], powody: [], uwagi: podzial.uwagi.slice(), profil: p, kotwice: kotw };
-  const dniTreningu = [];
   let kardioIle = p.kardio && p.kardio.ile ? p.kardio.ile : 0;
 
-  let silowe = podzial.dni;
-  let biegowe = 0;
+  // Dni tygodnia (przesunięcia od dziś). Siła: tyle dni, ile przewiduje podział (początkujący max 4).
+  // Bieganie: biegi nie dzień po dniu (stawy i ścięgna potrzebują dnia przerwy), marszobieg max 3× w tygodniu.
+  let dniBiegu = [];
+  let dniSily;
+  let wzor;
   if (p.cel === "bieg") {
-    const sila = p.dni >= 5 ? 2 : p.dni === 4 ? 1 : 0;
-    silowe = sila;
-    biegowe = Math.min(4, p.dni - sila);
+    const uklad = PG_DNI_BIEG[Math.min(6, Math.max(2, p.dni))];
+    dniBiegu = p.bieg20 ? uklad.b : uklad.b.slice(0, 3);
+    dniSily = uklad.s;
+    wzor = dniBiegu.concat(dniSily);
     kardioIle = 0;
+  } else {
+    wzor = PG_DNI[Math.min(6, Math.max(1, podzial.dni))];
+    dniSily = wzor;
   }
-
-  // Dni tygodnia: pierwsze przesunięcia dla treningów, reszta jest wolna
-  const wzor = PG_DNI[Math.min(6, Math.max(1, p.dni))];
   const wolne = [0, 1, 2, 3, 4, 5, 6].filter(function (d) { return wzor.indexOf(d) === -1; });
-
-  // Przydział dni tygodnia: bieganie dostaje pierwsze dni, siła kolejne
-  const dniBiegu = wzor.slice(0, biegowe);
-  const dniSily = p.cel === "bieg" ? wzor.slice(biegowe) : wzor;
   const dniKardio = wolne.slice(0, kardioIle);
 
   // Treningi siłowe
@@ -878,7 +971,7 @@ function pgBuduj(p) {
   Object.keys(typyUzyte).forEach(function (k) {
     const t = typyUzyte[k];
     let nazwa = OPISY[t.ts.klucz];
-    if (t.ts.szablon === "ppl" && t.ts.przesun === 1) {
+    if (podzial.typ === "ppl" && t.ts.przesun === 1) {
       nazwa += " 2";
     }
     wynik.treningi[k] = {
@@ -890,6 +983,8 @@ function pgBuduj(p) {
       dol: ["DA", "DB", "Legs", "S"].indexOf(t.ts.klucz) !== -1
     };
   });
+
+  pgOgraniczObjetosc(wynik, p);
 
   // Bloki rozgrzewki i rozciągania
   wynik.czasBlokow = { rozgrzewka: 0, rozciaganie: 0 };
@@ -954,9 +1049,12 @@ function pgBuduj(p) {
 
   // Nazwa planu
   const etykietaPodzialu = {
-    fb: "całe ciało", ul: "góra / dół", ppl: "push / pull / legs", bieg: p.bieg20 ? "bieg ciągły" : "marszobieg"
+    fb: "całe ciało", ul: "góra / dół", ulppl: "góra / dół + push / pull / legs", ppl: "push / pull / legs", bieg: p.bieg20 ? "bieg ciągły" : "marszobieg"
   }[podzial.typ];
-  wynik.nazwa = PG_NAZWY_CELI[p.cel] + " – " + etykietaPodzialu + " " + p.dni + "×";
+  wynik.nazwa = PG_NAZWY_CELI[p.cel] + " – " + etykietaPodzialu + " " + wzor.length + "×";
+  if (p.cel === "bieg" && wzor.length < p.dni) {
+    wynik.uwagi.push("Na początek marszobieg 3 razy w tygodniu w zupełności wystarczy, z dniem przerwy między biegami. Pozostałe dni to odpoczynek albo trening siły.");
+  }
   if (p.tygodni > 4) {
     wynik.nazwa += " (blok " + (p.blokNr || 1) + "/" + (p.tygodni / 4) + ")";
   } else if ((p.blokNr || 1) > 1) {
@@ -965,10 +1063,58 @@ function pgBuduj(p) {
   return wynik;
 }
 
+// Objętość: nie więcej niż ok. 14 / 16 / 20 / 22 serii tygodniowo na partię (wg poziomu; nogi +4, bo to kilka dużych mięśni).
+// Nadmiar zabieramy po jednej serii z ćwiczeń tej partii, które mają ich najwięcej (min. 2 serie zostają).
+function pgOgraniczObjetosc(wynik, p) {
+  if (p.cel === "zdrowie" || p.cel === "bieg") {
+    return;
+  }
+  const ile = {};
+  wynik.sesje.forEach(function (s) {
+    if (s.dzien < 7 && s.trening) {
+      ile[s.trening] = (ile[s.trening] || 0) + 1;
+    }
+  });
+  const klucze = Object.keys(ile);
+  function wpisyGrupy(g) {
+    const lista = [];
+    klucze.forEach(function (k) {
+      wynik.treningi[k].wpisy.forEach(function (w, i) {
+        if (!w.statyczne && pgGrupa(w.cw) === g) {
+          lista.push({ w: w, i: i, razy: ile[k] });
+        }
+      });
+    });
+    return lista;
+  }
+  ["klatka", "plecy", "nogi", "barki", "ramiona"].forEach(function (g) {
+    const max = [14, 16, 20, 22][p.dosw || 0] + (g === "nogi" ? 4 : 0);
+    const lista = wpisyGrupy(g);
+    let suma = lista.reduce(function (a, x) { return a + x.w.serie * x.razy; }, 0);
+    while (suma > max) {
+      let naj = null;
+      lista.forEach(function (x) {
+        if (x.w.serie > 2 && (!naj || x.w.serie > naj.w.serie || (x.w.serie === naj.w.serie && x.i > naj.i))) {
+          naj = x;
+        }
+      });
+      if (!naj) {
+        break;
+      }
+      naj.w.serie--;
+      suma -= naj.razy;
+    }
+  });
+}
+
 // Grupa mięśni ćwiczenia do liczenia serii: klatka, plecy, barki, ramiona, nogi (z pośladkami), brzuch, lydki
 function pgGrupa(cw) {
   if (/Wspięcia|Tibialis/i.test(cw.nazwa)) {
     return "lydki";
+  }
+  // Martwe ciągi pracują głównie tyłem uda i pośladkami, więc liczymy je do nóg
+  if (/Martwy ciąg|RDL|SLDL/.test(cw.nazwa)) {
+    return "nogi";
   }
   const mapa = {
     "partia-klatka": "klatka", "partia-plecy": "plecy", "partia-barki": "barki", "partia-ramiona": "ramiona",
@@ -989,8 +1135,8 @@ function pgPowody(wynik, p, podzial, kotw) {
       powody.push("Krótkie ćwiczenia nóg i brzucha (2 serie) wzmacniają stawy i poprawiają ekonomię biegu.");
     }
   } else {
-    const nazwaPodzialu = { fb: "całe ciało 2–3 razy w tygodniu", ul: "podział góra / dół", ppl: "podział push / pull / legs" }[podzial.typ];
-    powody.push("Dla " + poziomy[p.dosw] + " przy " + p.dni + " dniach dobrze działa " + nazwaPodzialu + ": każda duża partia jest trenowana regularnie, a między treningami ma czas na regenerację.");
+    const nazwaPodzialu = { fb: "całe ciało 2–3 razy w tygodniu", ul: "podział góra / dół", ulppl: "podział góra / dół + push / pull / legs", ppl: "podział push / pull / legs" }[podzial.typ];
+    powody.push("Dla " + poziomy[p.dosw] + " przy " + podzial.dni + " dniach dobrze działa " + nazwaPodzialu + ": każda duża partia jest trenowana regularnie, a między treningami ma czas na regenerację.");
     // Objętość: serie tygodniowo na grupę mięśni w pierwszym tygodniu
     const serie = {};
     wynik.sesje.filter(function (s) { return s.dzien < 7 && s.trening; }).forEach(function (s) {
@@ -1023,7 +1169,7 @@ function pgPowody(wynik, p, podzial, kotw) {
     } else if (p.cel === "rzezba") {
       powody.push("Przy redukcji tkanki tłuszczowej mięśnie trzeba nadal trenować ciężko, więc trening jest taki sam jak na masę, a do tego dochodzi kardio. Najważniejsza jest dieta, której plan nie obejmuje.");
     } else {
-      powody.push("Powtórzenia 6–12 w większości serii i ok. 2 powtórzenia zapasu na koniec serii to sprawdzony zakres dla budowy mięśni.");
+      powody.push(["Na początek więcej powtórzeń (10–15) i lżejsze ciężary: łatwiej opanować technikę, a mięśnie rosną tak samo dobrze.", "Powtórzenia 8–12 w większości serii", "Powtórzenia 6–12 w większości serii", "Ciężkie serie po 5–8 powtórzeń w ćwiczeniach głównych i 8–12 w dodatkowych"][p.dosw || 0] + (p.dosw ? " i ok. 2 powtórzenia zapasu na koniec serii to sprawdzony zakres dla budowy mięśni." : ""));
     }
   }
   if (wynik.czasBlokow && (wynik.czasBlokow.rozgrzewka || wynik.czasBlokow.rozciaganie)) {
@@ -1039,6 +1185,9 @@ function pgPowody(wynik, p, podzial, kotw) {
   }
   if (p.sprzet === "c" && p.drazek !== false && !p.poreczy) {
     wynik.uwagi.push("Bez poręczy dipy wykonasz na ławce lub krześle. Z poręczami zrobisz trudniejsze wersje.");
+  }
+  if (p.sprzet === "c" && p.bole && p.bole.indexOf("nadgarstek") !== -1) {
+    wynik.uwagi.push("Nadgarstek: pompki i dipy rób na uchwytach do pompek albo na pięściach, tak żeby nadgarstek był prosty. Jeśli mimo to boli, pomiń ćwiczenie.");
   }
   if (p.bole && p.bole.length > 0) {
     wynik.uwagi.push("Wyłączyłem ćwiczenia obciążające bolące miejsca (" + p.bole.join(", ") + "). Przy bólu skonsultuj się z lekarzem lub fizjoterapeutą.");
