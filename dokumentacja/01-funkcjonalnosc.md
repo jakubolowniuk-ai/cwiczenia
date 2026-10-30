@@ -265,3 +265,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Serie i zakresy zależą od doświadczenia: 3×8–12 → 4×5–8 w głównych ćwiczeniach; rdzeń 3 serie, nie odpada przy skracaniu. Więcej ćwiczeń na brzuch (deska, deska boczna, Hollow Body, odwrotne spięcia, unoszenie kolan/nóg w zwisie, Dead Bug, Russian Twist, L-Sit, Toes to Bar) i dodatkowe ćwiczenia wypełniające czas.
 - Progresja kalisteniki korzysta z tych samych drabinek (`PR_DRABINKA` uzupełniana z `PG_KAL_LAD`).
 - Podsumowanie planu: pole „Zapisz treningi jako moje zestawy" (domyślnie włączone): treningi planu trafiają do Ćwiczenia → Moje treningi z parametrami (`pgZapisz(wynik, {zapiszZestawy})`).
+
+## v60 – generator siłowni zależny od poziomu
+- Każde ćwiczenie w planie siłowni/dom ma osobną listę dla poziomów 0–3 (`PG_T`). Początkujący: maszyny i hantle (łatwa technika), średni: sztanga i wolne ciężary, zaawansowani: więcej wariantów (front squat, Pendlay, podciąganie nachwytem, kółko brzuszne, drwal).
+- Masa/rzeźba: serie, zakresy powtórzeń i przerwy rosną z doświadczeniem (np. główne 3×10–12 → 4×5–8, przerwa 90 → 150 s).
+- Brzuch zawsze w planie i nigdy nie jest przycinany.

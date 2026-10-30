@@ -121,6 +121,147 @@ const PG_D2_CORE = pgS(
   ["Pallof Press (wyciskanie linki w bok)", "Deska przodem z talerzem na plecach"],
   ["Deska przodem (Front Plank)"], ["Hollow Body Hold"], 3, 10, 12, 60, true);
 
+// ===== Siłownia: ćwiczenia zależne od poziomu =====
+// Każde "miejsce" w treningu ma listy dla poziomów 0–3 (pierwsze dostępne i bezpieczne jest wybierane).
+// Początkujący: maszyny i hantle (stabilne, łatwa technika) oraz podstawowe ruchy ze sztangą dopiero od poziomu 1.
+// Średniozaawansowani: ciężkie wielostawowe ze sztangą. Zaawansowani: więcej wariantów (front squat, Pendlay, martwy ciąg...).
+function pgT(l0, l1, l2, l3) {
+  return [l0, l1, l2, l3];
+}
+
+const PG_T = {
+  SQ: pgT(
+    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Goblet z kettlebellem lub hantlem", "Hip Thrust na maszynie"],
+    ["Przysiad ze sztangą na plecach (Back Squat)", "Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Goblet z kettlebellem lub hantlem", "Hip Thrust ze sztangą"],
+    ["Przysiad ze sztangą na plecach (Back Squat)", "Przysiad Hack na maszynie", "Wypychanie ciężaru na suwnicy (Leg Press)", "Hip Thrust ze sztangą"],
+    ["Przysiad ze sztangą na plecach (Back Squat)", "Przysiad ze sztangą z przodu (Front Squat)", "Przysiad Hack na maszynie", "Hip Thrust ze sztangą"]),
+  SQ2: pgT(
+    ["Przysiad Goblet z kettlebellem lub hantlem", "Wypychanie ciężaru na suwnicy (Leg Press)", "Uginanie nóg siedząc na maszynie"],
+    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad bułgarski z hantlami", "Uginanie nóg siedząc na maszynie"],
+    ["Przysiad bułgarski z hantlami", "Wykroki chodzone z hantlami", "Wypychanie ciężaru na suwnicy (Leg Press)", "Hip Thrust na maszynie"],
+    ["Przysiad bułgarski z hantlami", "Wykroki chodzone z hantlami", "Przysiad Hack na maszynie", "Hip Thrust na maszynie"]),
+  SQB: pgT(
+    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Goblet z kettlebellem lub hantlem", "Uginanie nóg siedząc na maszynie"],
+    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Hack na maszynie", "Uginanie nóg siedząc na maszynie"],
+    ["Przysiad Hack na maszynie", "Wypychanie ciężaru na suwnicy (Leg Press)", "Uginanie nóg siedząc na maszynie"],
+    ["Wypychanie ciężaru na suwnicy (Leg Press)", "Przysiad Hack na maszynie", "Uginanie nóg siedząc na maszynie"]),
+  HING: pgT(
+    ["Martwy ciąg rumuński z hantlami", "Uginanie nóg leżąc na maszynie"],
+    ["Martwy ciąg rumuński ze sztangą (RDL)", "Martwy ciąg rumuński z hantlami", "Uginanie nóg leżąc na maszynie"],
+    ["Martwy ciąg rumuński ze sztangą (RDL)", "Martwy ciąg na prostych nogach ze sztangą (SLDL)", "Uginanie nóg leżąc na maszynie"],
+    ["Martwy ciąg rumuński ze sztangą (RDL)", "Martwy ciąg klasyczny", "Martwy ciąg na prostych nogach ze sztangą (SLDL)", "Uginanie nóg leżąc na maszynie"]),
+  GLUTE: pgT(
+    ["Hip Thrust na maszynie", "Martwy ciąg rumuński z hantlami"],
+    ["Hip Thrust ze sztangą", "Hip Thrust na maszynie", "Martwy ciąg rumuński z hantlami"],
+    ["Hip Thrust ze sztangą", "Hip Thrust na maszynie"],
+    ["Hip Thrust ze sztangą", "Pull-Through na wyciągu", "Hip Thrust na maszynie"]),
+  PRESS: pgT(
+    ["Wyciskanie na maszynie Hammer (siedząc)", "Wyciskanie hantli na ławce poziomej"],
+    ["Wyciskanie hantli na ławce poziomej", "Wyciskanie sztangi na ławce poziomej", "Wyciskanie na maszynie Hammer (siedząc)"],
+    ["Wyciskanie sztangi na ławce poziomej", "Wyciskanie hantli na ławce poziomej", "Wyciskanie na maszynie Hammer (siedząc)"],
+    ["Wyciskanie sztangi na ławce poziomej", "Wyciskanie hantli na ławce poziomej", "Wyciskanie sztangi leżąc na podłodze (Floor Press)"]),
+  INCL: pgT(
+    ["Wyciskanie na maszynie skośnej", "Wyciskanie hantli na ławce skośnej dodatniej"],
+    ["Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie na maszynie skośnej"],
+    ["Wyciskanie sztangi na ławce skośnej dodatniej", "Wyciskanie hantli na ławce skośnej dodatniej", "Wyciskanie na maszynie skośnej"],
+    ["Wyciskanie sztangi na ławce skośnej dodatniej", "Wyciskanie hantli na ławce skośnej dodatniej", "Rozpiętki z hantlami na skosie"]),
+  ROW: pgT(
+    ["Wiosłowanie na maszynie z oparciem klatki", "Przyciąganie linki wyciągu dolnego do brzucha (siedząc)"],
+    ["Wiosłowanie na maszynie siedząc (chwyt neutralny)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę", "Wiosłowanie sztangą w opadzie tułowia"],
+    ["Wiosłowanie sztangą w opadzie tułowia", "Wiosłowanie sztangą T-Bar", "Wiosłowanie hantlą jednorącz w oparciu o ławkę"],
+    ["Wiosłowanie sztangą z podłogi (Pendlay)", "Wiosłowanie sztangą w opadzie tułowia", "Wiosłowanie sztangą T-Bar"]),
+  ROW2: pgT(
+    ["Przyciąganie linki wyciągu dolnego do brzucha (siedząc)", "Wiosłowanie na maszynie siedząc (chwyt neutralny)"],
+    ["Wiosłowanie na maszynie siedząc (chwyt neutralny)", "Przyciąganie linki wyciągu dolnego do brzucha (siedząc)", "Wiosłowanie jednorącz na wyciągu"],
+    ["Wiosłowanie hantlą jednorącz w oparciu o ławkę", "Wiosłowanie jednorącz na wyciągu", "Wiosłowanie na maszynie siedząc (chwyt neutralny)"],
+    ["Wiosłowanie hantlami leżąc brzuchem na ławce skośnej (Seal Row)", "Wiosłowanie hantlą jednorącz w oparciu o ławkę", "Wiosłowanie na maszynie z oparciem klatki"]),
+  PION: pgT(
+    ["Ściąganie drążka wyciągu górnego do klatki", "Podciąganie z asystą na maszynie"],
+    ["Ściąganie drążka wyciągu górnego do klatki", "Podciąganie z asystą na maszynie", "Ściąganie drążka V (wąski chwyt neutralny)"],
+    ["Podciąganie z asystą na maszynie", "Ściąganie drążka wyciągu górnego do klatki", "Ściąganie drążka V (wąski chwyt neutralny)"],
+    ["Podciąganie nachwytem", "Ściąganie drążka wyciągu górnego do klatki", "Ściąganie drążka V (wąski chwyt neutralny)"]),
+  OHP: pgT(
+    ["Wyciskanie hantli siedząc", "Wyciskanie na maszynie nad głowę (siedząc)", "Unoszenie hantli bokiem w staniu"],
+    ["Wyciskanie hantli siedząc", "Wyciskanie na maszynie nad głowę (siedząc)", "Unoszenie hantli bokiem w staniu"],
+    ["Wyciskanie żołnierskie ze sztangą (OHP)", "Wyciskanie hantli siedząc", "Unoszenie hantli bokiem w staniu"],
+    ["Wyciskanie żołnierskie ze sztangą (OHP)", "Wyciskanie Arnolda", "Unoszenie hantli bokiem w staniu"]),
+  LAT: pgT(
+    ["Unoszenie ramion bokiem na maszynie", "Unoszenie hantli bokiem w staniu"],
+    ["Unoszenie hantli bokiem w staniu", "Unoszenie ramion bokiem na maszynie"],
+    ["Unoszenie hantli bokiem w staniu", "Unoszenie ramienia bokiem na wyciągu dolnym"],
+    ["Unoszenie ramienia bokiem na wyciągu dolnym", "Unoszenie hantli bokiem w staniu"]),
+  REAR: pgT(
+    ["Odwrotne rozpiętki na maszynie (Reverse Pec Deck)", "Face Pulls (przyciąganie liny do twarzy)"],
+    ["Face Pulls (przyciąganie liny do twarzy)", "Odwrotne rozpiętki na maszynie (Reverse Pec Deck)"],
+    ["Face Pulls (przyciąganie liny do twarzy)", "Unoszenie hantli w opadzie tułowia"],
+    ["Face Pulls (przyciąganie liny do twarzy)", "Unoszenie hantli w opadzie tułowia", "Odwrotne rozpiętki na maszynie (Reverse Pec Deck)"]),
+  BIC: pgT(
+    ["Uginanie ramion z hantlami z supinacją", "Uginanie ramion na maszynie (Preacher Curl)"],
+    ["Uginanie ramion z hantlami z supinacją", "Uginanie ramion ze sztangą łamaną stojąc"],
+    ["Uginanie ramion ze sztangą łamaną stojąc", "Uginanie ramion z hantlami z supinacją"],
+    ["Uginanie ramion z hantlami na ławce skośnej dodatniej", "Uginanie ramion ze sztangą łamaną stojąc", "Uginanie ramion z hantlami z supinacją"]),
+  BIC2: pgT(
+    ["Uginanie ramion na wyciągu dolnym z liną (chwyt młotkowy)", "Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"],
+    ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)", "Uginanie ramion na wyciągu dolnym z liną (chwyt młotkowy)"],
+    ["Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)", "Uginanie ramion na modlitewniku ze sztangą łamaną"],
+    ["Uginanie ramion na modlitewniku ze sztangą łamaną", "Uginanie ramion z hantlami chwytem młotkowym (Hammer Curl)"]),
+  TRI: pgT(
+    ["Prostowanie ramion na wyciągu górnym z liną (Pushdown)", "Prostowanie ramion na maszynie do tricepsu (siedząc)"],
+    ["Prostowanie ramion na wyciągu górnym z liną (Pushdown)", "Prostowanie ramion na wyciągu z drążkiem prostym"],
+    ["Wyciskanie francuskie ze sztangą łamaną leżąc", "Prostowanie ramion na wyciągu górnym z liną (Pushdown)"],
+    ["Wyciskanie francuskie ze sztangą łamaną leżąc", "Prostowanie ramion na wyciągu górnym z liną (Pushdown)"]),
+  TRI2: pgT(
+    ["Prostowanie ramion z liną wyciągu zza głowy", "Prostowanie ramion na wyciągu z drążkiem prostym"],
+    ["Prostowanie ramion z liną wyciągu zza głowy", "Prostowanie ramienia z hantlem w opadzie tułowia (Kickback)"],
+    ["Prostowanie ramion z liną wyciągu zza głowy", "Wyciskanie francuskie z hantlem jednorącz (siedząc)"],
+    ["Prostowanie ramion z liną wyciągu zza głowy", "Wyciskanie francuskie z hantlem jednorącz (siedząc)"]),
+  CALF: pgT(
+    ["Wspięcia na palce siedząc na maszynie", "Wspięcia na palce na suwnicy"],
+    ["Wspięcia na palce siedząc na maszynie", "Wspięcia na palce stojąc ze sztangą"],
+    ["Wspięcia na palce stojąc ze sztangą", "Wspięcia na palce na suwnicy", "Wspięcia na palce siedząc na maszynie"],
+    ["Wspięcia na palce stojąc ze sztangą", "Wspięcia na palce na suwnicy", "Wspięcia na palce siedząc na maszynie"]),
+  CALF2: pgT(
+    ["Wspięcia na palce na suwnicy", "Wspięcia na palce siedząc na maszynie"],
+    ["Wspięcia na palce na suwnicy", "Wspięcia na palce siedząc na maszynie"],
+    ["Wspięcia na palce siedząc na maszynie", "Wspięcia na palce na suwnicy"],
+    ["Wspięcia na palce siedząc na maszynie", "Wspięcia na palce na suwnicy"]),
+  CURL: pgT(
+    ["Uginanie nóg leżąc na maszynie", "Uginanie nóg siedząc na maszynie"],
+    ["Uginanie nóg leżąc na maszynie", "Uginanie nóg siedząc na maszynie"],
+    ["Uginanie nóg leżąc na maszynie", "Uginanie nóg siedząc na maszynie"],
+    ["Uginanie nóg leżąc na maszynie", "Uginanie jednej nogi stojąc na maszynie"]),
+  CURL2: pgT(
+    ["Uginanie nóg siedząc na maszynie", "Uginanie nóg leżąc na maszynie"],
+    ["Uginanie nóg siedząc na maszynie", "Uginanie nóg leżąc na maszynie"],
+    ["Uginanie nóg siedząc na maszynie", "Uginanie nóg leżąc na maszynie"],
+    ["Uginanie nóg siedząc na maszynie", "Uginanie jednej nogi stojąc na maszynie"]),
+  CORE: pgT(
+    ["Unoszenie nóg leżąc", "Deska przodem (Front Plank)"],
+    ["Unoszenie nóg leżąc", "Brzuszki na maszynie (Ab Crunch)"],
+    ["Allahy (skłony tułowia z linką wyciągu górnego)", "Kółko brzuszne (Ab Wheel Rollout) z kolan", "Unoszenie nóg leżąc"],
+    ["Kółko brzuszne (Ab Wheel Rollout) z kolan", "Skłony tułowia na ławce skośnej ujemnej z talerzem", "Allahy (skłony tułowia z linką wyciągu górnego)"]),
+  COREB: pgT(
+    ["Deska przodem (Front Plank)", "Pallof Press (wyciskanie linki w bok)"],
+    ["Pallof Press (wyciskanie linki w bok)", "Deska przodem (Front Plank)"],
+    ["Pallof Press (wyciskanie linki w bok)", "Deska przodem z talerzem na plecach", "Drwal (Woodchopper) na wyciągu"],
+    ["Drwal (Woodchopper) na wyciągu", "Deska przodem z talerzem na plecach", "Pallof Press (wyciskanie linki w bok)"])
+};
+
+// Przypisanie list poziomowych do miejsc w szablonach siłowni
+(function () {
+  const P = PG_T;
+  [[PG_PRZYSIAD, P.SQ], [PG_WYCISKANIE, P.PRESS], [PG_WIOSLO, P.ROW], [PG_BARKI, P.OHP], [PG_BICEPS, P.BIC], [PG_BRZUCH, P.CORE],
+    [PG_RDL, P.HING], [PG_SKOS, P.INCL], [PG_PION, P.PION], [PG_NOGI2, P.SQ2], [PG_BOKI, P.LAT], [PG_TRICEPS, P.TRI], [PG_LYDKI, P.CALF],
+    [PG_UGINANIE_NOG, P.CURL], [PG_BRZUCH_B, P.COREB], [PG_CORE_G, P.COREB],
+    [PG_G_PRZOD, P.PRESS], [PG_G_WIOSLO, P.ROW], [PG_G_OHP, P.OHP], [PG_G_PION, P.PION], [PG_G_BICEPS, P.BIC], [PG_G_TRICEPS, P.TRI],
+    [PG_G_SKOS, P.INCL], [PG_G_WIOSLO2, P.ROW2], [PG_G_BOKI, P.LAT], [PG_G_TYL, P.REAR], [PG_G_MLOTEK, P.BIC2], [PG_G_TRICEPS2, P.TRI2],
+    [PG_D_PRZYSIAD, P.SQ], [PG_D_RDL, P.HING], [PG_D_WYKROKI, P.SQ2], [PG_D_UGINANIE, P.CURL], [PG_D_LYDKI, P.CALF], [PG_D_BRZUCH, P.CORE],
+    [PG_D2_NOGI, P.SQB], [PG_D2_POSLADKI, P.GLUTE], [PG_D2_UGINANIE, P.CURL2], [PG_D2_LYDKI, P.CALF2], [PG_D2_CORE, P.COREB]
+  ].forEach(function (para) {
+    para[0].s = para[1];
+  });
+})();
+
 const PG_SZABLONY = {
   fb: {
     A: [PG_PRZYSIAD, PG_WYCISKANIE, PG_WIOSLO, PG_BARKI, PG_BICEPS, PG_BRZUCH],
@@ -455,6 +596,9 @@ function pgWybierzCwiczenie(slot, p, uzyte, przesun) {
   if (!lista) {
     return null;
   }
+  if (Array.isArray(lista[0])) {
+    lista = lista[Math.min(p.dosw || 0, lista.length - 1)];
+  }
   let plaska = [];
   lista.forEach(function (n) {
     plaska = plaska.concat(n.indexOf("@k:") === 0 ? pgDrabinka(n, p, true) : [n]);
@@ -490,8 +634,22 @@ function pgParametryCelu(slot, indeks, p) {
     od = 10;
     do_ = 15;
     przerwa = 60;
-  } else if (p.dosw === 0 && p.dni >= 4) {
-    serie = Math.max(2, serie - 1);
+  } else if (p.sprzet !== "c") {
+    // Masa i rzeźba: serie, zakresy i przerwy rosną z doświadczeniem (początkujący: więcej powtórzeń i lżej, zaawansowani: ciężej)
+    const poz = p.dosw || 0;
+    if (!slot.r) {
+      if (glowne) {
+        serie = [3, 3, 4, 4][poz];
+        od = [10, 8, 6, 5][poz];
+        do_ = [12, 10, 10, 8][poz];
+        przerwa = [90, 120, 150, 150][poz];
+      } else {
+        serie = Math.min(slot.serie, [2, 2, 3, 3][poz]);
+        od = [12, 10, 8, 8][poz];
+        do_ = [15, 12, 12, 12][poz];
+        przerwa = [60, 75, 75, 75][poz];
+      }
+    }
   }
   if (p.sprzet === "c") {
     // Masa ciała: serie i zakresy zależą od doświadczenia (zaawansowani robią trudniejsze warianty, więc mniej powtórzeń)
