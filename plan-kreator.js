@@ -55,6 +55,9 @@ function pkKroki() {
     kroki.push("sprzetc");
   }
   kroki.push("bole");
+  if (pkUkryte().length > 0) {
+    kroki.push("ukryte");
+  }
   if (cel !== "bieg" && cel !== "zdrowie") {
     kroki.push("priorytet");
   }
@@ -63,6 +66,11 @@ function pkKroki() {
   }
   kroki.push("tygodni", "kotwice", "podsumowanie");
   return kroki;
+}
+
+// Ćwiczenia ukryte przez użytkownika w bazie
+function pkUkryte() {
+  return dane.cwiczenia.filter(function (c) { return c.ukryte; });
 }
 
 function pkEl(tag, klasa, tekst) {
@@ -93,7 +101,7 @@ function pkOtworz() {
   pkProfil = {
     cel: null, dosw: dosw, dni: 3, czas: 60, sprzet: "s", bole: [], priorytet: null,
     kardio: { ile: 0, rodzaj: "spacer" }, tygodni: 4, kotwice: {}, maxPompek: null, maxPodciagniec: null,
-    bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true
+    bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false
   };
   pkKrok = 0;
   pkWynik = null;
@@ -256,6 +264,16 @@ function pkRysuj() {
     });
     tresc.appendChild(lista);
     tresc.appendChild(pkEl("p", "opis", "Przy bólu skonsultuj się z lekarzem lub fizjoterapeutą. Plan nie zastępuje porady medycznej."));
+  } else if (krok === "ukryte") {
+    pokazDalej = false;
+    const ukryte = pkUkryte();
+    const przyklady = ukryte.slice(0, 3).map(function (c) { return c.nazwa; }).join(", ");
+    wybor("Użyć ukrytych ćwiczeń?", "Ukryte ćwiczenia w Twojej bazie: " + ukryte.length + " (np. " + przyklady + (ukryte.length > 3 ? "…" : "") + "). Czy mogą trafić do planu?", [
+      [false, "Nie, pomiń ukryte", "Plan powstanie tylko z widocznych ćwiczeń, a ukryte zastąpię innymi"],
+      [true, "Tak, mogą być w planie", "Ukryte ćwiczenia traktuję jak pozostałe"]
+    ], !!pkProfil.uzyjUkrytych, function (w) {
+      pkProfil.uzyjUkrytych = w;
+    });
   } else if (krok === "priorytet") {
     pokazDalej = false;
     wybor("Czy jakaś partia jest dla Ciebie ważniejsza?", "Dodam do planu jedno ćwiczenie więcej dla tej partii.", PK_PRIORYTET.map(function (o) {

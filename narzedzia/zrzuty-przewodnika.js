@@ -145,6 +145,22 @@ const fs = require("fs");
   await p.waitForTimeout(200);
   await zrzut(p, "14-kolejny-blok");
 
+  // Pytanie o ukryte ćwiczenia (pojawia się tylko, gdy coś jest ukryte)
+  await p.evaluate(() => {
+    ["Przysiad ze sztangą na plecach (Back Squat)", "Wyciskanie sztangi na ławce poziomej", "Pajacyki"].forEach((n) => {
+      const c = dane.cwiczenia.find((x) => x.nazwa === n);
+      if (c) c.ukryte = true;
+    });
+    zapiszDane();
+    pkOtworz();
+    pkProfil.cel = "masa";
+    pkKrok = pkKroki().indexOf("ukryte");
+    pkRysuj();
+  });
+  await p.waitForTimeout(300);
+  await zrzut(p, "12b-ukryte");
+  await p.evaluate(() => pkZamknij());
+
   // ===== Plan ręczny: kalendarz =====
   const r = await nowa();
   await r.tap("#dzis-utworz-plan");

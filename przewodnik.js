@@ -15,6 +15,7 @@ const KARTY_PRZEWODNIKA = [
   { obraz: "przewodnik/10-recznie.webp", tytul: "Plan ręcznie", tekst: "Wolisz sam? „Utwórz plan ręcznie”: wybierz aktywności i ile razy chcesz je zrobić, rozłóż sesje w kalendarzu (albo „Zaproponuj rozkład”), a potem dodaj ćwiczenia do każdej sesji." },
   { obraz: "przewodnik/11-postep.webp", tytul: "Postęp", tekst: "Realizacja planu, ćwiczone mięśnie i seria dni. Tu przełączasz i edytujesz plany, a poprzednie zostają w historii. Możesz też wpisać rekordy na dystansie, np. 5 km." },
   { obraz: "przewodnik/12-baza.webp", tytul: "Baza ćwiczeń", tekst: "Wybierz partię i mięśnie, aby znaleźć ćwiczenie. Każde ma opis wykonania. Możesz dodać własne, ukryć niepotrzebne i wpisać swój rekord, a aplikacja zapyta, gdy go pobijesz." },
+  { obraz: "przewodnik/12b-ukryte.webp", tytul: "Ukryte ćwiczenia a plan", tekst: "Nie lubisz jakiegoś ćwiczenia? Ukryj je w bazie. Gdy coś jest ukryte, „Ułóż mi plan” zapyta, czy może go użyć. Jeśli nie, wstawi zamiennik i powie, co pominął." },
   { obraz: "przewodnik/13-moje-zestawy.webp", tytul: "Moje treningi", tekst: "Zapisane zestawy ćwiczeń, w tym treningi z ułożonego planu, rozgrzewki i rozciągania. Użyjesz ich w kolejnych planach. Możesz je podejrzeć, edytować albo usunąć." },
   { obraz: "przewodnik/14-kolejny-blok.webp", tytul: "Po 4 tygodniach: kolejny blok", tekst: "Gdy plan się skończy, „Ułóż kolejny blok” przygotuje następne 4 tygodnie. Ciężary weźmie z Twoich ostatnich treningów, a ćwiczenia dodatkowe zmieni na inne warianty." }
 ];

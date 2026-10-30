@@ -1,12 +1,12 @@
 // Service worker: aplikacja działa bez internetu, ale zawsze najpierw próbuje pobrać nowe pliki.
 // Przy każdej wgranej paczce zmień numer wersji poniżej.
-const WERSJA = "cwiczenia-v63";
+const WERSJA = "cwiczenia-v64";
 
 const PLIKI = [
   "./", "index.html", "style.css", "manifest.webmanifest",
   "dane.js", "anatomia.js", "cwiczenia.js", "treningi.js", "kreator.js", "kreator2.js",
   "dzis.js", "postep.js", "rekordy.js", "cwicz.js", "ustawienia.js", "kopia.js", "plan-generator.js", "plan-kreator.js", "plan-progresja.js", "przewodnik.js", "app.js",
-  "przewodnik/01-start.webp", "przewodnik/02-kreator.webp", "przewodnik/03-gotowy-plan.webp", "przewodnik/04-dzis.webp", "przewodnik/05-cwicz.webp", "przewodnik/06-przerwa.webp", "przewodnik/07-ocena.webp", "przewodnik/08-propozycje.webp", "przewodnik/09-inne-wartosci.webp", "przewodnik/10-recznie.webp", "przewodnik/11-postep.webp", "przewodnik/12-baza.webp", "przewodnik/13-moje-zestawy.webp", "przewodnik/14-kolejny-blok.webp",
+  "przewodnik/01-start.webp", "przewodnik/02-kreator.webp", "przewodnik/03-gotowy-plan.webp", "przewodnik/04-dzis.webp", "przewodnik/05-cwicz.webp", "przewodnik/06-przerwa.webp", "przewodnik/07-ocena.webp", "przewodnik/08-propozycje.webp", "przewodnik/09-inne-wartosci.webp", "przewodnik/10-recznie.webp", "przewodnik/11-postep.webp", "przewodnik/12-baza.webp", "przewodnik/12b-ukryte.webp", "przewodnik/13-moje-zestawy.webp", "przewodnik/14-kolejny-blok.webp",
   "przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json", "przyklady-zestawy.json",
   "ikona-192.png", "ikona-512.png"
 ];

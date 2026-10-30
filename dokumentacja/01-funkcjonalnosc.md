@@ -292,3 +292,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Przewodnik ma 14 kart z aktualnymi zrzutami: Ułóż mi plan, gotowy plan, Dziś, tryb Ćwicz, przerwa, ocena, propozycje progresji, inne wartości, plan ręczny, Postęp, baza, Moje treningi, kolejny blok. Zrzuty generuje `narzedzia/zrzuty-przewodnika.js`.
 - Ekran startowy (brak planu) opisuje „Ułóż mi plan”, plan ręczny i „Ćwicz”.
 - Poprawki znalezione przy zrzutach: lista Moje treningi odświeża się po przełączeniu (zestawy z kreatora były widoczne dopiero po ponownym uruchomieniu); własne zestawy na górze (najnowsze pierwsze), rozgrzewki i rozciągania na końcu; przyciski Pokaż/Edytuj/Usuń pod nazwą, lista ćwiczeń skrócona do 3 linii; pole wyszukiwania zestawów ma normalny wygląd; zmiana zakładki przewija ekran na górę.
+
+## v64 – ukryte ćwiczenia w generatorze
+- Generator domyślnie nie używa ćwiczeń ukrytych w bazie (tak było już wcześniej, ale bez informacji).
+- Nowy krok kreatora „Użyć ukrytych ćwiczeń?” (`ukryte`), tylko gdy coś jest ukryte. Profil: `uzyjUkrytych`. Przy „Nie” plan dostaje zamienniki, a uwaga wymienia pominięte ćwiczenia (`pgUkrytePominiete`).
+- Kolejny blok dziedziczy wybór. Propozycje trudniejszego wariantu (kalistenika) też go respektują.
+- Ograniczenie: gotowe bloki rozgrzewki i rozciągania zawierają swoje ćwiczenia niezależnie od ukrycia.
+- Przewodnik: nowa karta „Ukryte ćwiczenia a plan”.

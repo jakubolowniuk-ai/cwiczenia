@@ -192,7 +192,7 @@ function prPropozycja(plan, sesja, id) {
   }
   if (naGorze || (ocena === "latwo" && wZakresie && maxPowt >= hi)) {
     const nast = PR_DRABINKA[cw.nazwa];
-    const nowyCw = nast ? znajdzCwiczeniePoNazwie(nast) : null;
+    const nowyCw = nast ? znajdzCwiczeniePoNazwie(nast, !!(plan.kreator && plan.kreator.profil && plan.kreator.profil.uzyjUkrytych)) : null;
     if (nowyCw && !(sesja.parametry && sesja.parametry[nowyCw.id])) {
       return {
         id: id, cw: cw, sesjaOdniesienia: L, nowyCwId: nowyCw.id,
@@ -218,9 +218,9 @@ function prPropozycja(plan, sesja, id) {
   return null;
 }
 
-function znajdzCwiczeniePoNazwie(nazwa) {
+function znajdzCwiczeniePoNazwie(nazwa, zUkrytymi) {
   return dane.cwiczenia.find(function (c) {
-    return c.nazwa === nazwa && !c.ukryte;
+    return c.nazwa === nazwa && (!c.ukryte || zUkrytymi);
   });
 }
 

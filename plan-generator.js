@@ -583,9 +583,20 @@ function pgCiezar(nazwa, kotw) {
 
 // ===== Pomocnicze =====
 
+// Ukryte ćwiczenia: domyślnie generator ich nie używa (użytkownik może na to pozwolić w kreatorze).
+// Ustawiane na czas jednego wywołania pgBuduj; pgUkrytePominiete zbiera ukryte, które zostały pominięte.
+let pgUkryteDozwolone = false;
+let pgUkrytePominiete = {};
+
 function pgZnajdz(nazwa) {
   return dane.cwiczenia.find(function (c) {
-    return c.nazwa === nazwa && !c.ukryte;
+    return c.nazwa === nazwa && (!c.ukryte || pgUkryteDozwolone);
+  });
+}
+
+function pgCzyUkryte(nazwa) {
+  return dane.cwiczenia.some(function (c) {
+    return c.nazwa === nazwa && c.ukryte;
   });
 }
 
@@ -689,7 +700,12 @@ function pgWybierzCwiczenie(slot, p, uzyte, przesun) {
     plaska = plaska.concat(n.indexOf("@k:") === 0 ? pgDrabinka(n, p, true) : [n]);
   });
   lista = plaska.filter(function (n) {
-    return n && !uzyte[n] && !uzyte["~" + pgKlucz(n)] && !pgKoliduje(n, p.bole, p.sprzet) && pgZnajdz(n);
+    const pasuje = n && !uzyte[n] && !uzyte["~" + pgKlucz(n)] && !pgKoliduje(n, p.bole, p.sprzet);
+    if (pasuje && !pgUkryteDozwolone && pgCzyUkryte(n)) {
+      pgUkrytePominiete[n] = true;
+      return false;
+    }
+    return pasuje && pgZnajdz(n);
   });
   if (lista.length === 0) {
     return null;
@@ -919,6 +935,16 @@ const PG_BIEG_DLUGI = [25, 30, 35, 40];
 // Zwraca { nazwa, treningi: {klucz: {nazwa, wpisy, blokPrzed, blokPo}}, sesje: [{dzien, kluczTreningu | kardio}], powody, uwagi }
 
 function pgBuduj(p) {
+  pgUkryteDozwolone = !!p.uzyjUkrytych;
+  pgUkrytePominiete = {};
+  try {
+    return pgBudujPlan(p);
+  } finally {
+    pgUkryteDozwolone = false;
+  }
+}
+
+function pgBudujPlan(p) {
   const kotw = pgKotwice(p);
   const podzial = pgPodzial(p);
   const wynik = { treningi: {}, sesje: [], powody: [], uwagi: podzial.uwagi.slice(), profil: p, kotwice: kotw };
@@ -1188,6 +1214,10 @@ function pgPowody(wynik, p, podzial, kotw) {
   }
   if (p.sprzet === "c" && p.bole && p.bole.indexOf("nadgarstek") !== -1) {
     wynik.uwagi.push("Nadgarstek: pompki i dipy rób na uchwytach do pompek albo na pięściach, tak żeby nadgarstek był prosty. Jeśli mimo to boli, pomiń ćwiczenie.");
+  }
+  const ukryte = Object.keys(pgUkrytePominiete);
+  if (ukryte.length > 0) {
+    wynik.uwagi.push("Pominąłem ukryte przez Ciebie ćwiczenia (" + ukryte.slice(0, 4).join(", ") + (ukryte.length > 4 ? " i inne" : "") + ") i wstawiłem zamienniki.");
   }
   if (p.bole && p.bole.length > 0) {
     wynik.uwagi.push("Wyłączyłem ćwiczenia obciążające bolące miejsca (" + p.bole.join(", ") + "). Przy bólu skonsultuj się z lekarzem lub fizjoterapeutą.");
