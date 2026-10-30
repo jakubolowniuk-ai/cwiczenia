@@ -5,6 +5,7 @@ let pkProfil = null;
 let pkKrok = 0;
 let pkNakladka = null;
 let pkWynik = null;
+let pkPoprzedniPlan = null;
 
 const PK_CELE = [
   ["masa", "Zwiększyć masę mięśniową", "Więcej mięśni i siły, trening na masę"],
@@ -96,6 +97,7 @@ function pkOtworz() {
   };
   pkKrok = 0;
   pkWynik = null;
+  pkPoprzedniPlan = null;
   if (!pkNakladka) {
     pkNakladka = pkEl("div", "pk-nakladka");
     pkNakladka.hidden = true;
@@ -389,7 +391,7 @@ function pkRysujPodsumowanie(tresc) {
     const dod = (wynik.czasBlokow.rozgrzewka || 0) + (wynik.czasBlokow.rozciaganie || 0);
     czasTekst = " Trening do " + pkProfil.czas + " min" + (dod > 0 ? " plus ok. " + dod + " min rozgrzewki i rozciągania." : ".");
   }
-  tresc.appendChild(pkEl("p", "opis", "Plan na 4 tygodnie · " + liczba + " sesji. Pierwsza dziś." + czasTekst));
+  tresc.appendChild(pkEl("p", "opis", "Blok 4 tygodnie · " + liczba + " sesji. Pierwsza dziś." + czasTekst));
 
   wynik.uwagi.forEach(function (u) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));
@@ -446,6 +448,12 @@ function pkRysujPodsumowanie(tresc) {
     }
     pgZapisz(pkWynik, { zapiszZestawy: pkProfil.zapiszZestawy !== false });
     pkWynik = null;
+    if (pkPoprzedniPlan) {
+      pkPoprzedniPlan.zamkniety = true;
+      pkPoprzedniPlan.zamknieto = new Date().toISOString();
+      pkPoprzedniPlan = null;
+      zapiszDane();
+    }
     pkZamknij();
     pokazEkran("ekran-dzis");
     rysujDzis();
@@ -482,3 +490,14 @@ function pkDodajPrzyciski() {
 }
 
 pkDodajPrzyciski();
+
+
+// Kolejny blok planu: od razu ekran z gotowym planem (profil z poprzedniego bloku, ciężary z wyników)
+function pkNastepnyBlok(plan) {
+  const profil = pgProfilKolejnegoBloku(plan);
+  pkOtworz();
+  pkPoprzedniPlan = plan;
+  Object.assign(pkProfil, profil);
+  pkKrok = pkKroki().length - 1;
+  pkRysuj();
+}

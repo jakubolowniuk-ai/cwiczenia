@@ -728,7 +728,9 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
   const uzyte = {};
   let wpisy = [];
   sloty.forEach(function (slot, i) {
-    const cw = pgWybierzCwiczenie(slot, p, uzyte, przesun);
+    // Kolejne bloki: ćwiczenia dodatkowe (od 4. miejsca) zmieniają się na inne warianty, główne zostają
+    const obrot = i >= 3 && p.sprzet !== "c" ? (p.blokNr || 1) - 1 : 0;
+    const cw = pgWybierzCwiczenie(slot, p, uzyte, (przesun || 0) + obrot);
     if (!cw) {
       return;
     }
@@ -741,7 +743,7 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
       od: par.od,
       do: par.do,
       przerwa: par.przerwa,
-      kg: p.sprzet === "c" ? 0 : pgCiezar(cw.nazwa, kotw),
+      kg: p.sprzet === "c" ? 0 : (p.ostatnie && p.ostatnie[cw.nazwa] > 0 ? p.ostatnie[cw.nazwa] : pgCiezar(cw.nazwa, kotw)),
       statyczne: cw.rodzajId === "rodzaj-statyczny",
       rdzen: !!slot.r
     });
@@ -956,7 +958,9 @@ function pgBuduj(p) {
   }[podzial.typ];
   wynik.nazwa = PG_NAZWY_CELI[p.cel] + " – " + etykietaPodzialu + " " + p.dni + "×";
   if (p.tygodni > 4) {
-    wynik.nazwa += " (blok 1/" + (p.tygodni / 4) + ")";
+    wynik.nazwa += " (blok " + (p.blokNr || 1) + "/" + (p.tygodni / 4) + ")";
+  } else if ((p.blokNr || 1) > 1) {
+    wynik.nazwa += " (blok " + p.blokNr + ")";
   }
   return wynik;
 }
@@ -1133,9 +1137,31 @@ function pgZapisz(wynik, opcje) {
     aktywnosci: aktywnosci,
     sesje: sesje,
     utworzono: new Date().toISOString(),
-    kreator: { profil: JSON.parse(JSON.stringify(p)), blok: 1, powody: wynik.powody }
+    kreator: { profil: JSON.parse(JSON.stringify(p)), blok: p.blokNr || 1, powody: wynik.powody }
   };
   dane.plany.push(plan);
   zapiszDane();
   return plan;
+}
+
+
+// ===== Kolejny blok =====
+// Profil z poprzedniego bloku + ciężary z ostatnio wykonanych serii (nie z pierwotnych szacunków)
+function pgProfilKolejnegoBloku(plan) {
+  const p = JSON.parse(JSON.stringify(plan.kreator.profil));
+  p.blokNr = (plan.kreator.blok || 1) + 1;
+  p.ostatnie = {};
+  plan.sesje.slice().sort(function (a, b) { return a.dzien - b.dzien; }).forEach(function (s) {
+    if (!s.zrobione || !s.parametry) { return; }
+    Object.keys(s.zrobione).forEach(function (id) {
+      const cw = znajdzCwiczenie(id);
+      const il = (s.wykonane && s.wykonane[id]) || s.parametry[id];
+      if (!cw || !il || !il.ciezary || il.ciezary.length === 0) { return; }
+      const kg = Math.max.apply(null, il.ciezary);
+      if (kg > 0) {
+        p.ostatnie[cw.nazwa] = kg;
+      }
+    });
+  });
+  return p;
 }

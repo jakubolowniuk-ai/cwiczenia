@@ -1072,6 +1072,17 @@ function rysujKoniecPlanu(plan, kontener) {
     blok.appendChild(pasek);
   });
 
+  if (plan.kreator && plan.kreator.profil && typeof pkNastepnyBlok === "function") {
+    blok.appendChild(tekstElement("p", "opis", "Ułożę kolejny blok na podstawie ciężarów z Twoich ostatnich treningów. Główne ćwiczenia zostają, dodatkowe zmienią się na inne warianty."));
+    const dalej = document.createElement("button");
+    dalej.className = "przycisk wielki";
+    dalej.textContent = "Ułóż kolejny blok";
+    dalej.addEventListener("click", function () {
+      pkNastepnyBlok(plan);
+    });
+    blok.appendChild(dalej);
+  }
+
   const nowy = document.createElement("button");
   nowy.className = "przycisk wielki";
   nowy.textContent = "Nowy plan";

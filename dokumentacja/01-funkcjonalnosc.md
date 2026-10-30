@@ -270,3 +270,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Każde ćwiczenie w planie siłowni/dom ma osobną listę dla poziomów 0–3 (`PG_T`). Początkujący: maszyny i hantle (łatwa technika), średni: sztanga i wolne ciężary, zaawansowani: więcej wariantów (front squat, Pendlay, podciąganie nachwytem, kółko brzuszne, drwal).
 - Masa/rzeźba: serie, zakresy powtórzeń i przerwy rosną z doświadczeniem (np. główne 3×10–12 → 4×5–8, przerwa 90 → 150 s).
 - Brzuch zawsze w planie i nigdy nie jest przycinany.
+
+## v61 – kolejne bloki planu
+- Po zakończeniu planu ekran „Plan zakończony” ma przycisk „Ułóż kolejny blok” (`pkNastepnyBlok`, `pgProfilKolejnegoBloku`).
+- Profil zostaje z poprzedniego bloku, ciężary startowe pochodzą z ostatnio wykonanych serii (`profil.ostatnie`), a ćwiczenia dodatkowe (od 4. miejsca) zmieniają się na kolejne warianty. Główne ćwiczenia zostają.
+- Poprzedni plan zamyka się po „Zacznij”. Nazwa: „(blok 2/3)”. Nie dotyczy jeszcze kalisteniki (tam progresję robią propozycje) ani biegania.
