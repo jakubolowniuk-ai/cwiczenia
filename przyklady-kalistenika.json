@@ -3397,6 +3397,237 @@
     "ruch": "Przesuwaj głowę i tułów do przodu nad dłonie jak delfin, potem wróć biodrami w górę.",
     "uwaga": "Łatwiejszy krok do pompek pike. Przy bólu barków przerwij."
    }
+  },
+  {
+   "nazwa": "Rozpiętki ze ślizgaczami (Slider Flyes)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Zębaty przedni",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem na kolanach (łatwiej) lub na palcach, dłonie na ślizgaczach, ręcznikach na gładkiej podłodze lub talerzykach, ciało w prostej linii.",
+    "ruch": "Rozsuwaj ręce powoli na boki, aż klatka będzie tuż nad podłogą, potem ściągnij je z powrotem siłą klatki piersiowej. Wdech przy rozsuwaniu, wydech przy powrocie.",
+    "uwaga": "Nie rozsuwaj dalej, niż potrafisz kontrolować – ślizg jest niebezpieczny dla barków. Zacznij od kolan i krótkiego zakresu."
+   }
+  },
+  {
+   "nazwa": "Wycieraczki na podłodze (Hollow Body)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, ręce wyciągnięte w bok na podłodze, nogi proste i złączone, uniesione pionowo lub pod kątem 45°.",
+    "ruch": "Opuść złączone nogi powoli w jedną stronę, nie dotykając podłogi, i unieś je z powrotem. Potem druga strona. Łopatki i barki zostają przy podłodze.",
+    "uwaga": "Dolne plecy cały czas przy podłodze. Zbyt trudne? Ugnij kolana."
+   }
+  },
+  {
+   "nazwa": "Plank z wysuniętymi rękami (Long Lever Plank)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Naramienny przedni",
+    "Zębaty przedni",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja deski na przedramionach lub dłoniach, ręce wysunięte do przodu bardziej niż pod barkami.",
+    "ruch": "Napnij brzuch i pośladki, utrzymaj prostą linię ciała od głowy do pięt. Oddychaj spokojnie przez zadany czas.",
+    "uwaga": "Biodra nie opadają. Wysuwaj ręce stopniowo. Przy bólu pleców lub barków przerwij."
+   }
+  },
+  {
+   "nazwa": "Pompki w wadze kucznej (Tuck Planche Push-ups)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Zębaty przedni",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na dłoniach, barki wysunięte, kolana skulone i uniesione nad podłogę (tuck planche).",
+    "ruch": "Zegnij łokcie i opuść ciało, nie dotykając stopami podłogi, potem wypchnij się w górę.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj Tuck Planche Hold i pompki pseudo-planche. Rozgrzej nadgarstki."
+   }
+  },
+  {
+   "nazwa": "Skin the Cat z zatrzymaniem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Naramienny przedni",
+    "Naramienny tylny",
+    "Prosty brzucha",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku lub kółkach, ręce proste.",
+    "ruch": "Podciągnij kolana do klatki i przewróć ciało w tył, przeprowadzając nogi między rękoma, aż do głębokiego zwisu z rozciągniętymi barkami. Zatrzymaj się na kilka sekund i wróć tą samą drogą.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie barków. Wchodź do pozycji powoli i nie schodź na siłę. Przy bólu przerwij."
+   }
+  },
+  {
+   "nazwa": "Pompki z obrotem o 360°",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki, ciało w prostej linii.",
+    "ruch": "Opuść klatkę i dynamicznie wybij dłonie z podłogi, obracając ciało o 360° w powietrzu, po czym miękko wyląduj w podporze.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Ćwicz na macie i na wolnej przestrzeni. Ryzyko dla nadgarstków i barków."
+   }
+  },
+  {
+   "nazwa": "Skoki kozackie z naprzemienną zmianą stron",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Głęboki przysiad boczny (kozacki) na jedną nogę, druga wyprostowana w bok.",
+    "ruch": "Odbij się z nogi w bok i w locie zamień strony, lądując miękko w głębokim przysiadzie na drugiej nodze. Powtarzaj naprzemiennie.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie kolan i ścięgien. Opanuj najpierw Cossack Squat i skoki."
+   }
+  },
+  {
+   "nazwa": "Podciąganie w Front Lever",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Obły większy",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja Front Lever pod drążkiem (ciało poziomo, twarzą do góry), ręce proste.",
+    "ruch": "Utrzymując poziomą linię ciała, ugnij łokcie i przyciągnij klatkę do drążka, potem opuść w kontroli.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj Front Lever Hold i wznosy do wagi przodem. Wysokie ryzyko dla barków i łokci."
+   }
+  },
+  {
+   "nazwa": "Dipy na kółkach z rotacją zewnętrzną (Rings Turned Out)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni",
+    "Biceps",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na kółkach gimnastycznych, ręce proste, dłonie obrócone palcami na zewnątrz.",
+    "ruch": "Zegnij łokcie i opuść ciało między kółkami, na górze obróć dłonie na zewnątrz i utrzymaj stabilność.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Wymaga kółek i mocnych barków. Najpierw opanuj Podpór na kółkach (Ring Support Hold) i dipy."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad Sissy",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, trzymaj się ściany lub słupka, stopy na szerokość bioder.",
+    "ruch": "Wspinając się na palce, odchylaj tułów i uda w tył, kolana wysuwają się do przodu, ciało od kolan do głowy w jednej linii. Opuść się, ile możesz, i wróć.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Bardzo mocno obciąża kolana. Zacznij od małego zakresu z podparciem. Przy bólu kolan przerwij."
+   }
+  },
+  {
+   "nazwa": "Pompki archer w staniu na rękach przy ścianie",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stanie na rękach przy ścianie, ręce na szerokość większą niż barki, ciało w jednej linii.",
+    "ruch": "Opuść głowę w stronę jednej dłoni, druga ręka prosta w bok, wypchnij się w górę i zmień stronę.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj Pompki w staniu na rękach przy ścianie. Ćwicz na macie. Przy bólu barków przerwij."
+   }
   }
  ]
 }
