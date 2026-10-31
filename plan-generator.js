@@ -793,9 +793,17 @@ function pgMinuty(wpisy) {
 }
 
 // Czas bloku (rozgrzewki albo rozciągania) w minutach, zaokrąglony; ok. 10 s na przejście między ćwiczeniami
+// Ćwiczenia bloku (rozgrzewka/rozciąganie), z pominięciem ukrytych, jeśli użytkownik nie zgodził się na ich użycie
+function pgIdyBloku(blok, uzyjUkrytych) {
+  return blok.cwiczeniaIds.filter(function (id) {
+    const c = dane.cwiczenia.find(function (x) { return x.id === id; });
+    return c && (uzyjUkrytych || !c.ukryte);
+  });
+}
+
 function pgMinutyBloku(blok) {
   let sek = 0;
-  blok.cwiczeniaIds.forEach(function (id) {
+  pgIdyBloku(blok, pgUkryteDozwolone).forEach(function (id) {
     const il = (blok.parametry && blok.parametry[id]) || DOMYSLNA_ILOSC_BLOKU;
     const m = il.jednostka === "min" ? 60 : 1;
     if (il.typ === "czas") {
@@ -1291,7 +1299,7 @@ function pgZapisz(wynik, opcje) {
       }
       [t.blokPrzed, t.blokPo].forEach(function (blok) {
         if (!blok) { return; }
-        blok.cwiczeniaIds.forEach(function (id) {
+        pgIdyBloku(blok, p.uzyjUkrytych).forEach(function (id) {
           if (!(id in parametry)) {
             parametry[id] = (blok.parametry && blok.parametry[id]) || DOMYSLNA_ILOSC_BLOKU;
           }

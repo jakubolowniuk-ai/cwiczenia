@@ -309,3 +309,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Dodano do bazy 34 ćwiczenia zaawansowane/elitarne z listy PDF: pompki plyometryczne (klaśnięcia, Supermana), Free HSPU, tygrysie, podciąganie za kark / do pasa / z klaśnięciem / na jednej ręce, dipy koreańskie / L-sit / eksplozywne / back lever, przysiad smoka, rollouty ze stania i na jednej ręce, ćwiczenia ze stopami na kółku, V-Sit, Manna, Planche, Human Flag (też z ugiętymi kolanami), One Arm Planche, pompki delfina.
 - Każde ma ostrzeżenie w polu „uwaga" (elitarne, ryzyko dla nadgarstków/barków/łokci).
 - Generator ich NIE używa – są tylko w bazie do ręcznego dodawania. `WERSJA_BAZY` = 10.
+
+## v67 – rozgrzewka i rozciąganie bez ukrytych ćwiczeń
+- Gotowe bloki rozgrzewki/rozciągania w wygenerowanym planie pomijają ukryte ćwiczenia (chyba że użytkownik w kreatorze zgodził się na użycie ukrytych). Dotyczy też liczenia czasu bloków.
