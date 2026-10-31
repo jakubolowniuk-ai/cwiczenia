@@ -2379,6 +2379,1654 @@
     "uwaga": "Kolana idą w stronę palców, pięty na podłodze, plecy proste. Zacznij od lekkich hantli."
    },
    "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie hantli na ławce skośnej ujemnej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce skośnej głową w dół, stopy zablokowane pod wałkami. Hantle trzymaj nad dolną częścią klatki, łokcie lekko ugięte.",
+    "ruch": "Opuść hantle kontrolowanie do boków dolnej klatki, łokcie ok. 45° do tułowia. Wypchnij w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Nie opuszczaj nisko głowy zbyt długo. Przy nadciśnieniu i problemach z oczami lub sercem unikaj ławki ujemnej."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie hantli chwytem neutralnym (Squeeze Press)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce poziomej, hantle trzymaj złączone nad klatką, dłonie zwrócone do siebie.",
+    "ruch": "Ściskaj hantle o siebie przez cały ruch i wyciskaj je w górę, potem opuść do klatki. Wdech w dół, wydech w górę.",
+    "uwaga": "Dociskanie hantli do siebie utrzymuj przez całą serię. Lekki ciężar wystarczy."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rozpiętki z hantlami na ławce skośnej ujemnej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce skośnej głową w dół, hantle nad klatką, łokcie lekko ugięte.",
+    "ruch": "Rozwiedź ręce szerokim łukiem, aż poczujesz rozciągnięcie klatki, potem ściągnij hantle z powrotem nad klatkę. Wdech w dół, wydech w górę.",
+    "uwaga": "Łokcie stale lekko ugięte. Nie schodź za nisko ze względu na barki."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Krzyżowanie linek wyciągu dolnego (od dołu do góry)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań między wyciągami, rączki na dole, tułów lekko pochylony, łokcie lekko ugięte.",
+    "ruch": "Unieś rączki łukiem w górę i do środka na wysokość twarzy, ściskając górę klatki. Wróć powoli. Wydech w górę.",
+    "uwaga": "Tułów się nie buja. Skup się na ruchu klatki, a nie ramion."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Dipy na maszynie z asystą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na stopniu maszyny, chwyć uchwyty, ustaw przeciwwagę (im większa, tym łatwiej).",
+    "ruch": "Opuść się, uginając łokcie, tułów lekko pochylony, a potem wypchnij w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Dobry sposób na naukę dipów. Z czasem zmniejszaj asystę."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie Landmine jednorącz stojąc",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem do końca sztangi osadzonej w uchwycie Landmine, koniec sztangi trzymaj przy barku.",
+    "ruch": "Wypchnij koniec sztangi w górę i do przodu aż do wyprostu ręki, tułów stabilny. Wróć powoli. Potem druga ręka.",
+    "uwaga": "Przyjazne dla barków. Nie wyginaj lędźwi, brzuch napięty."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie Z-Press",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze z prostymi nogami, plecy wyprostowane, sztanga lub hantle na barkach.",
+    "ruch": "Wyciśnij ciężar nad głowę bez odchylania tułowia i opuść do barków. Wydech w górę.",
+    "uwaga": "Wymaga mocnego brzucha i mobilności. Zacznij od lekkiego ciężaru."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Push Press",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona",
+    "Nogi"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań ze sztangą na barkach (chwyt jak w OHP), stopy na szerokość bioder.",
+    "ruch": "Lekko ugnij kolana, dynamicznie je wyprostuj i wypchnij sztangę nad głowę. Opuść ją na barki. Wydech przy wyciskaniu.",
+    "uwaga": "Siła z nóg, nie z lędźwi. Przy bólu barków lub pleców przerwij."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Y-Raises z hantlami na ławce",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Czworoboczny – część dolna",
+    "Czworoboczny – część środkowa",
+    "Równoległoboczny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się brzuchem na ławce skośnej, ręce zwisają z lekkimi hantlami.",
+    "ruch": "Unieś ręce w literę Y, kciuki w górę, do linii ciała. Opuść powoli. Wydech w górę.",
+    "uwaga": "Ciężar bardzo lekki. Barki z dala od uszu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rotacje zewnętrzne z linką wyciągu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Podgrzebieniowy",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem do wyciągu, łokieć przy tułowiu zgięty pod kątem 90°, rączka w dłoni bliżej wyciągu.",
+    "ruch": "Obracaj przedramię na zewnątrz, łokieć nie odrywa się od boku, potem wróć powoli.",
+    "uwaga": "Bardzo mały ciężar. Ćwiczenie ochronne dla stożka rotatorów."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Odwrotne krzyżowanie linek wyciągu górnego",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Naramienny tylny",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań między wyciągami, chwyć skrzyżowane rączki (prawa ręka lewą linkę), ręce przed sobą.",
+    "ruch": "Rozwiedź ręce szeroko na boki do linii barków, ściskając łopatki. Wróć powoli.",
+    "uwaga": "Łokcie lekko ugięte, tułów stabilny. Lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiosłowanie Meadows (Landmine)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem do końca sztangi Landmine, jedna stopa z przodu, tułów pochylony.",
+    "ruch": "Przyciągnij koniec sztangi do biodra, łokieć prowadzisz wzdłuż tułowia. Opuść powoli. Potem druga strona.",
+    "uwaga": "Plecy proste. Wariant przyjazny dla pleców i chwytu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Ściąganie jednorącz wyciągu górnego",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź przy wyciągu, chwyć jedną rączkę, tułów lekko odchylony.",
+    "ruch": "Przyciągnij łokieć w dół do boku tułowia, ściskając najszerszy grzbietu. Wróć powoli. Potem druga ręka.",
+    "uwaga": "Bez szarpania. Barki z dala od uszu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiosłowanie sztangą w opadzie chwytem podchwytem (Yates)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Biceps",
+    "Ramienny",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań z lekko ugiętymi kolanami, tułów pochylony ok. 45°, sztanga w podchwycie.",
+    "ruch": "Przyciągnij sztangę do dolnej części brzucha, łokcie wzdłuż tułowia. Opuść powoli.",
+    "uwaga": "Plecy proste, lędźwie nie uginają się. Mniejszy ciężar niż w klasycznym wiosłowaniu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rack Pull",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Czworoboczny – część górna",
+    "Dwugłowy uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga ustawiona w stojaku tuż poniżej kolan. Stań blisko, chwyt na szerokość barków.",
+    "ruch": "Wyprostuj biodra i kolana, ściągając łopatki na górze. Opuść sztangę na stojak powoli.",
+    "uwaga": "Plecy proste. Skróconym zakresem pozwala na duży ciężar, ale nie przesadzaj. Pas opcjonalnie."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Reverse Hyper",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się brzuchem na ławce lub maszynie, nogi zwisają, chwyć uchwyty.",
+    "ruch": "Unieś proste nogi do linii tułowia, ściskając pośladki. Opuść powoli.",
+    "uwaga": "Nie bujaj nogami. Ruch z pośladków, a nie z lędźwi."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Pullover na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Zębaty przedni",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na maszynie, ręce lub łokcie na wałkach, ramiona uniesione nad głowę.",
+    "ruch": "Pociągnij ręce w dół i do przodu, ściskając najszerszy grzbietu. Wróć powoli.",
+    "uwaga": "Dopasuj siedzisko. Pełny zakres bez szarpania."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Szrugsy na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Czworoboczny – część górna",
+    "Czworoboczny – część środkowa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź lub stań na maszynie do szrugsów, chwyć uchwyty, ramiona luźno w dół.",
+    "ruch": "Unieś barki do uszu, zatrzymaj na chwilę i opuść. Wydech w górę.",
+    "uwaga": "Bez kręcenia barkami. Głowa nieruchomo."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad Cyclist (na podwyższeniu pięt)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań wąsko, pięty na podwyższeniu (talerz, klin), hantel trzymaj przy klatce.",
+    "ruch": "Przysiadaj głęboko, kolana wysuwają się daleko do przodu, tułów prosto. Wróć siłą nóg.",
+    "uwaga": "Mocno obciąża przód uda i kolana. Zacznij lekko."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad na maszynie Pendulum",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na platformie maszyny, plecy oparte, ramiona zabezpieczone wałkami.",
+    "ruch": "Zniż się głęboko, a potem wypchnij w górę. Kolana wzdłuż stóp.",
+    "uwaga": "Dobre dla kolan i pleców. Pięty cały czas na platformie."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad pasowy (Belt Squat) na maszynie",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zapnij pas z ciężarem maszyny wokół bioder i stań na platformach.",
+    "ruch": "Zniż się w przysiad i wstań. Tułów prosto, ciężar zawieszony na biodrach.",
+    "uwaga": "Bez obciążania kręgosłupa. Pięty na platformie."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie jednonóż na suwnicy",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na suwnicy, jedna stopa na środku platformy, druga w powietrzu lub na boku.",
+    "ruch": "Zegnij nogę, aż uda zbliżą się do klatki, i wypchnij bez blokowania kolana. Potem druga noga.",
+    "uwaga": "Mniejszy ciężar niż obunóż. Dolne plecy przy oparciu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad wykroczny ze sztangą (Split Squat)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga na plecach, jedna noga z przodu, druga z tyłu, stopy na szerokość bioder.",
+    "ruch": "Opuść tylne kolano w stronę podłogi, tułów prosto. Wypchnij się w górę. Wdech w dół.",
+    "uwaga": "Przedni piszczel mniej więcej pionowo. Przy bólu kolan zmniejsz zakres."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg rumuński jednonóż z hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Dwugłowy uda",
+    "Półścięgnisty i półbłoniasty",
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, hantel w ręce po przeciwnej stronie, kolano lekko ugięte.",
+    "ruch": "Pochyl tułów, wypychając drugą nogę do tyłu, hantel zjeżdża wzdłuż nogi. Wyprostuj się, ściskając pośladek.",
+    "uwaga": "Biodra równo. Plecy proste. Przytrzymaj się ściany, jeśli tracisz równowagę."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Hip Thrust jednonóż",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Pośladkowy średni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Plecy oparte o ławkę, jedna stopa na podłodze, druga noga uniesiona, ewentualnie hantel na biodrach.",
+    "ruch": "Wypchnij biodra w górę, ściskając pośladek, a potem opuść. Potem druga noga.",
+    "uwaga": "Broda przyciągnięta, brzuch napięty. Nie wyginaj lędźwi."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wykroki boczne z hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań prosto, hantel trzymaj przy klatce.",
+    "ruch": "Krok w bok i zniż biodra nad ugiętą nogą, druga prosta. Odepchnij się z powrotem.",
+    "uwaga": "Kolano idzie w kierunku palców. Stopy cały czas skierowane do przodu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wykroki chodzone ze sztangą na plecach",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga na plecach, stopy na szerokość bioder.",
+    "ruch": "Zrób krok do przodu i zniż tylne kolano, wypchnij się i zrób następny krok.",
+    "uwaga": "Plecy proste, kroki równe. Lżejszy ciężar, więcej miejsca."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Odwodzenie nogi w bok na wyciągu dolnym",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy średni",
+    "Pośladkowy mały",
+    "Napinacz powięzi szerokiej"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem do wyciągu, mankiet na nodze dalszej od wyciągu, przytrzymaj się.",
+    "ruch": "Unieś nogę w bok bez przechylania tułowia i wróć powoli. Potem druga noga.",
+    "uwaga": "Mały zakres, kontrola. Tułów nie odchyla się."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przywodzenie nogi na wyciągu dolnym",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem do wyciągu, mankiet na nodze bliższej wyciągowi, przytrzymaj się.",
+    "ruch": "Przeciągnij nogę przed drugą w stronę środka, a potem wróć powoli. Potem druga noga.",
+    "uwaga": "Tułów stabilny. Lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wspięcia na palce siedząc z hantlami na kolanach",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Płaszczkowaty",
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na ławce, stopy na podwyższeniu, hantle na kolanach.",
+    "ruch": "Unieś pięty wysoko i opuść poniżej poziomu palców. Zatrzymaj na górze.",
+    "uwaga": "Pełny zakres, wolne tempo."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wspięcia osła (Donkey Calf Raises)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Brzuchaty łydki – głowa boczna",
+    "Brzuchaty łydki – głowa przyśrodkowa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pochyl tułów, dłonie oprzyj o stabilne podparcie, palce stóp na podwyższeniu, ciężar na biodrach lub partner.",
+    "ruch": "Unieś pięty wysoko i opuść poniżej poziomu palców. Zatrzymaj na górze.",
+    "uwaga": "Kolana proste, ale nie zablokowane."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Copenhagen Plank",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Przywodziciele uda",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się bokiem, górną nogę oprzyj na ławce, dolna pod ławką, łokieć pod barkiem.",
+    "ruch": "Unieś biodra, ciało w linii, przytrzymaj. Oddychaj spokojnie. Potem druga strona.",
+    "uwaga": "Zacznij z kolanem opartym na ławce. Przy bólu pachwiny przerwij."
+   },
+   "ciezar": false
+  },
+  {
+   "nazwa": "Uginanie ramion Spider Curl",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się brzuchem na ławce skośnej, ręce zwisają z hantlami lub sztangą.",
+    "ruch": "Uginaj łokcie, unosząc ciężar do barków. Opuść powoli.",
+    "uwaga": "Łokcie wolne i pionowo w dół. Bez bujania."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Uginanie Zottmana",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny",
+    "Ramienno-promieniowy",
+    "Prostowniki przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań z hantlami w rękach, dłonie do przodu.",
+    "ruch": "Unieś hantle podchwytem, na górze obróć dłonie do dołu i opuść je nachwytem. Na dole obróć z powrotem.",
+    "uwaga": "Opuszczanie bardzo wolne. Lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Uginanie Bayesian na wyciągu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań tyłem do wyciągu dolnego, rączka w ręce, ramię odciągnięte do tyłu.",
+    "ruch": "Uginaj łokieć, ramię pozostaje z tyłu. Opuść powoli, nie prostując łokcia całkowicie. Potem druga ręka.",
+    "uwaga": "Rozciągnięcie bicepsa u dołu. Barki nieruchome."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Uginanie jednorącz na modlitewniku z hantlem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Biceps",
+    "Ramienny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź przy modlitewniku, ramię oparte całą długością, hantel w dłoni.",
+    "ruch": "Uginaj łokieć do góry i opuść, nie prostując go zupełnie. Potem druga ręka.",
+    "uwaga": "Bez szarpania na dole. Łokieć przy podparciu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Tate Press",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce, hantle nad klatką, dłonie zwrócone do stóp, łokcie szeroko.",
+    "ruch": "Zginaj łokcie, opuszczając hantle do klatki, a następnie wypchnij je w górę.",
+    "uwaga": "Ruch tylko w łokciach, ciężar lekki. Ostrożnie z uderzaniem w klatkę."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie francuskie hantlem oburącz",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań lub usiądź, hantel trzymany oburącz nad głową, łokcie wskazują w górę.",
+    "ruch": "Zegnij łokcie, opuszczając hantel za głowę, i wyprostuj ręce. Wdech w dół, wydech w górę.",
+    "uwaga": "Łokcie blisko głowy. Plecy proste."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Prostowanie ramion na wyciągu podchwytem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań przy wyciągu górnym, rączka lub drążek podchwytem, łokcie przy tułowiu.",
+    "ruch": "Wyprostuj ręce w dół i wróć kontrolowanie.",
+    "uwaga": "Łokcie nie odrywają się od boków. Ruch tylko w łokciach."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rotacje tułowia Landmine",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań stabilnie, końcówkę sztangi Landmine trzymaj oburącz przed klatką.",
+    "ruch": "Prowadź sztangę łukiem z boku na bok, obracając tułów i biodra, ręce wyprostowane. Wróć.",
+    "uwaga": "Ruch z tułowia. Kontrolowane tempo, lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Renegade Row",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Skośny zewnętrzny brzucha",
+    "Poprzeczny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem na dwóch hantlach, stopy szeroko.",
+    "ruch": "Przyciągnij jeden hantel do biodra, nie obracając tułowia, odłóż i zrób to drugą ręką.",
+    "uwaga": "Stopy szeroko dla stabilności. Lekkie hantle."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Spacer z walizką (Suitcase Carry)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Czworoboczny – część górna",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań prosto z ciężarem w jednej ręce.",
+    "ruch": "Idź powoli, nie pozwalając tułowiowi przechylić się w bok. Po przejściu zmień rękę.",
+    "uwaga": "Barki równo, brzuch napięty."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Spacer z ciężarem nad głową (Overhead Carry)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Czworoboczny – część górna",
+    "Skośny zewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Wyciśnij ciężar nad głowę jedną ręką, ramię wyprostowane przy uchu.",
+    "ruch": "Idź powoli z ciężarem nad głową, tułów prosto. Potem druga ręka.",
+    "uwaga": "Nie wyginaj lędźwi. Lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Tureckie wstawanie z kettlebellem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Brzuch",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, kettlebell wyciśnięty w górę w jednej ręce, wzrok na kettlu.",
+    "ruch": "Przejdź kontrolowanie przez kolejne etapy aż do stania, trzymając ciężar nad sobą, a potem wróć tą samą drogą.",
+    "uwaga": "Ćwicz najpierw bez ciężaru. Ręka cały czas pionowo."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Obszerny boczny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań z hantlami po bokach lub przed udami, plecy proste.",
+    "ruch": "Zegnij biodra i kolana, opuść hantle wzdłuż nóg i wyprostuj się.",
+    "uwaga": "Lędźwie neutralnie. Prostszy start do martwego ciągu."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad Zerchera (Zercher Squat)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga w zgięciach łokci przed tułowiem, stopy na szerokość barków.",
+    "ruch": "Zniż się w przysiad z tułowiem prosto i wstań.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Obciąża łokcie, ścięgna i plecy. Użyj osłony na sztangę."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Spacer Zerchera (Zercher Carry)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podnieś sztangę i trzymaj ją w zgięciach łokci.",
+    "ruch": "Idź powoli, tułów wyprostowany.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Użyj osłony na łokcie. Lekki ciężar."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad ze sztangą Landmine",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Końcówka sztangi Landmine przy klatce, oba ręce na końcu.",
+    "ruch": "Przysiadaj, tułów prosto, i wstań.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga ustabilizowanej sztangi."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad Zerchera z Landmine",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Koniec sztangi Landmine w zgięciach łokci, drugi koniec w uchwycie.",
+    "ruch": "Przysiadaj z tułowiem pionowo, a następnie wstań.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Użyj osłony na łokcie."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad Jeffersona",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań okrakiem nad sztangą, jedna stopa przed nią, druga za nią, chwyć sztangę jedna ręka z przodu, druga z tyłu.",
+    "ruch": "Zniż się, trzymając sztangę nisko, i wstań. Zmień nogi w kolejnej serii.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Rotacja bioder i duże obciążenie kolan. Zacznij bardzo lekko."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad kozacki z ciężarem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Przywodziciele uda",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań szeroko, hantel trzymaj przy klatce.",
+    "ruch": "Przenieś ciężar na jedną nogę i zniż się, druga prosta. Wróć i zmień stronę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Mobilność bioder. Przy bólu kolana zmniejsz zakres."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad Sissy z talerzem",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, talerz przy klatce, jedna ręka trzyma się podparcia.",
+    "ruch": "Wspinając się na palce, odchylaj tułów i uda do tyłu, kolana wysuwają się do przodu. Wróć.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Bardzo obciąża kolana."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad hackmaszynowy odwrócony (Reverse Hack)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań twarzą do oparcia maszyny, pięty wysoko na platformie.",
+    "ruch": "Zniż się, a potem wypchnij w górę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Duże obciążenie kolan. Zacznij od mało."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wskoki na skrzynię z hantlami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Hantle w dłoniach przy bokach, stań przed stabilną skrzynią.",
+    "ruch": "Zamachnij się, wskocz na skrzynię i zejdź krokiem.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Ryzyko dla ścięgien Achillesa i kolan."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg rwaniowy (Snatch-Grip)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Bardzo szeroki chwyt sztangi, stopy na szerokość bioder.",
+    "ruch": "Podnieś sztangę, prostując biodra i kolana. Opuść kontrolowanie.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Duży zakres, duże obciążenie pleców."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg z deficytu",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Obszerny boczny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na podwyższeniu 2–5 cm, sztanga na podłodze.",
+    "ruch": "Podnieś sztangę z dłuższego zakresu ruchu.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Bardzo obciąża plecy."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Hip Thrust B-stance",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Plecy oparte o ławkę, jedna stopa na podłodze, druga lekko wsparta obok.",
+    "ruch": "Wypchnij biodra w górę, główny ciężar niesie noga przednia.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Dobierz ciężar, aby biodra pozostały równo."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie gilotynowe",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce, sztanga nad klatką, chwyt bardzo szeroki.",
+    "ruch": "Opuść sztangę do górnej klatki lub szyi i wypchnij.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Duże ryzyko dla barków. Stosuj lekki ciężar i asekurację."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie zza karku stojąc ze sztangą",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, sztanga na plecach (za głową), chwyt szeroki.",
+    "ruch": "Wyciśnij sztangę nad głowę i opuść ją za głowę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga bardzo dobrej mobilności barków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie zza karku siedząc na maszynie Smitha",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź pod sztangą Smitha, chwyt szeroki.",
+    "ruch": "Opuść sztangę za głowę do ucha i wyprostuj ręce.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Obciąża barki i szyję."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Ściąganie drążka wyciągu górnego za kark",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Równoległoboczny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź przy wyciągu, chwyt szeroki.",
+    "ruch": "Pociągnij drążek za głowę do karku, wróć powoli.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Ryzykowne dla barków i szyi. Zwykłe ściąganie do klatki jest bezpieczniejsze."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie Bradforda",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań ze sztangą przy barkach.",
+    "ruch": "Wyciskaj na przemian sztangę nad głowę i za głowę bez pełnego wyprostu.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Duże obciążenie barków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie Scotta (Scott Press)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki"
+   ],
+   "miesnie": [
+    "Naramienny środkowy",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź, hantle przy barkach.",
+    "ruch": "Wyciskaj hantle nad głowę z rotacją ramion na boki.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Zakres ruchu jest nietypowy dla barków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Szrugsy ze sztangą za plecami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Czworoboczny – część górna",
+    "Czworoboczny – część środkowa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, sztanga trzymana za plecami.",
+    "ruch": "Unieś barki do uszu i opuść.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Niekorzystna pozycja dla barków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiosłowanie Kroc Row",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Czworoboczny – część środkowa",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Oprzyj jedną rękę o ławkę, drugą trzymaj ciężki hantel.",
+    "ruch": "Przyciągaj hantel do biodra w serii wielu powtórzeń z lekką dynamiką.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Przy zmęczeniu łatwo o kontuzję pleców."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Spacer kelnera (Waiter's Walk)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Barki",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Skośny zewnętrzny brzucha",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Wyciśnij ciężar nad głowę jedną ręką, ramię wyprostowane.",
+    "ruch": "Idź powoli, utrzymując ciężar nad głową.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Unikaj wyginania lędźwi."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Spacer kaczki z kettlebellem (Goblet Duck Walk)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Kettlebell przy klatce, głęboki przysiad.",
+    "ruch": "Idź w przysiadzie małymi krokami.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Duże obciążenie kolan i bioder."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rwanie hantla z ziemi (Dumbbell Snatch)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Hantel na podłodze między stopami, pozycja jak do martwego ciągu.",
+    "ruch": "Dynamicznie wyprostuj biodra i wyrzuć hantel nad głowę jednym ruchem. Opuść i powtórz.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga techniki. Ćwicz najpierw z lekkim ciężarem."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Zarzut hantli z zawieszenia (Hang Clean)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Czworoboczny – część górna",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Hantle w dłoniach przed udami, kolana lekko ugięte.",
+    "ruch": "Wyprostuj biodra i przerzuć hantle na barki, opuść.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Ryzyko dla nadgarstków. Najpierw nauka techniki."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Zarzut i podrzut sztangi (Clean and Jerk)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Czworoboczny – część górna",
+    "Naramienny przedni",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga na podłodze, pozycja jak do martwego ciągu.",
+    "ruch": "Podnieś sztangę na barki, a następnie wypchnij ją nad głowę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Ćwiczenie techniczne, ćwicz z trenerem."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rwanie sztangi (Snatch)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Plecy",
+    "Barki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Czworoboczny – część górna",
+    "Naramienny środkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga na podłodze, bardzo szeroki chwyt.",
+    "ruch": "Jednym ruchem podnieś sztangę nad głowę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Bardzo techniczne. Ćwicz z trenerem."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Zarzut i wyciskanie sztangi (Clean and Press)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga na podłodze.",
+    "ruch": "Podnieś sztangę na barki i wyciśnij nad głowę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga techniki."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rwanie kettlebella (Kettlebell Snatch)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Czworoboczny – część górna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Kettlebell na podłodze przed sobą, pozycja jak do swingu.",
+    "ruch": "Dynamicznie wyprostuj biodra i wyrzuć kettlebell nad głowę. Opuść i powtórz.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Ryzyko dla nadgarstka. Ćwicz najpierw swing."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Zarzut i wyciskanie kettlebella",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Pośladki",
+    "Barki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa boczna"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Kettlebell na podłodze.",
+    "ruch": "Zarzuć kettlebell na ramię i wyciśnij nad głowę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga techniki."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wiatrak z kettlebellem (Windmill)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Brzuch",
+    "Barki"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Prostowniki grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Kettlebell wyciśnięty nad głowę jedną ręką, stopy rozstawione.",
+    "ruch": "Pochyl tułów w bok, sunąc drugą ręką wzdłuż nogi. Wróć.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga mobilności bioder i barków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie hantli na piłce gimnastycznej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się plecami na piłce, hantle nad klatką.",
+    "ruch": "Wyciskaj hantle w górę i opuszczaj je do klatki.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Niestabilne podłoże zwiększa ryzyko upadku."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Rozpiętki z hantlami na piłce gimnastycznej",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się plecami na piłce, hantle nad klatką.",
+    "ruch": "Rozwiedź ręce na boki i wróć.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Niestabilne podłoże zwiększa ryzyko upadku."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie szwajcarskie (Swiss Bar Press)",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce, chwyt neutralny na drążku szwajcarskim.",
+    "ruch": "Opuść drążek i wypchnij w górę.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga specjalnego drążka."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad ze sztangą Safety Squat Bar",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga SSB na barkach, uchwyty przed sobą.",
+    "ruch": "Przysiadaj i wstań.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Wymaga specjalnej sztangi."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Wyciskanie z łańcuchami",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na ławce, sztanga z łańcuchami.",
+    "ruch": "Opuść sztangę do klatki i wypchnij.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Zmienny opór. Wymaga asekuracji."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Martwy ciąg z gumami oporowymi",
+   "rodzaj": "Siłownia",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki",
+    "Dwugłowy uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Sztanga z gumami przymocowanymi do platformy.",
+    "ruch": "Podnieś sztangę jak w martwym ciągu.",
+    "uwaga": "Ćwiczenie zaawansowane lub ryzykowne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów, z lekkim ciężarem i, gdy trzeba, z asekuracją. Rosnący opór na końcu ruchu."
+   },
+   "ciezar": true
   }
  ]
 }

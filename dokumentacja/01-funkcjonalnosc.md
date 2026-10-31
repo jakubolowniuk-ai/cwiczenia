@@ -315,3 +315,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## v68 – 11 ćwiczeń z listy Tom III
 - Dodano 11 ćwiczeń: Rozpiętki ze ślizgaczami, Wycieraczki na podłodze (Hollow Body), Plank z wysuniętymi rękami oraz 8 elitarnych (Tuck Planche Push-ups, Skin the Cat, pompki 360°, skoki kozackie, Front Lever Pull-ups, dipy na kółkach RTO, Przysiad Sissy, archer HSPU). Pozycje 21–160 listy były pustymi wypełniaczami. `WERSJA_BAZY` = 11. Generator ich nie używa.
+
+## v69 – 81 ćwiczeń siłowych z trzech list
+- Dodano do `przyklady-silownia.json` 45 ćwiczeń efektywnych (m.in. Landmine Press, Z-Press, Meadows Row, Rack Pull, Reverse Hyper, Pendulum/Belt Squat, RDL i Hip Thrust jednonóż, Spider/Zottman/Bayesian Curl, Tate Press, Renegade Row, Turkish Get-Up, Copenhagen Plank) oraz 36 elitarnych/ryzykownych/technicznych z ostrzeżeniem w uwadze (Zercher, wyciskanie zza karku, ćwiczenia olimpijskie i kettlebell, sprzęt niszowy). Pominięto ok. 280 powtórek i warianty bez praktycznej różnicy. `WERSJA_BAZY` = 12. Generator ich nie używa.
