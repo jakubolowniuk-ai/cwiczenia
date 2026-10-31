@@ -403,7 +403,7 @@ const PG_KAL_LAD = {
   pullH: ["Podciąganie australijskie", "Podciąganie australijskie z nogami na podwyższeniu", "Podciąganie australijskie z nogami na podwyższeniu", "Wiosłowanie australijskie jednorącz", "Wiosłowanie australijskie jednorącz"],
   biceps: ["Uginanie ramion w australijskim podciąganiu podchwytem", "Uginanie ramion w australijskim podciąganiu podchwytem", "Uginanie ramion na niskim drążku podchwytem", "Uginanie ramion na niskim drążku podchwytem", "Podciąganie podchwytem"],
   squat: ["Przysiad klasyczny", "Przysiad bułgarski", "Przysiad kozacki (Cossack Squat)", "Pistol Squat z podparciem", "Pistol Squat"],
-  squatB: ["Przysiad sumo", "Przysiad głęboki", "Przysiad kozacki (Cossack Squat)", "Pistol Squat z podparciem", "Pistol Squat"],
+  squatB: ["Przysiad sumo", "Przysiad głęboki", "Przysiad kozacki (Cossack Squat)", "Przysiad krewetkowy (Shrimp Squat)", "Pistol Squat"],
   lunge: ["Wykroki w tył", "Wykroki chodzone", "Wykroki chodzone", "Przysiad bułgarski", "Przysiad bułgarski"],
   hinge: ["Most biodrowy", "Most biodrowy jednonóż", "Hip Thrust jednonóż", "Hip Thrust jednonóż", "Hip Thrust jednonóż"],
   ham: ["Sliding Leg Curl", "Sliding Leg Curl", "Sliding Leg Curl", "Nordic Hamstring Curl", "Nordic Hamstring Curl"],

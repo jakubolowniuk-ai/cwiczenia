@@ -299,3 +299,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Kolejny blok dziedziczy wybór. Propozycje trudniejszego wariantu (kalistenika) też go respektują.
 - Ograniczenie: gotowe bloki rozgrzewki i rozciągania zawierają swoje ćwiczenia niezależnie od ukrycia.
 - Przewodnik: nowa karta „Ukryte ćwiczenia a plan”.
+
+## v65 – 22 nowe ćwiczenia w bazie
+- Dodano do `przyklady-kalistenika.json` 22 ćwiczenia z listy PDF (bez powtórek i bez ćwiczeń nieefektywnych/ryzykownych): m.in. Pompki na kolanach, Pompki Sfinksa, Podciąganie z gumą, Podciąganie negatywne, Dipy na drążku prostym, Przysiad krewetkowy, Plank odwrócony, L-sit w zwisie, Kółko brzuszne do ściany / na bok / Iso-Hold, Kruk, Straddle Planche. Własne opisy po polsku.
+- `WERSJA_BAZY` = 9 – istniejący użytkownicy dostają nowe ćwiczenia po odświeżeniu.
+- Generator: Przysiad krewetkowy na drabince przysiadów (wariant B).

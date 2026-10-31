@@ -2226,6 +2226,464 @@
     "ruch": "Pochylaj się do przodu, rozwijając kółko, aż ciało będzie prawie poziome, plecy proste. Zatrzymaj i wróć napięciem brzucha. Wydech w przód, wdech w tył.",
     "uwaga": "Nie wyginaj dolnych pleców w dół. Zacznij od wersji z kolan. Zmniejsz zakres, jeśli plecy się uginają."
    }
+  },
+  {
+   "nazwa": "Pompki na kolanach",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem, dłonie pod barkami, kolana na miękkiej macie. Ciało w prostej linii od kolan do głowy, brzuch napięty.",
+    "ruch": "Zegnij łokcie, prowadząc je pod kątem ok. 45° do tułowia, i opuść klatkę nisko. Wypchnij się w górę. Wdech w dół, wydech w górę.",
+    "uwaga": "Biodra nie opadają i nie sterczą w górę. Gdy zrobisz 3 serie po 12, przejdź na pompki klasyczne albo z rękami na podwyższeniu."
+   }
+  },
+  {
+   "nazwa": "Pompki Sfinksa",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna",
+    "Naramienny przedni",
+    "Zębaty przedni",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem na przedramionach, łokcie pod barkami, ciało w prostej linii, brzuch i pośladki napięte (jak w desce).",
+    "ruch": "Dociskaj dłonie do podłogi i prostuj łokcie, unosząc tułów do podporu na prostych rękach. Wróć powoli na przedramiona. Wydech w górę, wdech w dół.",
+    "uwaga": "Zacznij na kolanach. Dłonie stawiaj na wysokości łokci. Przy bólu łokci lub nadgarstków przerwij."
+   }
+  },
+  {
+   "nazwa": "Podciąganie z gumą (z asystą)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zaczep gumę oporową o drążek i wsuń w pętlę kolano lub stopę. Chwyt nachwytem na szerokość barków, zwis, łopatki w dół.",
+    "ruch": "Podciągnij się, aż broda będzie nad drążkiem. Guma pomaga najbardziej na dole ruchu. Opuść się powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Z czasem wybieraj cieńszą gumę. Bez bujania. Sprawdź, czy guma jest dobrze zaczepiona i nie wyskoczy."
+   }
+  },
+  {
+   "nazwa": "Podciąganie negatywne",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na krześle lub podskocz tak, by znaleźć się na górze: broda nad drążkiem, chwyt nachwytem na szerokość barków.",
+    "ruch": "Opuszczaj się jak najwolniej, ok. 3–5 sekund, aż do pełnego zwisu na prostych rękach. Zejdź z drążka i powtórz. Wdech w dół.",
+    "uwaga": "To najlepszy sposób na pierwsze podciągnięcie. Nie opadaj swobodnie, hamuj ruch. Po takim treningu mięśnie bolą mocniej, więc daj im dzień przerwy."
+   }
+  },
+  {
+   "nazwa": "Dipy na drążku prostym (Straight Bar Dips)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań przed drążkiem na wysokości bioder (np. w stojaku). Chwyć go z góry i odepchnij się do podporu: ramiona proste, drążek pod klatką.",
+    "ruch": "Pochyl lekko tułów, zegnij łokcie i opuść klatkę do drążka. Wypchnij się w górę do prostych rąk. Wdech w dół, wydech w górę.",
+    "uwaga": "Ćwiczenie dla zaawansowanych, mocno obciąża barki. Najpierw opanuj dipy na ławce. Przy bólu barków przerwij."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przysiad krewetkowy (Shrimp Squat)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze. Drugą zegnij w kolanie do tyłu i chwyć stopę dłonią za sobą. Tułów lekko pochylony.",
+    "ruch": "Opuszczaj się na nodze stojącej, aż kolano nogi wolnej lekko dotknie podłogi za piętą stojącej. Wróć do stania siłą jednej nogi. Wdech w dół, wydech w górę. Potem druga strona.",
+    "uwaga": "Na początku przytrzymaj się ściany lub poręczy. Kolano nogi stojącej idzie w stronę palców. Przy bólu kolana przerwij."
+   }
+  },
+  {
+   "nazwa": "Plank odwrócony (Reverse Plank)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Plecy",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Pośladkowy wielki",
+    "Dwugłowy uda",
+    "Naramienny tylny",
+    "Prostowniki grzbietu",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Usiądź na podłodze z wyprostowanymi nogami, dłonie za biodrami, palce skierowane w stronę stóp.",
+    "ruch": "Wypchnij biodra w górę, aż ciało będzie prostą linią od głowy do pięt. Patrz przed siebie, pośladki i brzuch napięte. Utrzymaj zadany czas, oddychaj spokojnie.",
+    "uwaga": "Biodra nie opadają. Łatwiej: ugnij kolana (pozycja stołu). Przy bólu nadgarstków lub barków przerwij."
+   }
+  },
+  {
+   "nazwa": "Trzymanie L-sit w zwisie",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Prosty uda",
+    "Skośny wewnętrzny brzucha",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, łopatki lekko w dół. Nogi razem.",
+    "ruch": "Unieś proste nogi do poziomu bioder i utrzymaj z napiętym brzuchem. Oddychaj płytko i równo.",
+    "uwaga": "Bez bujania. Za trudno? Unieś ugięte kolana. Przy bólu barków przerwij."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne do ściany",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na macie ok. 30–40 cm od ściany, chwyć kółko obiema rękami przed sobą. Brzuch napięty, plecy proste.",
+    "ruch": "Toczyć kółko przed siebie, aż dotknie ściany, i wróć siłą brzucha. Wydech przy toczeniu, wdech przy powrocie.",
+    "uwaga": "Ściana ogranicza zakres. Z czasem odsuwaj się od niej dalej. Nie wyginaj lędźwi w łuk. Przy bólu pleców przerwij."
+   }
+  },
+  {
+   "nazwa": "Kruk (Crow Pose)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna",
+    "Zębaty przedni",
+    "Prosty brzucha",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Kucnij, dłonie na podłodze na szerokość barków, palce szeroko. Kolana oprzyj o zewnętrzną stronę ramion, tuż nad łokciami.",
+    "ruch": "Pochyl się do przodu i przenieś ciężar na dłonie, oderwij jedną, potem drugą stopę od podłogi. Utrzymaj pozycję, patrz kilkanaście centymetrów przed dłonie, oddychaj.",
+    "uwaga": "Połóż poduszkę lub matę przed sobą na wypadek upadku. Zacznij od kilku sekund. Przy bólu nadgarstków przerwij."
+   }
+  },
+  {
+   "nazwa": "Pompki asymetryczne",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Skośny zewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki: jedna dłoń pod barkiem, druga wysunięta o 20–30 cm do przodu. Ciało w prostej linii.",
+    "ruch": "Zegnij łokcie i opuść klatkę, więcej ciężaru kładąc na rękę pod barkiem. Wypchnij się w górę. Po serii zamień ręce.",
+    "uwaga": "Rób tyle samo powtórzeń na każdą stronę. To krok pośredni do pompek łuczniczych."
+   }
+  },
+  {
+   "nazwa": "Pompki na jednej ręce",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Nogi szeroko, jedna dłoń pod barkiem, druga ręka za plecami. Ciało w prostej linii, brzuch i pośladki napięte.",
+    "ruch": "Zegnij łokieć i opuść klatkę nisko, tułów lekko się skręca. Wypchnij się w górę. Potem druga strona.",
+    "uwaga": "Ćwiczenie dla bardzo zaawansowanych (zwykle po ok. 30 zwykłych pompkach). Zacznij z dłonią na podwyższeniu. Szeroko rozstawione nogi ułatwiają równowagę."
+   }
+  },
+  {
+   "nazwa": "Podciąganie komandosa",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy",
+    "Skośny zewnętrzny brzucha",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań bokiem pod drążkiem i chwyć go obiema rękami jedna za drugą (dłonie jedna przed drugą), zwis.",
+    "ruch": "Podciągnij się tak, aby głowa znalazła się z jednej strony drążka. Opuść się i podciągnij na drugą stronę. Zmieniaj stronę co powtórzenie albo co serię.",
+    "uwaga": "Bez szarpania. Zmieniaj też kolejność dłoni. Najpierw opanuj zwykłe podciąganie."
+   }
+  },
+  {
+   "nazwa": "Podciąganie z nogami w L-sit",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Prosty uda",
+    "Obły większy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt nachwytem, zwis. Unieś proste nogi przed siebie do poziomu bioder.",
+    "ruch": "Trzymaj nogi poziomo i podciągnij się, aż broda będzie nad drążkiem. Opuść się powoli, nogi nie opadają.",
+    "uwaga": "Zaawansowane. Najpierw opanuj trzymanie L-sit w zwisie i zwykłe podciąganie. Przy braku sił ugnij kolana."
+   }
+  },
+  {
+   "nazwa": "Podciąganie na ręcznikach",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Zginacze przedramienia",
+    "Prostowniki przedramienia",
+    "Obły większy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Przełóż dwa ręczniki przez drążek i chwyć po jednym końcu w każdej dłoni. Zwis na prostych rękach.",
+    "ruch": "Podciągnij się, aż twarz zrówna się z dłońmi, łokcie prowadź w dół. Opuść się powoli. Wydech w górę, wdech w dół.",
+    "uwaga": "Mocno obciąża przedramiona i chwyt. Sprawdź, czy ręczniki nie ślizgają się po drążku. Zacznij od mniejszej liczby powtórzeń."
+   }
+  },
+  {
+   "nazwa": "Wznosy do wagi przodem (Front Lever Raises)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Obły większy",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Zwis na drążku, ręce proste, łopatki ściągnięte w dół.",
+    "ruch": "Z prostymi rękami unieś ciało (na początku z ugiętymi kolanami) do poziomu, brzuchem do góry. Opuść powoli do zwisu. Wydech w górę.",
+    "uwaga": "Zaawansowane. Bez huśtania. Przy bólu barków lub łokci przerwij."
+   }
+  },
+  {
+   "nazwa": "Wykroki z wyskokiem (Jumping Lunges)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja wykroku: jedna noga z przodu, obie ugięte, tułów prosto.",
+    "ruch": "Odbij się obiema nogami w górę, w powietrzu zamień nogi i wyląduj miękko w wykroku. Powtarzaj naprzemiennie. Wdech w dół.",
+    "uwaga": "Zaawansowane, obciąża kolana. Lądowanie ciche i miękkie. Najpierw opanuj zwykłe wykroki. Przy bólu kolan przerwij."
+   }
+  },
+  {
+   "nazwa": "Wyskoki na skrzynię (Box Jumps)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań przed stabilną skrzynią lub ławką (30–60 cm), stopy na szerokość bioder.",
+    "ruch": "Zamachnij się rękami, odbij obiema stopami i wyląduj miękko na skrzyni w półprzysiadzie. Wyprostuj się i zejdź krokiem, nie skacz w dół.",
+    "uwaga": "Skrzynia musi być stabilna. Zacznij od niskiej. Schodzenie krokiem oszczędza ścięgna Achillesa."
+   }
+  },
+  {
+   "nazwa": "Nożyce poziome (Flutter Kicks)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Poprzeczny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na plecach, ręce wzdłuż ciała lub pod pośladkami, dolne plecy dociśnięte do podłogi.",
+    "ruch": "Unieś proste nogi kilka centymetrów nad podłogę i drobnymi ruchami naprzemiennie unoś i opuszczaj. Oddychaj równo.",
+    "uwaga": "Dolne plecy cały czas przy podłodze. Jeśli się odrywają, unieś nogi wyżej."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne na bok z kolan",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Najszerszy grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na macie, chwyć kółko i ustaw je lekko z boku od ciała.",
+    "ruch": "Toczyć kółko skośnie w jedną stronę, aż ciało będzie prawie wyprostowane, i wróć siłą skośnych brzucha. Zmień stronę.",
+    "uwaga": "Zaawansowane. Zakres zwiększaj stopniowo. Lędźwie nie wyginają się w łuk. Najpierw opanuj zwykły rollout."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne z zatrzymaniem (Iso-Hold)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na macie, chwyć kółko obiema rękami.",
+    "ruch": "Rozwiń kółko tak daleko, jak możesz utrzymać prostą linię ciała, i zatrzymaj się na zadany czas. Wróć powoli.",
+    "uwaga": "Brzuch i pośladki napięte, lędźwie się nie uginają. Jeśli uginają, skróć zakres. Przy bólu pleców przerwij."
+   }
+  },
+  {
+   "nazwa": "Straddle Planche (waga przodem, nogi rozstawione)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Zębaty przedni",
+    "Prosty brzucha",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na dłoniach, palce w przód lub lekko na boki, ręce proste, barki wysunięte w przód.",
+    "ruch": "Unieś stopy nad podłogę, nogi proste i szeroko rozstawione, ciało poziomo. Utrzymaj kilka sekund i oddychaj.",
+    "uwaga": "Bardzo zaawansowane. Najpierw opanuj Tuck Planche Hold. Rozgrzej nadgarstki. Przy bólu przerwij."
+   }
   }
  ]
 }
