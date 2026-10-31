@@ -318,3 +318,6 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## v69 – 81 ćwiczeń siłowych z trzech list
 - Dodano do `przyklady-silownia.json` 45 ćwiczeń efektywnych (m.in. Landmine Press, Z-Press, Meadows Row, Rack Pull, Reverse Hyper, Pendulum/Belt Squat, RDL i Hip Thrust jednonóż, Spider/Zottman/Bayesian Curl, Tate Press, Renegade Row, Turkish Get-Up, Copenhagen Plank) oraz 36 elitarnych/ryzykownych/technicznych z ostrzeżeniem w uwadze (Zercher, wyciskanie zza karku, ćwiczenia olimpijskie i kettlebell, sprzęt niszowy). Pominięto ok. 280 powtórek i warianty bez praktycznej różnicy. `WERSJA_BAZY` = 12. Generator ich nie używa.
+
+## v70 – 52 ćwiczenia siłowe z list Tom IV i V
+- Dodano 25 efektywnych (wyciskania naprzemienne/z podłogi/na Smithie, rozpiętki na wyciągu, W-Raise, Y na wyciągu, wiosłowania i ściąganie podchwytem, ćwiczenia chwytu: Wrist Roller, Pinch Carry, ściskacze) oraz 27 elitarnych/ryzykownych z ostrzeżeniem (Savickas, Klokov, Reeves, Anderson, ćwiczenia olimpijskie, strongman). Pominięto ok. 255 powtórek. `WERSJA_BAZY` = 13. Generator ich nie używa.
