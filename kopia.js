@@ -336,7 +336,7 @@ const STARE_OPISY_START = [
  "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
 ];
 
-const WERSJA_BAZY = 9;
+const WERSJA_BAZY = 10;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json"];
 const PLIK_ZESTAWOW = "przyklady-zestawy.json";
 

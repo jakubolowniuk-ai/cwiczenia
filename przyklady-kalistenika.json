@@ -2684,6 +2684,719 @@
     "ruch": "Unieś stopy nad podłogę, nogi proste i szeroko rozstawione, ciało poziomo. Utrzymaj kilka sekund i oddychaj.",
     "uwaga": "Bardzo zaawansowane. Najpierw opanuj Tuck Planche Hold. Rozgrzej nadgarstki. Przy bólu przerwij."
    }
+  },
+  {
+   "nazwa": "Pompki w wolnym staniu na rękach (Free HSPU)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na rękach bez podparcia, ciało w jednej linii, brzuch i pośladki napięte.",
+    "ruch": "Zegnij łokcie i opuść głowę nisko przed dłonie, potem wypchnij się w górę do pełnego wyprostu. Oddychaj równo.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Ćwicz na miękkiej macie i na wolnej przestrzeni. Najpierw pewne pompki przy ścianie i stanie na rękach."
+   }
+  },
+  {
+   "nazwa": "Pompki z klaśnięciem za plecami",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki, ciało w prostej linii.",
+    "ruch": "Opuść klatkę, dynamicznie wypchnij się tak, by dłonie oderwały się od podłogi, klaśnij za plecami i miękko złap podłogę.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże ryzyko dla nadgarstków i barków. Zaczynaj od zwykłych pompek z klaśnięciem."
+   }
+  },
+  {
+   "nazwa": "Pompki z potrójnym klaśnięciem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki, ciało w prostej linii.",
+    "ruch": "Wybij się mocno w górę i w czasie lotu klaśnij przed klatką, za plecami i znów przed klatką, po czym miękko wylądować na rękach.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Wymaga bardzo dużej mocy i mobilności barków. Ćwicz na macie, w razie wątpliwości zrezygnuj."
+   }
+  },
+  {
+   "nazwa": "Pompki z klaśnięciem o uda",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki, ciało w prostej linii.",
+    "ruch": "Opuść klatkę i wybij się tak mocno, by tułów uniósł się wysoko, klaśnij dłońmi o uda i wróć do podporu na ugiętych ramionach.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Lądowanie miękkie. Przy bólu nadgarstków przerwij."
+   }
+  },
+  {
+   "nazwa": "Pompki Supermana",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Prostowniki grzbietu",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Połóż się na brzuchu, ręce wyciągnięte przed siebie.",
+    "ruch": "Dynamicznie odepchnij się dłońmi i unieś całe ciało w powietrze w jednej linii, ręce przed sobą. Opadnij miękko na dłonie.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Moc wybicia kontroluj, lądowanie na ugiętych rękach."
+   }
+  },
+  {
+   "nazwa": "Pompki na jednej ręce i jednej nodze",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Naramienny przedni",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki na jednej ręce, przeciwległa noga uniesiona nad podłogę.",
+    "ruch": "Zegnij łokieć, opuść klatkę i wypchnij się w górę, nie pozwalając tułowiowi się obracać. Potem druga strona.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj najpierw pompki na jednej ręce."
+   }
+  },
+  {
+   "nazwa": "Pompki tygrysie (Tiger Bend)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Triceps – głowa długa",
+    "Triceps – głowa boczna",
+    "Piersiowy większy",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pompki.",
+    "ruch": "Opuść klatkę, następnie oprzyj przedramiona na podłodze (Sfinks), unieś jedną dłoń i podłóż pod łokieć, potem drugą, aż wrócisz do podporu na prostych rękach.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie łokci. Nie rób tego w gorszym dniu."
+   }
+  },
+  {
+   "nazwa": "Podciąganie za kark",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Równoległoboczny",
+    "Naramienny tylny",
+    "Biceps"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt szeroki nachwytem, zwis, głowa lekko wysunięta do przodu.",
+    "ruch": "Podciągnij się powoli tak, aby drążek zszedł na kark, bez szarpania. Opuść się pod kontrolą.",
+    "uwaga": "Ryzykowne dla barków i szyi, wymaga bardzo dobrej mobilności barków. Przy najmniejszym bólu wróć do zwykłego podciągania."
+   }
+  },
+  {
+   "nazwa": "Podciąganie do pasa (High Pull-ups)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Obły większy",
+    "Równoległoboczny",
+    "Biceps",
+    "Naramienny tylny"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt nachwytem, zwis, ciało lekko odchylone do tyłu.",
+    "ruch": "Dynamicznie podciągnij się tak, aby drążek dotarł do brzucha lub bioder. Opuść się powoli.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Mocno obciąża barki i łokcie. Bez wcześniejszej rozgrzewki nie wykonuj."
+   }
+  },
+  {
+   "nazwa": "Podciąganie z klaśnięciem",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt nachwytem, zwis.",
+    "ruch": "Podciągnij się tak dynamicznie, by dłonie na ułamek sekundy oderwały się od drążka, klaśnij i ponownie złap drążek. Opuść się powoli.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Złap drążek pewnie. Mało miejsca nad głową = nie ćwicz."
+   }
+  },
+  {
+   "nazwa": "Podciąganie na jednej ręce",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy",
+    "Zginacze przedramienia",
+    "Skośny zewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt jedną ręką, druga ręka za plecami lub na nadgarstku, zwis.",
+    "ruch": "Podciągnij ciało do brody nad drążkiem siłą jednej ręki, bez bujania. Opuść się powoli. Potem druga ręka.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj najpierw wariant z trzymaniem za nadgarstek i podciąganie łucznicze."
+   }
+  },
+  {
+   "nazwa": "Podciąganie z trzymaniem za nadgarstek",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Plecy",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Najszerszy grzbietu",
+    "Biceps",
+    "Ramienny",
+    "Obły większy",
+    "Zginacze przedramienia"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Jedna ręka trzyma drążek, druga chwyta za nadgarstek ręki pracującej.",
+    "ruch": "Podciągnij się, większość pracy wykonuje ręka trzymająca drążek, druga pomaga minimalnie. Opuść się powoli.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Z czasem zmniejszaj pomoc drugiej ręki. Zmieniaj strony."
+   }
+  },
+  {
+   "nazwa": "Dipy koreańskie (Korean Dips)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań tyłem do drążka na wysokości bioder, chwyć go za plecami i odepchnij się nogami do pozycji niemal poziomej.",
+    "ruch": "Zegnij łokcie i opuść ciało pod drążek, potem wypchnij się w górę.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Bardzo mocno obciąża barki i łokcie. Wymaga pełnej mobilności barków."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Dipy L-sit",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Prosty uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na poręczach, ręce proste, nogi uniesione prosto do poziomu bioder.",
+    "ruch": "Utrzymuj nogi poziomo i uginaj łokcie, opuszczając klatkę, potem wypchnij się w górę.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj L-sit oraz zwykłe dipy."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Dipy z przejściem do wagi tyłem (Back Lever Dips)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Najszerszy grzbietu",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Wejdź do pozycji wagi tyłem pod poręczami lub drążkiem, ciało poziomo, ramiona proste.",
+    "ruch": "Zegnij ramiona i opuść ciało, kontrolując pozycję, potem wypchnij się do pozycji wyjściowej.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie łokci i barków. Tylko dla osób po wadze tyłem."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Dipy eksplozywne (z wyskokiem)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Klatka piersiowa",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na poręczach, ręce proste.",
+    "ruch": "Opuść się do dna dipu i dynamicznie wypchnij tak, by dłonie na chwilę oderwały się od poręczy, po czym złap je.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Ryzykowne dla łokci i barków. Złap poręcze pewnie."
+   },
+   "ciezar": true
+  },
+  {
+   "nazwa": "Przejścia na poręczach (Dip Walks)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Ramiona",
+    "Barki"
+   ],
+   "miesnie": [
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na poręczach równoległych, ręce proste, barki wysunięte.",
+    "ruch": "Przesuwaj dłonie naprzemiennie wzdłuż poręczy, utrzymując zablokowane łokcie, tam i z powrotem.",
+    "uwaga": "Barki cały czas aktywne, nie zapadaj się. Przy bólu przerwij."
+   }
+  },
+  {
+   "nazwa": "Przysiad smoka (Dragon Squat)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Nogi",
+    "Pośladki"
+   ],
+   "miesnie": [
+    "Prosty uda",
+    "Obszerny boczny",
+    "Obszerny przyśrodkowy",
+    "Pośladkowy wielki",
+    "Przywodziciele uda"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań na jednej nodze, drugą skrzyżuj za nogą stojącą, stopa zahaczona w bok.",
+    "ruch": "Opuść biodra, zginając nogę stojącą, wolna noga przechodzi z tyłu w bok. Wróć do stania. Potem druga strona.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie kolana i bioder. Przy bólu kolana przerwij."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne ze stania (pełne rozwinięcie)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, trzymaj kółko obiema rękami przy stopach, brzuch napięty.",
+    "ruch": "Rozwiń kółko do pełnego wyprostu ciała tuż nad podłogą i wróć siłą brzucha do stania.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Jedno z najtrudniejszych ćwiczeń core. Lędźwie nie mogą się uginać."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne ze stania z gumą",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Przymocuj gumę oporową do bioder i do stabilnego punktu za sobą, stań z kółkiem w rękach.",
+    "ruch": "Rozwiń kółko i wróć do stania, guma pomaga na powrocie.",
+    "uwaga": "Sprawdź mocowanie gumy. Z czasem wybieraj cieńszą gumę."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne na bok ze stania",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Najszerszy grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Stań, trzymaj kółko, ustaw je lekko z boku.",
+    "ruch": "Rozwiń kółko skośnie, zachowując prostą linię ciała, i wróć do stania. Zmień stronę.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duża stabilizacja rotacyjna. Zakres zwiększaj stopniowo."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne na jednej ręce z kolan",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Najszerszy grzbietu"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Uklęknij, chwyć kółko jedną ręką, druga ręka za plecami, brzuch napięty.",
+    "ruch": "Rozwiń kółko niewielkim zakresem i wróć. Potem druga ręka.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Zakres zwiększaj bardzo powoli."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne ze stopami na kółku – składanie (Pike)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch",
+    "Barki"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Naramienny przedni",
+    "Zębaty przedni",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem, stopy na kółku (lub ślizgaczach), ręce na podłodze.",
+    "ruch": "Proste nogi przyciągnij pod siebie, unosząc biodra wysoko w górę, i wróć do podporu.",
+    "uwaga": "Biodra unoszą się siłą brzucha, kolana proste. Przy bólu pleców przerwij."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne ze stopami na kółku – kolana do klatki (Tuck)",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Poprzeczny brzucha",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem, stopy na kółku, ciało w prostej linii.",
+    "ruch": "Przyciągnij ugięte kolana do klatki, toczyć kółko, i wróć do podporu.",
+    "uwaga": "Lędźwie nie uginają się. Przy bólu pleców przerwij."
+   }
+  },
+  {
+   "nazwa": "Wspinaczka ze stopami na kółku",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Poprzeczny brzucha",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór przodem, stopy na kółku, ręce na podłodze.",
+    "ruch": "Naprzemiennie przyciągaj kolana do klatki w dynamicznym tempie.",
+    "uwaga": "Utrzymaj stabilny tułów. Zacznij od wolnego tempa."
+   }
+  },
+  {
+   "nazwa": "Kółko brzuszne z kolanami na podwyższeniu",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Poprzeczny brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Uklęknij na miękkim podwyższeniu (np. złożonym kocu), chwyć kółko.",
+    "ruch": "Rozwiń kółko jak w rolloucie, dłuższa dźwignia utrudnia ruch. Wróć siłą brzucha.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Zacznij od krótszego zakresu."
+   }
+  },
+  {
+   "nazwa": "V-Sit",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Prosty uda",
+    "Zginacze przedramienia",
+    "Naramienny przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Siad podparty na dłoniach (L-sit), ręce proste.",
+    "ruch": "Unieś proste nogi wyżej niż poziom bioder, tworząc literę V, i utrzymaj pozycję.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj najpierw L-sit. Przy bólu przerwij."
+   }
+  },
+  {
+   "nazwa": "Manna",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch",
+    "Barki"
+   ],
+   "miesnie": [
+    "Prosty brzucha",
+    "Biodrowo-lędźwiowy",
+    "Naramienny przedni",
+    "Zginacze przedramienia",
+    "Pośladkowy wielki"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Z pozycji V-Sit na dłoniach, ręce proste.",
+    "ruch": "Wypchnij biodra do tyłu za dłonie, aż proste nogi znajdą się poziomo nad podłożem za plecami, i utrzymaj.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Wymaga ogromnej mobilności i siły. Tylko dla osób po V-Sit."
+   }
+  },
+  {
+   "nazwa": "Planche (waga przodem)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Zębaty przedni",
+    "Prosty brzucha",
+    "Zginacze przedramienia",
+    "Biodrowo-lędźwiowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na dłoniach, ręce proste, barki mocno wysunięte w przód, ciało nisko.",
+    "ruch": "Unieś całe wyprostowane ciało poziomo nad podłogą, opierając się tylko na dłoniach. Utrzymaj kilka sekund.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Najpierw opanuj Tuck Planche Hold i Straddle Planche. Rozgrzej nadgarstki."
+   }
+  },
+  {
+   "nazwa": "Ludzka flaga (Human Flag)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch",
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt na pionowej rurze lub słupku, jedna ręka nad drugą.",
+    "ruch": "Wypchnij górną rękę, pociągnij dolną i unieś ciało poziomo w bok. Utrzymaj kilka sekund.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie barków i boków tułowia. Sprawdź stabilność rury."
+   }
+  },
+  {
+   "nazwa": "Ludzka flaga z ugiętymi kolanami (Tucked Human Flag)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Brzuch",
+    "Barki",
+    "Plecy"
+   ],
+   "miesnie": [
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha",
+    "Najszerszy grzbietu",
+    "Naramienny przedni",
+    "Naramienny środkowy"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Chwyt na pionowej rurze lub słupku, kolana blisko tułowia.",
+    "ruch": "Unieś ciało z ugiętymi kolanami do poziomu w bok i utrzymaj.",
+    "uwaga": "Łatwiejszy krok do pełnej flagi. Przy bólu barków przerwij."
+   }
+  },
+  {
+   "nazwa": "Waga na jednej ręce (One Arm Planche)",
+   "rodzaj": "Trening statyczny",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa",
+    "Brzuch"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Zębaty przedni",
+    "Prosty brzucha",
+    "Skośny zewnętrzny brzucha",
+    "Skośny wewnętrzny brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Podpór na jednej dłoni, nogi szeroko, druga ręka za plecami.",
+    "ruch": "Unieś ciało poziomo, opierając się na jednej dłoni, i utrzymaj.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Praktycznie wyłącznie dla gimnastyków. Duże ryzyko dla nadgarstka i barku."
+   }
+  },
+  {
+   "nazwa": "Pompki z przejściem do Planche",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Klatka piersiowa"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Piersiowy większy",
+    "Triceps – głowa boczna",
+    "Triceps – głowa długa",
+    "Zębaty przedni",
+    "Prosty brzucha"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pompka z pozycji pseudo-planche, barki mocno w przód.",
+    "ruch": "Wypchnij się w górę i na końcu ruchu oderwij stopy od podłogi, wchodząc w tuck planche. Wróć powoli.",
+    "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Ćwicz na macie, zacznij od krótkiego oderwania stóp."
+   }
+  },
+  {
+   "nazwa": "Pompki delfina",
+   "rodzaj": "Kalistenika",
+   "partie": [
+    "Barki",
+    "Ramiona"
+   ],
+   "miesnie": [
+    "Naramienny przedni",
+    "Naramienny środkowy",
+    "Triceps – głowa długa",
+    "Zębaty przedni"
+   ],
+   "link": "",
+   "opis": {
+    "start": "Pozycja pike (V), przedramiona na podłodze, biodra wysoko.",
+    "ruch": "Przesuwaj głowę i tułów do przodu nad dłonie jak delfin, potem wróć biodrami w górę.",
+    "uwaga": "Łatwiejszy krok do pompek pike. Przy bólu barków przerwij."
+   }
   }
  ]
 }

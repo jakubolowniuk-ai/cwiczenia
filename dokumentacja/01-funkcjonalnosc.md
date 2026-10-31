@@ -304,3 +304,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Dodano do `przyklady-kalistenika.json` 22 ćwiczenia z listy PDF (bez powtórek i bez ćwiczeń nieefektywnych/ryzykownych): m.in. Pompki na kolanach, Pompki Sfinksa, Podciąganie z gumą, Podciąganie negatywne, Dipy na drążku prostym, Przysiad krewetkowy, Plank odwrócony, L-sit w zwisie, Kółko brzuszne do ściany / na bok / Iso-Hold, Kruk, Straddle Planche. Własne opisy po polsku.
 - `WERSJA_BAZY` = 9 – istniejący użytkownicy dostają nowe ćwiczenia po odświeżeniu.
 - Generator: Przysiad krewetkowy na drabince przysiadów (wariant B).
+
+## v66 – 34 ćwiczenia elitarne i ryzykowne
+- Dodano do bazy 34 ćwiczenia zaawansowane/elitarne z listy PDF: pompki plyometryczne (klaśnięcia, Supermana), Free HSPU, tygrysie, podciąganie za kark / do pasa / z klaśnięciem / na jednej ręce, dipy koreańskie / L-sit / eksplozywne / back lever, przysiad smoka, rollouty ze stania i na jednej ręce, ćwiczenia ze stopami na kółku, V-Sit, Manna, Planche, Human Flag (też z ugiętymi kolanami), One Arm Planche, pompki delfina.
+- Każde ma ostrzeżenie w polu „uwaga" (elitarne, ryzyko dla nadgarstków/barków/łokci).
+- Generator ich NIE używa – są tylko w bazie do ręcznego dodawania. `WERSJA_BAZY` = 10.
