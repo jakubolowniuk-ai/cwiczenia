@@ -1947,3 +1947,64 @@ h1 {
   -webkit-box-orient: vertical;
   overflow: hidden;
 }
+
+/* Poziomy trudności ćwiczeń: kolor rośnie od zielonego do czerwonego */
+.poz-1 { --poz: #2E9E5B; }
+.poz-2 { --poz: #2A93C9; }
+.poz-3 { --poz: #D9A400; }
+.poz-4 { --poz: #E8751A; }
+.poz-5 { --poz: #D32F2F; }
+.znaczek-poziomu {
+  display: inline-block;
+  margin-left: 8px;
+  padding: 1px 8px;
+  border-radius: 999px;
+  font-size: 12px;
+  font-weight: 600;
+  vertical-align: middle;
+  color: var(--poz);
+  border: 1.5px solid var(--poz);
+  background: color-mix(in srgb, var(--poz) 14%, transparent);
+}
+.chip-poziom { border-left: 6px solid var(--poz); }
+.chip-poziom.aktywny { background: var(--poz); border-color: var(--poz); color: #fff; }
+.skala-poziomow { display: inline-flex; gap: 3px; margin-left: 8px; vertical-align: middle; }
+.skala-poziomow i { width: 18px; height: 8px; border-radius: 4px; background: var(--poz); }
+.podpowiedz-poziomow { margin: 0 0 6px; font-size: 13px; color: var(--tekst-szary); }
+.chip-poziom.poz-3.aktywny { color: #1A1A1A; }
+
+/* Zamiana ćwiczenia w planie */
+.cw-wiersz .zamien {
+  flex: none;
+  min-width: 40px;
+  min-height: 40px;
+  border: 0;
+  border-radius: 8px;
+  background: transparent;
+  color: var(--akcent);
+  font-size: 20px;
+  cursor: pointer;
+}
+.zam-okno { display: flex; flex-direction: column; gap: 10px; max-height: calc(100vh - 32px); overflow-y: auto; }
+.zam-zakres { display: flex; flex-direction: column; gap: 6px; }
+.zam-lista { display: flex; flex-direction: column; gap: 8px; }
+.zam-wiersz {
+  text-align: left;
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--linia);
+  border-radius: 10px;
+  background: var(--karta);
+  color: var(--tekst);
+  font: inherit;
+  cursor: pointer;
+}
+.zam-okno input[type="search"] {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid var(--linia);
+  border-radius: 10px;
+  background: var(--karta);
+  color: var(--tekst);
+  font: inherit;
+}

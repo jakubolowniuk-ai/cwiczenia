@@ -39,6 +39,8 @@ let wybraneIds = [];
 // Filtry w panelu wyboru ćwiczeń
 const poleSzukajTreningow = document.getElementById("szukaj-treningow");
 let szukajTreningow = "";
+let pokazUkryteZestawy = false;
+const przyciskUkryteZestawy = document.getElementById("przycisk-ukryte-zestawy");
 const filtrWyboru = { tekst: "", partiaId: null, rodzajId: null };
 
 // ===== Pomocnicze =====
@@ -97,12 +99,19 @@ function treningiZapisane() {
   });
 }
 
+// Zestawy niewidoczne dla użytkownika: ukryte nie pokazują się na liście ani w wyborze przy układaniu planu
+function treningiWidoczne() {
+  return treningiZapisane().filter(function (t) {
+    return !t.ukryte;
+  });
+}
+
 // Pokazuje w przełączniku liczbę ćwiczeń i treningów
 function odswiezPrzelacznik() {
   przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.filter(function (c) {
     return !c.ukryte;
   }).length + ")";
-  przelacznikTreningi.textContent = "Moje treningi (" + treningiZapisane().length + ")";
+  przelacznikTreningi.textContent = "Moje treningi (" + treningiWidoczne().length + ")";
 }
 
 // Tworzy kartę z nazwą i opisem (bez przycisków)
@@ -395,7 +404,15 @@ function rysujTreningi() {
   const kolejnosc = function (t) {
     return t.blok ? 2 : t.zBazy ? 1 : 0;
   };
-  const wszystkie = treningiZapisane();
+  const liczbaUkrytych = treningiZapisane().length - treningiWidoczne().length;
+  if (pokazUkryteZestawy && liczbaUkrytych === 0) {
+    pokazUkryteZestawy = false;
+  }
+  przyciskUkryteZestawy.hidden = liczbaUkrytych === 0 && !pokazUkryteZestawy;
+  przyciskUkryteZestawy.textContent = pokazUkryteZestawy ? "← Wróć do listy treningów" : "Pokaż ukryte zestawy (" + liczbaUkrytych + ")";
+  const wszystkie = treningiZapisane().filter(function (t) {
+    return !!t.ukryte === pokazUkryteZestawy;
+  });
   const widoczneTreningi = wszystkie.slice().sort(function (a, b) {
     return kolejnosc(a) - kolejnosc(b) || wszystkie.indexOf(b) - wszystkie.indexOf(a);
   }).filter(function (trening) {
@@ -408,8 +425,8 @@ function rysujTreningi() {
         return cw && cw.nazwa.toLowerCase().indexOf(szukajTreningow) !== -1;
       });
   });
-  poleSzukajTreningow.hidden = treningiZapisane().length < 6;
-  if (treningiZapisane().length > 0 && widoczneTreningi.length === 0) {
+  poleSzukajTreningow.hidden = treningiWidoczne().length < 6;
+  if (treningiZapisane().length > 0 && widoczneTreningi.length === 0 && szukajTreningow !== "") {
     const brak = document.createElement("p");
     brak.className = "opis";
     brak.textContent = "Nie znaleziono treningu o takiej nazwie.";
@@ -489,6 +506,17 @@ function rysujTreningi() {
     );
 
     karta.appendChild(
+      przyciskAkcji(trening.ukryte ? "Przywróć" : "Ukryj", "", function () {
+        trening.ukryte = !trening.ukryte;
+        if (!trening.ukryte) {
+          delete trening.ukryte;
+        }
+        zapiszDane();
+        rysujTreningi();
+      })
+    );
+
+    karta.appendChild(
       przyciskAkcji("Usuń", "usun", function () {
         if (confirm("Usunąć trening „" + trening.nazwa + "”?")) {
           dane.treningi = dane.treningi.filter(function (inny) {
@@ -502,7 +530,7 @@ function rysujTreningi() {
 
     karta.appendChild(szczegoly);
     return karta;
-  }, "t|" + szukajTreningow);
+  }, "t|" + szukajTreningow + "|" + pokazUkryteZestawy);
 }
 
 // ===== Podpięcie przycisków =====
@@ -525,6 +553,11 @@ przyciskGotoweWyboru.addEventListener("click", zamknijPanelWyboru);
 poleSzukajWyboru.addEventListener("input", function () {
   filtrWyboru.tekst = poleSzukajWyboru.value.trim().toLowerCase();
   rysujWybor();
+});
+
+przyciskUkryteZestawy.addEventListener("click", function () {
+  pokazUkryteZestawy = !pokazUkryteZestawy;
+  rysujTreningi();
 });
 
 poleSzukajTreningow.addEventListener("input", function () {

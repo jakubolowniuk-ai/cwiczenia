@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=71">
+  <link rel="stylesheet" href="style.css?v=72">
 </head>
 <body>
 
@@ -144,7 +144,8 @@
         <div class="etykieta-pola">Rodzaj aktywności</div>
         <div class="chipy" id="chipy-rodzaje"></div>
 
-        <div class="etykieta-pola">Trudność</div>
+        <div class="etykieta-pola">Trudność <span class="skala-poziomow" aria-hidden="true"><i class="poz-1"></i><i class="poz-2"></i><i class="poz-3"></i><i class="poz-4"></i><i class="poz-5"></i></span></div>
+        <p class="podpowiedz-poziomow">Od zielonego (łatwe, na start) do czerwonego (bardzo trudne, po miesiącach lub latach treningu). Liczba obok to ilość ćwiczeń.</p>
         <div class="chipy" id="chipy-poziomy"></div>
 
         <div id="blok-miesnie-lista">
@@ -216,6 +217,7 @@
 
         <p class="opis" id="puste-treningi">Nie masz jeszcze treningów. Dodaj pierwszy.</p>
         <input type="search" id="szukaj-treningow" placeholder="Szukaj treningu lub ćwiczenia w nim" hidden>
+        <button class="akcja" id="przycisk-ukryte-zestawy" hidden>Pokaż ukryte zestawy</button>
         <div id="lista-treningow"></div>
       </div>
     </section>
@@ -615,7 +617,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=71"></script>
+  <script src="dane.js?v=72"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -638,17 +640,17 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=71"></script>
-  <script src="cwiczenia.js?v=71"></script>
-  <script src="treningi.js?v=71"></script>
-  <script src="kreator.js?v=71"></script>
-  <script src="kreator2.js?v=71"></script>
-  <script src="dzis.js?v=71"></script>
-  <script src="postep.js?v=71"></script>
-  <script src="rekordy.js?v=71"></script>
-  <script src="cwicz.js?v=71"></script>
-  <script src="ustawienia.js?v=71"></script>
-  <script src="kopia.js?v=71"></script>
+  <script src="anatomia.js?v=72"></script>
+  <script src="cwiczenia.js?v=72"></script>
+  <script src="treningi.js?v=72"></script>
+  <script src="kreator.js?v=72"></script>
+  <script src="kreator2.js?v=72"></script>
+  <script src="dzis.js?v=72"></script>
+  <script src="postep.js?v=72"></script>
+  <script src="rekordy.js?v=72"></script>
+  <script src="cwicz.js?v=72"></script>
+  <script src="ustawienia.js?v=72"></script>
+  <script src="kopia.js?v=72"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -663,10 +665,11 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=71"></script>
-  <script src="plan-kreator.js?v=71"></script>
-  <script src="plan-progresja.js?v=71"></script>
-  <script src="przewodnik.js?v=71"></script>
-  <script src="app.js?v=71"></script>
+  <script src="plan-generator.js?v=72"></script>
+  <script src="plan-kreator.js?v=72"></script>
+  <script src="plan-progresja.js?v=72"></script>
+  <script src="plan-zamiana.js?v=72"></script>
+  <script src="przewodnik.js?v=72"></script>
+  <script src="app.js?v=72"></script>
 </body>
 </html>

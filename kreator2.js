@@ -1202,7 +1202,7 @@ function otworzSesje(sesja) {
         otworzBudowe(trening ? trening.cwiczeniaIds : []);
       })
     );
-    if (treningiZapisane().length > 0) {
+    if (treningiWidoczne().length > 0) {
       karta.appendChild(
         przyciskAkcji("Z moich zestawów", "", function () {
           otworzWybor(aktywnosc);
@@ -1254,7 +1254,7 @@ function zrobKarteBlokow(sesja) {
   const glowne = glowny ? glowny.cwiczeniaIds : [];
 
   const zrobWybor = function (etykieta, rodzajBloku, klucz) {
-    const dostepne = dane.treningi.filter(function (t) { return t.blok === rodzajBloku && !t.roboczy; });
+    const dostepne = dane.treningi.filter(function (t) { return t.blok === rodzajBloku && !t.roboczy && (!t.ukryte || t.id === sesja[klucz]); });
     const blok = document.createElement("div");
     const opis = document.createElement("label");
     opis.textContent = etykieta;
@@ -1449,12 +1449,12 @@ function rysujTreningiWyboru() {
   kr2Treningi.innerHTML = "";
   const wszystkie = kr2WszystkieTreningi.checked;
 
-  const lista = treningiZapisane().filter(function (trening) {
+  const lista = treningiWidoczne().filter(function (trening) {
     return wszystkie || treningPasuje(trening, kr2Aktywnosc);
   });
 
   kr2BrakTreningow.hidden = lista.length > 0;
-  if (treningiZapisane().length === 0) {
+  if (treningiWidoczne().length === 0) {
     kr2BrakTreningow.textContent = "Nie masz jeszcze żadnych zestawów. Zbuduj pierwszy poniżej.";
   } else {
     kr2BrakTreningow.textContent = "Nie masz jeszcze pasującego treningu. Zbuduj nowy albo pokaż wszystkie zestawy.";

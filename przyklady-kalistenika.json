@@ -656,7 +656,7 @@
     "uwaga": "Bez kołysania całym ciałem. Ćwicz najpierw wysokie podciąganie i dipy. Rozgrzej barki i łokcie. Przy bólu przerwij."
    },
    "ciezar": true,
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Podciąganie łopatkowe",
@@ -2292,7 +2292,7 @@
     "ruch": "Opuszczaj nogi jak wycieraczki raz w jedną, raz w drugą stronę, napinając boki brzucha. Wracaj przez środek. Oddychaj równo.",
     "uwaga": "Tułów prawie się nie huśta. Łatwiej: ugnij kolana. Najpierw opanuj unoszenie prostych nóg w zwisie."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Dragon Flag",
@@ -2333,7 +2333,7 @@
     "ruch": "Pochylaj się do przodu, rozwijając kółko, aż ciało będzie prawie poziome, plecy proste. Zatrzymaj i wróć napięciem brzucha. Wydech w przód, wdech w tył.",
     "uwaga": "Nie wyginaj dolnych pleców w dół. Zacznij od wersji z kolan. Zmniejsz zakres, jeśli plecy się uginają."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Pompki na kolanach",
@@ -2641,7 +2641,7 @@
     "ruch": "Trzymaj nogi poziomo i podciągnij się, aż broda będzie nad drążkiem. Opuść się powoli, nogi nie opadają.",
     "uwaga": "Zaawansowane. Najpierw opanuj trzymanie L-sit w zwisie i zwykłe podciąganie. Przy braku sił ugnij kolana."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Podciąganie na ręcznikach",
@@ -2687,7 +2687,7 @@
     "ruch": "Z prostymi rękami unieś ciało (na początku z ugiętymi kolanami) do poziomu, brzuchem do góry. Opuść powoli do zwisu. Wydech w górę.",
     "uwaga": "Zaawansowane. Bez huśtania. Przy bólu barków lub łokci przerwij."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Wykroki z wyskokiem (Jumping Lunges)",
@@ -2856,7 +2856,7 @@
     "ruch": "Opuść klatkę, dynamicznie wypchnij się tak, by dłonie oderwały się od podłogi, klaśnij za plecami i miękko złap podłogę.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże ryzyko dla nadgarstków i barków. Zaczynaj od zwykłych pompek z klaśnięciem."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Pompki z potrójnym klaśnięciem",
@@ -2877,7 +2877,7 @@
     "ruch": "Wybij się mocno w górę i w czasie lotu klaśnij przed klatką, za plecami i znów przed klatką, po czym miękko wylądować na rękach.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Wymaga bardzo dużej mocy i mobilności barków. Ćwicz na macie, w razie wątpliwości zrezygnuj."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Pompki z klaśnięciem o uda",
@@ -2899,7 +2899,7 @@
     "ruch": "Opuść klatkę i wybij się tak mocno, by tułów uniósł się wysoko, klaśnij dłońmi o uda i wróć do podporu na ugiętych ramionach.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Lądowanie miękkie. Przy bólu nadgarstków przerwij."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Pompki Supermana",
@@ -2922,7 +2922,7 @@
     "ruch": "Dynamicznie odepchnij się dłońmi i unieś całe ciało w powietrze w jednej linii, ręce przed sobą. Opadnij miękko na dłonie.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Moc wybicia kontroluj, lądowanie na ugiętych rękach."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Pompki na jednej ręce i jednej nodze",
@@ -3029,7 +3029,7 @@
     "ruch": "Podciągnij się tak dynamicznie, by dłonie na ułamek sekundy oderwały się od drążka, klaśnij i ponownie złap drążek. Opuść się powoli.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Złap drążek pewnie. Mało miejsca nad głową = nie ćwicz."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Podciąganie na jednej ręce",
@@ -3074,7 +3074,7 @@
     "ruch": "Podciągnij się, większość pracy wykonuje ręka trzymająca drążek, druga pomaga minimalnie. Opuść się powoli.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Z czasem zmniejszaj pomoc drugiej ręki. Zmieniaj strony."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Dipy koreańskie (Korean Dips)",
@@ -3096,7 +3096,7 @@
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Bardzo mocno obciąża barki i łokcie. Wymaga pełnej mobilności barków."
    },
    "ciezar": true,
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Dipy L-sit",
@@ -3121,7 +3121,7 @@
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj L-sit oraz zwykłe dipy."
    },
    "ciezar": true,
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Dipy z przejściem do wagi tyłem (Back Lever Dips)",
@@ -3211,7 +3211,7 @@
     "ruch": "Opuść biodra, zginając nogę stojącą, wolna noga przechodzi z tyłu w bok. Wróć do stania. Potem druga strona.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duże obciążenie kolana i bioder. Przy bólu kolana przerwij."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Kółko brzuszne ze stania (pełne rozwinięcie)",
@@ -3232,7 +3232,7 @@
     "ruch": "Rozwiń kółko do pełnego wyprostu ciała tuż nad podłogą i wróć siłą brzucha do stania.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Jedno z najtrudniejszych ćwiczeń core. Lędźwie nie mogą się uginać."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Kółko brzuszne ze stania z gumą",
@@ -3274,7 +3274,7 @@
     "ruch": "Rozwiń kółko skośnie, zachowując prostą linię ciała, i wróć do stania. Zmień stronę.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Duża stabilizacja rotacyjna. Zakres zwiększaj stopniowo."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Kółko brzuszne na jednej ręce z kolan",
@@ -3399,7 +3399,7 @@
     "ruch": "Unieś proste nogi wyżej niż poziom bioder, tworząc literę V, i utrzymaj pozycję.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj najpierw L-sit. Przy bólu przerwij."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Manna",
@@ -3646,7 +3646,7 @@
     "ruch": "Zegnij łokcie i opuść ciało, nie dotykając stopami podłogi, potem wypchnij się w górę.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj Tuck Planche Hold i pompki pseudo-planche. Rozgrzej nadgarstki."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Skin the Cat z zatrzymaniem",
@@ -3691,7 +3691,7 @@
     "ruch": "Opuść klatkę i dynamicznie wybij dłonie z podłogi, obracając ciało o 360° w powietrzu, po czym miękko wyląduj w podporze.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Ćwicz na macie i na wolnej przestrzeni. Ryzyko dla nadgarstków i barków."
    },
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Skoki kozackie z naprzemienną zmianą stron",
@@ -3761,7 +3761,7 @@
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Wymaga kółek i mocnych barków. Najpierw opanuj Podpór na kółkach (Ring Support Hold) i dipy."
    },
    "ciezar": true,
-   "poziom": 5
+   "poziom": 4
   },
   {
    "nazwa": "Przysiad Sissy",
@@ -3802,7 +3802,7 @@
     "ruch": "Opuść głowę w stronę jednej dłoni, druga ręka prosta w bok, wypchnij się w górę i zmień stronę.",
     "uwaga": "Ćwiczenie elitarne – podejmuj je dopiero po opanowaniu łatwiejszych wariantów. Opanuj Pompki w staniu na rękach przy ścianie. Ćwicz na macie. Przy bólu barków przerwij."
    },
-   "poziom": 5
+   "poziom": 4
   }
  ]
 }

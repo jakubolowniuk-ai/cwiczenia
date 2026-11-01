@@ -54,6 +54,15 @@ const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [], pozio
 
 // Poziomy trudności ćwiczeń (pole poziom: 1–5)
 const NAZWY_POZIOMOW = { 1: "Początkujący", 2: "Podstawowy", 3: "Średni", 4: "Zaawansowany", 5: "Elitarny" };
+
+// Kolorowy znaczek poziomu trudności (zielony → czerwony); pełny tekst albo sama cyfra
+function znaczekPoziomu(poziom, krotki) {
+  const z = document.createElement("span");
+  z.className = "znaczek-poziomu poz-" + poziom;
+  z.textContent = krotki ? String(poziom) : poziom + " · " + NAZWY_POZIOMOW[poziom];
+  z.title = "Trudność " + poziom + " z 5: " + NAZWY_POZIOMOW[poziom].toLowerCase();
+  return z;
+}
 const przyciskUkryte = document.getElementById("przycisk-ukryte");
 const filtrMiesien = document.getElementById("filtr-miesien");
 const chipyMiesnie = document.getElementById("chipy-miesnie");
@@ -683,8 +692,8 @@ function rysujFiltry() {
       return;
     }
     const chip = document.createElement("button");
-    chip.className = "chip" + (filtr.poziom === poziom ? " aktywny" : "");
-    chip.textContent = poziom + " · " + NAZWY_POZIOMOW[poziom];
+    chip.className = "chip chip-poziom poz-" + poziom + (filtr.poziom === poziom ? " aktywny" : "");
+    chip.textContent = poziom + " · " + NAZWY_POZIOMOW[poziom] + " " + ile;
     chip.addEventListener("click", function () {
       filtr.poziom = filtr.poziom === poziom ? null : poziom;
       rysujFiltry();
@@ -876,11 +885,13 @@ function rysujListe() {
     const nazwa = document.createElement("div");
     nazwa.className = "karta-nazwa";
     nazwa.textContent = cwiczenie.nazwa;
+    if (cwiczenie.poziom) {
+      nazwa.appendChild(znaczekPoziomu(cwiczenie.poziom));
+    }
 
     // Opis: rodzaj aktywności i partie, rozdzielone kropkami
     const nazwyPartii = (cwiczenie.partieIds || []).map(nazwaKategorii);
     const czesci = [nazwaKategorii(cwiczenie.rodzajId)]
-      .concat(cwiczenie.poziom ? ["Poz. " + cwiczenie.poziom + " (" + NAZWY_POZIOMOW[cwiczenie.poziom].toLowerCase() + ")"] : [])
       .concat(nazwyPartii)
       .concat(cwiczenie.style || [])
       .filter(function (czesc) {

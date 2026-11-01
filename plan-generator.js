@@ -602,7 +602,7 @@ function pgCzyUkryte(nazwa) {
 
 function pgZnajdzBlok(poczatek, rodzajBloku) {
   return dane.treningi.find(function (t) {
-    return t.blok === rodzajBloku && t.nazwa.indexOf(poczatek) === 0;
+    return t.blok === rodzajBloku && !t.ukryte && t.nazwa.indexOf(poczatek) === 0;
   });
 }
 

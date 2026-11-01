@@ -366,7 +366,7 @@ function zrobKarteDzis(plan, sesja) {
     const glowne = document.createElement("div");
     glowne.className = "dzis-glowne";
     ids.forEach(function (id) {
-      glowne.appendChild(zrobWierszCwiczenia(sesja, id));
+      glowne.appendChild(zrobWierszCwiczenia(sesja, id, false, plan));
     });
     karta.appendChild(glowne);
 
@@ -398,7 +398,7 @@ function zrobKarteDzis(plan, sesja) {
   return karta;
 }
 
-function zrobWierszCwiczenia(sesja, id, wBloku) {
+function zrobWierszCwiczenia(sesja, id, wBloku, plan_) {
   const cwiczenie = znajdzCwiczenie(id);
   const zrobione = !!(sesja.zrobione || {})[id];
   const plan = sesja.parametry[id];
@@ -462,6 +462,16 @@ function zrobWierszCwiczenia(sesja, id, wBloku) {
   wiersz.appendChild(tekst);
 
   dodajFilm(wiersz, cwiczenie);
+  if (!wBloku && plan_ && !zrobione && typeof otworzZamiane === "function" && !(sesja.przebieg && sesja.przebieg.wyniki && sesja.przebieg.wyniki[id])) {
+    const zamien = document.createElement("button");
+    zamien.className = "zamien";
+    zamien.textContent = "⇄";
+    zamien.setAttribute("aria-label", "Zamień ćwiczenie: " + cwiczenie.nazwa);
+    zamien.addEventListener("click", function () {
+      otworzZamiane(plan_, sesja, id);
+    });
+    wiersz.appendChild(zamien);
+  }
   if (!wBloku) {
     wiersz.appendChild(zrobUchwyt(sesja, wiersz));
   }
