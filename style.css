@@ -2008,3 +2008,19 @@ h1 {
   color: var(--tekst);
   font: inherit;
 }
+
+/* ===== Ścieżki rozwoju ===== */
+.sciezka-grupa { margin: 18px 0 8px; font-size: 1.05rem; }
+.sciezka-karta { display: flex; flex-direction: column; gap: 4px; width: 100%; text-align: left; padding: 12px 14px; margin-bottom: 8px; border: 1px solid var(--linia, #ddd); border-radius: 12px; background: var(--tlo-karty, #fff); color: inherit; font: inherit; cursor: pointer; }
+.sciezka-cel, .sciezka-meta { font-size: .88rem; opacity: .8; }
+.sciezka-tytul { margin: 12px 0 4px; }
+.sciezka-opis { margin: 4px 0; }
+.sciezka-uwaga { color: #D32F2F; font-size: .88rem; margin-top: 4px; }
+.sciezka-kroki { list-style: none; padding: 0; margin: 12px 0; }
+.sciezka-krok { padding: 10px 12px; margin-bottom: 8px; border-left: 4px solid var(--linia, #ccc); background: var(--tlo-karty, #fff); border-radius: 8px; }
+.sciezka-krok-gora { display: flex; align-items: center; gap: 8px; flex-wrap: wrap; }
+.sciezka-nr { display: inline-flex; align-items: center; justify-content: center; width: 24px; height: 24px; border-radius: 50%; background: #2A93C9; color: #fff; font-size: .8rem; flex: none; }
+.sciezka-nazwa { background: none; border: 0; padding: 0; font: inherit; font-weight: 600; text-align: left; color: inherit; text-decoration: underline dotted; cursor: pointer; }
+.sciezka-nazwa.brak { opacity: .5; }
+.sciezka-kryt { font-size: .88rem; opacity: .85; margin-top: 4px; }
+.sciezka-wsparcie { padding-left: 20px; }

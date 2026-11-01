@@ -331,3 +331,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - **Zamiana ćwiczenia** (`plan-zamiana.js`): na ekranie Dziś przy niewykonanym ćwiczeniu głównym przycisk ⇄. Okno pokazuje odpowiedniki (te same mięśnie i partie, podobna trudność, sąsiedzi na drabince „krok łatwiej/trudniej", podobna nazwa ruchu) oraz wyszukiwarkę po całej bazie. Pomija ćwiczenia kolidujące z bólem z kreatora, niepasujące do sprzętu planu i ukryte (chyba że w kreatorze wybrano użycie ukrytych). Zakres: ta i kolejne sesje tego treningu albo tylko ta sesja; wykonane sesje się nie zmieniają. Trening jest kopiowany (roboczy), ilość przeliczana (powtórzenia ↔ czas), ciężar startowy jak w generatorze.
 - **Ukrywanie zestawów** w Moje treningi: „Ukryj" / „Przywróć", przycisk „Pokaż ukryte zestawy (n)". Ukryte zestawy nie pojawiają się w wyborze przy układaniu planu, w wyborze bloków ani w generatorze (rozgrzewki/rozciąganie).
 - **Poziomy trudności**: kolory 1–5 (zielony, niebieski, żółty, pomarańczowy, czerwony) na kartach i w filtrze, pasek skali i opis nad filtrem. Poziom 5 zostawiony tylko dla 15 ćwiczeń naprawdę elitarnych (Front Lever, Planche, Human Flag, Manna, jedna ręka, Free HSPU, Snatch, Clean and Jerk i podobne); pozostałe wróciły na poziom 4. `WERSJA_BAZY` = 14.
+
+## v73 – Ścieżki rozwoju
+
+- Nowa zakładka **Ścieżki** w Ćwiczeniach (obok „Baza ćwiczeń" i „Moje treningi").
+- 53 ścieżki (22 + 9 siłownia + dodatkowe warianty, razem 280 kroków) z pliku `sciezki.json`: kalistenika (pompki, stanie na rękach, planche, L-sit, podciąganie, muscle-up, front/back lever, flaga, pistol, nordic, kółko brzuszne, brzuch, nogi, pośladki, łydki, kółka, dipy…) i siłownia (martwy ciąg, przysiad, OHP, olimpijskie, chwyt, ściąganie…).
+- Każdy krok: ćwiczenie z poziomem trudności, kryterium przejścia dalej, ewentualne ostrzeżenie; ćwiczenia wspierające na końcu. Dotknięcie nazwy otwiera opis ćwiczenia.
+- Na razie tylko podgląd (bez śledzenia postępu i wyboru celu w kreatorze).

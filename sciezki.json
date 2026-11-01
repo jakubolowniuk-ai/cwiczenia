@@ -1,0 +1,1718 @@
+{
+ "sciezki": [
+  {
+   "id": "pierwsza-pompka",
+   "nazwa": "Pompki: od pierwszej do 30",
+   "typ": "kalistenika",
+   "cel": "30 pompek klasycznych pod rząd",
+   "opis": "Dla osób, które jeszcze nie zrobią pełnej pompki. Każdy krok zaliczasz, gdy zrobisz podane powtórzenia w kilku seriach.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki z rękami na podwyższeniu",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Pompki na kolanach",
+     "kryterium": "3 × 12",
+     "uwaga": "Alternatywa, gdy podwyższenie jest za niskie lub wysokie"
+    },
+    {
+     "cwiczenie": "Pompki klasyczne",
+     "kryterium": "3 × 8",
+     "uwaga": "Biodra w linii z tułowiem"
+    },
+    {
+     "cwiczenie": "Pompki klasyczne",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Pompki z nogami na podwyższeniu",
+     "kryterium": "3 × 10"
+    }
+   ],
+   "wsparcie": [
+    "Deska przodem (Front Plank)"
+   ]
+  },
+  {
+   "id": "pompki-jedna-reka",
+   "nazwa": "Pompki na jednej ręce",
+   "typ": "kalistenika",
+   "cel": "Pompka na jednej ręce",
+   "opis": "Droga przez rozstaw dłoni, asymetrię i pompki łucznicze. Zajmuje zwykle lata.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki klasyczne",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Pompki szerokie",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Pompki asymetryczne",
+     "kryterium": "3 × 8 na stronę"
+    },
+    {
+     "cwiczenie": "Pompki łucznicze",
+     "kryterium": "3 × 6 na stronę"
+    },
+    {
+     "cwiczenie": "Pompki pseudo-planche",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Pompki na jednej ręce",
+     "kryterium": "3 × 3 na stronę",
+     "uwaga": "Zacznij z ręką na podwyższeniu"
+    },
+    {
+     "cwiczenie": "Pompki na jednej ręce i jednej nodze",
+     "kryterium": "3 × 2 na stronę"
+    }
+   ],
+   "wsparcie": [
+    "Deska bokiem (Side Plank)"
+   ]
+  },
+  {
+   "id": "stanie-na-rekach",
+   "nazwa": "Stanie na rękach i pompki w staniu",
+   "typ": "kalistenika",
+   "cel": "Wolne stanie na rękach i pompki HSPU",
+   "opis": "Najpierw barki i nadgarstki, potem wejście przy ścianie, potem pompki w staniu.",
+   "kroki": [
+    {
+     "cwiczenie": "Deska przodem (Front Plank)",
+     "kryterium": "3 × 45 s"
+    },
+    {
+     "cwiczenie": "Pompki pike",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Pompki delfina",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Pompki pike z nogami na podwyższeniu",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Kruk (Crow Pose)",
+     "kryterium": "3 × 15 s"
+    },
+    {
+     "cwiczenie": "Stanie na rękach",
+     "kryterium": "3 × 30 s przy ścianie",
+     "uwaga": "Brzuchem do ściany, plecami do ściany dopiero na końcu"
+    },
+    {
+     "cwiczenie": "Pompki w staniu na rękach przy ścianie",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Pompki archer w staniu na rękach przy ścianie",
+     "kryterium": "3 × 3 na stronę"
+    },
+    {
+     "cwiczenie": "Pompki w wolnym staniu na rękach (Free HSPU)",
+     "kryterium": "3 × 2"
+    }
+   ],
+   "wsparcie": [
+    "Krążenia kolan, kostek i nadgarstków",
+    "Wall Angels (aniołki przy ścianie)"
+   ],
+   "uwaga": "Wszystkie kroki ćwicz przy ścianie, na miękkiej macie."
+  },
+  {
+   "id": "planche",
+   "nazwa": "Planche (waga przodem na ziemi)",
+   "typ": "kalistenika",
+   "cel": "Pełne Planche, a potem Planche push-up",
+   "opis": "Wymaga bardzo mocnych barków i nadgarstków. Kroki rozłóż na miesiące i lata.",
+   "kroki": [
+    {
+     "cwiczenie": "Deska przodem (Front Plank)",
+     "kryterium": "3 × 60 s"
+    },
+    {
+     "cwiczenie": "Plank z wysuniętymi rękami (Long Lever Plank)",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Pompki z wypchnięciem łopatek (Push-Up Plus)",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Pompki pseudo-planche",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Kruk (Crow Pose)",
+     "kryterium": "3 × 20 s"
+    },
+    {
+     "cwiczenie": "Tuck Planche Hold",
+     "kryterium": "3 × 10 s"
+    },
+    {
+     "cwiczenie": "Pompki w wadze kucznej (Tuck Planche Push-ups)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Straddle Planche (waga przodem, nogi rozstawione)",
+     "kryterium": "3 × 5 s"
+    },
+    {
+     "cwiczenie": "Planche (waga przodem)",
+     "kryterium": "3 × 3 s"
+    },
+    {
+     "cwiczenie": "Pompki z przejściem do Planche",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Waga na jednej ręce (One Arm Planche)",
+     "kryterium": "1 × 2 s"
+    }
+   ],
+   "wsparcie": [
+    "Krążenia kolan, kostek i nadgarstków"
+   ],
+   "uwaga": "Bardzo duże obciążenie nadgarstków i łokci. Nie przyspieszaj kroków."
+  },
+  {
+   "id": "l-sit",
+   "nazwa": "L-sit i V-sit",
+   "typ": "kalistenika",
+   "cel": "L-sit na podłodze lub poręczach, potem V-sit",
+   "opis": "Siła brzucha i zginaczy bioder oraz wypychanie barków w dół.",
+   "kroki": [
+    {
+     "cwiczenie": "Hollow Body Hold",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Unoszenie kolan w zwisie",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Trzymanie L-sit w zwisie",
+     "kryterium": "3 × 15 s"
+    },
+    {
+     "cwiczenie": "L-Sit",
+     "kryterium": "3 × 15 s",
+     "uwaga": "Na podłodze lub poręczach"
+    },
+    {
+     "cwiczenie": "Dipy L-sit",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "V-Sit",
+     "kryterium": "3 × 10 s"
+    }
+   ],
+   "wsparcie": [
+    "Zwis aktywny na drążku"
+   ]
+  },
+  {
+   "id": "manna",
+   "nazwa": "Manna",
+   "typ": "kalistenika",
+   "cel": "Manna – siad podparty z nogami nad głową",
+   "opis": "Najwyższy poziom statyki w siadzie. Wymaga V-sit i dużej mobilności.",
+   "kroki": [
+    {
+     "cwiczenie": "L-Sit",
+     "kryterium": "3 × 20 s"
+    },
+    {
+     "cwiczenie": "V-Sit",
+     "kryterium": "3 × 10 s"
+    },
+    {
+     "cwiczenie": "Manna",
+     "kryterium": "3 × 3 s"
+    }
+   ],
+   "wsparcie": [
+    "Półszpagat (Half Splits)",
+    "Skłon w siadzie do prostych nóg"
+   ]
+  },
+  {
+   "id": "pierwsze-podciagniecie",
+   "nazwa": "Podciąganie: od zera do 15",
+   "typ": "kalistenika",
+   "cel": "15 podciągnięć nachwytem",
+   "opis": "Pierwsze podciągnięcie to najczęstszy kamień milowy. Negatywy i guma najszybciej do niego prowadzą.",
+   "kroki": [
+    {
+     "cwiczenie": "Zwis bierny na drążku",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Podciąganie łopatkowe",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Podciąganie australijskie",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Podciąganie australijskie z nogami na podwyższeniu",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Podciąganie negatywne",
+     "kryterium": "3 × 5 (opuszczanie 4 s)"
+    },
+    {
+     "cwiczenie": "Podciąganie z gumą (z asystą)",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Podciąganie szerokim nachwytem",
+     "kryterium": "3 × 8"
+    }
+   ],
+   "wsparcie": [
+    "Zwis aktywny na drążku"
+   ]
+  },
+  {
+   "id": "podciaganie-jedna-reka",
+   "nazwa": "Podciąganie na jednej ręce",
+   "typ": "kalistenika",
+   "cel": "Podciąganie na jednej ręce",
+   "opis": "Przez łucznicze i komandosa do wersji z asystą nadgarstka.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Podciąganie wąskim nachwytem",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Podciąganie łucznicze",
+     "kryterium": "3 × 5 na stronę"
+    },
+    {
+     "cwiczenie": "Podciąganie komandosa",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Podciąganie z trzymaniem za nadgarstek",
+     "kryterium": "3 × 3 na stronę"
+    },
+    {
+     "cwiczenie": "Podciąganie na jednej ręce",
+     "kryterium": "1 × 1 na stronę"
+    }
+   ],
+   "wsparcie": [
+    "Zwis aktywny na drążku"
+   ],
+   "uwaga": "Duże obciążenie łokci i barków."
+  },
+  {
+   "id": "muscle-up",
+   "nazwa": "Muscle-up",
+   "typ": "kalistenika",
+   "cel": "Muscle-up na drążku",
+   "opis": "Siła ciągnąca, dipy i technika przejścia nad drążek.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Podciąganie do pasa (High Pull-ups)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Dipy na poręczach",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Dipy na drążku prostym (Straight Bar Dips)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Muscle-up",
+     "kryterium": "3 × 1"
+    }
+   ],
+   "wsparcie": [
+    "Krążenia kolan, kostek i nadgarstków"
+   ]
+  },
+  {
+   "id": "front-lever",
+   "nazwa": "Front Lever",
+   "typ": "kalistenika",
+   "cel": "Front Lever Hold i podciąganie w Front Lever",
+   "opis": "Plecy i brzuch w poziomie. Kroki to dźwignie: im dłuższa, tym trudniej.",
+   "kroki": [
+    {
+     "cwiczenie": "Zwis aktywny na drążku",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Hollow Body Hold",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Unoszenie kolan w zwisie",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Unoszenie prostych nóg w zwisie",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Skin the Cat z zatrzymaniem",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Wznosy do wagi przodem (Front Lever Raises)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Front Lever Hold",
+     "kryterium": "3 × 5 s"
+    },
+    {
+     "cwiczenie": "Podciąganie w Front Lever",
+     "kryterium": "3 × 2"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "back-lever",
+   "nazwa": "Back Lever",
+   "typ": "kalistenika",
+   "cel": "Back Lever Hold",
+   "opis": "Mobilność barków i siła bicepsów.",
+   "kroki": [
+    {
+     "cwiczenie": "Zwis aktywny na drążku",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Skin the Cat z zatrzymaniem",
+     "kryterium": "3 × 5 s"
+    },
+    {
+     "cwiczenie": "Back Lever Hold",
+     "kryterium": "3 × 5 s"
+    },
+    {
+     "cwiczenie": "Dipy z przejściem do wagi tyłem (Back Lever Dips)",
+     "kryterium": "3 × 2"
+    }
+   ],
+   "wsparcie": [
+    "Rozciąganie barku z ręką za plecami"
+   ],
+   "uwaga": "Obciąża stawy łokciowe i barkowe."
+  },
+  {
+   "id": "flaga",
+   "nazwa": "Ludzka flaga",
+   "typ": "kalistenika",
+   "cel": "Human Flag",
+   "opis": "Siła skośnych brzucha, barków i chwytu na pionowej rurze.",
+   "kroki": [
+    {
+     "cwiczenie": "Deska bokiem (Side Plank)",
+     "kryterium": "3 × 45 s"
+    },
+    {
+     "cwiczenie": "Unoszenie prostych nóg w zwisie",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Ludzka flaga z ugiętymi kolanami (Tucked Human Flag)",
+     "kryterium": "3 × 5 s"
+    },
+    {
+     "cwiczenie": "Ludzka flaga (Human Flag)",
+     "kryterium": "3 × 3 s"
+    }
+   ],
+   "wsparcie": [
+    "Skłony boczne z hantlem w staniu"
+   ]
+  },
+  {
+   "id": "dipy",
+   "nazwa": "Dipy: od ławki do koreańskich",
+   "typ": "kalistenika",
+   "cel": "Dipy na poręczach 20+ i dipy z obciążeniem",
+   "opis": "Dipy mocno obciążają barki, nie przyspieszaj progresu.",
+   "kroki": [
+    {
+     "cwiczenie": "Dipy na ławce",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Dipy na poręczach",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Dipy na poręczach",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Dipy z pochyleniem tułowia",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Dipy na drążku prostym (Straight Bar Dips)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Dipy koreańskie (Korean Dips)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": [
+    "Podpór na kółkach (Ring Support Hold)"
+   ]
+  },
+  {
+   "id": "pistol",
+   "nazwa": "Przysiad na jednej nodze (Pistol)",
+   "typ": "kalistenika",
+   "cel": "Pistol Squat bez podparcia",
+   "opis": "Mobilność kostki, siła czworogłowych i równowaga.",
+   "kroki": [
+    {
+     "cwiczenie": "Przysiad klasyczny",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Przysiad bułgarski",
+     "kryterium": "3 × 8 na nogę"
+    },
+    {
+     "cwiczenie": "Przysiad kozacki (Cossack Squat)",
+     "kryterium": "3 × 8 na stronę"
+    },
+    {
+     "cwiczenie": "Pistol Squat z podparciem",
+     "kryterium": "3 × 5 na nogę"
+    },
+    {
+     "cwiczenie": "Pistol Squat",
+     "kryterium": "3 × 3 na nogę"
+    },
+    {
+     "cwiczenie": "Przysiad krewetkowy (Shrimp Squat)",
+     "kryterium": "3 × 3 na nogę"
+    },
+    {
+     "cwiczenie": "Przysiad smoka (Dragon Squat)",
+     "kryterium": "3 × 2 na nogę"
+    }
+   ],
+   "wsparcie": [
+    "Rozciąganie łydek w wykroku przy ścianie"
+   ]
+  },
+  {
+   "id": "nordic",
+   "nazwa": "Nordic Hamstring Curl",
+   "typ": "kalistenika",
+   "cel": "Nordic Hamstring Curl",
+   "opis": "Siła tyłu uda, ochrona przed kontuzjami.",
+   "kroki": [
+    {
+     "cwiczenie": "Most biodrowy jednonóż",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Sliding Leg Curl",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Ring Hamstring Curl",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Nordic Hamstring Curl",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "kolko-brzuszne",
+   "nazwa": "Kółko brzuszne (Ab Wheel)",
+   "typ": "kalistenika",
+   "cel": "Kółko ze stania",
+   "opis": "Najpierw zakres ruchu, potem długość dźwigni.",
+   "kroki": [
+    {
+     "cwiczenie": "Deska przodem (Front Plank)",
+     "kryterium": "3 × 45 s"
+    },
+    {
+     "cwiczenie": "Hollow Body Hold",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne do ściany",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne (Ab Wheel Rollout) z kolan",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne z zatrzymaniem (Iso-Hold)",
+     "kryterium": "3 × 10 s"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne na bok z kolan",
+     "kryterium": "3 × 6 na stronę"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne ze stania",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne ze stania (pełne rozwinięcie)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "dragon-flag",
+   "nazwa": "Dragon Flag",
+   "typ": "kalistenika",
+   "cel": "Dragon Flag",
+   "opis": "Siła brzucha i zginaczy bioder w dźwigni całego ciała.",
+   "kroki": [
+    {
+     "cwiczenie": "Odwrotne spięcia brzucha",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Unoszenie nóg leżąc",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Scyzoryk (V-up)",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Hollow Body Rocks",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Dragon Flag",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "toes-to-bar",
+   "nazwa": "Toes to Bar i wycieraczki",
+   "typ": "kalistenika",
+   "cel": "Toes to Bar i Windshield Wipers",
+   "opis": "Siła brzucha i chwytu w zwisie.",
+   "kroki": [
+    {
+     "cwiczenie": "Zwis aktywny na drążku",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Unoszenie kolan w zwisie",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Unoszenie prostych nóg w zwisie",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Toes to Bar",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Wycieraczki w zwisie (Windshield Wipers)",
+     "kryterium": "3 × 3 na stronę"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "skoki",
+   "nazwa": "Skoki i plyometria nóg",
+   "typ": "kalistenika",
+   "cel": "Wyskoki na skrzynię, skoki kozackie",
+   "opis": "Zaczynaj od niskiej intensywności. Ścięgna adaptują się wolniej niż mięśnie.",
+   "kroki": [
+    {
+     "cwiczenie": "Przysiad z wyskokiem",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Skoki w dal z miejsca",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Tuck Jumps",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Wyskoki na skrzynię (Box Jumps)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Wykroki z wyskokiem (Jumping Lunges)",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Skoki kozackie z naprzemienną zmianą stron",
+     "kryterium": "3 × 6"
+    }
+   ],
+   "wsparcie": [
+    "Ekscentryczne opuszczanie pięt ze stopnia"
+   ]
+  },
+  {
+   "id": "pompki-plyo",
+   "nazwa": "Pompki dynamiczne",
+   "typ": "kalistenika",
+   "cel": "Pompki z klaśnięciem za plecami",
+   "opis": "Moc klatki i tricepsów, rozwijana stopniowo.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki klasyczne",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Pompki z klaśnięciem",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Pompki z klaśnięciem o uda",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Pompki z klaśnięciem za plecami",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Pompki z potrójnym klaśnięciem",
+     "kryterium": "3 × 2"
+    },
+    {
+     "cwiczenie": "Pompki z obrotem o 360°",
+     "kryterium": "3 × 2"
+    }
+   ],
+   "wsparcie": [
+    "Krążenia kolan, kostek i nadgarstków"
+   ],
+   "uwaga": "Duże obciążenie nadgarstków i barków."
+  },
+  {
+   "id": "hinduskie",
+   "nazwa": "Pompki hinduskie i tygrysie",
+   "typ": "kalistenika",
+   "cel": "Pompki tygrysie",
+   "opis": "Mobilność barków i pleców oraz triceps.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki pike",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Pompki delfina",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Pompki hinduskie",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Pompki tygrysie (Tiger Bend)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "mostek",
+   "nazwa": "Mostek gimnastyczny",
+   "typ": "kalistenika",
+   "cel": "Mostek gimnastyczny",
+   "opis": "Mobilność kręgosłupa i barków.",
+   "kroki": [
+    {
+     "cwiczenie": "Most biodrowy",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Kobra (Bhujangasana)",
+     "kryterium": "3 × 20 s"
+    },
+    {
+     "cwiczenie": "Mostek biodrowy (Setu Bandhasana)",
+     "kryterium": "3 × 20 s"
+    },
+    {
+     "cwiczenie": "Mostek gimnastyczny",
+     "kryterium": "3 × 10 s"
+    }
+   ],
+   "wsparcie": [
+    "Wyprost piersiowy na wałku lub zwiniętym ręczniku"
+   ],
+   "uwaga": "Nie dociskaj w bólu. Mobilność buduj bardzo powoli."
+  },
+  {
+   "id": "martwy-ciag",
+   "nazwa": "Martwy ciąg",
+   "typ": "silownia",
+   "cel": "Martwy ciąg z deficytu",
+   "opis": "Od wzorca zawiasu do wariantów z większym zakresem.",
+   "kroki": [
+    {
+     "cwiczenie": "Pull-Through na wyciągu",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Martwy ciąg rumuński z hantlami",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Martwy ciąg klasyczny",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Rack Pull",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Martwy ciąg z deficytu",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": [
+    "Good Morning"
+   ],
+   "uwaga": "Plecy zawsze proste. Technika ważniejsza od ciężaru."
+  },
+  {
+   "id": "przysiad",
+   "nazwa": "Przysiad ze sztangą",
+   "typ": "silownia",
+   "cel": "Przysiad ze sztangą z przodu i Zercher",
+   "opis": "Od przysiadu z hantlem do wariantów z przodu.",
+   "kroki": [
+    {
+     "cwiczenie": "Przysiad Goblet z kettlebellem lub hantlem",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Przysiad ze sztangą na plecach (Back Squat)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Przysiad ze sztangą z przodu (Front Squat)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Przysiad Zerchera (Zercher Squat)",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": [
+    "Rozciąganie piszczeli i przodu stopy (klęk na piętach)"
+   ]
+  },
+  {
+   "id": "ohp",
+   "nazwa": "Wyciskanie nad głowę",
+   "typ": "silownia",
+   "cel": "Push Press i Z-Press",
+   "opis": "Od hantli siedząc do wariantów dynamicznych.",
+   "kroki": [
+    {
+     "cwiczenie": "Wyciskanie hantli siedząc",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Wyciskanie hantli nad głowę stojąc",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Wyciskanie żołnierskie ze sztangą (OHP)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Push Press",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Wyciskanie Z-Press",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": [
+    "Rotacja zewnętrzna barku z gumą"
+   ]
+  },
+  {
+   "id": "hip-thrust",
+   "nazwa": "Hip Thrust",
+   "typ": "silownia",
+   "cel": "Hip Thrust jednonóż",
+   "opis": "Od mostu biodrowego do wariantów z większym zakresem.",
+   "kroki": [
+    {
+     "cwiczenie": "Most biodrowy",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Hip Thrust ze sztangą",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Hip Thrust jednonóż",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Hip Thrust z deficytu",
+     "kryterium": "3 × 8"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "olimpijskie",
+   "nazwa": "Ćwiczenia olimpijskie",
+   "typ": "silownia",
+   "cel": "Clean and Jerk i Snatch",
+   "opis": "Wymagają trenera. Zaczynaj z kettlebellem, potem sztanga z zawieszenia.",
+   "kroki": [
+    {
+     "cwiczenie": "Swing z kettlebellem",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Zarzut hantli z zawieszenia (Hang Clean)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Zarzut sztangi z zawieszenia (Hang Power Clean)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Zarzut i podrzut sztangi (Clean and Jerk)",
+     "kryterium": "3 × 2"
+    },
+    {
+     "cwiczenie": "Rwanie hantla z ziemi (Dumbbell Snatch)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Rwanie sztangi z zawieszenia (Power Snatch)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Rwanie sztangi (Snatch)",
+     "kryterium": "3 × 2"
+    }
+   ],
+   "wsparcie": [],
+   "uwaga": "Ćwiczenia techniczne – najlepiej z trenerem."
+  },
+  {
+   "id": "podciaganie-obciazenie",
+   "nazwa": "Podciąganie i dipy z obciążeniem",
+   "typ": "silownia",
+   "cel": "Podciąganie i dipy z obciążeniem",
+   "opis": "Gdy podciągasz się 12+, obciążenie dalej buduje siłę.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Podciąganie na drążku z obciążeniem",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Dipy na poręczach",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Dipy na poręczach z obciążeniem",
+     "kryterium": "3 × 6"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "tureckie",
+   "nazwa": "Kettlebell: tureckie wstawanie i wiatrak",
+   "typ": "silownia",
+   "cel": "Turkish Get-Up i Windmill",
+   "opis": "Mobilność i stabilność barku z ciężarem.",
+   "kroki": [
+    {
+     "cwiczenie": "Spacer z walizką (Suitcase Carry)",
+     "kryterium": "3 × 20 m"
+    },
+    {
+     "cwiczenie": "Spacer z ciężarem nad głową (Overhead Carry)",
+     "kryterium": "3 × 20 m"
+    },
+    {
+     "cwiczenie": "Tureckie wstawanie z kettlebellem",
+     "kryterium": "3 × 3 na stronę"
+    },
+    {
+     "cwiczenie": "Wiatrak z kettlebellem (Windmill)",
+     "kryterium": "3 × 5 na stronę"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "lezenie",
+   "nazwa": "Wyciskanie leżąc",
+   "typ": "silownia",
+   "cel": "Wyciskanie sztangi leżąc",
+   "opis": "Od maszyny do sztangi.",
+   "kroki": [
+    {
+     "cwiczenie": "Wyciskanie na maszynie Hammer (siedząc)",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Wyciskanie hantli na ławce poziomej",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Wyciskanie sztangi na ławce poziomej",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Wyciskanie sztangi wąskim chwytem leżąc",
+     "kryterium": "3 × 8"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "wioslowanie",
+   "nazwa": "Wiosłowanie i grzbiet",
+   "typ": "silownia",
+   "cel": "Wiosłowanie sztangą w opadzie",
+   "opis": "Od maszyny do wiosłowania ze sztangą.",
+   "kroki": [
+    {
+     "cwiczenie": "Wiosłowanie na maszynie siedząc (chwyt neutralny)",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Wiosłowanie hantlą jednorącz w oparciu o ławkę",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Wiosłowanie sztangą w opadzie tułowia",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Wiosłowanie sztangą z podłogi (Pendlay)",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "podciaganie-zaaw",
+   "nazwa": "Podciąganie: warianty zaawansowane",
+   "typ": "kalistenika",
+   "cel": "Podciąganie z klaśnięciem",
+   "opis": "Gdy zwykłe podciąganie 12+ jest łatwe.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Podciąganie podchwytem",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Podciąganie chwytem neutralnym",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Podciąganie na ręcznikach",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Podciąganie z nogami w L-sit",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Podciąganie do pasa (High Pull-ups)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Podciąganie z klaśnięciem",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Podciąganie za kark",
+     "kryterium": "3 × 3",
+     "uwaga": "Ryzykowne dla barków, nie jest konieczne do żadnego celu"
+    }
+   ],
+   "wsparcie": [
+    "Zwis aktywny na drążku"
+   ]
+  },
+  {
+   "id": "kolka",
+   "nazwa": "Kółka gimnastyczne",
+   "typ": "kalistenika",
+   "cel": "Dipy na kółkach z rotacją zewnętrzną",
+   "opis": "Niestabilne kółka zwiększają pracę barków i stabilizatorów.",
+   "kroki": [
+    {
+     "cwiczenie": "Podpór na kółkach (Ring Support Hold)",
+     "kryterium": "3 × 20 s"
+    },
+    {
+     "cwiczenie": "Wiosłowanie na kółkach gimnastycznych",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Uginanie ramion na kółkach gimnastycznych",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Dipy na kółkach z rotacją zewnętrzną (Rings Turned Out)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "dipy-dynamiczne",
+   "nazwa": "Dipy dynamiczne i przejścia",
+   "typ": "kalistenika",
+   "cel": "Dipy eksplozywne",
+   "opis": "Dynamika i kontrola barków.",
+   "kroki": [
+    {
+     "cwiczenie": "Dipy na poręczach",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Przejścia na poręczach (Dip Walks)",
+     "kryterium": "3 × 10 m"
+    },
+    {
+     "cwiczenie": "Dipy eksplozywne (z wyskokiem)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "triceps-pompki",
+   "nazwa": "Pompki na triceps",
+   "typ": "kalistenika",
+   "cel": "Pompki diamentowe i pompki Sfinksa",
+   "opis": "Praca tricepsa z masą ciała.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki z wąskim rozstawem dłoni",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Pompki Sfinksa",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Pompki diamentowe",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Dipy z pionowym tułowiem",
+     "kryterium": "3 × 8"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "biceps-cialo",
+   "nazwa": "Biceps z masą ciała",
+   "typ": "kalistenika",
+   "cel": "Podciąganie podchwytem",
+   "opis": "Uginanie ramion pod drążkiem i na kółkach.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie australijskie podchwytem",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Uginanie ramion na niskim drążku podchwytem",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Uginanie ramion w australijskim podciąganiu podchwytem",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Uginanie ramion na kółkach gimnastycznych",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Podciąganie podchwytem",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "wioslowanie-cialo",
+   "nazwa": "Wiosłowanie z masą ciała",
+   "typ": "kalistenika",
+   "cel": "Wiosłowanie jednorącz",
+   "opis": "Plecy i tył barków bez ciężarów.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie australijskie",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Wiosłowanie na kółkach gimnastycznych",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Utrzymanie zwisu z ugiętymi łokciami",
+     "kryterium": "3 × 15 s"
+    },
+    {
+     "cwiczenie": "Wiosłowanie australijskie jednorącz",
+     "kryterium": "3 × 6 na stronę"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "nogi-bez-sprzetu",
+   "nazwa": "Nogi bez sprzętu",
+   "typ": "kalistenika",
+   "cel": "Przysiad bułgarski z wyskokiem",
+   "opis": "Siła i mobilność nóg w domu.",
+   "kroki": [
+    {
+     "cwiczenie": "Przysiad klasyczny",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Przysiad głęboki",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Wykrok boczny",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Wykroki chodzone",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Przysiad bułgarski",
+     "kryterium": "3 × 8 na nogę"
+    },
+    {
+     "cwiczenie": "Martwy ciąg na jednej nodze bez obciążenia",
+     "kryterium": "3 × 8 na nogę"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "lydki",
+   "nazwa": "Łydki i stopy",
+   "typ": "kalistenika",
+   "cel": "Wspięcia jednonóż z pełnym zakresem",
+   "opis": "Łydki, ścięgno Achillesa i przód piszczeli.",
+   "kroki": [
+    {
+     "cwiczenie": "Wspięcia na palce obunóż",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Wspięcia na palce jednonóż",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Ekscentryczne opuszczanie pięt ze stopnia",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Tibialis Raise",
+     "kryterium": "3 × 15"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "posladki-cialo",
+   "nazwa": "Pośladki bez sprzętu",
+   "typ": "kalistenika",
+   "cel": "Hip Thrust jednonóż",
+   "opis": "Od mostu do jednonóż.",
+   "kroki": [
+    {
+     "cwiczenie": "Most biodrowy",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Hip Thrust",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Most biodrowy jednonóż",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Hip Thrust jednonóż",
+     "kryterium": "3 × 10"
+    }
+   ],
+   "wsparcie": [
+    "Fire Hydrant",
+    "Donkey Kicks"
+   ]
+  },
+  {
+   "id": "brzuch-podstawy",
+   "nazwa": "Brzuch od podstaw",
+   "typ": "kalistenika",
+   "cel": "Hollow Body Rocks",
+   "opis": "Stabilizacja przed trudnymi ćwiczeniami.",
+   "kroki": [
+    {
+     "cwiczenie": "Dead Bug",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Bird Dog",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Deska przodem (Front Plank)",
+     "kryterium": "3 × 45 s"
+    },
+    {
+     "cwiczenie": "Nożyce poziome (Flutter Kicks)",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Russian Twist",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Wycieraczki na podłodze (Hollow Body)",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Hollow Body Rocks",
+     "kryterium": "3 × 20"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "podpor-ruchy",
+   "nazwa": "Ruchy w podporze",
+   "typ": "kalistenika",
+   "cel": "Bear Crawl i Crab Walk",
+   "opis": "Koordynacja i barki.",
+   "kroki": [
+    {
+     "cwiczenie": "Mountain Climbers",
+     "kryterium": "3 × 30 s"
+    },
+    {
+     "cwiczenie": "Bear Crawl",
+     "kryterium": "3 × 20 m"
+    },
+    {
+     "cwiczenie": "Crab Walk",
+     "kryterium": "3 × 20 m"
+    },
+    {
+     "cwiczenie": "Burpees",
+     "kryterium": "3 × 10"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "kolko-zaaw",
+   "nazwa": "Kółko brzuszne: warianty zaawansowane",
+   "typ": "kalistenika",
+   "cel": "Kółko na jednej ręce z kolan",
+   "opis": "Gdy kółko ze stania jest już opanowane.",
+   "kroki": [
+    {
+     "cwiczenie": "Kółko brzuszne z kolanami na podwyższeniu",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne ze stopami na kółku – kolana do klatki (Tuck)",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Wspinaczka ze stopami na kółku",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne ze stopami na kółku – składanie (Pike)",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne na bok ze stania",
+     "kryterium": "3 × 4 na stronę"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne ze stania z gumą",
+     "kryterium": "3 × 6"
+    },
+    {
+     "cwiczenie": "Kółko brzuszne na jednej ręce z kolan",
+     "kryterium": "3 × 3 na stronę"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "kolana",
+   "nazwa": "Siła kolan i przysiad Sissy",
+   "typ": "kalistenika",
+   "cel": "Przysiad Sissy",
+   "opis": "Ostrożny rozwój przodu uda.",
+   "kroki": [
+    {
+     "cwiczenie": "Wall Sit",
+     "kryterium": "3 × 45 s"
+    },
+    {
+     "cwiczenie": "Przysiad głęboki",
+     "kryterium": "3 × 12"
+    },
+    {
+     "cwiczenie": "Przysiad Sissy",
+     "kryterium": "3 × 5",
+     "uwaga": "Mocno obciąża kolana"
+    }
+   ],
+   "wsparcie": [],
+   "uwaga": "Przy bólu kolan przerwij."
+  },
+  {
+   "id": "pompki-rozne",
+   "nazwa": "Pompki: warianty",
+   "typ": "kalistenika",
+   "cel": "Pompki Supermana",
+   "opis": "Dodatkowe warianty pompek dynamicznych.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki klasyczne",
+     "kryterium": "3 × 20"
+    },
+    {
+     "cwiczenie": "Pompki z klaśnięciem",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Pompki Supermana",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "slidery",
+   "nazwa": "Ślizgacze",
+   "typ": "kalistenika",
+   "cel": "Rozpiętki ze ślizgaczami",
+   "opis": "Klatka i brzuch na ślizgaczach.",
+   "kroki": [
+    {
+     "cwiczenie": "Pompki klasyczne",
+     "kryterium": "3 × 15"
+    },
+    {
+     "cwiczenie": "Rozpiętki ze ślizgaczami (Slider Flyes)",
+     "kryterium": "3 × 8"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "wykroki-silownia",
+   "nazwa": "Przysiad jednonóż (siłownia)",
+   "typ": "silownia",
+   "cel": "Przysiad wykroczny ze sztangą",
+   "opis": "Od wejść na podwyższenie do wariantów ze sztangą.",
+   "kroki": [
+    {
+     "cwiczenie": "Wejścia na podwyższenie z hantlami (Step-up)",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Wykroki chodzone z hantlami",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Przysiad bułgarski z hantlami",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Przysiad wykroczny ze sztangą (Split Squat)",
+     "kryterium": "3 × 6"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "chwyt",
+   "nazwa": "Chwyt i przedramiona",
+   "typ": "silownia",
+   "cel": "Spacer kelnera",
+   "opis": "Siła chwytu przydaje się w podciąganiu i martwym ciągu.",
+   "kroki": [
+    {
+     "cwiczenie": "Spacer farmera z hantlami lub kettlebellami",
+     "kryterium": "3 × 30 m"
+    },
+    {
+     "cwiczenie": "Spacer z talerzami chwytem szczypcowym (Pinch Grip Carry)",
+     "kryterium": "3 × 20 m"
+    },
+    {
+     "cwiczenie": "Wrist Roller (nawijanie ciężaru na wałek)",
+     "kryterium": "3 × 1"
+    },
+    {
+     "cwiczenie": "Spacer kelnera (Waiter's Walk)",
+     "kryterium": "3 × 20 m"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "sciaganie",
+   "nazwa": "Ściąganie do podciągania",
+   "typ": "silownia",
+   "cel": "Podciąganie nachwytem",
+   "opis": "Maszyna jako schody do drążka.",
+   "kroki": [
+    {
+     "cwiczenie": "Podciąganie z asystą na maszynie",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Ściąganie drążka wyciągu górnego do klatki",
+     "kryterium": "3 × 10"
+    },
+    {
+     "cwiczenie": "Ściąganie jednorącz wyciągu górnego",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Podciąganie nachwytem",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "ohp-zaaw",
+   "nazwa": "Wyciskanie nad głowę: warianty zaawansowane",
+   "typ": "silownia",
+   "cel": "Wyciskanie Klokova i Savickasa",
+   "opis": "Ryzykowne warianty tylko dla zaawansowanych.",
+   "kroki": [
+    {
+     "cwiczenie": "Wyciskanie żołnierskie ze sztangą (OHP)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Push Press",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Wyciskanie Z-Press",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Wyciskanie Landmine jednorącz stojąc",
+     "kryterium": "3 × 8"
+    },
+    {
+     "cwiczenie": "Wyciskanie Klokova (Klokov Press)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Wyciskanie Savickasa (Savickas Press)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Wyciskanie Bradforda",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Wyciskanie zza karku stojąc ze sztangą",
+     "kryterium": "3 × 5",
+     "uwaga": "Wymaga bardzo dobrej mobilności barków"
+    }
+   ],
+   "wsparcie": [],
+   "uwaga": "Przy bólu barków przerwij."
+  },
+  {
+   "id": "przysiad-zaaw",
+   "nazwa": "Przysiady: warianty zaawansowane",
+   "typ": "silownia",
+   "cel": "Przysiad Andersona",
+   "opis": "Duże obciążenie kolan i pleców.",
+   "kroki": [
+    {
+     "cwiczenie": "Przysiad ze sztangą z przodu (Front Squat)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Przysiad Zerchera (Zercher Squat)",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Przysiad Jeffersona",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Przysiad Andersona (Anderson Squat)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Przysiad ze sztangą Safety Squat Bar",
+     "kryterium": "3 × 5"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "ciag-zaaw",
+   "nazwa": "Martwy ciąg: warianty zaawansowane",
+   "typ": "silownia",
+   "cel": "Martwy ciąg Reevesa",
+   "opis": "Warianty zmieniające zakres i chwyt.",
+   "kroki": [
+    {
+     "cwiczenie": "Martwy ciąg klasyczny",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Martwy ciąg z deficytu",
+     "kryterium": "3 × 5"
+    },
+    {
+     "cwiczenie": "Martwy ciąg rwaniowy (Snatch-Grip)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Martwy ciąg Jeffersona (Jefferson Deadlift)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Martwy ciąg Reevesa (Reeves Deadlift)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Martwy ciąg z grubym gryfem (Axle Bar)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "olimpijskie-zaaw",
+   "nazwa": "Olimpijskie i strongman: rozszerzone",
+   "typ": "silownia",
+   "cel": "Przysiad z zarzutem i Overhead Squat",
+   "opis": "Dla osób z trenerem.",
+   "kroki": [
+    {
+     "cwiczenie": "Zarzut sztangi z zawieszenia (Hang Power Clean)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Podrzut sztangi z klatki (Push Jerk)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Zarzut i wyciskanie sztangi (Clean and Press)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Przysiad z zarzutem (Squat Clean)",
+     "kryterium": "3 × 2"
+    },
+    {
+     "cwiczenie": "Ciąg rwaniowy (Snatch Pull)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Snatch Balance",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Przysiad rwaniowy (Overhead Squat)",
+     "kryterium": "3 × 3"
+    },
+    {
+     "cwiczenie": "Załadunek worka z piaskiem (Sandbag Loading)",
+     "kryterium": "3 × 3"
+    }
+   ],
+   "wsparcie": [],
+   "uwaga": "Bardzo techniczne. Najpierw trener."
+  }
+ ]
+}

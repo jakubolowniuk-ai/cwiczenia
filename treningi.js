@@ -142,10 +142,16 @@ function zrobKarte(nazwa, opis) {
 
 function pokazWidok(nazwa) {
   const treningi = nazwa === "treningi";
-  widokBaza.hidden = treningi;
+  const sciezki = nazwa === "sciezki";
+  widokBaza.hidden = treningi || sciezki;
   widokTreningi.hidden = !treningi;
-  przelacznikBaza.classList.toggle("aktywny", !treningi);
+  document.getElementById("widok-sciezki").hidden = !sciezki;
+  przelacznikBaza.classList.toggle("aktywny", !treningi && !sciezki);
   przelacznikTreningi.classList.toggle("aktywny", treningi);
+  document.getElementById("przelacznik-sciezki").classList.toggle("aktywny", sciezki);
+  if (sciezki) {
+    sciezkiWczytaj(rysujSciezki);
+  }
   if (treningi) {
     // Zestawy mogły dojść w innym miejscu (np. z kreatora planu), więc rysujemy listę od nowa
     rysujTreningi();
