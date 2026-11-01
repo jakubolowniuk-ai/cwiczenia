@@ -44,10 +44,16 @@ const blokFiltrow = document.getElementById("blok-filtrow");
 const poleSzukaj = document.getElementById("pole-szukaj");
 const chipyPartie = document.getElementById("chipy-partie");
 const chipyRodzaje = document.getElementById("chipy-rodzaje");
+const chipyPoziomy = document.getElementById("chipy-poziomy");
+const filtrSortowanie = document.getElementById("filtr-sortowanie");
+const polePoziom = document.getElementById("pole-poziom");
 const przyciskWyczysc = document.getElementById("przycisk-wyczysc");
 
 // Aktualnie wybrane filtry (tekst zapisujemy małymi literami)
-const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [], ukryte: false };
+const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [], poziom: null, sortowanie: "", ukryte: false };
+
+// Poziomy trudności ćwiczeń (pole poziom: 1–5)
+const NAZWY_POZIOMOW = { 1: "Początkujący", 2: "Podstawowy", 3: "Średni", 4: "Zaawansowany", 5: "Elitarny" };
 const przyciskUkryte = document.getElementById("przycisk-ukryte");
 const filtrMiesien = document.getElementById("filtr-miesien");
 const chipyMiesnie = document.getElementById("chipy-miesnie");
@@ -435,6 +441,7 @@ function otworzFormularz(cwiczenie, opcje) {
   poleOpisRuch.value = "";
   poleOpisUwaga.value = "";
   poleCiezar.checked = false;
+  polePoziom.value = "";
   poleCzyPartie.checked = false;
   panelPartii.hidden = true;
   podsumowaniePartii.hidden = true;
@@ -452,6 +459,7 @@ function otworzFormularz(cwiczenie, opcje) {
     poleOpisRuch.value = (cwiczenie.opis && cwiczenie.opis.ruch) || "";
     poleOpisUwaga.value = (cwiczenie.opis && cwiczenie.opis.uwaga) || "";
     poleCiezar.checked = !!cwiczenie.zCiezarem;
+    polePoziom.value = cwiczenie.poziom ? String(cwiczenie.poziom) : "";
     poleRodzaj.value = cwiczenie.rodzajId;
     odswiezPoleStyli();
 
@@ -558,6 +566,9 @@ function zapiszCwiczenie() {
   if (style.length > 0) {
     wpis.style = style;
   }
+  if (polePoziom.value !== "") {
+    wpis.poziom = Number(polePoziom.value);
+  }
   const opis = {
     start: poleOpisStart.value.trim(),
     ruch: poleOpisRuch.value.trim(),
@@ -622,6 +633,9 @@ function pasujeDoFiltrow(cwiczenie) {
   if (filtr.partiaId && (cwiczenie.partieIds || []).indexOf(filtr.partiaId) === -1) {
     return false;
   }
+  if (filtr.poziom && cwiczenie.poziom !== filtr.poziom) {
+    return false;
+  }
   if (filtr.miesnieIds.length > 0 && !filtr.miesnieIds.some(function (id) {
     return (cwiczenie.miesnieIds || []).indexOf(id) !== -1;
   })) {
@@ -659,6 +673,26 @@ function rysujFiltry() {
   }).forEach(function (kategoria) {
     chipyRodzaje.appendChild(zrobChip(kategoria, "rodzajId"));
   });
+
+  chipyPoziomy.innerHTML = "";
+  [1, 2, 3, 4, 5].forEach(function (poziom) {
+    const ile = dane.cwiczenia.filter(function (cw) {
+      return !cw.ukryte && cw.poziom === poziom;
+    }).length;
+    if (ile === 0) {
+      return;
+    }
+    const chip = document.createElement("button");
+    chip.className = "chip" + (filtr.poziom === poziom ? " aktywny" : "");
+    chip.textContent = poziom + " · " + NAZWY_POZIOMOW[poziom];
+    chip.addEventListener("click", function () {
+      filtr.poziom = filtr.poziom === poziom ? null : poziom;
+      rysujFiltry();
+      rysujListe();
+    });
+    chipyPoziomy.appendChild(chip);
+  });
+  filtrSortowanie.value = filtr.sortowanie;
 
   // Mięśnie: po wybraniu partii chipy jej mięśni (można kilka); bez partii lista rozwijana
   const liczbaCwiczen = function (m) {
@@ -724,7 +758,7 @@ function rysujFiltry() {
   przyciskUkryte.hidden = liczbaUkrytych === 0 && !filtr.ukryte;
   przyciskUkryte.textContent = filtr.ukryte ? "← Wróć do listy ćwiczeń" : "Pokaż ukryte (" + liczbaUkrytych + ")";
 
-  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.miesnieIds.length > 0);
+  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.poziom || filtr.sortowanie !== "" || filtr.miesnieIds.length > 0);
 }
 
 // Czyści wyszukiwarkę i wszystkie filtry
@@ -733,6 +767,8 @@ function wyczyscFiltry() {
   filtr.partiaId = null;
   filtr.rodzajId = null;
   filtr.miesnieIds = [];
+  filtr.poziom = null;
+  filtr.sortowanie = "";
   filtr.ukryte = false;
   poleSzukaj.value = "";
   rysujFiltry();
@@ -812,6 +848,18 @@ function rysujListe() {
   }
 
   const widoczne = dane.cwiczenia.filter(pasujeDoFiltrow);
+  if (filtr.sortowanie === "az") {
+    widoczne.sort(function (a, b) { return a.nazwa.localeCompare(b.nazwa, "pl"); });
+  } else if (filtr.sortowanie === "latwe" || filtr.sortowanie === "trudne") {
+    const mnoznik = filtr.sortowanie === "latwe" ? 1 : -1;
+    // Bez poziomu zawsze na końcu; wewnątrz poziomu alfabetycznie
+    widoczne.sort(function (a, b) {
+      if (!a.poziom && !b.poziom) { return a.nazwa.localeCompare(b.nazwa, "pl"); }
+      if (!a.poziom) { return 1; }
+      if (!b.poziom) { return -1; }
+      return (a.poziom - b.poziom) * mnoznik || a.nazwa.localeCompare(b.nazwa, "pl");
+    });
+  }
   const brakCwiczen = dane.cwiczenia.length === 0;
 
   pustaLista.hidden = !brakCwiczen;
@@ -832,6 +880,7 @@ function rysujListe() {
     // Opis: rodzaj aktywności i partie, rozdzielone kropkami
     const nazwyPartii = (cwiczenie.partieIds || []).map(nazwaKategorii);
     const czesci = [nazwaKategorii(cwiczenie.rodzajId)]
+      .concat(cwiczenie.poziom ? ["Poz. " + cwiczenie.poziom + " (" + NAZWY_POZIOMOW[cwiczenie.poziom].toLowerCase() + ")"] : [])
       .concat(nazwyPartii)
       .concat(cwiczenie.style || [])
       .filter(function (czesc) {
@@ -930,7 +979,7 @@ function rysujListe() {
     }
 
     return karta;
-  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.miesnieIds.join(","), filtr.ukryte].join("|"));
+  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.poziom, filtr.sortowanie, filtr.miesnieIds.join(","), filtr.ukryte].join("|"));
 }
 
 // ===== Podpięcie przycisków =====
@@ -975,6 +1024,11 @@ filtrMiesien.addEventListener("change", function () {
     filtr.partiaId = m.partiaId;
     filtr.miesnieIds = [m.id];
   }
+  rysujFiltry();
+  rysujListe();
+});
+filtrSortowanie.addEventListener("change", function () {
+  filtr.sortowanie = filtrSortowanie.value;
   rysujFiltry();
   rysujListe();
 });

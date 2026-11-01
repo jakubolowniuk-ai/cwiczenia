@@ -321,3 +321,8 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 
 ## v70 – 52 ćwiczenia siłowe z list Tom IV i V
 - Dodano 25 efektywnych (wyciskania naprzemienne/z podłogi/na Smithie, rozpiętki na wyciągu, W-Raise, Y na wyciągu, wiosłowania i ściąganie podchwytem, ćwiczenia chwytu: Wrist Roller, Pinch Carry, ściskacze) oraz 27 elitarnych/ryzykownych z ostrzeżeniem (Savickas, Klokov, Reeves, Anderson, ćwiczenia olimpijskie, strongman). Pominięto ok. 255 powtórek. `WERSJA_BAZY` = 13. Generator ich nie używa.
+
+## v71 – poziomy trudności ćwiczeń
+- Każde ćwiczenie z bazy (506) ma pole `poziom` 1–5: początkujący, podstawowy, średni, zaawansowany, elitarny. Nadane w plikach `przyklady-*.json`; import (także dla już istniejących ćwiczeń) ustawia poziom z bazy, `WERSJA_BAZY` = 14.
+- Zakładka Ćwiczenia: filtr „Trudność" (chipy 1–5 z nazwami), lista „Kolejność" (domyślna, od najłatwiejszych, od najtrudniejszych, alfabetycznie; bez poziomu na końcu), poziom w opisie karty („Poz. 3 (średni)"). W formularzu własnego ćwiczenia opcjonalne pole „Poziom trudności".
+- Podstawa pod ścieżki umiejętności (kroki do celu z regresjami).

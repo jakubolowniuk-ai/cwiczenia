@@ -191,6 +191,9 @@ function dodajCwiczeniaZListy(lista, opcje) {
       });
       if (istniejace && opcje.zBazy) {
         istniejace.zBazy = true;
+        if (wpis.poziom >= 1 && wpis.poziom <= 5) {
+          istniejace.poziom = wpis.poziom;
+        }
         // Ćwiczenia, które można obciążyć (kamizelka, plecak, hantel): włączamy pole ciężaru
         if (wpis.ciezar === true && !istniejace.zCiezarem) {
           istniejace.zCiezarem = true;
@@ -229,6 +232,7 @@ function dodajCwiczeniaZListy(lista, opcje) {
       miesnieIds: miesnieIds,
       link: typeof wpis.link === "string" ? wpis.link.trim() : "",
       zBazy: !!opcje.zBazy,
+      poziom: wpis.poziom >= 1 && wpis.poziom <= 5 ? wpis.poziom : undefined,
       opis: wpis.opis && typeof wpis.opis === "object" ? wpis.opis : undefined,
       opisZBazy: wpis.opis && opcje.zBazy ? true : undefined,
       zCiezarem: wpis.ciezar === true || (wpis.ciezar !== false && rodzaj.id === "rodzaj-cialo")
@@ -336,7 +340,7 @@ const STARE_OPISY_START = [
  "Stań prosto, stopy na szerokość bioder, ręce na biodrach, brzuch napięty."
 ];
 
-const WERSJA_BAZY = 13;
+const WERSJA_BAZY = 14;
 const PLIKI_BAZY = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json"];
 const PLIK_ZESTAWOW = "przyklady-zestawy.json";
 
