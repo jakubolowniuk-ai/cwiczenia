@@ -323,7 +323,7 @@ function pkRysuj() {
       pkProfil.tygodni = w;
     });
   } else if (krok === "kotwice") {
-    pokazDalej = pkProfil.cel !== "bieg";
+    pokazDalej = pkProfil.cel !== "bieg" && mzWypelnione();
     pkRysujKotwice(tresc, function (f) { walidacja = f; });
   } else if (krok === "podsumowanie") {
     pokazDalej = false;
@@ -371,30 +371,43 @@ function pkRysujKotwice(tresc, ustawWalidacje) {
     ustawWalidacje(function () { return true; });
     return;
   }
-  if (p.sprzet === "c") {
-    tresc.appendChild(pkEl("h1", "", "Sprawdźmy Twoją siłę"));
-    tresc.appendChild(pkEl("p", "opis", "Wpisz, ile razy dasz radę zrobić dane ćwiczenie z poprawną techniką. Jeśli nie wiesz, zostaw puste, ułożę łagodny start."));
-    tresc.appendChild(pkPoleLiczba("Pompki klasyczne (maksymalnie powtórzeń)", "Z prostym ciałem, klatka do podłogi", p.maxPompek, function (v) { p.maxPompek = v; }));
-    if (p.drazek) {
-      tresc.appendChild(pkPoleLiczba("Podciągnięcia na drążku (maksymalnie)", "0 jeśli jeszcze nie dajesz rady", p.maxPodciagniec, function (v) { p.maxPodciagniec = v; }));
-    }
-    ustawWalidacje(function () { return true; });
+  // Możliwości bierzemy z profilu „Moje możliwości” (Ustawienia). Bez testu nie zgadujemy.
+  if (!mzWypelnione()) {
+    tresc.appendChild(pkEl("h1", "", "Najpierw uzupełnij swoje możliwości"));
+    tresc.appendChild(pkEl("p", "opis", "Żeby dobrze dobrać trudność ćwiczeń, powtórzenia i ciężary, potrzebuję wyników krótkiego testu (ok. 10 minut). Bez nich plan byłby zgadywany. Wyniki zapiszą się w Ustawieniach i przydadzą się przy kolejnych planach."));
+    const b = pkEl("button", "przycisk wielki", "Uzupełnij teraz");
+    b.type = "button";
+    b.addEventListener("click", function () {
+      otworzMozliwosci(function () { pkRysuj(); });
+    });
+    tresc.appendChild(b);
+    ustawWalidacje(function () { return mzWypelnione(); });
     return;
   }
-  const dom = p.sprzet === "d";
-  tresc.appendChild(pkEl("h1", "", "Jakie ciężary stosujesz?"));
-  tresc.appendChild(pkEl("p", "opis", "Podaj ciężar, który podniesiesz 10 razy, zostawiając zapas 2–3 powtórzeń (czyli nie do upadku). Resztę ciężarów wyliczę z proporcji. Puste pole oznacza „nie wiem” i dostaniesz łagodny start."));
-  if (dom) {
-    tresc.appendChild(pkPoleLiczba("Wyciskanie hantli na ławce (kg na jedną rękę)", "", p.kotwice.pch, function (v) { p.kotwice.pch = v; }));
-    tresc.appendChild(pkPoleLiczba("Wiosłowanie hantlą w oparciu o ławkę (kg)", "", p.kotwice.wio, function (v) { p.kotwice.wio = v; }));
-    tresc.appendChild(pkPoleLiczba("Przysiad z hantlem przy klatce (kg)", "", p.kotwice.prz, function (v) { p.kotwice.prz = v; }));
-  } else {
-    tresc.appendChild(pkPoleLiczba("Wyciskanie sztangi na ławce (kg razem ze sztangą)", "", p.kotwice.pch, function (v) { p.kotwice.pch = v; }));
-    tresc.appendChild(pkPoleLiczba("Wiosłowanie sztangą w opadzie (kg)", "", p.kotwice.wio, function (v) { p.kotwice.wio = v; }));
-    tresc.appendChild(pkPoleLiczba("Przysiad ze sztangą (kg)", "Jeśli nie robisz, zostaw puste", p.kotwice.prz, function (v) { p.kotwice.prz = v; }));
+  mzDoProfilu(p);
+  tresc.appendChild(pkEl("h1", "", "Twoje możliwości"));
+  const dni = mzDniOdTestu();
+  tresc.appendChild(pkEl("p", "opis", "Na podstawie testu z " + mzData() + " dobiorę trudność i ciężary." + (dni > 56 ? " Test ma ponad 8 tygodni – jeśli zrobiłeś(aś) postępy, zrób go ponownie." : "")));
+  const klucze = p.sprzet === "c" ? ["pompki", "podciagniecia", "dipy", "przysiady", "plank"]
+    : p.sprzet === "d" ? ["pompki", "przysiady", "plank", "d_pch", "d_wio", "d_prz"]
+    : ["pompki", "przysiady", "plank", "s_pch", "s_wio", "s_prz"];
+  const lista = mzPodsumowanie(klucze);
+  if (lista.length === 0) {
+    tresc.appendChild(pkEl("p", "opis", "Brak wyników dla tego rodzaju treningu – zacznę łagodnie."));
   }
-  tresc.appendChild(pkEl("p", "opis", "Jeśli masz wątpliwości, wpisz mniej. Zawsze możesz zwiększyć ciężar w trakcie."));
-  ustawWalidacje(function () { return true; });
+  lista.forEach(function (t) {
+    tresc.appendChild(pkEl("div", "mz-wiersz", t));
+  });
+  if (p.sprzet !== "c" && !(p.kotwice.pch > 0 && p.kotwice.wio > 0 && p.kotwice.prz > 0)) {
+    tresc.appendChild(pkEl("p", "opis", "Nie wszystkie ciężary są wpisane – brakujące wyliczę ostrożnie. Zawsze możesz je zmienić w trakcie."));
+  }
+  const zmien = pkEl("button", "akcja", "Zmień wyniki testu");
+  zmien.type = "button";
+  zmien.addEventListener("click", function () {
+    otworzMozliwosci(function () { pkRysuj(); });
+  });
+  tresc.appendChild(zmien);
+  ustawWalidacje(function () { mzDoProfilu(p); return true; });
 }
 
 // Ekran z gotowym planem: podsumowanie, "Dlaczego ten plan?", przycisk "Zacznij"

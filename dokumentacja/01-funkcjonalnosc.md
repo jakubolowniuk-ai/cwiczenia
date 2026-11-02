@@ -357,3 +357,11 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Błąd: przy sprzęcie „Masa ciała z drążkiem” cele masa, rzeźba, siła i kalistenika dawały identyczny plan (te same ćwiczenia, serie i zakresy) – parametry zależały tylko od doświadczenia.
 - Teraz: masa – więcej serii (3–5 w głównych), 6–12 powt., przerwy 90–120 s; siła – 3–5 serii po 3–8 powt., przerwy 2–3 min i o szczebel trudniejszy wariant (przysiady zawsze, pchanie/ciąganie tylko gdy podano maks. pompek/podciągnięć); rzeźba – 10–15 (dodatkowe 12–20) powt., przerwy 45–60 s; kalistenika – jak dotąd.
 - Sweep 6720 profili bez błędów; jedynie przy 30 min + ból barku/kolan niektóre treningi siły/masy mają 3 ćwiczenia (więcej serii mieści się w czasie).
+
+## v77 – Moje możliwości (etap 1 celów i ścieżek)
+
+- Nowy plik `mozliwosci.js`; dane w `dane.mozliwosci = { data, wartosci }` (wartość `null` = nie wiem / nie robię).
+- Test: masa ciała (pompki, podciągnięcia, dipy, przysiady, plank, zwis) oraz opcjonalnie ciężary na 10 powt. z zapasem 2–3 – sztanga (wyciskanie, wiosłowanie, przysiad) i hantle. Wymagany co najmniej wynik pompek (0 też się liczy).
+- Ustawienia → „Moje możliwości”: podsumowanie wyników, data testu, przypomnienie po 8 tygodniach, przycisk „Zrób test / Zmień”.
+- Kreator planu: krok z ręcznym wpisywaniem maksów i ciężarów zastąpiony. Bez testu kreator pokazuje „Najpierw uzupełnij swoje możliwości” i nie pozwala przejść dalej; „Uzupełnij teraz” otwiera test, po zapisaniu wraca do kreatora z zachowanymi odpowiedziami. Z testem pokazuje wyniki użyte do planu i „Zmień wyniki testu”.
+- Generator: nowe dane wpływają na szczebel przysiadów (przysiady: <20, <40, 40+) i ćwiczenia stabilizacji (plank: <30 s, <60 s, 60+ s); pompki i podciągnięcia jak dotąd.

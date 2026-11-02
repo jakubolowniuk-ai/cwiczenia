@@ -2024,3 +2024,10 @@ h1 {
 .sciezka-nazwa.brak { opacity: .5; }
 .sciezka-kryt { font-size: .88rem; opacity: .85; margin-top: 4px; }
 .sciezka-wsparcie { padding-left: 20px; }
+
+/* ===== Moje możliwości ===== */
+.mz-nakladka { z-index: 210; }
+.mz-grupa { margin: 14px 0 0; font-size: 1.05rem; }
+.mz-wiersz { padding: 6px 0; border-bottom: 1px solid var(--linia); color: var(--tekst); }
+#ust-mozliwosci { display: flex; flex-direction: column; gap: 6px; }
+#ust-mozliwosci .przycisk { margin-top: 8px; }

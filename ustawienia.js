@@ -135,6 +135,7 @@ function pobierzIcs() {
 // ===== Rysowanie ekranu =====
 
 function rysujUstawienia() {
+  rysujKarteMozliwosci();
   const wlaczony = dane.ustawienia.alarmWlaczony !== false;
   ustPrzelacznik.setAttribute("aria-checked", wlaczony ? "true" : "false");
   ustPrzelacznik.classList.toggle("wlaczony", wlaczony);

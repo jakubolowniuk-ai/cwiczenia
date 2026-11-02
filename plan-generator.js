@@ -459,6 +459,10 @@ function pgDrabinka(kod, p, kandydaci) {
       return jedna(klucz === "pullVB" ? "Podciąganie australijskie podchwytem" : klucz === "biceps" ? null : "Podciąganie australijskie");
     }
     r = pgSzczebelCiagniecia(p);
+  } else if (/^squat/.test(klucz) && p.maxPrzysiadow != null) {
+    r = p.maxPrzysiadow < 20 ? 0 : p.maxPrzysiadow < 40 ? 1 : Math.max(2, dosw2);
+  } else if (klucz === "core1" && p.maxPlank != null) {
+    r = p.maxPlank < 30 ? 0 : p.maxPlank < 60 ? 1 : Math.max(2, dosw2);
   } else if (klucz === "core2") {
     return jedna(PG_KAL_LAD[zDraz ? "core2" : "core2bez"][dosw]);
   } else if (klucz === "core3" && !zDraz) {
