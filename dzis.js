@@ -434,7 +434,7 @@ function zrobWierszCwiczenia(sesja, id, wBloku, plan_) {
   const tekst = document.createElement("div");
   tekst.className = "karta-tekst";
   tekst.appendChild(tekstElement("div", "karta-nazwa", cwiczenie.nazwa));
-  const opis = tekstElement("button", "wartosc-przycisk", opisIlosci(wykonane || plan));
+  const opis = tekstElement("button", "wartosc-przycisk", opisIlosci(wykonane || plan, znajdzCwiczenie(id)));
   opis.setAttribute("aria-label", "Wpisz inną wartość: " + cwiczenie.nazwa);
   opis.addEventListener("click", function () {
     otworzWartosc(sesja, id);
@@ -456,7 +456,7 @@ function zrobWierszCwiczenia(sesja, id, wBloku, plan_) {
   if (wykonane) {
     const roznica = opisRoznicy(plan, wykonane);
     if (roznica) {
-      tekst.appendChild(tekstElement("div", "etykieta " + (roznica.wiecej ? "ponad" : "ponizej"), roznica.wiecej ? roznica.tekst : "plan " + opisIlosci(plan) + " · " + roznica.tekst));
+      tekst.appendChild(tekstElement("div", "etykieta " + (roznica.wiecej ? "ponad" : "ponizej"), roznica.wiecej ? roznica.tekst : "plan " + opisIlosci(plan, cwiczenie) + " · " + roznica.tekst));
     }
   }
   wiersz.appendChild(tekst);
@@ -797,7 +797,7 @@ function otworzWartosc(sesja, id) {
   wartSesja = sesja;
   wartId = id;
   wartTytul.textContent = znajdzCwiczenie(id).nazwa;
-  wartPlan.textContent = "Zaplanowano: " + opisIlosci(plan);
+  wartPlan.textContent = "Zaplanowano: " + opisIlosci(plan, znajdzCwiczenie(id)) + (jednostronne(znajdzCwiczenie(id)) ? " (powtórzenia robisz na każdą stronę osobno)" : "");
   wartPola.innerHTML = "";
   wartPolaDane = [];
   wartCiezary = [];

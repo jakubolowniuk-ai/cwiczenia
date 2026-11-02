@@ -536,7 +536,7 @@ function cwRysujKoniec() {
     const cw = znajdzCwiczenie(id);
     const wiersz = cwEl("div", "cw-podsumowanie");
     wiersz.appendChild(cwEl("div", "karta-nazwa", cw.nazwa));
-    wiersz.appendChild(cwEl("div", "ostatnio-info", opisIlosci(cwSesja.wykonane && cwSesja.wykonane[id] ? cwSesja.wykonane[id] : cwSesja.parametry[id])));
+    wiersz.appendChild(cwEl("div", "ostatnio-info", opisIlosci(cwSesja.wykonane && cwSesja.wykonane[id] ? cwSesja.wykonane[id] : cwSesja.parametry[id], znajdzCwiczenie(id))));
     if (!cwBlokowe(id)) {
       wiersz.appendChild(ocenaPasek(cwSesja, id));
     }

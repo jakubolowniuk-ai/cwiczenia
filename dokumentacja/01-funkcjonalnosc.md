@@ -338,3 +338,10 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - 53 ścieżki (22 + 9 siłownia + dodatkowe warianty, razem 280 kroków) z pliku `sciezki.json`: kalistenika (pompki, stanie na rękach, planche, L-sit, podciąganie, muscle-up, front/back lever, flaga, pistol, nordic, kółko brzuszne, brzuch, nogi, pośladki, łydki, kółka, dipy…) i siłownia (martwy ciąg, przysiad, OHP, olimpijskie, chwyt, ściąganie…).
 - Każdy krok: ćwiczenie z poziomem trudności, kryterium przejścia dalej, ewentualne ostrzeżenie; ćwiczenia wspierające na końcu. Dotknięcie nazwy otwiera opis ćwiczenia.
 - Na razie tylko podgląd (bez śledzenia postępu i wyboru celu w kreatorze).
+
+## v74 – poprawki
+
+- Ścieżki czytelne w ciemnym trybie (kolory z motywu zamiast sztywnych jasnych).
+- Ćwiczenia jednostronne (jednonóż, jednorącz, łucznicze, kozackie, bułgarski, Pistol, Side Plank itd.) pokazują „na stronę” przy ilości (np. „3 × 10 na stronę”), w oknie wartości, w karcie kreatora i w opisie ćwiczenia jest wyjaśnienie, jak liczyć serie.
+- 24 ćwiczenia zdegradowane z poziomu 5 do 4 mają opis „Ćwiczenie zaawansowane –” zamiast „elitarne” (WERSJA_BAZY = 15 odświeża opisy z bazy).
+- Kreator: ćwiczenie z różnymi powtórzeniami w seriach zachowuje liczbę serii i pierwsze powtórzenia po przełączeniu na „Serie i powtórzenia”.

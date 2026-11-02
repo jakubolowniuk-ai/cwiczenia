@@ -642,6 +642,9 @@ function zrobKarteParametrow(sesja, cwiczenie) {
   naglowek.appendChild(nazwa);
   dodajFilm(naglowek, cwiczenie);
   karta.appendChild(naglowek);
+  if (jednostronne(cwiczenie)) {
+    karta.appendChild(tekstElement("div", "ostatnio-info", "Ćwiczenie jednostronne: wpisz powtórzenia (lub czas) dla jednej strony. Każdą serię robisz na lewą i na prawą stronę."));
+  }
 
   // Adnotacja o poprzednim wykonaniu tego ćwiczenia (też z zakończonych planów)
   const ostatnio = typeof tekstOstatnio === "function" ? tekstOstatnio(cwiczenie.id, sesja.id) : "";
@@ -796,8 +799,8 @@ function zrobKarteParametrow(sesja, cwiczenie) {
     const maCiezar = !!cwiczenie.zCiezarem;
     const startKg = start && Array.isArray(start.ciezary) ? start.ciezary.slice() : [];
     const kgRozne = startKg.some(function (c) { return c !== startKg[0]; });
-    const serie = zrobPoleLiczbowe("Serie", start && start.typ === "powtorzenia" ? start.serie : 0, false);
-    const pow = zrobPoleLiczbowe("Powtórzenia", start && start.typ === "powtorzenia" ? start.powtorzenia : 0, false);
+    const serie = zrobPoleLiczbowe("Serie", start && start.typ === "powtorzenia" ? start.serie : start && start.typ === "serie-lista" ? start.powtorzenia.length : 0, false);
+    const pow = zrobPoleLiczbowe("Powtórzenia", start && start.typ === "powtorzenia" ? start.powtorzenia : start && start.typ === "serie-lista" ? start.powtorzenia[0] : 0, false);
     const kgJeden = zrobPoleLiczbowe(etykietaCiezaru(cwiczenie), startKg.length > 0 ? startKg[0] : 0, true);
     const rzadSerie = zrobRzad();
     rzadSerie.appendChild(serie.blok);

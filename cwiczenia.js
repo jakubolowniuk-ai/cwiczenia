@@ -139,8 +139,17 @@ function opisCiezarow(ilosc) {
 }
 
 // Zamienia zapisaną ilość na krótki tekst, np. "3 × 12", "30 s", "3 × 30 s" (z ciężarem: "3 × 12 · 60 kg")
-function opisIlosci(ilosc) {
-  const tekst = opisIlosciBezCiezaru(ilosc);
+// Ćwiczenia robione osobno na każdą stronę (nogę, rękę): liczby w planie dotyczą jednej strony
+const WZORZEC_JEDNOSTRONNE = /jednonó|jednorą|jednej|jedną|łuczn|archer|bułgar|krewetk|Step-up|kozacki|Cossack|Pistol|Side Plank|Deska bokiem|Odwodzenie biodra|Wykrok boczny|Wykroki boczne|Skłon boczny|Skłony boczne|Single-Arm/i;
+function jednostronne(cwiczenie) {
+  return !!cwiczenie && WZORZEC_JEDNOSTRONNE.test(cwiczenie.nazwa) && !/naprzemienn/i.test(cwiczenie.nazwa);
+}
+
+function opisIlosci(ilosc, cwiczenie) {
+  let tekst = opisIlosciBezCiezaru(ilosc);
+  if (tekst && jednostronne(cwiczenie)) {
+    tekst += " na stronę";
+  }
   const ciezar = opisCiezarow(ilosc);
   return ciezar ? tekst + " · " + ciezar : tekst;
 }
@@ -1127,6 +1136,18 @@ function otworzOpis(cwiczenie) {
     blok.appendChild(tekst);
     opisTresc.appendChild(blok);
   });
+  if (jednostronne(cwiczenie)) {
+    const blok = document.createElement("div");
+    blok.className = "opis-blok";
+    const etykieta = document.createElement("div");
+    etykieta.className = "etykieta";
+    etykieta.textContent = "Jak liczyć serie";
+    const tekst = document.createElement("p");
+    tekst.textContent = "Ćwiczenie jednostronne: liczba powtórzeń (albo czas) w serii dotyczy jednej strony. Zrób całą serię na jedną nogę lub rękę, potem tyle samo na drugą. Np. „3 × 10 na stronę” to 10 powtórzeń na lewą i 10 na prawą w każdej z 3 serii (razem 60).";
+    blok.appendChild(etykieta);
+    blok.appendChild(tekst);
+    opisTresc.appendChild(blok);
+  }
   if (!opisTresc.firstChild) {
     const brak = document.createElement("p");
     brak.className = "opis";

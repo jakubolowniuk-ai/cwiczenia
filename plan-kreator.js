@@ -428,7 +428,7 @@ function pkRysujPodsumowanie(tresc) {
       karta.appendChild(pkEl("b", "", etykieta + ": " + t.nazwa));
       t.wpisy.forEach(function (w) {
         const il = pgIlosc(w);
-        karta.appendChild(pkEl("div", "pk-cw", w.cw.nazwa + " · " + opisIlosci(il)));
+        karta.appendChild(pkEl("div", "pk-cw", w.cw.nazwa + " · " + opisIlosci(il, w.cw)));
       });
     } else {
       karta.appendChild(pkEl("b", "", etykieta + ": " + nazwaKategorii(s.kardio)));
