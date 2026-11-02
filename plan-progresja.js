@@ -130,7 +130,12 @@ function prPropozycja(plan, sesja, id) {
   }
   const lo = cur.zakres[0];
   const hi = cur.zakres[1];
-  const reps = listaPowtorzen(zrobiona);
+  let reps = listaPowtorzen(zrobiona);
+  // Plan z opadającymi seriami (np. 8 / 8 / 6 / 6): ostatnie serie liczymy względem ich własnego celu
+  if (cur.wzor === "opadajace") {
+    const cel = powtorzeniaSerii(cur);
+    reps = reps.map(function (r, i) { return r + (cur.powtorzenia - (i < cel.length ? cel[i] : cur.powtorzenia)); });
+  }
   const serie = planowana.serie || reps.length;
   const maxPowt = Math.max.apply(null, reps);
   const minPowt = Math.min.apply(null, reps);

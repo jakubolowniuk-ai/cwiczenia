@@ -924,6 +924,10 @@ function pgIlosc(w) {
   const ilosc = { typ: "powtorzenia", serie: w.serie, powtorzenia: start, zakres: [w.od, w.do] };
   if (w.kg > 0) {
     ilosc.ciezary = new Array(w.serie).fill(w.kg);
+    // Ćwiczenia z ciężarem: ostatnie serie z mniejszą liczbą powtórzeń (np. 8 / 8 / 6 / 6)
+    if (w.serie >= 3 && w.do - w.od >= 2) {
+      ilosc.wzor = "opadajace";
+    }
   }
   return ilosc;
 }

@@ -550,11 +550,7 @@ function listaPowtorzen(ilosc) {
   if (ilosc.typ === "serie-lista") {
     return ilosc.powtorzenia;
   }
-  const lista = [];
-  for (let i = 0; i < ilosc.serie; i++) {
-    lista.push(ilosc.powtorzenia);
-  }
-  return lista;
+  return powtorzeniaSerii(ilosc);
 }
 
 // Czy ilość to serie z powtórzeniami (zwykłe albo różne w seriach)
@@ -598,7 +594,7 @@ function miaraIlosci(ilosc) {
     }, 0);
   }
   if (ilosc.typ === "powtorzenia") {
-    return ilosc.serie * ilosc.powtorzenia;
+    return powtorzeniaSerii(ilosc).reduce(function (suma, p) { return suma + p; }, 0);
   }
   if (ilosc.typ === "czas") {
     return sekundyZ(ilosc.wartosc, ilosc.jednostka);
@@ -804,7 +800,7 @@ function otworzWartosc(sesja, id) {
   wartZCiezarem = !!znajdzCwiczenie(id).zCiezarem && liczbaSerii(plan) > 0;
   const ciezaryStart = ciezaryIlosci(start).length > 0 ? ciezaryIlosci(start) : ciezaryIlosci(plan);
   const rozneCiezary = ciezaryStart.some(function (c) { return c !== ciezaryStart[0]; });
-  wartTryb = plan.typ === "serie-lista" || start.typ === "serie-lista" || (wartZCiezarem && rozneCiezary) ? "lista" : "jednolite";
+  wartTryb = plan.typ === "serie-lista" || start.typ === "serie-lista" || (czyPowtorzenia(start) && listaPowtorzen(start).some(function (x, i, l) { return x !== l[0]; })) || (wartZCiezarem && rozneCiezary) ? "lista" : "jednolite";
   if (czyPowtorzenia(plan)) {
     wartStart = start;
     narysujPolaPowtorzen(listaPowtorzen(start), ciezaryStart);

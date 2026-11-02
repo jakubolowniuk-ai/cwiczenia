@@ -345,3 +345,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Ćwiczenia jednostronne (jednonóż, jednorącz, łucznicze, kozackie, bułgarski, Pistol, Side Plank itd.) pokazują „na stronę” przy ilości (np. „3 × 10 na stronę”), w oknie wartości, w karcie kreatora i w opisie ćwiczenia jest wyjaśnienie, jak liczyć serie.
 - 24 ćwiczenia zdegradowane z poziomu 5 do 4 mają opis „Ćwiczenie zaawansowane –” zamiast „elitarne” (WERSJA_BAZY = 15 odświeża opisy z bazy).
 - Kreator: ćwiczenie z różnymi powtórzeniami w seriach zachowuje liczbę serii i pierwsze powtórzenia po przełączeniu na „Serie i powtórzenia”.
+
+## v75 – różne powtórzenia w seriach w generatorze
+
+- Ćwiczenia z ciężarem (min. 3 serie, zakres powtórzeń min. 3 szerokości) dostają wzór „opadający”: druga połowa serii ma o 2 powtórzenia mniej (nie poniżej dolnej granicy zakresu), np. 4 × 8 → 8 / 8 / 6 / 6 przy tym samym ciężarze.
+- Wzór (`wzor: "opadajace"`) jest zapisany w ilości sesji; okno wartości w Dziś otwiera się od razu w trybie serii osobno, plan pokazuje „8 / 8 / 6 / 6 powt.”, a porównanie z planem liczy sumę z wzoru.
+- Progresja liczy ostatnie serie względem ich własnego celu, więc wykonanie 8 / 8 / 6 / 6 nadal liczy się jako pełne wykonanie planu.

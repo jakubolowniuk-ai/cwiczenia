@@ -154,9 +154,31 @@ function opisIlosci(ilosc, cwiczenie) {
   return ciezar ? tekst + " · " + ciezar : tekst;
 }
 
+// Powtórzenia w kolejnych seriach zwykłej ilości. Wzór "opadajace" (ćwiczenia z ciężarem): druga połowa serii
+// ma o 2 powtórzenia mniej (nie poniżej dolnej granicy zakresu), np. 4 × 8 daje 8 / 8 / 6 / 6
+function powtorzeniaSerii(ilosc) {
+  const lista = [];
+  for (let i = 0; i < ilosc.serie; i++) {
+    lista.push(ilosc.powtorzenia);
+  }
+  if (ilosc.wzor === "opadajace" && ilosc.serie >= 3) {
+    const dol = ilosc.zakres ? ilosc.zakres[0] : 1;
+    for (let i = ilosc.serie - Math.floor(ilosc.serie / 2); i < ilosc.serie; i++) {
+      lista[i] = Math.max(dol, ilosc.powtorzenia - 2);
+    }
+  }
+  return lista;
+}
+
 function opisIlosciBezCiezaru(ilosc) {
   if (!ilosc) {
     return "";
+  }
+  if (ilosc.typ === "powtorzenia" && ilosc.wzor === "opadajace") {
+    const l = powtorzeniaSerii(ilosc);
+    if (l.some(function (x) { return x !== l[0]; })) {
+      return l.join(" / ") + " powt.";
+    }
   }
   if (ilosc.typ === "powtorzenia") {
     if (ilosc.zakres && ilosc.zakres[0] !== ilosc.zakres[1]) {
