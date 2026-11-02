@@ -464,6 +464,10 @@ function pgDrabinka(kod, p, kandydaci) {
   } else if (klucz === "core3" && !zDraz) {
     r = Math.min(r, 3);
   }
+  // Cel „siła”: o szczebel trudniejszy wariant w pchaniu, ciąganiu i przysiadach (mniej powtórzeń, większy opór)
+  if (p.cel === "sila" && dosw >= 1 && (/^squat/.test(klucz) || (/^(push|dip)/.test(klucz) && p.maxPompek != null) || (/^pull/.test(klucz) && p.maxPodciagniec != null))) {
+    r = r + 1;
+  }
   const lad = PG_KAL_LAD[klucz];
   if (!lad) {
     return jedna(null);
@@ -754,30 +758,70 @@ function pgParametryCelu(slot, indeks, p) {
     }
   }
   if (p.sprzet === "c") {
-    // Masa ciała: serie i zakresy zależą od doświadczenia (zaawansowani robią trudniejsze warianty, więc mniej powtórzeń)
+    // Masa ciała: serie i zakresy zależą od celu i doświadczenia (zaawansowani robią trudniejsze warianty, więc mniej powtórzeń)
     const poz = p.dosw || 0;
     const rdz = !!slot.r;
-    if (p.cel !== "zdrowie") {
+    if (p.cel === "zdrowie") {
+      od = 10;
+      do_ = 15;
+      przerwa = 60;
+    } else if (rdz) {
+      serie = 3;
+      od = 10;
+      do_ = 15;
+      przerwa = 60;
+    } else if (p.cel === "sila") {
+      // Siła: trudniejszy wariant, mało powtórzeń, długie przerwy
+      if (glowne) {
+        serie = [3, 4, 4, 5][poz];
+        od = [5, 5, 4, 3][poz];
+        do_ = [8, 8, 6, 5][poz];
+        przerwa = [120, 150, 180, 180][poz];
+      } else {
+        serie = Math.min(slot.serie, 2) + (poz >= 2 ? 1 : 0);
+        od = [8, 8, 6, 6][poz];
+        do_ = [12, 10, 10, 8][poz];
+        przerwa = 90;
+      }
+    } else if (p.cel === "rzezba") {
+      // Rzeźba: więcej powtórzeń, krótsze przerwy (więcej pracy w krótszym czasie)
+      if (glowne) {
+        serie = 3;
+        od = [10, 10, 8, 8][poz];
+        do_ = [15, 15, 12, 12][poz];
+        przerwa = 60;
+      } else {
+        serie = Math.min(slot.serie, 2) + (poz >= 2 ? 1 : 0);
+        od = [12, 12, 10, 10][poz];
+        do_ = [20, 20, 15, 15][poz];
+        przerwa = 45;
+      }
+    } else if (p.cel === "masa") {
+      // Masa: więcej serii w głównych ćwiczeniach, zakres budujący mięśnie, przerwy pozwalające zrobić kolejną serię
+      if (glowne) {
+        serie = [3, 4, 4, 5][poz];
+        od = [8, 8, 6, 6][poz];
+        do_ = [12, 12, 10, 10][poz];
+        przerwa = [90, 90, 120, 120][poz];
+      } else {
+        serie = Math.min(slot.serie, 2) + (poz >= 1 ? 1 : 0);
+        od = [10, 10, 8, 8][poz];
+        do_ = [15, 15, 12, 12][poz];
+        przerwa = 75;
+      }
+    } else {
+      // Kalistenika ogólnie: siła i technika w równowadze
       if (glowne) {
         serie = [3, 3, 4, 4][poz];
         od = [8, 8, 6, 5][poz];
         do_ = [12, 12, 10, 8][poz];
         przerwa = 90;
-      } else if (rdz) {
-        serie = 3;
-        od = 10;
-        do_ = 15;
-        przerwa = 60;
       } else {
         serie = Math.min(slot.serie, 2) + (poz >= 2 ? 1 : 0);
         od = [10, 10, 8, 8][poz];
         do_ = [15, 15, 12, 12][poz];
         przerwa = 60;
       }
-    } else {
-      od = 10;
-      do_ = 15;
-      przerwa = 60;
     }
   }
   return { serie: serie, od: od, do: do_, przerwa: przerwa };

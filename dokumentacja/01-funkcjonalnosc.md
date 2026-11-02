@@ -351,3 +351,9 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Ćwiczenia z ciężarem (min. 3 serie, zakres powtórzeń min. 3 szerokości) dostają wzór „opadający”: druga połowa serii ma o 2 powtórzenia mniej (nie poniżej dolnej granicy zakresu), np. 4 × 8 → 8 / 8 / 6 / 6 przy tym samym ciężarze.
 - Wzór (`wzor: "opadajace"`) jest zapisany w ilości sesji; okno wartości w Dziś otwiera się od razu w trybie serii osobno, plan pokazuje „8 / 8 / 6 / 6 powt.”, a porównanie z planem liczy sumę z wzoru.
 - Progresja liczy ostatnie serie względem ich własnego celu, więc wykonanie 8 / 8 / 6 / 6 nadal liczy się jako pełne wykonanie planu.
+
+## v76 – generator: cel przy masie ciała
+
+- Błąd: przy sprzęcie „Masa ciała z drążkiem” cele masa, rzeźba, siła i kalistenika dawały identyczny plan (te same ćwiczenia, serie i zakresy) – parametry zależały tylko od doświadczenia.
+- Teraz: masa – więcej serii (3–5 w głównych), 6–12 powt., przerwy 90–120 s; siła – 3–5 serii po 3–8 powt., przerwy 2–3 min i o szczebel trudniejszy wariant (przysiady zawsze, pchanie/ciąganie tylko gdy podano maks. pompek/podciągnięć); rzeźba – 10–15 (dodatkowe 12–20) powt., przerwy 45–60 s; kalistenika – jak dotąd.
+- Sweep 6720 profili bez błędów; jedynie przy 30 min + ból barku/kolan niektóre treningi siły/masy mają 3 ćwiczenia (więcej serii mieści się w czasie).
