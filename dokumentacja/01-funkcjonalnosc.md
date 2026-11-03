@@ -413,3 +413,7 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Trwający bieg w `localStorage` („cwiczenia-bieg-trwa”) – po odświeżeniu lub zamknięciu karty ekran biegu wraca z poprawnym czasem.
 - Wake Lock w czasie biegu, odnawiany po powrocie do karty; przełącznik w Ustawieniach „Ekran nie gaśnie podczas biegu” (`dane.ustawienia.biegEkran`).
 - Stop zapisuje pomiar jako szkic (`sesja.wynikSzkic`: czas, pauzy, czas pauz, źródło „stoper”) i otwiera okno wyniku wypełnione pomiarem. Anuluj nie traci pomiaru: na karcie „Niezapisany bieg …”, „Zapisz wynik biegu” albo „Odrzuć pomiar”. Wynik zapisuje też `pauzy` i `czasPauzS` (do celów „bez zatrzymania”).
+
+## v83 – poprawka: Stop zatrzymuje czas od razu
+
+- Stop natychmiast zatrzymuje stoper (napis „Zatrzymano – zakończyć bieg?”). „Zakończ bieg” zapisuje czas z chwili naciśnięcia Stop; „Biegnę dalej” wznawia bez doliczania przerwy i bez liczenia jej jako pauzy. Stan potwierdzenia przeżywa odświeżenie strony.

@@ -126,16 +126,41 @@ function biegOtworzEkran() {
     biegZapiszStan();
     biegRysujCzas();
   });
+  // Stop od razu zatrzymuje czas; potwierdzenie decyduje, czy koniec, czy biegniemy dalej
   stop.addEventListener("click", function () {
+    const teraz = Date.now();
+    if (biegStan.stan === "trwa") {
+      biegStan = biegStoperPauza(biegStan, teraz);
+      biegStan.pauzaZeStopu = true;
+    }
+    biegStan.stopOd = teraz;
+    biegZapiszStan();
+    biegRysujCzas();
     dol.hidden = true;
     potw.hidden = false;
   });
   wroc.addEventListener("click", function () {
+    const teraz = Date.now();
+    if (biegStan.pauzaZeStopu) {
+      // To nie była pauza biegacza: nie liczymy jej jako zatrzymania
+      const przerwa = Math.max(0, teraz - biegStan.pauzaOd);
+      biegStan = biegStoperWznow(biegStan, teraz);
+      biegStan.pauzy = Math.max(0, biegStan.pauzy - 1);
+      biegStan.czasPauz = Math.max(0, biegStan.czasPauz - przerwa);
+    }
+    delete biegStan.pauzaZeStopu;
+    delete biegStan.stopOd;
+    biegZapiszStan();
+    biegRysujCzas();
     potw.hidden = true;
     dol.hidden = false;
   });
   zakoncz.addEventListener("click", biegStop);
 
+  if (biegStan.stopOd) {
+    dol.hidden = true;
+    potw.hidden = false;
+  }
   biegEkran._el = { czas: czas, cel: cel, stan: stanTekst, pauza: pauza, sesja: z.sesja };
   document.body.appendChild(biegEkran);
   biegZajmijEkran();
@@ -153,7 +178,7 @@ function biegRysujCzas() {
   const pauza = biegStan.stan === "pauza";
   el.pauza.textContent = pauza ? "Wznów" : "Pauza";
   el.pauza.classList.toggle("wznow", pauza);
-  el.stan.textContent = pauza ? "Pauza" : "";
+  el.stan.textContent = biegStan.stopOd ? "Zatrzymano – zakończyć bieg?" : pauza ? "Pauza" : "";
   biegEkran.classList.toggle("pauza", pauza);
   const celS = biegSekundy(el.sesja.czas);
   const celM = biegMetry(el.sesja.dystans);
@@ -188,7 +213,13 @@ function biegZamknijEkran() {
 // Stop: pomiar trafia do szkicu wyniku w sesji (nie ginie), potem okno wyniku
 function biegStop() {
   const z = biegZnajdz(biegStan);
-  const w = biegStoperWynik(biegStan, Date.now());
+  const koniec = biegStan.stopOd || Date.now();
+  if (biegStan.pauzaZeStopu) {
+    // Czas oczekiwania na potwierdzenie to nie pauza w biegu
+    biegStan.pauzy = Math.max(0, biegStan.pauzy - 1);
+    biegStan.pauzaOd = koniec;
+  }
+  const w = biegStoperWynik(biegStan, koniec);
   biegStan = null;
   biegZapiszStan();
   biegZamknijEkran();
