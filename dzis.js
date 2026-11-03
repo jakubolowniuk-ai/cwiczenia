@@ -165,11 +165,21 @@ function opisCeluSesji(dane_) {
   if (dane_.kroki) {
     czesci.push(opisKrokow(dane_.kroki));
   }
+  if (dane_.rodzajBiegu) {
+    czesci.push(biegRodzaj(dane_.rodzajBiegu).nazwa);
+  }
   if (dane_.dystans) {
     czesci.push(dane_.dystans.wartosc + " " + dane_.dystans.jednostka);
   }
   if (dane_.czas) {
     czesci.push(opisCzasuSesji(dane_.czas));
+  }
+  const tempo = biegTempo(dane_.dystans, dane_.czas);
+  if (tempo && (dane_.rodzajBiegu || dane_.zrodlo)) {
+    czesci.push(biegOpisTempa(tempo));
+  }
+  if (typeof dane_.wysilek === "number") {
+    czesci.push("wysiłek " + dane_.wysilek + "/10");
   }
   if (dane_.obciazenie) {
     czesci.push("z obciążeniem " + dane_.obciazenie + " kg");
@@ -1140,9 +1150,14 @@ function otworzWynik(plan, sesja) {
     dystans: start.dystans,
     kroki: start.kroki,
     obciazenie: start.obciazenie,
-    czas: start.czas
+    czas: start.czas,
+    wysilek: sesja.wynik ? sesja.wynik.wysilek : null,
+    zrodlo: sesja.wynik ? sesja.wynik.zrodlo : null
   };
-  const wpis = zrobKarteSesji(kopia, aktywnosc);
+  if (aktywnosc.rodzajId === "rodzaj-bieganie" && sesja.rodzajBiegu) {
+    wynikTytul.textContent += " · " + biegRodzaj(sesja.rodzajBiegu).nazwa.toLowerCase();
+  }
+  const wpis = zrobKarteSesji(kopia, aktywnosc, { wynik: true });
   wynikOdczyt = wpis.odczytaj;
   wynikPola.appendChild(wpis.karta);
   wynikTlo.hidden = false;

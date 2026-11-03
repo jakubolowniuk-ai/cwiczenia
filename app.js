@@ -1,3 +1,8 @@
+// Migracja danych biegania: dystans lub czas 0 = brak wartości
+if (typeof biegMigruj === "function" && biegMigruj(dane) > 0) {
+  zapiszDane();
+}
+
 // ===== Nawigacja między ekranami =====
 
 // Znajdujemy wszystkie zakładki i wszystkie ekrany

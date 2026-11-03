@@ -1307,7 +1307,7 @@ function pgBudujPlan(p) {
           czas = PG_MARSZOBIEG[tydz].min;
           notatka = PG_MARSZOBIEG[tydz].opis + ". Zacznij od 5 min szybkiego marszu. Tempo biegu ma być spokojne: takie, w którym możesz mówić.";
         }
-        wynik.sesje.push({ dzien: tydz * 7 + przes, kardio: "rodzaj-bieganie", czas: czas, notatka: notatka });
+        wynik.sesje.push({ dzien: tydz * 7 + przes, kardio: "rodzaj-bieganie", czas: czas, notatka: notatka, rodzajBiegu: ciagle ? (ostatni ? "dlugi" : "spokojny") : "marszobieg" });
       });
     }
   } else if (kardioIle > 0) {
@@ -1572,6 +1572,9 @@ function pgZapisz(wynik, opcje) {
       const sesja = nowaSesja(a, s.dzien);
       sesja.czas = { wartosc: s.czas, jednostka: "min" };
       sesja.notatka = s.notatka;
+      if (s.rodzajBiegu) {
+        sesja.rodzajBiegu = s.rodzajBiegu;
+      }
       sesje.push(sesja);
     }
   });

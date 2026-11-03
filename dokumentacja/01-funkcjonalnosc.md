@@ -393,3 +393,15 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Propozycje na dziś (`celPropozycja`): po zaliczonym kroku „Krok zaliczony: A → B” (zmiana ćwiczenia w przyszłych sesjach po „Przyjmij”); gdy dwa ostatnie treningi bieżącego kroku < 70% planu albo z oceną „Ciężko” – „krok niżej” (po przyjęciu cofa też „Tu jesteś”). Ćwiczenia celów nie przechodzą na zwykłą drabinkę wariantów.
 - Tydzień lżejszy i test: w 4. tygodniu bloku (dni 21–27) jedna seria mniej w ćwiczeniach poza celami (min. 2), `plan.tydzienTestu = 21`; w Dziś karta „Tydzień lżejszy i test” z przyciskiem „Zrób test” (po teście: „Test zrobiony ✓”). Nie dotyczy biegania i zdrowia.
 - Postęp: karta „Moje cele” – ścieżki (krok N z M, ćwiczenie, data, pasek; dotknięcie otwiera ścieżkę) i liczby (teraz z celu, pasek).
+
+## v81 – Bieganie, wersja 1: dane, rodzaj biegu, tempo, wysiłek
+
+Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
+- Nowy plik `bieg-logika.js` (bez interfejsu, do przeniesienia do wersji natywnej): rodzaje biegu, `biegMetry`, `biegSekundy`, `biegTempo`, `biegOpisTempa`, `biegMigruj`.
+- Format (zgodny z istniejącym): `sesja.rodzajBiegu` (spokojny / tempowy / interwaly / dlugi / marszobieg), `sesja.dystans` i `sesja.czas` = obiekt albo `null` (brak, nie 0); `sesja.wynik` dodatkowo `wysilek` (1–10 albo `null`) i `zrodlo` („reczny”; później „stoper”, „gps”). Tempo nie jest zapisywane.
+- Migracja przy starcie (`app.js`): dystans/czas z wartością 0 w sesjach i wynikach → `null`.
+- Edycja sesji biegowej: rodzaj biegu jednym dotknięciem z opisem; dystans opcjonalny (puste pole „brak”), czas puste zamiast 0, obciążenie puste = bez.
+- Okno wyniku: tytuł z rodzajem biegu, tempo liczone na żywo, wysiłek 1–10 (opcjonalny, ponowne dotknięcie usuwa); zapis bez dystansu bez „0 km”.
+- Opisy sesji i wyników: rodzaj, dystans, czas, tempo (gdy są dystans i czas), wysiłek.
+- Kopiowanie do innych sesji przenosi też rodzaj biegu i obciążenie; każdą sesję można potem zmienić osobno.
+- Generator biegowy ustawia rodzaj: marsz-bieg, spokojny, długi (ostatni bieg tygodnia).

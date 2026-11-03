@@ -2060,3 +2060,13 @@ h1 {
 .cele-wiersz { display: flex; flex-direction: column; gap: 4px; }
 .cele-wiersz.klikalny { cursor: pointer; }
 .cele-tytul { font-weight: 700; color: var(--tekst); }
+
+/* ===== Bieganie ===== */
+.bieg-rodzaje { display: flex; flex-direction: column; gap: 6px; }
+.bieg-rodzaje .chipy { display: flex; flex-wrap: wrap; gap: 8px; }
+.bieg-rodzaj-opis { margin: 0; }
+.bieg-tempo { margin: 4px 0; font-weight: 600; color: var(--akcent); }
+.bieg-wysilek { display: flex; flex-direction: column; gap: 6px; margin-top: 8px; }
+.bieg-wysilek-rzad { display: grid; grid-template-columns: repeat(10, 1fr); gap: 4px; }
+.bieg-wysilek-p { min-height: 40px; padding: 0; font: inherit; font-weight: 700; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 8px; }
+.bieg-wysilek-p.aktywny { background: var(--akcent); color: var(--tlo); border-color: var(--akcent); }
