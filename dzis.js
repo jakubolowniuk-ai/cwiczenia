@@ -168,6 +168,12 @@ function opisCeluSesji(dane_) {
   if (dane_.rodzajBiegu) {
     czesci.push(biegRodzaj(dane_.rodzajBiegu).nazwa);
   }
+  if (dane_.odcinki && dane_.odcinki.length) {
+    czesci.push(biegOpisOdcinkow(dane_.odcinki));
+  }
+  if (dane_.odcinkiWyniki && dane_.odcinkiWyniki.length) {
+    czesci.push(dane_.odcinkiWyniki.length + " odcinków");
+  }
   if (dane_.dystans) {
     czesci.push(dane_.dystans.wartosc + " " + dane_.dystans.jednostka);
   }
@@ -1163,6 +1169,10 @@ function otworzWynik(plan, sesja) {
   wynikTytul.textContent = "Wynik: " + opisAktywnosci(aktywnosc).tytul;
   wynikBlad.textContent = "";
   wynikPola.innerHTML = "";
+  const podpis = document.getElementById("wynik-podpis");
+  if (podpis) {
+    podpis.textContent = sesja.wynikSzkic ? "Pola są wypełnione pomiarem ze stopera. Popraw je, jeśli trzeba (np. dopisz dystans z bieżni)." : sesja.wynik ? "Popraw wynik, jeśli trzeba." : "Pola są wypełnione celem z planu. Popraw je, jeśli wynik był inny.";
+  }
 
   // Pola są wstępnie wypełnione pomiarem (stoper), wynikiem (jeśli już był) albo celem z planu
   const start = sesja.wynikSzkic || sesja.wynik || sesja;
@@ -1178,8 +1188,17 @@ function otworzWynik(plan, sesja) {
     wysilek: sesja.wynik ? sesja.wynik.wysilek : null,
     zrodlo: sesja.wynikSzkic ? sesja.wynikSzkic.zrodlo : sesja.wynik ? sesja.wynik.zrodlo : null
   };
+  if (!sesja.wynikSzkic && !sesja.wynik && sesja.odcinki && sesja.odcinki.length) {
+    // Wynik ręczny sesji z odcinkami: podpowiadamy sumę odcinków
+    const suma = biegSumaOdcinkow(sesja.odcinki);
+    kopia.czas = suma.czasS ? { wartosc: suma.czasS, jednostka: "s" } : null;
+    kopia.dystans = suma.dystansM ? { wartosc: suma.dystansM / 1000, jednostka: "km" } : null;
+  }
   if (sesja.wynikSzkic) {
     kopia.dystans = sesja.wynikSzkic.dystans;
+    kopia.odcinkiWyniki = sesja.wynikSzkic.odcinkiWyniki;
+  } else if (sesja.wynik && sesja.wynik.odcinkiWyniki) {
+    kopia.odcinkiWyniki = sesja.wynik.odcinkiWyniki;
   }
   if (aktywnosc.rodzajId === "rodzaj-bieganie" && sesja.rodzajBiegu) {
     wynikTytul.textContent += " · " + biegRodzaj(sesja.rodzajBiegu).nazwa.toLowerCase();

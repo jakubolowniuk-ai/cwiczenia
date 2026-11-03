@@ -1182,10 +1182,10 @@ function pgIlosc(w) {
 // ===== Bieganie =====
 
 const PG_MARSZOBIEG = [
-  { opis: "8 × (1 min biegu + 2 min marszu)", min: 24 },
-  { opis: "6 × (2 min biegu + 2 min marszu)", min: 24 },
-  { opis: "5 × (3 min biegu + 2 min marszu)", min: 25 },
-  { opis: "4 × (5 min biegu + 2 min marszu)", min: 28 }
+  { opis: "8 × (1 min biegu + 2 min marszu)", min: 24, ile: 8, bieg: 1 },
+  { opis: "6 × (2 min biegu + 2 min marszu)", min: 24, ile: 6, bieg: 2 },
+  { opis: "5 × (3 min biegu + 2 min marszu)", min: 25, ile: 5, bieg: 3 },
+  { opis: "4 × (5 min biegu + 2 min marszu)", min: 28, ile: 4, bieg: 5 }
 ];
 const PG_BIEG_LATWY = [20, 25, 30, 30];
 const PG_BIEG_DLUGI = [25, 30, 35, 40];
@@ -1300,14 +1300,21 @@ function pgBudujPlan(p) {
         const ostatni = i === dniBiegu.length - 1 && dniBiegu.length > 1;
         let czas;
         let notatka;
+        let odcinki = null;
         if (ciagle) {
           czas = ostatni ? PG_BIEG_DLUGI[tydz] : PG_BIEG_LATWY[tydz];
           notatka = ostatni ? "Dłuższy, spokojny bieg. Tempo rozmowy: powinieneś móc mówić pełnymi zdaniami." : "Spokojny bieg w tempie rozmowy.";
         } else {
           czas = PG_MARSZOBIEG[tydz].min;
-          notatka = PG_MARSZOBIEG[tydz].opis + ". Zacznij od 5 min szybkiego marszu. Tempo biegu ma być spokojne: takie, w którym możesz mówić.";
+          notatka = "Tempo biegu ma być spokojne: takie, w którym możesz mówić. Stoper sam poprowadzi Cię przez odcinki.";
+          const mb = PG_MARSZOBIEG[tydz];
+          odcinki = [
+            { rodzaj: "marsz", czasS: 300 },
+            { powtorz: mb.ile, odcinki: [{ rodzaj: "bieg", czasS: mb.bieg * 60 }, { rodzaj: "marsz", czasS: 120 }] },
+            { rodzaj: "marsz", czasS: 300 }
+          ];
         }
-        wynik.sesje.push({ dzien: tydz * 7 + przes, kardio: "rodzaj-bieganie", czas: czas, notatka: notatka, rodzajBiegu: ciagle ? (ostatni ? "dlugi" : "spokojny") : "marszobieg" });
+        wynik.sesje.push({ dzien: tydz * 7 + przes, kardio: "rodzaj-bieganie", czas: czas, notatka: notatka, rodzajBiegu: ciagle ? (ostatni ? "dlugi" : "spokojny") : "marszobieg", odcinki: odcinki });
       });
     }
   } else if (kardioIle > 0) {
@@ -1574,6 +1581,10 @@ function pgZapisz(wynik, opcje) {
       sesja.notatka = s.notatka;
       if (s.rodzajBiegu) {
         sesja.rodzajBiegu = s.rodzajBiegu;
+      }
+      if (s.odcinki) {
+        sesja.odcinki = JSON.parse(JSON.stringify(s.odcinki));
+        sesja.czas = null;
       }
       sesje.push(sesja);
     }

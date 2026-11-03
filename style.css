@@ -2089,3 +2089,40 @@ h1 {
 .bieg-pauza.wznow { background: var(--akcent); color: var(--tlo); }
 .bieg-stop { background: #D32F2F; color: #fff; }
 .bieg-start { margin-bottom: 8px; }
+
+/* Odcinki */
+.odc-edytor { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.odc-wiersz { display: flex; flex-direction: column; gap: 4px; padding: 8px; border: 1px solid var(--linia); border-radius: 10px; background: var(--tlo); }
+.odc-gora { display: flex; align-items: center; gap: 6px; flex-wrap: wrap; }
+.odc-gora select, .odc-gora input { min-height: 40px; font: inherit; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 8px; padding: 4px 6px; }
+.odc-gora input[type="number"] { width: 64px; }
+.odc-gora select { max-width: 130px; }
+.odc-tempo { min-height: 36px; font: inherit; font-size: 14px; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 8px; padding: 4px 8px; }
+.odc-maly { min-width: 36px; min-height: 36px; font: inherit; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 8px; }
+.odc-grupa { display: flex; flex-direction: column; gap: 6px; padding: 8px; border: 2px solid var(--akcent); border-radius: 12px; }
+.odc-ile { width: 56px !important; }
+.odc-akcje { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
+.odc-akcje select { min-height: 40px; font: inherit; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 8px; }
+.odc-wyniki { display: flex; flex-direction: column; gap: 4px; max-height: 40vh; overflow-y: auto; }
+.odc-wynik-wiersz { display: flex; justify-content: space-between; align-items: center; gap: 8px; }
+.odc-wynik-wiersz input { width: 88px; min-height: 36px; font: inherit; text-align: right; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 8px; padding: 4px 8px; }
+.bieg-odc { display: flex; flex-direction: column; align-items: center; gap: 4px; width: 100%; max-width: 420px; padding: 12px; border-radius: 16px; background: var(--karta); border: 2px solid var(--akcent); text-align: center; }
+.bieg-odc[hidden] { display: none; }
+.bieg-odc-nazwa { font-size: 18px; font-weight: 700; }
+.bieg-odc-czas { font-size: 48px; font-weight: 800; font-variant-numeric: tabular-nums; color: var(--akcent); }
+.bieg-odc-nast { font-size: 15px; color: var(--tekst-szary); }
+.bieg-ekran.z-odcinkami .bieg-ekran-czas { margin-top: 1vh; font-size: clamp(56px, 18vw, 110px); }
+.odc-edytor .odc-gora { flex-wrap: nowrap; }
+.odc-edytor .odc-gora select, .odc-edytor .odc-gora input { width: auto; min-width: 0; margin: 0; }
+.odc-edytor .odc-gora select:first-child { flex: 1 1 auto; max-width: none; }
+.odc-edytor .odc-gora input[type="number"] { flex: 0 0 64px; width: 64px; }
+.odc-edytor .odc-gora select + input + select { flex: 0 0 58px; width: 58px; }
+.odc-edytor .odc-maly { flex: 0 0 34px; min-width: 34px; padding: 0; }
+.odc-edytor .odc-grupa .odc-gora:first-child input { flex: 0 0 56px; width: 56px; }
+.odc-edytor .odc-tempo { width: 100%; margin: 0; }
+.odc-edytor .odc-gora { display: grid; grid-template-columns: 1fr 72px 72px; gap: 6px; }
+.odc-edytor .odc-grupa > .odc-gora:first-child { display: flex; }
+.odc-edytor .odc-gora select, .odc-edytor .odc-gora input[type="number"] { width: 100%; flex: none; max-width: none; padding: 4px 6px; }
+.odc-dol { display: flex; gap: 6px; align-items: center; }
+.odc-dol .odc-tempo { flex: 1 1 auto; min-width: 0; width: auto; }
+.odc-edytor .odc-gora { grid-template-columns: 1fr 64px 88px; }

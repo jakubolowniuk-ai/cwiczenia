@@ -417,3 +417,12 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 ## v83 – poprawka: Stop zatrzymuje czas od razu
 
 - Stop natychmiast zatrzymuje stoper (napis „Zatrzymano – zakończyć bieg?”). „Zakończ bieg” zapisuje czas z chwili naciśnięcia Stop; „Biegnę dalej” wznawia bez doliczania przerwy i bez liczenia jej jako pauzy. Stan potwierdzenia przeżywa odświeżenie strony.
+
+## v84 – Bieganie, wersja 3: odcinki i interwały
+
+- `bieg-logika.js`: `sesja.odcinki` – lista odcinków `{ rodzaj, czasS | dystansM, tempoS? }` i grup `{ powtorz, odcinki }` (grupa to jeden element); rodzaje: rozgrzewka, bieg, szybko, wolno, marsz, schłodzenie. Funkcje: opis, płaska lista, suma, przesuwanie odcinka w stoperze (z czasu, nie z tyknięć), ręczne zakończenie odcinka; szablony: marsz-bieg 8 × (1 + 2), interwały 6 × (1 + 1), 6 × 400 m, tempowy 10-20-10.
+- Edycja sesji biegowej: „Odcinki (opcjonalnie)” – + Dodaj odcinek, + Powtórzenie (Powtórz N razy z odcinkami w środku), ↑ ↓ ✕, tempo docelowe (opcjonalne, „5:30”), gotowy szablon (ustawia też rodzaj biegu), „Łącznie: ≈ X min + Y km”. Gdy są odcinki, pola dystansu i czasu się chowają (sesja bez odcinków wygląda jak przedtem).
+- Ekran biegu: ramka bieżącego odcinka – „Odcinek 2 z 18: Bieg 1 min”, odliczanie do końca, „Następnie: …”, „jeszcze 7 powtórzeń”; zmiana odcinka = sygnał (dźwięk + wibracja), koniec ostatniego = 3 sygnały; odcinki na dystans kończy przycisk „Odcinek zrobiony →” (do czasu GPS). Stan odcinka przeżywa odświeżenie.
+- Wynik: zmierzone odcinki (z planem i oznaczeniem przerwanego) w oknie wyniku do poprawy (min:s); zapis w `wynik.odcinkiWyniki`. Wynik ręczny sesji z odcinkami podpowiada ich sumę. Podpis okna mówi, skąd są wartości (stoper / plan / wynik).
+- Generator: marsz-bieg ma odcinki (5 min marszu, N × (bieg + 2 min marszu), 5 min marszu), więc stoper prowadzi przez nie sam.
+- Kopiowanie do innych sesji przenosi odcinki.

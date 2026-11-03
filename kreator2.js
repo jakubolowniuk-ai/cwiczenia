@@ -145,7 +145,7 @@ function celUstawiony(sesja, aktywnosc) {
     return false;
   }
   if (pola.indexOf("styl") === -1 && (pola.indexOf("dystans") !== -1 || pola.indexOf("czas") !== -1 || pola.indexOf("kroki") !== -1)) {
-    if (!sesja.dystans && !sesja.czas && !sesja.kroki) {
+    if (!sesja.dystans && !sesja.czas && !sesja.kroki && !(sesja.odcinki && sesja.odcinki.length)) {
       return false;
     }
   }
@@ -215,6 +215,9 @@ function opisSesji(sesja) {
   }
   if (sesja.rodzajBiegu && aktywnosc.rodzajId === "rodzaj-bieganie") {
     czesci.push(biegRodzaj(sesja.rodzajBiegu).nazwa);
+  }
+  if (sesja.odcinki && sesja.odcinki.length) {
+    czesci.push(biegOpisOdcinkow(sesja.odcinki));
   }
   if (sesja.dystans) {
     czesci.push(sesja.dystans.wartosc + " " + sesja.dystans.jednostka);
@@ -1011,6 +1014,7 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
 
   // Bieganie (plan): rodzaj biegu jednym dotknięciem
   let rodzajBiegu = sesja.rodzajBiegu || "spokojny";
+  let ustawRodzajBiegu = null;
   if (bieg && !opcje.wynik) {
     const blokR = document.createElement("div");
     blokR.className = "bieg-rodzaje";
@@ -1035,8 +1039,20 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
     blokR.appendChild(chipy);
     blokR.appendChild(opisR);
     karta.appendChild(blokR);
+    ustawRodzajBiegu = function (id) {
+      const r = biegRodzaj(id);
+      rodzajBiegu = r.id;
+      chipy.querySelectorAll(".chip").forEach(function (x) {
+        const ten = x.textContent === r.nazwa;
+        x.classList.toggle("aktywny", ten);
+        x.setAttribute("aria-pressed", ten ? "true" : "false");
+      });
+      opisR.textContent = r.opis;
+    };
   }
 
+  let rzadDystansu = null;
+  let rzadCzasu = null;
   let kroki = null;
   let dystans = null;
   let dystansJedn = null;
@@ -1128,6 +1144,7 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
     rzad.appendChild(dystans.blok);
     rzad.appendChild(dystansJedn.blok);
     karta.appendChild(rzad);
+    rzadDystansu = rzad;
   }
 
   if (pola.indexOf("czas") !== -1) {
@@ -1141,6 +1158,7 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
     rzad.appendChild(czas.blok);
     rzad.appendChild(czasSek.blok);
     karta.appendChild(rzad);
+    rzadCzasu = rzad;
   }
 
   // Opcjonalne obciążenie (plecak, kamizelka) dla biegania i spaceru
@@ -1164,8 +1182,59 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
       el.addEventListener("input", odswiezTempo);
       el.addEventListener("change", odswiezTempo);
     });
-    karta.insertBefore(tempoInfo, obciazenie ? obciazenie.blok : blad);
+    if (obciazenie) {
+      karta.insertBefore(tempoInfo, obciazenie.blok);
+    } else {
+      karta.appendChild(tempoInfo);
+    }
     setTimeout(odswiezTempo, 0);
+  }
+
+  // Bieganie (plan): odcinki i powtórzenia (gdy są, czas i dystans liczą się z nich)
+  let edytorOdcinkow = null;
+  if (bieg && !opcje.wynik) {
+    edytorOdcinkow = biegEdytorOdcinkow(sesja.odcinki, function (lista) {
+      const sa = lista.length > 0;
+      if (rzadDystansu) { rzadDystansu.hidden = sa; }
+      if (rzadCzasu) { rzadCzasu.hidden = sa; }
+      if (tempoInfo) { tempoInfo.hidden = sa; }
+    }, function (szablon) {
+      if (ustawRodzajBiegu) {
+        ustawRodzajBiegu(szablon.rodzajBiegu);
+      }
+    });
+    karta.appendChild(edytorOdcinkow.blok);
+    const sa = edytorOdcinkow.odczytaj().length > 0 || (sesja.odcinki && sesja.odcinki.length > 0);
+    if (rzadDystansu) { rzadDystansu.hidden = sa; }
+    if (rzadCzasu) { rzadCzasu.hidden = sa; }
+    if (tempoInfo) { tempoInfo.hidden = sa; }
+  }
+
+  // Bieganie (wynik): lista zmierzonych odcinków do poprawy
+  let polaWynikowOdcinkow = null;
+  if (bieg && opcje.wynik && Array.isArray(sesja.odcinkiWyniki) && sesja.odcinkiWyniki.length) {
+    const blokO = document.createElement("div");
+    blokO.className = "odc-wyniki";
+    blokO.appendChild(tekstElement("label", "", "Odcinki (możesz poprawić czasy)"));
+    polaWynikowOdcinkow = [];
+    sesja.odcinkiWyniki.forEach(function (o) {
+      const w = document.createElement("div");
+      w.className = "odc-wynik-wiersz";
+      w.appendChild(tekstElement("span", "", (o.powt ? o.powt + "/" + o.zPowt + " " : "") + biegNazwaOdcinka(o.rodzaj) + (o.dystansM ? " " + biegOpisWartosci({ dystansM: o.dystansM }) : o.planS ? " (plan " + biegOpisWartosci({ czasS: o.planS }) + ")" : "") + (o.przerwany ? " – przerwany" : "")));
+      const p = document.createElement("input");
+      p.type = "text";
+      p.inputMode = "decimal";
+      p.value = biegFormatCzasu(o.czasS || 0);
+      p.setAttribute("aria-label", "Czas odcinka (min:s)");
+      w.appendChild(p);
+      polaWynikowOdcinkow.push({ o: o, pole: p });
+      blokO.appendChild(w);
+    });
+    if (tempoInfo) {
+      karta.insertBefore(blokO, tempoInfo);
+    } else {
+      karta.appendChild(blokO);
+    }
   }
 
   // Bieganie (wynik): odczuwany wysiłek 1–10, opcjonalny
@@ -1239,7 +1308,8 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
         const dyst = dystans ? Number(dystans.pole.value) : 0;
         const cz = czas ? odczytajCzasS() : 0;
         const kr = kroki ? Number(kroki.pole.value) : 0;
-        if (!(dyst >= 0) || !(cz >= 0) || !(kr >= 0) || (kr > 0 && Math.floor(kr) !== kr) || (!(dyst > 0) && !(cz > 0) && !(kr > 0))) {
+        const zOdcinkami = edytorOdcinkow && edytorOdcinkow.odczytaj().length > 0;
+        if (!(dyst >= 0) || !(cz >= 0) || !(kr >= 0) || (kr > 0 && Math.floor(kr) !== kr) || (!(dyst > 0) && !(cz > 0) && !(kr > 0) && !zOdcinkami)) {
           blad.textContent = kroki ? "Wpisz kroki (liczba całkowita), dystans lub czas, większe od zera." : "Wpisz dystans lub czas (albo oba), większe od zera.";
           return null;
         }
@@ -1249,6 +1319,22 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
       }
       if (bieg && !opcje.wynik) {
         wynik.rodzajBiegu = rodzajBiegu;
+        const odc = edytorOdcinkow ? edytorOdcinkow.odczytaj() : [];
+        wynik.odcinki = odc.length ? odc : null;
+        if (odc.length) {
+          wynik.dystans = null;
+          wynik.czas = null;
+        }
+      }
+      if (polaWynikowOdcinkow) {
+        wynik.odcinkiWyniki = polaWynikowOdcinkow.map(function (x) {
+          const m = /^\s*(?:(\d+):)?(\d+):(\d{1,2})\s*$|^\s*(\d+)\s*$/.exec(x.pole.value);
+          let s = x.o.czasS || 0;
+          if (m) {
+            s = m[4] !== undefined ? Number(m[4]) : (Number(m[1] || 0) * 3600 + Number(m[2]) * 60 + Number(m[3]));
+          }
+          return Object.assign({}, x.o, { czasS: s });
+        });
       }
       if (bieg && opcje.wynik) {
         wynik.wysilek = wysilek;
@@ -1480,7 +1566,7 @@ function kopiujDoInnych() {
       s.blokPoId = pdSesja.blokPoId || null;
       s.parametry = JSON.parse(JSON.stringify(pdSesja.parametry));
     } else {
-      ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "kroki", "czas", "rodzajBiegu", "obciazenie"].forEach(function (klucz) {
+      ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "kroki", "czas", "rodzajBiegu", "obciazenie", "odcinki"].forEach(function (klucz) {
         s[klucz] = pdSesja[klucz] ? JSON.parse(JSON.stringify(pdSesja[klucz])) : null;
       });
     }

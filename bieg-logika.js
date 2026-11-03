@@ -136,3 +136,134 @@ function biegFormatCzasu(sek) {
   const s = sek % 60;
   return (h > 0 ? h + ":" + String(m).padStart(2, "0") : String(m)) + ":" + String(s).padStart(2, "0");
 }
+
+// ===== Odcinki =====
+// sesja.odcinki = lista elementów: odcinek { rodzaj, czasS?, dystansM?, tempoS? (s/km, opcjonalnie) }
+// albo grupa { powtorz: N, odcinki: [odcinki] } – grupa to jeden element listy.
+
+const RODZAJE_ODCINKA = [
+  { id: "rozgrzewka", nazwa: "Rozgrzewka" },
+  { id: "bieg", nazwa: "Bieg" },
+  { id: "szybko", nazwa: "Szybko" },
+  { id: "wolno", nazwa: "Wolno" },
+  { id: "marsz", nazwa: "Marsz" },
+  { id: "schlodzenie", nazwa: "Schłodzenie" }
+];
+
+function biegNazwaOdcinka(id) {
+  const r = RODZAJE_ODCINKA.find(function (x) { return x.id === id; });
+  return r ? r.nazwa : "Odcinek";
+}
+
+// "1 min", "90 s", "400 m", "1,5 km"
+function biegOpisWartosci(o) {
+  if (o.czasS) {
+    return o.czasS % 60 === 0 ? o.czasS / 60 + " min" : o.czasS > 60 ? biegFormatCzasu(o.czasS) + " min" : o.czasS + " s";
+  }
+  if (o.dystansM) {
+    return o.dystansM >= 1000 ? String(Math.round(o.dystansM / 10) / 100).replace(".", ",") + " km" : o.dystansM + " m";
+  }
+  return "";
+}
+
+function biegOpisOdcinka(o) {
+  return biegNazwaOdcinka(o.rodzaj) + " " + biegOpisWartosci(o) + (o.tempoS ? " (" + biegOpisTempa(o.tempoS) + ")" : "");
+}
+
+// Krótki opis listy: "Rozgrzewka 5 min, 8 × (Bieg 1 min + Marsz 2 min), Schłodzenie 5 min"
+function biegOpisOdcinkow(odcinki) {
+  return (odcinki || []).map(function (e) {
+    if (e.powtorz) {
+      return e.powtorz + " × (" + e.odcinki.map(biegOpisOdcinka).join(" + ") + ")";
+    }
+    return biegOpisOdcinka(e);
+  }).join(", ");
+}
+
+// Płaska lista do stopera: [{ rodzaj, czasS, dystansM, tempoS, powt: numer powtórzenia, zPowt: ile powtórzeń }]
+function biegOdcinkiPlaskie(odcinki) {
+  const wynik = [];
+  (odcinki || []).forEach(function (e) {
+    if (e.powtorz) {
+      for (let i = 1; i <= e.powtorz; i++) {
+        e.odcinki.forEach(function (o) {
+          wynik.push({ rodzaj: o.rodzaj, czasS: o.czasS || null, dystansM: o.dystansM || null, tempoS: o.tempoS || null, powt: i, zPowt: e.powtorz });
+        });
+      }
+    } else {
+      wynik.push({ rodzaj: e.rodzaj, czasS: e.czasS || null, dystansM: e.dystansM || null, tempoS: e.tempoS || null, powt: null, zPowt: null });
+    }
+  });
+  return wynik;
+}
+
+// Suma odcinków: czas (z odcinków na czas), dystans (z odcinków na dystans)
+function biegSumaOdcinkow(odcinki) {
+  let czasS = 0;
+  let dystansM = 0;
+  biegOdcinkiPlaskie(odcinki).forEach(function (o) {
+    czasS += o.czasS || 0;
+    dystansM += o.dystansM || 0;
+  });
+  return { czasS: czasS || null, dystansM: dystansM || null };
+}
+
+// Stoper z odcinkami: przesuwa bieżący odcinek, gdy minął jego czas.
+// st.odc = { nr, startMs (czas aktywny na początku odcinka), wyniki: [{ czasS }] }. Zwraca liczbę zmian odcinka.
+function biegOdcinkiAktualizuj(st, plaskie, teraz) {
+  if (!st.odc || !plaskie.length) {
+    return 0;
+  }
+  let zmiany = 0;
+  const aktywne = biegStoperCzas(st, teraz);
+  while (st.odc.nr < plaskie.length) {
+    const o = plaskie[st.odc.nr];
+    if (!o.czasS) {
+      break; // odcinek na dystans: bez GPS kończy go użytkownik
+    }
+    const koniec = st.odc.startMs + o.czasS * 1000;
+    if (aktywne < koniec) {
+      break;
+    }
+    st.odc.wyniki.push({ czasS: o.czasS });
+    st.odc.startMs = koniec;
+    st.odc.nr++;
+    zmiany++;
+  }
+  return zmiany;
+}
+
+// Ręczne zakończenie odcinka (np. na dystans bez GPS)
+function biegOdcinekZakoncz(st, plaskie, teraz) {
+  if (!st.odc || st.odc.nr >= plaskie.length) {
+    return;
+  }
+  const aktywne = biegStoperCzas(st, teraz);
+  st.odc.wyniki.push({ czasS: Math.round((aktywne - st.odc.startMs) / 1000) });
+  st.odc.startMs = aktywne;
+  st.odc.nr++;
+}
+
+// Gotowe szablony
+const SZABLONY_ODCINKOW = [
+  { id: "marszobieg", nazwa: "Marsz-bieg 8 × (1 + 2)", rodzajBiegu: "marszobieg", odcinki: [
+    { rodzaj: "marsz", czasS: 300 },
+    { powtorz: 8, odcinki: [{ rodzaj: "bieg", czasS: 60 }, { rodzaj: "marsz", czasS: 120 }] },
+    { rodzaj: "marsz", czasS: 300 }
+  ] },
+  { id: "int11", nazwa: "Interwały 6 × (1 min + 1 min)", rodzajBiegu: "interwaly", odcinki: [
+    { rodzaj: "rozgrzewka", czasS: 600 },
+    { powtorz: 6, odcinki: [{ rodzaj: "szybko", czasS: 60 }, { rodzaj: "wolno", czasS: 60 }] },
+    { rodzaj: "schlodzenie", czasS: 300 }
+  ] },
+  { id: "int400", nazwa: "Interwały 6 × 400 m", rodzajBiegu: "interwaly", odcinki: [
+    { rodzaj: "rozgrzewka", czasS: 600 },
+    { powtorz: 6, odcinki: [{ rodzaj: "szybko", dystansM: 400 }, { rodzaj: "wolno", czasS: 120 }] },
+    { rodzaj: "schlodzenie", czasS: 600 }
+  ] },
+  { id: "tempo102010", nazwa: "Bieg tempowy 10-20-10", rodzajBiegu: "tempowy", odcinki: [
+    { rodzaj: "rozgrzewka", czasS: 600 },
+    { rodzaj: "szybko", czasS: 1200 },
+    { rodzaj: "schlodzenie", czasS: 600 }
+  ] }
+];
