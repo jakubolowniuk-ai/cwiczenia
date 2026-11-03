@@ -365,3 +365,12 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Ustawienia → „Moje możliwości”: podsumowanie wyników, data testu, przypomnienie po 8 tygodniach, przycisk „Zrób test / Zmień”.
 - Kreator planu: krok z ręcznym wpisywaniem maksów i ciężarów zastąpiony. Bez testu kreator pokazuje „Najpierw uzupełnij swoje możliwości” i nie pozwala przejść dalej; „Uzupełnij teraz” otwiera test, po zapisaniu wraca do kreatora z zachowanymi odpowiedziami. Z testem pokazuje wyniki użyte do planu i „Zmień wyniki testu”.
 - Generator: nowe dane wpływają na szczebel przysiadów (przysiady: <20, <40, 40+) i ćwiczenia stabilizacji (plank: <30 s, <60 s, 60+ s); pompki i podciągnięcia jak dotąd.
+
+## v78 – cele i „Tu jesteś” (etap 2)
+
+- Nowy plik `cele.js`. Dane: `dane.sciezkiPostep = { id: { krok, data } }` (krok = indeks bieżącego kroku; równy liczbie kroków = cel osiągnięty) i `dane.cele = [ {typ:"sciezka", id} | {typ:"liczba", k, cel} ]`.
+- Ścieżki: „Ustal / Zmień, gdzie jestem” – dotykasz najtrudniejszy krok, który już robisz (albo „Żadnego”); kroki zaliczone ✓, bieżący z „Tu jesteś”, pasek postępu; na liście ścieżek znaczek „Twój cel” i „Tu jesteś: krok N z M”.
+- Kreator planu (oprócz biegania): krok „Cele umiejętności (opcjonalnie)” – liczba powtórzeń pod rząd (pompki, podciąganie, dipy, przysiady; z wynikiem z testu jako „Teraz”) oraz ścieżki (przy siłowni wszystkie, inaczej kalistenika). Maks. 3 cele; ostrzeżenia, gdy cele obciążają te same stawy (nadgarstki, barki, proste ramiona, kolana, dolny odcinek pleców).
+- Krok „Gdzie jesteś” dla każdej wybranej ścieżki bez ustalonego startu.
+- Cele zapisują się po „Zacznij”; w podsumowaniu informacja, że ćwiczenia celów trafią do planu w etapie 3.
+- Przełącznik Baza / Moje treningi / Ścieżki – napisy się nie ucinają.

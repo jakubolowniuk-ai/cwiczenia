@@ -64,6 +64,12 @@ function pkKroki() {
   if (cel !== "bieg") {
     kroki.push("kardio");
   }
+  if (cel !== "bieg") {
+    kroki.push("cele");
+    if ((pkProfil.cele || []).some(function (c) { return c.typ === "sciezka"; })) {
+      kroki.push("celestart");
+    }
+  }
   kroki.push("tygodni", "kotwice", "podsumowanie");
   return kroki;
 }
@@ -101,7 +107,7 @@ function pkOtworz() {
   pkProfil = {
     cel: null, dosw: dosw, dni: 3, czas: 60, sprzet: "s", bole: [], priorytet: null,
     kardio: { ile: 0, rodzaj: "spacer" }, tygodni: 4, kotwice: {}, maxPompek: null, maxPodciagniec: null,
-    bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false
+    cele: JSON.parse(JSON.stringify(dane.cele || [])), bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false
   };
   pkKrok = 0;
   pkWynik = null;
@@ -322,6 +328,17 @@ function pkRysuj() {
     ], pkProfil.tygodni, function (w) {
       pkProfil.tygodni = w;
     });
+  } else if (krok === "cele" || krok === "celestart") {
+    if (!sciezkiDane) {
+      pokazDalej = false;
+      tresc.appendChild(pkEl("p", "opis", "Wczytuję ścieżki…"));
+      sciezkiWczytaj(pkRysuj);
+    } else if (krok === "cele") {
+      pkRysujCele(tresc, function (f) { walidacja = f; });
+    } else {
+      pkRysujCeleStart(tresc, function (f) { walidacja = f; });
+      pokazDalej = pkCeleBezStartu().length === 0;
+    }
   } else if (krok === "kotwice") {
     pokazDalej = pkProfil.cel !== "bieg" && mzWypelnione();
     pkRysujKotwice(tresc, function (f) { walidacja = f; });
@@ -427,6 +444,9 @@ function pkRysujPodsumowanie(tresc) {
   wynik.uwagi.forEach(function (u) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));
   });
+  if ((pkProfil.cele || []).length) {
+    tresc.appendChild(pkEl("p", "pk-uwaga", "Twoje cele: " + pkProfil.cele.map(opisCelu).join(", ") + ". Zapiszę je i pokażę postęp w Ścieżkach. Ćwiczenia celów zaczną trafiać do planu w następnej wersji."));
+  }
 
   // Pierwszy tydzień
   tresc.appendChild(pkEl("h3", "pp-naglowek", "Pierwszy tydzień"));
@@ -477,6 +497,8 @@ function pkRysujPodsumowanie(tresc) {
       return;
     }
     pgZapisz(pkWynik, { zapiszZestawy: pkProfil.zapiszZestawy !== false });
+    dane.cele = JSON.parse(JSON.stringify(pkProfil.cele || []));
+    zapiszDane();
     pkWynik = null;
     if (pkPoprzedniPlan) {
       pkPoprzedniPlan.zamkniety = true;

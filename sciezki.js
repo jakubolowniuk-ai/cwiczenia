@@ -64,6 +64,17 @@ function rysujSciezki() {
         }
       }
       karta.appendChild(meta);
+      const post = sciezkaPostep(s.id);
+      if (post || czyCelSciezki(s.id)) {
+        const st = sciezkiEl("span", "sciezka-meta sciezka-stan", "");
+        if (czyCelSciezki(s.id)) {
+          st.appendChild(sciezkiEl("span", "sciezka-cel-znak", "Twój cel"));
+        }
+        if (post) {
+          st.appendChild(document.createTextNode(post.krok >= s.kroki.length ? " Cel osiągnięty" : " Tu jesteś: krok " + (post.krok + 1) + " z " + s.kroki.length));
+        }
+        karta.appendChild(st);
+      }
       karta.addEventListener("click", function () {
         sciezkaOtwarta = s;
         rysujSciezki();
@@ -79,6 +90,7 @@ function rysujSciezke(s) {
   wstecz.type = "button";
   wstecz.addEventListener("click", function () {
     sciezkaOtwarta = null;
+    sciezkaWyborStartu = false;
     rysujSciezki();
   });
   widokSciezki.appendChild(wstecz);
@@ -88,14 +100,26 @@ function rysujSciezke(s) {
   if (s.uwaga) {
     widokSciezki.appendChild(sciezkiEl("p", "sciezka-uwaga", "⚠ " + s.uwaga));
   }
+  widokSciezki.appendChild(sciezkiPasekPostepu(s));
+  const post = sciezkaPostep(s.id);
   const ol = sciezkiEl("ol", "sciezka-kroki");
   s.kroki.forEach(function (k, i) {
     const li = sciezkiEl("li", "sciezka-krok");
+    if (sciezkaWyborStartu) {
+      li.classList.add("wybieralny");
+      li.addEventListener("click", function () {
+        ustawPostepSciezki(s.id, i + 1);
+        sciezkaWyborStartu = false;
+        rysujSciezki();
+      });
+    } else if (post) {
+      li.classList.add(i < post.krok ? "zaliczony" : i === post.krok ? "aktualny" : "przyszly");
+    }
     const c = sciezkiCwiczenie(k.cwiczenie);
     const gora = sciezkiEl("div", "sciezka-krok-gora");
     gora.appendChild(sciezkiEl("span", "sciezka-nr", String(i + 1)));
-    const nazwa = sciezkiEl(c ? "button" : "span", "sciezka-nazwa", k.cwiczenie);
-    if (c) {
+    const nazwa = sciezkiEl(c && !sciezkaWyborStartu ? "button" : "span", "sciezka-nazwa", k.cwiczenie);
+    if (c && !sciezkaWyborStartu) {
       nazwa.type = "button";
       nazwa.addEventListener("click", function () { otworzOpis(c); });
     } else {
@@ -103,6 +127,8 @@ function rysujSciezke(s) {
     }
     gora.appendChild(nazwa);
     if (c && c.poziom) { gora.appendChild(znaczekPoziomu(c.poziom, true)); }
+    if (!sciezkaWyborStartu && post && i === post.krok) { gora.appendChild(sciezkiEl("span", "sciezka-tu", "Tu jesteś")); }
+    if (!sciezkaWyborStartu && post && i < post.krok) { gora.appendChild(sciezkiEl("span", "sciezka-ok", "✓")); }
     li.appendChild(gora);
     li.appendChild(sciezkiEl("div", "sciezka-kryt", "Przejdź dalej, gdy: " + k.kryterium));
     if (k.uwaga) { li.appendChild(sciezkiEl("div", "sciezka-uwaga", "⚠ " + k.uwaga)); }

@@ -2031,3 +2031,22 @@ h1 {
 .mz-wiersz { padding: 6px 0; border-bottom: 1px solid var(--linia); color: var(--tekst); }
 #ust-mozliwosci { display: flex; flex-direction: column; gap: 6px; }
 #ust-mozliwosci .przycisk { margin-top: 8px; }
+
+/* ===== Cele i „Tu jesteś” ===== */
+.sciezka-postep { display: flex; flex-direction: column; gap: 8px; align-items: flex-start; margin: 10px 0; padding: 12px; background: var(--karta); border: 1px solid var(--linia); border-radius: 12px; color: var(--tekst); }
+.sciezka-postep p { margin: 0; }
+.sciezka-pasek { width: 100%; height: 8px; background: var(--linia); border-radius: 4px; overflow: hidden; }
+.sciezka-pasek span { display: block; height: 100%; background: var(--akcent); }
+.sciezka-krok.zaliczony { border-left-color: #2E9E5B; opacity: .75; }
+.sciezka-krok.aktualny { border-left-color: var(--akcent); box-shadow: 0 0 0 2px var(--akcent) inset; }
+.sciezka-krok.wybieralny { cursor: pointer; border-left-color: var(--akcent); }
+.sciezka-tu { font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; background: var(--akcent); color: var(--tlo); }
+.sciezka-ok { color: #2E9E5B; font-weight: 700; }
+.sciezka-cel-znak { font-size: .75rem; font-weight: 700; padding: 2px 8px; border-radius: 10px; border: 1px solid var(--akcent); color: var(--akcent); }
+.sciezka-stan { display: flex; align-items: center; gap: 4px; flex-wrap: wrap; }
+.cel-wiersz { justify-content: flex-start; }
+.cel-tekst { display: flex; flex-direction: column; flex: 1; }
+.cel-tekst small { color: var(--tekst-szary); font-size: 13px; }
+.cel-ile { width: 72px; min-height: 40px; padding: 6px 8px; font: inherit; font-size: 17px; color: var(--tekst); background: var(--tlo); border: 1px solid var(--linia); border-radius: 10px; }
+.pk-wiersz input.cel-ile { width: 72px; height: auto; }
+.segment { height: auto; min-height: 52px; padding: 6px 4px; font-size: 15px; line-height: 1.2; }
