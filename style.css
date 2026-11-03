@@ -2050,3 +2050,5 @@ h1 {
 .cel-ile { width: 72px; min-height: 40px; padding: 6px 8px; font: inherit; font-size: 17px; color: var(--tekst); background: var(--tlo); border: 1px solid var(--linia); border-radius: 10px; }
 .pk-wiersz input.cel-ile { width: 72px; height: auto; }
 .segment { height: auto; min-height: 52px; padding: 6px 4px; font-size: 15px; line-height: 1.2; }
+.pk-cw-cel { color: var(--akcent); font-weight: 600; }
+.cel-opis-dzis { color: var(--akcent); font-size: 13px; font-weight: 600; margin: 2px 0; }

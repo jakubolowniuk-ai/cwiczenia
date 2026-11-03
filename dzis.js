@@ -434,6 +434,9 @@ function zrobWierszCwiczenia(sesja, id, wBloku, plan_) {
   const tekst = document.createElement("div");
   tekst.className = "karta-tekst";
   tekst.appendChild(tekstElement("div", "karta-nazwa", cwiczenie.nazwa));
+  if (plan_ && plan_.celeOpisy && plan_.celeOpisy[id] && !wBloku) {
+    tekst.appendChild(tekstElement("div", "cel-opis-dzis", "★ " + plan_.celeOpisy[id]));
+  }
   const opis = tekstElement("button", "wartosc-przycisk", opisIlosci(wykonane || plan, znajdzCwiczenie(id)));
   opis.setAttribute("aria-label", "Wpisz inną wartość: " + cwiczenie.nazwa);
   opis.addEventListener("click", function () {

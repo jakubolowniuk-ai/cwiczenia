@@ -445,7 +445,7 @@ function pkRysujPodsumowanie(tresc) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));
   });
   if ((pkProfil.cele || []).length) {
-    tresc.appendChild(pkEl("p", "pk-uwaga", "Twoje cele: " + pkProfil.cele.map(opisCelu).join(", ") + ". Zapiszę je i pokażę postęp w Ścieżkach. Ćwiczenia celów zaczną trafiać do planu w następnej wersji."));
+    tresc.appendChild(pkEl("p", "pk-uwaga", "Twoje cele: " + pkProfil.cele.map(opisCelu).join(", ") + ". Ćwiczenia celów (★) są na początku treningów, w których pracują te same mięśnie. Postęp zobaczysz w Ścieżkach."));
   }
 
   // Pierwszy tydzień
@@ -461,7 +461,7 @@ function pkRysujPodsumowanie(tresc) {
       karta.appendChild(pkEl("b", "", etykieta + ": " + t.nazwa));
       t.wpisy.forEach(function (w) {
         const il = pgIlosc(w);
-        karta.appendChild(pkEl("div", "pk-cw", w.cw.nazwa + " · " + opisIlosci(il, w.cw)));
+        karta.appendChild(pkEl("div", "pk-cw" + (w.cel ? " pk-cw-cel" : ""), (w.cel ? "★ " : "") + w.cw.nazwa + " · " + opisIlosci(il, w.cw)));
       });
     } else {
       karta.appendChild(pkEl("b", "", etykieta + ": " + nazwaKategorii(s.kardio)));

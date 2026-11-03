@@ -374,3 +374,13 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Krok „Gdzie jesteś” dla każdej wybranej ścieżki bez ustalonego startu.
 - Cele zapisują się po „Zacznij”; w podsumowaniu informacja, że ćwiczenia celów trafią do planu w etapie 3.
 - Przełącznik Baza / Moje treningi / Ścieżki – napisy się nie ucinają.
+
+## v79 – cele w planie (etap 3)
+
+- Generator (`pgDodajCele`, `pgBudujTrening(..., klucz)`): ćwiczenia celów na początku treningu (★). Przypisanie do rodzaju treningu: pchanie → A/B, Góra, Push; ciągnięcie → A/B, Góra, Pull; nogi i całe ciało → A/B, Dół, Legs; brzuch → A/B, Dół, Pull.
+- Ścieżka: ćwiczenie bieżącego kroku („Tu jesteś”); 3–5 serii, powtórzenia od połowy do kryterium kroku, statyczne 60% czasu kryterium; przerwa 120 s.
+- Cel „liczba pod rząd”: przy wyniku ≥ 3 – serie poniżej maksimum (zakres 50–75% maksimum, 4–5 serii); przy < 3 lub braku wyniku – krok ścieżki „Pompki / Podciąganie / Dipy / Nogi”.
+- Wliczanie objętości: cel zastępuje to samo ćwiczenie z planu, a gdy go nie ma – usuwa jedno ćwiczenie dodatkowe tej samej partii; cele nie odpadają przy dopasowaniu do czasu i nie są skracane przy limicie serii tygodniowych.
+- Uwagi w planie: warunki wstępne (np. planche – 20 pompek, front lever – 8 podciągnięć) i rozgrzewka nadgarstków przy celach obciążających nadgarstki.
+- Dziś: pod nazwą ćwiczenia celu opis „★ L-sit i V-sit – krok 3 z 6 (cel kroku: 3 × 15 s)” (`plan.celeOpisy`).
+- Test: 6360 kombinacji celów × profili bez błędów i dubli.

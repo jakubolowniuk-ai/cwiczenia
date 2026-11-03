@@ -889,8 +889,187 @@ function pgKg(cw, p, kotw) {
   return p.ostatnie && p.ostatnie[cw.nazwa] > 0 ? p.ostatnie[cw.nazwa] : pgCiezar(cw.nazwa, kotw);
 }
 
+
+// ===== Cele umiejętności w planie =====
+// Ćwiczenie celu idzie na początek treningu (na świeżo). Ścieżki przypisane są do rodzaju treningu.
+
+const PG_CEL_DOL = ["pistol", "nordic", "skoki", "nogi-bez-sprzetu", "lydki", "posladki-cialo", "kolana", "przysiad", "przysiad-zaaw", "martwy-ciag", "ciag-zaaw", "hip-thrust", "wykroki-silownia"];
+const PG_CEL_BRZUCH = ["l-sit", "dragon-flag", "kolko-brzuszne", "kolko-zaaw", "toes-to-bar", "brzuch-podstawy"];
+const PG_CEL_CALE = ["olimpijskie", "olimpijskie-zaaw", "tureckie", "podpor-ruchy", "chwyt", "mostek"];
+const PG_CEL_CIAG = ["pierwsze-podciagniecie", "podciaganie-jedna-reka", "muscle-up", "front-lever", "podciaganie-zaaw", "biceps-cialo", "wioslowanie-cialo", "sciaganie", "wioslowanie", "flaga"];
+const PG_CEL_LICZBA_ID = { pompki: "pierwsza-pompka", podciagniecia: "pierwsze-podciagniecie", dipy: "dipy", przysiady: "nogi-bez-sprzetu" };
+// Minimalna baza przed trudnymi ścieżkami: [klucz testu, wartość, tekst]
+const PG_CEL_WARUNKI = {
+  "planche": ["pompki", 20, "20 pompek klasycznych"],
+  "stanie-na-rekach": ["pompki", 15, "15 pompek klasycznych"],
+  "manna": ["dipy", 15, "15 dipów"],
+  "pompki-jedna-reka": ["pompki", 25, "25 pompek klasycznych"],
+  "front-lever": ["podciagniecia", 8, "8 podciągnięć"],
+  "back-lever": ["podciagniecia", 5, "5 podciągnięć"],
+  "muscle-up": ["podciagniecia", 10, "10 podciągnięć"],
+  "podciaganie-jedna-reka": ["podciagniecia", 15, "15 podciągnięć"],
+  "flaga": ["podciagniecia", 8, "8 podciągnięć"],
+  "dragon-flag": ["plank", 60, "60 s planku"]
+};
+
+function pgRodzajCelu(c) {
+  const id = c.typ === "sciezka" ? c.id : PG_CEL_LICZBA_ID[c.k];
+  if (c.typ === "liczba") {
+    return c.k === "przysiady" ? "dol" : c.k === "podciagniecia" ? "ciag" : "pchanie";
+  }
+  if (PG_CEL_DOL.indexOf(id) !== -1) { return "dol"; }
+  if (PG_CEL_BRZUCH.indexOf(id) !== -1) { return "brzuch"; }
+  if (PG_CEL_CALE.indexOf(id) !== -1) { return "cale"; }
+  if (PG_CEL_CIAG.indexOf(id) !== -1) { return "ciag"; }
+  return "pchanie";
+}
+
+// Czy cel trafia do treningu o danym kluczu (A, B, GA, DA, Push, Pull, Legs, S)
+function pgCelPasuje(rodzaj, klucz) {
+  if (klucz === "A" || klucz === "B" || klucz === "S") { return true; }
+  if (klucz === "GA" || klucz === "GB") { return rodzaj === "pchanie" || rodzaj === "ciag"; }
+  if (klucz === "DA" || klucz === "DB") { return rodzaj === "dol" || rodzaj === "brzuch" || rodzaj === "cale"; }
+  if (klucz === "Push") { return rodzaj === "pchanie"; }
+  if (klucz === "Pull") { return rodzaj === "ciag" || rodzaj === "brzuch"; }
+  if (klucz === "Legs") { return rodzaj === "dol" || rodzaj === "cale"; }
+  return false;
+}
+
+// "3 × 10", "3 × 30 s", "3 × 5 na stronę" → { serie, ile, czas }
+function pgKryterium(tekst) {
+  const m = /(\d+)\s*×\s*(\d+)\s*(s\b)?/.exec(tekst || "");
+  if (!m) {
+    return { serie: 3, ile: 5, czas: false };
+  }
+  return { serie: Number(m[1]), ile: Number(m[2]), czas: !!m[3] };
+}
+
+function pgCwiczenieCelu(nazwa) {
+  return dane.cwiczenia.find(function (c) { return c.nazwa === nazwa; }) || null;
+}
+
+// Wpis treningu dla kroku ścieżki: pracujemy w stronę kryterium kroku
+function pgWpisKroku(krok, sciezka, nrKroku, p) {
+  const cw = pgCwiczenieCelu(krok.cwiczenie);
+  if (!cw) {
+    return null;
+  }
+  const k = pgKryterium(krok.kryterium);
+  const w = { cw: cw, serie: Math.max(3, Math.min(5, k.serie)), przerwa: 120, kg: 0, cel: true, celOpis: sciezka.nazwa + " – krok " + (nrKroku + 1) + " z " + sciezka.kroki.length + " (cel kroku: " + krok.kryterium + ")" };
+  if (k.czas || cw.rodzajId === "rodzaj-statyczny") {
+    w.statyczne = true;
+    w.czasy = new Array(w.serie).fill(Math.max(5, Math.round(k.ile * 0.6 / 5) * 5));
+    w.od = 1;
+    w.do = 1;
+  } else {
+    w.statyczne = false;
+    w.od = Math.max(1, Math.round(k.ile * 0.5));
+    w.do = Math.max(w.od, k.ile);
+  }
+  return w;
+}
+
+// Cel „liczba powtórzeń pod rząd”: dużo serii poniżej maksimum, zakres rośnie z postępem
+function pgWpisLiczby(c, p) {
+  const def = typeof celLiczbaDef === "function" ? celLiczbaDef(c.k) : null;
+  const max = typeof mzWartosc === "function" ? mzWartosc(c.k) : null;
+  // Gdy jeszcze nie ma kilku powtórzeń, idziemy ścieżką do pierwszych powtórzeń
+  if (!def || max === null || max < 3) {
+    const s = typeof sciezkaWgId === "function" ? sciezkaWgId(PG_CEL_LICZBA_ID[c.k]) : null;
+    if (!s) {
+      return null;
+    }
+    const post = sciezkaPostep(s.id);
+    const nr = Math.min(post ? post.krok : 0, s.kroki.length - 1);
+    const w = pgWpisKroku(s.kroki[nr], s, nr, p);
+    if (w) {
+      w.celOpis = (def ? def.nazwa : c.k) + ": cel " + c.cel + " pod rząd. Najpierw " + s.nazwa.toLowerCase() + " – krok " + (nr + 1) + " z " + s.kroki.length + ".";
+    }
+    return w;
+  }
+  const cw = pgCwiczenieCelu(def.nazwa);
+  if (!cw) {
+    return null;
+  }
+  const od = Math.max(2, Math.round(max * 0.5));
+  const do_ = Math.max(od + 1, Math.round(max * 0.75));
+  return {
+    cw: cw, serie: max >= 10 ? 5 : 4, od: od, do: do_, przerwa: 120, kg: 0, statyczne: false, cel: true,
+    celOpis: def.nazwa + ": teraz " + max + ", cel " + c.cel + " pod rząd. Serie poniżej maksimum; raz w tygodniu ostatnią serię zrób do maksa."
+  };
+}
+
+// Wstawia cele na początek treningu; ćwiczenia celu zastępują te same ćwiczenia z planu (bez dublowania)
+function pgDodajCele(wpisy, p, klucz, uzyte) {
+  const cele = (p.cele || []).filter(function (c) {
+    return pgCelPasuje(pgRodzajCelu(c), klucz);
+  });
+  const nowe = [];
+  cele.forEach(function (c) {
+    let w = null;
+    if (c.typ === "liczba") {
+      w = pgWpisLiczby(c, p);
+    } else {
+      const s = typeof sciezkaWgId === "function" ? sciezkaWgId(c.id) : null;
+      if (!s) {
+        return;
+      }
+      const post = sciezkaPostep(s.id);
+      const nr = Math.min(post ? post.krok : 0, s.kroki.length - 1);
+      w = pgWpisKroku(s.kroki[nr], s, nr, p);
+    }
+    if (!w || nowe.some(function (x) { return x.cw.nazwa === w.cw.nazwa; })) {
+      return;
+    }
+    // To samo ćwiczenie już jest w treningu: zabieramy je (cel je zastępuje)
+    const i = wpisy.findIndex(function (x) { return x.cw.nazwa === w.cw.nazwa; });
+    if (i !== -1) {
+      wpisy.splice(i, 1);
+    } else {
+      // Wliczamy cel w objętość: usuwamy jedno ćwiczenie dodatkowe tej samej partii
+      const partia = (w.cw.partieIds || [])[0];
+      for (let j = wpisy.length - 1; j >= 3; j--) {
+        if (!wpisy[j].rdzen && !wpisy[j].cel && (wpisy[j].cw.partieIds || [])[0] === partia) {
+          wpisy.splice(j, 1);
+          break;
+        }
+      }
+    }
+    uzyte[w.cw.nazwa] = true;
+    nowe.push(w);
+  });
+  return nowe.concat(wpisy);
+}
+
+// Uwagi do planu o celach: warunki wstępne i brak danych
+function pgUwagiCelow(p) {
+  const uwagi = [];
+  (p.cele || []).forEach(function (c) {
+    if (c.typ !== "sciezka") {
+      return;
+    }
+    const s = typeof sciezkaWgId === "function" ? sciezkaWgId(c.id) : null;
+    if (!s) {
+      uwagi.push("Nie udało się wczytać ścieżki celu. Otwórz zakładkę Ścieżki i ułóż plan ponownie.");
+      return;
+    }
+    const war = PG_CEL_WARUNKI[c.id];
+    const post = sciezkaPostep(s.id);
+    if (war && (!post || post.krok <= 1)) {
+      const v = typeof mzWartosc === "function" ? mzWartosc(war[0]) : null;
+      if (v === null || v < war[1]) {
+        uwagi.push(s.nazwa + ": zanim pójdziesz dalej niż pierwsze kroki, zbuduj bazę – co najmniej " + war[2] + ". Plan i tak to ćwiczy w głównej części.");
+      }
+    }
+    if (CEL_OBCIAZENIA && CEL_OBCIAZENIA.nadgarstki && CEL_OBCIAZENIA.nadgarstki.indexOf(c.id) !== -1) {
+      uwagi.push(s.nazwa + ": przed ćwiczeniem celu rozgrzej nadgarstki (krążenia, delikatne podpory na dłoniach).");
+    }
+  });
+  return uwagi;
+}
+
 // Zwraca listę wpisów treningu: { cw, serie, od, do, przerwa, kg, statyczne, czasy }
-function pgBudujTrening(sloty, p, kotw, przesun) {
+function pgBudujTrening(sloty, p, kotw, przesun, klucz) {
   const uzyte = {};
   let wpisy = [];
   sloty.forEach(function (slot, i) {
@@ -933,15 +1112,21 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
     }
   }
 
+  // Cele umiejętności na początku treningu
+  if (p.cele && p.cele.length && klucz) {
+    wpisy = pgDodajCele(wpisy, p, klucz, uzyte);
+  }
+
   // Dopasowanie do czasu treningu (rozgrzewka i rozciąganie są liczone osobno, ponad ten czas)
   const budzet = Math.max(20, p.czas);
   const pelne = wpisy.slice();
   const pelnyCzas = Math.ceil(pgMinuty(pelne));
-  // Ćwiczenia na brzuch (rdzeń) nie odpadają; usuwamy od końca zwykłe ćwiczenia dodatkowe (pierwsze 3 zostają)
+  // Ćwiczenia na brzuch (rdzeń) i cele nie odpadają; usuwamy od końca zwykłe ćwiczenia dodatkowe (pierwsze 3 zwykłe zostają)
+  const ileCelow = wpisy.filter(function (w) { return w.cel; }).length;
   while (pgMinuty(wpisy) > budzet) {
     let idx = -1;
-    for (let i = wpisy.length - 1; i >= 3; i--) {
-      if (!wpisy[i].rdzen) {
+    for (let i = wpisy.length - 1; i >= 3 + ileCelow; i--) {
+      if (!wpisy[i].rdzen && !wpisy[i].cel) {
         idx = i;
         break;
       }
@@ -952,7 +1137,7 @@ function pgBudujTrening(sloty, p, kotw, przesun) {
     wpisy.splice(idx, 1);
   }
   wpisy.forEach(function (w) {
-    if (w.statyczne) {
+    if (w.statyczne && !w.cel) {
       const t = pgCzasStatyczny(p.dosw);
       w.czasy = new Array(w.serie).fill(t);
     }
@@ -1043,7 +1228,7 @@ function pgBudujPlan(p) {
       licznik++;
       if (!typyUzyte[ts.klucz + ts.przesun]) {
         const sloty = (p.sprzet === "c" ? PG_KAL : PG_SZABLONY)[ts.szablon][ts.klucz];
-        typyUzyte[ts.klucz + ts.przesun] = Object.assign({ ts: ts }, pgBudujTrening(sloty, p, kotw, ts.przesun));
+        typyUzyte[ts.klucz + ts.przesun] = Object.assign({ ts: ts }, pgBudujTrening(sloty, p, kotw, ts.przesun, ts.klucz));
       }
       wynik.sesje.push({ dzien: dzien, trening: ts.klucz + ts.przesun, szablon: ts.szablon, klucz: ts.klucz });
     });
@@ -1071,6 +1256,10 @@ function pgBudujPlan(p) {
   });
 
   pgOgraniczObjetosc(wynik, p);
+  if (p.cele && p.cele.length) {
+    wynik.uwagi = wynik.uwagi.concat(pgUwagiCelow(p));
+    wynik.powody.push("Cele umiejętności są na początku treningu, na świeżo: technika i siła potrzebne do trudnych pozycji wymagają pełnej koncentracji. Ćwiczenia celu zastępują podobne ćwiczenia z planu, więc łączna objętość się nie zwiększa.");
+  }
 
   // Bloki rozgrzewki i rozciągania
   wynik.czasBlokow = { rozgrzewka: 0, rozciaganie: 0 };
@@ -1180,7 +1369,7 @@ function pgOgraniczObjetosc(wynik, p) {
     while (suma > max) {
       let naj = null;
       lista.forEach(function (x) {
-        if (x.w.serie > 2 && (!naj || x.w.serie > naj.w.serie || (x.w.serie === naj.w.serie && x.i > naj.i))) {
+        if (!x.w.cel && x.w.serie > 2 && (!naj || x.w.serie > naj.w.serie || (x.w.serie === naj.w.serie && x.i > naj.i))) {
           naj = x;
         }
       });
@@ -1378,6 +1567,18 @@ function pgZapisz(wynik, opcje) {
     utworzono: new Date().toISOString(),
     kreator: { profil: JSON.parse(JSON.stringify(p)), blok: p.blokNr || 1, powody: wynik.powody }
   };
+  // Opisy ćwiczeń celów (pokazywane w Dziś)
+  const celeOpisy = {};
+  Object.keys(wynik.treningi).forEach(function (k) {
+    wynik.treningi[k].wpisy.forEach(function (w) {
+      if (w.cel && w.celOpis) {
+        celeOpisy[w.cw.id] = w.celOpis;
+      }
+    });
+  });
+  if (Object.keys(celeOpisy).length) {
+    plan.celeOpisy = celeOpisy;
+  }
   dane.plany.push(plan);
   zapiszDane();
   return plan;
