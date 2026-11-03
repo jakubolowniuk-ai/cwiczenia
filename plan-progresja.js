@@ -103,6 +103,12 @@ function prPropozycja(plan, sesja, id) {
   if (roz && roz.sesjaId === L.id) {
     return null;
   }
+  // Ćwiczenie ze ścieżki celu: następny krok albo krok niżej (zamiast zwykłej drabinki)
+  const celP = typeof celPropozycja === "function" ? celPropozycja(plan, sesja, id, cw, cur, wyk) : undefined;
+  if (celP) {
+    return celP;
+  }
+  const krokCelu = celP === null;
   const planowana = L.parametry[id];
   const zrobiona = (L.wykonane && L.wykonane[id]) || planowana;
   const ocena = L.ocena && L.ocena[id];
@@ -196,7 +202,7 @@ function prPropozycja(plan, sesja, id) {
     return null;
   }
   if (naGorze || (ocena === "latwo" && wZakresie && maxPowt >= hi)) {
-    const nast = PR_DRABINKA[cw.nazwa];
+    const nast = krokCelu ? null : PR_DRABINKA[cw.nazwa];
     const nowyCw = nast ? znajdzCwiczeniePoNazwie(nast, !!(plan.kreator && plan.kreator.profil && plan.kreator.profil.uzyjUkrytych)) : null;
     if (nowyCw && !(sesja.parametry && sesja.parametry[nowyCw.id])) {
       return {
@@ -253,6 +259,9 @@ function prRozstrzygnij(plan, pr, przyjmij) {
     plan.progresja = {};
   }
   plan.progresja[pr.id] = { sesjaId: pr.sesjaOdniesienia.id, stan: przyjmij ? "przyjeto" : "zostaw" };
+  if (przyjmij && pr.poPrzyjeciu) {
+    pr.poPrzyjeciu();
+  }
   if (przyjmij) {
     const odDnia = pr.sesja.dzien;
     const sklonowane = {};

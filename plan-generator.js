@@ -1148,6 +1148,20 @@ function pgBudujTrening(sloty, p, kotw, przesun, klucz) {
   return { wpisy: wpisy, pominiete: pominiete, pelnyCzas: pelnyCzas };
 }
 
+// Tydzień lżejszy (4. tydzień bloku): jedna seria mniej, nie mniej niż 2
+function pgLzejsze(il) {
+  const n = JSON.parse(JSON.stringify(il));
+  if (n.typ === "powtorzenia" && n.serie > 2) {
+    n.serie--;
+    if (n.ciezary) {
+      n.ciezary = n.ciezary.slice(0, n.serie);
+    }
+  } else if (n.typ === "czas-serie" && n.czasy.length > 2) {
+    n.czasy = n.czasy.slice(0, n.czasy.length - 1);
+  }
+  return n;
+}
+
 // Ilość do zapisania w sesji
 function pgIlosc(w) {
   if (w.statyczne) {
@@ -1256,6 +1270,9 @@ function pgBudujPlan(p) {
   });
 
   pgOgraniczObjetosc(wynik, p);
+  if (p.cel !== "bieg" && p.cel !== "zdrowie") {
+    wynik.powody.push("4. tydzień jest lżejszy (jedna seria mniej w każdym ćwiczeniu poza celami): ciało nadrabia regenerację, a Ty robisz test możliwości. Kolejny blok dobiorę do nowych wyników.");
+  }
   if (p.cele && p.cele.length) {
     wynik.uwagi = wynik.uwagi.concat(pgUwagiCelow(p));
     wynik.powody.push("Cele umiejętności są na początku treningu, na świeżo: technika i siła potrzebne do trudnych pozycji wymagają pełnej koncentracji. Ćwiczenia celu zastępują podobne ćwiczenia z planu, więc łączna objętość się nie zwiększa.");
@@ -1531,7 +1548,9 @@ function pgZapisz(wynik, opcje) {
       const sesja = nowaSesja(a, s.dzien);
       sesja.treningId = treningiId[s.trening];
       const parametry = {};
-      t.wpisy.forEach(function (w) { parametry[w.cw.id] = pgIlosc(w); });
+      t.wpisy.forEach(function (w) {
+        parametry[w.cw.id] = s.dzien >= 21 && !w.cel ? pgLzejsze(pgIlosc(w)) : pgIlosc(w);
+      });
       if (t.blokPrzed) {
         sesja.blokPrzedId = t.blokPrzed.id;
       }
@@ -1567,6 +1586,9 @@ function pgZapisz(wynik, opcje) {
     utworzono: new Date().toISOString(),
     kreator: { profil: JSON.parse(JSON.stringify(p)), blok: p.blokNr || 1, powody: wynik.powody }
   };
+  if (p.cel !== "bieg" && p.cel !== "zdrowie") {
+    plan.tydzienTestu = 21;
+  }
   // Opisy ćwiczeń celów (pokazywane w Dziś)
   const celeOpisy = {};
   Object.keys(wynik.treningi).forEach(function (k) {

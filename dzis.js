@@ -246,6 +246,9 @@ function rysujPlanDzis(plan, kontener) {
     return;
   }
 
+  if (typeof celeKartaTestu === "function") {
+    celeKartaTestu(plan, kontener);
+  }
   const sesjeDzis = plan.sesje.filter(function (s) {
     return s.dzien === indeks;
   });

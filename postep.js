@@ -371,6 +371,15 @@ function dodajMojePlany() {
 
 function rysujPostep() {
   postepTresc.innerHTML = "";
+  if (typeof celeKartaPostepu === "function") {
+    if (!sciezkiDane && (dane.cele || []).some(function (c) { return c.typ === "sciezka"; })) {
+      sciezkiWczytaj(rysujPostep);
+    }
+    const kc = celeKartaPostepu();
+    if (kc) {
+      postepTresc.appendChild(kc);
+    }
+  }
   const plan = planPostepu();
   dodajMojePlany();
   postepEdytujPlan.hidden = !plan;

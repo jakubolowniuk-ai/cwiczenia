@@ -384,3 +384,12 @@ Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter).
 - Uwagi w planie: warunki wstępne (np. planche – 20 pompek, front lever – 8 podciągnięć) i rozgrzewka nadgarstków przy celach obciążających nadgarstki.
 - Dziś: pod nazwą ćwiczenia celu opis „★ L-sit i V-sit – krok 3 z 6 (cel kroku: 3 × 15 s)” (`plan.celeOpisy`).
 - Test: 6360 kombinacji celów × profili bez błędów i dubli.
+
+## v80 – zaliczanie kroków, krok niżej, tydzień testu, postęp celów (etap 4)
+
+- `celeSprawdz` (wywoływane z `sprawdzRekord` po każdym zaliczeniu ćwiczenia: Dziś, okno wartości, tryb Ćwicz):
+  - ćwiczenie to bieżący krok ścieżki celu i wynik spełnia kryterium (np. 3 × 15 s) → krok zaliczony (`dane.sciezkiPostep`), komunikat; gdy następny krok to to samo ćwiczenie – nowe wartości od razu w przyszłych sesjach;
+  - lepsza pojedyncza seria w pompkach, podciąganiu nachwytem, dipach, przysiadach lub planku podnosi wynik w Moich możliwościach (i postęp celu „liczba pod rząd”).
+- Propozycje na dziś (`celPropozycja`): po zaliczonym kroku „Krok zaliczony: A → B” (zmiana ćwiczenia w przyszłych sesjach po „Przyjmij”); gdy dwa ostatnie treningi bieżącego kroku < 70% planu albo z oceną „Ciężko” – „krok niżej” (po przyjęciu cofa też „Tu jesteś”). Ćwiczenia celów nie przechodzą na zwykłą drabinkę wariantów.
+- Tydzień lżejszy i test: w 4. tygodniu bloku (dni 21–27) jedna seria mniej w ćwiczeniach poza celami (min. 2), `plan.tydzienTestu = 21`; w Dziś karta „Tydzień lżejszy i test” z przyciskiem „Zrób test” (po teście: „Test zrobiony ✓”). Nie dotyczy biegania i zdrowia.
+- Postęp: karta „Moje cele” – ścieżki (krok N z M, ćwiczenie, data, pasek; dotknięcie otwiera ścieżkę) i liczby (teraz z celu, pasek).

@@ -105,6 +105,9 @@ function najlepszyZHistorii(cwiczenie, typ, pomijanaSesjaId) {
 const RODZAJE_BEZ_REKORDOW = ["rodzaj-rozgrzewka", "rodzaj-rozciaganie", "rodzaj-joga"];
 
 function sprawdzRekord(sesja, id) {
+  if (typeof celeSprawdz === "function") {
+    try { celeSprawdz(sesja, id); } catch (blad) { console.error(blad); }
+  }
   const cwiczenie = znajdzCwiczenie(id);
   if (cwiczenie && RODZAJE_BEZ_REKORDOW.indexOf(cwiczenie.rodzajId) !== -1) {
     return;
