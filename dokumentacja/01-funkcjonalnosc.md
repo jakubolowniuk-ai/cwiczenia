@@ -405,3 +405,11 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Opisy sesji i wyników: rodzaj, dystans, czas, tempo (gdy są dystans i czas), wysiłek.
 - Kopiowanie do innych sesji przenosi też rodzaj biegu i obciążenie; każdą sesję można potem zmienić osobno.
 - Generator biegowy ustawia rodzaj: marsz-bieg, spokojny, długi (ostatni bieg tygodnia).
+
+## v82 – Bieganie, wersja 2: stoper i ekran biegu
+
+- `bieg-logika.js`: stoper liczony z zegara (`startedAt`, `accumulated`, pauzy i czas pauz) – `biegStoperNowy/Czas/Pauza/Wznow/Wynik`, `biegFormatCzasu`.
+- Nowy plik `bieg.js` (ekran): na karcie Dziś przy sesji biegowej „▶ Start” i „Wpisz wynik ręcznie”. Ekran biegu: rodzaj, cel (ile zostało; sygnał dźwięk + wibracja po osiągnięciu celu czasu), duży czas, kafle dystans/tempo (na razie „—”, do GPS), Pauza/Wznów, Stop z potwierdzeniem („Biegnę dalej” / „Zakończ bieg”). Odświeżanie ekranu co 250 ms.
+- Trwający bieg w `localStorage` („cwiczenia-bieg-trwa”) – po odświeżeniu lub zamknięciu karty ekran biegu wraca z poprawnym czasem.
+- Wake Lock w czasie biegu, odnawiany po powrocie do karty; przełącznik w Ustawieniach „Ekran nie gaśnie podczas biegu” (`dane.ustawienia.biegEkran`).
+- Stop zapisuje pomiar jako szkic (`sesja.wynikSzkic`: czas, pauzy, czas pauz, źródło „stoper”) i otwiera okno wyniku wypełnione pomiarem. Anuluj nie traci pomiaru: na karcie „Niezapisany bieg …”, „Zapisz wynik biegu” albo „Odrzuć pomiar”. Wynik zapisuje też `pauzy` i `czasPauzS` (do celów „bez zatrzymania”).

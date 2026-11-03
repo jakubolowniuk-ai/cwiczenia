@@ -83,3 +83,56 @@ function biegMigruj(d) {
   });
   return zmiany;
 }
+
+// ===== Stoper: czas liczony z zegara, nie z tyknięć =====
+// stan = { sesjaId, planId, start, startedAt, accumulated (ms), pauzy, czasPauz (ms), pauzaOd, stan: "trwa" | "pauza" }
+
+function biegStoperNowy(sesjaId, planId, teraz) {
+  return { sesjaId: sesjaId, planId: planId, start: teraz, startedAt: teraz, accumulated: 0, pauzy: 0, czasPauz: 0, pauzaOd: null, stan: "trwa" };
+}
+
+// Czas aktywny w milisekundach
+function biegStoperCzas(st, teraz) {
+  return st.accumulated + (st.stan === "trwa" ? Math.max(0, teraz - st.startedAt) : 0);
+}
+
+function biegStoperPauza(st, teraz) {
+  if (st.stan !== "trwa") {
+    return st;
+  }
+  st.accumulated = biegStoperCzas(st, teraz);
+  st.stan = "pauza";
+  st.pauzaOd = teraz;
+  st.pauzy++;
+  return st;
+}
+
+function biegStoperWznow(st, teraz) {
+  if (st.stan !== "pauza") {
+    return st;
+  }
+  st.czasPauz += Math.max(0, teraz - st.pauzaOd);
+  st.pauzaOd = null;
+  st.startedAt = teraz;
+  st.stan = "trwa";
+  return st;
+}
+
+// Wynik ze stopera: czas aktywny w sekundach, liczba i czas pauz
+function biegStoperWynik(st, teraz) {
+  const czasPauz = st.czasPauz + (st.stan === "pauza" && st.pauzaOd ? Math.max(0, teraz - st.pauzaOd) : 0);
+  return {
+    czasS: Math.round(biegStoperCzas(st, teraz) / 1000),
+    pauzy: st.pauzy,
+    czasPauzS: Math.round(czasPauz / 1000)
+  };
+}
+
+// "4:07" albo "1:02:07"
+function biegFormatCzasu(sek) {
+  sek = Math.max(0, Math.floor(sek));
+  const h = Math.floor(sek / 3600);
+  const m = Math.floor((sek % 3600) / 60);
+  const s = sek % 60;
+  return (h > 0 ? h + ":" + String(m).padStart(2, "0") : String(m)) + ":" + String(s).padStart(2, "0");
+}

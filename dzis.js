@@ -399,9 +399,33 @@ function zrobKarteDzis(plan, sesja) {
     if (sesja.notatka) {
       karta.appendChild(tekstElement("div", "karta-opis", sesja.notatka));
     }
+    const bieg = aktywnosc && aktywnosc.rodzajId === "rodzaj-bieganie";
+    if (bieg && sesja.wynikSzkic && !sesja.wynik) {
+      karta.appendChild(tekstElement("div", "dzis-wynik", "Niezapisany bieg: " + opisCeluSesji(sesja.wynikSzkic)));
+    }
+    if (bieg && sesja.wynikSzkic && !sesja.wynik) {
+      const odrzuc = tekstElement("button", "akcja usun", "Odrzuć pomiar");
+      odrzuc.type = "button";
+      odrzuc.addEventListener("click", function () {
+        if (confirm("Odrzucić zmierzony bieg? Tego nie da się cofnąć.")) {
+          delete sesja.wynikSzkic;
+          zapiszDane();
+          rysujDzis();
+        }
+      });
+      karta.appendChild(odrzuc);
+    }
+    if (bieg && !sesja.wynik && !sesja.wynikSzkic) {
+      const start = tekstElement("button", "przycisk wielki bieg-start", "▶ Start");
+      start.type = "button";
+      start.addEventListener("click", function () {
+        biegStart(plan, sesja);
+      });
+      karta.appendChild(start);
+    }
     const przycisk = document.createElement("button");
-    przycisk.className = "przycisk wielki" + (sesja.wynik ? " drugi" : "");
-    przycisk.textContent = sesja.wynik ? "Zmień wynik" : "Wpisz wynik";
+    przycisk.className = "przycisk wielki" + (sesja.wynik || (bieg && !sesja.wynikSzkic) ? " drugi" : "");
+    przycisk.textContent = sesja.wynik ? "Zmień wynik" : bieg && sesja.wynikSzkic ? "Zapisz wynik biegu" : bieg ? "Wpisz wynik ręcznie" : "Wpisz wynik";
     przycisk.addEventListener("click", function () {
       otworzWynik(plan, sesja);
     });
@@ -1140,8 +1164,8 @@ function otworzWynik(plan, sesja) {
   wynikBlad.textContent = "";
   wynikPola.innerHTML = "";
 
-  // Pola są wstępnie wypełnione wynikiem (jeśli już był) albo celem z planu
-  const start = sesja.wynik || sesja;
+  // Pola są wstępnie wypełnione pomiarem (stoper), wynikiem (jeśli już był) albo celem z planu
+  const start = sesja.wynikSzkic || sesja.wynik || sesja;
   const kopia = {
     styl: start.styl,
     etapy: start.etapy,
@@ -1152,8 +1176,11 @@ function otworzWynik(plan, sesja) {
     obciazenie: start.obciazenie,
     czas: start.czas,
     wysilek: sesja.wynik ? sesja.wynik.wysilek : null,
-    zrodlo: sesja.wynik ? sesja.wynik.zrodlo : null
+    zrodlo: sesja.wynikSzkic ? sesja.wynikSzkic.zrodlo : sesja.wynik ? sesja.wynik.zrodlo : null
   };
+  if (sesja.wynikSzkic) {
+    kopia.dystans = sesja.wynikSzkic.dystans;
+  }
   if (aktywnosc.rodzajId === "rodzaj-bieganie" && sesja.rodzajBiegu) {
     wynikTytul.textContent += " · " + biegRodzaj(sesja.rodzajBiegu).nazwa.toLowerCase();
   }
@@ -1174,6 +1201,11 @@ function zapiszWynik() {
   if (wynik === null) {
     wynikBlad.textContent = "Popraw zaznaczone pole.";
     return;
+  }
+  if (wynikSesja.wynikSzkic) {
+    wynik.pauzy = wynikSesja.wynikSzkic.pauzy;
+    wynik.czasPauzS = wynikSesja.wynikSzkic.czasPauzS;
+    delete wynikSesja.wynikSzkic;
   }
   wynikSesja.wynik = wynik;
   wynikSesja.dataWykonania = dzisISO();

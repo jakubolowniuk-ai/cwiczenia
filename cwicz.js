@@ -654,7 +654,17 @@ function rysujUstawieniaTreningu() {
   ustWibracja.setAttribute("aria-checked", wi ? "true" : "false");
   ustWibracja.classList.toggle("wlaczony", wi);
   ustPrzerwa.value = String(dane.ustawienia.przerwa || 60);
+  const be = dane.ustawienia.biegEkran !== false;
+  const ustBiegEkran = document.getElementById("ust-bieg-ekran");
+  ustBiegEkran.setAttribute("aria-checked", be ? "true" : "false");
+  ustBiegEkran.classList.toggle("wlaczony", be);
 }
+
+document.getElementById("ust-bieg-ekran").addEventListener("click", function () {
+  dane.ustawienia.biegEkran = dane.ustawienia.biegEkran === false;
+  zapiszDane();
+  rysujUstawieniaTreningu();
+});
 
 document.getElementById("otworz-ustawienia").addEventListener("click", rysujUstawieniaTreningu);
 ustDzwiek.addEventListener("click", function () {

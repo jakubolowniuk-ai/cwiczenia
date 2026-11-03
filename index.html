@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=81">
+  <link rel="stylesheet" href="style.css?v=82">
 </head>
 <body>
 
@@ -493,6 +493,12 @@
           <button class="przelacznik-wl" id="ust-wibracja" role="switch" aria-checked="true" aria-label="Wibracja po przerwie"><span></span></button>
         </div>
         <div class="ust-linia"></div>
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Ekran nie gaśnie podczas biegu</div>
+          <button class="przelacznik-wl" id="ust-bieg-ekran" role="switch" aria-checked="true" aria-label="Ekran nie gaśnie podczas biegu"><span></span></button>
+        </div>
+        <p class="opis">Zużywa więcej baterii, ale stoper i sygnały działają pewniej.</p>
+        <div class="ust-linia"></div>
         <label class="ust-nazwa" for="ust-przerwa">Domyślna przerwa między seriami (s)</label>
         <input type="number" id="ust-przerwa" class="ust-godzina" min="5" max="900" step="5" value="60" inputmode="numeric">
         <p class="opis">Przerwę dla konkretnego ćwiczenia zmienisz w trakcie ćwiczenia przyciskami −15 s i +15 s. Aplikacja ją zapamięta.</p>
@@ -622,7 +628,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=81"></script>
+  <script src="dane.js?v=82"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -645,19 +651,20 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=81"></script>
-  <script src="cwiczenia.js?v=81"></script>
-  <script src="treningi.js?v=81"></script>
-  <script src="bieg-logika.js?v=81"></script>
-  <script src="kreator.js?v=81"></script>
-  <script src="kreator2.js?v=81"></script>
-  <script src="dzis.js?v=81"></script>
-  <script src="postep.js?v=81"></script>
-  <script src="rekordy.js?v=81"></script>
-  <script src="cwicz.js?v=81"></script>
-  <script src="mozliwosci.js?v=81"></script>
-  <script src="ustawienia.js?v=81"></script>
-  <script src="kopia.js?v=81"></script>
+  <script src="anatomia.js?v=82"></script>
+  <script src="cwiczenia.js?v=82"></script>
+  <script src="treningi.js?v=82"></script>
+  <script src="bieg-logika.js?v=82"></script>
+  <script src="kreator.js?v=82"></script>
+  <script src="kreator2.js?v=82"></script>
+  <script src="dzis.js?v=82"></script>
+  <script src="postep.js?v=82"></script>
+  <script src="rekordy.js?v=82"></script>
+  <script src="cwicz.js?v=82"></script>
+  <script src="bieg.js?v=82"></script>
+  <script src="mozliwosci.js?v=82"></script>
+  <script src="ustawienia.js?v=82"></script>
+  <script src="kopia.js?v=82"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -672,13 +679,13 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=81"></script>
-  <script src="plan-kreator.js?v=81"></script>
-  <script src="plan-progresja.js?v=81"></script>
-  <script src="plan-zamiana.js?v=81"></script>
-  <script src="sciezki.js?v=81"></script>
-  <script src="cele.js?v=81"></script>
-  <script src="przewodnik.js?v=81"></script>
-  <script src="app.js?v=81"></script>
+  <script src="plan-generator.js?v=82"></script>
+  <script src="plan-kreator.js?v=82"></script>
+  <script src="plan-progresja.js?v=82"></script>
+  <script src="plan-zamiana.js?v=82"></script>
+  <script src="sciezki.js?v=82"></script>
+  <script src="cele.js?v=82"></script>
+  <script src="przewodnik.js?v=82"></script>
+  <script src="app.js?v=82"></script>
 </body>
 </html>
