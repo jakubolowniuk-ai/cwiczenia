@@ -453,3 +453,7 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Import GPX: na karcie biegu w Dziś „Wczytaj bieg z pliku GPX” – dystans, czas ruchu (przerwy dłuższe niż 30 s to pauzy), data z pliku; potem zwykłe okno wyniku.
 - Testy: filtr na trasach syntetycznych (błąd ≤ 2,5% przy szumie 4–8 m, skoki 300 m odrzucone, stanie 120 s = 0 m), symulowany GPS w Chromium (Start, pauza ze skokiem, Stop, zapis, przeliczenie, eksport i import GPX, odświeżenie w trakcie biegu, brak zgody, słaby sygnał, sprzątanie).
 - Nie ma jeszcze: mapy trasy, przełączania odcinków po dystansie, GPS przy wygaszonym ekranie (wymaga wersji natywnej).
+
+## v88 – Tempo zawsze widoczne
+
+- Kafel tempa na ekranie biegu i podgląd tempa w oknie wyniku są teraz widoczne na każdym poziomie szczegółów (wcześniej tylko „Zaawansowany”). Poziom nadal ukrywa tempo w Postępie i historii, rekordy oraz obciążenie.

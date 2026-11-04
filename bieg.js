@@ -139,11 +139,7 @@ function biegOtworzEkran() {
   kTempo.appendChild(kTempoWart);
   kTempo.appendChild(kTempoEtyk);
   kafle.appendChild(kDyst);
-  if (biegPoziomUst() === "zaawansowany") {
-    kafle.appendChild(kTempo);
-  } else {
-    kafle.classList.add("jeden");
-  }
+  kafle.appendChild(kTempo);
   biegEkran.appendChild(kafle);
   const gpsEl = gpsZbudujEkran(biegEkran, { dystWart: kDystWart, dystEtyk: kDystEtyk, tempoWart: kTempoWart, tempoEtyk: kTempoEtyk });
 

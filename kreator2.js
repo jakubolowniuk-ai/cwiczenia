@@ -1172,7 +1172,7 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
 
   // Bieganie: tempo liczone z dystansu i czasu (nie wpisuje się go)
   let tempoInfo = null;
-  if (bieg && dystans && czas && !pocz) {
+  if (bieg && dystans && czas) {
     tempoInfo = tekstElement("p", "bieg-tempo", "");
     const odswiezTempo = function () {
       const dyst = Number(dystans.pole.value) || 0;
