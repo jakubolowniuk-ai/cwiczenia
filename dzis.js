@@ -414,6 +414,9 @@ function zrobKarteDzis(plan, sesja) {
       odrzuc.type = "button";
       odrzuc.addEventListener("click", function () {
         if (confirm("Odrzucić zmierzony bieg? Tego nie da się cofnąć.")) {
+          if (sesja.wynikSzkic && sesja.wynikSzkic.trasaId) {
+            gpsUsunTrase(sesja.wynikSzkic.trasaId);
+          }
           delete sesja.wynikSzkic;
           zapiszDane();
           rysujDzis();
@@ -428,6 +431,10 @@ function zrobKarteDzis(plan, sesja) {
         biegStart(plan, sesja);
       });
       karta.appendChild(start);
+      const import_ = tekstElement("button", "akcja bieg-import", "Wczytaj bieg z pliku GPX (zegarek, inna aplikacja)");
+      import_.type = "button";
+      import_.addEventListener("click", function () { gpsImportuj(plan, sesja); });
+      karta.appendChild(import_);
     }
     const przycisk = document.createElement("button");
     przycisk.className = "przycisk wielki" + (sesja.wynik || (bieg && !sesja.wynikSzkic) ? " drugi" : "");
@@ -1172,7 +1179,11 @@ function otworzWynik(plan, sesja) {
   wynikPola.innerHTML = "";
   const podpis = document.getElementById("wynik-podpis");
   if (podpis) {
-    podpis.textContent = sesja.wynikSzkic ? "Pola są wypełnione pomiarem ze stopera. Popraw je, jeśli trzeba (np. dopisz dystans z bieżni)." : sesja.wynik ? "Popraw wynik, jeśli trzeba." : "Pola są wypełnione celem z planu. Popraw je, jeśli wynik był inny.";
+    const sz = sesja.wynikSzkic;
+    podpis.textContent = sz && sz.gps && sz.gps.import ? "Dane z pliku GPX. Popraw je, jeśli trzeba." :
+      sz && sz.zrodlo === "gps" ? "Dystans policzony z GPS." + (sz.gps && sz.gps.slaby ? " Sygnał był słaby na części trasy, więc dystans mógł wyjść za mały – popraw go, jeśli znasz właściwy." : " Popraw go, jeśli trzeba.") :
+      sz && sz.gps && sz.gps.brak ? "GPS nie zmierzył dystansu (za krótka trasa albo brak sygnału). Wpisz go, jeśli znasz (np. z bieżni)." :
+      sz ? "Pola są wypełnione pomiarem ze stopera. Popraw je, jeśli trzeba (np. dopisz dystans z bieżni)." : sesja.wynik ? "Popraw wynik, jeśli trzeba." : "Pola są wypełnione celem z planu. Popraw je, jeśli wynik był inny.";
   }
 
   // Pola są wstępnie wypełnione pomiarem (stoper), wynikiem (jeśli już był) albo celem z planu
@@ -1233,13 +1244,18 @@ function zapiszWynik() {
       return;
     }
   }
-  if (wynikSesja.wynikSzkic) {
-    wynik.pauzy = wynikSesja.wynikSzkic.pauzy;
-    wynik.czasPauzS = wynikSesja.wynikSzkic.czasPauzS;
+  const szkic = wynikSesja.wynikSzkic || null;
+  if (szkic) {
+    wynik.pauzy = szkic.pauzy;
+    wynik.czasPauzS = szkic.czasPauzS;
+    if (szkic.trasaId) {
+      wynik.trasaId = szkic.trasaId;
+      wynik.gps = szkic.gps;
+    }
     delete wynikSesja.wynikSzkic;
   }
   wynikSesja.wynik = wynik;
-  wynikSesja.dataWykonania = dzisISO();
+  wynikSesja.dataWykonania = szkic && szkic.dataBiegu ? szkic.dataBiegu : dzisISO();
   zapiszDane();
   const rodzajWyniku = wynikRodzajId;
   if (rodzajWyniku === "rodzaj-bieganie" && typeof celeSprawdzBieg === "function") {

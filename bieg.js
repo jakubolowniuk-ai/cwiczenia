@@ -56,10 +56,20 @@ document.addEventListener("visibilitychange", function () {
 
 // Start biegu z karty Dziś
 function biegStart(plan, sesja) {
+  // Pierwszy Start: najpierw pytamy, czy mierzyć GPS (zgodę systemową przeglądarka poprosi przy włączeniu pomiaru)
+  if (dane.ustawienia.biegGps === undefined && gpsDostepny()) {
+    gpsZapytajOZgode(function () { biegStart(plan, sesja); });
+    return;
+  }
   if (typeof cwSygnal === "function") {
     cwSygnal(0);
   }
   biegStan = biegStoperNowy(sesja.id, plan.id, Date.now());
+  if (gpsWlaczony()) {
+    biegStan.gps = true;
+    biegStan.trasaId = gpsNowyId();
+    biegStan.gpsSeg = 0;
+  }
   if (sesja.odcinki && sesja.odcinki.length) {
     biegStan.odc = { nr: 0, startMs: 0, wyniki: [] };
   }
@@ -119,11 +129,15 @@ function biegOtworzEkran() {
   const kafle = document.createElement("div");
   kafle.className = "bieg-ekran-kafle";
   const kDyst = document.createElement("div");
-  kDyst.appendChild(tekstElement("span", "bieg-ekran-wart", "—"));
-  kDyst.appendChild(tekstElement("span", "bieg-ekran-etyk", "dystans (bez GPS)"));
+  const kDystWart = tekstElement("span", "bieg-ekran-wart", "—");
+  const kDystEtyk = tekstElement("span", "bieg-ekran-etyk", "dystans (bez GPS)");
+  kDyst.appendChild(kDystWart);
+  kDyst.appendChild(kDystEtyk);
   const kTempo = document.createElement("div");
-  kTempo.appendChild(tekstElement("span", "bieg-ekran-wart", "—"));
-  kTempo.appendChild(tekstElement("span", "bieg-ekran-etyk", "tempo"));
+  const kTempoWart = tekstElement("span", "bieg-ekran-wart", "—");
+  const kTempoEtyk = tekstElement("span", "bieg-ekran-etyk", "tempo");
+  kTempo.appendChild(kTempoWart);
+  kTempo.appendChild(kTempoEtyk);
   kafle.appendChild(kDyst);
   if (biegPoziomUst() === "zaawansowany") {
     kafle.appendChild(kTempo);
@@ -131,6 +145,7 @@ function biegOtworzEkran() {
     kafle.classList.add("jeden");
   }
   biegEkran.appendChild(kafle);
+  const gpsEl = gpsZbudujEkran(biegEkran, { dystWart: kDystWart, dystEtyk: kDystEtyk, tempoWart: kTempoWart, tempoEtyk: kTempoEtyk });
 
   const dol = document.createElement("div");
   dol.className = "bieg-ekran-dol";
@@ -156,6 +171,9 @@ function biegOtworzEkran() {
 
   pauza.addEventListener("click", function () {
     const teraz = Date.now();
+    if (biegStan.stan !== "trwa") {
+      gpsNowySegment();
+    }
     biegStan = biegStan.stan === "trwa" ? biegStoperPauza(biegStan, teraz) : biegStoperWznow(biegStan, teraz);
     biegZapiszStan();
     biegRysujCzas();
@@ -181,6 +199,7 @@ function biegOtworzEkran() {
       biegStan = biegStoperWznow(biegStan, teraz);
       biegStan.pauzy = Math.max(0, biegStan.pauzy - 1);
       biegStan.czasPauz = Math.max(0, biegStan.czasPauz - przerwa);
+      gpsNowySegment();
     }
     delete biegStan.pauzaZeStopu;
     delete biegStan.stopOd;
@@ -195,9 +214,12 @@ function biegOtworzEkran() {
     dol.hidden = true;
     potw.hidden = false;
   }
-  biegEkran._el = { czas: czas, cel: cel, stan: stanTekst, pauza: pauza, sesja: z.sesja, odcNazwa: odcNazwa, odcCzas: odcCzas, odcNast: odcNast, odcDalej: odcDalej };
+  biegEkran._el = { czas: czas, cel: cel, stan: stanTekst, pauza: pauza, sesja: z.sesja, odcNazwa: odcNazwa, odcCzas: odcCzas, odcNast: odcNast, odcDalej: odcDalej, gps: gpsEl };
   document.body.appendChild(biegEkran);
   biegZajmijEkran();
+  if (biegStan.gps && gpsNasluch === null) {
+    gpsStartPomiaru();
+  }
   biegRysujCzas();
   biegOdswiez = setInterval(biegRysujCzas, 250);
 }
@@ -212,6 +234,7 @@ function biegRysujCzas() {
   const pauza = biegStan.stan === "pauza";
   el.pauza.textContent = pauza ? "Wznów" : "Pauza";
   el.pauza.classList.toggle("wznow", pauza);
+  biegRysujGps();
   el.stan.textContent = biegStan.stopOd ? "Zatrzymano – zakończyć bieg?" : pauza ? "Pauza" : "";
   biegEkran.classList.toggle("pauza", pauza);
   // Odcinki: przejście do następnego, gdy minął czas bieżącego; sygnał tylko przy zmianie
@@ -320,15 +343,22 @@ function biegStop() {
       }
     }
   }
+  const g = gpsDoSzkicu(st0);
   z.sesja.wynikSzkic = {
     odcinkiWyniki: odcinkiWyniki,
     czas: w.czasS > 0 ? { wartosc: w.czasS, jednostka: "s" } : null,
-    dystans: null,
+    dystans: g && g.dystans ? g.dystans : null,
     pauzy: w.pauzy,
     czasPauzS: w.czasPauzS,
-    zrodlo: "stoper",
+    zrodlo: g && g.dystans ? "gps" : "stoper",
     data: dzisISO()
   };
+  if (g && g.trasaId) {
+    z.sesja.wynikSzkic.trasaId = g.trasaId;
+    z.sesja.wynikSzkic.gps = g.gps;
+  } else if (g && g.brak) {
+    z.sesja.wynikSzkic.gps = { brak: true };
+  }
   zapiszDane();
   rysujDzis();
   otworzWynik(z.plan, z.sesja);
@@ -630,6 +660,9 @@ function biegZbierzBiegi() {
         zrodlo: s.wynik.zrodlo || "reczny",
         obciazenie: s.wynik.obciazenie || null,
         odcinkiWyniki: s.wynik.odcinkiWyniki || null,
+        trasaId: s.wynik.trasaId || null,
+        gps: s.wynik.gps || null,
+        sesja: s,
         plan: nazwaPlanu(plan)
       });
     });
@@ -831,6 +864,27 @@ function biegOtworzSzczegoly(b) {
     karta.appendChild(w);
   });
   postepOknoTresc.appendChild(karta);
+  if (b.trasaId) {
+    const info = tekstElement("p", "opis", b.gps && b.gps.slaby ? "Sygnał GPS był słaby na części trasy, dystans mógł wyjść za mały." : "");
+    postepOknoTresc.appendChild(info);
+    const gpx = tekstElement("button", "przycisk", "Pobierz trasę (GPX)");
+    gpx.type = "button";
+    gpx.addEventListener("click", function () { gpsPobierzGpx(b); });
+    postepOknoTresc.appendChild(gpx);
+    const przelicz = tekstElement("button", "przycisk drugi", "Przelicz dystans z zapisanej trasy");
+    przelicz.type = "button";
+    przelicz.addEventListener("click", function () {
+      gpsPrzeliczBieg(b.sesja).then(function (r) {
+        if (!r) {
+          info.textContent = "Nie znalazłem zapisanej trasy w tym telefonie.";
+          return;
+        }
+        info.textContent = r.stare === null ? "Dystans: " + biegKm(r.nowe) + "." : "Było " + biegKm(r.stare) + ", jest " + biegKm(r.nowe) + ".";
+        b.dystansM = r.nowe;
+      });
+    });
+    postepOknoTresc.appendChild(przelicz);
+  }
   if (b.odcinkiWyniki && b.odcinkiWyniki.length) {
     const k2 = document.createElement("div");
     k2.className = "pp-karta";
@@ -859,6 +913,12 @@ function biegRysujUstawienia() {
   const s = document.getElementById("ust-bieg-serie");
   s.setAttribute("aria-checked", biegSerieWlaczone() ? "true" : "false");
   s.classList.toggle("wlaczony", biegSerieWlaczone());
+  const g = document.getElementById("ust-bieg-gps");
+  if (g) {
+    const wl = dane.ustawienia.biegGps === true;
+    g.setAttribute("aria-checked", wl ? "true" : "false");
+    g.classList.toggle("wlaczony", wl);
+  }
 }
 
 (function () {

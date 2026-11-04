@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=86">
+  <link rel="stylesheet" href="style.css?v=87">
 </head>
 <body>
 
@@ -510,6 +510,14 @@
           <button class="przelacznik-wl" id="ust-bieg-serie" role="switch" aria-checked="true" aria-label="Serie i rekordy biegowe"><span></span></button>
         </div>
         <div class="ust-linia"></div>
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Pomiar GPS podczas biegu</div>
+          <button class="przelacznik-wl" id="ust-bieg-gps" role="switch" aria-checked="false" aria-label="Pomiar GPS podczas biegu"><span></span></button>
+        </div>
+        <p class="opis">Dystans i tempo z lokalizacji telefonu. Trasa zostaje tylko w telefonie. Ekran musi być włączony, a aplikacja na wierzchu. Na bieżni wyłącz GPS (można też w trakcie biegu).</p>
+        <button class="przycisk" id="ust-bieg-przelicz" type="button">Przelicz dystanse z zapisanych tras</button>
+        <p class="opis" id="ust-bieg-przelicz-info"></p>
+        <div class="ust-linia"></div>
         <label class="ust-nazwa" for="ust-przerwa">Domyślna przerwa między seriami (s)</label>
         <input type="number" id="ust-przerwa" class="ust-godzina" min="5" max="900" step="5" value="60" inputmode="numeric">
         <p class="opis">Przerwę dla konkretnego ćwiczenia zmienisz w trakcie ćwiczenia przyciskami −15 s i +15 s. Aplikacja ją zapamięta.</p>
@@ -639,7 +647,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=86"></script>
+  <script src="dane.js?v=87"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -662,20 +670,22 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=86"></script>
-  <script src="cwiczenia.js?v=86"></script>
-  <script src="treningi.js?v=86"></script>
-  <script src="bieg-logika.js?v=86"></script>
-  <script src="kreator.js?v=86"></script>
-  <script src="kreator2.js?v=86"></script>
-  <script src="dzis.js?v=86"></script>
-  <script src="postep.js?v=86"></script>
-  <script src="rekordy.js?v=86"></script>
-  <script src="cwicz.js?v=86"></script>
-  <script src="bieg.js?v=86"></script>
-  <script src="mozliwosci.js?v=86"></script>
-  <script src="ustawienia.js?v=86"></script>
-  <script src="kopia.js?v=86"></script>
+  <script src="anatomia.js?v=87"></script>
+  <script src="cwiczenia.js?v=87"></script>
+  <script src="treningi.js?v=87"></script>
+  <script src="bieg-logika.js?v=87"></script>
+  <script src="gps-logika.js?v=87"></script>
+  <script src="gps.js?v=87"></script>
+  <script src="kreator.js?v=87"></script>
+  <script src="kreator2.js?v=87"></script>
+  <script src="dzis.js?v=87"></script>
+  <script src="postep.js?v=87"></script>
+  <script src="rekordy.js?v=87"></script>
+  <script src="cwicz.js?v=87"></script>
+  <script src="bieg.js?v=87"></script>
+  <script src="mozliwosci.js?v=87"></script>
+  <script src="ustawienia.js?v=87"></script>
+  <script src="kopia.js?v=87"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -690,14 +700,14 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=86"></script>
-  <script src="plan-bieg.js?v=86"></script>
-  <script src="plan-kreator.js?v=86"></script>
-  <script src="plan-progresja.js?v=86"></script>
-  <script src="plan-zamiana.js?v=86"></script>
-  <script src="sciezki.js?v=86"></script>
-  <script src="cele.js?v=86"></script>
-  <script src="przewodnik.js?v=86"></script>
-  <script src="app.js?v=86"></script>
+  <script src="plan-generator.js?v=87"></script>
+  <script src="plan-bieg.js?v=87"></script>
+  <script src="plan-kreator.js?v=87"></script>
+  <script src="plan-progresja.js?v=87"></script>
+  <script src="plan-zamiana.js?v=87"></script>
+  <script src="sciezki.js?v=87"></script>
+  <script src="cele.js?v=87"></script>
+  <script src="przewodnik.js?v=87"></script>
+  <script src="app.js?v=87"></script>
 </body>
 </html>
