@@ -2127,3 +2127,20 @@ h1 {
 .odc-dol .odc-tempo { flex: 1 1 auto; min-width: 0; width: auto; }
 .odc-edytor .odc-gora { grid-template-columns: 1fr 64px 88px; }
 .sciezka-nazwa.bez-linku { text-decoration: none; cursor: default; }
+
+/* Bieganie w Postępie */
+.bieg-karta { display: flex; flex-direction: column; gap: 8px; margin-bottom: 12px; }
+.bieg-tydzien { font-weight: 700; color: var(--tekst); }
+.bieg-chipy { display: flex; gap: 8px; }
+.bieg-wykres { width: 100%; height: auto; }
+.bieg-wykres .slupek { fill: var(--an-miesien); }
+.bieg-wykres .slupek.teraz { fill: var(--akcent); }
+.bieg-wykres .wartosc { font-size: 11px; font-weight: 700; fill: var(--tekst); text-anchor: middle; }
+.bieg-wykres .etykieta { font-size: 10px; fill: var(--tekst-szary); text-anchor: middle; }
+.bieg-seria { font-weight: 600; color: var(--akcent); }
+.bieg-rek { display: flex; justify-content: space-between; gap: 8px; padding: 6px 0; border-bottom: 1px solid var(--linia); color: var(--tekst); }
+.bieg-rek-nagl { margin-top: 6px; }
+.bieg-hist-wiersz { display: flex; flex-direction: column; gap: 2px; width: 100%; text-align: left; padding: 12px; margin-bottom: 8px; font: inherit; color: var(--tekst); background: var(--karta); border: 1px solid var(--linia); border-radius: 12px; cursor: pointer; }
+.bieg-hist-gora { font-weight: 700; }
+.bieg-ekran-kafle.jeden { grid-template-columns: 1fr; }
+#ust-bieg-poziom { margin: 8px 0; }

@@ -1163,7 +1163,8 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
 
   // Opcjonalne obciążenie (plecak, kamizelka) dla biegania i spaceru
   let obciazenie = null;
-  if (aktywnosc.rodzajId === "rodzaj-bieganie" || aktywnosc.rodzajId === "rodzaj-spacer") {
+  const pocz = bieg && opcje.wynik && typeof biegPoziomUst === "function" && biegPoziomUst() === "poczatkujacy";
+  if ((aktywnosc.rodzajId === "rodzaj-bieganie" || aktywnosc.rodzajId === "rodzaj-spacer") && !(pocz && !sesja.obciazenie)) {
     obciazenie = zrobPoleLiczbowe("Obciążenie (kg) – plecak, kamizelka; puste, jeśli bez", sesja.obciazenie || "", true);
     obciazenie.pole.placeholder = "bez";
     karta.appendChild(obciazenie.blok);
@@ -1171,7 +1172,7 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
 
   // Bieganie: tempo liczone z dystansu i czasu (nie wpisuje się go)
   let tempoInfo = null;
-  if (bieg && dystans && czas) {
+  if (bieg && dystans && czas && !pocz) {
     tempoInfo = tekstElement("p", "bieg-tempo", "");
     const odswiezTempo = function () {
       const dyst = Number(dystans.pole.value) || 0;

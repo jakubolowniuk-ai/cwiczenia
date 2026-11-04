@@ -125,7 +125,11 @@ function biegOtworzEkran() {
   kTempo.appendChild(tekstElement("span", "bieg-ekran-wart", "—"));
   kTempo.appendChild(tekstElement("span", "bieg-ekran-etyk", "tempo"));
   kafle.appendChild(kDyst);
-  kafle.appendChild(kTempo);
+  if (biegPoziomUst() === "zaawansowany") {
+    kafle.appendChild(kTempo);
+  } else {
+    kafle.classList.add("jeden");
+  }
   biegEkran.appendChild(kafle);
 
   const dol = document.createElement("div");
@@ -596,3 +600,284 @@ function biegEdytorOdcinkow(poczatkowe, poZmianie, przySzablonie) {
     }
   };
 }
+
+// ===== Poziom szczegółów i statystyki biegania =====
+
+function biegPoziomUst() {
+  return dane.ustawienia.biegPoziom === "zaawansowany" ? "zaawansowany" : "poczatkujacy";
+}
+
+function biegSerieWlaczone() {
+  return dane.ustawienia.biegSerie !== false;
+}
+
+// Wszystkie zapisane biegi ze wszystkich planów
+function biegZbierzBiegi() {
+  const lista = [];
+  dane.plany.forEach(function (plan) {
+    plan.sesje.forEach(function (s) {
+      const a = plan.aktywnosci.find(function (x) { return x.id === s.aktywnoscId; });
+      if (!a || a.rodzajId !== "rodzaj-bieganie" || !s.wynik) {
+        return;
+      }
+      lista.push({
+        data: s.dataWykonania || dataPlanu(plan, s.dzien).toISOString().slice(0, 10),
+        czasS: biegSekundy(s.wynik.czas),
+        dystansM: biegMetry(s.wynik.dystans),
+        rodzajBiegu: s.rodzajBiegu || "spokojny",
+        wysilek: typeof s.wynik.wysilek === "number" ? s.wynik.wysilek : null,
+        pauzy: s.wynik.pauzy || 0,
+        zrodlo: s.wynik.zrodlo || "reczny",
+        obciazenie: s.wynik.obciazenie || null,
+        odcinkiWyniki: s.wynik.odcinkiWyniki || null,
+        plan: nazwaPlanu(plan)
+      });
+    });
+  });
+  return lista.sort(function (a, b) { return a.data < b.data ? 1 : a.data > b.data ? -1 : 0; });
+}
+
+function biegKm(m) {
+  return String(Math.round(m / 10) / 100).replace(".", ",") + " km";
+}
+
+function biegCzasDlugi(s) {
+  const h = Math.floor(s / 3600);
+  const m = Math.round((s % 3600) / 60);
+  return h > 0 ? h + " h " + m + " min" : m + " min";
+}
+
+function biegDataPL(iso) {
+  const c = iso.split("-");
+  return Number(c[2]) + "." + c[1];
+}
+
+// Wykres słupkowy ostatnich tygodni (SVG): czas w minutach albo dystans w km
+function biegWykres(tygodnie, miara) {
+  const sz = 320;
+  const wys = 150;
+  const n = tygodnie.length;
+  const wart = tygodnie.map(function (t) { return miara === "dystans" ? t.dystansM / 1000 : t.czasS / 60; });
+  const max = Math.max.apply(null, wart.concat([miara === "dystans" ? 5 : 30]));
+  const ns = "http://www.w3.org/2000/svg";
+  const svg = document.createElementNS(ns, "svg");
+  svg.setAttribute("viewBox", "0 0 " + sz + " " + (wys + 34));
+  svg.setAttribute("class", "bieg-wykres");
+  svg.setAttribute("role", "img");
+  svg.setAttribute("aria-label", (miara === "dystans" ? "Dystans" : "Czas biegu") + " w ostatnich " + n + " tygodniach");
+  const szer = sz / n;
+  wart.forEach(function (v, i) {
+    const h = v > 0 ? Math.max(3, Math.round(v / max * (wys - 18))) : 0;
+    const x = i * szer + szer * 0.18;
+    const r = document.createElementNS(ns, "rect");
+    r.setAttribute("x", x);
+    r.setAttribute("y", wys - h);
+    r.setAttribute("width", szer * 0.64);
+    r.setAttribute("height", h);
+    r.setAttribute("rx", 3);
+    r.setAttribute("class", i === n - 1 ? "slupek teraz" : "slupek");
+    svg.appendChild(r);
+    if (v > 0) {
+      const t = document.createElementNS(ns, "text");
+      t.setAttribute("x", x + szer * 0.32);
+      t.setAttribute("y", wys - h - 4);
+      t.setAttribute("class", "wartosc");
+      t.textContent = miara === "dystans" ? String(Math.round(v * 10) / 10).replace(".", ",") : Math.round(v);
+      svg.appendChild(t);
+    }
+    const e = document.createElementNS(ns, "text");
+    e.setAttribute("x", x + szer * 0.32);
+    e.setAttribute("y", wys + 16);
+    e.setAttribute("class", "etykieta");
+    e.textContent = biegDataPL(tygodnie[i].tydzien);
+    svg.appendChild(e);
+  });
+  return svg;
+}
+
+let biegMiaraWykresu = "czas";
+
+function biegKartaPostepu() {
+  const biegi = biegZbierzBiegi();
+  if (!biegi.length) {
+    return null;
+  }
+  const zaaw = biegPoziomUst() === "zaawansowany";
+  const dzis = dzisISO();
+  const karta = document.createElement("div");
+  karta.className = "pp-karta bieg-karta";
+  karta.appendChild(tekstElement("div", "pp-naglowek", "Bieganie"));
+
+  const tyg = biegOstatnieTygodnie(biegi, dzis, 8);
+  const ten = tyg[tyg.length - 1];
+  const czesci = [ten.biegow + " " + (ten.biegow === 1 ? "bieg" : ten.biegow > 1 && ten.biegow < 5 ? "biegi" : "biegów"), biegCzasDlugi(ten.czasS)];
+  if (ten.dystansM) {
+    czesci.push(biegKm(ten.dystansM));
+  }
+  if (zaaw && ten.dystansM && ten.czasZDystansemS) {
+    czesci.push("śr. " + biegOpisTempa(ten.czasZDystansemS / (ten.dystansM / 1000)));
+  }
+  karta.appendChild(tekstElement("div", "bieg-tydzien", "Ten tydzień: " + czesci.join(" · ")));
+
+  // Wykres: początkujący – minuty; zaawansowany – przełącznik czas / dystans
+  const miara = zaaw ? biegMiaraWykresu : "czas";
+  if (zaaw) {
+    const chipy = document.createElement("div");
+    chipy.className = "chipy bieg-chipy";
+    [["czas", "Czas"], ["dystans", "Dystans"]].forEach(function (m) {
+      const c = tekstElement("button", "chip" + (miara === m[0] ? " aktywny" : ""), m[1]);
+      c.type = "button";
+      c.addEventListener("click", function () {
+        biegMiaraWykresu = m[0];
+        rysujPostep();
+      });
+      chipy.appendChild(c);
+    });
+    karta.appendChild(chipy);
+  }
+  karta.appendChild(tekstElement("div", "opis", miara === "dystans" ? "Kilometry w tygodniu (tylko biegi z dystansem)" : "Minuty biegu w tygodniu"));
+  karta.appendChild(biegWykres(tyg, miara));
+
+  if (biegSerieWlaczone()) {
+    const seria = biegSeriaTygodni(biegi, dzis);
+    if (seria.najdluzsza > 0) {
+      karta.appendChild(tekstElement("div", "bieg-seria", "Seria: " + seria.biezaca + " " + (seria.biezaca === 1 ? "tydzień" : "tyg.") + " z biegiem z rzędu" + (seria.najdluzsza > seria.biezaca ? " (najdłuższa: " + seria.najdluzsza + ")" : "")));
+    }
+    if (zaaw) {
+      const r = biegRekordy(biegi);
+      const lista = [];
+      if (r.najdluzszyDystans) {
+        lista.push(["Najdłuższy dystans", biegKm(r.najdluzszyDystans.dystansM) + " · " + biegDataPL(r.najdluzszyDystans.data)]);
+      }
+      if (r.najdluzszyCzas) {
+        lista.push(["Najdłuższy bieg", biegCzasDlugi(r.najdluzszyCzas.czasS) + " · " + biegDataPL(r.najdluzszyCzas.data)]);
+      }
+      BIEG_DYSTANSE_REKORDOW.forEach(function (d) {
+        const x = r.najszybsze[d[0]];
+        if (x) {
+          lista.push(["Najszybsze " + d[1], biegFormatCzasu(x.czasS) + " · " + biegDataPL(x.data)]);
+        }
+      });
+      if (lista.length) {
+        karta.appendChild(tekstElement("div", "pp-naglowek bieg-rek-nagl", "Rekordy"));
+        lista.forEach(function (x) {
+          const w = document.createElement("div");
+          w.className = "bieg-rek";
+          w.appendChild(tekstElement("span", "", x[0]));
+          w.appendChild(tekstElement("b", "", x[1]));
+          karta.appendChild(w);
+        });
+        karta.appendChild(tekstElement("p", "opis", "Najszybsze czasy liczą się z biegów o tym dystansie (±3%)."));
+      }
+    }
+  }
+
+  const hist = tekstElement("button", "przycisk drugi", "Historia biegów (" + biegi.length + ")");
+  hist.type = "button";
+  hist.addEventListener("click", function () { biegOtworzHistorie(); });
+  karta.appendChild(hist);
+  return karta;
+}
+
+function biegOpisBiegu(b, zaaw) {
+  const c = [];
+  if (b.dystansM) { c.push(biegKm(b.dystansM)); }
+  if (b.czasS) { c.push(biegFormatCzasu(b.czasS)); }
+  if (zaaw && b.dystansM && b.czasS) { c.push(biegOpisTempa(b.czasS / (b.dystansM / 1000))); }
+  if (b.wysilek) { c.push("wysiłek " + b.wysilek + "/10"); }
+  return c.join(" · ");
+}
+
+function biegOtworzHistorie() {
+  const biegi = biegZbierzBiegi();
+  const zaaw = biegPoziomUst() === "zaawansowany";
+  pokazOkno("Historia biegów", biegi.length + " " + (biegi.length === 1 ? "bieg" : "biegów"));
+  biegi.forEach(function (b) {
+    const w = document.createElement("button");
+    w.type = "button";
+    w.className = "bieg-hist-wiersz";
+    w.appendChild(tekstElement("div", "bieg-hist-gora", biegDataPL(b.data) + "." + b.data.slice(0, 4) + " · " + biegRodzaj(b.rodzajBiegu).nazwa));
+    w.appendChild(tekstElement("div", "opis", biegOpisBiegu(b, zaaw) || "bez czasu i dystansu"));
+    w.addEventListener("click", function () { biegOtworzSzczegoly(b); });
+    postepOknoTresc.appendChild(w);
+  });
+}
+
+function biegOtworzSzczegoly(b) {
+  const zaaw = biegPoziomUst() === "zaawansowany";
+  pokazOkno(biegRodzaj(b.rodzajBiegu).nazwa + " · " + biegDataPL(b.data) + "." + b.data.slice(0, 4), b.plan);
+  const wstecz = tekstElement("button", "akcja", "← Historia biegów");
+  wstecz.type = "button";
+  wstecz.addEventListener("click", biegOtworzHistorie);
+  postepOknoTresc.appendChild(wstecz);
+  const pola = [
+    ["Czas", b.czasS ? biegFormatCzasu(b.czasS) : "—"],
+    ["Dystans", b.dystansM ? biegKm(b.dystansM) : "nie wpisano"],
+    ["Tempo", b.dystansM && b.czasS ? biegOpisTempa(b.czasS / (b.dystansM / 1000)) : "—"],
+    ["Wysiłek", b.wysilek ? b.wysilek + "/10 – " + OPISY_WYSILKU[b.wysilek] : "—"],
+    ["Pauzy", String(b.pauzy || 0)],
+    ["Źródło", { reczny: "wpis ręczny", stoper: "stoper", gps: "GPS" }[b.zrodlo] || b.zrodlo]
+  ];
+  if (zaaw && b.obciazenie) {
+    pola.push(["Obciążenie", b.obciazenie + " kg"]);
+  }
+  const karta = document.createElement("div");
+  karta.className = "pp-karta";
+  pola.forEach(function (x) {
+    const w = document.createElement("div");
+    w.className = "bieg-rek";
+    w.appendChild(tekstElement("span", "", x[0]));
+    w.appendChild(tekstElement("b", "", x[1]));
+    karta.appendChild(w);
+  });
+  postepOknoTresc.appendChild(karta);
+  if (b.odcinkiWyniki && b.odcinkiWyniki.length) {
+    const k2 = document.createElement("div");
+    k2.className = "pp-karta";
+    k2.appendChild(tekstElement("div", "pp-naglowek", "Odcinki"));
+    b.odcinkiWyniki.forEach(function (o) {
+      const w = document.createElement("div");
+      w.className = "bieg-rek";
+      w.appendChild(tekstElement("span", "", (o.powt ? o.powt + "/" + o.zPowt + " " : "") + biegNazwaOdcinka(o.rodzaj) + (o.dystansM ? " " + biegOpisWartosci({ dystansM: o.dystansM }) : "") + (o.przerwany ? " (przerwany)" : "")));
+      w.appendChild(tekstElement("b", "", biegFormatCzasu(o.czasS || 0)));
+      k2.appendChild(w);
+    });
+    postepOknoTresc.appendChild(k2);
+  }
+}
+
+// ===== Ustawienia: poziom biegania, serie i rekordy =====
+
+function biegRysujUstawienia() {
+  const p = document.getElementById("ust-bieg-poziom");
+  if (!p) {
+    return;
+  }
+  p.querySelectorAll("button").forEach(function (b) {
+    b.classList.toggle("aktywny", b.dataset.poziom === biegPoziomUst());
+  });
+  const s = document.getElementById("ust-bieg-serie");
+  s.setAttribute("aria-checked", biegSerieWlaczone() ? "true" : "false");
+  s.classList.toggle("wlaczony", biegSerieWlaczone());
+}
+
+(function () {
+  const p = document.getElementById("ust-bieg-poziom");
+  if (p) {
+    p.querySelectorAll("button").forEach(function (b) {
+      b.addEventListener("click", function () {
+        dane.ustawienia.biegPoziom = b.dataset.poziom;
+        zapiszDane();
+        biegRysujUstawienia();
+      });
+    });
+  }
+  const s = document.getElementById("ust-bieg-serie");
+  if (s) {
+    s.addEventListener("click", function () {
+      dane.ustawienia.biegSerie = dane.ustawienia.biegSerie === false;
+      zapiszDane();
+      biegRysujUstawienia();
+    });
+  }
+})();

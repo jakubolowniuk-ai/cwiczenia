@@ -333,3 +333,94 @@ function biegWarunekTygodnia(w, daty, data) {
   }
   return true;
 }
+
+// ===== Statystyki biegania (Postęp) =====
+// biegi = [{ data: "RRRR-MM-DD", czasS, dystansM (albo null), rodzajBiegu, wysilek, ... }]
+// Puste wartości nie są liczone jako 0: dystans tygodnia i tempo liczą się tylko z biegów, które mają dystans.
+
+function biegTygodnie(biegi) {
+  const t = {};
+  biegi.forEach(function (b) {
+    const k = biegPoczatekTygodnia(b.data);
+    if (!t[k]) {
+      t[k] = { tydzien: k, biegow: 0, czasS: 0, dystansM: 0, czasZDystansemS: 0 };
+    }
+    t[k].biegow++;
+    t[k].czasS += b.czasS || 0;
+    if (b.dystansM) {
+      t[k].dystansM += b.dystansM;
+      t[k].czasZDystansemS += b.czasS || 0;
+    }
+  });
+  return t;
+}
+
+// Ostatnie n tygodni (od najstarszego), także puste
+function biegOstatnieTygodnie(biegi, dzis, n) {
+  const t = biegTygodnie(biegi);
+  const wynik = [];
+  const d = new Date(biegPoczatekTygodnia(dzis) + "T12:00:00");
+  d.setDate(d.getDate() - 7 * (n - 1));
+  for (let i = 0; i < n; i++) {
+    const k = d.toISOString().slice(0, 10);
+    wynik.push(t[k] || { tydzien: k, biegow: 0, czasS: 0, dystansM: 0, czasZDystansemS: 0 });
+    d.setDate(d.getDate() + 7);
+  }
+  return wynik;
+}
+
+// Najdłuższa seria kolejnych tygodni z co najmniej jednym biegiem (i bieżąca seria)
+function biegSeriaTygodni(biegi, dzis) {
+  const t = biegTygodnie(biegi);
+  const klucze = Object.keys(t).sort();
+  let naj = 0;
+  let akt = 0;
+  let poprz = null;
+  klucze.forEach(function (k) {
+    const d = new Date(k + "T12:00:00");
+    if (poprz) {
+      const p = new Date(poprz + "T12:00:00");
+      p.setDate(p.getDate() + 7);
+      akt = p.toISOString().slice(0, 10) === k ? akt + 1 : 1;
+    } else {
+      akt = 1;
+    }
+    naj = Math.max(naj, akt);
+    poprz = k;
+    return d;
+  });
+  // Bieżąca seria: liczona tylko, gdy ostatni tydzień z biegiem to ten albo poprzedni
+  const ten = biegPoczatekTygodnia(dzis);
+  const d = new Date(ten + "T12:00:00");
+  d.setDate(d.getDate() - 7);
+  const poprzedni = d.toISOString().slice(0, 10);
+  const biezaca = poprz === ten || poprz === poprzedni ? akt : 0;
+  return { najdluzsza: naj, biezaca: biezaca };
+}
+
+// Rekordy: najdłuższy dystans i czas, najszybsze 1 / 5 / 10 km (bez GPS: tylko biegi o tym dystansie ±3%)
+const BIEG_DYSTANSE_REKORDOW = [[1000, "1 km"], [5000, "5 km"], [10000, "10 km"], [21097, "półmaraton"]];
+
+function biegRekordy(biegi) {
+  const r = { najdluzszyDystans: null, najdluzszyCzas: null, najszybsze: {} };
+  biegi.forEach(function (b) {
+    if (b.dystansM && (!r.najdluzszyDystans || b.dystansM > r.najdluzszyDystans.dystansM)) {
+      r.najdluzszyDystans = b;
+    }
+    if (b.czasS && (!r.najdluzszyCzas || b.czasS > r.najdluzszyCzas.czasS)) {
+      r.najdluzszyCzas = b;
+    }
+    if (b.dystansM && b.czasS) {
+      BIEG_DYSTANSE_REKORDOW.forEach(function (d) {
+        if (Math.abs(b.dystansM - d[0]) <= d[0] * 0.03) {
+          const naDystansie = b.czasS * d[0] / b.dystansM;
+          const obecny = r.najszybsze[d[0]];
+          if (!obecny || naDystansie < obecny.czasS) {
+            r.najszybsze[d[0]] = { czasS: Math.round(naDystansie), data: b.data };
+          }
+        }
+      });
+    }
+  });
+  return r;
+}

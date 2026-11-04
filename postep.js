@@ -380,6 +380,12 @@ function rysujPostep() {
       postepTresc.appendChild(kc);
     }
   }
+  if (typeof biegKartaPostepu === "function") {
+    const kb = biegKartaPostepu();
+    if (kb) {
+      postepTresc.appendChild(kb);
+    }
+  }
   const plan = planPostepu();
   dodajMojePlany();
   postepEdytujPlan.hidden = !plan;

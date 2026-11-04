@@ -436,3 +436,9 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Zaliczanie bez klikania: po zapisaniu wyniku biegu kolejne spełnione kroki zaliczają się same (komunikat). Gdy bieg bez dystansu mógłby zaliczyć krok z dystansem – prośba o dystans (drugie „Zapisz” zapisuje bez niego).
 - Plan biegowy dodaje ścieżkę „Bieganie” do celów (start: krok 1, jeśli biegasz 20 minut); widać ją w Ścieżkach (nowa grupa „Bieganie”) i w Postępie.
 - Test: 14 400 kombinacji profili biegowych × bloków bez błędów (liczba biegów i sesji siły, brak pustych sesji).
+
+## v86 – Bieganie, wersja 5: Postęp i poziom szczegółów
+
+- `bieg-logika.js`: `biegTygodnie`, `biegOstatnieTygodnie`, `biegSeriaTygodni`, `biegRekordy` (najdłuższy dystans i czas, najszybsze 1 / 5 / 10 km i półmaraton – tylko z biegów o tym dystansie ±3%). Puste wartości nie są liczone jako 0: dystans tygodnia i średnie tempo tylko z biegów z dystansem.
+- Postęp → karta „Bieganie”: ten tydzień (biegi, czas, dystans, u zaawansowanych średnie tempo), wykres słupkowy 8 tygodni (początkujący: minuty; zaawansowany: przełącznik Czas / Dystans), seria tygodni z biegiem (bieżąca i najdłuższa), rekordy (zaawansowany), „Historia biegów” – lista (data, rodzaj, dystans, czas, tempo, wysiłek) i szczegóły biegu z odcinkami.
+- Ustawienia → „Bieganie: poziom szczegółów” (Początkujący / Zaawansowany, `dane.ustawienia.biegPoziom`; ustawiany też przy tworzeniu planu biegowego) i „Serie i rekordy biegowe” (`biegSerie`). Początkujący: bez tempa i obciążenia w oknie wyniku (obciążenie zostaje, jeśli było ustawione), bez kafla tempa na ekranie biegu, bez rekordów i dystansu w wykresie. Zmiana poziomu niczego nie usuwa.

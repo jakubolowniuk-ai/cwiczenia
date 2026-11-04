@@ -582,6 +582,7 @@ function pkRysujPodsumowanie(tresc) {
     dane.cele = JSON.parse(JSON.stringify(pkProfil.cele || []));
     // Plan biegowy: ścieżka „Bieganie” jako cel, start zależny od tego, czy biegasz 20 minut
     if (pkProfil.cel === "bieg") {
+      dane.ustawienia.biegPoziom = pgBiegPoziom(pkProfil);
       if (!dane.cele.some(function (c) { return c.typ === "sciezka" && c.id === "bieganie"; }) && dane.cele.length < CEL_MAX) {
         dane.cele.push({ typ: "sciezka", id: "bieganie" });
       }
