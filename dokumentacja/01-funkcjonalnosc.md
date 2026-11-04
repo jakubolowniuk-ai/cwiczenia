@@ -457,3 +457,14 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 ## v88 – Tempo zawsze widoczne
 
 - Kafel tempa na ekranie biegu i podgląd tempa w oknie wyniku są teraz widoczne na każdym poziomie szczegółów (wcześniej tylko „Zaawansowany”). Poziom nadal ukrywa tempo w Postępie i historii, rekordy oraz obciążenie.
+
+## v89 – Kolejny blok: nowy test, podsumowanie i dopasowanie; odcinki po dystansie z GPS
+
+- **Nowy test w kolejnym bloku.** `pgProfilKolejnegoBloku` wywołuje `mzDoProfilu`, więc świeży test z „Moje możliwości” trafia do profilu następnego bloku (maksy pompek, podciągnięć, przysiadów, planku i ciężary startowe; ciężary z ostatnich treningów mają pierwszeństwo).
+- **Podsumowanie bloku** (`plan-adaptacja.js`, `paOtworzPodsumowanie`): „Ułóż kolejny blok” najpierw pokazuje okno z liczbą zrobionych treningów i biegów, ocenami ćwiczeń (łatwo / w sam raz / ciężko), przebiegniętym dystansem i średnim wysiłkiem oraz listą zmian w kolejnym bloku. Gdy test możliwości jest starszy niż 8 tygodni albo go nie ma – propozycja „Zrób test teraz” (nie jest wymuszona).
+- **Dopasowanie** (`paZastosuj`, wnioski z poprzedniego bloku):
+  - zrobione poniżej 60% treningów (od 4 zaplanowanych) → o jeden dzień mniej w tygodniu (min. 2); przy 85% i więcej wraca do pierwotnej liczby dni (`dniOryg`);
+  - ćwiczenie ocenione co najmniej 3 razy: „łatwo” w ≥ 60% ocen → ciężar ok. +5% (zaokrąglone do 2,5 kg od 20 kg, inaczej 1 kg) albo +2 powtórzenia w ćwiczeniu z masą ciała; „ciężko” w ≥ 50% → ok. −5% albo mniej powtórzeń. Ćwiczenia czasowe bez zmian. Gdy w bloku zrobiono nowy test, ćwiczeń z masą ciała nie korygujemy ocenami (test dobiera trudność wariantu);
+  - bieganie: zrobione poniżej 60% biegów → powtórzenie 2 ostatnich tygodni planu (`p.biegPrzes`, plan wydłuża się o 2 tygodnie); średni wysiłek ≥ 8/10 → powtórzenie 1 tygodnia. `pgTydzienPlanu` liczy tydzień z uwzględnieniem przesunięcia.
+  - Zmiany widać w „Dlaczego ten plan?” jako „Po poprzednim bloku: …”.
+- **Odcinki po dystansie z GPS.** Odcinek zapisany na dystans (np. 400 m) kończy się sam, gdy GPS naliczy ten dystans (zapas 5 m na opóźnienie wygładzania), z tym samym sygnałem co przy odcinkach na czas; na ekranie „zostało X m”. Przycisk „Odcinek zrobiony →” działa zawsze, bez GPS wszystko po staremu. Ustawienia → „Odcinki na dystans przełączają się same” (`biegOdcDyst`, domyślnie włączone). Każdy zakończony odcinek zapisuje przebiegnięty dystans z GPS (`dystansGpsM`); w szczegółach biegu odcinki na czas pokazują dystans i tempo.

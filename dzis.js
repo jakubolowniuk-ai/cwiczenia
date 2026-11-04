@@ -1129,12 +1129,16 @@ function rysujKoniecPlanu(plan, kontener) {
   });
 
   if (plan.kreator && plan.kreator.profil && typeof pkNastepnyBlok === "function") {
-    blok.appendChild(tekstElement("p", "opis", "Ułożę kolejny blok na podstawie ciężarów z Twoich ostatnich treningów. Główne ćwiczenia zostają, dodatkowe zmienią się na inne warianty."));
+    blok.appendChild(tekstElement("p", "opis", "Pokażę podsumowanie bloku i ułożę kolejny na podstawie Twoich wyników, ocen i testu możliwości. Główne ćwiczenia zostają, dodatkowe zmienią się na inne warianty."));
     const dalej = document.createElement("button");
     dalej.className = "przycisk wielki";
     dalej.textContent = "Ułóż kolejny blok";
     dalej.addEventListener("click", function () {
-      pkNastepnyBlok(plan);
+      if (typeof paOtworzPodsumowanie === "function") {
+        paOtworzPodsumowanie(plan, function () { pkNastepnyBlok(plan); });
+      } else {
+        pkNastepnyBlok(plan);
+      }
     });
     blok.appendChild(dalej);
   }

@@ -72,6 +72,9 @@ function biegStart(plan, sesja) {
   }
   if (sesja.odcinki && sesja.odcinki.length) {
     biegStan.odc = { nr: 0, startMs: 0, wyniki: [] };
+    if (biegStan.gps) {
+      biegStan.odc.startDyst = 0;
+    }
   }
   biegSygnalCelu = false;
   biegZapiszStan();
@@ -106,7 +109,7 @@ function biegOtworzEkran() {
   odcDalej.hidden = true;
   odcDalej.addEventListener("click", function () {
     const z2 = biegZnajdz(biegStan);
-    biegOdcinekZakoncz(biegStan, biegOdcinkiPlaskie(z2.sesja.odcinki), Date.now());
+    biegOdcinekZakoncz(biegStan, biegOdcinkiPlaskie(z2.sesja.odcinki), Date.now(), gpsDystansDlaOdcinkow());
     biegZapiszStan();
     if (typeof cwSygnal === "function") {
       cwSygnal(2);
@@ -236,7 +239,7 @@ function biegRysujCzas() {
   // Odcinki: przejście do następnego, gdy minął czas bieżącego; sygnał tylko przy zmianie
   if (biegStan.odc && el.sesja.odcinki) {
     const plaskie = biegOdcinkiPlaskie(el.sesja.odcinki);
-    const zmiany = biegOdcinkiAktualizuj(biegStan, plaskie, Date.now());
+    const zmiany = biegOdcinkiAktualizuj(biegStan, plaskie, Date.now(), gpsDystansDlaOdcinkow());
     if (zmiany > 0) {
       biegZapiszStan();
       if (typeof cwSygnal === "function") {
@@ -283,7 +286,13 @@ function biegRysujOdcinek(el, plaskie) {
     el.odcCzas.textContent = biegFormatCzasu(o.czasS - wOdcinku);
     el.odcDalej.hidden = true;
   } else {
-    el.odcCzas.textContent = biegFormatCzasu(wOdcinku);
+    const dg = gpsDystansDlaOdcinkow();
+    if (o.dystansM && typeof dg === "number" && typeof biegStan.odc.startDyst === "number") {
+      const zostalo = Math.max(0, o.dystansM - (dg - biegStan.odc.startDyst));
+      el.odcCzas.textContent = "zostało " + (zostalo >= 1000 ? (Math.round(zostalo / 10) / 100 + "").replace(".", ",") + " km" : Math.round(zostalo) + " m");
+    } else {
+      el.odcCzas.textContent = biegFormatCzasu(wOdcinku);
+    }
     el.odcDalej.hidden = false;
   }
   const nast = plaskie[nr + 1];
@@ -327,15 +336,17 @@ function biegStop() {
   let odcinkiWyniki = null;
   if (st0.odc && z && z.sesja.odcinki) {
     const plaskie = biegOdcinkiPlaskie(z.sesja.odcinki);
-    biegOdcinkiAktualizuj(st0, plaskie, koniec);
+    biegOdcinkiAktualizuj(st0, plaskie, koniec, gpsDystansDlaOdcinkow(st0));
     odcinkiWyniki = st0.odc.wyniki.map(function (r, i) {
-      return Object.assign({}, plaskie[i], { czasS: r.czasS, planS: plaskie[i].czasS });
+      return Object.assign({}, plaskie[i], { czasS: r.czasS, planS: plaskie[i].czasS }, typeof r.dystM === "number" ? { dystansGpsM: r.dystM } : {});
     });
     // Odcinek przerwany Stopem: zapisujemy przebiegnięty kawałek
     if (st0.odc.nr < plaskie.length) {
       const reszta = Math.round((biegStoperCzas(st0, koniec) - st0.odc.startMs) / 1000);
       if (reszta > 0) {
-        odcinkiWyniki.push(Object.assign({}, plaskie[st0.odc.nr], { czasS: reszta, planS: plaskie[st0.odc.nr].czasS, przerwany: true }));
+        const dg = gpsDystansDlaOdcinkow(st0);
+        const dodatek = typeof dg === "number" && typeof st0.odc.startDyst === "number" ? { dystansGpsM: Math.max(0, Math.round(dg - st0.odc.startDyst)) } : {};
+        odcinkiWyniki.push(Object.assign({}, plaskie[st0.odc.nr], { czasS: reszta, planS: plaskie[st0.odc.nr].czasS, przerwany: true }, dodatek));
       }
     }
   }
@@ -888,7 +899,7 @@ function biegOtworzSzczegoly(b) {
     b.odcinkiWyniki.forEach(function (o) {
       const w = document.createElement("div");
       w.className = "bieg-rek";
-      w.appendChild(tekstElement("span", "", (o.powt ? o.powt + "/" + o.zPowt + " " : "") + biegNazwaOdcinka(o.rodzaj) + (o.dystansM ? " " + biegOpisWartosci({ dystansM: o.dystansM }) : "") + (o.przerwany ? " (przerwany)" : "")));
+      w.appendChild(tekstElement("span", "", (o.powt ? o.powt + "/" + o.zPowt + " " : "") + biegNazwaOdcinka(o.rodzaj) + (o.dystansM ? " " + biegOpisWartosci({ dystansM: o.dystansM }) : "") + (o.przerwany ? " (przerwany)" : "") + (o.dystansGpsM >= 20 && !o.dystansM ? " · " + o.dystansGpsM + " m" + (o.czasS ? " · " + biegOpisTempa(o.czasS / (o.dystansGpsM / 1000)) : "") : "")));
       w.appendChild(tekstElement("b", "", biegFormatCzasu(o.czasS || 0)));
       k2.appendChild(w);
     });
@@ -909,6 +920,12 @@ function biegRysujUstawienia() {
   const s = document.getElementById("ust-bieg-serie");
   s.setAttribute("aria-checked", biegSerieWlaczone() ? "true" : "false");
   s.classList.toggle("wlaczony", biegSerieWlaczone());
+  const od = document.getElementById("ust-bieg-odc-gps");
+  if (od) {
+    const wl2 = dane.ustawienia.biegOdcDyst !== false;
+    od.setAttribute("aria-checked", wl2 ? "true" : "false");
+    od.classList.toggle("wlaczony", wl2);
+  }
   const g = document.getElementById("ust-bieg-gps");
   if (g) {
     const wl = dane.ustawienia.biegGps === true;

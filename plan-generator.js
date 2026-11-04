@@ -1068,6 +1068,37 @@ function pgUwagiCelow(p) {
   return uwagi;
 }
 
+// Dopasowanie do ocen z poprzedniego bloku (p.ocenyCw): „łatwo” = ok. 5% więcej ciężaru albo 2 powtórzenia więcej,
+// „ciężko” = ok. 5% mniej ciężaru albo mniej powtórzeń. Ćwiczenia czasowe bez zmian.
+function pgAdaptacjaCw(cw, p, od, do_, kg) {
+  const ocena = p.ocenyCw && p.ocenyCw[cw.nazwa];
+  if (!ocena || cw.rodzajId === "rodzaj-statyczny") {
+    return { od: od, do: do_, kg: kg };
+  }
+  if (kg > 0) {
+    // Krok dopasowany do sprzętu: sztangi i maszyny co 2,5 kg, lekkie hantle co 1 kg
+    const krok = kg >= 20 ? 2.5 : 1;
+    let nowe = Math.round(kg * (ocena === "latwo" ? 1.05 : 0.95) / krok) * krok;
+    if (ocena === "latwo" && nowe <= kg) {
+      nowe = kg + krok;
+    }
+    if (ocena === "ciezko" && nowe >= kg) {
+      nowe = kg - krok;
+    }
+    return { od: od, do: do_, kg: Math.max(krok, nowe) };
+  }
+  if (ocena === "latwo") {
+    return { od: od + 2, do: do_ + 2, kg: kg };
+  }
+  const nowyOd = Math.max(1, od - 1);
+  return { od: nowyOd, do: Math.max(nowyOd, do_ - 2), kg: kg };
+}
+
+// Tydzień w całym planie biegowym (od 1). Przesunięcie p.biegPrzes ≤ 0 powtarza ostatnie tygodnie (po za małej realizacji).
+function pgTydzienPlanu(p, tydz) {
+  return Math.max(1, ((p.blokNr || 1) - 1) * 4 + tydz + 1 + (p.biegPrzes || 0));
+}
+
 // Zwraca listę wpisów treningu: { cw, serie, od, do, przerwa, kg, statyczne, czasy }
 function pgBudujTrening(sloty, p, kotw, przesun, klucz) {
   const uzyte = {};
@@ -1082,13 +1113,14 @@ function pgBudujTrening(sloty, p, kotw, przesun, klucz) {
     uzyte[cw.nazwa] = true;
     uzyte["~" + pgKlucz(cw.nazwa)] = true;
     const par = pgParametryCelu(slot, i, p);
+    const adapt = pgAdaptacjaCw(cw, p, par.od, par.do, pgKg(cw, p, kotw));
     wpisy.push({
       cw: cw,
       serie: par.serie,
-      od: par.od,
-      do: par.do,
+      od: adapt.od,
+      do: adapt.do,
       przerwa: par.przerwa,
-      kg: pgKg(cw, p, kotw),
+      kg: adapt.kg,
       statyczne: cw.rodzajId === "rodzaj-statyczny",
       rdzen: !!slot.r
     });
@@ -1234,7 +1266,7 @@ function pgBudujPlan(p) {
   let licznik = 0;
   const nTygBieg = p.cel === "bieg" ? p.tygodni : 99;
   for (let tydz = 0; tydz < 4; tydz++) {
-    if (((p.blokNr || 1) - 1) * 4 + tydz + 1 > nTygBieg) {
+    if (pgTydzienPlanu(p, tydz) > nTygBieg) {
       break;
     }
     dniSily.forEach(function (przes) {
@@ -1301,7 +1333,7 @@ function pgBudujPlan(p) {
   // Bieganie
   if (p.cel === "bieg") {
     for (let tydz = 0; tydz < 4; tydz++) {
-      const w = ((p.blokNr || 1) - 1) * 4 + tydz + 1;
+      const w = pgTydzienPlanu(p, tydz);
       if (w > p.tygodni) {
         break;
       }
@@ -1352,7 +1384,7 @@ function pgBudujPlan(p) {
     }
   }
   if (p.tygodni > 4) {
-    wynik.nazwa += " (blok " + (p.blokNr || 1) + "/" + Math.ceil(p.tygodni / 4) + ")";
+    wynik.nazwa += " (blok " + (p.blokNr || 1) + "/" + Math.max(p.blokNr || 1, Math.ceil((p.tygodni - (p.biegPrzes || 0)) / 4)) + ")";
   } else if ((p.blokNr || 1) > 1) {
     wynik.nazwa += " (blok " + p.blokNr + ")";
   }
@@ -1422,6 +1454,9 @@ function pgGrupa(cw) {
 // "Dlaczego ten plan?" i ostrzeżenia
 function pgPowody(wynik, p, podzial, kotw) {
   const powody = wynik.powody;
+  (p.adaptZmiany || []).slice(0, 8).forEach(function (z) {
+    powody.push("Po poprzednim bloku: " + z);
+  });
   const poziomy = ["osoby początkującej", "osoby początkującej", "osoby średniozaawansowanej", "osoby zaawansowanej"];
   if (podzial.typ === "bieg") {
     pgBiegPowody(p, p.tygodni).forEach(function (t) { powody.push(t); });
@@ -1634,5 +1669,12 @@ function pgProfilKolejnegoBloku(plan) {
       }
     });
   });
+  // Świeży test możliwości trafia do nowego bloku, a oceny i realizacja bloku dopasowują trudność
+  if (typeof mzDoProfilu === "function") {
+    mzDoProfilu(p);
+  }
+  if (typeof paZastosuj === "function") {
+    paZastosuj(plan, p);
+  }
   return p;
 }

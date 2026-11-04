@@ -210,36 +210,63 @@ function biegSumaOdcinkow(odcinki) {
 
 // Stoper z odcinkami: przesuwa bieżący odcinek, gdy minął jego czas.
 // st.odc = { nr, startMs (czas aktywny na początku odcinka), wyniki: [{ czasS }] }. Zwraca liczbę zmian odcinka.
-function biegOdcinkiAktualizuj(st, plaskie, teraz) {
+// dystansM (opcjonalnie): dystans z GPS od początku biegu w metrach albo null. Gdy jest, odcinek na dystans kończy się sam,
+// a każdy zakończony odcinek zapisuje przebiegnięty dystans (dystM).
+const BIEG_ZAPAS_DYSTANSU = 5; // m – GPS i wygładzanie liczą z lekkim opóźnieniem
+
+function biegOdcinkiAktualizuj(st, plaskie, teraz, dystansM) {
   if (!st.odc || !plaskie.length) {
     return 0;
   }
+  const gps = typeof dystansM === "number";
   let zmiany = 0;
   const aktywne = biegStoperCzas(st, teraz);
+  if (gps && typeof st.odc.startDyst !== "number") {
+    st.odc.startDyst = dystansM;
+  }
+  const zapisz = function (czasS, koniecMs) {
+    const w = { czasS: czasS };
+    if (gps) {
+      w.dystM = Math.max(0, Math.round(dystansM - st.odc.startDyst));
+      st.odc.startDyst = dystansM;
+    }
+    st.odc.wyniki.push(w);
+    st.odc.startMs = koniecMs;
+    st.odc.nr++;
+    zmiany++;
+  };
   while (st.odc.nr < plaskie.length) {
     const o = plaskie[st.odc.nr];
     if (!o.czasS) {
-      break; // odcinek na dystans: bez GPS kończy go użytkownik
+      // Odcinek na dystans: z GPS kończy się sam, bez GPS kończy go użytkownik
+      if (gps && o.dystansM && dystansM - st.odc.startDyst >= o.dystansM - BIEG_ZAPAS_DYSTANSU) {
+        zapisz(Math.round((aktywne - st.odc.startMs) / 1000), aktywne);
+      }
+      break;
     }
     const koniec = st.odc.startMs + o.czasS * 1000;
     if (aktywne < koniec) {
       break;
     }
-    st.odc.wyniki.push({ czasS: o.czasS });
-    st.odc.startMs = koniec;
-    st.odc.nr++;
-    zmiany++;
+    zapisz(o.czasS, koniec);
   }
   return zmiany;
 }
 
 // Ręczne zakończenie odcinka (np. na dystans bez GPS)
-function biegOdcinekZakoncz(st, plaskie, teraz) {
+function biegOdcinekZakoncz(st, plaskie, teraz, dystansM) {
   if (!st.odc || st.odc.nr >= plaskie.length) {
     return;
   }
   const aktywne = biegStoperCzas(st, teraz);
-  st.odc.wyniki.push({ czasS: Math.round((aktywne - st.odc.startMs) / 1000) });
+  const w = { czasS: Math.round((aktywne - st.odc.startMs) / 1000) };
+  if (typeof dystansM === "number" && typeof st.odc.startDyst === "number") {
+    w.dystM = Math.max(0, Math.round(dystansM - st.odc.startDyst));
+  }
+  if (typeof dystansM === "number") {
+    st.odc.startDyst = dystansM;
+  }
+  st.odc.wyniki.push(w);
   st.odc.startMs = aktywne;
   st.odc.nr++;
 }

@@ -483,6 +483,15 @@ function gpsPrzeliczWszystkie(info) {
   });
 }
 
+// Dystans z GPS dla odcinków: liczba metrów albo null (GPS wyłączony, wyłączone w ustawieniach)
+function gpsDystansDlaOdcinkow(st) {
+  st = st || biegStan;
+  if (dane.ustawienia.biegOdcDyst === false || !st || !st.gps || !gpsFiltrWynik) {
+    return null;
+  }
+  return gpsFiltrWynik.dystansM;
+}
+
 // ----- Ustawienia -----
 
 (function () {
@@ -490,6 +499,14 @@ function gpsPrzeliczWszystkie(info) {
   if (przycisk) {
     przycisk.addEventListener("click", function () {
       gpsPrzeliczWszystkie(document.getElementById("ust-bieg-przelicz-info"));
+    });
+  }
+  const odcGps = document.getElementById("ust-bieg-odc-gps");
+  if (odcGps) {
+    odcGps.addEventListener("click", function () {
+      dane.ustawienia.biegOdcDyst = dane.ustawienia.biegOdcDyst === false;
+      zapiszDane();
+      biegRysujUstawienia();
     });
   }
   const gps = document.getElementById("ust-bieg-gps");
