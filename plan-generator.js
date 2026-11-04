@@ -1215,10 +1215,12 @@ function pgBudujPlan(p) {
   let dniSily;
   let wzor;
   if (p.cel === "bieg") {
-    const uklad = PG_DNI_BIEG[Math.min(6, Math.max(2, p.dni))];
-    dniBiegu = p.bieg20 ? uklad.b : uklad.b.slice(0, 3);
+    pgBiegNormalizuj(p);
+    // Marszobieg: najwyżej 3 biegi w tygodniu (dni przerwy dla stawów i ścięgien)
+    const uklad = pgBiegDni(p.biegCel === "pierwsze5" || !p.bieg20 ? Math.min(3, p.biegDni) : p.biegDni, p.silaDni);
+    dniBiegu = uklad.b;
     dniSily = uklad.s;
-    wzor = dniBiegu.concat(dniSily);
+    wzor = dniBiegu.concat(dniSily.filter(function (d) { return dniBiegu.indexOf(d) === -1; }));
     kardioIle = 0;
   } else {
     wzor = PG_DNI[Math.min(6, Math.max(1, podzial.dni))];
@@ -1230,12 +1232,16 @@ function pgBudujPlan(p) {
   // Treningi siłowe
   const typyUzyte = {};
   let licznik = 0;
+  const nTygBieg = p.cel === "bieg" ? p.tygodni : 99;
   for (let tydz = 0; tydz < 4; tydz++) {
+    if (((p.blokNr || 1) - 1) * 4 + tydz + 1 > nTygBieg) {
+      break;
+    }
     dniSily.forEach(function (przes) {
       const dzien = tydz * 7 + przes;
       let ts;
       if (p.cel === "bieg") {
-        ts = { klucz: "S", szablon: "bsila", przesun: 0 };
+        ts = p.silaRodzaj === "cale" ? { klucz: licznik % 2 === 0 ? "A" : "B", szablon: "fb", przesun: 0 } : { klucz: "S", szablon: "bsila", przesun: 0 };
       } else {
         ts = pgTypSesji(podzial, licznik);
       }
@@ -1294,27 +1300,15 @@ function pgBudujPlan(p) {
 
   // Bieganie
   if (p.cel === "bieg") {
-    const ciagle = !!p.bieg20;
     for (let tydz = 0; tydz < 4; tydz++) {
-      dniBiegu.forEach(function (przes, i) {
-        const ostatni = i === dniBiegu.length - 1 && dniBiegu.length > 1;
-        let czas;
-        let notatka;
-        let odcinki = null;
-        if (ciagle) {
-          czas = ostatni ? PG_BIEG_DLUGI[tydz] : PG_BIEG_LATWY[tydz];
-          notatka = ostatni ? "Dłuższy, spokojny bieg. Tempo rozmowy: powinieneś móc mówić pełnymi zdaniami." : "Spokojny bieg w tempie rozmowy.";
-        } else {
-          czas = PG_MARSZOBIEG[tydz].min;
-          notatka = "Tempo biegu ma być spokojne: takie, w którym możesz mówić. Stoper sam poprowadzi Cię przez odcinki.";
-          const mb = PG_MARSZOBIEG[tydz];
-          odcinki = [
-            { rodzaj: "marsz", czasS: 300 },
-            { powtorz: mb.ile, odcinki: [{ rodzaj: "bieg", czasS: mb.bieg * 60 }, { rodzaj: "marsz", czasS: 120 }] },
-            { rodzaj: "marsz", czasS: 300 }
-          ];
-        }
-        wynik.sesje.push({ dzien: tydz * 7 + przes, kardio: "rodzaj-bieganie", czas: czas, notatka: notatka, rodzajBiegu: ciagle ? (ostatni ? "dlugi" : "spokojny") : "marszobieg", odcinki: odcinki });
+      const w = ((p.blokNr || 1) - 1) * 4 + tydz + 1;
+      if (w > p.tygodni) {
+        break;
+      }
+      const biegi = pgBiegTydzien(p, w, p.tygodni);
+      const dni = biegi.length >= dniBiegu.length ? dniBiegu : (PG_DNI_BIEGOW[Math.max(2, biegi.length)] || dniBiegu);
+      biegi.forEach(function (b, i) {
+        wynik.sesje.push({ dzien: tydz * 7 + dni[i], kardio: "rodzaj-bieganie", czas: b.czas || null, dystans: b.dystans || null, notatka: b.notatka, rodzajBiegu: b.rodzajBiegu, odcinki: b.odcinki || null });
       });
     }
   } else if (kardioIle > 0) {
@@ -1351,11 +1345,14 @@ function pgBudujPlan(p) {
     fb: "całe ciało", ul: "góra / dół", ulppl: "góra / dół + push / pull / legs", ppl: "push / pull / legs", bieg: p.bieg20 ? "bieg ciągły" : "marszobieg"
   }[podzial.typ];
   wynik.nazwa = PG_NAZWY_CELI[p.cel] + " – " + etykietaPodzialu + " " + wzor.length + "×";
-  if (p.cel === "bieg" && wzor.length < p.dni) {
-    wynik.uwagi.push("Na początek marszobieg 3 razy w tygodniu w zupełności wystarczy, z dniem przerwy między biegami. Pozostałe dni to odpoczynek albo trening siły.");
+  if (p.cel === "bieg") {
+    wynik.nazwa = "Bieganie – " + pgBiegCel(p.biegCel).nazwa + " (" + p.biegDni + "× bieg" + (p.silaDni ? " + " + p.silaDni + "× siła" : "") + ")";
+    if ((p.biegCel === "pierwsze5" || !p.bieg20) && p.biegDni > 3) {
+      wynik.uwagi.push("Na początek marszobieg 3 razy w tygodniu w zupełności wystarczy, z dniem przerwy między biegami. Pozostałe dni to odpoczynek albo trening siły.");
+    }
   }
   if (p.tygodni > 4) {
-    wynik.nazwa += " (blok " + (p.blokNr || 1) + "/" + (p.tygodni / 4) + ")";
+    wynik.nazwa += " (blok " + (p.blokNr || 1) + "/" + Math.ceil(p.tygodni / 4) + ")";
   } else if ((p.blokNr || 1) > 1) {
     wynik.nazwa += " (blok " + p.blokNr + ")";
   }
@@ -1427,12 +1424,7 @@ function pgPowody(wynik, p, podzial, kotw) {
   const powody = wynik.powody;
   const poziomy = ["osoby początkującej", "osoby początkującej", "osoby średniozaawansowanej", "osoby zaawansowanej"];
   if (podzial.typ === "bieg") {
-    powody.push(p.bieg20
-      ? "Biegasz ciągle, więc plan to spokojne biegi z jednym dłuższym w tygodniu. Czas rośnie co tydzień o ok. 5 minut."
-      : "Zaczynasz od marszobiegu: krótkie odcinki biegu przeplatane marszem. Co tydzień biegu jest więcej, a marszu mniej, co oszczędza stawy i pozwala zbudować kondycję.");
-    if (wynik.treningi.S) {
-      powody.push("Krótkie ćwiczenia nóg i brzucha (2 serie) wzmacniają stawy i poprawiają ekonomię biegu.");
-    }
+    pgBiegPowody(p, p.tygodni).forEach(function (t) { powody.push(t); });
   } else {
     const nazwaPodzialu = { fb: "całe ciało 2–3 razy w tygodniu", ul: "podział góra / dół", ulppl: "podział góra / dół + push / pull / legs", ppl: "podział push / pull / legs" }[podzial.typ];
     powody.push("Dla " + poziomy[p.dosw] + " przy " + podzial.dni + " dniach dobrze działa " + nazwaPodzialu + ": każda duża partia jest trenowana regularnie, a między treningami ma czas na regenerację.");
@@ -1577,7 +1569,10 @@ function pgZapisz(wynik, opcje) {
     } else {
       const a = aktywnosc(s.kardio, false);
       const sesja = nowaSesja(a, s.dzien);
-      sesja.czas = { wartosc: s.czas, jednostka: "min" };
+      sesja.czas = s.czas ? { wartosc: s.czas, jednostka: "min" } : null;
+      if (s.dystans) {
+        sesja.dystans = JSON.parse(JSON.stringify(s.dystans));
+      }
       sesja.notatka = s.notatka;
       if (s.rodzajBiegu) {
         sesja.rodzajBiegu = s.rodzajBiegu;

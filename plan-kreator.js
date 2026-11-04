@@ -47,6 +47,30 @@ const PK_PRIORYTET = [
 function pkKroki() {
   const cel = pkProfil.cel || "masa";
   const kroki = ["cel"];
+  // Bieganie: własne pytania; część siłowa tylko, gdy jest siła w planie
+  if (cel === "bieg") {
+    kroki.push("biegcel");
+    if (pkProfil.biegCel !== "pierwsze5") {
+      kroki.push("bieg20");
+    }
+    kroki.push("biegpoziom", "biegdni", "silabieg");
+    if (pkProfil.silaDni > 0) {
+      kroki.push("dosw", "czas", "bloki", "sprzet");
+      if (pkProfil.sprzet === "c") {
+        kroki.push("sprzetc");
+      }
+      kroki.push("bole");
+      if (pkUkryte().length > 0) {
+        kroki.push("ukryte");
+      }
+    }
+    kroki.push("tygodni");
+    if (pkProfil.silaDni > 0) {
+      kroki.push("kotwice");
+    }
+    kroki.push("podsumowanie");
+    return kroki;
+  }
   kroki.push("dosw", "dni", "czas", "bloki");
   if (cel !== "kalistenika") {
     kroki.push("sprzet");
@@ -107,7 +131,7 @@ function pkOtworz() {
   pkProfil = {
     cel: null, dosw: dosw, dni: 3, czas: 60, sprzet: "s", bole: [], priorytet: null,
     kardio: { ile: 0, rodzaj: "spacer" }, tygodni: 4, kotwice: {}, maxPompek: null, maxPodciagniec: null,
-    cele: JSON.parse(JSON.stringify(dane.cele || [])), bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false
+    cele: JSON.parse(JSON.stringify(dane.cele || [])), biegCel: null, biegPoziom: null, biegDni: 3, silaDni: 0, silaRodzaj: "biegacz", bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false
   };
   pkKrok = 0;
   pkWynik = null;
@@ -194,6 +218,64 @@ function pkRysuj() {
       if (w === "bieg") {
         pkProfil.kardio.ile = 0;
       }
+    });
+  } else if (krok === "biegcel") {
+    pokazDalej = false;
+    wybor("Jaki masz cel biegowy?", "Od celu zależą długość planu, rodzaje biegów i to, czym plan się kończy.", PG_BIEG_CELE.map(function (c) {
+      return [c.id, c.nazwa, c.opis];
+    }), pkProfil.biegCel, function (w) {
+      pkProfil.biegCel = w;
+      pkProfil.tygodni = pgBiegCel(w).tygodni;
+      pkProfil.biegPoziom = null;
+      if (w === "pierwsze5") {
+        pkProfil.bieg20 = false;
+      }
+    });
+  } else if (krok === "bieg20") {
+    pokazDalej = false;
+    wybor("Czy przebiegniesz 20 minut bez przerwy?", "Jeśli nie, zaczniemy od marszobiegu – to najbezpieczniejsza droga do ciągłego biegu.", [
+      [true, "Tak, 20 minut dam radę", "Biegi ciągłe, z czasem coraz dłuższe"],
+      [false, "Nie lub nie wiem", "Marszobieg: bieg przeplatany marszem"]
+    ], pkProfil.bieg20, function (w) {
+      pkProfil.bieg20 = w;
+    });
+  } else if (krok === "biegpoziom") {
+    pokazDalej = false;
+    const podp = pgBiegPoziom(Object.assign({}, pkProfil, { biegPoziom: null }));
+    wybor("Jak szczegółowy ma być plan?", "Podpowiedź z Twojego celu: " + (podp === "poczatkujacy" ? "początkujący" : "zaawansowany") + ". Możesz to zmienić.", [
+      ["poczatkujacy", "Początkujący", "Spokojne biegi, prosty język, mniej akcentów"],
+      ["zaawansowany", "Zaawansowany", "Interwały, bieg tempowy, odcinki na dystans, dłuższe biegi"]
+    ], pkProfil.biegPoziom || podp, function (w) {
+      pkProfil.biegPoziom = w;
+    });
+  } else if (krok === "biegdni") {
+    pokazDalej = false;
+    const mb = pkProfil.biegCel === "pierwsze5" || !pkProfil.bieg20;
+    wybor("Ile razy w tygodniu chcesz biegać?", mb ? "Przy marszobiegu 3 razy w tygodniu wystarczy – dni przerwy są potrzebne stawom i ścięgnom." : "Dni biegu rozłożę z przerwami. Najdłuższy bieg będzie na końcu tygodnia.", [2, 3, 4, 5].map(function (n) {
+      return [n, n + " razy", n === 3 ? "Dobry wybór na start" : n === 5 ? "Dla osób, które biegają regularnie" : ""];
+    }), pkProfil.biegDni, function (w) {
+      pkProfil.biegDni = w;
+    });
+  } else if (krok === "silabieg") {
+    pokazDalej = false;
+    tresc.appendChild(pkEl("h1", "", "Trening siłowy w planie?"));
+    tresc.appendChild(pkEl("p", "opis", "Siła zmniejsza ryzyko kontuzji i poprawia ekonomię biegu. Ułożę ją w dni bez biegu, nie dzień przed długim biegiem."));
+    [
+      [0, null, "Bez siły", "Sam bieg"],
+      [1, "biegacz", "Siła dla biegacza 1×", "Nogi, pośladki, brzuch – ok. 30 min"],
+      [2, "biegacz", "Siła dla biegacza 2×", "Nogi, pośladki, brzuch – ok. 30 min"],
+      [1, "cale", "Całe ciało 1×", "Pełny trening siłowy"],
+      [2, "cale", "Całe ciało 2×", "Pełny trening siłowy, treningi A i B"]
+    ].forEach(function (o) {
+      const wyb = pkProfil.silaDni === o[0] && (o[0] === 0 || pkProfil.silaRodzaj === o[1]);
+      tresc.appendChild(pkOpcja(o[2], o[3], wyb, function () {
+        pkProfil.silaDni = o[0];
+        if (o[1]) {
+          pkProfil.silaRodzaj = o[1];
+        }
+        pkKrok++;
+        pkRysuj();
+      }));
     });
   } else if (krok === "dosw") {
     pokazDalej = false;
@@ -319,6 +401,14 @@ function pkRysuj() {
     if (pkProfil.kardio.ile > wolne) {
       tresc.appendChild(pkEl("p", "opis", "Przy " + pkProfil.dni + " dniach treningu zostaje " + wolne + " wolnych dni, więc zmieszczę tylko tyle kardio."));
     }
+  } else if (krok === "tygodni" && pkProfil.cel === "bieg") {
+    pokazDalej = false;
+    const zal = pgBiegCel(pkProfil.biegCel).tygodni;
+    wybor("Na ile tygodni plan?", "Plan powstaje blokami po 4 tygodnie, ale objętość rośnie przez cały czas, a ostatni tydzień kończy się sprawdzianem.", [4, 8, 12, 16].map(function (n) {
+      return [n, n + " tygodni", n === zal ? "Zalecane dla tego celu" : ""];
+    }), pkProfil.tygodni, function (w) {
+      pkProfil.tygodni = w;
+    });
   } else if (krok === "tygodni") {
     pokazDalej = false;
     wybor("Na jak długo ułożyć plan?", "Plan powstaje w blokach po 4 tygodnie. Kolejny blok ułożę na podstawie Twoich prawdziwych wyników.", [
@@ -340,7 +430,7 @@ function pkRysuj() {
       pokazDalej = pkCeleBezStartu().length === 0;
     }
   } else if (krok === "kotwice") {
-    pokazDalej = pkProfil.cel !== "bieg" && mzWypelnione();
+    pokazDalej = mzWypelnione();
     pkRysujKotwice(tresc, function (f) { walidacja = f; });
   } else if (krok === "podsumowanie") {
     pokazDalej = false;
@@ -375,19 +465,7 @@ function pkPoleLiczba(etykieta, podpowiedz, wartosc, przy) {
 
 function pkRysujKotwice(tresc, ustawWalidacje) {
   const p = pkProfil;
-  if (p.cel === "bieg") {
-    tresc.appendChild(pkEl("h1", "", "Czy przebiegniesz 20 minut bez przerwy?"));
-    tresc.appendChild(pkEl("p", "opis", "Od tego zależy, czy zaczniemy od marszobiegu, czy od spokojnych biegów ciągłych."));
-    [[true, "Tak, 20 minut dam radę", "Biegi ciągłe, z czasem coraz dłuższe"], [false, "Nie lub nie wiem", "Marszobieg: bieg przeplatany marszem"]].forEach(function (o) {
-      tresc.appendChild(pkOpcja(o[1], o[2], p.bieg20 === o[0], function () {
-        p.bieg20 = o[0];
-        pkKrok++;
-        pkRysuj();
-      }));
-    });
-    ustawWalidacje(function () { return true; });
-    return;
-  }
+
   // Możliwości bierzemy z profilu „Moje możliwości” (Ustawienia). Bez testu nie zgadujemy.
   if (!mzWypelnione()) {
     tresc.appendChild(pkEl("h1", "", "Najpierw uzupełnij swoje możliwości"));
@@ -439,7 +517,7 @@ function pkRysujPodsumowanie(tresc) {
     const dod = (wynik.czasBlokow.rozgrzewka || 0) + (wynik.czasBlokow.rozciaganie || 0);
     czasTekst = " Trening do " + pkProfil.czas + " min" + (dod > 0 ? " plus ok. " + dod + " min rozgrzewki i rozciągania." : ".");
   }
-  tresc.appendChild(pkEl("p", "opis", "Blok 4 tygodnie · " + liczba + " sesji. Pierwsza dziś." + czasTekst));
+  tresc.appendChild(pkEl("p", "opis", (pkProfil.cel === "bieg" && pkProfil.tygodni > 4 ? "Plan na " + pkProfil.tygodni + " tygodni, teraz blok " + (pkProfil.blokNr || 1) + " (4 tygodnie)" : "Blok 4 tygodnie") + " · " + liczba + " sesji. Pierwsza dziś." + czasTekst));
 
   wynik.uwagi.forEach(function (u) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));
@@ -464,8 +542,12 @@ function pkRysujPodsumowanie(tresc) {
         karta.appendChild(pkEl("div", "pk-cw" + (w.cel ? " pk-cw-cel" : ""), (w.cel ? "★ " : "") + w.cw.nazwa + " · " + opisIlosci(il, w.cw)));
       });
     } else {
-      karta.appendChild(pkEl("b", "", etykieta + ": " + nazwaKategorii(s.kardio)));
-      karta.appendChild(pkEl("div", "pk-cw", s.czas + " min · " + s.notatka));
+      karta.appendChild(pkEl("b", "", etykieta + ": " + nazwaKategorii(s.kardio) + (s.rodzajBiegu ? " · " + biegRodzaj(s.rodzajBiegu).nazwa.toLowerCase() : "")));
+      const cel = s.odcinki ? biegOpisOdcinkow(s.odcinki) : [s.dystans ? s.dystans.wartosc + " " + s.dystans.jednostka : "", s.czas ? s.czas + " min" : ""].filter(Boolean).join(" · ");
+      karta.appendChild(pkEl("div", "pk-cw", cel));
+      if (s.notatka) {
+        karta.appendChild(pkEl("div", "pk-cw", s.notatka));
+      }
     }
     tresc.appendChild(karta);
   });
@@ -498,6 +580,16 @@ function pkRysujPodsumowanie(tresc) {
     }
     pgZapisz(pkWynik, { zapiszZestawy: pkProfil.zapiszZestawy !== false });
     dane.cele = JSON.parse(JSON.stringify(pkProfil.cele || []));
+    // Plan biegowy: ścieżka „Bieganie” jako cel, start zależny od tego, czy biegasz 20 minut
+    if (pkProfil.cel === "bieg") {
+      if (!dane.cele.some(function (c) { return c.typ === "sciezka" && c.id === "bieganie"; }) && dane.cele.length < CEL_MAX) {
+        dane.cele.push({ typ: "sciezka", id: "bieganie" });
+      }
+      if (!sciezkaPostep("bieganie")) {
+        dane.sciezkiPostep = dane.sciezkiPostep || {};
+        dane.sciezkiPostep.bieganie = { krok: pkProfil.bieg20 ? 1 : 0, data: dzisISO() };
+      }
+    }
     zapiszDane();
     pkWynik = null;
     if (pkPoprzedniPlan) {

@@ -267,3 +267,69 @@ const SZABLONY_ODCINKOW = [
     { rodzaj: "schlodzenie", czasS: 600 }
   ] }
 ];
+
+// ===== Warunki kroków ścieżki „Bieganie” =====
+// warunek = { minCzasS, minDystansM, maxCzasS, maxPauz, nieRodzaj, biegowWTygodniu, tygodniZRzedu }
+// bieg = { czasS, dystansM (albo null), pauzy, rodzajBiegu }
+// Zwraca "tak", "nie" albo "brak-dystansu" (warunek wymaga dystansu, a bieg go nie ma).
+function biegWarunek(w, bieg) {
+  if (w.biegowWTygodniu) {
+    return "nie"; // warunki tygodniowe liczy osobna funkcja
+  }
+  if (w.nieRodzaj && bieg.rodzajBiegu === w.nieRodzaj) {
+    return "nie";
+  }
+  if (w.maxPauz != null && (bieg.pauzy || 0) > w.maxPauz) {
+    return "nie";
+  }
+  if (w.minCzasS && !(bieg.czasS >= w.minCzasS)) {
+    return "nie";
+  }
+  if (w.minDystansM) {
+    if (!bieg.dystansM) {
+      return "brak-dystansu";
+    }
+    if (bieg.dystansM < w.minDystansM) {
+      return "nie";
+    }
+  }
+  if (w.maxCzasS) {
+    if (!bieg.czasS) {
+      return "nie";
+    }
+    // Czas przeliczony na dystans warunku (dłuższy bieg w tym samym tempie też się liczy)
+    const naDystansie = w.minDystansM && bieg.dystansM ? bieg.czasS * w.minDystansM / bieg.dystansM : bieg.czasS;
+    if (naDystansie >= w.maxCzasS) {
+      return "nie";
+    }
+  }
+  return "tak";
+}
+
+// Poniedziałek tygodnia dla daty "RRRR-MM-DD" → "RRRR-MM-DD"
+function biegPoczatekTygodnia(data) {
+  const d = new Date(data + "T12:00:00");
+  const dzien = (d.getDay() + 6) % 7;
+  d.setDate(d.getDate() - dzien);
+  return d.toISOString().slice(0, 10);
+}
+
+// Warunek tygodniowy: daty zapisanych biegów, data bieżącego biegu
+function biegWarunekTygodnia(w, daty, data) {
+  const ile = {};
+  daty.forEach(function (x) {
+    const t = biegPoczatekTygodnia(x);
+    ile[t] = (ile[t] || 0) + 1;
+  });
+  let t = biegPoczatekTygodnia(data);
+  const potrzeba = w.tygodniZRzedu || 1;
+  for (let i = 0; i < potrzeba; i++) {
+    if ((ile[t] || 0) < w.biegowWTygodniu) {
+      return false;
+    }
+    const d = new Date(t + "T12:00:00");
+    d.setDate(d.getDate() - 7);
+    t = d.toISOString().slice(0, 10);
+  }
+  return true;
+}

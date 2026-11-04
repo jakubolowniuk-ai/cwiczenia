@@ -80,7 +80,7 @@ function ostrzezeniaCelow(cele) {
 // Ścieżki, z których można wybrać cel przy danym sprzęcie
 function sciezkiDlaSprzetu(sprzet) {
   return (sciezkiDane || []).filter(function (s) {
-    return sprzet === "s" || s.typ === "kalistenika";
+    return s.typ !== "bieganie" && (sprzet === "s" || s.typ === "kalistenika");
   });
 }
 
@@ -525,7 +525,7 @@ function celeKartaPostepu() {
       const post = sciezkaPostep(c.id);
       const k = post ? Math.min(post.krok, s.kroki.length) : 0;
       tytul = s.nazwa;
-      stan = k >= s.kroki.length ? "Cel osiągnięty 🎉" : "Krok " + (k + 1) + " z " + s.kroki.length + ": " + s.kroki[k].cwiczenie + (post && post.data ? " · od " + post.data.split("-").reverse().join(".") : "");
+      stan = k >= s.kroki.length ? "Cel osiągnięty 🎉" : "Krok " + (k + 1) + " z " + s.kroki.length + ": " + (s.kroki[k].cwiczenie || s.kroki[k].nazwa) + (post && post.data ? " · od " + post.data.split("-").reverse().join(".") : "");
       proc = Math.round(100 * k / s.kroki.length);
       wiersz.addEventListener("click", function () {
         sciezkaOtwarta = s;
@@ -556,4 +556,91 @@ function celeKartaPostepu() {
 // Ścieżki potrzebne od startu, gdy są cele (zaliczanie kroków w Dziś)
 if ((dane.cele || []).some(function (c) { return c.typ === "sciezka"; })) {
   sciezkiWczytaj(function () {});
+}
+
+// ===== Ścieżki biegowe: zaliczanie z zapisanego biegu =====
+
+function celeBiegDaty() {
+  const daty = [];
+  dane.plany.forEach(function (plan) {
+    plan.sesje.forEach(function (s) {
+      const a = plan.aktywnosci.find(function (x) { return x.id === s.aktywnoscId; });
+      if (a && a.rodzajId === "rodzaj-bieganie" && s.wynik) {
+        daty.push(s.dataWykonania || dataPlanu(plan, s.dzien).toISOString().slice(0, 10));
+      }
+    });
+  });
+  return daty;
+}
+
+function celeBiegDane(sesja, wynik) {
+  return {
+    czasS: biegSekundy(wynik.czas),
+    dystansM: biegMetry(wynik.dystans),
+    pauzy: wynik.pauzy || 0,
+    rodzajBiegu: sesja.rodzajBiegu || "spokojny"
+  };
+}
+
+// Krok, który ten bieg mógłby zaliczyć, gdyby był wpisany dystans (do prośby o dystans)
+function celeBiegBrakDystansu(sesja, wynik) {
+  if (!sciezkiDane) {
+    return null;
+  }
+  const bieg = celeBiegDane(sesja, wynik);
+  let krok = null;
+  sciezkiDane.forEach(function (s) {
+    if (s.typ !== "bieganie" || krok) {
+      return;
+    }
+    const post = sciezkaPostep(s.id);
+    let nr = post ? post.krok : 0;
+    // Pomijamy kroki, które ten bieg i tak zalicza (np. 30 minut), i sprawdzamy następny
+    while (nr < s.kroki.length && s.kroki[nr].warunek && !s.kroki[nr].warunek.biegowWTygodniu && biegWarunek(s.kroki[nr].warunek, bieg) === "tak") {
+      nr++;
+    }
+    const k = s.kroki[nr];
+    if (k && k.warunek && biegWarunek(k.warunek, bieg) === "brak-dystansu") {
+      krok = k;
+    }
+  });
+  return krok;
+}
+
+// Po zapisaniu wyniku biegu: zaliczamy kolejne kroki ścieżek biegowych, które bieg spełnia
+function celeSprawdzBieg(sesja, wynik) {
+  if (!sciezkiDane) {
+    return;
+  }
+  const bieg = celeBiegDane(sesja, wynik);
+  const daty = celeBiegDaty();
+  const data = sesja.dataWykonania || dzisISO();
+  const komunikaty = [];
+  sciezkiDane.forEach(function (s) {
+    if (s.typ !== "bieganie") {
+      return;
+    }
+    const post = sciezkaPostep(s.id);
+    let nr = post ? post.krok : 0;
+    const start = nr;
+    while (nr < s.kroki.length) {
+      const w = s.kroki[nr].warunek || {};
+      const ok = w.biegowWTygodniu ? biegWarunekTygodnia(w, daty, data) : biegWarunek(w, bieg) === "tak";
+      if (!ok) {
+        break;
+      }
+      nr++;
+    }
+    if (nr > start) {
+      ustawPostepSciezki(s.id, nr);
+      komunikaty.push(nr >= s.kroki.length
+        ? "🎉 " + s.nazwa + ": cel osiągnięty!"
+        : "✓ " + s.kroki.slice(start, nr).map(function (k) { return k.nazwa; }).join(", ") + " – zaliczone. Następny krok: " + s.kroki[nr].nazwa + ".");
+    } else if (!post) {
+      ustawPostepSciezki(s.id, 0);
+    }
+  });
+  if (komunikaty.length) {
+    celeToast(komunikaty.join(" "));
+  }
 }

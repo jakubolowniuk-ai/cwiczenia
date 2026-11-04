@@ -1166,6 +1166,7 @@ function otworzWynik(plan, sesja) {
   const aktywnosc = aktywnoscPlanu(plan, sesja.aktywnoscId);
   wynikSesja = sesja;
   wynikRodzajId = aktywnosc.rodzajId;
+  wynikProsbaODystans = false;
   wynikTytul.textContent = "Wynik: " + opisAktywnosci(aktywnosc).tytul;
   wynikBlad.textContent = "";
   wynikPola.innerHTML = "";
@@ -1215,11 +1216,22 @@ function zamknijWynik() {
   wynikOdczyt = null;
 }
 
+let wynikProsbaODystans = false;
+
 function zapiszWynik() {
   const wynik = wynikOdczyt();
   if (wynik === null) {
     wynikBlad.textContent = "Popraw zaznaczone pole.";
     return;
+  }
+  // Bieg bez dystansu, a krok ścieżki go wymaga: raz prosimy o dystans (drugie „Zapisz” zapisuje bez niego)
+  if (wynikRodzajId === "rodzaj-bieganie" && !wynik.dystans && !wynikProsbaODystans && typeof celeBiegBrakDystansu === "function") {
+    const krok = celeBiegBrakDystansu(wynikSesja, Object.assign({}, wynik, { pauzy: wynikSesja.wynikSzkic ? wynikSesja.wynikSzkic.pauzy : 0 }));
+    if (krok) {
+      wynikProsbaODystans = true;
+      wynikBlad.textContent = "Wpisz dystans, a ten bieg może zaliczyć krok „" + krok.nazwa + "”. Bez dystansu naciśnij „Zapisz” jeszcze raz.";
+      return;
+    }
   }
   if (wynikSesja.wynikSzkic) {
     wynik.pauzy = wynikSesja.wynikSzkic.pauzy;
@@ -1230,6 +1242,9 @@ function zapiszWynik() {
   wynikSesja.dataWykonania = dzisISO();
   zapiszDane();
   const rodzajWyniku = wynikRodzajId;
+  if (rodzajWyniku === "rodzaj-bieganie" && typeof celeSprawdzBieg === "function") {
+    try { celeSprawdzBieg(wynikSesja, wynik); } catch (blad) { console.error(blad); }
+  }
   zamknijWynik();
   rysujDzis();
   setTimeout(function () {

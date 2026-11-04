@@ -1713,6 +1713,103 @@
    ],
    "wsparcie": [],
    "uwaga": "Bardzo techniczne. Najpierw trener."
+  },
+  {
+   "id": "bieganie",
+   "nazwa": "Bieganie: od 20 minut do półmaratonu",
+   "typ": "bieganie",
+   "cel": "Półmaraton",
+   "opis": "Kroki zaliczają się same, gdy zapiszesz bieg, który spełnia warunek. Do kroków z dystansem potrzebny jest dystans (wpisany albo z GPS).",
+   "kroki": [
+    {
+     "nazwa": "Pierwsze 20 minut biegu",
+     "kryterium": "20 min biegu (nie marsz-bieg)",
+     "warunek": {
+      "minCzasS": 1200,
+      "nieRodzaj": "marszobieg"
+     }
+    },
+    {
+     "nazwa": "30 minut bez zatrzymania",
+     "kryterium": "30 min biegu bez pauzy",
+     "warunek": {
+      "minCzasS": 1800,
+      "maxPauz": 0,
+      "nieRodzaj": "marszobieg"
+     }
+    },
+    {
+     "nazwa": "5 km bez zatrzymania",
+     "kryterium": "co najmniej 5 km, bez pauzy",
+     "warunek": {
+      "minDystansM": 5000,
+      "maxPauz": 0
+     }
+    },
+    {
+     "nazwa": "5 km w mniej niż 30 minut",
+     "kryterium": "5 km w czasie poniżej 30:00",
+     "warunek": {
+      "minDystansM": 5000,
+      "maxCzasS": 1800
+     }
+    },
+    {
+     "nazwa": "10 km",
+     "kryterium": "co najmniej 10 km",
+     "warunek": {
+      "minDystansM": 10000
+     }
+    },
+    {
+     "nazwa": "10 km w mniej niż godzinę",
+     "kryterium": "10 km w czasie poniżej 60:00",
+     "warunek": {
+      "minDystansM": 10000,
+      "maxCzasS": 3600
+     }
+    },
+    {
+     "nazwa": "Półmaraton",
+     "kryterium": "co najmniej 21,1 km",
+     "warunek": {
+      "minDystansM": 21097
+     }
+    }
+   ],
+   "wsparcie": []
+  },
+  {
+   "id": "bieganie-regularnie",
+   "nazwa": "Regularne bieganie",
+   "typ": "bieganie",
+   "cel": "4 tygodnie z rzędu po 3 biegi",
+   "opis": "Liczą się zapisane biegi w tygodniu kalendarzowym (poniedziałek–niedziela).",
+   "kroki": [
+    {
+     "nazwa": "Tydzień z 2 biegami",
+     "kryterium": "2 zapisane biegi w jednym tygodniu",
+     "warunek": {
+      "biegowWTygodniu": 2
+     }
+    },
+    {
+     "nazwa": "Tydzień z 3 biegami",
+     "kryterium": "3 zapisane biegi w jednym tygodniu",
+     "warunek": {
+      "biegowWTygodniu": 3
+     }
+    },
+    {
+     "nazwa": "4 tygodnie z rzędu po 3 biegi",
+     "kryterium": "4 kolejne tygodnie, w każdym co najmniej 3 biegi",
+     "warunek": {
+      "biegowWTygodniu": 3,
+      "tygodniZRzedu": 4
+     }
+    }
+   ],
+   "wsparcie": []
   }
  ]
 }

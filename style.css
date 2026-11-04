@@ -2126,3 +2126,4 @@ h1 {
 .odc-dol { display: flex; gap: 6px; align-items: center; }
 .odc-dol .odc-tempo { flex: 1 1 auto; min-width: 0; width: auto; }
 .odc-edytor .odc-gora { grid-template-columns: 1fr 64px 88px; }
+.sciezka-nazwa.bez-linku { text-decoration: none; cursor: default; }

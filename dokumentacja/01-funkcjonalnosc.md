@@ -426,3 +426,13 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Wynik: zmierzone odcinki (z planem i oznaczeniem przerwanego) w oknie wyniku do poprawy (min:s); zapis w `wynik.odcinkiWyniki`. Wynik ręczny sesji z odcinkami podpowiada ich sumę. Podpis okna mówi, skąd są wartości (stoper / plan / wynik).
 - Generator: marsz-bieg ma odcinki (5 min marszu, N × (bieg + 2 min marszu), 5 min marszu), więc stoper prowadzi przez nie sam.
 - Kopiowanie do innych sesji przenosi odcinki.
+
+## v85 – Bieganie, wersja 4: generator biegowy z siłą i ścieżka „Bieganie”
+
+- Nowy plik `plan-bieg.js` (bez interfejsu): cele biegowe (pierwsze 5 km, 5 km szybciej, 10 km, półmaraton, utrzymanie formy), poziom (podpowiedź z celu: pierwsze 5 km / brak 20 min biegu / małe doświadczenie → początkujący), układ dni (biegi z przerwami, długi bieg na końcu tygodnia; siła w dni bez biegu, nie przed długim biegiem), tydzień planu liczony przez wszystkie bloki: objętość +8% na tydzień, co 4. tydzień 75%, ostatni 60% + sprawdzian na dystansie celu; akcenty od 2. tygodnia (tempowy z odcinkami / interwały 1 min albo 400 m dla zaawansowanych), marszobieg 8 poziomów rozłożonych na długość planu (max 3 biegi w tygodniu).
+- Siła w planie biegowym: bez, „siła dla biegacza” (nogi, pośladki, brzuch) 1–2× albo całe ciało (A/B) 1–2×; korzysta z istniejących szablonów, testu możliwości i bólu.
+- Kreator dla biegania: cel biegowy → (czy 20 min) → poziom → biegi w tygodniu → siła → (przy sile: doświadczenie, czas, rozgrzewka, sprzęt, ból) → długość 4/8/12/16 tyg. (zalecana z celu) → (przy sile: Moje możliwości) → podsumowanie z odcinkami i dystansami. Starsze profile biegowe dostają wartości domyślne (`pgBiegNormalizuj`).
+- Ścieżki „Bieganie: od 20 minut do półmaratonu” (7 kroków) i „Regularne bieganie” (2 / 3 biegi w tygodniu, 4 tygodnie z rzędu) z warunkami w danych (`warunek`: minCzasS, minDystansM, maxCzasS – przeliczany na dystans warunku, maxPauz, nieRodzaj, biegowWTygodniu, tygodniZRzedu); `biegWarunek`, `biegWarunekTygodnia` w `bieg-logika.js`.
+- Zaliczanie bez klikania: po zapisaniu wyniku biegu kolejne spełnione kroki zaliczają się same (komunikat). Gdy bieg bez dystansu mógłby zaliczyć krok z dystansem – prośba o dystans (drugie „Zapisz” zapisuje bez niego).
+- Plan biegowy dodaje ścieżkę „Bieganie” do celów (start: krok 1, jeśli biegasz 20 minut); widać ją w Ścieżkach (nowa grupa „Bieganie”) i w Postępie.
+- Test: 14 400 kombinacji profili biegowych × bloków bez błędów (liczba biegów i sesji siły, brak pustych sesji).

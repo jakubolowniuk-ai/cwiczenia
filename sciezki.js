@@ -30,7 +30,7 @@ function sciezkiCwiczenie(nazwa) {
 
 function sciezkiZakres(s) {
   const poz = s.kroki.map(function (k) {
-    const c = sciezkiCwiczenie(k.cwiczenie);
+    const c = k.cwiczenie ? sciezkiCwiczenie(k.cwiczenie) : null;
     return c && c.poziom ? c.poziom : 0;
   }).filter(Boolean);
   if (!poz.length) { return null; }
@@ -44,7 +44,7 @@ function rysujSciezki() {
     return;
   }
   widokSciezki.appendChild(sciezkiEl("p", "podpowiedz-poziomow", "Wybierz cel. Każda ścieżka to kolejne ćwiczenia od łatwego do trudnego – przechodź dalej, gdy spełnisz kryterium kroku."));
-  [["kalistenika", "Kalistenika"], ["silownia", "Siłownia"]].forEach(function (g) {
+  [["kalistenika", "Kalistenika"], ["silownia", "Siłownia"], ["bieganie", "Bieganie"]].forEach(function (g) {
     const lista = sciezkiDane.filter(function (s) { return s.typ === g[0]; });
     if (!lista.length) { return; }
     widokSciezki.appendChild(sciezkiEl("h2", "sciezka-grupa", g[1] + " (" + lista.length + ")"));
@@ -115,14 +115,17 @@ function rysujSciezke(s) {
     } else if (post) {
       li.classList.add(i < post.krok ? "zaliczony" : i === post.krok ? "aktualny" : "przyszly");
     }
-    const c = sciezkiCwiczenie(k.cwiczenie);
+    const c = k.cwiczenie ? sciezkiCwiczenie(k.cwiczenie) : null;
     const gora = sciezkiEl("div", "sciezka-krok-gora");
     gora.appendChild(sciezkiEl("span", "sciezka-nr", String(i + 1)));
-    const nazwa = sciezkiEl(c && !sciezkaWyborStartu ? "button" : "span", "sciezka-nazwa", k.cwiczenie);
+    const nazwa = sciezkiEl(c && !sciezkaWyborStartu ? "button" : "span", "sciezka-nazwa", k.cwiczenie || k.nazwa);
+    if (!k.cwiczenie) {
+      nazwa.classList.add("bez-linku");
+    }
     if (c && !sciezkaWyborStartu) {
       nazwa.type = "button";
       nazwa.addEventListener("click", function () { otworzOpis(c); });
-    } else {
+    } else if (k.cwiczenie) {
       nazwa.classList.add("brak");
     }
     gora.appendChild(nazwa);
