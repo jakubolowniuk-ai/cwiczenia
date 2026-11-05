@@ -1229,6 +1229,9 @@ function pgBuduj(p) {
   pgUkryteDozwolone = !!p.uzyjUkrytych;
   pgUkrytePominiete = {};
   try {
+    if (p.cel === "plywanie" && typeof pgPlywBudujPlan === "function") {
+      return pgPlywBudujPlan(p);
+    }
     return pgBudujPlan(p);
   } finally {
     pgUkryteDozwolone = false;
@@ -1616,6 +1619,17 @@ function pgZapisz(wynik, opcje) {
         sesja.odcinki = JSON.parse(JSON.stringify(s.odcinki));
         sesja.czas = null;
       }
+      if (s.bloki) {
+        // Basen: bloki w długościach basenu, czas treningu w sekundach
+        sesja.bloki = JSON.parse(JSON.stringify(s.bloki));
+        sesja.basen = s.basen ? Object.assign({}, s.basen) : null;
+        sesja.trybProsty = false;
+        sesja.czasSesji = s.czasSesji || null;
+        sesja.czas = null;
+        if (s.sprawdzian) {
+          sesja.sprawdzian = true;
+        }
+      }
       sesje.push(sesja);
     }
   });
@@ -1630,7 +1644,7 @@ function pgZapisz(wynik, opcje) {
     utworzono: new Date().toISOString(),
     kreator: { profil: JSON.parse(JSON.stringify(p)), blok: p.blokNr || 1, powody: wynik.powody }
   };
-  if (p.cel !== "bieg" && p.cel !== "zdrowie") {
+  if (p.cel !== "bieg" && p.cel !== "zdrowie" && p.cel !== "plywanie") {
     plan.tydzienTestu = 21;
   }
   // Opisy ćwiczeń celów (pokazywane w Dziś)

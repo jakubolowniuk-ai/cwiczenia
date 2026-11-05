@@ -572,7 +572,7 @@ function sprawdzRekordDystansu(rodzajId, wynik) {
   let styl = "";
   if (rodzajId === "rodzaj-basen") {
     const etapy = etapySesji(wynik);
-    if (etapy.length !== 1) {
+    if (etapy.length !== 1 || (typeof plywCiagly === "function" && !plywCiagly(wynik))) {
       return;
     }
     metrySesji = etapy[0].metry;

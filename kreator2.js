@@ -207,7 +207,9 @@ function opisSesji(sesja) {
     return trening ? "Zestaw: " + trening.nazwa : "Dotknij, aby dodać ćwiczenia";
   }
   const czesci = [];
-  if (etapySesji(sesja).length > 0) {
+  if (Array.isArray(sesja.bloki) && sesja.bloki.length && typeof plywOpisKrotki === "function") {
+    czesci.push(plywOpisKrotki(sesja));
+  } else if (etapySesji(sesja).length > 0) {
     czesci.push(opisEtapow(sesja));
   }
   if (sesja.kroki) {
@@ -558,6 +560,7 @@ function nowaSesja(aktywnosc, dzien) {
     parametry: {},
     styl: null,
     etapy: null,
+    bloki: null,
     dlugosci: null,
     dystans: null,
     kroki: null,
@@ -1029,6 +1032,9 @@ function zrobKarteSesji(sesja, aktywnosc, opcje) {
   const rodzaj = znajdzKategorie(aktywnosc.rodzajId);
   const pola = rodzaj && rodzaj.polaPlanu ? rodzaj.polaPlanu : [];
   const bieg = aktywnosc.rodzajId === "rodzaj-bieganie";
+  if (pola.indexOf("styl") !== -1 && typeof plywKarta === "function") {
+    return plywKarta(sesja, aktywnosc, opcje);
+  }
 
   const karta = document.createElement("div");
   karta.className = "formularz parametry-karta";
@@ -1602,8 +1608,8 @@ function kopiujDoInnych() {
       s.blokPoId = pdSesja.blokPoId || null;
       s.parametry = JSON.parse(JSON.stringify(pdSesja.parametry));
     } else {
-      ["styl", "etapy", "cwiczenieId", "dlugosci", "dystans", "kroki", "czas", "rodzajBiegu", "obciazenie", "odcinki"].forEach(function (klucz) {
-        s[klucz] = pdSesja[klucz] ? JSON.parse(JSON.stringify(pdSesja[klucz])) : null;
+      ["styl", "etapy", "bloki", "basen", "trybProsty", "czasSesji", "cwiczenieId", "dlugosci", "dystans", "kroki", "czas", "rodzajBiegu", "obciazenie", "odcinki"].forEach(function (klucz) {
+        s[klucz] = pdSesja[klucz] || pdSesja[klucz] === false ? JSON.parse(JSON.stringify(pdSesja[klucz])) : null;
       });
     }
   });

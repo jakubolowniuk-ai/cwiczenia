@@ -80,7 +80,7 @@ function ostrzezeniaCelow(cele) {
 // Ścieżki, z których można wybrać cel przy danym sprzęcie
 function sciezkiDlaSprzetu(sprzet) {
   return (sciezkiDane || []).filter(function (s) {
-    return s.typ !== "bieganie" && (sprzet === "s" || s.typ === "kalistenika");
+    return s.typ !== "bieganie" && s.typ !== "plywanie" && (sprzet === "s" || s.typ === "kalistenika");
   });
 }
 
@@ -617,6 +617,61 @@ function celeOpisBiegu(b) {
     czesci.push(Math.round(b.czasS / 60) + " min");
   }
   return czesci.join(" w ") || "zapisany";
+}
+
+// ===== Pływanie: kroki ścieżki z „najdłuższego odcinka bez zatrzymania” =====
+
+function celePlywWarunek(w, dlugosci, metry) {
+  if (w.minDlugosci && !(dlugosci >= w.minDlugosci - 0.001)) {
+    return false;
+  }
+  if (w.minCiaglyM && !(metry >= w.minCiaglyM * 0.995)) {
+    return false;
+  }
+  return true;
+}
+
+// Po zapisaniu wyniku na basenie: zaliczamy kolejne kroki ścieżek pływackich
+function celeSprawdzPlyw(sesja, wynik) {
+  if (!wynik || typeof plywBasen !== "function") {
+    return;
+  }
+  if (!sciezkiDane) {
+    sciezkiWczytaj(function () { celeSprawdzPlyw(sesja, wynik); });
+    return;
+  }
+  const b = plywBasen(wynik.bloki ? wynik : sesja);
+  let dl = typeof wynik.najdluzszy === "number" ? wynik.najdluzszy : null;
+  if (dl === null && plywCiagly(wynik)) {
+    dl = plywDlugosci(plywBlokiSesji(wynik));
+  }
+  if (!(dl > 0)) {
+    return;
+  }
+  const m = dl * plywBasenM(b);
+  const komunikaty = [];
+  sciezkiDane.forEach(function (s) {
+    if (s.typ !== "plywanie") {
+      return;
+    }
+    const post = sciezkaPostep(s.id);
+    let nr = post ? post.krok : 0;
+    const start = nr;
+    while (nr < s.kroki.length && celePlywWarunek(s.kroki[nr].warunek || {}, dl, m)) {
+      nr++;
+    }
+    if (nr > start) {
+      ustawPostepSciezki(s.id, nr);
+      komunikaty.push(nr >= s.kroki.length
+        ? "🎉 " + s.nazwa + ": cel osiągnięty!"
+        : "✓ " + plywLiczba(dl) + " dł. (" + Math.round(m) + " m) bez zatrzymania – zaliczony krok „" + s.kroki.slice(start, nr).map(function (k) { return k.nazwa; }).join("”, „") + "”. Kolejny: " + s.kroki[nr].nazwa.toLowerCase() + ".");
+    } else if (!post && czyCelSciezki(s.id)) {
+      ustawPostepSciezki(s.id, 0);
+    }
+  });
+  if (komunikaty.length) {
+    celeToast(komunikaty.join(" "));
+  }
 }
 
 // Po zapisaniu wyniku biegu: zaliczamy kolejne kroki ścieżek biegowych, które bieg spełnia

@@ -107,7 +107,11 @@ const POMOC_SLOWNICZEK = [
   ["Ćwiczenie", "pojedynczy ruch, np. pompki albo przysiad."],
   ["Rodzaj treningu", "siłownia, kalistenika, bieganie, rower, basen itd."],
   ["Ścieżka", "kolejne kroki do umiejętności, np. do pierwszego podciągnięcia."],
-  ["Cel", "ścieżka albo liczba (np. 30 podciągnięć), do której plan Cię prowadzi."]
+  ["Cel", "ścieżka albo liczba (np. 30 podciągnięć), do której plan Cię prowadzi."],
+  ["Długość (basen)", "jeden przepłynięty basen od ściany do ściany. Na basenie 25 m 4 długości to 100 m."],
+  ["Blok (basen)", "część treningu na basenie, np. 4 × 2 długości kraulem z przerwą 20 s."],
+  ["Start co (odjazd)", "każde powtórzenie zaczynasz co określony czas, np. co 1:00. Im szybciej płyniesz, tym dłużej odpoczywasz."],
+  ["Najdłuższy odcinek", "ile długości przepłynąłeś(aś) bez zatrzymania. Z niego zaliczają się kroki ścieżki „Pływanie”."]
 ];
 
 function pomocOtworz(klucz) {

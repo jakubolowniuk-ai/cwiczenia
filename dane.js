@@ -114,7 +114,7 @@ function domyslneDane() {
     ].concat(MIESNIE_STARTOWE.map(function (m) {
       return { id: m[0], nazwa: m[1], typ: "miesien", partiaId: m[2] };
     })),
-    stylePlywania: ["Kraul", "Grzbietowy", "Klasyczny", "Motylkowy", "Dowolny"],
+    stylePlywania: ["Kraul", "Grzbietowy", "Klasyczny", "Motylkowy", "Zmienny", "Dowolnie wybrany"],
     cwiczenia: [],
     treningi: [],
     szkicPlanu: null,
@@ -256,6 +256,12 @@ function uzupelnijDane(zapisane) {
     zapisane.stylePlywania = startowe.stylePlywania;
   }
 
+  // Pływanie (v97): „Dowolny” to kraul; zapisy w metrach zamieniamy na bloki w długościach basenu (bez utraty metrów)
+  if (zapisane.plywMigracja !== 1) {
+    migrujPlywanie(zapisane, startowe.stylePlywania);
+    zapisane.plywMigracja = 1;
+  }
+
   if (!("szkicPlanu" in zapisane)) {
     zapisane.szkicPlanu = null;
   }
@@ -265,6 +271,67 @@ function uzupelnijDane(zapisane) {
   }
 
   return zapisane;
+}
+
+function migrujPlywanie(zapisane, startoweStyle) {
+  const zmien = function (st) { return st === "Dowolny" ? "Kraul" : st; };
+  const style = (zapisane.stylePlywania || []).map(zmien);
+  startoweStyle.forEach(function (st) {
+    if (style.indexOf(st) === -1) {
+      style.push(st);
+    }
+  });
+  zapisane.stylePlywania = style.filter(function (st, i) { return style.indexOf(st) === i; });
+  (zapisane.cwiczenia || []).forEach(function (c) {
+    if (Array.isArray(c.style)) {
+      c.style = c.style.map(zmien).filter(function (st, i, t) { return t.indexOf(st) === i; });
+    }
+  });
+  (zapisane.rekordyDystans || []).forEach(function (r) {
+    r.styl = zmien(r.styl);
+  });
+  const naBloki = function (s) {
+    if (!s || (Array.isArray(s.bloki) && s.bloki.length)) {
+      return;
+    }
+    let etapy = [];
+    if (Array.isArray(s.etapy) && s.etapy.length) {
+      etapy = s.etapy.map(function (e) { return { styl: e.styl, metry: e.metry !== undefined ? e.metry : (e.dlugosci || 0) * 25 }; });
+    } else if (s.dlugosci) {
+      etapy = [{ styl: s.styl || "", metry: s.dlugosci * 25 }];
+    }
+    etapy = etapy.filter(function (e) { return e.metry > 0; });
+    if (!etapy.length) {
+      return;
+    }
+    // Starsze zapisy liczyły długości po 25 m: zostaje basen 25 m (przy nierównych metrach – ułamek długości, metry bez zmian)
+    s.basen = { dlugosc: 25, jednostka: "m" };
+    s.bloki = etapy.map(function (e) {
+      return { powt: 1, dl: Math.round(e.metry / 25 * 100) / 100, styl: zmien(e.styl) || "Kraul", tryb: "przerwa", przerwaS: 0, odjazdS: 0, pomoce: [], intensywnosc: "umiarkowanie", typ: "glowna", notatka: "" };
+    });
+    s.trybProsty = true;
+    s.etapy = null;
+    s.dlugosci = null;
+    s.styl = null;
+  };
+  (zapisane.plany || []).forEach(function (plan) {
+    const basenowe = (plan.aktywnosci || []).filter(function (a) { return a.rodzajId === "rodzaj-basen"; }).map(function (a) { return a.id; });
+    (plan.sesje || []).forEach(function (s) {
+      if (basenowe.indexOf(s.aktywnoscId) === -1) {
+        return;
+      }
+      naBloki(s);
+      naBloki(s.wynik);
+    });
+  });
+  if (zapisane.szkicPlanu && Array.isArray(zapisane.szkicPlanu.sesje)) {
+    const basenowe = (zapisane.szkicPlanu.aktywnosci || []).filter(function (a) { return a.rodzajId === "rodzaj-basen"; }).map(function (a) { return a.id; });
+    zapisane.szkicPlanu.sesje.forEach(function (s) {
+      if (basenowe.indexOf(s.aktywnoscId) !== -1) {
+        naBloki(s);
+      }
+    });
+  }
 }
 
 // Wczytuje dane z pamięci telefonu (albo tworzy dane startowe)

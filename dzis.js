@@ -159,7 +159,9 @@ function sesjaZaliczona(plan, sesja) {
 // Opis celu albo wyniku biegania i basenu, np. "Kraul 400 m" albo "5 km · 30 min"
 function opisCeluSesji(dane_) {
   const czesci = [];
-  if (etapySesji(dane_).length > 0) {
+  if (Array.isArray(dane_.bloki) && dane_.bloki.length && typeof plywOpisKrotki === "function") {
+    czesci.push(plywOpisKrotki(dane_));
+  } else if (etapySesji(dane_).length > 0) {
     czesci.push(opisEtapow(dane_));
   }
   if (dane_.kroki) {
@@ -183,6 +185,19 @@ function opisCeluSesji(dane_) {
   const tempo = biegTempo(dane_.dystans, dane_.czas);
   if (tempo && (dane_.rodzajBiegu || dane_.zrodlo)) {
     czesci.push(biegOpisTempa(tempo));
+  }
+  if (Array.isArray(dane_.bloki) && dane_.bloki.length && typeof plywOpisKrotki === "function") {
+    const m = sumaMetrow(dane_);
+    const t = dane_.czas ? plywTempo(sekundyZ(dane_.czas.wartosc, dane_.czas.jednostka), m) : null;
+    if (t) {
+      czesci.push("tempo " + plywOpisTempa(t));
+    }
+    if (typeof dane_.najdluzszy === "number" && dane_.najdluzszy > 0) {
+      czesci.push("bez zatrzymania " + plywMetry(dane_.najdluzszy, plywBasen(dane_)) + " m");
+    }
+    if (dane_.czasSesji) {
+      czesci.push("trening " + Math.round(dane_.czasSesji / 60) + " min");
+    }
   }
   if (typeof dane_.wysilek === "number") {
     czesci.push("wysiłek " + dane_.wysilek + "/10");
@@ -425,6 +440,9 @@ function zrobKarteDzis(plan, sesja) {
     }
     if (sesja.notatka) {
       karta.appendChild(tekstElement("div", "karta-opis", sesja.notatka));
+    }
+    if (Array.isArray(sesja.bloki) && sesja.bloki.length > 1 && typeof plywListaBlokow === "function") {
+      karta.appendChild(plywListaBlokow(sesja));
     }
     const bieg = aktywnosc && aktywnosc.rodzajId === "rodzaj-bieganie";
     if (bieg && sesja.wynikSzkic && !sesja.wynik) {
@@ -1243,7 +1261,14 @@ function otworzWynik(plan, sesja) {
   if (aktywnosc.rodzajId === "rodzaj-bieganie" && sesja.rodzajBiegu) {
     wynikTytul.textContent += " · " + biegRodzaj(sesja.rodzajBiegu).nazwa.toLowerCase();
   }
-  const wpis = zrobKarteSesji(kopia, aktywnosc, { wynik: true });
+  wynikZapisz.hidden = false;
+  const basenowy = typeof plywKarta === "function" && aktywnosc.rodzajId === "rodzaj-basen";
+  if (basenowy && podpis) {
+    podpis.textContent = sesja.wynik ? "Popraw wynik, jeśli trzeba." : "Pływanie poszło zgodnie z planem? Jedno dotknięcie wystarczy. Jeśli było inaczej, wybierz „Poprawiam”.";
+  }
+  const wpis = basenowy
+    ? plywKarta(sesja.wynik || sesja, aktywnosc, { wynik: true, plan: sesja, popraw: !!sesja.wynik, zapisz: zapiszWynik, przyciskZapisz: wynikZapisz })
+    : zrobKarteSesji(kopia, aktywnosc, { wynik: true });
   wynikOdczyt = wpis.odczytaj;
   wynikPola.appendChild(wpis.karta);
   wynikTlo.hidden = false;
@@ -1291,6 +1316,9 @@ function zapiszWynik() {
   const rodzajWyniku = wynikRodzajId;
   if (rodzajWyniku === "rodzaj-bieganie" && typeof celeSprawdzBieg === "function") {
     try { celeSprawdzBieg(wynikSesja, wynik); } catch (blad) { console.error(blad); }
+  }
+  if (rodzajWyniku === "rodzaj-basen" && typeof celeSprawdzPlyw === "function") {
+    try { celeSprawdzPlyw(wynikSesja, wynik); } catch (blad) { console.error(blad); }
   }
   zamknijWynik();
   rysujDzis();

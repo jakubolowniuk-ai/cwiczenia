@@ -136,6 +136,9 @@ function paZastosuj(plan, p) {
       zmiany.push("Biegi oceniałeś(aś) średnio na " + (Math.round(sredni * 10) / 10) + "/10, więc powtórzę ostatni tydzień planu, żeby ciało się przyzwyczaiło. Plan będzie o tydzień dłuższy.");
     }
   }
+  if (p.cel === "plywanie" && typeof pgPlywAdaptuj === "function") {
+    pgPlywAdaptuj(plan, p, zmiany);
+  }
   p.adaptZmiany = zmiany;
   return zmiany;
 }
@@ -202,7 +205,19 @@ function paOtworzPodsumowanie(plan, dalej) {
     }
 
     // Test możliwości (siła): świeży test trafia do nowego bloku
-    if (plan.kreator.profil.cel !== "bieg" || plan.kreator.profil.silaDni) {
+    if (plan.kreator.profil.cel === "plywanie" && typeof pgPlywAdaptuj === "function") {
+      const pl = pgPlywAdaptuj(plan, JSON.parse(JSON.stringify(plan.kreator.profil)), []);
+      if (pl.planowane) {
+        paWiersz(karta, "Treningi na basenie", pl.zrobione + " z " + pl.planowane);
+        if (pl.najM > 0) {
+          paWiersz(karta, "Najdłużej bez zatrzymania", Math.round(pl.najM) + " m");
+        }
+        if (pl.wysilek !== null) {
+          paWiersz(karta, "Średni wysiłek", (Math.round(pl.wysilek * 10) / 10) + "/10");
+        }
+      }
+    }
+    if (plan.kreator.profil.cel !== "plywanie" && (plan.kreator.profil.cel !== "bieg" || plan.kreator.profil.silaDni)) {
       const dni = typeof mzDniOdTestu === "function" ? mzDniOdTestu() : null;
       if (dni === null || dni > 56) {
         okno.appendChild(tekstElement("p", "opis", dni === null ? "Nie masz zapisanego testu możliwości. Zrób go (ok. 10 minut), a kolejny blok dobierze trudność do Twojej formy." : "Test możliwości ma ponad 8 tygodni. Zrób go ponownie (ok. 10 minut), a kolejny blok dobierze trudność do Twojej formy."));

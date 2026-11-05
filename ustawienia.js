@@ -144,6 +144,9 @@ function rysujUstawienia() {
   if (typeof biegRysujUstawienia === "function") {
     biegRysujUstawienia();
   }
+  if (typeof plywRysujUstawienia === "function") {
+    plywRysujUstawienia();
+  }
   const wlaczony = dane.ustawienia.alarmWlaczony !== false;
   ustPrzelacznik.setAttribute("aria-checked", wlaczony ? "true" : "false");
   ustPrzelacznik.classList.toggle("wlaczony", wlaczony);

@@ -506,6 +506,13 @@ function rysujPostep() {
       postepTresc.appendChild(ppBezTytulu(kb));
     }
   }
+  if (typeof plywKartaPostepu === "function") {
+    const kp = plywKartaPostepu();
+    if (kp) {
+      ppSekcja("Pływanie");
+      postepTresc.appendChild(ppBezTytulu(kp));
+    }
+  }
   const ileRekordow = dane.cwiczenia.filter(function (c) { return c.rekord; }).length + (dane.rekordyDystans || []).filter(function (r) { return r.czas; }).length;
   ppSekcja("Rekordy", ileRekordow ? String(ileRekordow) : "");
   dodajRekordyAktywnosci();

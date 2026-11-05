@@ -88,6 +88,9 @@ function zapiszSzkic() {
 
 // Basen: etapy sesji [{ styl, metry }]. Starsze sesje miały długości basenu: liczymy je jako 25 m.
 function etapySesji(s) {
+  if (Array.isArray(s.bloki) && s.bloki.length > 0 && typeof plywEtapyZBlokow === "function") {
+    return plywEtapyZBlokow(s);
+  }
   if (Array.isArray(s.etapy) && s.etapy.length > 0) {
     return s.etapy.map(function (e) {
       return { styl: e.styl, metry: e.metry !== undefined ? e.metry : (e.dlugosci || 0) * 25 };

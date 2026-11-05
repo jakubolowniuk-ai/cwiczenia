@@ -46,7 +46,7 @@ function rysujSciezki() {
     return;
   }
   widokSciezki.appendChild(sciezkiEl("p", "podpowiedz-poziomow", "Wybierz cel. Każda ścieżka to kolejne ćwiczenia od łatwego do trudnego – przechodź dalej, gdy spełnisz kryterium kroku."));
-  [["kalistenika", "Kalistenika", "Ćwiczenia z masą ciała: podciąganie, pompki, figury."], ["silownia", "Siłownia", "Ćwiczenia z ciężarem: przysiad, wyciskanie, martwy ciąg."], ["bieganie", "Bieganie", "Od pierwszych minut biegu do półmaratonu."]].forEach(function (g) {
+  [["kalistenika", "Kalistenika", "Ćwiczenia z masą ciała: podciąganie, pompki, figury."], ["silownia", "Siłownia", "Ćwiczenia z ciężarem: przysiad, wyciskanie, martwy ciąg."], ["bieganie", "Bieganie", "Od pierwszych minut biegu do półmaratonu."], ["plywanie", "Pływanie", "Od 2 długości basenu do 1500 m bez zatrzymania."]].forEach(function (g) {
     const lista = sciezkiDane.filter(function (s) { return s.typ === g[0]; });
     if (!lista.length) { return; }
     const otwarta = !!sciezkiGrupyOtwarte[g[0]];

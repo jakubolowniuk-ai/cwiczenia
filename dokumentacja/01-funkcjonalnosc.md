@@ -527,3 +527,40 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Karty na liście są krótkie (nazwa, poziom, rodzaj i partie, strzałka). Dotknięcie otwiera arkusz szczegółów: początek opisu, rekord, szacowany 1RM, data ostatniego treningu i przyciski: Opis i wyniki (opis, film, wykres), Mięśnie, Rekord, Historia, Edytuj, Ukryj, Usuń (tylko własne). Ukryte ćwiczenia nadal mają na karcie „Przywróć”.
 - „Dodaj do zestawu…” w szczegółach: lista Twoich zestawów, dopisuje ćwiczenie na koniec wybranego zestawu (do planów, które już go używają, dodaje się je w edycji planu).
 - Poprawka: lista ćwiczeń rysowana przy wczytywaniu nie używa funkcji z dzis.js (błąd „tekstElement is not defined” po odświeżeniu z danymi).
+
+## v97 – Pływanie: długości basenu, bloki, wynik jednym dotknięciem, plan, ścieżka i statystyki
+
+**Model danych (plik `plyw.js`).** Trening na basenie zapisuje się w długościach, a metry liczą się same:
+- `s.basen = { dlugosc, jednostka: "m" | "yd" }` – basen tego treningu (brak = „Mój basen” z Ustawień, domyślnie 25 m; jardy × 0,9144),
+- `s.bloki = [{ powt, dl, styl, tryb: "przerwa" | "odjazd", przerwaS, odjazdS, pomoce[], intensywnosc, typ, notatka }]`,
+- `s.trybProsty`, `s.czasSesji` (s, cały trening); wynik dodatkowo: `czas` (sam czas pływania – do tempa i rekordów), `najdluzszy` (najdłuższy odcinek bez zatrzymania, w długościach), `wysilek` 1–10.
+- `etapySesji()` liczy etapy {styl, metry} z bloków, więc starsze funkcje (opisy, cele, rekordy, % realizacji) działają bez zmian.
+
+**Style:** Kraul (dawny „Dowolny” to kraul), Grzbietowy, Klasyczny, Motylkowy, Zmienny, Dowolnie wybrany.
+
+**Migracja (jednorazowa, `plywMigracja`):** stare zapisy w metrach (`etapy`, `dlugosci` × 25 m) zamieniają się na bloki na basenie 25 m – metry zostają dokładnie te same (przy nierównych metrach ułamek długości, np. 330 m = 13,2 dł.). „Dowolny” → „Kraul” w treningach, wynikach, ćwiczeniach i rekordach.
+
+**Edycja treningu (plan):**
+- Basen: Mój basen / 25 m / 50 m / 25 jardów / inna długość.
+- „Prosty”: liczba długości + styl, metry obok. „Bloki”: lista bloków – zwinięte do jednej linii (część, powtórzenia × długości, metry, przerwa, intensywność); dotknięcie rozwija pola: część treningu, powtórzenia × długości, styl, intensywność, odpoczynek (przerwa albo „start co”), sprzęt (deska, ósemka, płetwy, łapki, fajka), notatka; ↑ ↓ kopiuj usuń.
+- Gotowe treningi: Technika (~1500 m), Wytrzymałość (~2000 m), Sprint (~1200 m) – przeliczone na długości wybranego basenu.
+- Podsumowanie na żywo: długości, metry, szacowany czas (tempo z ostatnich wyników, bez historii 3:00/100 m, plus przerwy).
+- Czas treningu w minutach (opcjonalnie). Domyślny tryb nowego treningu ustawia się w Ustawieniach.
+
+**Wynik:** „Zrobione wg planu” zapisuje plan jednym dotknięciem (najdłuższy odcinek = najdłuższe powtórzenie z bloków; w trybie prostym nieznany). „Poprawiam”: przepłynięte długości, styl, czas pływania, czas całego treningu, najdłuższy odcinek bez zatrzymania, wysiłek; na żywo metry i tempo /100 m. Inna liczba długości niż w planie zapisuje się jako jeden blok.
+
+**Dziś:** „Cel: 24 dł. × 25 m = 600 m · 4 bloki · trening 45 min”, rozwijany „Plan treningu” z blokami, notatkami i sprzętem. Wynik z tempem i najdłuższym odcinkiem.
+
+**Plan pływacki (kreator „Ułóż mi plan” → „Pływać”, plik `plan-plyw.js`):** pytania: cel (zacznij pływać regularnie; 400 / 800 / 1000 / 1500 m bez zatrzymania; kondycja; szybciej na 100 / 400 / 1500 m; nowy styl), który styl (przy nowym stylu), basen, test „ile długości kraulem bez zatrzymania”, znane style, 1–4 razy w tygodniu, 30–90 min, liczba tygodni.
+- Każdy trening: rozgrzewka (~15%), technika (~15–25%, ćwiczenia techniczne z opisem i sprzętem), część główna, wyciszenie (~10%).
+- Objętość od możliwości i czasu, +~10% na tydzień, co 4. tydzień ok. 75% i sprawdzian (jak najdalej bez zatrzymania; przy celach na szybkość – dystans na czas); ostatni tydzień planu – sprawdzian celu.
+- Odcinki rosną, przerwy maleją (np. 8×50 → 4×100 → 3×200 → 2×400 → 800); do ostatniej ćwiartki planu co najmniej 2 powtórzenia.
+- ~80/20: w drugim treningu tygodnia akcent (mocniej albo szybkie odcinki), poza celami „start” i „nowy styl”.
+- Kolejny blok: mało zrobionych treningów → powtórzenie 2 tygodni, średni wysiłek ≥ 8 → powtórzenie tygodnia, nowy najdłuższy odcinek → nowy punkt startu. Podsumowanie bloku pokazuje treningi na basenie, najdłuższy odcinek i wysiłek. Test możliwości nie jest wymagany.
+- Uwaga bezpieczeństwa w każdym planie (nie zastępuje instruktora; przy < 2 długościach – lekcje z instruktorem, nigdy samemu).
+
+**Ścieżka „Pływanie” (grupa Pływanie w Ścieżkach):** 2 długości → 4 → 8 → 400 m → 800 m → 1 km → 1500 m bez zatrzymania. Kroki zaliczają się same z „najdłuższego odcinka” w wyniku (`celeSprawdzPlyw`). Plan pływacki dodaje ścieżkę jako cel i zaczyna od kroku wynikającego z testu.
+
+**Postęp → Pływanie:** treningi i metry w tym tygodniu, tempo (ostatnie i średnie z 5), wykres metrów w tygodniach (8) albo miesiącach (6), najdłużej bez zatrzymania, rekordy 50–1500 m osobno dla basenów (25 m, 50 m, jardy, inne) i stylów – tylko z pływania bez zatrzymania z wpisanym czasem (±3%), historia pływania. Pytanie o rekord dystansu po zapisie wyniku pojawia się tylko dla pływania bez zatrzymania.
+
+**Ustawienia → Pływanie:** Mój basen (25 m / 50 m / 25 yd / inny), nowy trening: Prosty / Bloki. Słowniczek pomocy: długość, blok, start co, najdłuższy odcinek.

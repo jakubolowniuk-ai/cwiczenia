@@ -13,7 +13,8 @@ const PK_CELE = [
   ["sila", "Zwiększyć siłę", "Ciężkie serie, mało powtórzeń"],
   ["zdrowie", "Zdrowie i kondycja", "Spokojny trening całego ciała i trochę kardio"],
   ["bieg", "Biegać / poprawić wytrzymałość", "Plan biegowy z krótkim treningiem siłowym"],
-  ["kalistenika", "Ćwiczyć z masą własnego ciała", "Pompki, podciąganie, przysiady: bez siłowni"]
+  ["kalistenika", "Ćwiczyć z masą własnego ciała", "Pompki, podciąganie, przysiady: bez siłowni"],
+  ["plywanie", "Pływać", "Plan na basen: od pierwszych długości do 1500 m albo szybszego tempa"]
 ];
 const PK_DOSW = [
   [0, "Zaczynam albo wracam po przerwie", "Nigdy nie ćwiczyłem(am) regularnie"],
@@ -47,6 +48,14 @@ const PK_PRIORYTET = [
 function pkKroki() {
   const cel = pkProfil.cel || "masa";
   const kroki = ["cel"];
+  if (cel === "plywanie") {
+    kroki.push("plywcel");
+    if (pkProfil.plywCel === "styl") {
+      kroki.push("plywnowy");
+    }
+    kroki.push("plywbasen", "plywtest", "plywstyle", "plywdni", "plywczas", "tygodni", "podsumowanie");
+    return kroki;
+  }
   // Bieganie: własne pytania; część siłowa tylko, gdy jest siła w planie
   if (cel === "bieg") {
     kroki.push("biegcel");
@@ -131,7 +140,8 @@ function pkOtworz() {
   pkProfil = {
     cel: null, dosw: dosw, dni: 3, czas: 60, sprzet: "s", bole: [], priorytet: null,
     kardio: { ile: 0, rodzaj: "spacer" }, tygodni: 4, kotwice: {}, maxPompek: null, maxPodciagniec: null,
-    cele: JSON.parse(JSON.stringify(dane.cele || [])), biegCel: null, biegPoziom: null, biegDni: 3, silaDni: 0, silaRodzaj: "biegacz", bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false
+    cele: JSON.parse(JSON.stringify(dane.cele || [])), biegCel: null, biegPoziom: null, biegDni: 3, silaDni: 0, silaRodzaj: "biegacz", bieg20: false, rozgrzewka: true, rozciaganie: true, drazek: true, poreczy: false, zapiszZestawy: true, uzyjUkrytych: false,
+    plywCel: null, plywBasen: null, plywTest: null, plywStyle: [], plywNowy: null, plywDni: 2, plywCzas: 45
   };
   pkKrok = 0;
   pkWynik = null;
@@ -218,9 +228,96 @@ function pkRysuj() {
       if (w === "zdrowie" && pkProfil.kardio.ile === 0) {
         pkProfil.kardio.ile = 2;
       }
-      if (w === "bieg") {
+      if (w === "bieg" || w === "plywanie") {
         pkProfil.kardio.ile = 0;
       }
+    });
+  } else if (krok === "plywcel") {
+    pokazDalej = false;
+    wybor("Jaki masz cel na basenie?", "Od celu zależą długości odcinków, przerwy i sprawdzian na końcu planu.", PG_PLYW_CELE.map(function (c) {
+      return [c.id, c.nazwa, c.opis];
+    }), pkProfil.plywCel, function (w) {
+      pkProfil.plywCel = w;
+      pkProfil.tygodni = pgPlywCel(w).tygodni;
+    });
+  } else if (krok === "plywnowy") {
+    pokazDalej = false;
+    const znane = pkProfil.plywStyle || [];
+    wybor("Którego stylu chcesz się nauczyć?", "Dostaniesz ćwiczenia techniczne tego stylu w każdym treningu.", ["Kraul", "Grzbietowy", "Klasyczny", "Motylkowy"].map(function (st) {
+      return [st, st, znane.indexOf(st) !== -1 ? "Już go znasz – poprawimy technikę" : st === "Motylkowy" ? "Najtrudniejszy – najlepiej po opanowaniu kraula" : ""];
+    }), pkProfil.plywNowy, function (w) {
+      pkProfil.plywNowy = w;
+    });
+  } else if (krok === "plywbasen") {
+    pokazDalej = false;
+    const b = pkProfil.plywBasen || plywBasenDomyslny();
+    wybor("Na jakim basenie pływasz?", "Treningi dostaniesz w długościach tego basenu – łatwiej liczyć niż metry. Długość ustawisz też w Ustawieniach.", PLYW_BASENY.map(function (x) {
+      return [x[0], x[3], x[0] === "25m" ? "Najczęstszy basen rekreacyjny" : x[0] === "50m" ? "Basen olimpijski" : ""];
+    }).concat([["inny", "Inna długość", "Np. 33,3 m albo 20 m"]]), plywKluczBasenu(b), function (w) {
+      if (w === "inny") {
+        const d = Number(String(prompt("Długość basenu w metrach:", plywKluczBasenu(b) === "inny" ? b.dlugosc : "33.3") || "").replace(",", "."));
+        pkProfil.plywBasen = d > 0 ? { dlugosc: Math.round(d * 100) / 100, jednostka: "m" } : b;
+      } else {
+        const x = PLYW_BASENY.find(function (z) { return z[0] === w; });
+        pkProfil.plywBasen = { dlugosc: x[1], jednostka: x[2] };
+      }
+      if (!(dane.ustawienia.basen && dane.ustawienia.basen.dlugosc > 0)) {
+        dane.ustawienia.basen = Object.assign({}, pkProfil.plywBasen);
+        zapiszDane();
+      }
+    });
+  } else if (krok === "plywtest") {
+    pokazDalej = false;
+    const b = pkProfil.plywBasen || plywBasenDomyslny();
+    const m = function (n) { return plywMetry(n, b) + " m"; };
+    wybor("Ile długości przepłyniesz kraulem bez zatrzymania?", "Krótki test na najbliższym basenie, spokojnym tempem. Nie wiesz? Wybierz ostrożniej – plan sam się dopasuje po sprawdzianie.", [
+      [0, "Jeszcze ani jednej", "Nie pływam kraulem albo dopiero się uczę"],
+      [1, "1 długość", m(1)],
+      [2, "2–3 długości", "ok. " + m(2)],
+      [4, "4–7 długości", "ok. " + m(4)],
+      [8, "8–15 długości", "ok. " + m(8)],
+      [16, "16–30 długości", "ok. " + m(16)],
+      [32, "Ponad 30 długości", "ok. " + m(32) + " i więcej"]
+    ], pkProfil.plywTest, function (w) {
+      pkProfil.plywTest = w;
+      if (w > 0 && (pkProfil.plywStyle || []).indexOf("Kraul") === -1) {
+        pkProfil.plywStyle = (pkProfil.plywStyle || []).concat(["Kraul"]);
+      }
+    });
+  } else if (krok === "plywstyle") {
+    tresc.appendChild(pkEl("h1", "", "Jakie style znasz?"));
+    tresc.appendChild(pkEl("p", "opis", "Zaznacz te, którymi przepłyniesz choć jedną długość. Rozgrzewkę i wyciszenie możesz płynąć dowolnym z nich."));
+    const lista = pkEl("div", "pk-lista");
+    pkProfil.plywStyle = pkProfil.plywStyle || [];
+    ["Kraul", "Grzbietowy", "Klasyczny", "Motylkowy"].forEach(function (st) {
+      const wiersz = pkEl("label", "pk-wiersz");
+      const pole = document.createElement("input");
+      pole.type = "checkbox";
+      pole.checked = pkProfil.plywStyle.indexOf(st) !== -1;
+      pole.addEventListener("change", function () {
+        pkProfil.plywStyle = pkProfil.plywStyle.filter(function (x) { return x !== st; });
+        if (pole.checked) {
+          pkProfil.plywStyle.push(st);
+        }
+      });
+      wiersz.appendChild(pole);
+      wiersz.appendChild(pkEl("span", "", st));
+      lista.appendChild(wiersz);
+    });
+    tresc.appendChild(lista);
+  } else if (krok === "plywdni") {
+    pokazDalej = false;
+    wybor("Ile razy w tygodniu chcesz pływać?", "Regularność daje więcej niż długie, rzadkie treningi.", [1, 2, 3, 4].map(function (n) {
+      return [n, n === 1 ? "Raz" : n + " razy", n === 2 ? "Dobry wybór na start" : n === 1 ? "Utrzymanie formy, wolniejszy postęp" : ""];
+    }), pkProfil.plywDni, function (w) {
+      pkProfil.plywDni = w;
+    });
+  } else if (krok === "plywczas") {
+    pokazDalej = false;
+    wybor("Ile czasu masz na jeden trening w wodzie?", "Sam czas w wodzie, bez przebierania. Objętość dobiorę do czasu i Twoich możliwości.", [30, 45, 60, 90].map(function (n) {
+      return [n, n + " minut", n === 45 ? "Najczęstszy wybór" : ""];
+    }), pkProfil.plywCzas, function (w) {
+      pkProfil.plywCzas = w;
     });
   } else if (krok === "biegcel") {
     pokazDalej = false;
@@ -404,9 +501,9 @@ function pkRysuj() {
     if (pkProfil.kardio.ile > wolne) {
       tresc.appendChild(pkEl("p", "opis", "Przy " + pkProfil.dni + " dniach treningu zostaje " + wolne + " wolnych dni, więc zmieszczę tylko tyle kardio."));
     }
-  } else if (krok === "tygodni" && pkProfil.cel === "bieg") {
+  } else if (krok === "tygodni" && (pkProfil.cel === "bieg" || pkProfil.cel === "plywanie")) {
     pokazDalej = false;
-    const zal = pgBiegCel(pkProfil.biegCel).tygodni;
+    const zal = pkProfil.cel === "plywanie" ? pgPlywCel(pkProfil.plywCel).tygodni : pgBiegCel(pkProfil.biegCel).tygodni;
     wybor("Na ile tygodni plan?", "Plan powstaje blokami po 4 tygodnie, ale objętość rośnie przez cały czas, a ostatni tydzień kończy się sprawdzianem.", [4, 8, 12, 16].map(function (n) {
       return [n, n + " tygodni", n === zal ? "Zalecane dla tego celu" : ""];
     }), pkProfil.tygodni, function (w) {
@@ -437,6 +534,9 @@ function pkRysuj() {
     pkRysujKotwice(tresc, function (f) { walidacja = f; });
   } else if (krok === "podsumowanie") {
     pokazDalej = false;
+    if (pkProfil.cel === "plywanie" && !sciezkiDane && typeof sciezkiWczytaj === "function") {
+      sciezkiWczytaj(function () {});
+    }
     pkRysujPodsumowanie(tresc);
   }
 
@@ -516,11 +616,13 @@ function pkRysujPodsumowanie(tresc) {
   tresc.appendChild(pkEl("h1", "", wynik.nazwa));
   const liczba = wynik.sesje.length;
   let czasTekst = "";
-  if (pkProfil.cel !== "bieg") {
+  if (pkProfil.cel === "plywanie") {
+    czasTekst = " Trening ok. " + pkProfil.plywCzas + " min w wodzie.";
+  } else if (pkProfil.cel !== "bieg") {
     const dod = (wynik.czasBlokow.rozgrzewka || 0) + (wynik.czasBlokow.rozciaganie || 0);
     czasTekst = " Trening do " + pkProfil.czas + " min" + (dod > 0 ? " plus ok. " + dod + " min rozgrzewki i rozciągania." : ".");
   }
-  tresc.appendChild(pkEl("p", "opis", (pkProfil.cel === "bieg" && pkProfil.tygodni > 4 ? "Plan na " + pkProfil.tygodni + " tygodni, teraz blok " + (pkProfil.blokNr || 1) + " (4 tygodnie)" : "Blok 4 tygodnie") + " · " + liczba + " treningów. Pierwszy dziś." + czasTekst));
+  tresc.appendChild(pkEl("p", "opis", ((pkProfil.cel === "bieg" || pkProfil.cel === "plywanie") && pkProfil.tygodni > 4 ? "Plan na " + pkProfil.tygodni + " tygodni, teraz blok " + (pkProfil.blokNr || 1) + " (4 tygodnie)" : "Blok 4 tygodnie") + " · " + liczba + " treningów. Pierwszy dziś." + czasTekst));
 
   wynik.uwagi.forEach(function (u) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));
@@ -544,6 +646,12 @@ function pkRysujPodsumowanie(tresc) {
         const il = pgIlosc(w);
         karta.appendChild(pkEl("div", "pk-cw" + (w.cel ? " pk-cw-cel" : ""), (w.cel ? "★ " : "") + w.cw.nazwa + " · " + opisIlosci(il, w.cw)));
       });
+    } else if (s.bloki) {
+      karta.appendChild(pkEl("b", "", etykieta + ": " + nazwaKategorii(s.kardio) + (s.sprawdzian ? " · sprawdzian" : "")));
+      s.bloki.forEach(function (bl) {
+        karta.appendChild(pkEl("div", "pk-cw", plywNazwa(PLYW_TYPY, bl.typ) + ": " + plywOpisBloku(bl, s.basen)));
+      });
+      karta.appendChild(pkEl("div", "pk-cw plyw-pk-suma", plywPodsumowanie(s.bloki, s.basen)));
     } else {
       karta.appendChild(pkEl("b", "", etykieta + ": " + nazwaKategorii(s.kardio) + (s.rodzajBiegu ? " · " + biegRodzaj(s.rodzajBiegu).nazwa.toLowerCase() : "")));
       const cel = s.odcinki ? biegOpisOdcinkow(s.odcinki) : [s.dystans ? s.dystans.wartosc + " " + s.dystans.jednostka : "", s.czas ? s.czas + " min" : ""].filter(Boolean).join(" · ");
@@ -573,7 +681,9 @@ function pkRysujPodsumowanie(tresc) {
   });
   wierszZ.appendChild(poleZ);
   wierszZ.appendChild(pkEl("span", "", "Zapisz treningi jako moje zestawy ćwiczeń (zakładka Ćwiczenia → Moje zestawy)"));
-  tresc.appendChild(wierszZ);
+  if (pkProfil.cel !== "plywanie") {
+    tresc.appendChild(wierszZ);
+  }
 
   const zacznij = pkEl("button", "przycisk wielki", "Zacznij");
   zacznij.type = "button";
@@ -592,6 +702,26 @@ function pkRysujPodsumowanie(tresc) {
       if (!sciezkaPostep("bieganie")) {
         dane.sciezkiPostep = dane.sciezkiPostep || {};
         dane.sciezkiPostep.bieganie = { krok: pkProfil.bieg20 ? 1 : 0, data: dzisISO() };
+      }
+    }
+    // Plan pływacki: ścieżka „Pływanie” jako cel, start z testu długości
+    if (pkProfil.cel === "plywanie") {
+      if (!dane.cele.some(function (c) { return c.typ === "sciezka" && c.id === "plywanie"; }) && dane.cele.length < CEL_MAX) {
+        dane.cele.push({ typ: "sciezka", id: "plywanie" });
+      }
+      const sp = sciezkaWgId("plywanie");
+      if (sp && typeof celePlywWarunek === "function") {
+        const b = pkProfil.plywBasen || plywBasenDomyslny();
+        const dl = pkProfil.plywTest || 0;
+        let nr = 0;
+        while (nr < sp.kroki.length && celePlywWarunek(sp.kroki[nr].warunek || {}, dl, dl * plywBasenM(b))) {
+          nr++;
+        }
+        const post = sciezkaPostep("plywanie");
+        if (!post || post.krok < nr) {
+          dane.sciezkiPostep = dane.sciezkiPostep || {};
+          dane.sciezkiPostep.plywanie = { krok: nr, data: dzisISO() };
+        }
       }
     }
     zapiszDane();

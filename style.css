@@ -2331,3 +2331,55 @@ body.bez-przewijania { overflow: hidden; }
 .cw-zestawy { display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow-y: auto; }
 .cw-zestawy .zam-wiersz:disabled { opacity: 0.6; }
 #lista-cwiczen .karta.karta-klik { flex-wrap: nowrap; align-items: center; }
+
+/* ===== Pływanie (v97) ===== */
+.plyw-karta { display: flex; flex-direction: column; gap: 10px; }
+.plyw-karta label, .plyw-etyk { font-size: 14px; color: var(--tekst-szary); }
+.plyw-pole { display: flex; flex-direction: column; gap: 4px; min-width: 0; flex: 1; }
+.plyw-pole input, .plyw-pole select { width: 100%; min-width: 0; }
+.plyw-basen-inny { margin-top: 6px; }
+.plyw-tryb { margin: 4px 0 0; }
+.plyw-tryb .segment { height: 44px; }
+.plyw-opis-trybu { margin: 0; }
+.plyw-podsum { font-weight: 700; margin: 4px 0; }
+.plyw-szablony .chipy { margin-top: 6px; }
+.plyw-bloki { display: flex; flex-direction: column; gap: 10px; }
+.plyw-blok { border: 1px solid var(--linia); border-left: 5px solid var(--akcent); border-radius: 12px; padding: 10px; display: flex; flex-direction: column; gap: 8px; background: var(--karta); }
+.plyw-blok.plyw-typ-rozgrzewka, .plyw-dzis-lista .plyw-typ-rozgrzewka { border-left-color: #e0a100; }
+.plyw-blok.plyw-typ-technika, .plyw-dzis-lista .plyw-typ-technika { border-left-color: #2f8fd6; }
+.plyw-blok.plyw-typ-wyciszenie, .plyw-dzis-lista .plyw-typ-wyciszenie { border-left-color: #6aa36f; }
+.plyw-blok-gora { display: flex; gap: 8px; }
+.plyw-nr { font-weight: 700; padding-bottom: 10px; }
+.plyw-typ { flex: 1; }
+.plyw-akcje { display: flex; gap: 6px; justify-content: flex-end; }
+.plyw-akcja { min-width: 40px; min-height: 40px; border: 1px solid var(--linia); border-radius: 8px; background: var(--tlo); color: var(--tekst); font: inherit; font-size: 16px; }
+.plyw-akcja:disabled { opacity: .35; }
+.plyw-rzad-ilosc { align-items: flex-end; }
+.plyw-razy { padding-bottom: 12px; font-weight: 700; }
+.plyw-metry-bloku { padding-bottom: 12px; white-space: nowrap; color: var(--tekst-szary); font-size: 14px; }
+.plyw-pomoce .chip { height: 36px; padding: 0 12px; }
+.plyw-dodaj { align-self: flex-start; }
+.plyw-czas .rzad { margin-top: 4px; }
+.plyw-plan-info { margin: 0; color: var(--tekst-szary); }
+.plyw-wynik-wybor { display: flex; flex-direction: column; gap: 8px; }
+.plyw-wynik-pola { display: flex; flex-direction: column; gap: 10px; }
+.plyw-wynik-pola[hidden] { display: none; }
+.plyw-dzis-bloki { margin: 6px 0; }
+.plyw-dzis-bloki summary { cursor: pointer; font-weight: 700; padding: 8px 0; min-height: 40px; }
+.plyw-dzis-lista { margin: 0; padding-left: 0; list-style: none; display: flex; flex-direction: column; gap: 6px; }
+.plyw-dzis-lista li { border-left: 4px solid var(--akcent); padding: 4px 8px; }
+.plyw-dzis-lista .opis { margin: 2px 0 0; }
+.plyw-tempo { margin: 4px 0 8px; }
+.plyw-ust-basen .segment { font-size: 15px; }
+.plyw-ust-inny { margin-bottom: 8px; }
+.plyw-ust-inny > div { display: flex; flex-direction: column; gap: 4px; }
+.plyw-historia { max-height: 85vh; overflow: auto; }
+.plyw-hist-lista { display: flex; flex-direction: column; gap: 8px; margin: 8px 0 12px; }
+.plyw-hist { display: flex; flex-direction: column; gap: 2px; padding: 8px 0; border-bottom: 1px solid var(--linia); }
+.plyw-blok-nagl { flex: 1; min-width: 0; display: flex; align-items: flex-start; gap: 6px; text-align: left; background: none; border: 0; padding: 4px 0; min-height: 44px; color: var(--tekst); font: inherit; font-size: 15px; }
+.plyw-blok-nagl .plyw-nr { padding-bottom: 0; }
+.plyw-skrot { flex: 1; min-width: 0; }
+.plyw-strzalka { color: var(--tekst-szary); }
+.plyw-blok-gora { align-items: flex-start; }
+.plyw-wskazowka { margin: 0; }
+.plyw-szablony { margin-bottom: 6px; }
