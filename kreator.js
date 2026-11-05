@@ -283,7 +283,7 @@ function rysujKrok1() {
   if (razem === 0) {
     krPodpowiedz.textContent = "";
   } else {
-    let tekst = "Razem " + razem + " " + odmiana(razem, "sesja", "sesje", "sesji") + " w " + dni + " dniach.";
+    let tekst = "Razem " + razem + " " + odmiana(razem, "trening", "treningi", "treningów") + " w " + dni + " dniach.";
     if (razem > dni) {
       tekst += " To więcej niż dni w okresie, więc w niektóre dni będzie kilka treningów.";
     }

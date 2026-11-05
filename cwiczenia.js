@@ -50,7 +50,8 @@ const polePoziom = document.getElementById("pole-poziom");
 const przyciskWyczysc = document.getElementById("przycisk-wyczysc");
 
 // Aktualnie wybrane filtry (tekst zapisujemy małymi literami)
-const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [], poziom: null, sortowanie: "", ukryte: false };
+// zrodlo: "baza" – ćwiczenia z bazy aplikacji, "moje" – dodane przez użytkownika (bez znacznika zBazy)
+const filtr = { tekst: "", partiaId: null, rodzajId: null, miesnieIds: [], poziom: null, sortowanie: "", ukryte: false, zrodlo: "baza" };
 
 // Poziomy trudności ćwiczeń (pole poziom: 1–5)
 const NAZWY_POZIOMOW = { 1: "Początkujący", 2: "Podstawowy", 3: "Średni", 4: "Zaawansowany", 5: "Elitarny" };
@@ -474,6 +475,10 @@ function otworzFormularz(cwiczenie, opcje) {
   cwiczenieEdytowane = cwiczenie || null;
   przygotujFormularz();
   pokazBlad("");
+  const zrodloCw = document.getElementById("zrodlo-cwiczen");
+  if (zrodloCw) {
+    zrodloCw.hidden = true;
+  }
 
   poleNazwa.value = "";
   poleLink.value = "";
@@ -635,6 +640,8 @@ function zapiszCwiczenie() {
     });
   } else {
     dane.cwiczenia.push(wpis);
+    // Nowe ćwiczenie jest „moje” – pokazujemy listę moich, żeby było je od razu widać
+    filtr.zrodlo = "moje";
   }
 
   zapiszDane();
@@ -660,7 +667,14 @@ function przyciskAkcji(tekst, dodatkowaKlasa, poKliknieciu) {
 // ===== Wyszukiwarka i filtry =====
 
 // Sprawdza, czy ćwiczenie pasuje do wpisanego tekstu i wybranych filtrów
+function czyMojeCwiczenie(cwiczenie) {
+  return !cwiczenie.zBazy;
+}
+
 function pasujeDoFiltrow(cwiczenie) {
+  if (czyMojeCwiczenie(cwiczenie) !== (filtr.zrodlo === "moje")) {
+    return false;
+  }
   if (!!cwiczenie.ukryte !== filtr.ukryte) {
     return false;
   }
@@ -901,9 +915,24 @@ function rysujListe() {
     });
   }
   const brakCwiczen = dane.cwiczenia.length === 0;
+  const ileMoich = dane.cwiczenia.filter(czyMojeCwiczenie).length;
+  const zrodlo = document.getElementById("zrodlo-cwiczen");
+  if (zrodlo) {
+    zrodlo.hidden = brakCwiczen || !formularz.hidden;
+    document.getElementById("zrodlo-baza").textContent = "Baza (" + (dane.cwiczenia.length - ileMoich) + ")";
+    document.getElementById("zrodlo-moje").textContent = "Moje ćwiczenia (" + ileMoich + ")";
+    Array.prototype.forEach.call(zrodlo.querySelectorAll(".segment"), function (b) {
+      const wl = b.dataset.zrodlo === filtr.zrodlo;
+      b.classList.toggle("aktywny", wl);
+      b.setAttribute("aria-pressed", wl ? "true" : "false");
+    });
+  }
 
   pustaLista.hidden = !brakCwiczen;
   brakWynikow.hidden = brakCwiczen || widoczne.length > 0;
+  brakWynikow.textContent = filtr.zrodlo === "moje" && ileMoich === 0 ?
+    "Nie masz jeszcze własnych ćwiczeń. Dodasz je przyciskiem „+ Dodaj ćwiczenie” – pojawią się tutaj, oddzielnie od bazy." :
+    "Brak ćwiczeń dla wybranych filtrów.";
   blokFiltrow.hidden = brakCwiczen || !formularz.hidden;
 
   dopiszPorcjami(listaCwiczen, widoczne, function (cwiczenie) {
@@ -1200,3 +1229,20 @@ opisTlo.addEventListener("click", function (zdarzenie) {
     zamknijOpis();
   }
 });
+
+// Przełącznik Baza / Moje ćwiczenia
+(function () {
+  const zrodlo = document.getElementById("zrodlo-cwiczen");
+  if (!zrodlo) {
+    return;
+  }
+  zrodlo.addEventListener("click", function (e) {
+    const b = e.target.closest(".segment");
+    if (!b || b.dataset.zrodlo === filtr.zrodlo) {
+      return;
+    }
+    filtr.zrodlo = b.dataset.zrodlo;
+    rysujFiltry();
+    rysujListe();
+  });
+})();

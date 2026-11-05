@@ -3,6 +3,8 @@ const widokSciezki = document.getElementById("widok-sciezki");
 const przelacznikSciezki = document.getElementById("przelacznik-sciezki");
 let sciezkiDane = null;
 let sciezkaOtwarta = null;
+// Które grupy (Kalistenika / Siłownia / Bieganie) są rozwinięte – na starcie zwinięte
+const sciezkiGrupyOtwarte = {};
 
 function sciezkiWczytaj(poWczytaniu) {
   if (sciezkiDane) {
@@ -44,10 +46,29 @@ function rysujSciezki() {
     return;
   }
   widokSciezki.appendChild(sciezkiEl("p", "podpowiedz-poziomow", "Wybierz cel. Każda ścieżka to kolejne ćwiczenia od łatwego do trudnego – przechodź dalej, gdy spełnisz kryterium kroku."));
-  [["kalistenika", "Kalistenika"], ["silownia", "Siłownia"], ["bieganie", "Bieganie"]].forEach(function (g) {
+  [["kalistenika", "Kalistenika", "Ćwiczenia z masą ciała: podciąganie, pompki, figury."], ["silownia", "Siłownia", "Ćwiczenia z ciężarem: przysiad, wyciskanie, martwy ciąg."], ["bieganie", "Bieganie", "Od pierwszych minut biegu do półmaratonu."]].forEach(function (g) {
     const lista = sciezkiDane.filter(function (s) { return s.typ === g[0]; });
     if (!lista.length) { return; }
-    widokSciezki.appendChild(sciezkiEl("h2", "sciezka-grupa", g[1] + " (" + lista.length + ")"));
+    const otwarta = !!sciezkiGrupyOtwarte[g[0]];
+    const moje = lista.filter(function (s) { return sciezkaPostep(s.id) || czyCelSciezki(s.id); }).length;
+    const naglowek = sciezkiEl("button", "sciezka-grupa-przycisk" + (otwarta ? " otwarta" : ""));
+    naglowek.type = "button";
+    naglowek.setAttribute("aria-expanded", otwarta ? "true" : "false");
+    const tekst = sciezkiEl("span", "sciezka-grupa-tekst");
+    tekst.appendChild(sciezkiEl("strong", "", g[1]));
+    tekst.appendChild(sciezkiEl("span", "sciezka-meta", lista.length + " ścieżek" + (moje ? " · Twoje: " + moje : "") + " · " + g[2]));
+    naglowek.appendChild(tekst);
+    naglowek.appendChild(sciezkiEl("span", "sciezka-grupa-strzalka", otwarta ? "▾" : "▸"));
+    naglowek.addEventListener("click", function () {
+      sciezkiGrupyOtwarte[g[0]] = !otwarta;
+      rysujSciezki();
+    });
+    widokSciezki.appendChild(naglowek);
+    if (!otwarta) {
+      return;
+    }
+    const pojemnik = sciezkiEl("div", "sciezka-grupa-lista");
+    widokSciezki.appendChild(pojemnik);
     lista.forEach(function (s) {
       const karta = sciezkiEl("button", "sciezka-karta");
       karta.type = "button";
@@ -80,7 +101,7 @@ function rysujSciezki() {
         rysujSciezki();
         window.scrollTo(0, 0);
       });
-      widokSciezki.appendChild(karta);
+      pojemnik.appendChild(karta);
     });
   });
 }

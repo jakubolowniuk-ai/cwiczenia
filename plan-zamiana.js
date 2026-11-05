@@ -174,7 +174,8 @@ function zamZamknij() {
   }
 }
 
-function otworzZamiane(plan, sesja, stareId) {
+// poZamianie (opcjonalnie): co odświeżyć po zamianie (domyślnie ekran Dziś)
+function otworzZamiane(plan, sesja, stareId, poZamianie) {
   zamPlan = plan;
   zamSesja = sesja;
   zamStareId = stareId;
@@ -260,7 +261,11 @@ function otworzZamiane(plan, sesja, stareId) {
         const wszystkie = okno.querySelector('input[name="zam-zakres"]:checked').value === "wszystkie";
         zamZastosuj(plan, sesja, stareId, k.cw.id, wszystkie);
         zamZamknij();
-        rysujDzis();
+        if (poZamianie) {
+          poZamianie();
+        } else {
+          rysujDzis();
+        }
       });
       lista.appendChild(wiersz);
     });

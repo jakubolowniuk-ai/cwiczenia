@@ -2241,3 +2241,43 @@ h1 {
 .dn-opcje { display: flex; flex-direction: column; gap: 8px; }
 .dn-karta { border-color: var(--akcent); }
 .gps-zgoda .przycisk:disabled { opacity: 0.45; cursor: default; }
+
+/* ===== Ustawienia i Postęp – uporządkowany układ (v93) ===== */
+.ust-tresc .pp-karta { padding: 14px 16px; }
+.ust-tresc .ust-naglowek { margin: 22px 4px 8px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--tekst-szary); }
+.ust-tresc .ust-naglowek:first-child { margin-top: 4px; }
+.ust-rzad { gap: 12px; min-height: 40px; }
+.ust-rzad .ust-nazwa { flex: 1 1 auto; }
+.ust-opis { margin: 4px 0 0; font-size: 14px; line-height: 1.4; color: var(--tekst-szary); }
+.ust-opis-gora { margin: 0 0 10px; }
+.ust-opis:empty { display: none; }
+.ust-pole { flex: 0 0 auto; width: 110px; padding: 8px 10px; font-size: 17px; font-weight: 600; text-align: right; border: 1px solid var(--linia); border-radius: 10px; background: var(--tlo); color: var(--tekst); font-family: inherit; }
+.ust-przyciski { display: flex; flex-direction: column; gap: 8px; }
+.ust-przyciski .przycisk, .ust-szeroki { width: 100%; min-height: 48px; }
+.ust-akcja { display: block; padding: 8px 0; min-height: 40px; text-align: left; }
+.ust-przelacznik { margin: 8px 0 0; }
+.ust-tresc .ust-segmenty { margin: 0; }
+.mz-siatka { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin-bottom: 12px; }
+.mz-kafel { background: var(--tlo); border-radius: 10px; padding: 8px 10px; display: flex; flex-direction: column; gap: 2px; }
+.mz-kafel-nazwa { font-size: 12px; color: var(--tekst-szary); line-height: 1.25; }
+.mz-kafel b { font-size: 17px; }
+
+.pp-sekcja { margin: 26px 2px 10px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--tekst-szary); }
+#postep-tresc > .pp-sekcja:first-child { margin-top: 6px; }
+.pp-podnaglowek { margin: 16px 2px 8px; font-size: 15px; font-weight: 700; }
+.pp-podpis { margin: -4px 2px 10px; font-size: 14px; }
+.pp-wybor-planu { margin-bottom: 10px; }
+.pp-plan-karta .pp-plan-nazwa { font-size: 18px; font-weight: 700; }
+.pp-plan-karta > .opis { margin: 2px 0 12px; }
+.pp-plan-karta .pp-kafle { margin-bottom: 10px; }
+.pp-plan-akcje { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-top: 12px; }
+.pp-plan-akcje .przycisk { flex: 1 1 auto; min-height: 48px; }
+.pp-rekordy-przycisk { width: 100%; min-height: 48px; margin-bottom: 4px; }
+#postep-nowy-plan, #postep-uloz-plan { margin-top: 12px; }
+.sciezka-grupa-przycisk { display: flex; align-items: center; gap: 12px; width: 100%; text-align: left; background: var(--karta); color: var(--tekst); border: 1px solid var(--linia); border-radius: 14px; padding: 14px 16px; margin: 0 0 10px; font-family: inherit; cursor: pointer; min-height: 64px; }
+.sciezka-grupa-przycisk.otwarta { border-color: var(--akcent); border-width: 2px; }
+.sciezka-grupa-tekst { flex: 1 1 auto; display: flex; flex-direction: column; gap: 3px; }
+.sciezka-grupa-tekst strong { font-size: 18px; }
+.sciezka-grupa-strzalka { font-size: 20px; color: var(--akcent); }
+.sciezka-grupa-lista { margin: -2px 0 16px 10px; padding-left: 10px; border-left: 2px solid var(--linia); }
+.zrodlo-cwiczen { margin: 4px 0 12px; } .zrodlo-cwiczen .segment { height: 44px; font-size: 15px; }

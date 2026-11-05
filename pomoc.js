@@ -17,7 +17,8 @@ const POMOC = {
     punkty: [
       "Filtruj po partii mięśni, rodzaju treningu i trudności. Kolor kropki to trudność: od zielonego (na start) do czerwonego.",
       "Dotknij ćwiczenia, żeby zobaczyć opis wykonania.",
-      "„+ Dodaj ćwiczenie” tworzy Twoje własne ćwiczenie. Możesz też ukryć te, których nie robisz."
+      "„+ Dodaj ćwiczenie” tworzy Twoje własne ćwiczenie. Własne ćwiczenia (też dodane z pliku) są osobno – przełącznik „Baza / Moje ćwiczenia” nad wyszukiwarką.",
+      "Ćwiczenia, których nie robisz, możesz ukryć – kreator planu nie będzie ich wstawiał."
     ]
   },
   zestawy: {
@@ -31,6 +32,7 @@ const POMOC = {
   sciezki: {
     tytul: "Ścieżki",
     punkty: [
+      "Ścieżki są w trzech grupach: Kalistenika, Siłownia i Bieganie. Dotknij grupy, żeby rozwinąć jej listę.",
       "Ścieżka to kolejne kroki do umiejętności, np. od podciągania z gumą do 10 podciągnięć.",
       "„Tu jesteś” pokazuje Twój krok. Krok zalicza się sam, gdy w treningu zrobisz wymagany wynik.",
       "Ścieżkę możesz dodać jako cel planu (najwyżej 3 cele) – generator wstawi jej ćwiczenia do treningów."
@@ -67,6 +69,7 @@ const POMOC = {
     punkty: [
       "Krok 1: wybierz okres i rodzaje treningów, przy każdym wpisz, ile razy chcesz go zrobić.",
       "Krok 2: rozłóż treningi w kalendarzu (albo „Zaproponuj rozkład”) i uzupełnij każdy o zestaw ćwiczeń i parametry.",
+      "Przy każdym ćwiczeniu jest „Zamień na inne” – podpowie odpowiedniki (te same mięśnie, podobna trudność). Zmiana zapisze się po „Zapisz plan”.",
       "Pusty znacznik w kalendarzu = trening jeszcze nieuzupełniony."
     ]
   },

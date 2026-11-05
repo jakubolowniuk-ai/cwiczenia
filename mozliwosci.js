@@ -226,12 +226,24 @@ function rysujKarteMozliwosci() {
     karta.appendChild(tekstElement("p", "opis", "Nie zrobiłeś(aś) jeszcze testu. Bez niego kreator planu nie wie, od jakiego poziomu zacząć."));
   } else {
     const dni = mzDniOdTestu();
-    karta.appendChild(tekstElement("p", "opis", "Test z " + mzData() + (dni > 56 ? " – minęło ponad 8 tygodni, warto zrobić go ponownie." : ".")));
-    mzPodsumowanie().forEach(function (t) {
-      karta.appendChild(tekstElement("div", "mz-wiersz", t));
+    karta.appendChild(tekstElement("p", "ust-opis ust-opis-gora", "Test z " + mzData() + (dni > 56 ? " – minęło ponad 8 tygodni, warto zrobić go ponownie." : ".")));
+    const siatka = document.createElement("div");
+    siatka.className = "mz-siatka";
+    ["pompki", "podciagniecia", "dipy", "przysiady", "plank", "zwis", "s_pch", "s_wio", "s_prz", "d_pch", "d_wio", "d_prz"].forEach(function (k) {
+      const v = mzWartosc(k);
+      const p = mzPole(k);
+      if (v === null || !p) {
+        return;
+      }
+      const kafel = document.createElement("div");
+      kafel.className = "mz-kafel";
+      kafel.appendChild(tekstElement("span", "mz-kafel-nazwa", p.nazwa));
+      kafel.appendChild(tekstElement("b", "", v + " " + p.jedn));
+      siatka.appendChild(kafel);
     });
+    karta.appendChild(siatka);
   }
-  const b = tekstElement("button", "przycisk", mzWypelnione() ? "Zmień / zrób test ponownie" : "Zrób test");
+  const b = tekstElement("button", mzWypelnione() ? "przycisk drugi ust-szeroki" : "przycisk ust-szeroki", mzWypelnione() ? "Zrób test ponownie" : "Zrób test");
   b.type = "button";
   b.addEventListener("click", function () { otworzMozliwosci(null); });
   karta.appendChild(b);

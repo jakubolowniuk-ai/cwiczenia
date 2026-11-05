@@ -334,13 +334,28 @@ function planPostepu() {
   return wybrany || aktywnyPlan() || planyOtwarte()[planyOtwarte().length - 1] || null;
 }
 
+// Nagłówek sekcji Postępu (jednakowy dla wszystkich sekcji)
+function ppSekcja(tytul) {
+  postepTresc.appendChild(tekstElement("h2", "pp-sekcja", tytul));
+}
+
+// Karta z innego modułu bez jej wewnętrznego tytułu (tytułem jest nagłówek sekcji)
+function ppBezTytulu(karta) {
+  const t = karta.querySelector(":scope > .pp-naglowek");
+  if (t) {
+    t.remove();
+  }
+  return karta;
+}
+
 function dodajMojePlany() {
   const otwarte = planyOtwarte();
   if (otwarte.length === 0) {
     return;
   }
   const wybrany = planPostepu();
-  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Moje plany"));
+  ppSekcja("Moje plany");
+  postepTresc.appendChild(tekstElement("p", "opis pp-podpis", "Dotknij planu, żeby zobaczyć jego wyniki na górze. Przełącznik włącza i wyłącza plan (wyłączony nie pojawia się w „Dziś”)."));
   otwarte.forEach(function (plan) {
     const wiersz = document.createElement("div");
     wiersz.className = "pp-plan-wiersz" + (wybrany && wybrany.id === plan.id ? " wybrany" : "");
@@ -351,6 +366,7 @@ function dodajMojePlany() {
     tekst.addEventListener("click", function () {
       postepPlanId = plan.id;
       rysujPostep();
+      window.scrollTo({ top: 0, behavior: "smooth" });
     });
     wiersz.appendChild(tekst);
     const wl = document.createElement("button");
@@ -369,40 +385,33 @@ function dodajMojePlany() {
   });
 }
 
-function rysujPostep() {
-  postepTresc.innerHTML = "";
-  if (typeof celeKartaPostepu === "function") {
-    if (!sciezkiDane && (dane.cele || []).some(function (c) { return c.typ === "sciezka"; })) {
-      sciezkiWczytaj(rysujPostep);
-    }
-    const kc = celeKartaPostepu();
-    if (kc) {
-      postepTresc.appendChild(kc);
-    }
+// Karta wybranego planu: kafelki Dziś i okres, seria, mięśnie, przyciski Edytuj / Usuń
+function dodajKartePlanu(plan) {
+  const otwarte = planyOtwarte();
+  ppSekcja("Twój plan");
+  if (otwarte.length > 1) {
+    const chipy = document.createElement("div");
+    chipy.className = "chipy pp-wybor-planu";
+    otwarte.forEach(function (p) {
+      const c = tekstElement("button", "chip" + (p.id === plan.id ? " aktywny" : ""), nazwaPlanu(p).replace(/\s*\(blok.*\)$/, ""));
+      c.type = "button";
+      c.setAttribute("aria-pressed", p.id === plan.id ? "true" : "false");
+      c.addEventListener("click", function () {
+        postepPlanId = p.id;
+        rysujPostep();
+      });
+      chipy.appendChild(c);
+    });
+    postepTresc.appendChild(chipy);
   }
-  if (typeof biegKartaPostepu === "function") {
-    const kb = biegKartaPostepu();
-    if (kb) {
-      postepTresc.appendChild(kb);
-    }
-  }
-  const plan = planPostepu();
-  dodajMojePlany();
-  postepEdytujPlan.hidden = !plan;
-  if (!plan) {
-    postepTresc.appendChild(tekstElement("p", "opis", "Gdy ułożysz plan i zaczniesz ćwiczyć, zobaczysz tutaj swoje wyniki."));
-    dodajRekordyAktywnosci();
-    dodajPoprzedniePlany();
-    return;
-  }
+  const karta = document.createElement("div");
+  karta.className = "pp-karta pp-plan-karta";
+  karta.appendChild(tekstElement("div", "pp-plan-nazwa", nazwaPlanu(plan)));
+  karta.appendChild(tekstElement("div", "opis", zakresDat(plan) + (plan.wylaczony ? " · wyłączony" : "")));
 
   const indeks = dzisiejszyDzienPlanu(plan);
-  postepTresc.appendChild(tekstElement("p", "opis", nazwaPlanu(plan) + " · " + zakresDat(plan)));
-
   const kafle = document.createElement("div");
   kafle.className = "pp-kafle";
-
-  // Kafelek Dziś
   const dzis = sesjeDnia(plan, indeks);
   const zalDzis = dzis.filter(function (s) {
     return sesjaZaliczona(plan, s);
@@ -412,12 +421,10 @@ function rysujPostep() {
       otworzOknoDzis(plan, indeks);
     }));
   } else {
-    kafle.appendChild(zrobKafelek("Dziś", zalDzis + " z " + dzis.length, dzis.length === 1 ? "sesja" : "sesje", procent(zalDzis, dzis.length), function () {
+    kafle.appendChild(zrobKafelek("Dziś", zalDzis + " z " + dzis.length, dzis.length === 1 ? "trening" : "treningi", procent(zalDzis, dzis.length), function () {
       otworzOknoDzis(plan, indeks);
     }));
   }
-
-  // Kafelek Tydzień / Miesiąc
   const wymagane = plan.sesje.filter(function (s) {
     return s.dzien <= indeks;
   });
@@ -429,29 +436,64 @@ function rysujPostep() {
   const zalPlan = plan.sesje.filter(function (s) {
     return sesjaZaliczona(plan, s);
   }).length;
-  kafle.appendChild(zrobKafelek(nazwaOkresu(plan), wymagane.length === 0 ? "—" : p + "%", zalPlan + " z " + plan.sesje.length + " sesji", p, function () {
+  kafle.appendChild(zrobKafelek(nazwaOkresu(plan), wymagane.length === 0 ? "—" : p + "%", zalPlan + " z " + plan.sesje.length + " treningów", p, function () {
     otworzOknoOkresu(plan, indeks);
   }));
-  postepTresc.appendChild(kafle);
-
-  const kartaMiesni = zrobKarteMiesni(plan);
-  if (kartaMiesni) {
-    postepTresc.appendChild(kartaMiesni);
-  }
+  karta.appendChild(kafle);
 
   const seria = liczSerie(plan, indeks);
   if (seria >= 2) {
-    postepTresc.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " treningów z rzędu", "Dni odpoczynku jej nie przerywają."));
+    karta.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " treningów z rzędu", "Dni odpoczynku jej nie przerywają."));
   }
-
-  const usun = document.createElement("button");
-  usun.className = "akcja usun pp-usun";
-  usun.textContent = "Usuń plan";
+  const kartaMiesni = zrobKarteMiesni(plan);
+  if (kartaMiesni) {
+    karta.appendChild(kartaMiesni);
+  }
+  const akcje = document.createElement("div");
+  akcje.className = "pp-plan-akcje";
+  const edytuj = tekstElement("button", "przycisk drugi", "Edytuj plan");
+  edytuj.type = "button";
+  edytuj.addEventListener("click", function () { postepEdytujPlan.click(); });
+  akcje.appendChild(edytuj);
+  const usun = tekstElement("button", "akcja usun", "Usuń plan");
+  usun.type = "button";
   usun.addEventListener("click", function () {
     otworzUsuwanie(plan);
   });
-  postepTresc.appendChild(usun);
+  akcje.appendChild(usun);
+  karta.appendChild(akcje);
+  postepTresc.appendChild(karta);
+}
+
+function rysujPostep() {
+  postepTresc.innerHTML = "";
+  const plan = planPostepu();
+  postepEdytujPlan.hidden = true;
+  if (plan) {
+    dodajKartePlanu(plan);
+  } else {
+    postepTresc.appendChild(zrobPustyKomunikat("Nie masz jeszcze planu", "Ułóż plan przyciskiem na dole. Gdy zaczniesz ćwiczyć, zobaczysz tutaj swoje wyniki."));
+  }
+  if (typeof celeKartaPostepu === "function") {
+    if (!sciezkiDane && (dane.cele || []).some(function (c) { return c.typ === "sciezka"; })) {
+      sciezkiWczytaj(rysujPostep);
+    }
+    const kc = celeKartaPostepu();
+    if (kc) {
+      ppSekcja("Moje cele");
+      postepTresc.appendChild(ppBezTytulu(kc));
+    }
+  }
+  if (typeof biegKartaPostepu === "function") {
+    const kb = biegKartaPostepu();
+    if (kb) {
+      ppSekcja("Bieganie");
+      postepTresc.appendChild(ppBezTytulu(kb));
+    }
+  }
+  ppSekcja("Rekordy");
   dodajRekordyAktywnosci();
+  dodajMojePlany();
   dodajPoprzedniePlany();
 }
 
@@ -472,7 +514,7 @@ function dodajPoprzedniePlany() {
   if (zamkniete.length === 0) {
     return;
   }
-  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Poprzednie plany"));
+  ppSekcja("Poprzednie plany");
   zamkniete.forEach(function (plan) {
     const przycisk = document.createElement("button");
     przycisk.className = "pp-poprzedni";
@@ -480,7 +522,7 @@ function dodajPoprzedniePlany() {
       return sesjaZaliczona(plan, s);
     }).length;
     przycisk.appendChild(tekstElement("b", "", nazwaPlanu(plan) + " · " + zakresDat(plan)));
-    przycisk.appendChild(tekstElement("span", "opis", realizacjaPlanu(plan) + "% · " + zal + " z " + plan.sesje.length + " sesji"));
+    przycisk.appendChild(tekstElement("span", "opis", realizacjaPlanu(plan) + "% · " + zal + " z " + plan.sesje.length + " treningów"));
     przycisk.addEventListener("click", function () {
       otworzOknoOkresu(plan, DNI_W_OKRESIE[plan.okres] - 1);
     });
@@ -676,7 +718,7 @@ function otworzOknoOkresu(plan, indeks) {
       markery.appendChild(zrobMarker(stan === "pelna" ? "pelny" : stan === "prawie" ? "pol" : "pusty", kolor));
     });
     blok.appendChild(markery);
-    blok.appendChild(tekstElement("div", "pp-podpis", zaliczone + " z " + aktywnosc.razy + " sesji"));
+    blok.appendChild(tekstElement("div", "pp-podpis", zaliczone + " z " + aktywnosc.razy + " treningów"));
     blok.appendChild(zrobPasek(pa, kolor));
     lista.appendChild(blok);
   });

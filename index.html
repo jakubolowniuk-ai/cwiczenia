@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=92">
+  <link rel="stylesheet" href="style.css?v=93">
 </head>
 <body>
 
@@ -132,6 +132,10 @@
         </div>
       </div>
 
+      <div class="przelacznik zrodlo-cwiczen" id="zrodlo-cwiczen" role="group" aria-label="Które ćwiczenia pokazać">
+        <button class="segment" type="button" data-zrodlo="baza" id="zrodlo-baza">Baza</button>
+        <button class="segment" type="button" data-zrodlo="moje" id="zrodlo-moje">Moje ćwiczenia</button>
+      </div>
       <div class="filtry" id="blok-filtrow" hidden>
         <label for="pole-szukaj" class="etykieta-pola">Szukaj ćwiczenia</label>
         <input type="search" id="pole-szukaj" placeholder="Wpisz nazwę">
@@ -459,28 +463,11 @@
       </button>
       <h1>Ustawienia</h1>
     </div>
-    <div class="postep-okno-tresc">
+    <div class="postep-okno-tresc ust-tresc">
       <div class="ust-naglowek">Moje możliwości</div>
       <div class="pp-karta" id="ust-mozliwosci"></div>
-      <div class="ust-naglowek">Przypomnienie</div>
-      <div class="pp-karta">
-        <div class="ust-rzad">
-          <div class="ust-nazwa">Alarm</div>
-          <button class="przelacznik-wl" id="ust-alarm" role="switch" aria-checked="true" aria-label="Alarm"><span></span></button>
-        </div>
-        <div id="ust-godzina-blok">
-          <div class="ust-linia"></div>
-          <label class="ust-nazwa" for="ust-godzina">Godzina</label>
-          <input type="time" id="ust-godzina" class="ust-godzina" value="18:30">
-          <p class="opis">Alarm dzwoni tylko w dni z zaplanowanym treningiem. W dni odpoczynku jest cisza.</p>
-        </div>
-        <div id="ust-ics-blok" hidden>
-          <div class="ust-linia"></div>
-          <button class="przycisk drugi" id="ust-ics">Dodaj przypomnienia do kalendarza</button>
-          <p class="opis" id="ust-ics-info"></p>
-        </div>
-      </div>
-      <div class="ust-naglowek">Trening</div>
+
+      <div class="ust-naglowek">Trening siłowy</div>
       <div class="pp-karta">
         <div class="ust-rzad">
           <div class="ust-nazwa">Dźwięk po przerwie</div>
@@ -493,65 +480,107 @@
         </div>
         <div class="ust-linia"></div>
         <div class="ust-rzad">
-          <div class="ust-nazwa">Ekran nie gaśnie podczas biegu</div>
-          <button class="przelacznik-wl" id="ust-bieg-ekran" role="switch" aria-checked="true" aria-label="Ekran nie gaśnie podczas biegu"><span></span></button>
+          <label class="ust-nazwa" for="ust-przerwa">Domyślna przerwa (s)</label>
+          <input type="number" id="ust-przerwa" class="ust-pole" min="5" max="900" step="5" value="60" inputmode="numeric">
         </div>
-        <p class="opis">Zużywa więcej baterii, ale stoper i sygnały działają pewniej.</p>
+        <p class="ust-opis">Dla jednego ćwiczenia zmienisz ją w trakcie przyciskami −15 s / +15 s – aplikacja zapamięta.</p>
+      </div>
+
+      <div class="ust-naglowek">Bieganie</div>
+      <div class="pp-karta">
+        <div class="ust-nazwa">Ilość szczegółów</div>
+        <div class="przelacznik ust-przelacznik" id="ust-bieg-poziom">
+          <button class="segment" data-poziom="poczatkujacy" type="button">Podstawowe</button>
+          <button class="segment" data-poziom="zaawansowany" type="button">Wszystkie</button>
+        </div>
+        <p class="ust-opis">„Wszystkie” dodaje tempo w historii, obciążenie, rekordy i dystans tygodniowy. Zmiana niczego nie usuwa.</p>
         <div class="ust-linia"></div>
-        <div class="ust-nazwa">Bieganie: poziom szczegółów</div>
-        <div class="przelacznik" id="ust-bieg-poziom">
-          <button class="segment" data-poziom="poczatkujacy" type="button">Początkujący</button>
-          <button class="segment" data-poziom="zaawansowany" type="button">Zaawansowany</button>
-        </div>
-        <p class="opis">Zaawansowany pokazuje też tempo, obciążenie, rekordy i dystans tygodniowy. Zmiana niczego nie usuwa.</p>
         <div class="ust-rzad">
           <div class="ust-nazwa">Serie i rekordy biegowe</div>
           <button class="przelacznik-wl" id="ust-bieg-serie" role="switch" aria-checked="true" aria-label="Serie i rekordy biegowe"><span></span></button>
         </div>
         <div class="ust-linia"></div>
         <div class="ust-rzad">
-          <div class="ust-nazwa">Pomiar GPS podczas biegu</div>
+          <div class="ust-nazwa">Ekran nie gaśnie podczas biegu</div>
+          <button class="przelacznik-wl" id="ust-bieg-ekran" role="switch" aria-checked="true" aria-label="Ekran nie gaśnie podczas biegu"><span></span></button>
+        </div>
+        <p class="ust-opis">Zużywa więcej baterii, ale stoper, GPS i sygnały działają pewniej.</p>
+        <div class="ust-linia"></div>
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Pomiar GPS</div>
           <button class="przelacznik-wl" id="ust-bieg-gps" role="switch" aria-checked="false" aria-label="Pomiar GPS podczas biegu"><span></span></button>
         </div>
-        <p class="opis">Dystans i tempo z lokalizacji telefonu. Trasa zostaje tylko w telefonie. Ekran musi być włączony, a aplikacja na wierzchu. Na bieżni wyłącz GPS (można też w trakcie biegu).</p>
+        <p class="ust-opis">Dystans i tempo z lokalizacji. Trasa zostaje w telefonie. Działa przy włączonym ekranie. Na bieżni wyłącz.</p>
+        <div class="ust-linia"></div>
         <div class="ust-rzad">
           <div class="ust-nazwa">Odcinki na dystans przełączają się same</div>
           <button class="przelacznik-wl" id="ust-bieg-odc-gps" role="switch" aria-checked="true" aria-label="Odcinki na dystans przełączają się same"><span></span></button>
         </div>
-        <p class="opis">Przy włączonym GPS odcinek „400 m” kończy się, gdy zmierzony dystans dojdzie do 400 m, z sygnałem jak przy czasie. GPS ma błąd kilku metrów, więc przy krótkich odcinkach (poniżej 200 m) lepiej użyć przycisku „Odcinek zrobiony”. Przycisk działa zawsze.</p>
-        <button class="przycisk" id="ust-bieg-przelicz" type="button">Przelicz dystanse z zapisanych tras</button>
-        <p class="opis" id="ust-bieg-przelicz-info"></p>
+        <p class="ust-opis">Z GPS, np. odcinek 400 m kończy się po 400 m. Przy odcinkach krótszych niż 200 m lepiej użyć przycisku „Odcinek zrobiony”.</p>
         <div class="ust-linia"></div>
-        <label class="ust-nazwa" for="ust-przerwa">Domyślna przerwa między seriami (s)</label>
-        <input type="number" id="ust-przerwa" class="ust-godzina" min="5" max="900" step="5" value="60" inputmode="numeric">
-        <p class="opis">Przerwę dla konkretnego ćwiczenia zmienisz w trakcie ćwiczenia przyciskami −15 s i +15 s. Aplikacja ją zapamięta.</p>
+        <button class="akcja ust-akcja" id="ust-bieg-przelicz" type="button">Przelicz dystanse z zapisanych tras GPS</button>
+        <p class="ust-opis" id="ust-bieg-przelicz-info"></p>
       </div>
-      <div class="ust-naglowek">Pomoc</div>
+
+      <div class="ust-naglowek">Przypomnienie</div>
       <div class="pp-karta">
-        <button class="przycisk drugi" id="ust-przewodnik">Jak to działa? (przewodnik)</button>
-      </div>
-      <div class="ust-naglowek">Dane</div>
-      <div class="pp-karta">
-        <button class="przycisk" id="kopia-zapisz">Zapisz kopię zapasową</button>
-        <button class="przycisk drugi" id="kopia-wczytaj">Wczytaj kopię</button>
-        <div class="ust-linia"></div>
-        <button class="przycisk" id="kopia-przyklady">Uzupełnij bazę ćwiczeń przykładowych</button>
-        <button class="przycisk drugi" id="kopia-cwiczenia">Dodaj ćwiczenia z pliku</button>
-        <button class="akcja" id="kopia-wzor">Pobierz wzór pliku z ćwiczeniami</button>
-        <p class="opis" id="kopia-info"></p>
-        <input type="file" id="kopia-wczytaj-plik" accept=".json,application/json" hidden>
-        <input type="file" id="kopia-cwiczenia-plik" accept=".json,application/json" hidden>
-      </div>
-      <div class="ust-naglowek">Usuwanie danych</div>
-      <div class="pp-karta">
-        <p class="opis">Usuwa wszystkie plany, wyniki i Twoje ćwiczenia z tego telefonu. Przed usunięciem automatycznie pobierze się kopia zapasowa.</p>
-        <button class="przycisk niebezpieczny" id="ust-usun-dane" type="button">Usuń wszystkie dane…</button>
+        <div class="ust-rzad">
+          <div class="ust-nazwa">Alarm</div>
+          <button class="przelacznik-wl" id="ust-alarm" role="switch" aria-checked="true" aria-label="Alarm"><span></span></button>
+        </div>
+        <div id="ust-godzina-blok">
+          <div class="ust-linia"></div>
+          <div class="ust-rzad">
+            <label class="ust-nazwa" for="ust-godzina">Godzina</label>
+            <input type="time" id="ust-godzina" class="ust-pole" value="18:30">
+          </div>
+          <p class="ust-opis">Tylko w dni z zaplanowanym treningiem.</p>
+        </div>
+        <div id="ust-ics-blok" hidden>
+          <div class="ust-linia"></div>
+          <button class="przycisk drugi ust-szeroki" id="ust-ics">Dodaj przypomnienia do kalendarza</button>
+          <p class="ust-opis" id="ust-ics-info"></p>
+        </div>
       </div>
 
       <div class="ust-naglowek">Wygląd</div>
-      <div class="ust-segmenty">
-        <button id="ust-jasny">Jasny</button>
-        <button id="ust-ciemny">Ciemny</button>
+      <div class="pp-karta">
+        <div class="ust-segmenty">
+          <button id="ust-jasny">Jasny</button>
+          <button id="ust-ciemny">Ciemny</button>
+        </div>
+      </div>
+
+      <div class="ust-naglowek">Kopia zapasowa</div>
+      <div class="pp-karta">
+        <p class="ust-opis ust-opis-gora" id="ust-kopia-stan">Dane są tylko w tym telefonie. Zapisuj plik kopii regularnie, np. na Dysku Google.</p>
+        <div class="ust-przyciski">
+          <button class="przycisk" id="kopia-zapisz">Zapisz kopię zapasową</button>
+          <button class="przycisk drugi" id="kopia-wczytaj">Wczytaj kopię</button>
+        </div>
+      </div>
+
+      <div class="ust-naglowek">Baza ćwiczeń</div>
+      <div class="pp-karta">
+        <div class="ust-przyciski">
+          <button class="przycisk drugi" id="kopia-przyklady">Uzupełnij bazę ćwiczeń przykładowych</button>
+          <button class="przycisk drugi" id="kopia-cwiczenia">Dodaj ćwiczenia z pliku</button>
+        </div>
+        <button class="akcja ust-akcja" id="kopia-wzor">Pobierz wzór pliku z ćwiczeniami</button>
+        <p class="ust-opis" id="kopia-info"></p>
+        <input type="file" id="kopia-wczytaj-plik" accept=".json,application/json" hidden>
+        <input type="file" id="kopia-cwiczenia-plik" accept=".json,application/json" hidden>
+      </div>
+
+      <div class="ust-naglowek">Pomoc</div>
+      <div class="pp-karta">
+        <button class="przycisk drugi ust-szeroki" id="ust-przewodnik">Jak to działa? (przewodnik ze zdjęciami)</button>
+      </div>
+
+      <div class="ust-naglowek">Usuwanie danych</div>
+      <div class="pp-karta">
+        <p class="ust-opis ust-opis-gora">Usuwa plany, wyniki i Twoje ćwiczenia z tego telefonu. Wcześniej automatycznie pobierze się kopia zapasowa.</p>
+        <button class="przycisk niebezpieczny ust-szeroki" id="ust-usun-dane" type="button">Usuń wszystkie dane…</button>
       </div>
     </div>
   </div>
@@ -656,7 +685,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=92"></script>
+  <script src="dane.js?v=93"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -679,23 +708,23 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=92"></script>
-  <script src="cwiczenia.js?v=92"></script>
-  <script src="treningi.js?v=92"></script>
-  <script src="bieg-logika.js?v=92"></script>
-  <script src="gps-logika.js?v=92"></script>
-  <script src="gps.js?v=92"></script>
-  <script src="kreator.js?v=92"></script>
-  <script src="kreator2.js?v=92"></script>
-  <script src="dzis.js?v=92"></script>
-  <script src="postep.js?v=92"></script>
-  <script src="rekordy.js?v=92"></script>
-  <script src="cwicz.js?v=92"></script>
-  <script src="bieg.js?v=92"></script>
-  <script src="mozliwosci.js?v=92"></script>
-  <script src="ustawienia.js?v=92"></script>
-  <script src="kopia.js?v=92"></script>
-  <script src="bezpieczenstwo.js?v=92"></script>
+  <script src="anatomia.js?v=93"></script>
+  <script src="cwiczenia.js?v=93"></script>
+  <script src="treningi.js?v=93"></script>
+  <script src="bieg-logika.js?v=93"></script>
+  <script src="gps-logika.js?v=93"></script>
+  <script src="gps.js?v=93"></script>
+  <script src="kreator.js?v=93"></script>
+  <script src="kreator2.js?v=93"></script>
+  <script src="dzis.js?v=93"></script>
+  <script src="postep.js?v=93"></script>
+  <script src="rekordy.js?v=93"></script>
+  <script src="cwicz.js?v=93"></script>
+  <script src="bieg.js?v=93"></script>
+  <script src="mozliwosci.js?v=93"></script>
+  <script src="ustawienia.js?v=93"></script>
+  <script src="kopia.js?v=93"></script>
+  <script src="bezpieczenstwo.js?v=93"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -710,18 +739,18 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=92"></script>
-  <script src="plan-bieg.js?v=92"></script>
-  <script src="plan-kreator.js?v=92"></script>
-  <script src="plan-progresja.js?v=92"></script>
-  <script src="plan-adaptacja.js?v=92"></script>
-  <script src="plan-zamiana.js?v=92"></script>
-  <script src="sciezki.js?v=92"></script>
-  <script src="cele.js?v=92"></script>
-  <script src="przewodnik.js?v=92"></script>
-  <script src="pomoc.js?v=92"></script>
-  <script src="analiza.js?v=92"></script>
-  <script src="dzien.js?v=92"></script>
-  <script src="app.js?v=92"></script>
+  <script src="plan-generator.js?v=93"></script>
+  <script src="plan-bieg.js?v=93"></script>
+  <script src="plan-kreator.js?v=93"></script>
+  <script src="plan-progresja.js?v=93"></script>
+  <script src="plan-adaptacja.js?v=93"></script>
+  <script src="plan-zamiana.js?v=93"></script>
+  <script src="sciezki.js?v=93"></script>
+  <script src="cele.js?v=93"></script>
+  <script src="przewodnik.js?v=93"></script>
+  <script src="pomoc.js?v=93"></script>
+  <script src="analiza.js?v=93"></script>
+  <script src="dzien.js?v=93"></script>
+  <script src="app.js?v=93"></script>
 </body>
 </html>

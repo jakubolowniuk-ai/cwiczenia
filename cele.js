@@ -607,6 +607,18 @@ function celeBiegBrakDystansu(sesja, wynik) {
   return krok;
 }
 
+// Krótki opis biegu do komunikatu, np. "25 min" albo "5,2 km w 28 min"
+function celeOpisBiegu(b) {
+  const czesci = [];
+  if (b.dystansM) {
+    czesci.push((Math.round(b.dystansM / 100) / 10).toString().replace(".", ",") + " km");
+  }
+  if (b.czasS) {
+    czesci.push(Math.round(b.czasS / 60) + " min");
+  }
+  return czesci.join(" w ") || "zapisany";
+}
+
 // Po zapisaniu wyniku biegu: zaliczamy kolejne kroki ścieżek biegowych, które bieg spełnia
 function celeSprawdzBieg(sesja, wynik) {
   if (!sciezkiDane) {
@@ -635,7 +647,8 @@ function celeSprawdzBieg(sesja, wynik) {
       ustawPostepSciezki(s.id, nr);
       komunikaty.push(nr >= s.kroki.length
         ? "🎉 " + s.nazwa + ": cel osiągnięty!"
-        : "✓ " + s.kroki.slice(start, nr).map(function (k) { return k.nazwa; }).join(", ") + " – zaliczone. Następny krok: " + s.kroki[nr].nazwa + ".");
+        : "✓ Twój bieg (" + celeOpisBiegu(bieg) + ") spełnia krok „" + s.kroki.slice(start, nr).map(function (k) { return k.nazwa; }).join("”, „") +
+          "” – zaliczony. Kolejny cel na ścieżce: " + s.kroki[nr].nazwa.toLowerCase() + ".");
     } else if (!post) {
       ustawPostepSciezki(s.id, 0);
     }

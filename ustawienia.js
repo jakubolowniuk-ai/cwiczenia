@@ -136,6 +136,11 @@ function pobierzIcs() {
 
 function rysujUstawienia() {
   rysujKarteMozliwosci();
+  const stanKopii = document.getElementById("ust-kopia-stan");
+  if (stanKopii) {
+    const ost = dane.ustawienia.ostatniaKopia;
+    stanKopii.textContent = "Dane są tylko w tym telefonie. " + (ost ? "Ostatnia kopia: " + ost.split("-").reverse().join(".") + "." : "Nie masz jeszcze kopii.") + " Zapisuj plik regularnie, np. na Dysku Google.";
+  }
   if (typeof biegRysujUstawienia === "function") {
     biegRysujUstawienia();
   }

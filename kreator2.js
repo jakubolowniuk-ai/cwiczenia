@@ -420,7 +420,7 @@ function odswiezNaglowekPanelu() {
   }).length;
   pdPodtytul.textContent = liczba === 0
     ? "Odpoczynek"
-    : liczba + " " + odmiana(liczba, "sesja", "sesje", "sesji");
+    : liczba + " " + odmiana(liczba, "trening", "treningi", "treningów");
 }
 
 function rysujPanelDnia() {
@@ -443,7 +443,7 @@ function rysujPanelDnia() {
     karta.style.borderLeftColor = kolorAktywnosci(aktywnosc);
     if (sesjaMaPostep(sesja)) {
       // Sesja z zapisanym postępem zostaje bez zmian, żeby nie zepsuć historii
-      dodajLinie(karta, "Ma zapisany postęp, nie można jej zmienić");
+      dodajLinie(karta, "Ma zapisany postęp, nie można go zmienić");
     } else {
       karta.appendChild(
         przyciskAkcji("Edytuj", "", function () {
@@ -471,7 +471,7 @@ function rysujPanelDnia() {
 function otworzPrzenoszenie(sesja) {
   pdSesja = sesja;
   const aktywnosc = znajdzAktywnosc(sesja.aktywnoscId);
-  pdPrzeniesOpis.textContent = "Sesja: " + opisAktywnosci(aktywnosc).tytul + ". Wybierz dzień, na który ją przenosisz.";
+  pdPrzeniesOpis.textContent = "Trening: " + opisAktywnosci(aktywnosc).tytul + ". Wybierz dzień, na który go przenosisz.";
   pdPrzeniesLista.innerHTML = "";
   const liczbaDni = DNI_W_OKRESIE[szkic.okres];
   for (let dzien = 0; dzien < liczbaDni; dzien++) {
@@ -634,6 +634,20 @@ function ilosciStartowa(sesja, cwiczenie, miara) {
 
 // Karta z polami parametrów jednego ćwiczenia. Zwraca { cwiczenie, karta, odczytaj }.
 // odczytaj() zwraca ilość albo null (i pokazuje błąd w karcie).
+// Zamiana ćwiczenia w edycji planu: najpierw zapamiętujemy wpisane wartości, potem okno odpowiedników
+// (te same mięśnie, podobna trudność, bez kolidujących z bólem). Zmiana trafia do edytowanej kopii planu – zapisze ją „Zapisz plan”.
+function kr2Zamien(sesja, cwId) {
+  if (!zapiszSesjeZPol()) {
+    return;
+  }
+  const oryginal = szkic.edytowanyPlanId ? dane.plany.find(function (p) { return p.id === szkic.edytowanyPlanId; }) : null;
+  const planEdycji = { sesje: szkic.sesje, aktywnosci: szkic.aktywnosci, kreator: oryginal ? oryginal.kreator : null };
+  otworzZamiane(planEdycji, sesja, cwId, function () {
+    zapiszSzkic();
+    otworzSesje(sesja);
+  });
+}
+
 function zrobKarteParametrow(sesja, cwiczenie) {
   const rodzaj = znajdzKategorie(cwiczenie.rodzajId);
   const miara = rodzaj ? rodzaj.miara : "serie";
@@ -650,6 +664,13 @@ function zrobKarteParametrow(sesja, cwiczenie) {
   naglowek.appendChild(nazwa);
   dodajFilm(naglowek, cwiczenie);
   karta.appendChild(naglowek);
+  if (typeof otworzZamiane === "function" && !(sesja.zrobione && sesja.zrobione[cwiczenie.id])) {
+    const zamien = przyciskAkcji("Zamień na inne", "zamien-edycja", function () {
+      kr2Zamien(sesja, cwiczenie.id);
+    });
+    zamien.setAttribute("aria-label", "Zamień ćwiczenie " + cwiczenie.nazwa + " na inne");
+    karta.appendChild(zamien);
+  }
   if (jednostronne(cwiczenie)) {
     karta.appendChild(tekstElement("div", "ostatnio-info", "Ćwiczenie jednostronne: wpisz powtórzenia (lub czas) dla jednej strony. Każdą serię robisz na lewą i na prawą stronę."));
   }

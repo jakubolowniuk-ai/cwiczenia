@@ -338,7 +338,7 @@ function dodajRekordyAktywnosci() {
   if (wiersze.length === 0) {
     return;
   }
-  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Najdłuższe wyniki"));
+  postepTresc.appendChild(tekstElement("h3", "pp-podnaglowek", "Najdłuższe wyniki"));
   wiersze.forEach(function (w) {
     postepTresc.appendChild(zrobWskazowke("★", "#0B6B5F", "#DDF1E8", w[0], w[1]));
   });
@@ -392,7 +392,7 @@ function opisRekorduDystansu(r) {
 }
 
 function dodajRekordyDystansu() {
-  postepTresc.appendChild(tekstElement("h3", "pp-naglowek", "Moje rekordy na dystansie"));
+  postepTresc.appendChild(tekstElement("h3", "pp-podnaglowek", "Na dystansie"));
   const lista = dane.rekordyDystans || [];
   if (lista.length === 0) {
     postepTresc.appendChild(tekstElement("p", "opis", "Wybierz dystans (np. 5 km, 100 m kraulem), wpisz swój rekord, a aplikacja zapyta, gdy go poprawisz."));
@@ -643,8 +643,8 @@ function przeliczRekordyZHistorii() {
 function dodajPrzyciskMoichRekordow() {
   const lista = dane.cwiczenia.filter(function (c) { return c.rekord; });
   const przycisk = document.createElement("button");
-  przycisk.className = "przycisk drugi wielki pp-rekordy-przycisk";
-  przycisk.textContent = "★ Moje rekordy (" + lista.length + ")";
+  przycisk.className = "przycisk drugi pp-rekordy-przycisk";
+  przycisk.textContent = "★ Rekordy w ćwiczeniach (" + lista.length + ")";
   przycisk.addEventListener("click", otworzMojeRekordy);
   postepTresc.appendChild(przycisk);
 }
