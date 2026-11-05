@@ -513,3 +513,7 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - Ustawienia i Postęp: każda sekcja to przycisk (tytuł, krótkie podsumowanie, strzałka); treść rozwija się po dotknięciu. Na starcie wszystko zwinięte, a rozwinięte sekcje zostają rozwinięte do zamknięcia aplikacji (także po odświeżeniu Postępu). Funkcja `rozwijaneSekcje(kontener, selektor, prefiks)` w `pomoc.js`.
 - Postęp: na wierzchu zostaje grafika mięśni (z wybranego planu, a gdy to plan bez siłowni – z pierwszego planu, który ją ma). Podsumowania w nagłówkach: „Twój plan” – procent realizacji, „Moje cele”, „Rekordy”, „Moje plany”, „Poprzednie plany” – liczby. Dotknięcie planu w „Moje plany” rozwija „Twój plan” z jego wynikami.
 - Testy automatyczne otwierają wszystkie sekcje flagą `window.sekcjeWszystkieOtwarte`.
+
+## v95 – Bez importu ćwiczeń z pliku
+
+- Z Ustawień zniknęła sekcja „Baza ćwiczeń” („Uzupełnij bazę ćwiczeń przykładowych”, „Dodaj ćwiczenia z pliku”, „Pobierz wzór pliku”) razem z kodem importu. Wbudowana baza (ok. 500 ćwiczeń, 10 zestawów) wczytuje się sama przy pierwszym starcie, po usunięciu danych i przy każdej nowej wersji bazy (`WERSJA_BAZY`); ćwiczeń z bazy nie da się usunąć, tylko ukryć, więc ręczne „uzupełnianie” nie jest potrzebne. Własne ćwiczenia: „+ Dodaj ćwiczenie”. Komunikaty kopii zapasowej (`kopia-info`) są teraz w sekcji „Kopia zapasowa”.

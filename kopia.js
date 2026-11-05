@@ -1,14 +1,11 @@
-// ===== Kopia zapasowa i wczytywanie ćwiczeń z pliku (w Ustawieniach) =====
+// ===== Kopia zapasowa (w Ustawieniach) i wbudowana baza ćwiczeń =====
 // 1) Zapisz kopię: cały stan aplikacji do pliku .json (pobierany na telefon).
 // 2) Wczytaj kopię: zastępuje wszystkie dane danymi z pliku kopii.
-// 3) Dodaj ćwiczenia z pliku: dopisuje ćwiczenia do bazy (rodzaje i partie po nazwach).
+// 3) Baza ćwiczeń wczytuje się sama przy pierwszym starcie i przy każdej nowej wersji bazy (bez przycisków).
 
 const kopiaZapisz = document.getElementById("kopia-zapisz");
 const kopiaWczytaj = document.getElementById("kopia-wczytaj");
 const kopiaWczytajPlik = document.getElementById("kopia-wczytaj-plik");
-const kopiaCwiczenia = document.getElementById("kopia-cwiczenia");
-const kopiaCwiczeniaPlik = document.getElementById("kopia-cwiczenia-plik");
-const kopiaWzor = document.getElementById("kopia-wzor");
 const kopiaInfo = document.getElementById("kopia-info");
 
 const FORMAT_KOPII = "cwiczenia-kopia";
@@ -245,84 +242,6 @@ function dodajCwiczeniaZListy(lista, opcje) {
 
   return wynik;
 }
-
-function dodajIPokaz(lista, opcje) {
-  const w = dodajCwiczeniaZListy(lista, opcje);
-  zapiszDane();
-  if (typeof rysujListe === "function") {
-    rysujFiltry();
-    rysujListe();
-  }
-  if (typeof odswiezPrzelacznik === "function") {
-    odswiezPrzelacznik();
-  }
-  let opis = "Dodano ćwiczeń: " + w.dodane + ".";
-  if (w.uzupelnione > 0) {
-    opis += " Uzupełniono mięśnie w istniejących ćwiczeniach: " + w.uzupelnione + ".";
-  }
-  if (w.duplikaty > 0) {
-    opis += " Pominięto (już są w bazie): " + w.duplikaty + ".";
-  }
-  if (w.nowePartie.length > 0) {
-    opis += " Nowe partie: " + w.nowePartie.join(", ") + ".";
-  }
-  if (w.bledy.length > 0) {
-    opis += " Nie dodano " + w.bledy.length + ": " + w.bledy.slice(0, 3).join("; ") + (w.bledy.length > 3 ? "…" : "") + ".";
-  }
-  pokazInfoKopii(opis, w.dodane === 0 && w.bledy.length > 0);
-}
-
-kopiaCwiczenia.addEventListener("click", function () {
-  kopiaCwiczeniaPlik.click();
-});
-
-kopiaCwiczeniaPlik.addEventListener("change", function () {
-  odczytajPlik(kopiaCwiczeniaPlik, function (tekst) {
-    let dane_;
-    try {
-      dane_ = JSON.parse(tekst);
-    } catch (blad) {
-      pokazInfoKopii("Nie da się odczytać pliku. Sprawdź, czy ma format jak we wzorze.", true);
-      return;
-    }
-    const lista = Array.isArray(dane_) ? dane_ : dane_ && dane_.cwiczenia;
-    if (!Array.isArray(lista)) {
-      pokazInfoKopii("W pliku nie znalazłem listy ćwiczeń. Pobierz wzór i porównaj.", true);
-      return;
-    }
-    dodajIPokaz(lista);
-  });
-});
-
-kopiaWzor.addEventListener("click", function () {
-  const rodzaje = dane.kategorie.filter(function (k) {
-    return k.typ === "rodzaj";
-  }).map(function (k) {
-    return k.nazwa;
-  });
-  const wzor = {
-    cwiczenia: [
-      { nazwa: "Podciąganie nachwytem", rodzaj: "Kalistenika", partie: ["Plecy"], miesnie: ["Najszerszy grzbietu", "Biceps"], link: "https://x.com/..." },
-      { nazwa: "Deska przodem", rodzaj: "Trening statyczny", partie: ["Brzuch"], miesnie: ["Prosty brzucha", "Poprzeczny brzucha"], link: "" }
-    ],
-    dostepneRodzaje: rodzaje
-  };
-  pobierzPlik("cwiczenia-wzor.json", JSON.stringify(wzor, null, 1));
-  pokazInfoKopii("Pobrano wzór. Rodzaj musi nazywać się tak jak w aplikacji, a nieznane partie zostaną dodane automatycznie.", false);
-});
-
-document.getElementById("kopia-przyklady").addEventListener("click", function () {
-  const adresy = ["przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json"];
-  Promise.all(adresy.map(function (a) {
-    return fetch(a).then(function (o) { return o.json(); });
-  })).then(function (wyniki) {
-    let lista = [];
-    wyniki.forEach(function (w) { lista = lista.concat(w.cwiczenia || []); });
-    dodajIPokaz(lista, { zBazy: true });
-  }).catch(function () {
-    pokazInfoKopii("Nie udało się pobrać przykładów. Sprawdź internet i spróbuj ponownie.", true);
-  });
-});
 
 // ===== Baza ćwiczeń wczytywana przy starcie =====
 // Nowa osoba dostaje gotową bazę. Kto ma już ćwiczenia, dostaje tylko oznaczenie, które z nich

@@ -17,7 +17,7 @@ const POMOC = {
     punkty: [
       "Filtruj po partii mięśni, rodzaju treningu i trudności. Kolor kropki to trudność: od zielonego (na start) do czerwonego.",
       "Dotknij ćwiczenia, żeby zobaczyć opis wykonania.",
-      "„+ Dodaj ćwiczenie” tworzy Twoje własne ćwiczenie. Własne ćwiczenia (też dodane z pliku) są osobno – przełącznik „Baza / Moje ćwiczenia” nad wyszukiwarką.",
+      "„+ Dodaj ćwiczenie” tworzy Twoje własne ćwiczenie. Własne ćwiczenia są osobno – przełącznik „Baza / Moje ćwiczenia” nad wyszukiwarką.",
       "Ćwiczenia, których nie robisz, możesz ukryć – kreator planu nie będzie ich wstawiał."
     ]
   },
