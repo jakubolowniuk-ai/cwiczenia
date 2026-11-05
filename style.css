@@ -2159,7 +2159,7 @@ h1 {
 .bieg-gps-status.ostrzezenie { color: var(--ostrzezenie); font-weight: 700; }
 .bieg-gps-przycisk { font-size: 14px; }
 .bieg-import { display: block; margin: 6px auto 0; }
-.gps-zgoda-tlo { position: fixed; inset: 0; z-index: 400; background: rgba(0, 0, 0, 0.55); display: flex; align-items: center; justify-content: center; padding: 16px; }
+.gps-zgoda-tlo { position: fixed; inset: 0; z-index: 1300; background: rgba(0, 0, 0, 0.55); display: flex; align-items: center; justify-content: center; padding: 16px; }
 .gps-zgoda { background: var(--karta); color: var(--tekst); border-radius: 18px; padding: 20px; max-width: 420px; width: 100%; display: flex; flex-direction: column; gap: 10px; }
 .gps-zgoda h2 { margin: 0 0 4px; font-size: 20px; }
 
@@ -2191,3 +2191,53 @@ h1 {
 .przelacznik-wl::after { content: ""; position: absolute; left: -6px; right: -6px; top: -9px; bottom: -9px; }
 :focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
 .pp-przelacznik::before { content: ""; position: absolute; left: -6px; right: -6px; top: -9px; bottom: -9px; }
+
+/* ===== Analiza: wyniki ćwiczenia, wykres, kalkulator talerzy (v92) ===== */
+.an-blok { margin-top: 14px; padding-top: 12px; border-top: 1px solid var(--linia); }
+.an-blok p { margin: 6px 0; }
+.an-uwaga { color: var(--ostrzezenie); font-weight: 700; }
+.an-przelacznik { display: flex; flex-wrap: wrap; gap: 6px; margin: 10px 0 6px; }
+.an-wykres { margin: 0; }
+.an-wykres svg { width: 100%; height: auto; display: block; touch-action: pan-y; }
+.an-siatka { stroke: var(--linia); stroke-width: 1; }
+.an-os { fill: var(--tekst-szary); font-size: 11px; }
+.an-linia { fill: none; stroke: var(--akcent); stroke-width: 2; stroke-linejoin: round; stroke-linecap: round; }
+.an-kropka { fill: var(--akcent); stroke: var(--karta); stroke-width: 2; }
+.an-kropka.aktywna { r: 6; }
+.an-pion { stroke: var(--tekst-szary); stroke-width: 1; stroke-dasharray: 3 3; }
+.an-podpis { font-size: 14px; color: var(--tekst); margin-top: 4px; min-height: 2.6em; }
+.an-tabela summary { cursor: pointer; padding: 6px 0; color: var(--akcent); font-weight: 600; }
+.an-tabela table { width: 100%; border-collapse: collapse; font-size: 14px; }
+.an-tabela td { padding: 4px 0; border-bottom: 1px solid var(--linia); }
+.an-tabela td:last-child { text-align: right; }
+.an-rm { margin-top: 4px; }
+.an-talerze-przycisk { margin-top: 4px; }
+.an-kalk { max-height: 90vh; overflow-y: auto; }
+.an-pole { text-transform: none; }
+.an-wynik { min-height: 60px; }
+.an-strona { color: var(--tekst-szary); font-size: 14px; }
+.an-talerze-tekst { font-size: 22px; font-weight: 800; margin: 2px 0 8px; }
+.an-rysunek { display: flex; align-items: center; gap: 3px; min-height: 92px; padding: 4px 0; }
+.an-rysunek::before { content: ""; width: 34px; height: 10px; background: var(--tekst-szary); border-radius: 3px; }
+.an-talerz { width: 22px; background: var(--akcent); border-radius: 4px; font-size: 10px; font-weight: 700; color: var(--karta); display: flex; align-items: center; justify-content: center; writing-mode: vertical-rl; transform: rotate(180deg); }
+.an-opcja { display: block; width: 100%; margin: 6px 0; text-align: left; }
+
+/* ===== Dopasowanie dnia (v92) ===== */
+.dn-przyciski { display: flex; flex-direction: column; gap: 8px; margin-top: 8px; }
+.dn-rzad { display: flex; gap: 8px; flex-wrap: wrap; }
+.dn-rzad .przycisk { flex: 1 1 140px; min-height: 48px; }
+.dn-czas { text-align: center; }
+.dn-zmiana, .dn-ostrzezenie { border: 2px dashed var(--akcent); border-radius: 12px; padding: 10px 12px; display: flex; flex-direction: column; gap: 6px; }
+.dn-ostrzezenie { border-color: var(--ostrzezenie); border-style: solid; margin-top: 8px; }
+.dn-zmiana-tytul { font-weight: 700; }
+.dn-zmiana .pa-lista { font-size: 14px; }
+.dn-okno { max-height: 90vh; overflow-y: auto; }
+.dn-czasy { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+.dn-czasy .przycisk:disabled { opacity: 0.45; }
+.dn-oceny { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.dn-ocena { min-height: 56px; font-size: 17px; justify-content: center; }
+.dn-kolizja { border-top: 1px solid var(--linia); padding-top: 8px; display: flex; flex-direction: column; gap: 6px; }
+.dn-kolizja-nazwa { font-weight: 700; }
+.dn-opcje { display: flex; flex-direction: column; gap: 8px; }
+.dn-karta { border-color: var(--akcent); }
+.gps-zgoda .przycisk:disabled { opacity: 0.45; cursor: default; }

@@ -487,7 +487,7 @@ function pgDrabinka(kod, p, kandydaci) {
 // ===== Bezpieczeństwo: ćwiczenia kolidujące z bolącym miejscem =====
 
 const PG_BOLE = {
-  kolano: /Przysiad|Wykro|Zakro|Wejścia|Leg Press|Wypychanie|Hack|Pistol|Wall Sit|Cossack|Prostowanie nóg|Nordic|Burpees|Skoki|Wyskok/i,
+  kolano: /Przysiad|Wykro|Zakro|Wejścia|Leg Press|Wypychanie|suwnic|kaczk|Duck|Step|Sissy|Hack|Pistol|Wall Sit|Cossack|Prostowanie nóg|Nordic|Burpees|Skoki|Wyskok/i,
   bark: /żołnierskie|OHP|nad głowę|Arnolda|Dipy|pike|Pompki hinduskie|łucznicze|Wyciskanie hantli siedząc/i,
   plecy: /Martwy|RDL|SLDL|Good Morning|sztangą w opadzie|Swing|Prostowanie tułowia|Back Squat|Front Squat|T-Bar|Pendlay/i,
   nadgarstek: /Pompki|Dipy|Uginanie ramion ze sztangą|Zginanie nadgarstków|Planche|Bear|Crab/i

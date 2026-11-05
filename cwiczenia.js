@@ -1176,6 +1176,10 @@ function otworzOpis(cwiczenie) {
     brak.textContent = "Ćwiczenie nie ma jeszcze opisu. Dopiszesz go w Edytuj.";
     opisTresc.appendChild(brak);
   }
+  const wyniki = typeof anSekcjaOpisu === "function" ? anSekcjaOpisu(cwiczenie) : null;
+  if (wyniki) {
+    opisTresc.appendChild(wyniki);
+  }
   document.querySelector(".opis-uwaga").hidden = !opisTresc.querySelector(".opis-blok");
 
   opisLink.hidden = !cwiczenie.link;

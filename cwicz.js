@@ -171,7 +171,9 @@ function cwPrzerwaDla(id) {
     return 5;
   }
   const cw = znajdzCwiczenie(id);
-  return (cw && cw.przerwa) || dane.ustawienia.przerwa || 60;
+  // Skrócony trening ma krótsze przerwy (cwSesja.przerwaMnoznik), ale nie krótsze niż 15 s
+  const mnoznik = cwSesja && cwSesja.przerwaMnoznik ? cwSesja.przerwaMnoznik : 1;
+  return Math.max(15, Math.round(((cw && cw.przerwa) || dane.ustawienia.przerwa || 60) * mnoznik));
 }
 
 // Wynik ćwiczenia (w formacie jak w planie) z zapisanych serii
@@ -435,6 +437,24 @@ function cwRysujSerie() {
   let poleKg = null;
   if (cw.zCiezarem) {
     poleKg = cwStepper(etykietaCiezaru(cw), s.kg || 0, 2.5, true);
+    if (typeof anProcent1RM === "function") {
+      const info = cwEl("div", "ostatnio-info an-rm", "");
+      const odswiez = function () {
+        info.textContent = anProcent1RM(b.id, Number(poleKg.pole.value) || 0);
+      };
+      poleKg.pole.addEventListener("input", odswiez);
+      poleKg.blok.addEventListener("click", function () { setTimeout(odswiez, 0); });
+      odswiez();
+      poleKg.blok.appendChild(info);
+      if (anZeSztanga(cw)) {
+        poleKg.blok.appendChild(cwPrzycisk("Talerze na sztangę", "akcja an-talerze-przycisk", function () {
+          anOtworzKalkulator(Number(poleKg.pole.value) || 0, function (kg) {
+            poleKg.pole.value = String(kg);
+            odswiez();
+          });
+        }));
+      }
+    }
   }
 
   if (s.p !== undefined) {

@@ -227,6 +227,9 @@ function rysujDzis() {
   if (kartaKopii) {
     dzisSesje.appendChild(kartaKopii);
   }
+  if (typeof dnKartyDzis === "function") {
+    dnKartyDzis().forEach(function (k) { dzisSesje.appendChild(k); });
+  }
   if (wlaczone.length === 0) {
     dzisSesje.appendChild(zrobPustyKomunikat("Wszystkie plany są wyłączone", "Włącz plan w zakładce Postęp (sekcja „Moje plany”), a jego treningi pojawią się tutaj."));
     return;
@@ -367,6 +370,16 @@ function zrobKarteDzis(plan, sesja) {
         otworzCwicz(sesja);
       });
       karta.appendChild(cwicz);
+    }
+    if (typeof dnPrzyciskiTreningu === "function" && zrobioneWszystkie < wszystkie.length) {
+      const nogi = dnOstrzezenieNogi(plan, sesja);
+      if (nogi) {
+        karta.appendChild(nogi);
+      }
+      const dodatki = dnPrzyciskiTreningu(plan, sesja);
+      if (dodatki) {
+        karta.appendChild(dodatki);
+      }
     }
 
     const dodajBlok = function (tytul, idBloku, lista) {
