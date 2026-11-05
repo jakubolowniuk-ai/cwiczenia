@@ -219,6 +219,14 @@ function rysujDzis() {
 
   dzisSesje.innerHTML = "";
   dzisPodsumowanie.textContent = "";
+  const kartaWznow = typeof cwKartaWznowienia === "function" ? cwKartaWznowienia() : null;
+  if (kartaWznow) {
+    dzisSesje.appendChild(kartaWznow);
+  }
+  const kartaKopii = typeof bzKartaKopii === "function" ? bzKartaKopii() : null;
+  if (kartaKopii) {
+    dzisSesje.appendChild(kartaKopii);
+  }
   if (wlaczone.length === 0) {
     dzisSesje.appendChild(zrobPustyKomunikat("Wszystkie plany są wyłączone", "Włącz plan w zakładce Postęp (sekcja „Moje plany”), a jego sesje pojawią się tutaj."));
     return;
@@ -1061,6 +1069,9 @@ wartZapisz.addEventListener("click", function () {
   if (wynik === null) {
     return;
   }
+  if (!bzPotwierdz(bzUwagiIlosci(wynik))) {
+    return;
+  }
   if (!wartSesja.zrobione) {
     wartSesja.zrobione = {};
   }
@@ -1237,6 +1248,9 @@ function zapiszWynik() {
   const wynik = wynikOdczyt();
   if (wynik === null) {
     wynikBlad.textContent = "Popraw zaznaczone pole.";
+    return;
+  }
+  if (!bzPotwierdz(bzUwagiWyniku(wynik, wynikRodzajId))) {
     return;
   }
   // Bieg bez dystansu, a krok ścieżki go wymaga: raz prosimy o dystans (drugie „Zapisz” zapisuje bez niego)

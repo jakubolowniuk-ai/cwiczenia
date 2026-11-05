@@ -59,6 +59,8 @@ function odczytajPlik(wejscie, dalej) {
 kopiaZapisz.addEventListener("click", function () {
   const paczka = { format: FORMAT_KOPII, wersja: 1, zapisano: new Date().toISOString(), dane: dane };
   pobierzPlik("cwiczenia-kopia-" + dataDzisTekst() + ".json", JSON.stringify(paczka, null, 1));
+  dane.ustawienia.ostatniaKopia = dataDzisTekst();
+  zapiszDane();
   pokazInfoKopii("Kopia pobrana: " + dane.cwiczenia.length + " ćwiczeń, " + dane.treningi.length + " treningów, " + dane.plany.length + " planów. Trzymaj plik w bezpiecznym miejscu (np. na Dysku Google).", false);
 });
 

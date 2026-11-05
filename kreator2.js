@@ -1488,6 +1488,9 @@ function zapiszSesjeZPol() {
       pdSesjaBlad.textContent = "Popraw zaznaczone pole.";
       return false;
     }
+    if (!bzPotwierdz(bzUwagiWyniku(cel, aktywnosc && aktywnosc.rodzajId))) {
+      return false;
+    }
     Object.keys(cel).forEach(function (klucz) {
       pdSesja[klucz] = cel[klucz];
     });
@@ -1511,6 +1514,15 @@ function zapiszSesjeZPol() {
   if (pierwszyBlad) {
     pdSesjaBlad.textContent = "Popraw ćwiczenie: " + pierwszyBlad.cwiczenie.nazwa + ".";
     pierwszyBlad.karta.scrollIntoView({ behavior: "smooth", block: "center" });
+    return false;
+  }
+  let uwagiIlosci = [];
+  kr2Odczyty.forEach(function (wpis) {
+    if (wyniki[wpis.cwiczenie.id]) {
+      uwagiIlosci = uwagiIlosci.concat(bzUwagiIlosci(wyniki[wpis.cwiczenie.id], wpis.cwiczenie.nazwa));
+    }
+  });
+  if (!bzPotwierdz(uwagiIlosci)) {
     return false;
   }
 

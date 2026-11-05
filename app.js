@@ -40,17 +40,6 @@ zakladki.forEach(function (zakladka) {
   });
 });
 
-// ===== Czyszczenie danych (na czas budowy aplikacji) =====
-
-const przyciskReset = document.getElementById("przycisk-reset");
-
-przyciskReset.addEventListener("click", function () {
-  if (confirm("Usunąć wszystkie zapisane dane?")) {
-    localStorage.removeItem(KLUCZ_DANYCH);
-    location.reload();
-  }
-});
-
 // ===== Sprawdzenie, czy wszystkie pliki są w tej samej wersji =====
 // Po wgraniu części plików na GitHub aplikacja potrafi działać "w połowie".
 // Zamiast milczeć, pokazujemy wyraźny komunikat na górze strony.

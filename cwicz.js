@@ -223,6 +223,9 @@ function cwZakonczCwiczenie(id) {
 // ===== Przejścia =====
 
 function cwZapiszSerie(wynik) {
+  if (!bzPotwierdz(bzUwagiSerii(wynik))) {
+    return;
+  }
   const b = cwBiezace();
   const p = cwPrzebieg();
   if (!p.wyniki[b.id]) {
@@ -565,6 +568,7 @@ function cwRysuj() {
     cwRysujSerie();
   }
   cwOdswiezLicznik();
+  cwZapamietajStan();
 }
 
 // Odświeża liczniki (przerwa albo stoper); uruchamiane co ułamek sekundy z zegara, nie z licznika kroków
@@ -608,6 +612,124 @@ function cwOdswiezLicznik() {
   }
 }
 
+// ===== Wznawianie przerwanego treningu =====
+// Serie zapisują się w sesji na bieżąco (przebieg.wyniki). Tutaj pamiętamy tylko, który trening był otwarty
+// i czy trwała przerwa – żeby po zamknięciu aplikacji albo restarcie telefonu wrócić w to samo miejsce.
+
+const CW_TRWA = "cwiczenia-trening-trwa";
+const CW_WAZNOSC_H = 12;
+
+function cwZapamietajStan() {
+  if (!cwSesja) {
+    return;
+  }
+  try {
+    if (cwFaza === "koniec") {
+      localStorage.removeItem(CW_TRWA);
+      return;
+    }
+    localStorage.setItem(CW_TRWA, JSON.stringify({
+      sesjaId: cwSesja.id,
+      faza: cwFaza,
+      przerwaDo: cwPrzerwaDo,
+      ostatnieId: cwOstatnieId,
+      zapisano: Date.now()
+    }));
+  } catch (e) {}
+}
+
+function cwZapomnijStan() {
+  try {
+    localStorage.removeItem(CW_TRWA);
+  } catch (e) {}
+}
+
+// Zwraca { plan, sesja, stan } albo null (nic nie trwało, trening skończony, minęło ponad 12 h)
+function cwStanDoWznowienia() {
+  let stan = null;
+  try {
+    stan = JSON.parse(localStorage.getItem(CW_TRWA) || "null");
+  } catch (e) {
+    stan = null;
+  }
+  if (!stan || !stan.sesjaId) {
+    return null;
+  }
+  let znalezione = null;
+  (dane.plany || []).forEach(function (plan) {
+    (plan.sesje || []).forEach(function (s) {
+      if (s.id === stan.sesjaId) {
+        znalezione = { plan: plan, sesja: s, stan: stan };
+      }
+    });
+  });
+  const stary = Date.now() - (stan.zapisano || 0) > CW_WAZNOSC_H * 3600000;
+  if (!znalezione || stary) {
+    cwZapomnijStan();
+    return null;
+  }
+  // Czy coś zostało do zrobienia
+  const poprz = cwSesja;
+  cwSesja = znalezione.sesja;
+  const zostalo = !!cwBiezace();
+  cwSesja = poprz;
+  if (!zostalo) {
+    cwZapomnijStan();
+    return null;
+  }
+  return znalezione;
+}
+
+function cwWznow(w) {
+  otworzCwicz(w.sesja);
+  if (w.stan.faza === "przerwa" && w.stan.przerwaDo > Date.now()) {
+    cwFaza = "przerwa";
+    cwPrzerwaDo = w.stan.przerwaDo;
+    cwPrzerwaGotowa = false;
+    cwOstatnieId = w.stan.ostatnieId || null;
+    cwRysuj();
+  }
+}
+
+// Karta „Wznów trening” na górze „Dziś” albo null
+function cwKartaWznowienia() {
+  if (!cwTlo.hidden) {
+    return null;
+  }
+  const w = cwStanDoWznowienia();
+  if (!w) {
+    return null;
+  }
+  const poprz = cwSesja;
+  cwSesja = w.sesja;
+  const ids = cwIds();
+  const b = cwBiezace();
+  const cw = znajdzCwiczenie(b.id);
+  const serie = cwSerie(b.id).length;
+  cwSesja = poprz;
+  const tr = w.sesja.treningId ? znajdzTrening(w.sesja.treningId) : null;
+  const karta = document.createElement("div");
+  karta.className = "bz-karta wznow";
+  karta.appendChild(tekstElement("div", "bz-tytul", "Przerwany trening" + (tr ? ": " + tr.nazwa : "")));
+  karta.appendChild(tekstElement("p", "opis", "Zatrzymałeś(aś) się na: " + (cw ? cw.nazwa : "ćwiczenie") + " – seria " + Math.min(b.nr + 1, serie) + " z " + serie +
+    " (ćwiczenie " + (b.indeks + 1) + " z " + ids.length + "). Zrobione serie są zapisane."));
+  const rzad = document.createElement("div");
+  rzad.className = "bz-rzad";
+  const tak = tekstElement("button", "przycisk", "Wznów trening");
+  tak.type = "button";
+  tak.addEventListener("click", function () { cwWznow(w); });
+  const nie = tekstElement("button", "akcja", "Nie teraz");
+  nie.type = "button";
+  nie.addEventListener("click", function () {
+    cwZapomnijStan();
+    karta.remove();
+  });
+  rzad.appendChild(tak);
+  rzad.appendChild(nie);
+  karta.appendChild(rzad);
+  return karta;
+}
+
 // ===== Otwieranie i zamykanie =====
 
 function otworzCwicz(sesja) {
@@ -623,6 +745,8 @@ function otworzCwicz(sesja) {
 }
 
 function cwZamknijTryb() {
+  // Świadome zamknięcie: nie proponujemy wznowienia (zrobione serie i tak zostają w sesji)
+  cwZapomnijStan();
   clearInterval(cwInterwal);
   cwInterwal = null;
   cwStoperStart = 0;

@@ -37,6 +37,25 @@ const MZ_GRUPY = [
 
 let mzNakladka = null;
 
+// Granice, powyżej których wynik testu to najpewniej literówka
+const MZ_LIMITY = { pompki: 150, podciagniecia: 60, dipy: 100, przysiady: 300, plank: 900, zwis: 600 };
+
+function mzUwagi(wartosci) {
+  const uwagi = [];
+  Object.keys(wartosci).forEach(function (k) {
+    const v = wartosci[k];
+    const p = mzPole(k);
+    if (typeof v !== "number" || !p) {
+      return;
+    }
+    const limit = MZ_LIMITY[k] || 400;
+    if (v > limit) {
+      uwagi.push(p.nazwa + ": " + v + " " + p.jedn);
+    }
+  });
+  return uwagi;
+}
+
 function mzWypelnione() {
   return !!(dane.mozliwosci && dane.mozliwosci.data);
 }
@@ -169,6 +188,9 @@ function otworzMozliwosci(poZapisie) {
   zapisz.addEventListener("click", function () {
     if (typeof wartosci.pompki !== "number") {
       blad.textContent = "Wpisz przynajmniej wynik pompek (0 też jest wynikiem).";
+      return;
+    }
+    if (!bzPotwierdz(mzUwagi(wartosci))) {
       return;
     }
     const d = new Date();
