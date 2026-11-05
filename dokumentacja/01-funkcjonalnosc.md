@@ -517,3 +517,13 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 ## v95 – Bez importu ćwiczeń z pliku
 
 - Z Ustawień zniknęła sekcja „Baza ćwiczeń” („Uzupełnij bazę ćwiczeń przykładowych”, „Dodaj ćwiczenia z pliku”, „Pobierz wzór pliku”) razem z kodem importu. Wbudowana baza (ok. 500 ćwiczeń, 10 zestawów) wczytuje się sama przy pierwszym starcie, po usunięciu danych i przy każdej nowej wersji bazy (`WERSJA_BAZY`); ćwiczeń z bazy nie da się usunąć, tylko ukryć, więc ręczne „uzupełnianie” nie jest potrzebne. Własne ćwiczenia: „+ Dodaj ćwiczenie”. Komunikaty kopii zapasowej (`kopia-info`) są teraz w sekcji „Kopia zapasowa”.
+
+## v96 – Nowy ekran Ćwiczenia (Baza): wyszukiwarka, arkusz filtrów, szczegóły
+
+- Zakładki Baza / Moje zestawy / Ścieżki jako jeden smukły przełącznik (bez liczb).
+- Na górze tylko pole szukania i przycisk „Filtry” (z liczbą włączonych filtrów, np. „Filtry · 2”). Pod spodem chipy włączonych filtrów (✕ wyłącza) i szybki chip „Moje ćwiczenia (n)”; liczba wyników nad listą.
+- Arkusz filtrów od dołu: Pokaż (Baza / Moje ćwiczenia / Wszystkie), partia mięśni (po wybraniu – mięśnie tej partii), rodzaj treningu, trudność 1–5 (kolorowe półksiężyce od zielonego do czerwonego, nazwa poziomu w podpowiedzi i dla czytnika), mięsień, kolejność, ukryte ćwiczenia; „Wyczyść” (tekst wyszukiwania zostaje); na dole „Pokaż N ćwiczeń”. Zamyka się przyciskiem, dotknięciem tła albo Esc.
+- „+ Dodaj ćwiczenie” jako pływający przycisk w prawym dolnym rogu (znika przy otwartym formularzu).
+- Karty na liście są krótkie (nazwa, poziom, rodzaj i partie, strzałka). Dotknięcie otwiera arkusz szczegółów: początek opisu, rekord, szacowany 1RM, data ostatniego treningu i przyciski: Opis i wyniki (opis, film, wykres), Mięśnie, Rekord, Historia, Edytuj, Ukryj, Usuń (tylko własne). Ukryte ćwiczenia nadal mają na karcie „Przywróć”.
+- „Dodaj do zestawu…” w szczegółach: lista Twoich zestawów, dopisuje ćwiczenie na koniec wybranego zestawu (do planów, które już go używają, dodaje się je w edycji planu).
+- Poprawka: lista ćwiczeń rysowana przy wczytywaniu nie używa funkcji z dzis.js (błąd „tekstElement is not defined” po odświeżeniu z danymi).

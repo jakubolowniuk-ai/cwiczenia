@@ -475,10 +475,6 @@ function otworzFormularz(cwiczenie, opcje) {
   cwiczenieEdytowane = cwiczenie || null;
   przygotujFormularz();
   pokazBlad("");
-  const zrodloCw = document.getElementById("zrodlo-cwiczen");
-  if (zrodloCw) {
-    zrodloCw.hidden = true;
-  }
 
   poleNazwa.value = "";
   poleLink.value = "";
@@ -535,7 +531,9 @@ function otworzFormularz(cwiczenie, opcje) {
 
   formularz.hidden = false;
   przyciskNowe.hidden = true;
-  blokFiltrow.hidden = true;
+  document.getElementById("szuk-rzad").hidden = true;
+  document.getElementById("aktywne-filtry").hidden = true;
+  document.getElementById("lista-licznik").hidden = true;
   formularz.scrollIntoView({ behavior: "smooth", block: "start" });
 }
 
@@ -738,7 +736,10 @@ function rysujFiltry() {
     }
     const chip = document.createElement("button");
     chip.className = "chip chip-poziom poz-" + poziom + (filtr.poziom === poziom ? " aktywny" : "");
-    chip.textContent = poziom + " · " + NAZWY_POZIOMOW[poziom] + " " + ile;
+    chip.textContent = String(poziom);
+    chip.title = NAZWY_POZIOMOW[poziom] + " (" + ile + ")";
+    chip.setAttribute("aria-label", "Trudność " + poziom + ": " + NAZWY_POZIOMOW[poziom].toLowerCase() + ", " + ile + " ćwiczeń");
+    chip.setAttribute("aria-pressed", filtr.poziom === poziom ? "true" : "false");
     chip.addEventListener("click", function () {
       filtr.poziom = filtr.poziom === poziom ? null : poziom;
       rysujFiltry();
@@ -812,19 +813,111 @@ function rysujFiltry() {
   przyciskUkryte.hidden = liczbaUkrytych === 0 && !filtr.ukryte;
   przyciskUkryte.textContent = filtr.ukryte ? "← Wróć do listy ćwiczeń" : "Pokaż ukryte (" + liczbaUkrytych + ")";
 
-  przyciskWyczysc.hidden = !(filtr.tekst !== "" || filtr.partiaId || filtr.rodzajId || filtr.poziom || filtr.sortowanie !== "" || filtr.miesnieIds.length > 0);
+  przyciskWyczysc.hidden = liczbaAktywnychFiltrow() === 0 && filtr.zrodlo === "baza";
+
+  const chipyZrodlo = document.getElementById("chipy-zrodlo");
+  chipyZrodlo.innerHTML = "";
+  const ileMoich = dane.cwiczenia.filter(czyMojeCwiczenie).length;
+  [["baza", "Baza"], ["moje", "Moje ćwiczenia (" + ileMoich + ")"], ["wszystkie", "Wszystkie"]].forEach(function (z) {
+    const c = document.createElement("button");
+    c.type = "button";
+    c.className = "chip" + (filtr.zrodlo === z[0] ? " aktywny" : "");
+    c.setAttribute("aria-pressed", filtr.zrodlo === z[0] ? "true" : "false");
+    c.textContent = z[1];
+    c.addEventListener("click", function () {
+      filtr.zrodlo = z[0];
+      rysujFiltry();
+      rysujListe();
+    });
+    chipyZrodlo.appendChild(c);
+  });
+  const fp = document.getElementById("przycisk-filtry");
+  const n = liczbaAktywnychFiltrow();
+  fp.textContent = n ? "Filtry · " + n : "Filtry";
+  fp.classList.toggle("aktywny", n > 0);
 }
 
-// Czyści wyszukiwarkę i wszystkie filtry
+// Ile filtrów jest włączonych (bez wyszukiwarki i bez wyboru Baza/Moje)
+function liczbaAktywnychFiltrow() {
+  return (filtr.partiaId ? 1 : 0) + filtr.miesnieIds.length + (filtr.rodzajId ? 1 : 0) + (filtr.poziom ? 1 : 0) + (filtr.sortowanie !== "" ? 1 : 0) + (filtr.ukryte ? 1 : 0);
+}
+
+function odmianaCw(n) {
+  if (n === 1) {
+    return "ćwiczenie";
+  }
+  const d = n % 10;
+  const s = n % 100;
+  return d >= 2 && d <= 4 && (s < 12 || s > 14) ? "ćwiczenia" : "ćwiczeń";
+}
+
+// Chipy włączonych filtrów pod wyszukiwarką (✕ wyłącza) i szybki przełącznik „Moje ćwiczenia”
+function rysujAktywneFiltry(ileMoich) {
+  const kont = document.getElementById("aktywne-filtry");
+  kont.innerHTML = "";
+  const dodaj = function (tekst, wl, akcja, klasa) {
+    const c = document.createElement("button");
+    c.type = "button";
+    c.className = "chip" + (wl ? " aktywny" : "") + (klasa ? " " + klasa : "");
+    c.textContent = tekst + (wl ? " ✕" : "");
+    if (wl) {
+      c.setAttribute("aria-label", "Wyłącz filtr: " + tekst);
+    }
+    c.addEventListener("click", function () {
+      akcja();
+      rysujFiltry();
+      rysujListe();
+    });
+    kont.appendChild(c);
+  };
+  if (filtr.partiaId) {
+    dodaj(nazwaKategorii(filtr.partiaId), true, function () { filtr.partiaId = null; filtr.miesnieIds = []; });
+  }
+  filtr.miesnieIds.forEach(function (id) {
+    dodaj(nazwaKategorii(id), true, function () { filtr.miesnieIds = filtr.miesnieIds.filter(function (x) { return x !== id; }); });
+  });
+  if (filtr.rodzajId) {
+    dodaj(nazwaKategorii(filtr.rodzajId), true, function () { filtr.rodzajId = null; });
+  }
+  if (filtr.poziom) {
+    dodaj("Trudność " + filtr.poziom, true, function () { filtr.poziom = null; }, "chip-poziom poz-" + filtr.poziom);
+  }
+  if (filtr.sortowanie) {
+    dodaj({ latwe: "Od najłatwiejszych", trudne: "Od najtrudniejszych", az: "A–Z" }[filtr.sortowanie], true, function () { filtr.sortowanie = ""; });
+  }
+  if (filtr.ukryte) {
+    dodaj("Ukryte", true, function () { filtr.ukryte = false; });
+  }
+  if (filtr.zrodlo === "wszystkie") {
+    dodaj("Baza i moje", true, function () { filtr.zrodlo = "baza"; });
+  } else {
+    dodaj("Moje ćwiczenia (" + ileMoich + ")", filtr.zrodlo === "moje", function () {
+      filtr.zrodlo = filtr.zrodlo === "moje" ? "baza" : "moje";
+    });
+  }
+}
+
+// ===== Arkusz filtrów =====
+function otworzArkuszFiltrow() {
+  document.getElementById("arkusz-filtrow").hidden = false;
+  document.body.classList.add("bez-przewijania");
+  document.getElementById("przycisk-pokaz-wyniki").focus();
+}
+
+function zamknijArkuszFiltrow() {
+  document.getElementById("arkusz-filtrow").hidden = true;
+  document.body.classList.remove("bez-przewijania");
+}
+
+// Czyści filtry z arkusza (wpisany tekst w wyszukiwarce zostaje)
 function wyczyscFiltry() {
-  filtr.tekst = "";
   filtr.partiaId = null;
   filtr.rodzajId = null;
   filtr.miesnieIds = [];
   filtr.poziom = null;
   filtr.sortowanie = "";
   filtr.ukryte = false;
-  poleSzukaj.value = "";
+  filtr.zrodlo = "baza";
   rysujFiltry();
   rysujListe();
 }
@@ -916,24 +1009,20 @@ function rysujListe() {
   }
   const brakCwiczen = dane.cwiczenia.length === 0;
   const ileMoich = dane.cwiczenia.filter(czyMojeCwiczenie).length;
-  const zrodlo = document.getElementById("zrodlo-cwiczen");
-  if (zrodlo) {
-    zrodlo.hidden = brakCwiczen || !formularz.hidden;
-    document.getElementById("zrodlo-baza").textContent = "Baza (" + (dane.cwiczenia.length - ileMoich) + ")";
-    document.getElementById("zrodlo-moje").textContent = "Moje ćwiczenia (" + ileMoich + ")";
-    Array.prototype.forEach.call(zrodlo.querySelectorAll(".segment"), function (b) {
-      const wl = b.dataset.zrodlo === filtr.zrodlo;
-      b.classList.toggle("aktywny", wl);
-      b.setAttribute("aria-pressed", wl ? "true" : "false");
-    });
-  }
+  const formularzOtwarty = !formularz.hidden;
+  document.getElementById("szuk-rzad").hidden = brakCwiczen || formularzOtwarty;
+  document.getElementById("aktywne-filtry").hidden = brakCwiczen || formularzOtwarty;
+  const licznik = document.getElementById("lista-licznik");
+  licznik.hidden = brakCwiczen || formularzOtwarty;
+  licznik.textContent = widoczne.length + " " + odmianaCw(widoczne.length) + (filtr.ukryte ? " ukrytych" : filtr.zrodlo === "moje" ? " · Twoje" : "");
+  rysujAktywneFiltry(ileMoich);
+  document.getElementById("przycisk-pokaz-wyniki").textContent = widoczne.length ? "Pokaż " + widoczne.length + " " + odmianaCw(widoczne.length) : "Brak ćwiczeń – zmień filtry";
 
   pustaLista.hidden = !brakCwiczen;
   brakWynikow.hidden = brakCwiczen || widoczne.length > 0;
   brakWynikow.textContent = filtr.zrodlo === "moje" && ileMoich === 0 ?
     "Nie masz jeszcze własnych ćwiczeń. Dodasz je przyciskiem „+ Dodaj ćwiczenie” – pojawią się tutaj, oddzielnie od bazy." :
     "Brak ćwiczeń dla wybranych filtrów.";
-  blokFiltrow.hidden = brakCwiczen || !formularz.hidden;
 
   dopiszPorcjami(listaCwiczen, widoczne, function (cwiczenie) {
     const karta = document.createElement("div");
@@ -974,9 +1063,9 @@ function rysujListe() {
 
     const akcje = document.createElement("div");
     akcje.className = "karta-akcje";
-    karta.appendChild(akcje);
 
     if (cwiczenie.ukryte) {
+      karta.appendChild(akcje);
       karta.classList.add("karta-ukryta");
       akcje.appendChild(
         przyciskAkcji("Przywróć", "", function () {
@@ -997,60 +1086,26 @@ function rysujListe() {
       return karta;
     }
 
-    if ((cwiczenie.miesnieIds || []).length > 0) {
-      akcje.appendChild(
-        przyciskAkcji("Mięśnie", "", function () {
-          otworzOknoMiesni(cwiczenie);
-        })
-      );
-    }
-
-    akcje.appendChild(
-      przyciskAkcji("Rekord", "", function () {
-        otworzRekord(cwiczenie);
-      })
-    );
-
-    akcje.appendChild(
-      przyciskAkcji("Historia", "", function () {
-        otworzHistorieCwiczenia(cwiczenie);
-      })
-    );
-
-    if (maOpis(cwiczenie)) {
-      akcje.appendChild(przyciskAkcji("Opis", "film", function () {
-        otworzOpis(cwiczenie);
-      }));
-    }
-
-    akcje.appendChild(
-      przyciskAkcji("Edytuj", "", function () {
-        otworzFormularz(cwiczenie);
-      })
-    );
-
-    akcje.appendChild(
-      przyciskAkcji("Ukryj", "", function () {
-        cwiczenie.ukryte = true;
-        zapiszDane();
-        rysujFiltry();
-        rysujListe();
-        if (typeof rysujTreningi === "function") {
-          rysujTreningi();
-        }
-      })
-    );
-
-    if (!cwiczenie.zBazy) {
-      akcje.appendChild(
-        przyciskAkcji("Usuń", "usun", function () {
-          usunCwiczenie(cwiczenie);
-        })
-      );
-    }
-
+    // Dotknięcie karty otwiera szczegóły z akcjami (opis, mięśnie, rekord, historia, edycja…)
+    karta.classList.add("karta-klik");
+    karta.setAttribute("role", "button");
+    karta.tabIndex = 0;
+    karta.setAttribute("aria-label", cwiczenie.nazwa + ", szczegóły");
+    // (bez tekstElement – lista rysuje się już przy wczytywaniu tego pliku, przed dzis.js)
+    const strzalka = document.createElement("span");
+    strzalka.className = "karta-strzalka";
+    strzalka.textContent = "›";
+    strzalka.setAttribute("aria-hidden", "true");
+    karta.appendChild(strzalka);
+    karta.addEventListener("click", function () { otworzSzczegolyCwiczenia(cwiczenie); });
+    karta.addEventListener("keydown", function (e) {
+      if (e.key === "Enter" || e.key === " ") {
+        e.preventDefault();
+        otworzSzczegolyCwiczenia(cwiczenie);
+      }
+    });
     return karta;
-  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.poziom, filtr.sortowanie, filtr.miesnieIds.join(","), filtr.ukryte].join("|"));
+  }, [filtr.tekst, filtr.partiaId, filtr.rodzajId, filtr.poziom, filtr.sortowanie, filtr.miesnieIds.join(","), filtr.ukryte, filtr.zrodlo].join("|"));
 }
 
 // ===== Podpięcie przycisków =====
@@ -1230,19 +1285,172 @@ opisTlo.addEventListener("click", function (zdarzenie) {
   }
 });
 
-// Przełącznik Baza / Moje ćwiczenia
-(function () {
-  const zrodlo = document.getElementById("zrodlo-cwiczen");
-  if (!zrodlo) {
-    return;
+// Arkusz filtrów: otwieranie, zamykanie (tło, przycisk, Esc)
+document.getElementById("przycisk-filtry").addEventListener("click", otworzArkuszFiltrow);
+document.getElementById("przycisk-pokaz-wyniki").addEventListener("click", zamknijArkuszFiltrow);
+document.getElementById("arkusz-filtrow").addEventListener("click", function (e) {
+  if (e.target.id === "arkusz-filtrow") {
+    zamknijArkuszFiltrow();
   }
-  zrodlo.addEventListener("click", function (e) {
-    const b = e.target.closest(".segment");
-    if (!b || b.dataset.zrodlo === filtr.zrodlo) {
-      return;
+});
+document.addEventListener("keydown", function (e) {
+  if (e.key === "Escape" && !document.getElementById("arkusz-filtrow").hidden) {
+    zamknijArkuszFiltrow();
+  }
+});
+
+// ===== Szczegóły ćwiczenia (arkusz od dołu) =====
+// Lista ma krótkie karty; wszystkie akcje są tutaj.
+
+function otworzSzczegolyCwiczenia(cw) {
+  const tlo = document.createElement("div");
+  tlo.className = "gps-zgoda-tlo arkusz-dol";
+  tlo.setAttribute("role", "dialog");
+  tlo.setAttribute("aria-label", cw.nazwa);
+  const okno = document.createElement("div");
+  okno.className = "gps-zgoda cw-szczegoly";
+  tlo.appendChild(okno);
+  const zamknij = function () {
+    tlo.remove();
+    document.removeEventListener("keydown", klawisz);
+  };
+  const klawisz = function (e) {
+    if (e.key === "Escape") {
+      zamknij();
     }
-    filtr.zrodlo = b.dataset.zrodlo;
+  };
+  document.addEventListener("keydown", klawisz);
+  tlo.addEventListener("click", function (e) {
+    if (e.target === tlo) {
+      zamknij();
+    }
+  });
+  const potem = function (akcja) {
+    return function () {
+      zamknij();
+      akcja();
+    };
+  };
+
+  okno.appendChild(tekstElement("div", "arkusz-uchwyt", ""));
+  const tytul = tekstElement("h2", "", cw.nazwa);
+  if (cw.poziom) {
+    tytul.appendChild(znaczekPoziomu(cw.poziom));
+  }
+  okno.appendChild(tytul);
+  const czesci = [nazwaKategorii(cw.rodzajId)].concat((cw.partieIds || []).map(nazwaKategorii)).filter(function (x) { return x; });
+  okno.appendChild(tekstElement("div", "opis", czesci.join(" · ") + (czyMojeCwiczenie(cw) ? " · Twoje ćwiczenie" : "")));
+
+  const o = cw.opis || {};
+  const fragment = o.ruch || o.start || "";
+  if (fragment) {
+    const blok = document.createElement("div");
+    blok.className = "cw-szczegoly-opis";
+    blok.appendChild(tekstElement("b", "", (o.ruch ? "Ruch: " : "Ustawienie: ")));
+    blok.appendChild(document.createTextNode(fragment.length > 170 ? fragment.slice(0, 165).replace(/\s+\S*$/, "") + "…" : fragment));
+    okno.appendChild(blok);
+  }
+
+  const info = [];
+  if (cw.rekord && typeof opisRekordu === "function") {
+    info.push("★ Rekord: " + opisRekordu(cw.rekord));
+  }
+  if (typeof anHistoria === "function") {
+    const h = anHistoria(cw.id);
+    if (h.length) {
+      const rm = h.some(function (w) { return w.kg > 0; }) ? anSzacowany1RM(cw.id, h) : null;
+      if (rm) {
+        info.push("1RM ok. " + anKg(Math.round(rm.kg * 2) / 2) + " kg");
+      }
+      const d = h[h.length - 1].data.split("-");
+      info.push("Ostatnio: " + Number(d[2]) + "." + d[1]);
+    }
+  }
+  if (info.length) {
+    okno.appendChild(tekstElement("p", "cw-szczegoly-info", info.join(" · ")));
+  }
+
+  const akcje = document.createElement("div");
+  akcje.className = "cw-szczegoly-akcje";
+  const przycisk = function (tekst, akcja, klasa) {
+    const b = tekstElement("button", "przycisk drugi" + (klasa ? " " + klasa : ""), tekst);
+    b.type = "button";
+    b.addEventListener("click", potem(akcja));
+    akcje.appendChild(b);
+  };
+  przycisk(maOpis(cw) ? "Opis i wyniki" : "Wyniki", function () { otworzOpis(cw); });
+  if ((cw.miesnieIds || []).length > 0) {
+    przycisk("Mięśnie", function () { otworzOknoMiesni(cw); });
+  }
+  przycisk("Rekord", function () { otworzRekord(cw); });
+  przycisk("Historia", function () { otworzHistorieCwiczenia(cw); });
+  przycisk("Edytuj", function () { otworzFormularz(cw); });
+  przycisk("Ukryj", function () {
+    cw.ukryte = true;
+    zapiszDane();
     rysujFiltry();
     rysujListe();
+    if (typeof rysujTreningi === "function") {
+      rysujTreningi();
+    }
   });
-})();
+  if (!cw.zBazy) {
+    przycisk("Usuń", function () { usunCwiczenie(cw); }, "usun-przycisk");
+  }
+  okno.appendChild(akcje);
+
+  const doZestawu = tekstElement("button", "przycisk wielki", "Dodaj do zestawu…");
+  doZestawu.type = "button";
+  doZestawu.addEventListener("click", function () { cwWybierzZestaw(cw, okno); });
+  okno.appendChild(doZestawu);
+  const zam = tekstElement("button", "przycisk wielki drugi", "Zamknij");
+  zam.type = "button";
+  zam.addEventListener("click", zamknij);
+  okno.appendChild(zam);
+  document.body.appendChild(tlo);
+  zam.focus();
+}
+
+// Lista Twoich zestawów do wyboru (w tym samym arkuszu)
+function cwWybierzZestaw(cw, okno) {
+  const zestawy = (typeof treningiWidoczne === "function" ? treningiWidoczne() : dane.treningi).filter(function (t) { return !t.roboczy; });
+  okno.innerHTML = "";
+  okno.appendChild(tekstElement("div", "arkusz-uchwyt", ""));
+  okno.appendChild(tekstElement("h2", "", "Dodaj do zestawu"));
+  okno.appendChild(tekstElement("p", "opis", cw.nazwa));
+  const wynik = tekstElement("p", "cw-szczegoly-info", "");
+  wynik.setAttribute("aria-live", "polite");
+  if (!zestawy.length) {
+    okno.appendChild(tekstElement("p", "opis", "Nie masz jeszcze zestawów. Utworzysz je w zakładce „Moje zestawy”."));
+  }
+  const lista = document.createElement("div");
+  lista.className = "cw-zestawy";
+  zestawy.forEach(function (t) {
+    const jest = t.cwiczeniaIds.indexOf(cw.id) !== -1;
+    const b = tekstElement("button", "zam-wiersz", "");
+    b.type = "button";
+    b.appendChild(tekstElement("div", "karta-nazwa", t.nazwa));
+    b.appendChild(tekstElement("div", "karta-opis", t.cwiczeniaIds.length + " " + odmianaCw(t.cwiczeniaIds.length) + (jest ? " · już jest w tym zestawie" : "")));
+    b.disabled = jest;
+    b.addEventListener("click", function () {
+      t.cwiczeniaIds.push(cw.id);
+      zapiszDane();
+      if (typeof rysujTreningi === "function") {
+        rysujTreningi();
+      }
+      if (typeof odswiezPrzelacznik === "function") {
+        odswiezPrzelacznik();
+      }
+      b.disabled = true;
+      b.lastChild.textContent = t.cwiczeniaIds.length + " " + odmianaCw(t.cwiczeniaIds.length) + " · dodano ✓";
+      wynik.textContent = "Dodano do zestawu „" + t.nazwa + "”. W planach, które już go używają, dodasz to ćwiczenie w edycji planu.";
+    });
+    lista.appendChild(b);
+  });
+  okno.appendChild(lista);
+  okno.appendChild(wynik);
+  const gotowe = tekstElement("button", "przycisk wielki drugi", "Gotowe");
+  gotowe.type = "button";
+  gotowe.addEventListener("click", function () { okno.parentNode.remove(); });
+  okno.appendChild(gotowe);
+}

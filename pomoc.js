@@ -15,9 +15,9 @@ const POMOC = {
   baza: {
     tytul: "Baza ćwiczeń",
     punkty: [
-      "Filtruj po partii mięśni, rodzaju treningu i trudności. Kolor kropki to trudność: od zielonego (na start) do czerwonego.",
-      "Dotknij ćwiczenia, żeby zobaczyć opis wykonania.",
-      "„+ Dodaj ćwiczenie” tworzy Twoje własne ćwiczenie. Własne ćwiczenia są osobno – przełącznik „Baza / Moje ćwiczenia” nad wyszukiwarką.",
+      "Wpisz nazwę w wyszukiwarkę albo dotknij „Filtry”: partia mięśni, rodzaj treningu, trudność 1–5 (kolor od zielonego do czerwonego), mięsień i kolejność. Włączone filtry widać pod wyszukiwarką – ✕ wyłącza filtr.",
+      "Dotknij ćwiczenia, żeby zobaczyć opis, wyniki z wykresem, mięśnie, rekord i historię. Tam też edytujesz, ukrywasz albo dodajesz ćwiczenie do swojego zestawu.",
+      "„+ Dodaj ćwiczenie” (w prawym dolnym rogu) tworzy Twoje własne ćwiczenie. Własne są osobno – chip „Moje ćwiczenia” pod wyszukiwarką.",
       "Ćwiczenia, których nie robisz, możesz ukryć – kreator planu nie będzie ich wstawiał."
     ]
   },

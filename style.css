@@ -2292,3 +2292,42 @@ h1 {
 .sekcja-tresc { margin: 0 0 14px; }
 .sekcja-tresc > .pp-karta:last-child { margin-bottom: 0; }
 #postep-tresc > .pp-miesnie { margin-bottom: 14px; }
+
+/* ===== Ekran Ćwiczenia: wyszukiwarka, arkusz filtrów, szczegóły (v96) ===== */
+.zakladki-cw { background: var(--linia); border-radius: 12px; padding: 4px; gap: 4px; margin: 4px 0 12px; }
+.zakladki-cw .segment { height: 42px; border: 0; border-radius: 9px; background: transparent; color: var(--tekst-szary); font-size: 15px; font-weight: 600; }
+.zakladki-cw .segment.aktywny { background: var(--karta); color: var(--tekst); box-shadow: 0 1px 2px rgba(0, 0, 0, 0.1); }
+.szuk-rzad { display: flex; gap: 8px; margin-bottom: 8px; }
+.szuk-rzad input { flex: 1 1 auto; min-width: 0; margin: 0; }
+.filtr-przycisk { flex: 0 0 auto; min-height: 48px; padding: 0 16px; border: 2px solid var(--akcent); border-radius: 12px; background: var(--karta); color: var(--akcent); font-family: inherit; font-size: 15px; font-weight: 700; cursor: pointer; }
+.filtr-przycisk.aktywny { background: var(--akcent); color: var(--karta); }
+.aktywne-filtry { margin-bottom: 6px; }
+.aktywne-filtry:empty { display: none; }
+.lista-licznik { margin: 2px 2px 8px; font-size: 14px; color: var(--tekst-szary); }
+.karta-klik { cursor: pointer; display: flex; align-items: center; gap: 10px; }
+.karta-klik .karta-tekst { flex: 1 1 auto; }
+.karta-strzalka { font-size: 24px; color: var(--tekst-szary); line-height: 1; }
+.fab { position: fixed; right: 16px; bottom: calc(86px + env(safe-area-inset-bottom, 0px)); z-index: 50; min-height: 52px; padding: 0 22px; border: 0; border-radius: 26px; background: var(--akcent); color: var(--karta); font-family: inherit; font-size: 16px; font-weight: 700; box-shadow: 0 4px 14px rgba(0, 0, 0, 0.25); cursor: pointer; }
+#lista-cwiczen { padding-bottom: 80px; }
+body.bez-przewijania { overflow: hidden; }
+.arkusz-tlo { position: fixed; inset: 0; z-index: 1250; background: rgba(0, 0, 0, 0.5); display: flex; align-items: flex-end; }
+.arkusz-tlo[hidden] { display: none; }
+.arkusz { width: 100%; max-height: 88vh; display: flex; flex-direction: column; background: var(--karta); color: var(--tekst); border-radius: 20px 20px 0 0; padding: 8px 16px calc(14px + env(safe-area-inset-bottom, 0px)); }
+.arkusz-uchwyt { width: 40px; height: 4px; margin: 0 auto 8px; border-radius: 2px; background: var(--linia); }
+.arkusz-gora { display: flex; align-items: center; justify-content: space-between; }
+.arkusz-gora h2 { margin: 0; font-size: 20px; }
+.arkusz-tresc { overflow-y: auto; flex: 1 1 auto; margin: 4px -16px 0; padding: 0 16px 8px; }
+.arkusz-tresc .etykieta-pola { margin-top: 14px; }
+.arkusz-pokaz { margin-top: 10px; flex: 0 0 auto; }
+.chip-poziom { min-width: 48px; justify-content: center; font-weight: 700; }
+.arkusz-dol { align-items: flex-end; padding: 0; }
+.arkusz-dol .gps-zgoda { max-width: none; width: 100%; border-radius: 20px 20px 0 0; max-height: 90vh; overflow-y: auto; padding-bottom: calc(16px + env(safe-area-inset-bottom, 0px)); }
+.cw-szczegoly h2 { display: flex; flex-wrap: wrap; align-items: center; gap: 8px; margin: 0; font-size: 21px; }
+.cw-szczegoly-opis { background: var(--tlo); border-radius: 12px; padding: 12px; font-size: 15px; line-height: 1.45; }
+.cw-szczegoly-info { margin: 0; font-size: 15px; }
+.cw-szczegoly-akcje { display: grid; grid-template-columns: repeat(3, 1fr); gap: 8px; }
+.cw-szczegoly-akcje .przycisk { min-height: 48px; padding: 8px 4px; font-size: 14px; }
+.cw-szczegoly-akcje .usun-przycisk { color: var(--blad); border-color: var(--blad); }
+.cw-zestawy { display: flex; flex-direction: column; gap: 8px; max-height: 50vh; overflow-y: auto; }
+.cw-zestawy .zam-wiersz:disabled { opacity: 0.6; }
+#lista-cwiczen .karta.karta-klik { flex-wrap: nowrap; align-items: center; }

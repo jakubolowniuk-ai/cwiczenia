@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=95">
+  <link rel="stylesheet" href="style.css?v=96">
 </head>
 <body>
 
@@ -47,7 +47,7 @@
     <section id="ekran-cwiczenia" class="ekran">
       <h1>Ćwiczenia</h1>
 
-      <div class="przelacznik">
+      <div class="przelacznik zakladki-cw">
         <button class="segment aktywny" id="przelacznik-baza">Baza ćwiczeń</button>
         <button class="segment" id="przelacznik-treningi">Moje zestawy</button>
         <button class="segment" id="przelacznik-sciezki">Ścieżki</button>
@@ -57,7 +57,11 @@
 
       <div id="widok-baza">
 
-      <button class="przycisk" id="przycisk-nowe">+ Dodaj ćwiczenie</button>
+      <div class="szuk-rzad" id="szuk-rzad">
+        <input type="search" id="pole-szukaj" aria-label="Szukaj ćwiczenia" placeholder="Szukaj ćwiczenia">
+        <button class="filtr-przycisk" id="przycisk-filtry" type="button" aria-haspopup="dialog">Filtry</button>
+      </div>
+      <div class="chipy aktywne-filtry" id="aktywne-filtry"></div>
 
       <div class="formularz" id="formularz-cwiczenia" hidden>
         <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-formularza">Nowe ćwiczenie</h2><button class="przycisk maly zapisz-gora" id="przycisk-zapisz-gora" type="button">Zapisz</button></div>
@@ -132,50 +136,57 @@
         </div>
       </div>
 
-      <div class="przelacznik zrodlo-cwiczen" id="zrodlo-cwiczen" role="group" aria-label="Które ćwiczenia pokazać">
-        <button class="segment" type="button" data-zrodlo="baza" id="zrodlo-baza">Baza</button>
-        <button class="segment" type="button" data-zrodlo="moje" id="zrodlo-moje">Moje ćwiczenia</button>
-      </div>
-      <div class="filtry" id="blok-filtrow" hidden>
-        <label for="pole-szukaj" class="etykieta-pola">Szukaj ćwiczenia</label>
-        <input type="search" id="pole-szukaj" placeholder="Wpisz nazwę">
+      <div class="arkusz-tlo" id="arkusz-filtrow" hidden>
+        <div class="arkusz" role="dialog" aria-label="Filtry ćwiczeń">
+          <div class="arkusz-uchwyt" aria-hidden="true"></div>
+          <div class="arkusz-gora">
+            <h2>Filtry</h2>
+            <button class="akcja" id="przycisk-wyczysc" type="button">Wyczyść</button>
+          </div>
+          <div class="arkusz-tresc filtry" id="blok-filtrow">
+            <div class="etykieta-pola">Pokaż</div>
+            <div class="chipy" id="chipy-zrodlo"></div>
 
-        <div class="etykieta-pola">Partie mięśni</div>
-        <div class="chipy" id="chipy-partie"></div>
+            <div class="etykieta-pola">Partia mięśni</div>
+            <div class="chipy" id="chipy-partie"></div>
 
-        <div id="blok-miesnie-chipy" hidden>
-          <div class="etykieta-pola">Mięśnie tej partii (można kilka)</div>
-          <div class="chipy" id="chipy-miesnie"></div>
+            <div id="blok-miesnie-chipy" hidden>
+              <div class="etykieta-pola">Mięśnie tej partii (można kilka)</div>
+              <div class="chipy" id="chipy-miesnie"></div>
+            </div>
+
+            <div class="etykieta-pola">Rodzaj treningu</div>
+            <div class="chipy" id="chipy-rodzaje"></div>
+
+            <div class="etykieta-pola">Trudność <span class="skala-poziomow" aria-hidden="true"><i class="poz-1"></i><i class="poz-2"></i><i class="poz-3"></i><i class="poz-4"></i><i class="poz-5"></i></span></div>
+            <p class="podpowiedz-poziomow">1 – na start (zielony) … 5 – elitarne (czerwony).</p>
+            <div class="chipy" id="chipy-poziomy"></div>
+
+            <div id="blok-miesnie-lista">
+              <label for="filtr-miesien" class="etykieta-pola">Mięsień</label>
+              <select id="filtr-miesien" class="filtr-wybor"></select>
+            </div>
+
+            <label for="filtr-sortowanie" class="etykieta-pola">Kolejność</label>
+            <select id="filtr-sortowanie" class="filtr-wybor">
+              <option value="">Domyślna</option>
+              <option value="latwe">Od najłatwiejszych</option>
+              <option value="trudne">Od najtrudniejszych</option>
+              <option value="az">Alfabetycznie</option>
+            </select>
+
+            <button class="akcja" id="przycisk-ukryte" type="button" hidden>Pokaż ukryte</button>
+          </div>
+          <button class="przycisk wielki arkusz-pokaz" id="przycisk-pokaz-wyniki" type="button">Pokaż ćwiczenia</button>
         </div>
-
-        <div class="etykieta-pola">Rodzaj treningu</div>
-        <div class="chipy" id="chipy-rodzaje"></div>
-
-        <div class="etykieta-pola">Trudność <span class="skala-poziomow" aria-hidden="true"><i class="poz-1"></i><i class="poz-2"></i><i class="poz-3"></i><i class="poz-4"></i><i class="poz-5"></i></span></div>
-        <p class="podpowiedz-poziomow">Od zielonego (łatwe, na start) do czerwonego (bardzo trudne, po miesiącach lub latach treningu). Liczba obok to ilość ćwiczeń.</p>
-        <div class="chipy" id="chipy-poziomy"></div>
-
-        <div id="blok-miesnie-lista">
-          <label for="filtr-miesien" class="etykieta-pola">Mięsień</label>
-          <select id="filtr-miesien" class="filtr-wybor"></select>
-        </div>
-
-        <label for="filtr-sortowanie" class="etykieta-pola">Kolejność</label>
-        <select id="filtr-sortowanie" class="filtr-wybor">
-          <option value="">Domyślna</option>
-          <option value="latwe">Od najłatwiejszych</option>
-          <option value="trudne">Od najtrudniejszych</option>
-          <option value="az">Alfabetycznie</option>
-        </select>
-
-        <button class="akcja" id="przycisk-ukryte" hidden>Pokaż ukryte</button>
-        <button class="akcja" id="przycisk-wyczysc" hidden>Wyczyść filtry</button>
       </div>
 
+      <p class="lista-licznik" id="lista-licznik"></p>
       <p class="opis" id="pusta-lista">Nie masz jeszcze ćwiczeń. Dodaj pierwsze.</p>
       <p class="opis" id="brak-wynikow" hidden>Brak ćwiczeń dla wybranych filtrów.</p>
       <div id="lista-cwiczen"></div>
 
+      <button class="fab" id="przycisk-nowe" type="button">+ Dodaj ćwiczenie</button>
       </div>
 
       <div id="widok-treningi" hidden>
@@ -675,7 +686,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=95"></script>
+  <script src="dane.js?v=96"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -698,23 +709,23 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=95"></script>
-  <script src="cwiczenia.js?v=95"></script>
-  <script src="treningi.js?v=95"></script>
-  <script src="bieg-logika.js?v=95"></script>
-  <script src="gps-logika.js?v=95"></script>
-  <script src="gps.js?v=95"></script>
-  <script src="kreator.js?v=95"></script>
-  <script src="kreator2.js?v=95"></script>
-  <script src="dzis.js?v=95"></script>
-  <script src="postep.js?v=95"></script>
-  <script src="rekordy.js?v=95"></script>
-  <script src="cwicz.js?v=95"></script>
-  <script src="bieg.js?v=95"></script>
-  <script src="mozliwosci.js?v=95"></script>
-  <script src="ustawienia.js?v=95"></script>
-  <script src="kopia.js?v=95"></script>
-  <script src="bezpieczenstwo.js?v=95"></script>
+  <script src="anatomia.js?v=96"></script>
+  <script src="cwiczenia.js?v=96"></script>
+  <script src="treningi.js?v=96"></script>
+  <script src="bieg-logika.js?v=96"></script>
+  <script src="gps-logika.js?v=96"></script>
+  <script src="gps.js?v=96"></script>
+  <script src="kreator.js?v=96"></script>
+  <script src="kreator2.js?v=96"></script>
+  <script src="dzis.js?v=96"></script>
+  <script src="postep.js?v=96"></script>
+  <script src="rekordy.js?v=96"></script>
+  <script src="cwicz.js?v=96"></script>
+  <script src="bieg.js?v=96"></script>
+  <script src="mozliwosci.js?v=96"></script>
+  <script src="ustawienia.js?v=96"></script>
+  <script src="kopia.js?v=96"></script>
+  <script src="bezpieczenstwo.js?v=96"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -729,18 +740,18 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=95"></script>
-  <script src="plan-bieg.js?v=95"></script>
-  <script src="plan-kreator.js?v=95"></script>
-  <script src="plan-progresja.js?v=95"></script>
-  <script src="plan-adaptacja.js?v=95"></script>
-  <script src="plan-zamiana.js?v=95"></script>
-  <script src="sciezki.js?v=95"></script>
-  <script src="cele.js?v=95"></script>
-  <script src="przewodnik.js?v=95"></script>
-  <script src="pomoc.js?v=95"></script>
-  <script src="analiza.js?v=95"></script>
-  <script src="dzien.js?v=95"></script>
-  <script src="app.js?v=95"></script>
+  <script src="plan-generator.js?v=96"></script>
+  <script src="plan-bieg.js?v=96"></script>
+  <script src="plan-kreator.js?v=96"></script>
+  <script src="plan-progresja.js?v=96"></script>
+  <script src="plan-adaptacja.js?v=96"></script>
+  <script src="plan-zamiana.js?v=96"></script>
+  <script src="sciezki.js?v=96"></script>
+  <script src="cele.js?v=96"></script>
+  <script src="przewodnik.js?v=96"></script>
+  <script src="pomoc.js?v=96"></script>
+  <script src="analiza.js?v=96"></script>
+  <script src="dzien.js?v=96"></script>
+  <script src="app.js?v=96"></script>
 </body>
 </html>

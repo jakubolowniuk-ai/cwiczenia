@@ -108,10 +108,8 @@ function treningiWidoczne() {
 
 // Pokazuje w przełączniku liczbę ćwiczeń i treningów
 function odswiezPrzelacznik() {
-  przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.filter(function (c) {
-    return !c.ukryte;
-  }).length + ")";
-  przelacznikTreningi.textContent = "Moje zestawy (" + treningiWidoczne().length + ")";
+  przelacznikBaza.textContent = "Baza";
+  przelacznikTreningi.textContent = "Moje zestawy";
 }
 
 // Tworzy kartę z nazwą i opisem (bez przycisków)
