@@ -355,7 +355,7 @@ function dodajMojePlany() {
   }
   const wybrany = planPostepu();
   ppSekcja("Moje plany");
-  postepTresc.appendChild(tekstElement("p", "opis pp-wskazowka", "Dotknij planu, żeby zobaczyć jego wyniki na górze. Przełącznik włącza i wyłącza plan (wyłączony nie pojawia się w „Dziś”)."));
+  postepTresc.appendChild(tekstElement("p", "opis pp-plany-info", "Dotknij planu, żeby zobaczyć jego wyniki na górze. Przełącznik włącza i wyłącza plan (wyłączony nie pojawia się w „Dziś”)."));
   otwarte.forEach(function (plan) {
     const wiersz = document.createElement("div");
     wiersz.className = "pp-plan-wiersz" + (wybrany && wybrany.id === plan.id ? " wybrany" : "");
