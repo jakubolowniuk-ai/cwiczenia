@@ -335,8 +335,13 @@ function planPostepu() {
 }
 
 // Nagłówek sekcji Postępu (jednakowy dla wszystkich sekcji)
-function ppSekcja(tytul) {
-  postepTresc.appendChild(tekstElement("h2", "pp-sekcja", tytul));
+function ppSekcja(tytul, podsumowanie) {
+  const h = tekstElement("h2", "pp-sekcja", tytul);
+  if (podsumowanie) {
+    h.dataset.podsumowanie = podsumowanie;
+  }
+  postepTresc.appendChild(h);
+  return h;
 }
 
 // Karta z innego modułu bez jej wewnętrznego tytułu (tytułem jest nagłówek sekcji)
@@ -354,7 +359,7 @@ function dodajMojePlany() {
     return;
   }
   const wybrany = planPostepu();
-  ppSekcja("Moje plany");
+  ppSekcja("Moje plany", String(otwarte.length));
   postepTresc.appendChild(tekstElement("p", "opis pp-plany-info", "Dotknij planu, żeby zobaczyć jego wyniki na górze. Przełącznik włącza i wyłącza plan (wyłączony nie pojawia się w „Dziś”)."));
   otwarte.forEach(function (plan) {
     const wiersz = document.createElement("div");
@@ -365,6 +370,9 @@ function dodajMojePlany() {
     tekst.appendChild(tekstElement("span", "opis", (plan.okres === "tydzien" ? "Tydzień" : "Miesiąc") + " · " + zakresDat(plan) + (plan.wylaczony ? " · wyłączony" : "")));
     tekst.addEventListener("click", function () {
       postepPlanId = plan.id;
+      if (typeof rozwinSekcje === "function") {
+        rozwinSekcje("postep", "Twój plan");
+      }
       rysujPostep();
       window.scrollTo({ top: 0, behavior: "smooth" });
     });
@@ -388,7 +396,7 @@ function dodajMojePlany() {
 // Karta wybranego planu: kafelki Dziś i okres, seria, mięśnie, przyciski Edytuj / Usuń
 function dodajKartePlanu(plan) {
   const otwarte = planyOtwarte();
-  ppSekcja("Twój plan");
+  const naglowekPlanu = ppSekcja("Twój plan");
   if (otwarte.length > 1) {
     const chipy = document.createElement("div");
     chipy.className = "chipy pp-wybor-planu";
@@ -436,6 +444,7 @@ function dodajKartePlanu(plan) {
   const zalPlan = plan.sesje.filter(function (s) {
     return sesjaZaliczona(plan, s);
   }).length;
+  naglowekPlanu.dataset.podsumowanie = wymagane.length === 0 ? "" : p + "%";
   kafle.appendChild(zrobKafelek(nazwaOkresu(plan), wymagane.length === 0 ? "—" : p + "%", zalPlan + " z " + plan.sesje.length + " treningów", p, function () {
     otworzOknoOkresu(plan, indeks);
   }));
@@ -444,10 +453,6 @@ function dodajKartePlanu(plan) {
   const seria = liczSerie(plan, indeks);
   if (seria >= 2) {
     karta.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " treningów z rzędu", "Dni odpoczynku jej nie przerywają."));
-  }
-  const kartaMiesni = zrobKarteMiesni(plan);
-  if (kartaMiesni) {
-    karta.appendChild(kartaMiesni);
   }
   const akcje = document.createElement("div");
   akcje.className = "pp-plan-akcje";
@@ -469,6 +474,16 @@ function rysujPostep() {
   postepTresc.innerHTML = "";
   const plan = planPostepu();
   postepEdytujPlan.hidden = true;
+  // Grafika mięśni zostaje na wierzchu; resztę chowamy w rozwijanych sekcjach
+  // Z wybranego planu, a gdy to plan bez ćwiczeń siłowych (np. bieganie) – z pierwszego planu, który je ma
+  let kartaMiesni = plan ? zrobKarteMiesni(plan) : null;
+  if (!kartaMiesni) {
+    const zMiesniami = planyOtwarte().find(function (p) { return !p.wylaczony && zrobKarteMiesni(p); });
+    kartaMiesni = zMiesniami ? zrobKarteMiesni(zMiesniami) : null;
+  }
+  if (kartaMiesni) {
+    postepTresc.appendChild(kartaMiesni);
+  }
   if (plan) {
     dodajKartePlanu(plan);
   } else {
@@ -480,7 +495,7 @@ function rysujPostep() {
     }
     const kc = celeKartaPostepu();
     if (kc) {
-      ppSekcja("Moje cele");
+      ppSekcja("Moje cele", String((dane.cele || []).length));
       postepTresc.appendChild(ppBezTytulu(kc));
     }
   }
@@ -491,10 +506,14 @@ function rysujPostep() {
       postepTresc.appendChild(ppBezTytulu(kb));
     }
   }
-  ppSekcja("Rekordy");
+  const ileRekordow = dane.cwiczenia.filter(function (c) { return c.rekord; }).length + (dane.rekordyDystans || []).filter(function (r) { return r.czas; }).length;
+  ppSekcja("Rekordy", ileRekordow ? String(ileRekordow) : "");
   dodajRekordyAktywnosci();
   dodajMojePlany();
   dodajPoprzedniePlany();
+  if (typeof rozwijaneSekcje === "function") {
+    rozwijaneSekcje(postepTresc, "h2.pp-sekcja", "postep");
+  }
 }
 
 // ===== Poprzednie (zamknięte) plany =====
@@ -514,7 +533,7 @@ function dodajPoprzedniePlany() {
   if (zamkniete.length === 0) {
     return;
   }
-  ppSekcja("Poprzednie plany");
+  ppSekcja("Poprzednie plany", String(zamkniete.length));
   zamkniete.forEach(function (plan) {
     const przycisk = document.createElement("button");
     przycisk.className = "pp-poprzedni";

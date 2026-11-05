@@ -507,3 +507,9 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - **Ścieżki**: trzy rozwijane grupy (Kalistenika, Siłownia, Bieganie) z liczbą ścieżek, liczbą „Twoich” i krótkim opisem; dotknięcie rozwija listę. Stan rozwinięcia zostaje po powrocie ze ścieżki.
 - **Moje ćwiczenia**: w Bazie przełącznik „Baza (n) / Moje ćwiczenia (n)”. Moje = dodane przez użytkownika albo z pliku (bez znacznika `zBazy`). Po dodaniu ćwiczenia lista przełącza się na „Moje”. Pusty stan z podpowiedzią.
 - **Zamiana ćwiczenia w edycji planu**: przy każdym ćwiczeniu treningu w edycji planu „Zamień na inne” – okno odpowiedników jak na „Dziś” (te same mięśnie, podobna trudność, bez kolizji z bólem z profilu planu), zakres: ten i kolejne treningi z tym zestawem albo tylko ten. Wpisane wartości zapisują się przed zamianą; zmiana trafia do edytowanej kopii i zapisuje się „Zapisz plan”.
+
+## v94 – Rozwijane sekcje w Ustawieniach i Postępie
+
+- Ustawienia i Postęp: każda sekcja to przycisk (tytuł, krótkie podsumowanie, strzałka); treść rozwija się po dotknięciu. Na starcie wszystko zwinięte, a rozwinięte sekcje zostają rozwinięte do zamknięcia aplikacji (także po odświeżeniu Postępu). Funkcja `rozwijaneSekcje(kontener, selektor, prefiks)` w `pomoc.js`.
+- Postęp: na wierzchu zostaje grafika mięśni (z wybranego planu, a gdy to plan bez siłowni – z pierwszego planu, który ją ma). Podsumowania w nagłówkach: „Twój plan” – procent realizacji, „Moje cele”, „Rekordy”, „Moje plany”, „Poprzednie plany” – liczby. Dotknięcie planu w „Moje plany” rozwija „Twój plan” z jego wynikami.
+- Testy automatyczne otwierają wszystkie sekcje flagą `window.sekcjeWszystkieOtwarte`.

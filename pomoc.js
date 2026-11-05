@@ -241,3 +241,58 @@ function pomocPrzyNaglowku(h1, klucz, nazwa) {
     cwGora.appendChild(b);
   }
 })();
+
+// ===== Rozwijane sekcje (Ustawienia, Postęp) =====
+// Nagłówek sekcji zamienia się w przycisk, a wszystko do następnego nagłówka trafia do zwijanej treści.
+// Na starcie sekcje są zwinięte; to, co użytkownik rozwinął, zostaje rozwinięte do zamknięcia aplikacji.
+const sekcjeRozwiniete = {};
+
+function rozwijaneSekcje(kontener, selektor, prefiks) {
+  if (!kontener) {
+    return;
+  }
+  const naglowki = Array.prototype.filter.call(kontener.children, function (el) { return el.matches(selektor); });
+  naglowki.forEach(function (n, i) {
+    const tytul = n.textContent.trim();
+    const klucz = prefiks + ":" + tytul;
+    const tresc = document.createElement("div");
+    tresc.className = "sekcja-tresc";
+    tresc.id = "sekcja-" + prefiks + "-" + i;
+    let el = n.nextElementSibling;
+    while (el && !el.matches(selektor)) {
+      const nast = el.nextElementSibling;
+      tresc.appendChild(el);
+      el = nast;
+    }
+    // window.sekcjeWszystkieOtwarte – tylko do testów automatycznych
+    const otwarta = !!sekcjeRozwiniete[klucz] || window.sekcjeWszystkieOtwarte === true;
+    const przycisk = document.createElement("button");
+    przycisk.type = "button";
+    przycisk.className = "sekcja-przycisk";
+    przycisk.setAttribute("aria-expanded", otwarta ? "true" : "false");
+    przycisk.setAttribute("aria-controls", tresc.id);
+    przycisk.appendChild(tekstElement("span", "sekcja-tytul", tytul));
+    if (n.dataset.podsumowanie) {
+      przycisk.appendChild(tekstElement("span", "sekcja-podsumowanie", n.dataset.podsumowanie));
+    }
+    const strzalka = tekstElement("span", "sekcja-strzalka", "▾");
+    strzalka.setAttribute("aria-hidden", "true");
+    przycisk.appendChild(strzalka);
+    tresc.hidden = !otwarta;
+    przycisk.addEventListener("click", function () {
+      const teraz = tresc.hidden;
+      tresc.hidden = !teraz;
+      sekcjeRozwiniete[klucz] = teraz;
+      przycisk.setAttribute("aria-expanded", teraz ? "true" : "false");
+    });
+    n.replaceWith(przycisk);
+    przycisk.after(tresc);
+  });
+}
+
+function rozwinSekcje(prefiks, tytul) {
+  sekcjeRozwiniete[prefiks + ":" + tytul] = true;
+}
+
+// Ustawienia: statyczny HTML – zwijamy raz, przy starcie
+rozwijaneSekcje(document.querySelector("#ustawienia-okno .postep-okno-tresc"), ".ust-naglowek", "ust");

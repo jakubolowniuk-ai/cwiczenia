@@ -2281,3 +2281,14 @@ h1 {
 .sciezka-grupa-strzalka { font-size: 20px; color: var(--akcent); }
 .sciezka-grupa-lista { margin: -2px 0 16px 10px; padding-left: 10px; border-left: 2px solid var(--linia); }
 .zrodlo-cwiczen { margin: 4px 0 12px; } .zrodlo-cwiczen .segment { height: 44px; font-size: 15px; }
+
+/* ===== Rozwijane sekcje (v94) ===== */
+.sekcja-przycisk { display: flex; align-items: center; gap: 10px; width: 100%; min-height: 56px; margin: 0 0 8px; padding: 12px 16px; border: 1px solid var(--linia); border-radius: 14px; background: var(--karta); color: var(--tekst); font-family: inherit; text-align: left; cursor: pointer; }
+.sekcja-tytul { flex: 1 1 auto; font-size: 17px; font-weight: 700; }
+.sekcja-podsumowanie { font-size: 15px; font-weight: 600; color: var(--akcent); }
+.sekcja-strzalka { font-size: 18px; color: var(--tekst-szary); transition: transform 0.15s; transform: rotate(-90deg); }
+.sekcja-przycisk[aria-expanded="true"] { border-color: var(--akcent); }
+.sekcja-przycisk[aria-expanded="true"] .sekcja-strzalka { transform: none; color: var(--akcent); }
+.sekcja-tresc { margin: 0 0 14px; }
+.sekcja-tresc > .pp-karta:last-child { margin-bottom: 0; }
+#postep-tresc > .pp-miesnie { margin-bottom: 14px; }
