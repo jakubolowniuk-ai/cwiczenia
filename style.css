@@ -2265,7 +2265,7 @@ h1 {
 .pp-sekcja { margin: 26px 2px 10px; font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.04em; color: var(--tekst-szary); }
 #postep-tresc > .pp-sekcja:first-child { margin-top: 6px; }
 .pp-podnaglowek { margin: 16px 2px 8px; font-size: 15px; font-weight: 700; }
-.pp-podpis { margin: -4px 2px 10px; font-size: 14px; }
+.pp-wskazowka { margin: -4px 2px 10px; font-size: 14px; }
 .pp-wybor-planu { margin-bottom: 10px; }
 .pp-plan-karta .pp-plan-nazwa { font-size: 18px; font-weight: 700; }
 .pp-plan-karta > .opis { margin: 2px 0 12px; }
