@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=90">
+  <link rel="stylesheet" href="style.css?v=91">
 </head>
 <body>
 
@@ -26,10 +26,10 @@
           <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><rect x="4" y="5" width="16" height="15" rx="3"/><path d="M4 10h16M9 3v4M15 3v4"/></svg>
         </div>
         <div class="pusty-tytul">Nie masz jeszcze planu</div>
-        <p class="opis">Gdy masz plan, tutaj pojawią się Twoje sesje na każdy dzień.</p>
+        <p class="opis">Gdy masz plan, tutaj pojawią się Twoje treningi na każdy dzień.</p>
         <ol class="kroki-start">
           <li><b>Ułóż mi plan:</b> odpowiedz na kilka pytań (cel, doświadczenie, dni, czas), a aplikacja ułoży plan na 4 tygodnie.</li>
-          <li><b>Albo utwórz plan ręcznie:</b> sam wybierasz aktywności, dni i ćwiczenia.</li>
+          <li><b>Albo utwórz plan ręcznie:</b> sam wybierasz rodzaje treningów, dni i ćwiczenia.</li>
           <li><b>Ćwicz:</b> przycisk „Ćwicz” prowadzi Cię przez serie i przerwy.</li>
         </ol>
         <button class="przycisk wielki" id="dzis-utworz-plan">Utwórz plan</button>
@@ -49,7 +49,7 @@
 
       <div class="przelacznik">
         <button class="segment aktywny" id="przelacznik-baza">Baza ćwiczeń</button>
-        <button class="segment" id="przelacznik-treningi">Moje treningi</button>
+        <button class="segment" id="przelacznik-treningi">Moje zestawy</button>
         <button class="segment" id="przelacznik-sciezki">Ścieżki</button>
       </div>
 
@@ -65,7 +65,7 @@
         <label for="pole-nazwa">Nazwa</label>
         <input type="text" id="pole-nazwa" placeholder="Np. Wiosłowanie">
 
-        <label for="pole-rodzaj">Rodzaj aktywności</label>
+        <label for="pole-rodzaj">Rodzaj treningu</label>
         <select id="pole-rodzaj"></select>
 
         <label for="pole-poziom">Poziom trudności (opcjonalnie)</label>
@@ -144,7 +144,7 @@
           <div class="chipy" id="chipy-miesnie"></div>
         </div>
 
-        <div class="etykieta-pola">Rodzaj aktywności</div>
+        <div class="etykieta-pola">Rodzaj treningu</div>
         <div class="chipy" id="chipy-rodzaje"></div>
 
         <div class="etykieta-pola">Trudność <span class="skala-poziomow" aria-hidden="true"><i class="poz-1"></i><i class="poz-2"></i><i class="poz-3"></i><i class="poz-4"></i><i class="poz-5"></i></span></div>
@@ -175,21 +175,21 @@
       </div>
 
       <div id="widok-treningi" hidden>
-        <button class="przycisk" id="przycisk-nowy-trening">+ Dodaj trening</button>
+        <button class="przycisk" id="przycisk-nowy-trening">+ Dodaj zestaw ćwiczeń</button>
 
         <div class="formularz" id="formularz-treningu" hidden>
           <div class="naglowek-wstecz"><button class="wstecz" data-cel="przycisk-anuluj-trening" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="tytul-treningu">Nowy trening</h2><button class="przycisk maly zapisz-gora" id="przycisk-zapisz-trening-gora" type="button">Zapisz</button></div>
 
-          <label for="pole-nazwa-treningu">Nazwa treningu</label>
+          <label for="pole-nazwa-treningu">Nazwa zestawu</label>
           <input type="text" id="pole-nazwa-treningu" placeholder="Np. Plecy A">
           <label for="pole-blok-treningu">Rodzaj zestawu</label>
           <select id="pole-blok-treningu">
-            <option value="">Zwykły trening</option>
+            <option value="">Zwykły zestaw</option>
             <option value="rozgrzewka">Blok rozgrzewki (dołączany przed treningiem)</option>
             <option value="rozciaganie">Blok rozciągania (dołączany po treningu)</option>
           </select>
 
-          <div class="etykieta">Ćwiczenia w treningu</div>
+          <div class="etykieta">Ćwiczenia w zestawie</div>
           <p class="opis" id="puste-wybrane">Nie dodano jeszcze ćwiczeń.</p>
           <div id="wybrane-cwiczenia"></div>
 
@@ -203,7 +203,7 @@
             <div class="etykieta-pola">Partie mięśni</div>
             <div class="chipy" id="chipy-partie-wyboru"></div>
 
-            <div class="etykieta-pola">Rodzaj aktywności</div>
+            <div class="etykieta-pola">Rodzaj treningu</div>
             <div class="chipy" id="chipy-rodzaje-wyboru"></div>
 
             <div id="lista-wyboru"></div>
@@ -213,13 +213,13 @@
           <p class="blad" id="blad-treningu"></p>
 
           <div>
-            <button class="przycisk" id="przycisk-zapisz-trening">Zapisz trening</button>
+            <button class="przycisk" id="przycisk-zapisz-trening">Zapisz zestaw</button>
             <button class="przycisk drugi schowany" id="przycisk-anuluj-trening">Anuluj</button>
           </div>
         </div>
 
-        <p class="opis" id="puste-treningi">Nie masz jeszcze treningów. Dodaj pierwszy.</p>
-        <input type="search" id="szukaj-treningow" placeholder="Szukaj treningu lub ćwiczenia w nim" hidden>
+        <p class="opis" id="puste-treningi">Nie masz jeszcze zestawów ćwiczeń. Dodaj pierwszy.</p>
+        <input type="search" id="szukaj-treningow" aria-label="Szukaj zestawu lub ćwiczenia w nim" placeholder="Szukaj zestawu lub ćwiczenia w nim" hidden>
         <button class="akcja" id="przycisk-ukryte-zestawy" hidden>Pokaż ukryte zestawy</button>
         <div id="lista-treningow"></div>
       </div>
@@ -260,7 +260,7 @@
 
       <!-- Krok 1: okres i aktywności -->
       <div id="kr-krok1">
-        <p class="opis kr-wstep">Wybierz okres i dodaj aktywności. Przy każdej wpisz, ile razy w okresie chcesz ją zrobić.</p>
+        <p class="opis kr-wstep">Wybierz okres i dodaj rodzaje treningów. Przy każdym wpisz, ile razy w okresie chcesz go zrobić.</p>
         <label class="etykieta-pola" for="kr-nazwa-planu">Nazwa planu</label>
         <input type="text" id="kr-nazwa-planu" maxlength="40" placeholder="Np. Masa, Bieganie, Powrót po urlopie">
         <div class="etykieta-pola">Okres</div>
@@ -269,16 +269,16 @@
           <button class="segment" id="kr-okres-miesiac">Miesiąc</button>
         </div>
 
-        <div class="etykieta-pola">Aktywności</div>
-        <p class="opis" id="kr-pusta">Nie dodano jeszcze aktywności.</p>
+        <div class="etykieta-pola">Rodzaje treningów</div>
+        <p class="opis" id="kr-pusta">Nie dodano jeszcze żadnego rodzaju treningu.</p>
         <div id="kr-lista"></div>
 
-        <button class="przycisk-przerywany" id="kr-dodaj">+ Dodaj aktywność</button>
+        <button class="przycisk-przerywany" id="kr-dodaj">+ Dodaj rodzaj treningu</button>
 
         <div class="formularz" id="kr-formularz" hidden>
           <div class="naglowek-wstecz"><button class="wstecz" data-cel="kr-anuluj-aktywnosc" aria-label="Wstecz"><svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" aria-hidden="true"><path d="M15 5l-7 7 7 7"/></svg></button><h2 class="tytul-formularza" id="kr-tytul-formularza">Nowa aktywność</h2></div>
 
-          <label for="kr-rodzaj">Rodzaj aktywności</label>
+          <label for="kr-rodzaj">Rodzaj treningu</label>
           <select id="kr-rodzaj"></select>
 
           <div id="kr-pole-partia" hidden>
@@ -309,11 +309,11 @@
 
       <!-- Krok 2: kalendarz -->
       <div id="kr-krok2" hidden>
-        <p class="opis kr-wstep">Rozłóż sesje na dni: dotknij dnia w kalendarzu i dodaj sesję. Potem uzupełnij każdą o trening, ćwiczenia i parametry.</p>
+        <p class="opis kr-wstep">Rozłóż treningi na dni: dotknij dnia w kalendarzu i dodaj trening. Potem uzupełnij każdy o zestaw ćwiczeń i parametry.</p>
         <div class="etykieta-pola">Do rozłożenia</div>
         <div class="legenda" id="kal-legenda"></div>
         <div class="kal-oznaczenia">
-          <span><i class="znacznik" style="background:currentColor"></i> sesja gotowa</span>
+          <span><i class="znacznik" style="background:currentColor"></i> trening gotowy</span>
           <span><i class="znacznik pusty"></i> do uzupełnienia</span>
         </div>
         <div class="kal-dni-tygodnia">
@@ -340,7 +340,7 @@
 
           <div id="pd-widok-dzien">
             <div id="pd-sesje"></div>
-            <button class="przycisk-przerywany" id="pd-dodaj">+ Dodaj sesję</button>
+            <button class="przycisk-przerywany" id="pd-dodaj">+ Dodaj trening</button>
             <button class="przycisk wielki" id="pd-zamknij">Gotowe</button>
           </div>
 
@@ -356,11 +356,11 @@
             <div id="pd-sesja-parametry"></div>
             <p class="blad" id="pd-sesja-blad"></p>
             <p class="opis" id="pd-sesja-info"></p>
-            <button class="przycisk wielki" id="pd-sesja-zapisz">Zapisz sesję</button>
-            <button class="przycisk drugi wielki" id="pd-sesja-kopiuj">Kopiuj do innych sesji</button>
+            <button class="przycisk wielki" id="pd-sesja-zapisz">Zapisz trening</button>
+            <button class="przycisk drugi wielki" id="pd-sesja-kopiuj">Kopiuj do innych treningów</button>
             <button class="przycisk drugi wielki" id="pd-sesja-przenies">Przenieś na inny dzień</button>
             <button class="przycisk drugi wielki schowany" id="pd-sesja-wroc">Wróć</button>
-            <button class="akcja usun" id="pd-sesja-usun">Usuń sesję</button>
+            <button class="akcja usun" id="pd-sesja-usun">Usuń trening</button>
           </div>
 
           <div id="pd-widok-przenies" hidden>
@@ -419,20 +419,20 @@
 
     <!-- Okno zmiany liczby sesji aktywności -->
     <div class="arkusz-tlo srodek" id="okno-liczby-tlo" hidden>
-      <div class="okno" role="dialog" aria-label="Liczba sesji">
-        <div class="okno-tytul"><span class="kwadrat" id="ol-kwadrat"></span><h2 id="ol-tytul">Aktywność</h2></div>
-        <p class="opis">Liczba sesji w planie</p>
+      <div class="okno" role="dialog" aria-label="Liczba treningów">
+        <div class="okno-tytul"><span class="kwadrat" id="ol-kwadrat"></span><h2 id="ol-tytul">Rodzaj treningu</h2></div>
+        <p class="opis">Liczba treningów w planie</p>
         <div class="stepper">
-          <button id="ol-mniej" aria-label="Mniej sesji">−</button>
+          <button id="ol-mniej" aria-label="Mniej treningów">−</button>
           <div id="ol-liczba">1</div>
-          <button id="ol-wiecej" aria-label="Więcej sesji">+</button>
+          <button id="ol-wiecej" aria-label="Więcej treningów">+</button>
         </div>
         <p class="okno-info" id="ol-info"></p>
         <div>
           <button class="przycisk drugi" id="ol-anuluj">Anuluj</button>
           <button class="przycisk" id="ol-zapisz">Zapisz</button>
         </div>
-        <button class="akcja usun" id="ol-usun">Usuń aktywność z planu</button>
+        <button class="akcja usun" id="ol-usun">Usuń ten rodzaj treningu z planu</button>
       </div>
     </div>
 
@@ -472,7 +472,7 @@
           <div class="ust-linia"></div>
           <label class="ust-nazwa" for="ust-godzina">Godzina</label>
           <input type="time" id="ust-godzina" class="ust-godzina" value="18:30">
-          <p class="opis">Alarm dzwoni tylko w dni z zaplanowaną sesją. W dni odpoczynku jest cisza.</p>
+          <p class="opis">Alarm dzwoni tylko w dni z zaplanowanym treningiem. W dni odpoczynku jest cisza.</p>
         </div>
         <div id="ust-ics-blok" hidden>
           <div class="ust-linia"></div>
@@ -597,7 +597,7 @@
 
   <!-- Wynik biegania i basenu -->
   <div class="wynik-tlo" id="wynik-tlo" hidden>
-    <div class="okno" role="dialog" aria-label="Wynik sesji">
+    <div class="okno" role="dialog" aria-label="Wynik treningu">
       <h2 id="wynik-tytul">Wynik</h2>
       <p class="opis" id="wynik-podpis">Pola są wypełnione celem z planu. Popraw je, jeśli wynik był inny.</p>
       <div id="wynik-pola"></div>
@@ -613,7 +613,7 @@
     <div class="okno" role="dialog" aria-label="Rekord na dystansie">
       <h2>Rekord na dystansie</h2>
       <div class="formularz">
-        <label for="rd-rodzaj">Aktywność</label>
+        <label for="rd-rodzaj">Rodzaj treningu</label>
         <select id="rd-rodzaj"></select>
         <div id="rd-styl-blok" hidden>
           <label for="rd-styl">Styl</label>
@@ -656,7 +656,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=90"></script>
+  <script src="dane.js?v=91"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -679,23 +679,23 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=90"></script>
-  <script src="cwiczenia.js?v=90"></script>
-  <script src="treningi.js?v=90"></script>
-  <script src="bieg-logika.js?v=90"></script>
-  <script src="gps-logika.js?v=90"></script>
-  <script src="gps.js?v=90"></script>
-  <script src="kreator.js?v=90"></script>
-  <script src="kreator2.js?v=90"></script>
-  <script src="dzis.js?v=90"></script>
-  <script src="postep.js?v=90"></script>
-  <script src="rekordy.js?v=90"></script>
-  <script src="cwicz.js?v=90"></script>
-  <script src="bieg.js?v=90"></script>
-  <script src="mozliwosci.js?v=90"></script>
-  <script src="ustawienia.js?v=90"></script>
-  <script src="kopia.js?v=90"></script>
-  <script src="bezpieczenstwo.js?v=90"></script>
+  <script src="anatomia.js?v=91"></script>
+  <script src="cwiczenia.js?v=91"></script>
+  <script src="treningi.js?v=91"></script>
+  <script src="bieg-logika.js?v=91"></script>
+  <script src="gps-logika.js?v=91"></script>
+  <script src="gps.js?v=91"></script>
+  <script src="kreator.js?v=91"></script>
+  <script src="kreator2.js?v=91"></script>
+  <script src="dzis.js?v=91"></script>
+  <script src="postep.js?v=91"></script>
+  <script src="rekordy.js?v=91"></script>
+  <script src="cwicz.js?v=91"></script>
+  <script src="bieg.js?v=91"></script>
+  <script src="mozliwosci.js?v=91"></script>
+  <script src="ustawienia.js?v=91"></script>
+  <script src="kopia.js?v=91"></script>
+  <script src="bezpieczenstwo.js?v=91"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -710,15 +710,16 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=90"></script>
-  <script src="plan-bieg.js?v=90"></script>
-  <script src="plan-kreator.js?v=90"></script>
-  <script src="plan-progresja.js?v=90"></script>
-  <script src="plan-adaptacja.js?v=90"></script>
-  <script src="plan-zamiana.js?v=90"></script>
-  <script src="sciezki.js?v=90"></script>
-  <script src="cele.js?v=90"></script>
-  <script src="przewodnik.js?v=90"></script>
-  <script src="app.js?v=90"></script>
+  <script src="plan-generator.js?v=91"></script>
+  <script src="plan-bieg.js?v=91"></script>
+  <script src="plan-kreator.js?v=91"></script>
+  <script src="plan-progresja.js?v=91"></script>
+  <script src="plan-adaptacja.js?v=91"></script>
+  <script src="plan-zamiana.js?v=91"></script>
+  <script src="sciezki.js?v=91"></script>
+  <script src="cele.js?v=91"></script>
+  <script src="przewodnik.js?v=91"></script>
+  <script src="pomoc.js?v=91"></script>
+  <script src="app.js?v=91"></script>
 </body>
 </html>

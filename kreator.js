@@ -285,7 +285,7 @@ function rysujKrok1() {
   } else {
     let tekst = "Razem " + razem + " " + odmiana(razem, "sesja", "sesje", "sesji") + " w " + dni + " dniach.";
     if (razem > dni) {
-      tekst += " To więcej niż dni w okresie, więc w niektóre dni będzie kilka sesji.";
+      tekst += " To więcej niż dni w okresie, więc w niektóre dni będzie kilka treningów.";
     }
     krPodpowiedz.textContent = tekst;
   }
@@ -387,7 +387,7 @@ function otworzFormularzAktywnosci(aktywnosc) {
 
   if (aktywnosc) {
     edytowanaAktywnoscId = aktywnosc.id;
-    krTytulFormularza.textContent = "Edycja aktywności";
+    krTytulFormularza.textContent = "Edycja rodzaju treningu";
     krRodzaj.value = aktywnosc.rodzajId;
     krPartieWybor = partieAktywnosci(aktywnosc).slice();
     krOgolny = !!aktywnosc.ogolny;
@@ -395,7 +395,7 @@ function otworzFormularzAktywnosci(aktywnosc) {
     krUsunAktywnosc.hidden = false;
   } else {
     edytowanaAktywnoscId = null;
-    krTytulFormularza.textContent = "Nowa aktywność";
+    krTytulFormularza.textContent = "Nowy rodzaj treningu";
     krUsunAktywnosc.hidden = true;
   }
 
@@ -427,7 +427,7 @@ function kolejnyKolor() {
 function zapiszAktywnosc() {
   const rodzaj = znajdzKategorie(krRodzaj.value);
   if (!rodzaj) {
-    pokazBladAktywnosci("Wybierz rodzaj aktywności.");
+    pokazBladAktywnosci("Wybierz rodzaj treningu.");
     return;
   }
 
@@ -470,14 +470,14 @@ function zapiszAktywnosc() {
     const zmienionaTresc = stara.rodzajId !== wpis.rodzajId || (stara.ogolny !== wpis.ogolny || partieAktywnosci(stara).join() !== wpis.partieIds.join());
 
     if (zmienionaTresc && rozlozone > 0) {
-      if (!confirm("Ta aktywność ma już " + rozlozone + " sesji w kalendarzu. Zmiana rodzaju lub partii usunie je z kalendarza. Kontynuować?")) {
+      if (!confirm("Ten rodzaj treningu ma już " + rozlozone + " treningów w kalendarzu. Zmiana rodzaju lub partii usunie je z kalendarza. Kontynuować?")) {
         return;
       }
       szkic.sesje = szkic.sesje.filter(function (s) {
         return s.aktywnoscId !== stara.id;
       });
     } else if (wpis.razy < rozlozone) {
-      pokazBladAktywnosci("W kalendarzu jest już " + rozlozone + " sesji tej aktywności. Wpisz co najmniej " + rozlozone + ".");
+      pokazBladAktywnosci("W kalendarzu jest już " + rozlozone + " treningów tego rodzaju. Wpisz co najmniej " + rozlozone + ".");
       return;
     }
   }
@@ -501,10 +501,10 @@ function usunAktywnosc() {
   if (szkic.sesje.some(function (s) {
     return s.aktywnoscId === edytowanaAktywnoscId && sesjaMaPostep(s);
   })) {
-    alert("Ta aktywność ma już zaliczone sesje, więc nie można jej usunąć z planu.");
+    alert("Ten rodzaj treningu ma już zaliczone treningi, więc nie można go usunąć z planu.");
     return;
   }
-  if (confirm("Usunąć tę aktywność z planu (razem z jej sesjami w kalendarzu)?")) {
+  if (confirm("Usunąć ten rodzaj treningu z planu (razem z jego treningami w kalendarzu)?")) {
     szkic.aktywnosci = szkic.aktywnosci.filter(function (inna) {
       return inna.id !== edytowanaAktywnoscId;
     });
@@ -520,7 +520,7 @@ function usunAktywnosc() {
 
 function dalejZKroku1() {
   if (szkic.aktywnosci.length === 0) {
-    krBladKroku.textContent = "Dodaj co najmniej jedną aktywność.";
+    krBladKroku.textContent = "Dodaj co najmniej jeden rodzaj treningu.";
     return;
   }
   krBladKroku.textContent = "";

@@ -84,7 +84,7 @@ function zrobIcs(plan, godzina) {
       "DTSTART:" + dataTekst + "T" + dwie(g) + dwie(m) + "00",
       "DTEND:" + dataTekst + "T" + koniec + "00",
       "SUMMARY:Ćwiczenia: " + dni[klucz].join(", "),
-      "DESCRIPTION:Czas na dzisiejszą sesję. Otwórz aplikację Ćwiczenia.",
+      "DESCRIPTION:Czas na dzisiejszy trening. Otwórz aplikację Ćwiczenia.",
       "BEGIN:VALARM",
       "ACTION:DISPLAY",
       "DESCRIPTION:Ćwiczenia",
@@ -115,7 +115,7 @@ function pobierzIcs() {
   }
   const wynik = zrobIcs(plan, dane.ustawienia.godzinaAlarmu);
   if (wynik.liczba === 0) {
-    ustIcsInfo.textContent = "W planie nie ma już dni z sesjami do przypomnienia.";
+    ustIcsInfo.textContent = "W planie nie ma już dni z treningami do przypomnienia.";
     return;
   }
   const plik = new Blob([wynik.tekst], { type: "text/calendar" });

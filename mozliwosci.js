@@ -146,6 +146,9 @@ function otworzMozliwosci(poZapisie) {
   wstecz.type = "button";
   wstecz.addEventListener("click", mzZamknij);
   gora.appendChild(wstecz);
+  if (typeof pomocPrzycisk === "function") {
+    gora.appendChild(pomocPrzycisk("mozliwosci", "Moje możliwości"));
+  }
   mzNakladka.appendChild(gora);
 
   const tresc = document.createElement("div");
@@ -160,7 +163,8 @@ function otworzMozliwosci(poZapisie) {
     g.pola.forEach(function (p) {
       const blok = document.createElement("div");
       blok.className = "pk-pole";
-      blok.appendChild(tekstElement("label", "", p.nazwa + " (" + p.jedn + ")"));
+      const etykieta = tekstElement("label", "", p.nazwa + " (" + p.jedn + ")");
+      blok.appendChild(etykieta);
       if (p.jak) {
         blok.appendChild(tekstElement("span", "opis", p.jak));
       }
@@ -176,6 +180,7 @@ function otworzMozliwosci(poZapisie) {
         blad.textContent = "";
       });
       pole.addEventListener("focus", function () { pole.select(); });
+      dostepnoscPowiaz(etykieta, pole);
       blok.appendChild(pole);
       tresc.appendChild(blok);
     });

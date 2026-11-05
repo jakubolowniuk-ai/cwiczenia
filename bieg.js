@@ -94,7 +94,11 @@ function biegOtworzEkran() {
   biegEkran.setAttribute("role", "dialog");
   biegEkran.setAttribute("aria-label", "Bieg");
   const rodzaj = biegRodzaj(z.sesja.rodzajBiegu).nazwa;
-  biegEkran.appendChild(tekstElement("div", "bieg-ekran-gora", "Bieganie · " + rodzaj.toLowerCase()));
+  const biegGora = tekstElement("div", "bieg-ekran-gora", "Bieganie · " + rodzaj.toLowerCase());
+  if (typeof pomocPrzycisk === "function") {
+    biegGora.appendChild(pomocPrzycisk("bieg", "Bieg"));
+  }
+  biegEkran.appendChild(biegGora);
   const cel = tekstElement("div", "bieg-ekran-cel", "");
   biegEkran.appendChild(cel);
   // Bieżący odcinek (sesja z odcinkami)

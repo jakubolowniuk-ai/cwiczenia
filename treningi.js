@@ -111,7 +111,7 @@ function odswiezPrzelacznik() {
   przelacznikBaza.textContent = "Baza ćwiczeń (" + dane.cwiczenia.filter(function (c) {
     return !c.ukryte;
   }).length + ")";
-  przelacznikTreningi.textContent = "Moje treningi (" + treningiWidoczne().length + ")";
+  przelacznikTreningi.textContent = "Moje zestawy (" + treningiWidoczne().length + ")";
 }
 
 // Tworzy kartę z nazwą i opisem (bez przycisków)
@@ -331,13 +331,13 @@ function otworzFormularzTreningu(trening) {
 
   if (trening) {
     edytowanyTreningId = trening.id;
-    tytulTreningu.textContent = "Edycja treningu";
+    tytulTreningu.textContent = "Edycja zestawu";
     poleNazwaTreningu.value = trening.nazwa;
     poleBlokTreningu.value = trening.blok || "";
     wybraneIds = trening.cwiczeniaIds.slice();
   } else {
     edytowanyTreningId = null;
-    tytulTreningu.textContent = "Nowy trening";
+    tytulTreningu.textContent = "Nowy zestaw ćwiczeń";
     poleNazwaTreningu.value = "";
     poleBlokTreningu.value = "";
     wybraneIds = [];
@@ -359,11 +359,11 @@ function zamknijFormularzTreningu() {
 function zapiszTrening() {
   const nazwa = poleNazwaTreningu.value.trim();
   if (nazwa === "") {
-    pokazBladTreningu("Wpisz nazwę treningu.");
+    pokazBladTreningu("Wpisz nazwę zestawu.");
     return;
   }
   if (wybraneIds.length === 0) {
-    pokazBladTreningu("Dodaj do treningu co najmniej jedno ćwiczenie.");
+    pokazBladTreningu("Dodaj do zestawu co najmniej jedno ćwiczenie.");
     return;
   }
 
@@ -415,7 +415,7 @@ function rysujTreningi() {
     pokazUkryteZestawy = false;
   }
   przyciskUkryteZestawy.hidden = liczbaUkrytych === 0 && !pokazUkryteZestawy;
-  przyciskUkryteZestawy.textContent = pokazUkryteZestawy ? "← Wróć do listy treningów" : "Pokaż ukryte zestawy (" + liczbaUkrytych + ")";
+  przyciskUkryteZestawy.textContent = pokazUkryteZestawy ? "← Wróć do listy zestawów" : "Pokaż ukryte zestawy (" + liczbaUkrytych + ")";
   const wszystkie = treningiZapisane().filter(function (t) {
     return !!t.ukryte === pokazUkryteZestawy;
   });
@@ -435,7 +435,7 @@ function rysujTreningi() {
   if (treningiZapisane().length > 0 && widoczneTreningi.length === 0 && szukajTreningow !== "") {
     const brak = document.createElement("p");
     brak.className = "opis";
-    brak.textContent = "Nie znaleziono treningu o takiej nazwie.";
+    brak.textContent = "Nie znaleziono zestawu o takiej nazwie.";
     listaTreningow.appendChild(brak);
   }
 
@@ -524,7 +524,7 @@ function rysujTreningi() {
 
     karta.appendChild(
       przyciskAkcji("Usuń", "usun", function () {
-        if (confirm("Usunąć trening „" + trening.nazwa + "”?")) {
+        if (confirm("Usunąć zestaw „" + trening.nazwa + "”?")) {
           dane.treningi = dane.treningi.filter(function (inny) {
             return inny.id !== trening.id;
           });

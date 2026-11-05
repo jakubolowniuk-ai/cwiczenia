@@ -441,7 +441,7 @@ function rysujPostep() {
 
   const seria = liczSerie(plan, indeks);
   if (seria >= 2) {
-    postepTresc.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " sesji z rzędu", "Dni odpoczynku jej nie przerywają."));
+    postepTresc.appendChild(zrobWskazowke(String(seria), "#2563EB", "#E3ECFD", "Seria: " + seria + " treningów z rzędu", "Dni odpoczynku jej nie przerywają."));
   }
 
   const usun = document.createElement("button");
@@ -561,7 +561,7 @@ function otworzUsuwanie(plan) {
   const zaliczone = plan.sesje.filter(function (s) {
     return sesjaZaliczona(plan, s);
   }).length;
-  usunOpis.textContent = (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " i jego postęp zostaną usunięte razem z historią ćwiczeń z tego planu. Zaliczone sesje: " + zaliczone + " z " + plan.sesje.length + ". Jeśli chcesz zachować historię, zamknij plan zamiast go usuwać.";
+  usunOpis.textContent = (plan.okres === "tydzien" ? "Plan tygodniowy" : "Plan miesięczny") + " i jego postęp zostaną usunięte razem z historią ćwiczeń z tego planu. Zaliczone treningi: " + zaliczone + " z " + plan.sesje.length + ". Jeśli chcesz zachować historię, zamknij plan zamiast go usuwać.";
   usunTlo.hidden = false;
 }
 
@@ -698,7 +698,7 @@ function otworzOknoDzis(plan, indeks) {
   pokazOkno("Dziś", nazwyDni[dzis.getDay()] + ", " + dzis.getDate() + " " + MIESIACE_DOPELNIACZ[dzis.getMonth()]);
   const sesje = sesjeDnia(plan, indeks);
   if (sesje.length === 0) {
-    postepOknoTresc.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", "Brak sesji w planie na dzisiaj."));
+    postepOknoTresc.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", "Brak treningów w planie na dzisiaj."));
     return;
   }
   sesje.forEach(function (sesja) {

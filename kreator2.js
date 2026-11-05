@@ -204,7 +204,7 @@ function opisSesji(sesja) {
   const aktywnosc = znajdzAktywnosc(sesja.aktywnoscId);
   if (wymagaTreningu(aktywnosc)) {
     const trening = znajdzTrening(sesja.treningId);
-    return trening ? "Trening: " + trening.nazwa : "Dotknij, aby dodać ćwiczenia";
+    return trening ? "Zestaw: " + trening.nazwa : "Dotknij, aby dodać ćwiczenia";
   }
   const czesci = [];
   if (etapySesji(sesja).length > 0) {
@@ -316,7 +316,7 @@ function rysujKalendarz() {
     const tekst = document.createElement("span");
     tekst.textContent = opis.tytul + " " + rozlozone + "/" + aktywnosc.razy + (rozlozone >= aktywnosc.razy ? " ✓" : "");
     chip.appendChild(tekst);
-    chip.setAttribute("aria-label", "Zmień liczbę sesji: " + opis.tytul);
+    chip.setAttribute("aria-label", "Zmień liczbę treningów: " + opis.tytul);
     chip.addEventListener("click", function () {
       otworzOknoLiczby(aktywnosc);
     });
@@ -520,7 +520,7 @@ function otworzDodawanie() {
     const opis = opisAktywnosci(aktywnosc);
     const karta = zrobKarte(
       opis.tytul,
-      zostalo > 0 ? "Zostało " + zostalo + " z " + aktywnosc.razy : "Wszystkie sesje rozłożone ✓"
+      zostalo > 0 ? "Zostało " + zostalo + " z " + aktywnosc.razy : "Wszystkie treningi rozłożone ✓"
     );
     karta.style.borderLeftColor = kolorAktywnosci(aktywnosc);
     karta.classList.add("karta-sesji");
@@ -543,7 +543,7 @@ function otworzDodawanie() {
   if (szkic.aktywnosci.length === 0) {
     const info = document.createElement("p");
     info.className = "opis";
-    info.textContent = "Nie ma jeszcze aktywności. Dodaj je w kroku 1.";
+    info.textContent = "Nie ma jeszcze rodzajów treningu. Dodaj je w kroku 1.";
     pdWybor.appendChild(info);
   }
   pokazWidokPanelu("dodaj");
@@ -580,6 +580,7 @@ function zrobWyborJednostkiZ(etykieta, opcje, wartosc) {
     wybor.appendChild(opcja);
   });
   wybor.value = wartosc;
+  dostepnoscPowiaz(opis, wybor);
   blok.appendChild(opis);
   blok.appendChild(wybor);
   return { blok: blok, wybor: wybor };
@@ -601,6 +602,7 @@ function zrobPoleLiczbowe(etykieta, wartosc, ulamki) {
   pole.addEventListener("focus", function () {
     pole.select();
   });
+  dostepnoscPowiaz(opis, pole);
   blok.appendChild(opis);
   blok.appendChild(pole);
   return { blok: blok, pole: pole };
@@ -1369,8 +1371,8 @@ function otworzSesje(sesja) {
   if (wymagaTreningu(aktywnosc)) {
     const trening = znajdzTrening(sesja.treningId);
     const karta = zrobKarte(
-      trening ? (trening.roboczy ? "Ćwiczenia sesji" : "Zestaw: " + trening.nazwa) : "Nie wybrano ćwiczeń",
-      trening ? opisTreningu(trening).opis : "Dodaj ćwiczenia do tej sesji."
+      trening ? (trening.roboczy ? "Ćwiczenia treningu" : "Zestaw: " + trening.nazwa) : "Nie wybrano ćwiczeń",
+      trening ? opisTreningu(trening).opis : "Dodaj ćwiczenia do tego treningu."
     );
     karta.appendChild(
       przyciskAkcji(trening ? "Zmień ćwiczenia" : "Dodaj ćwiczenia", "", function () {
@@ -1396,7 +1398,7 @@ function otworzSesje(sesja) {
       if (cwiczenia.length === 0) {
         const info = document.createElement("p");
         info.className = "opis";
-        info.textContent = "Ten trening nie ma już żadnych ćwiczeń. Wybierz inny.";
+        info.textContent = "Ten zestaw nie ma już żadnych ćwiczeń. Wybierz inny.";
         pdSesjaParametry.appendChild(info);
       }
       cwiczenia.forEach(function (cwiczenie) {
@@ -1415,7 +1417,7 @@ function otworzSesje(sesja) {
 
   const inne = sesjeAktywnosci(aktywnosc).length - 1;
   pdSesjaKopiuj.hidden = inne < 1 || pdSesjaZapisz.hidden;
-  pdSesjaKopiuj.textContent = "Kopiuj do innych sesji: " + opisAktywnosci(aktywnosc).tytul;
+  pdSesjaKopiuj.textContent = "Kopiuj do innych treningów: " + opisAktywnosci(aktywnosc).tytul;
   pokazWidokPanelu("sesja");
 }
 
@@ -1569,7 +1571,7 @@ function kopiujDoInnych() {
   if (inne.length === 0) {
     return;
   }
-  if (!confirm("Skopiować do pozostałych sesji tej aktywności (" + inne.length + ")? Ich trening i parametry zostaną nadpisane.")) {
+  if (!confirm("Skopiować do pozostałych treningów tego rodzaju (" + inne.length + ")? Ich ćwiczenia i parametry zostaną nadpisane.")) {
     return;
   }
   inne.forEach(function (s) {
@@ -1585,12 +1587,12 @@ function kopiujDoInnych() {
     }
   });
   zapiszSzkic();
-  pdSesjaInfo.textContent = "Skopiowano do pozostałych sesji (" + inne.length + ").";
+  pdSesjaInfo.textContent = "Skopiowano do pozostałych treningów (" + inne.length + ").";
   rysujKalendarz();
 }
 
 function usunSesje() {
-  if (!confirm("Usunąć tę sesję z dnia?")) {
+  if (!confirm("Usunąć ten trening z dnia?")) {
     return;
   }
   szkic.sesje = szkic.sesje.filter(function (s) {
@@ -1645,7 +1647,7 @@ function rysujTreningiWyboru() {
   if (treningiWidoczne().length === 0) {
     kr2BrakTreningow.textContent = "Nie masz jeszcze żadnych zestawów. Zbuduj pierwszy poniżej.";
   } else {
-    kr2BrakTreningow.textContent = "Nie masz jeszcze pasującego treningu. Zbuduj nowy albo pokaż wszystkie zestawy.";
+    kr2BrakTreningow.textContent = "Nie masz jeszcze pasującego zestawu. Zbuduj nowy albo pokaż wszystkie zestawy.";
   }
 
   const tekstT = kr2SzukajTreningow.value.trim().toLowerCase();
@@ -1698,7 +1700,7 @@ function rysujBudowe() {
     komunikat.className = "opis";
     komunikat.textContent = dane.cwiczenia.length === 0
       ? "Baza ćwiczeń jest pusta. Najpierw dodaj ćwiczenia w zakładce Ćwiczenia."
-      : "Brak ćwiczeń pasujących do tej aktywności. Zaznacz „Pokaż wszystkie ćwiczenia z bazy”.";
+      : "Brak ćwiczeń pasujących do tego rodzaju treningu. Zaznacz „Pokaż wszystkie ćwiczenia z bazy”.";
     kr2Cwiczenia.appendChild(komunikat);
   }
 
@@ -1774,7 +1776,7 @@ function odswiezOknoLiczby() {
   olWiecej.disabled = olWartosc >= MAX_SESJI;
   olInfo.textContent = rozlozone > 0
     ? "Rozłożone w kalendarzu: " + rozlozone + " z " + olAktywnosc.razy + ". Nie możesz ustawić mniej niż " + minimum + "."
-    : "Żadna sesja nie jest jeszcze rozłożona w kalendarzu.";
+    : "Żaden trening nie jest jeszcze rozłożony w kalendarzu.";
 }
 
 function zamknijOknoLiczby() {
@@ -1793,13 +1795,13 @@ function usunAktywnoscZPlanu() {
   if (szkic.sesje.some(function (s) {
     return s.aktywnoscId === olAktywnosc.id && sesjaMaPostep(s);
   })) {
-    alert("Ta aktywność ma już zaliczone sesje, więc nie można jej usunąć z planu.");
+    alert("Ten rodzaj treningu ma już zaliczone treningi, więc nie można go usunąć z planu.");
     return;
   }
   const rozlozone = sesjeAktywnosci(olAktywnosc).length;
-  let pytanie = "Usunąć aktywność „" + opisAktywnosci(olAktywnosc).tytul + "” z planu?";
+  let pytanie = "Usunąć rodzaj treningu „" + opisAktywnosci(olAktywnosc).tytul + "” z planu?";
   if (rozlozone > 0) {
-    pytanie += "\n\nZostaną też usunięte jej rozłożone sesje (" + rozlozone + ") z kalendarza.";
+    pytanie += "\n\nZostaną też usunięte jego rozłożone treningi (" + rozlozone + ") z kalendarza.";
   }
   if (!confirm(pytanie)) {
     return;
@@ -1830,14 +1832,14 @@ function zaproponujRozklad() {
   });
 
   if (doRozlozenia.length === 0) {
-    kalBlad.textContent = "Wszystkie sesje są już rozłożone.";
+    kalBlad.textContent = "Wszystkie treningi są już rozłożone.";
     return;
   }
 
   const lacznie = doRozlozenia.reduce(function (suma, x) {
     return suma + x.ile;
   }, 0);
-  if (!confirm("Rozłożyć automatycznie brakujące sesje (" + lacznie + ")? Możesz je potem zmienić w kalendarzu.")) {
+  if (!confirm("Rozłożyć automatycznie brakujące treningi (" + lacznie + ")? Możesz je potem zmienić w kalendarzu.")) {
     return;
   }
 
@@ -1895,15 +1897,15 @@ function zapiszPlan() {
   }).length;
 
   if (szkic.aktywnosci.length === 0) {
-    kalBlad.textContent = "Plan nie ma żadnych aktywności. Wróć do kroku 1.";
+    kalBlad.textContent = "Plan nie ma żadnych rodzajów treningu. Wróć do kroku 1.";
     return;
   }
   if (doRozlozenia > 0) {
-    kalBlad.textContent = "Rozłóż jeszcze sesje w kalendarzu: " + doRozlozenia + ".";
+    kalBlad.textContent = "Rozłóż jeszcze treningi w kalendarzu: " + doRozlozenia + ".";
     return;
   }
   if (doUzupelnienia > 0) {
-    kalBlad.textContent = "Uzupełnij trening i parametry sesji z pustymi znacznikami: " + doUzupelnienia + ".";
+    kalBlad.textContent = "Uzupełnij ćwiczenia i parametry treningów z pustymi znacznikami: " + doUzupelnienia + ".";
     return;
   }
 

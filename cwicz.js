@@ -529,11 +529,11 @@ function cwRysujPrzerwe() {
 }
 
 function cwRysujKoniec() {
-  cwTytul.textContent = "Koniec sesji";
+  cwTytul.textContent = "Koniec treningu";
   cwPasek.style.width = "100%";
   const ids = cwIds();
   const zrobione = ids.filter(cwWykonane);
-  cwTresc.appendChild(cwEl("h2", "cw-nazwa", "Sesja zakończona 🎉"));
+  cwTresc.appendChild(cwEl("h2", "cw-nazwa", "Trening zakończony 🎉"));
   cwTresc.appendChild(cwEl("div", "cw-plan", "Zrobione ćwiczenia: " + zrobione.length + " z " + ids.length));
   zrobione.forEach(function (id) {
     const cw = znajdzCwiczenie(id);

@@ -169,6 +169,9 @@ function pkRysuj() {
   if (krok !== "podsumowanie") {
     gora.appendChild(pkEl("span", "opis", "Krok " + (pkKrok + 1) + " z " + kroki.length));
   }
+  if (typeof pomocPrzycisk === "function") {
+    gora.appendChild(pomocPrzycisk("kreator", "Kreator planu"));
+  }
   pkNakladka.appendChild(gora);
 
   const tresc = pkEl("div", "pk-tresc");
@@ -300,7 +303,7 @@ function pkRysuj() {
     pokazDalej = false;
     const t = pgCzasyBlokow();
     tresc.appendChild(pkEl("h1", "", "Rozgrzewka i rozciąganie?"));
-    tresc.appendChild(pkEl("p", "opis", "Rozgrzewka przed treningiem przygotowuje stawy i mięśnie. Rozciąganie po nim pomaga się wyciszyć. Oba bloki są poza czasem treningu, który wybrałeś(aś), więc wydłużą sesję."));
+    tresc.appendChild(pkEl("p", "opis", "Rozgrzewka przed treningiem przygotowuje stawy i mięśnie. Rozciąganie po nim pomaga się wyciszyć. Oba bloki są poza czasem treningu, który wybrałeś(aś), więc wydłużą trening."));
     const r = pkProfil.rozgrzewka;
     const z = pkProfil.rozciaganie;
     [
@@ -517,7 +520,7 @@ function pkRysujPodsumowanie(tresc) {
     const dod = (wynik.czasBlokow.rozgrzewka || 0) + (wynik.czasBlokow.rozciaganie || 0);
     czasTekst = " Trening do " + pkProfil.czas + " min" + (dod > 0 ? " plus ok. " + dod + " min rozgrzewki i rozciągania." : ".");
   }
-  tresc.appendChild(pkEl("p", "opis", (pkProfil.cel === "bieg" && pkProfil.tygodni > 4 ? "Plan na " + pkProfil.tygodni + " tygodni, teraz blok " + (pkProfil.blokNr || 1) + " (4 tygodnie)" : "Blok 4 tygodnie") + " · " + liczba + " sesji. Pierwsza dziś." + czasTekst));
+  tresc.appendChild(pkEl("p", "opis", (pkProfil.cel === "bieg" && pkProfil.tygodni > 4 ? "Plan na " + pkProfil.tygodni + " tygodni, teraz blok " + (pkProfil.blokNr || 1) + " (4 tygodnie)" : "Blok 4 tygodnie") + " · " + liczba + " treningów. Pierwszy dziś." + czasTekst));
 
   wynik.uwagi.forEach(function (u) {
     tresc.appendChild(pkEl("p", "pk-uwaga", u));
@@ -569,7 +572,7 @@ function pkRysujPodsumowanie(tresc) {
     pkProfil.zapiszZestawy = poleZ.checked;
   });
   wierszZ.appendChild(poleZ);
-  wierszZ.appendChild(pkEl("span", "", "Zapisz treningi jako moje zestawy (zakładka Ćwiczenia → Moje treningi)"));
+  wierszZ.appendChild(pkEl("span", "", "Zapisz treningi jako moje zestawy ćwiczeń (zakładka Ćwiczenia → Moje zestawy)"));
   tresc.appendChild(wierszZ);
 
   const zacznij = pkEl("button", "przycisk wielki", "Zacznij");

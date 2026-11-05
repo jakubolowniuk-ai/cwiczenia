@@ -61,7 +61,7 @@ kopiaZapisz.addEventListener("click", function () {
   pobierzPlik("cwiczenia-kopia-" + dataDzisTekst() + ".json", JSON.stringify(paczka, null, 1));
   dane.ustawienia.ostatniaKopia = dataDzisTekst();
   zapiszDane();
-  pokazInfoKopii("Kopia pobrana: " + dane.cwiczenia.length + " ćwiczeń, " + dane.treningi.length + " treningów, " + dane.plany.length + " planów. Trzymaj plik w bezpiecznym miejscu (np. na Dysku Google).", false);
+  pokazInfoKopii("Kopia pobrana: " + dane.cwiczenia.length + " ćwiczeń, " + dane.treningi.length + " zestawów ćwiczeń, " + dane.plany.length + " planów. Trzymaj plik w bezpiecznym miejscu (np. na Dysku Google).", false);
 });
 
 // ===== 2) Wczytanie kopii =====
@@ -87,7 +87,7 @@ kopiaWczytajPlik.addEventListener("change", function () {
     const liczba = function (lista) {
       return Array.isArray(lista) ? lista.length : 0;
     };
-    const pytanie = "Zastąpić wszystkie dane z telefonu kopią z pliku? W kopii: " + liczba(d.cwiczenia) + " ćwiczeń, " + liczba(d.treningi) + " treningów, " + liczba(d.plany) + " planów. Obecnych danych nie da się odzyskać.";
+    const pytanie = "Zastąpić wszystkie dane z telefonu kopią z pliku? W kopii: " + liczba(d.cwiczenia) + " ćwiczeń, " + liczba(d.treningi) + " zestawów ćwiczeń, " + liczba(d.plany) + " planów. Obecnych danych nie da się odzyskać.";
     if (!confirm(pytanie)) {
       return;
     }

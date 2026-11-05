@@ -228,7 +228,7 @@ function rysujDzis() {
     dzisSesje.appendChild(kartaKopii);
   }
   if (wlaczone.length === 0) {
-    dzisSesje.appendChild(zrobPustyKomunikat("Wszystkie plany są wyłączone", "Włącz plan w zakładce Postęp (sekcja „Moje plany”), a jego sesje pojawią się tutaj."));
+    dzisSesje.appendChild(zrobPustyKomunikat("Wszystkie plany są wyłączone", "Włącz plan w zakładce Postęp (sekcja „Moje plany”), a jego treningi pojawią się tutaj."));
     return;
   }
   wlaczone.forEach(function (plan) {
@@ -288,7 +288,7 @@ function rysujPlanDzis(plan, kontener) {
     if (nastepna) {
       const data = dataPlanu(plan, nastepna.dzien);
       const aktywnosc = aktywnoscPlanu(plan, nastepna.aktywnoscId);
-      opis += " Następna sesja: " + NAZWY_DNI[data.getDay()] + " " + data.getDate() + "." + (data.getMonth() + 1) + ", " + opisAktywnosci(aktywnosc).tytul + ".";
+      opis += " Następny trening: " + NAZWY_DNI[data.getDay()] + " " + data.getDate() + "." + (data.getMonth() + 1) + ", " + opisAktywnosci(aktywnosc).tytul + ".";
     }
     kontener.appendChild(zrobPustyKomunikat("Dziś odpoczywasz", opis));
   } else {
@@ -304,7 +304,7 @@ function rysujPlanDzis(plan, kontener) {
   const zaliczone = plan.sesje.filter(function (s) {
     return sesjaZaliczona(plan, s);
   }).length;
-  kontener.appendChild(tekstElement("p", "opis", "Plan: zaliczone sesje " + zaliczone + " z " + plan.sesje.length + ". Dzień " + (indeks + 1) + " z " + liczbaDni + "."));
+  kontener.appendChild(tekstElement("p", "opis", "Plan: zaliczone treningi " + zaliczone + " z " + plan.sesje.length + ". Dzień " + (indeks + 1) + " z " + liczbaDni + "."));
 }
 
 function zrobPustyKomunikat(tytul, opis) {
@@ -334,7 +334,7 @@ function zrobKarteDzis(plan, sesja) {
   if (wymagaTreningu(aktywnosc)) {
     const trening = znajdzTrening(sesja.treningId);
     if (trening) {
-      karta.appendChild(tekstElement("div", "karta-opis", "Trening: " + trening.nazwa));
+      karta.appendChild(tekstElement("div", "karta-opis", "Zestaw: " + trening.nazwa));
     }
 
     const ids = cwiczeniaSesjiIds(sesja);
@@ -398,7 +398,7 @@ function zrobKarteDzis(plan, sesja) {
     karta.appendChild(glowne);
 
     if (ids.length === 0) {
-      karta.appendChild(tekstElement("p", "opis", "Ta sesja nie ma ćwiczeń z parametrami."));
+      karta.appendChild(tekstElement("p", "opis", "Ten trening nie ma ćwiczeń z parametrami."));
     }
 
     dodajBlok("Rozciąganie po treningu", sesja.blokPoId, po);

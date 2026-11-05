@@ -9,6 +9,8 @@
   --an-cialo: #E6ECEA;
   --an-miesien: #C9D4D1;
   --an-on: #D32F2F;
+  --blad: #B3261E;
+  --ostrzezenie: #B45309;
 }
 
 /* Ciemny motyw: włącza się, gdy telefon ma ciemny tryb */
@@ -23,6 +25,8 @@
     --an-cialo: #26322F;
     --an-miesien: #3B4B47;
     --an-on: #FF5A52;
+    --blad: #FF8A80;
+    --ostrzezenie: #FBBF24;
   }
 }
 
@@ -175,7 +179,7 @@ h1 {
 .blad {
   min-height: 20px;
   margin: 12px 0 0;
-  color: #B3261E;
+  color: var(--blad);
   font-size: 14px;
 }
 
@@ -224,7 +228,7 @@ h1 {
 }
 
 .akcja.usun {
-  color: #B3261E;
+  color: var(--blad);
 }
 
 /* Dwa pola obok siebie */
@@ -829,7 +833,7 @@ h1 {
 }
 
 .dzis-karta.koniec {
-  border-left-color: #D97706;
+  border-left-color: var(--ostrzezenie);
 }
 
 .dzis-naglowek {
@@ -1265,7 +1269,7 @@ h1 {
 .dzis-status.prawie {
   font-size: 14px;
   font-weight: 700;
-  color: #D97706;
+  color: var(--ostrzezenie);
 }
 
 .dzis-status.pelna {
@@ -1304,6 +1308,8 @@ h1 {
   --tekst-szary: #9DB0AC;
   --akcent: #4FD1B8;
   --linia: #2B3836;
+  --blad: #FF8A80;
+  --ostrzezenie: #FBBF24;
 }
 
 :root[data-motyw="jasny"] {
@@ -1317,6 +1323,8 @@ h1 {
   --tekst-szary: #55625F;
   --akcent: #0B6B5F;
   --linia: #DDE5E3;
+  --blad: #B3261E;
+  --ostrzezenie: #B45309;
 }
 
 /* ===== Ustawienia ===== */
@@ -1435,12 +1443,12 @@ h1 {
   display: block;
   width: 100%;
   margin-top: 12px;
-  color: #B3261E;
+  color: var(--blad);
 }
 
 /* ===== Kopia zapasowa ===== */
 #kopia-info.blad {
-  color: #B3261E;
+  color: var(--blad);
 }
 
 #kopia-wzor {
@@ -1962,7 +1970,7 @@ h1 {
   font-size: 12px;
   font-weight: 600;
   vertical-align: middle;
-  color: var(--poz);
+  color: var(--tekst);
   border: 1.5px solid var(--poz);
   background: color-mix(in srgb, var(--poz) 14%, transparent);
 }
@@ -2076,7 +2084,7 @@ h1 {
 .bieg-ekran-gora { font-weight: 700; color: var(--tekst-szary); }
 .bieg-ekran-cel { min-height: 1.4em; font-size: 17px; font-weight: 600; text-align: center; }
 .bieg-ekran-czas { margin-top: 4vh; font-size: clamp(72px, 24vw, 140px); font-weight: 800; font-variant-numeric: tabular-nums; line-height: 1; letter-spacing: -2px; }
-.bieg-ekran-stan { min-height: 1.4em; font-size: 20px; font-weight: 700; color: #D97706; }
+.bieg-ekran-stan { min-height: 1.4em; font-size: 20px; font-weight: 700; color: var(--ostrzezenie); }
 .bieg-ekran.pauza .bieg-ekran-czas { opacity: .55; }
 .bieg-ekran-kafle { display: grid; grid-template-columns: 1fr 1fr; gap: 12px; width: 100%; max-width: 420px; }
 .bieg-ekran-kafle > div { display: flex; flex-direction: column; align-items: center; padding: 14px 8px; border-radius: 16px; background: var(--karta); border: 1px solid var(--linia); }
@@ -2148,7 +2156,7 @@ h1 {
 /* ===== GPS (v87) ===== */
 .bieg-gps { width: 100%; max-width: 420px; display: flex; flex-direction: column; align-items: center; gap: 4px; }
 .bieg-gps-status { font-size: 15px; color: var(--tekst-szary); text-align: center; min-height: 1.3em; }
-.bieg-gps-status.ostrzezenie { color: #D97706; font-weight: 700; }
+.bieg-gps-status.ostrzezenie { color: var(--ostrzezenie); font-weight: 700; }
 .bieg-gps-przycisk { font-size: 14px; }
 .bieg-import { display: block; margin: 6px auto 0; }
 .gps-zgoda-tlo { position: fixed; inset: 0; z-index: 400; background: rgba(0, 0, 0, 0.55); display: flex; align-items: center; justify-content: center; padding: 16px; }
@@ -2167,3 +2175,19 @@ h1 {
 .bz-rzad { display: flex; flex-wrap: wrap; gap: 8px; align-items: center; }
 .bz-rzad .przycisk { flex: 1 1 auto; min-height: 48px; }
 .bz-pole { width: 100%; font-size: 18px; padding: 12px; border-radius: 12px; border: 2px solid var(--linia, #ccc); background: var(--tlo); color: var(--tekst); box-sizing: border-box; text-transform: uppercase; }
+
+/* ===== Pomoc „?” (v91) ===== */
+.pomoc-przycisk { flex: 0 0 auto; width: 40px; height: 40px; min-width: 40px; border-radius: 50%; border: 2px solid var(--akcent); background: transparent; color: var(--akcent); font-family: inherit; font-weight: 800; font-size: 19px; line-height: 1; display: inline-flex; align-items: center; justify-content: center; cursor: pointer; padding: 0; }
+.pomoc-przycisk.na-prawo { margin-left: auto; }
+.naglowek-ikony { display: flex; align-items: center; gap: 4px; }
+.bieg-ekran-gora { display: flex; align-items: center; gap: 12px; }
+.pomoc-okno { max-height: 88vh; overflow-y: auto; }
+.pomoc-slownik summary { font-weight: 700; cursor: pointer; padding: 8px 0; min-height: 32px; }
+.pomoc-slownik p { margin: 6px 0; font-size: 15px; }
+
+/* ===== Dostępność (v91): większy obszar dotyku małych elementów, bez zmiany wyglądu ===== */
+.wartosc-przycisk { position: relative; }
+.wartosc-przycisk::after { content: ""; position: absolute; left: -4px; right: -4px; top: -11px; bottom: -11px; }
+.przelacznik-wl::after { content: ""; position: absolute; left: -6px; right: -6px; top: -9px; bottom: -9px; }
+:focus-visible { outline: 3px solid var(--akcent); outline-offset: 2px; }
+.pp-przelacznik::before { content: ""; position: absolute; left: -6px; right: -6px; top: -9px; bottom: -9px; }

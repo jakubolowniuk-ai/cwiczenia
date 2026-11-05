@@ -553,7 +553,7 @@ function zapiszCwiczenie() {
   }
 
   if (poleRodzaj.value === "") {
-    pokazBlad("Wybierz rodzaj aktywności.");
+    pokazBlad("Wybierz rodzaj treningu.");
     return;
   }
 
@@ -861,7 +861,7 @@ function usunCwiczenie(cwiczenie) {
 
   let pytanie = "Usunąć ćwiczenie „" + cwiczenie.nazwa + "”?";
   if (uzycia > 0) {
-    pytanie += "\n\nZostanie też usunięte z treningów (" + uzycia + ").";
+    pytanie += "\n\nZostanie też usunięte z zestawów ćwiczeń (" + uzycia + ").";
   }
 
   if (confirm(pytanie)) {

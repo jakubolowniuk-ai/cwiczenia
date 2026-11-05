@@ -197,7 +197,7 @@ function otworzZamiane(plan, sesja, stareId) {
 
   const zakres = document.createElement("div");
   zakres.className = "zam-zakres";
-  const etykiety = [["wszystkie", "Ta i kolejne sesje tego treningu (" + ileSesji + ")"], ["jedna", "Tylko ta sesja"]];
+  const etykiety = [["wszystkie", "Ten i kolejne treningi z tym zestawem (" + ileSesji + ")"], ["jedna", "Tylko ten trening"]];
   etykiety.forEach(function (e, i) {
     const l = document.createElement("label");
     l.className = "wybor";
