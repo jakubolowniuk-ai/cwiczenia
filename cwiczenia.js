@@ -1412,6 +1412,50 @@ function otworzSzczegolyCwiczenia(cw) {
 }
 
 // Lista Twoich zestawów do wyboru (w tym samym arkuszu)
+// Ilość na start dla ćwiczenia dopisanego do treningów planu: zapisana przy ćwiczeniu albo 3 × 10 / 3 × 30 s
+function cwIloscStartowa(cw) {
+  const rodzaj = znajdzKategorie(cw.rodzajId);
+  const miara = rodzaj ? rodzaj.miara : "serie";
+  const st = typeof ilosciStartowa === "function" ? ilosciStartowa({ parametry: {} }, cw, miara) : null;
+  if (st) {
+    return JSON.parse(JSON.stringify(st));
+  }
+  return miara === "statyczna" ? { typ: "czas-serie", czasy: [30, 30, 30], jednostka: "s" } : { typ: "powtorzenia", serie: 3, powtorzenia: 10 };
+}
+
+function cwOpisIlosci(il) {
+  if (il.typ === "czas-serie") {
+    return il.czasy.length + " × " + il.czasy[0] + " s";
+  }
+  if (il.typ === "powtorzenia") {
+    return il.serie + " × " + il.powtorzenia;
+  }
+  return "ilość startowa";
+}
+
+// Ćwiczenie dodane do zestawu trafia do przyszłych, niezaliczonych treningów planów z tym zestawem
+function cwDodajDoPrzyszlychSesji(trening, cw) {
+  const dzis = dzisISO();
+  let ile = 0;
+  (dane.plany || []).forEach(function (plan) {
+    (plan.sesje || []).forEach(function (s) {
+      if (s.treningId !== trening.id || (s.parametry && s.parametry[cw.id])) {
+        return;
+      }
+      if (typeof dataSesjiISO === "function" && dataSesjiISO(plan, s) < dzis) {
+        return;
+      }
+      if (typeof sesjaZaliczona === "function" && sesjaZaliczona(plan, s)) {
+        return;
+      }
+      s.parametry = s.parametry || {};
+      s.parametry[cw.id] = cwIloscStartowa(cw);
+      ile++;
+    });
+  });
+  return ile;
+}
+
 function cwWybierzZestaw(cw, okno) {
   const zestawy = (typeof treningiWidoczne === "function" ? treningiWidoczne() : dane.treningi).filter(function (t) { return !t.roboczy; });
   okno.innerHTML = "";
@@ -1441,9 +1485,16 @@ function cwWybierzZestaw(cw, okno) {
       if (typeof odswiezPrzelacznik === "function") {
         odswiezPrzelacznik();
       }
+      const ileSesji = cwDodajDoPrzyszlychSesji(t, cw);
+      zapiszDane();
+      if (typeof rysujDzis === "function") {
+        rysujDzis();
+      }
       b.disabled = true;
       b.lastChild.textContent = t.cwiczeniaIds.length + " " + odmianaCw(t.cwiczeniaIds.length) + " · dodano ✓";
-      wynik.textContent = "Dodano do zestawu „" + t.nazwa + "”. W planach, które już go używają, dodasz to ćwiczenie w edycji planu.";
+      wynik.textContent = "Dodano do zestawu „" + t.nazwa + "”." + (ileSesji
+        ? " Trafiło też do " + ileSesji + " " + (ileSesji === 1 ? "przyszłego treningu" : "przyszłych treningów") + " w planie (" + cwOpisIlosci(cwIloscStartowa(cw)) + " – zmienisz w edycji planu)."
+        : "");
     });
     lista.appendChild(b);
   });

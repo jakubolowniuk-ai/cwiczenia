@@ -9,7 +9,9 @@ const POMOC = {
       "„Ćwicz” prowadzi przez trening seria po serii, z odliczaniem przerwy i sygnałem.",
       "Zrobiłeś(aś) inaczej niż w planie? Popraw wartości – postęp i kolejne propozycje liczą się z tego, co wpiszesz.",
       "Bieg: „Start” włącza stoper (i GPS, jeśli go włączysz). Bieg z zegarka dodasz przyciskiem „Wczytaj bieg z pliku GPX”.",
-      "Na górze mogą pojawić się karty: przerwany trening do wznowienia i przypomnienie o kopii zapasowej."
+      "Basen: „Wpisz wynik” → „Zrobione wg planu” zapisuje trening jednym dotknięciem. Było inaczej? „Poprawiam”: długości dla każdego stylu (+ Dodaj styl), czas i najdłuższy odcinek bez zatrzymania.",
+      "„Skróć trening” i „Jak się dziś czujesz?” dopasują dzisiejszy trening, gdy masz mniej czasu albo słabszy dzień.",
+      "Na górze mogą pojawić się karty: przerwany trening do wznowienia, propozycje zmian, podsumowanie tygodnia i przypomnienie o kopii zapasowej."
     ]
   },
   baza: {
@@ -26,31 +28,33 @@ const POMOC = {
     punkty: [
       "Zestaw ćwiczeń to lista ćwiczeń, z której składa się trening siłowy (np. „Trening A”). Plan przypisuje zestaw do treningu w danym dniu.",
       "Zestawy z ułożonego planu zapisują się tu same. Możesz je edytować i używać w kolejnych planach.",
+      "Ćwiczenie dodane do zestawu (w Bazie: ćwiczenie → „Dodaj do zestawu…”) trafia też do przyszłych treningów planów, które używają tego zestawu.",
       "Blok rozgrzewki dołącza się przed treningiem, blok rozciągania po nim."
     ]
   },
   sciezki: {
     tytul: "Ścieżki",
     punkty: [
-      "Ścieżki są w trzech grupach: Kalistenika, Siłownia i Bieganie. Dotknij grupy, żeby rozwinąć jej listę.",
+      "Ścieżki są w czterech grupach: Kalistenika, Siłownia, Bieganie i Pływanie. Dotknij grupy, żeby rozwinąć jej listę.",
       "Ścieżka to kolejne kroki do umiejętności, np. od podciągania z gumą do 10 podciągnięć.",
-      "„Tu jesteś” pokazuje Twój krok. Krok zalicza się sam, gdy w treningu zrobisz wymagany wynik.",
+      "„Tu jesteś” pokazuje Twój krok. Krok zalicza się sam, gdy w treningu zrobisz wymagany wynik (bieg: czas lub dystans, basen: najdłuższy odcinek bez zatrzymania).",
       "Ścieżkę możesz dodać jako cel planu (najwyżej 3 cele) – generator wstawi jej ćwiczenia do treningów."
     ]
   },
   postep: {
     tytul: "Postęp",
     punkty: [
-      "Tydzień i kalendarz pokazują, co zrobiłeś(aś). Dotknij dnia, żeby zobaczyć szczegóły.",
-      "Rekordy, cele i bieganie (dystans, tempo, serie tygodni) liczą się same z zapisanych wyników.",
-      "Tu są też Twoje plany: włączanie, edycja, usuwanie i „Nowy plan”."
+      "Na górze grafika mięśni: które partie ćwiczysz najwięcej. Niżej sekcje – dotknij nagłówka, żeby rozwinąć.",
+      "„Twój plan”: realizacja, dzisiejsze i okresowe treningi, edycja i usuwanie planu.",
+      "Moje cele, Bieganie, Pływanie i Rekordy liczą się same z zapisanych wyników (dystans, tempo, rekordy, serie tygodni).",
+      "„Moje plany” – włączanie i wyłączanie planów, „Poprzednie plany” – historia. Na dole „Ułóż mi plan” i „Nowy plan ręcznie”."
     ]
   },
   ustawienia: {
     tytul: "Ustawienia",
     punkty: [
-      "Moje możliwości: krótki test sprawności. Bez niego kreator nie ułoży planu.",
-      "Przypomnienia, dźwięk i wibracja, bieganie (ilość szczegółów, GPS, odcinki), wygląd.",
+      "Moje możliwości: krótki test sprawności. Bez niego kreator nie ułoży planu siłowego ani kalistenicznego.",
+      "Dźwięk, wibracja i przerwa, bieganie (ilość szczegółów, GPS, odcinki), pływanie (Twój basen, tryb prosty lub bloki), przypomnienia, wygląd.",
       "Kopia zapasowa: dane są tylko w tym telefonie. Zapisuj plik kopii regularnie, np. na Dysku Google.",
       "„Usuń wszystkie dane…” jest na dole, z podwójnym potwierdzeniem i automatyczną kopią."
     ]
@@ -58,8 +62,8 @@ const POMOC = {
   kreator: {
     tytul: "Kreator planu",
     punkty: [
-      "Odpowiadasz na kilka pytań, a aplikacja układa plan na 4 tygodnie (jeden blok).",
-      "Potrzebny jest test „Moje możliwości” – na jego podstawie dobieram trudność ćwiczeń i ciężary.",
+      "Wybierasz cel: siłownia, kalistenika, bieganie albo pływanie. Odpowiadasz na kilka pytań, a aplikacja układa plan na 4 tygodnie (jeden blok).",
+      "Plan siłowy i kalisteniczny potrzebuje testu „Moje możliwości” – na jego podstawie dobieram trudność ćwiczeń i ciężary. Bieg i basen mają własny krótki test w pytaniach.",
       "Na końcu zobaczysz pierwszy tydzień i „Dlaczego ten plan?”. Po 4 tygodniach podsumowanie i kolejny blok dopasowany do Twoich wyników.",
       "To plan ogólny. Aplikacja nie zastępuje lekarza ani trenera."
     ]
@@ -69,6 +73,7 @@ const POMOC = {
     punkty: [
       "Krok 1: wybierz okres i rodzaje treningów, przy każdym wpisz, ile razy chcesz go zrobić.",
       "Krok 2: rozłóż treningi w kalendarzu (albo „Zaproponuj rozkład”) i uzupełnij każdy o zestaw ćwiczeń i parametry.",
+      "Basen: wpisujesz długości basenu, metry liczą się same. „Prosty” – długości i styl (+ Dodaj styl), „Bloki” – rozgrzewka, technika, część główna, wyciszenie albo gotowy trening.",
       "Przy każdym ćwiczeniu jest „Zamień na inne” – podpowie odpowiedniki (te same mięśnie, podobna trudność). Zmiana zapisze się po „Zapisz plan”.",
       "Pusty znacznik w kalendarzu = trening jeszcze nieuzupełniony."
     ]

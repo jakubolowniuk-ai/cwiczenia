@@ -2383,3 +2383,13 @@ body.bez-przewijania { overflow: hidden; }
 .plyw-blok-gora { align-items: flex-start; }
 .plyw-wskazowka { margin: 0; }
 .plyw-szablony { margin-bottom: 6px; }
+.plyw-wiersze { display: flex; flex-direction: column; gap: 8px; }
+.plyw-wiersz { align-items: flex-end; }
+.plyw-wiersz .plyw-pole:first-child { flex: 0 0 92px; }
+.plyw-metry-wiersza { color: var(--tekst-szary); font-size: 13px; }
+.plyw-wiersz { align-items: flex-start; }
+.plyw-wiersz .plyw-usun-wiersz { margin-top: 30px; }
+.plyw-usun-wiersz { flex: 0 0 auto; margin-bottom: 2px; }
+.plyw-dodaj-styl { align-self: flex-start; }
+.plyw-style-mies { margin: 0 0 8px; }
+.gps-zgoda > * { flex-shrink: 0; }

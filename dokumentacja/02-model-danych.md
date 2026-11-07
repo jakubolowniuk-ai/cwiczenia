@@ -1,80 +1,97 @@
 # Model danych
 
-Wszystko jest zapisane w jednym obiekcie `dane` pod kluczem `localStorage` **`cwiczenia-dane-v1`** (JSON). Wartość `dane.wersjaUstawien` (obecnie **5**) pozwala przy zmianach ustawień zaktualizować starsze dane (`uzupelnijDane` w `dane.js`).
+Stan: wersja 98. Wszystko jest w jednym obiekcie `dane` pod kluczem `localStorage` **`cwiczenia-dane-v1`** (JSON). Kopia zapasowa to ten sam obiekt w pliku `.json`.
+
+- `dane.wersjaUstawien` (obecnie **5**) – przy zmianie ustawień startowych `uzupelnijDane` w `dane.js` aktualizuje starsze dane. Tę samą liczbę sprawdzają `app.js` i `WYMAGANA_WERSJA_DANYCH` w `kreator.js`.
+- `dane.wersjaBazy` – wersja wbudowanej bazy ćwiczeń (`WERSJA_BAZY = 15` w `kopia.js`); nowa wersja dopisuje brakujące ćwiczenia, opisy i zestawy.
+- Jednorazowe migracje mają własne znaczniki, np. `plywMigracja = 1` (pływanie w długościach, v97), `rekordyPrzeliczone`.
 
 ```
 dane = {
-  wersjaUstawien, kategorie[], stylePlywania[],
-  cwiczenia[], treningi[], szkicPlanu, plany[], historia[], ustawienia
+  wersjaUstawien, wersjaBazy, plywMigracja, przewodnikWidziany, rekordyPrzeliczone,
+  kategorie[], stylePlywania[], cwiczenia[], treningi[],
+  szkicPlanu, plany[], historia[],
+  rekordyDystans[], mozliwosci, cele[], sciezkiPostep{}, samopoczucie[],
+  ustawienia{}
 }
 ```
 
+Poza tym obiektem:
+- `localStorage` `cwiczenia-trening-trwa` – otwarty tryb „Ćwicz” (do wznowienia, 12 h), `cwiczenia-bieg-trwa` – trwający bieg (stoper, odcinki, potwierdzenie Stop).
+- IndexedDB `cwiczenia-gps`, sklep `trasy` – surowe punkty tras GPS (`[lat, lon, czas ms, dokładność, wysokość, odcinek]`). Nie wchodzą do kopii; każdą trasę można pobrać jako GPX.
+
 ## kategorie
 Jedna lista, trzy typy:
-- **rodzaj**: `{ id, nazwa, typ: "rodzaj", miara: "serie"|"sesja"|"statyczna", polaPlanu: [...] }`. `polaPlanu` to pola w kreatorze: `partia`, `dystans`, `czas`, `styl`, `dlugosci`.
-- **partia**: `{ id, nazwa, typ: "partia" }`
-- **miesien**: `{ id, nazwa, typ: "miesien", partiaId }`. Id musi zgadzać się z kształtem w `anatomia.js`.
-
-Id rodzajów: `rodzaj-cialo` (nazwa „Siłownia”), `rodzaj-kalistenika`, `rodzaj-statyczny`, `rodzaj-rozciaganie`, `rodzaj-bieganie`, `rodzaj-basen`.
-Id partii: `partia-plecy`, `-brzuch`, `-klatka`, `-nogi`, `-barki`, `-ramiona`, `-posladki`, `-szyja`.
-
-**Mięśnie (43)** są zdefiniowane w `MIESNIE_STARTOWE` (`dane.js`), a ich kształty w `ANATOMIA_KSZTALTY` (`anatomia.js`); id w obu miejscach muszą się zgadzać.
-**Wersja 5** rozdzieliła dawne mięśnie: triceps (2 głowy), skośne brzucha (2), czworogłowy uda (3), kulszowo-goleniowe (2), brzuchaty łydki (2), czworoboczny (3 części, dobór po nazwie ćwiczenia) i przedramiona (3, dobór po nazwie). Migracja przepisuje `miesnieIds` w ćwiczeniach i usuwa stare mięśnie. Import z pliku rozumie też dawne nazwy.
+- **rodzaj**: `{ id, nazwa, typ: "rodzaj", miara: "serie"|"statyczna"|"sesja", polaPlanu: [...] }`. Id: `rodzaj-cialo` (Siłownia), `rodzaj-kalistenika`, `rodzaj-statyczny`, `rodzaj-rozciaganie`, `rodzaj-rozgrzewka`, `rodzaj-joga`, `rodzaj-bieganie`, `rodzaj-basen` (`polaPlanu: ["styl","czas"]` – pola basenu rysuje `plyw.js`), `rodzaj-rower`, `rodzaj-spacer`.
+- **partia**: `{ id, nazwa, typ: "partia" }` – `partia-plecy`, `-brzuch`, `-klatka`, `-nogi`, `-barki`, `-ramiona`, `-posladki`, `-szyja`.
+- **miesien**: `{ id, nazwa, typ: "miesien", partiaId }` – 43 mięśnie (`MIESNIE_STARTOWE` w `dane.js`), kształty w `ANATOMIA_KSZTALTY` (`anatomia.js`); id muszą się zgadzać.
 
 ## stylePlywania
-Lista nazw: Kraul, Grzbietowy, Klasyczny, Motylkowy, Dowolny.
+`["Kraul", "Grzbietowy", "Klasyczny", "Motylkowy", "Zmienny", "Dowolnie wybrany"]` (+ ewentualne własne). Dawny „Dowolny” = Kraul (migracja v97).
 
 ## cwiczenia
 ```
 { id, nazwa, rodzajId, partieIds[], miesnieIds[], link,
-  style[]  // tylko basen
-}
+  poziom (1–5), zCiezarem, opis: { start, ruch, uwaga }, opisZBazy,
+  zBazy, ukryte, rekord: { typ, ciezar, powtorzenia, serie, czas, data },
+  przerwa (s, zapamiętana w trybie Ćwicz), style[] (basen), ilosc (stare dane) }
 ```
-Dawne pole `ilosc` (stare dane) jest nadal rozumiane.
+`zBazy: true` – z wbudowanej bazy (można ukryć, nie usunąć); brak – własne („Moje ćwiczenia”).
 
-**Kształty ilości** (parametry ćwiczenia w sesji):
-- `{ typ: "powtorzenia", serie, powtorzenia }`
-- `{ typ: "serie-lista", powtorzenia: [..] }`: osobna liczba powtórzeń w każdej serii
+**Ilość** (parametry ćwiczenia w treningu):
+- `{ typ: "powtorzenia", serie, powtorzenia, zakres?: [od, do], ciezary?: [kg…], wzor?: "opadajace" }`
+- `{ typ: "serie-lista", powtorzenia: [..], ciezary? }`
 - `{ typ: "czas", wartosc, jednostka }`
 - `{ typ: "czas-powtorzenia", powtorzenia, czas: { wartosc, jednostka } }`
-- `{ typ: "czas-serie", czasy: [..], jednostka }`: ćwiczenia statyczne z różnymi czasami serii
+- `{ typ: "czas-serie", czasy: [..], jednostka, ciezary? }`
 
-## treningi
-`{ id, nazwa, cwiczeniaIds[] }` (kolejność ma znaczenie).
+## treningi (zestawy ćwiczeń)
+`{ id, nazwa, cwiczeniaIds[], parametry?{ idĆw: ilosc }, blok?: "rozgrzewka"|"rozciaganie", zBazy?, roboczy?, ukryte? }`
+- `roboczy: true` – zestaw utworzony w planie, niewidoczny w „Moje zestawy”, dopóki nie zostanie zapisany.
 
 ## plany
 ```
-plan = { id, okres: "tydzien"|"miesiac", start, aktywnosci[], sesje[],
-         utworzono, zmieniono?, zamkniety?, zamknieto? }
+plan = { id, nazwa, okres: "tydzien"|"miesiac", start (RRRR-MM-DD), aktywnosci[], sesje[],
+         utworzono, zmieniono?, wylaczony?, zamkniety?, zamknieto?,
+         kreator?: { profil }, progresja?{}, tydzienTestu?, celeOpisy?{} }
 
-aktywnosc = { id, rodzajId, partiaId|null, razy, kolor, ... pola zależne od rodzaju }
-
-sesja = { id, aktywnoscId, dzien, treningId|null, parametry{ idĆwiczenia: ilosc },
-          styl, etapy: [{ styl, dlugosci }], dlugosci, dystans, kroki, czas,   // bieganie, basen
-          zrobione{ idĆwiczenia: true },         // zaliczane ćwiczenia treningu
-          wykonane{ idĆwiczenia: ilosc },        // faktycznie wykonane wartości
-          wynik{ dystans, kroki, czas, styl, dlugosci } // bieganie i basen, wpisany po sesji
-        }
+aktywnosc = { id, rodzajId, partiaId, partieIds[], ogolny, razy, kolor }
 ```
-- Dawne sesje basenu miały pojedyncze `styl` i `dlugosci`; nowe mają `etapy`.
-- Sesja jest **zaliczona**, gdy zrobiono wszystkie ćwiczenia treningu albo wpisano `wynik`.
-- Sesja z postępem jest zablokowana przy edycji planu.
-- Aktywny plan to ten bez `zamkniety`. Nowy plan zamyka poprzedni, a zamknięte plany zostają w danych jako historia.
-- Licznik celu = liczba zaliczonych sesji danej aktywności w planie.
+
+**sesja** (w interfejsie „trening”):
+```
+{ id, aktywnoscId, dzien (od startu planu), treningId, parametry{ idĆw: ilosc },
+  blokPrzedId?, blokPoId?, kolejnosc?[], notatka?,
+  zrobione{ idĆw: true }, wykonane{ idĆw: ilosc }, ocena{ idĆw: "latwo"|"wsam"|"ciezko" },
+  przebieg{ wyniki, extra, pominiete }, przerwaMnoznik?, zmianaDnia?{ typy, opis, oryginal },
+  dataWykonania?, wynik?, wynikSzkic?,
+  // bieganie, rower, spacer
+  rodzajBiegu?, dystans?, czas?, kroki?, obciazenie?, odcinki?[],
+  // basen
+  basen?{ dlugosc, jednostka: "m"|"yd" }, bloki?[], trybProsty?, czasSesji? (s), sprawdzian? }
+```
+- **Blok basenu**: `{ powt, dl (długości), styl, tryb: "przerwa"|"odjazd", przerwaS, odjazdS, pomoce[], intensywnosc, typ: "rozgrzewka"|"technika"|"glowna"|"wyciszenie", notatka }`. Tryb prosty = bloki z `powt: 1`, po jednym na styl. Metry = długości × długość basenu (jardy × 0,9144); `etapySesji()` liczy z bloków etapy `{ styl, metry }` dla starszego kodu.
+- **Wynik biegu**: `{ dystans, czas, wysilek, zrodlo: "reczny"|"stoper"|"gps"|"gpx", pauzy, czasPauzS, odcinkiWyniki?, trasaId?, gps? }`.
+- **Wynik basenu**: `{ bloki, basen, czas (sam czas pływania), czasSesji, najdluzszy (długości bez zatrzymania), wysilek }`.
+- Dawne pola basenu (`etapy`, `dlugosci`, `styl`) zamienia migracja v97 na bloki na basenie 25 m (metry bez zmian).
+- Trening jest **zaliczony**, gdy zrobiono wszystkie ćwiczenia albo jest `wynik`.
 
 ## szkicPlanu
-Rozpoczęty, niezapisany plan (`okres`, `start`, `aktywnosci`, `sesje`). W trybie edycji zapisanego planu szkic ma pole `edytowanyPlanId` i nie jest zapisywany na stałe.
+Rozpoczęty, niezapisany plan ręczny (`okres`, `start`, `aktywnosci`, `sesje`). W edycji zapisanego planu ma `edytowanyPlanId`.
 
-## historia
-Zarezerwowane pole (obecnie nieużywane). Historię tworzą zamknięte i zakończone plany z sesjami.
+## Profil kreatora (`plan.kreator.profil`)
+Odpowiedzi z „Ułóż mi plan” i stan bloków: `cel`, `dosw`, `dni`, `czas`, `sprzet`, `bol[]`, `tygodni`, `blokNr`, `kotwice`, `cele[]`, bieganie (`biegCel`, `biegPoziom`, `biegDni`, `silaDni`, `biegPrzes`), pływanie (`plywCel`, `plywBasen`, `plywTest`, `plywStyle[]`, `plywNowy`, `plywDni`, `plywCzas`, `plywPrzes`), adaptacja (`dniOryg`, `ocenyCw`, `ostatnie`, `adaptZmiany`).
+
+## Cele, ścieżki, możliwości
+- `dane.cele = [ { typ: "sciezka", id } | { typ: "liczba", k, cel } ]` (najwyżej 3 cele siłowe; ścieżki biegu i basenu dochodzą z planów).
+- `dane.sciezkiPostep = { idŚcieżki: { krok, data } }` – `krok` = indeks bieżącego kroku; równy liczbie kroków = cel osiągnięty.
+- `dane.mozliwosci = { data, wartosci: { pompki, podciagniecia, dipy, przysiady, plank, zwis, s_pch, s_wio, s_prz, d_pch, d_wio, d_prz } }` (`null` = nie wiem).
+- Ścieżki są w pliku `sciezki.json` (kroki z ćwiczeniem lub `warunek`: bieg – `minCzasS`, `minDystansM`, `maxPauz`…; basen – `minDlugosci`, `minCiaglyM`).
+
+## Pozostałe
+- `dane.rekordyDystans = [ { id, rodzajId, dystansM, styl?, czas (s), data } ]` – ręczne rekordy na dystansie.
+- `dane.samopoczucie = [ { data, stan, bol[] } ]` – odpowiedzi „Jak się dziś czujesz?” (90 ostatnich).
+- `dane.historia` – zarezerwowane (historię tworzą zamknięte plany).
 
 ## ustawienia
-`{ godzinaAlarmu: "18:30", alarmWlaczony, motyw: "jasny"|"ciemny" (brak = jak telefon) }`
-
-## Ciężary
-- Ćwiczenie: `zCiezarem` (boolean).
-- Ilość dla kształtów z seriami: opcjonalne `ciezary: [kg, ...]` (jedna liczba na serię; brak = bez ciężaru).
-- Wynik zaliczenia w `wykonane[cwiczenieId]` także może mieć `ciezary`.
-
-## Aktywność w planie: partie
-- `partieIds: []` (kilka partii) i `ogolny: boolean`; `partiaId` = pierwsza partia (zgodność ze starymi planami; brak `partieIds` = jedna partia z `partiaId`).
+`godzinaAlarmu`, `alarmWlaczony`, `motyw`; trening: `dzwiek`, `wibracja`, `przerwa`, `sztanga { gryf, talerze }`; bieganie: `biegPoziom`, `biegSerie`, `biegEkran`, `biegGps`, `biegOdcDyst`; pływanie: `basen { dlugosc, jednostka }`, `plywTryb` („prosty” | „zaawansowany”); kopia: `ostatniaKopia`, `kopiaOdlozona`; karty Dziś: `deloadDo`, `deloadOdrzucony`, `stagnacjaKarta`, `stagnacjaPomin`, `tydzienPodsumowany`.

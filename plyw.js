@@ -167,6 +167,8 @@ function plywOpisKrotki(s) {
   let t = plywLiczba(dl) + " dł. × " + plywOpisBasenu(b) + " = " + plywMetry(dl, b) + " m";
   if (style.length === 1) {
     t += " · " + style[0].toLowerCase();
+  } else if (style.length <= 3) {
+    t += " · " + plywWgStylow(bl).map(function (w) { return w.styl.toLowerCase() + " " + plywLiczba(w.dl); }).join(", ");
   } else if (bl.length > 1) {
     t += " · " + bl.length + (bl.length % 10 >= 2 && bl.length % 10 <= 4 && (bl.length % 100 < 12 || bl.length % 100 > 14) ? " bloki" : " bloków");
   }
@@ -441,7 +443,8 @@ function plywKartaPlanu(sesja) {
   let basenSesji = sesja.basen && sesja.basen.dlugosc > 0 ? Object.assign({}, sesja.basen) : null;
   const stare = Array.isArray(sesja.bloki) && sesja.bloki.length ? null : etapySesji(sesja);
   let bloki = plywBlokiSesji(sesja).map(function (b) { return Object.assign({}, b, { pomoce: (b.pomoce || []).slice() }); });
-  const daSieProsto = bloki.length <= 1 && (!bloki.length || (bloki[0].powt || 1) === 1);
+  // Tryb prosty = same wiersze „długości + styl” (każdy blok to jedno powtórzenie bez sprzętu i notatki)
+  const daSieProsto = bloki.every(function (b) { return (b.powt || 1) === 1 && !(b.pomoce || []).length && !b.notatka; });
   let prosty = !daSieProsto ? false : typeof sesja.trybProsty === "boolean" ? sesja.trybProsty : dane.ustawienia.plywTryb !== "zaawansowany";
 
   const basen = function () { return basenSesji || plywBasenDomyslny(); };
@@ -485,13 +488,12 @@ function plywKartaPlanu(sesja) {
     if (naProsty === prosty) {
       return;
     }
-    if (naProsty && (bloki.length > 1 || (bloki[0] && bloki[0].powt > 1))) {
-      const dl = plywDlugosci(bloki);
-      if (!confirm("Tryb prosty zapisze trening jako jeden blok: " + plywLiczba(dl) + " " + plywOdmianaDl(dl) + ". Podział na bloki zniknie. Przełączyć?")) {
+    if (naProsty && !bloki.every(function (b) { return (b.powt || 1) === 1 && !(b.pomoce || []).length && !b.notatka; })) {
+      const wiersze = plywWgStylow(bloki);
+      if (!confirm("Tryb prosty zapisze trening jako: " + wiersze.map(function (w) { return w.styl.toLowerCase() + " " + plywLiczba(w.dl) + " dł."; }).join(", ") + ". Powtórzenia, przerwy, sprzęt i notatki znikną. Przełączyć?")) {
         return;
       }
-      const glowny = plywStylDominujacy(bloki);
-      bloki = [plywBlokNowy({ powt: 1, dl: dl, styl: glowny, przerwaS: 0, intensywnosc: "umiarkowanie" })];
+      bloki = wiersze.map(function (w) { return plywBlokNowy({ powt: 1, dl: w.dl, styl: w.styl, przerwaS: 0, intensywnosc: "umiarkowanie" }); });
     }
     prosty = naProsty;
     rysuj();
@@ -508,6 +510,11 @@ function plywKartaPlanu(sesja) {
         el.appendChild(document.createTextNode(" " + plywOpisBloku(b, basen()) + " · " + plywNazwa(PLYW_INTENS, b.intensywnosc).toLowerCase()));
       }
     });
+    strefa.querySelectorAll(".plyw-wiersze").forEach(function (el) {
+      if (el.odswiezMetry) {
+        el.odswiezMetry();
+      }
+    });
     podsum.textContent = bloki.length ? plywPodsumowanie(bloki, basen()) : "Dodaj co najmniej jeden blok.";
     strefa.querySelectorAll("[data-metry]").forEach(function (el) {
       const b = bloki[Number(el.dataset.metry)];
@@ -522,26 +529,16 @@ function plywKartaPlanu(sesja) {
     bZaaw.classList.toggle("aktywny", !prosty);
     bProsty.setAttribute("aria-pressed", prosty ? "true" : "false");
     bZaaw.setAttribute("aria-pressed", prosty ? "false" : "true");
-    opisTrybu.textContent = prosty ? "Wpisz, ile długości basenu chcesz przepłynąć. Metry policzę sam." : "Rozgrzewka, technika, część główna i wyciszenie. Każdy blok: powtórzenia × długości.";
+    opisTrybu.textContent = prosty ? "Wpisz, ile długości basenu chcesz przepłynąć. Kilka stylów? Dotknij „+ Dodaj styl”. Metry policzę sam." : "Rozgrzewka, technika, część główna i wyciszenie. Każdy blok: powtórzenia × długości.";
     strefa.innerHTML = "";
     if (prosty) {
       if (!bloki.length) {
         bloki = [plywBlokNowy({ dl: 20, przerwaS: 0, intensywnosc: "umiarkowanie" })];
       }
-      const b = bloki[0];
-      b.powt = 1;
-      const rzad = plywEl("div", "rzad");
-      const dl = plywPoleLiczby("Długości", b.dl || "", { ulamki: true });
-      dl.pole.classList.add("plyw-dl-prosty");
-      dl.pole.addEventListener("input", function () { b.dl = Number(dl.pole.value) || 0; odswiez(); });
-      const st = plywWybor("Styl", plywListaStylow(b.styl), b.styl);
-      st.wybor.addEventListener("change", function () { b.styl = st.wybor.value; odswiez(); });
-      rzad.appendChild(dl.blok);
-      rzad.appendChild(st.blok);
-      strefa.appendChild(rzad);
-      const m = plywEl("p", "opis plyw-metry");
-      m.dataset.metry = "0";
-      strefa.appendChild(m);
+      bloki.forEach(function (b) { b.powt = 1; });
+      strefa.appendChild(plywWierszeStylow(bloki, basen, odswiez, function (w) {
+        return plywBlokNowy({ powt: 1, dl: w.dl, styl: w.styl, przerwaS: 0, intensywnosc: "umiarkowanie" });
+      }));
     } else {
       // Szablony
       const szab = plywEl("div", "plyw-szablony");
@@ -759,6 +756,83 @@ function plywKartaPlanu(sesja) {
   };
 }
 
+// Suma długości według stylów, w kolejności pierwszego wystąpienia: [{ styl, dl }]
+function plywWgStylow(bloki) {
+  const wynik = [];
+  bloki.forEach(function (b) {
+    const st = b.styl || "Kraul";
+    let w = wynik.find(function (x) { return x.styl === st; });
+    if (!w) {
+      w = { styl: st, dl: 0 };
+      wynik.push(w);
+    }
+    w.dl = Math.round((w.dl + (Number(b.powt) || 0) * (Number(b.dl) || 0)) * 100) / 100;
+  });
+  return wynik;
+}
+
+// Wiersze „długości + styl” z „+ Dodaj styl” i ✕ (plan w trybie prostym i wynik)
+// wiersze – tablica obiektów z polami dl i styl, zmieniana na miejscu; nowy(w) tworzy nowy wiersz
+function plywWierszeStylow(wiersze, basen, przyZmianie, nowy) {
+  const blok = plywEl("div", "plyw-wiersze");
+  function rysuj(fokusOstatni) {
+    blok.innerHTML = "";
+    wiersze.forEach(function (w, i) {
+      const rzad = plywEl("div", "rzad plyw-wiersz");
+      const dl = plywPoleLiczby("Długości", w.dl || "", { ulamki: true });
+      dl.pole.classList.add("plyw-wiersz-dl");
+      dl.pole.addEventListener("input", function () { w.dl = Number(dl.pole.value) || 0; licz(); przyZmianie(); });
+      const st = plywWybor("Styl", plywListaStylow(w.styl), w.styl);
+      st.wybor.setAttribute("aria-label", "Styl " + (i + 1));
+      dl.pole.setAttribute("aria-label", "Długości " + (i + 1));
+      st.wybor.addEventListener("change", function () { w.styl = st.wybor.value; przyZmianie(); });
+      const m = plywEl("span", "plyw-metry-wiersza");
+      m.dataset.wiersz = String(i);
+      dl.blok.appendChild(m);
+      rzad.appendChild(dl.blok);
+      rzad.appendChild(st.blok);
+      if (wiersze.length > 1) {
+        const x = plywEl("button", "plyw-akcja plyw-usun-wiersz", "✕");
+        x.type = "button";
+        x.setAttribute("aria-label", "Usuń styl " + w.styl);
+        x.addEventListener("click", function () {
+          wiersze.splice(i, 1);
+          rysuj(false);
+          przyZmianie();
+        });
+        rzad.appendChild(x);
+      }
+      blok.appendChild(rzad);
+    });
+    const dodaj = plywEl("button", "przycisk drugi plyw-dodaj-styl", "+ Dodaj styl");
+    dodaj.type = "button";
+    dodaj.addEventListener("click", function () {
+      const uzyte = wiersze.map(function (w) { return w.styl; });
+      const wolny = PLYW_STYLE.find(function (st) { return uzyte.indexOf(st) === -1 && st !== "Dowolnie wybrany" && st !== "Zmienny"; }) || "Dowolnie wybrany";
+      wiersze.push(nowy({ dl: 4, styl: wolny }));
+      rysuj(true);
+      przyZmianie();
+    });
+    blok.appendChild(dodaj);
+    licz();
+    if (fokusOstatni) {
+      const pola = blok.querySelectorAll(".plyw-wiersz-dl");
+      if (pola.length) {
+        pola[pola.length - 1].focus();
+      }
+    }
+  }
+  function licz() {
+    blok.querySelectorAll("[data-wiersz]").forEach(function (el) {
+      const w = wiersze[Number(el.dataset.wiersz)];
+      el.textContent = w && Number(w.dl) > 0 ? "= " + plywMetry(Number(w.dl), basen()) + " m" : "\u00a0";
+    });
+  }
+  rysuj(false);
+  blok.odswiezMetry = licz;
+  return blok;
+}
+
 function plywStylDominujacy(bloki) {
   const s = {};
   bloki.forEach(function (b) { s[b.styl] = (s[b.styl] || 0) + (b.powt || 0) * (b.dl || 0); });
@@ -771,9 +845,6 @@ function plywKartaWyniku(start, opcje) {
   const planBloki = plywBlokiSesji(plan);
   const planDl = plywDlugosci(planBloki);
   const basenW = plywBasen(start.bloki ? start : plan);
-  const style = {};
-  planBloki.forEach(function (b) { style[b.styl] = true; });
-  const mieszane = Object.keys(style).length > 1;
   const startBloki = plywBlokiSesji(start);
   const startDl = plywDlugosci(startBloki);
   const karta = plywEl("div", "formularz parametry-karta plyw-karta plyw-wynik");
@@ -813,15 +884,19 @@ function plywKartaWyniku(start, opcje) {
   }
   karta.appendChild(pola);
 
-  const rz1 = plywEl("div", "rzad");
-  const dl = plywPoleLiczby("Przepłynięte długości", startDl || "", { ulamki: true });
-  dl.pole.classList.add("plyw-wynik-dl");
-  rz1.appendChild(dl.blok);
-  const opcjeStylu = (mieszane ? [["plan", "Jak w planie"]] : []).concat(plywListaStylow(plywStylDominujacy(startBloki)));
-  const startStyl = mieszane && startDl === planDl ? "plan" : plywStylDominujacy(startBloki);
-  const st = plywWybor("Styl", opcjeStylu, startStyl);
-  rz1.appendChild(st.blok);
-  pola.appendChild(rz1);
+  // Przepłynięte długości według stylów (wiersze z „+ Dodaj styl”), na start z planu albo wcześniejszego wyniku
+  const startWiersze = plywWgStylow(startBloki);
+  const wiersze = startWiersze.map(function (w) { return { styl: w.styl, dl: w.dl }; });
+  pola.appendChild(plywEl("div", "plyw-etyk", "Przepłynięte długości"));
+  const blokWierszy = plywWierszeStylow(wiersze, function () { return basenW; }, function () { licz(); }, function (w) { return w; });
+  blokWierszy.classList.add("plyw-wynik-wiersze");
+  pola.appendChild(blokWierszy);
+  const sumaWierszy = function () {
+    return Math.round(wiersze.reduce(function (a, w) { return a + (Number(w.dl) || 0); }, 0) * 100) / 100;
+  };
+  const takieSame = function (a, b) {
+    return a.length === b.length && a.every(function (x, i) { return x.styl === b[i].styl && Math.abs((Number(x.dl) || 0) - b[i].dl) < 0.001; });
+  };
 
   const czasP = plywPoleCzasu("Czas pływania (opcjonalnie – do tempa i rekordów)", start.czas ? sekundyZ(start.czas.wartosc, start.czas.jednostka) : 0);
   pola.appendChild(czasP.blok);
@@ -866,26 +941,26 @@ function plywKartaWyniku(start, opcje) {
   karta.appendChild(blad);
 
   function licz() {
-    const d = Number(dl.pole.value) || 0;
+    const d = sumaWierszy();
     const m = plywMetry(d, basenW);
     const cz = czasP.odczyt();
     const t = plywTempo(cz, m);
     info.textContent = d > 0 ? plywLiczba(d) + " " + plywOdmianaDl(d) + " = " + m + " m" + (t ? " · tempo " + plywOpisTempa(t) : "") : "";
   }
-  [dl.pole].concat(czasP.pola).forEach(function (p) { p.addEventListener("input", licz); });
+  czasP.pola.forEach(function (p) { p.addEventListener("input", licz); });
   licz();
 
   return {
     sesja: true,
     karta: karta,
     odczytaj: function () {
-      const d = Number(dl.pole.value);
-      if (!(d > 0)) {
+      const d = sumaWierszy();
+      if (!(d > 0) || wiersze.some(function (w) { return !(Number(w.dl) > 0); })) {
         pola.hidden = false;
         if (opcje.przyciskZapisz) {
           opcje.przyciskZapisz.hidden = false;
         }
-        blad.textContent = "Wpisz liczbę przepłyniętych długości.";
+        blad.textContent = d > 0 ? "Wpisz liczbę długości w każdym wierszu albo usuń pusty wiersz (✕)." : "Wpisz liczbę przepłyniętych długości.";
         return null;
       }
       const cz = czasP.odczyt();
@@ -901,13 +976,14 @@ function plywKartaWyniku(start, opcje) {
         blad.textContent = "Najdłuższy odcinek nie może być dłuższy niż cały trening (" + plywLiczba(d) + " dł.).";
         return null;
       }
+      // Bez zmian względem planu (albo wcześniejszego wyniku) – zostają jego bloki; inaczej jeden blok na styl
       let bloki;
-      if (Math.abs(d - planDl) < 0.001 && (st.wybor.value === "plan" || (!mieszane && st.wybor.value === plywStylDominujacy(planBloki)))) {
+      if (takieSame(wiersze, plywWgStylow(planBloki))) {
         bloki = planBloki.map(function (x) { return Object.assign({}, x, { pomoce: (x.pomoce || []).slice() }); });
-      } else if (Math.abs(d - startDl) < 0.001 && st.wybor.value === startStyl && start.bloki) {
-        bloki = startBloki.map(function (x) { return Object.assign({}, x); });
+      } else if (start.bloki && takieSame(wiersze, startWiersze)) {
+        bloki = startBloki.map(function (x) { return Object.assign({}, x, { pomoce: (x.pomoce || []).slice() }); });
       } else {
-        bloki = [plywBlokNowy({ powt: 1, dl: d, styl: st.wybor.value === "plan" ? plywStylDominujacy(planBloki) : st.wybor.value, przerwaS: 0, intensywnosc: "umiarkowanie" })];
+        bloki = wiersze.map(function (w) { return plywBlokNowy({ powt: 1, dl: Number(w.dl), styl: w.styl, przerwaS: 0, intensywnosc: "umiarkowanie" }); });
       }
       blad.textContent = "";
       return {
@@ -1115,6 +1191,21 @@ function plywKartaPostepu() {
     const ost = zTempem[0];
     const sr = zTempem.slice(0, 5).reduce(function (s, p) { return s + p.tempo; }, 0) / Math.min(5, zTempem.length);
     karta.appendChild(plywEl("div", "plyw-tempo", "Tempo: ostatnio " + plywOpisTempa(ost.tempo) + (zTempem.length > 1 ? " · średnio z " + Math.min(5, zTempem.length) + " ostatnich " + plywOpisTempa(sr) : "")));
+  }
+
+  // Metry według stylów w bieżącym miesiącu
+  const miesiac = dzis.slice(0, 7);
+  const wgStylu = {};
+  lista.forEach(function (p) {
+    if (p.data && p.data.slice(0, 7) === miesiac) {
+      plywWgStylow(plywBlokiSesji(Object.assign({}, p.sesja.wynik, { basen: p.basen }))).forEach(function (w) {
+        wgStylu[w.styl] = (wgStylu[w.styl] || 0) + plywMetry(w.dl, p.basen);
+      });
+    }
+  });
+  const styleMies = Object.keys(wgStylu).sort(function (a, b) { return wgStylu[b] - wgStylu[a]; });
+  if (styleMies.length) {
+    karta.appendChild(plywEl("div", "plyw-style-mies", "Style w tym miesiącu: " + styleMies.map(function (st) { return st.toLowerCase() + " " + plywKm(wgStylu[st]); }).join(" · ")));
   }
 
   const chipy = plywEl("div", "chipy bieg-chipy");

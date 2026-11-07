@@ -12,6 +12,8 @@ const fs = require("fs");
     p.on("pageerror", (e) => console.log("BŁĄD:", e.message));
     await p.goto("file://" + sciezka + "/index.html");
     await p.waitForTimeout(2000);
+    // Bez karty przypomnienia o kopii na zrzutach
+    await p.evaluate(() => { dane.ustawienia.ostatniaKopia = dataDzisTekst(); zapiszDane(); });
     return p;
   };
   const zrzut = (p, n) => p.screenshot({ path: sciezka + "/przewodnik/" + n + ".png" });
@@ -21,9 +23,17 @@ const fs = require("fs");
   const p = await nowa();
   await zrzut(p, "01-start");
 
+  // Moje możliwości (wypełniony test)
+  await p.evaluate(() => {
+    dane.mozliwosci = { data: dzisISO(), wartosci: { pompki: 22, podciagniecia: 6, dipy: 10, przysiady: 40, plank: 75, zwis: 45, s_pch: 50, s_wio: 45, s_prz: 60 } };
+    zapiszDane();
+    otworzMozliwosci();
+  });
+  await p.waitForTimeout(400);
+  await zrzut(p, "02b-mozliwosci");
+  await p.evaluate(() => mzZamknij());
+
   await p.tap("#dzis-uloz-plan");
-  await p.waitForTimeout(300);
-  await p.locator(".pk-opcja").nth(0).tap();
   await p.waitForTimeout(300);
   await zrzut(p, "02-kreator");
 
@@ -120,14 +130,24 @@ const fs = require("fs");
   // Baza ćwiczeń
   await p.evaluate(() => pokazEkran("ekran-cwiczenia"));
   await p.waitForTimeout(300);
-  if (await p.locator("#blok-filtrow").isHidden()) await p.evaluate(() => (document.getElementById("blok-filtrow").hidden = false));
-  await p.locator("#chipy-partie .chip", { hasText: "Plecy" }).tap();
-  await p.locator("#chipy-miesnie .chip").nth(3).tap();
+  await p.tap("#przycisk-filtry");
   await p.waitForTimeout(300);
+  await p.locator("#chipy-partie .chip", { hasText: "Plecy" }).tap();
+  await p.waitForTimeout(200);
+  await p.tap("#przycisk-pokaz-wyniki");
+  await p.waitForTimeout(300);
+  await p.locator("#lista-cwiczen .karta").first().tap();
+  await p.waitForTimeout(400);
   await zrzut(p, "12-baza");
+  await p.evaluate(() => document.querySelectorAll(".gps-zgoda-tlo").forEach((x) => x.remove()));
   await p.tap("#przelacznik-treningi");
   await p.waitForTimeout(300);
   await zrzut(p, "13-moje-zestawy");
+  await p.tap("#przelacznik-sciezki");
+  await p.waitForTimeout(300);
+  await p.evaluate(() => { const g = document.querySelector(".sciezka-grupa-przycisk"); if (g) g.click(); });
+  await p.waitForTimeout(300);
+  await zrzut(p, "17-sciezki");
 
   // Koniec planu: kolejny blok
   await p.evaluate(() => {
@@ -160,6 +180,57 @@ const fs = require("fs");
   await p.waitForTimeout(300);
   await zrzut(p, "12b-ukryte");
   await p.evaluate(() => pkZamknij());
+
+  // ===== Bieganie: ekran biegu =====
+  const g = await nowa();
+  await g.evaluate(() => {
+    dane.ustawienia.biegGps = false;
+    pkOtworz();
+    Object.assign(pkProfil, { cel: "bieg", biegCel: "pierwsze5", bieg20: false, biegPoziom: null, biegDni: 3, silaDni: 0, tygodni: 8 });
+    pkKrok = pkKroki().length - 1;
+    pkRysuj();
+  });
+  await g.waitForTimeout(300);
+  await g.locator(".pk-nakladka button:text-is('Zacznij')").tap();
+  await g.waitForTimeout(500);
+  await g.evaluate(() => {
+    const plan = aktywnyPlan();
+    const s = plan.sesje.slice().sort((a, b) => a.dzien - b.dzien)[0];
+    plan.start = dzisISO();
+    s.dzien = 0;
+    zapiszDane();
+    rysujDzis();
+  });
+  await g.waitForTimeout(300);
+  const start = g.locator("#dzis-sesje button", { hasText: "Start" }).first();
+  if (await start.count()) {
+    await start.tap();
+    await g.waitForTimeout(3500);
+    await zrzut(g, "15-bieg");
+  }
+
+  // ===== Pływanie: plan i trening na Dziś =====
+  const w = await nowa();
+  await w.evaluate(() => {
+    pkOtworz();
+    Object.assign(pkProfil, { cel: "plywanie", plywCel: "bez1000", plywBasen: { dlugosc: 25, jednostka: "m" }, plywTest: 8, plywStyle: ["Kraul", "Grzbietowy"], plywDni: 2, plywCzas: 45, tygodni: 12 });
+    pkKrok = pkKroki().length - 1;
+    pkRysuj();
+  });
+  await w.waitForTimeout(300);
+  await w.locator(".pk-nakladka button:text-is('Zacznij')").tap();
+  await w.waitForTimeout(500);
+  await w.evaluate(() => {
+    const plan = aktywnyPlan();
+    plan.start = dzisISO();
+    zapiszDane();
+    rysujDzis();
+    const d = document.querySelector(".plyw-dzis-bloki");
+    if (d) { d.open = true; d.closest(".karta, .dzis-sesja, div").scrollIntoView(); }
+    window.scrollBy(0, -60);
+  });
+  await w.waitForTimeout(400);
+  await zrzut(w, "16-basen");
 
   // ===== Plan ręczny: kalendarz =====
   const r = await nowa();

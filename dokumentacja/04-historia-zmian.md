@@ -1,0 +1,578 @@
+# Historia zmian
+
+Zapis zmian wersja po wersji (od początku projektu do dziś). Opis aktualnego stanu aplikacji jest w `01-funkcjonalnosc.md`; początkowe sekcje poniżej opisują pierwsze wersje i bywają nieaktualne.
+
+## Cel
+Pomagać codziennie wykonywać wybrane ćwiczenia i aktywności, planować je i przypominać o nich. Prosto i intuicyjnie.
+
+## Nawigacja
+Dolny pasek z głównymi ekranami: **Dziś**, **Ćwiczenia**, **Postęp**. Ustawienia otwiera ikona zębatki na ekranie „Dziś”. Na górze formularzy i okien jest strzałka wstecz.
+
+## Rodzaje aktywności (dane, lista otwarta)
+| Rodzaj | Miara w formularzu ćwiczenia | Pola w kreatorze planu |
+|---|---|---|
+| Siłownia | serie i powtórzenia albo czas | partia |
+| Kalistenika | serie i powtórzenia albo czas | partia |
+| Trening statyczny | powtórzenia i czas | brak |
+| Rozciąganie | serie i powtórzenia albo czas | brak |
+| Bieganie | dystans i czas | dystans, czas |
+| Basen | style, długości | styl, długości |
+| Rower | dystans i czas | dystans, czas |
+| Spacer | kroki, dystans i czas (co najmniej jedno) | kroki, dystans, czas |
+| Joga / mobilność | powtórzenia i czas (pozycje trzymane) | brak |
+
+Zawsze dochodzi pole „ile razy w okresie”.
+
+## Partie i mięśnie
+- **Partie** (8): Plecy, Brzuch, Klatka piersiowa, Nogi, Barki, Ramiona, Pośladki, Szyja. Można dodawać własne.
+- **Mięśnie** (43), każdy przypisany do partii. Zestaw pochodzi z dokumentu „Mapa mięśni – baza wiedzy dla czatbota” (41 mięśni) plus **równoległoboczny** i **pośladkowy mały**, których tam brakowało, a używa ich wiele ćwiczeń.
+  - Klatka: piersiowy większy, zębaty przedni
+  - Barki: naramienny przedni, środkowy, tylny, podgrzebieniowy
+  - Ramiona: biceps, ramienny, triceps (głowa boczna, głowa długa), ramienno-promieniowy, zginacze i prostowniki przedramienia
+  - Plecy: czworoboczny (część górna, środkowa, dolna), najszerszy grzbietu, obły większy, równoległoboczny, prostowniki grzbietu, wielodzielny, czworoboczny lędźwi
+  - Brzuch: prosty, skośny zewnętrzny, skośny wewnętrzny, poprzeczny, biodrowo-lędźwiowy
+  - Pośladki: pośladkowy wielki, średni, mały, napinacz powięzi szerokiej
+  - Nogi: prosty uda, obszerny boczny, obszerny przyśrodkowy, dwugłowy uda, półścięgnisty i półbłoniasty, przywodziciele, brzuchaty łydki (dwie głowy), płaszczkowaty, strzałkowe, piszczelowy przedni
+  - Szyja: mostkowo-obojczykowo-sutkowy
+- **Jedna grafika**: sylwetka z przodu i z tyłu (bez widoku z boku). W formularzu ćwiczenia jest zawsze na wierzchu: dotknięcie mięśnia zaznacza go, a wybrane mięśnie przeskakują na górę listy w sekcji „Wybrane”. Ta sama sylwetka służy w oknie mięśni ćwiczenia i w Postępie.
+- Wybranie mięśnia dopisuje też jego partię do partii ćwiczenia.
+
+## Zakładka Ćwiczenia
+- Przełącznik **Baza** / **Moje treningi**.
+- **Baza ćwiczeń**: lista z wyszukiwaniem, filtrami (rodzaj, partia, **mięsień**) i zwijaniem grup. Filtr mięśnia to lista pogrupowana według partii, z liczbą ćwiczeń przy każdym mięśniu. Długie listy dopisują się porcjami.
+- Formularz ćwiczenia: nazwa, rodzaj, partie, mięśnie (sylwetka do dotykania i lista), link do filmu. Dla basenu: kilka stylów.
+- **Moje treningi**: trening to nazwa i lista ćwiczeń z bazy. Wybór ćwiczeń ma wyszukiwanie i filtry.
+
+## Tworzenie planu (kreator)
+1. **Okres i aktywności**: tydzień lub miesiąc, data startu. „+ Dodaj aktywność”: rodzaj, pola zależne od rodzaju, ile razy w okresie. Kilka partii to osobne wpisy. Miękkie ostrzeżenie, gdy sesji jest wyraźnie więcej niż dni.
+2. **Kalendarz**: sesje dodaje się do dni ręcznie (jeden dzień może mieć kilka sesji). Można też zlecić automatyczny rozkład. Licznik „do rozłożenia” maleje.
+3. **Edycja sesji** w panelu: trening (dla aktywności treningowych), parametry ćwiczeń, a dla sesji biegania i basenu cel.
+   - **Parametry ćwiczenia**: serie z listą powtórzeń (każda seria może mieć inną liczbę), czas, czas z powtórzeniami, lista czasów serii (ćwiczenia statyczne).
+   - **Basen**: etapy, każdy z własnym stylem i liczbą długości. Suma długości jest celem sesji.
+4. **Przenoszenie sesji** na inny dzień (z podglądem, co jest w danym dniu) i usuwanie sesji.
+5. **Zapis planu**: wymaga rozłożenia wszystkich sesji i uzupełnienia treningów.
+
+Rozpoczęty szkic planu zapisuje się sam i można do niego wrócić.
+
+## Edycja zapisanego planu
+Przycisk edycji na ekranie „Dziś” i w „Postępie”. Zmienia się aktywności i sesje. Sesje, w których zaczęto zaliczanie, są zablokowane.
+
+## Ekran Dziś
+- Podsumowanie planu: zaliczone sesje, który to dzień.
+- Karty sesji na dany dzień. Dla treningu: odhaczanie ćwiczeń. Dla biegania i basenu: przycisk „Wpisz wynik”.
+- **Okno wartości** po odhaczeniu ćwiczenia: pola z faktycznie wykonanymi powtórzeniami lub czasami, wstępnie wypełnione celem. Plus i minus zmieniają wartość; widać aktualną.
+- Sesja jest zaliczona, gdy zrobiono wszystkie ćwiczenia albo wpisano wynik. Znacznik „◐”, gdy któreś ćwiczenie zrobiono poniżej planu.
+- Stany specjalne: brak planu (przycisk „Utwórz plan”), dzień odpoczynku (z informacją o następnej sesji), koniec planu (podsumowanie).
+- Usuwanie planu z potwierdzeniem.
+
+## Ekran Postęp
+- Postęp w celach planu (np. „bieganie 3/8”) i pasek procentowy.
+- Zaangażowane mięśnie w planie: sylwetka z poziomami (więcej / mniej obciążenia), z obrysem mięśni z planu.
+- Porównanie wyników sesji z rekordami (rodziny wartości liczone po typie ilości).
+- Wejście do edycji planu.
+
+## Ustawienia
+- **Przypomnienia**: przełącznik, godzina, plik kalendarza `.ics` dla sesji od dziś.
+- **Motyw**: jasny, ciemny albo jak w telefonie.
+- **Dane**:
+  - *Zapisz kopię zapasową*: cały stan do pliku `.json` na telefonie.
+  - *Wczytaj kopię*: zastępuje wszystkie dane danymi z pliku.
+  - *Wczytaj przykładowe ćwiczenia*: dodaje 219 gotowych ćwiczeń. Istniejące o tej samej nazwie są pomijane (zostaje im tylko uzupełnienie brakujących mięśni).
+  - *Dodaj ćwiczenia z pliku*: własna lista w formacie JSON (patrz niżej).
+  - *Pobierz wzór pliku z ćwiczeniami*.
+
+### Format pliku z ćwiczeniami
+```json
+{ "cwiczenia": [
+  { "nazwa": "Podciąganie nachwytem", "rodzaj": "Kalistenika",
+    "partie": ["Plecy"], "miesnie": ["Najszerszy grzbietu", "Biceps"], "link": "" }
+] }
+```
+Rodzaj i mięśnie dopasowuje się po nazwie (bez względu na wielkość liter). Nieznana partia jest tworzona automatycznie, nieznany rodzaj lub mięsień jest zgłaszany jako błąd i ćwiczenia nie dodaje.
+
+## Przykładowe ćwiczenia (w aplikacji)
+- `przyklady-kalistenika.json`: 99 pozycji (kalistenika i trening statyczny).
+- `przyklady-silownia.json`: 95 pozycji (94 siłownia, 1 trening statyczny: deska z talerzem).
+- `przyklady-mobilnosc.json`: 25 pozycji jogi i mobilności (rodzaj „Joga / mobilność”).
+- Zasady: nazwy po polsku w spójnym stylu; ćwiczenia izometryczne w „Trening statyczny”; warianty z ciężarem i na maszynach osobno od wersji z masą ciała.
+
+## Zasady prostoty
+- Mało głównych ekranów, jedna główna akcja na ekran.
+- Bez konta i logowania, dane tylko w telefonie.
+- Zmiana zbędna albo myląca jest cofana (patrz decyzje w `00-instrukcja-projektu.md`).
+
+## Ciężary (kg)
+- Ćwiczenie ma pole `zCiezarem` (włączane osobno przy każdym ćwiczeniu; domyślnie włączone dla Siłowni).
+- W planie przy takim ćwiczeniu jest blok ciężaru: jedna wartość albo osobny ciężar w każdej serii.
+- W oknie wartości na ekranie Dziś są kroki po 2,5 kg; „Różne powtórzenia i ciężary w seriach" rozpisuje je na serie.
+- Adnotacja „Ostatnio (dd.mm): …" pokazuje ostatnie wykonanie (w planie i po jego zakończeniu).
+- Sugerowany plan: jeszcze nie zrobiony (do omówienia).
+
+## Partie w aktywności planu
+- W kreatorze (krok 1) można wybrać kilka partii naraz albo „Ogólnorozwojowy (całe ciało)" (Siłownia, Kalistenika).
+- Ćwiczenie pasuje do aktywności, gdy ma choć jedną z wybranych partii; ogólnorozwojowa pasuje do każdego ćwiczenia tego rodzaju.
+
+## Filtr mięśni w bazie ćwiczeń
+- Po wybraniu partii pod nią pojawiają się chipy jej mięśni z licznikami; można zaznaczyć kilka (pasuje ćwiczenie z którymkolwiek). Zmiana partii czyści wybór mięśni.
+- Bez wybranej partii działa lista rozwijana „Wybierz mięsień" (ustawia też partię).
+
+## Historia
+- Postęp → „Poprzednie plany": zamknięte plany z procentem realizacji; dotknięcie otwiera szczegóły okresu.
+- Ćwiczenia → „Historia" przy ćwiczeniu: lista wykonań (data, serie × powt., ciężar, plan) i największy ciężar.
+- „Usuń plan" ostrzega, że kasuje historię, i proponuje „Zamknij plan (zachowaj historię)".
+
+## Baza startowa i ukrywanie ćwiczeń
+- Przy pierwszym starcie aplikacja sama wczytuje bazę (3 pliki `przyklady-*.json`, 219 ćwiczeń); `dane.wersjaBazy` zapamiętuje, że to zrobiono. Brak internetu: ponowna próba przy następnym starcie. Kto ma już ćwiczenia, dostaje tylko oznaczenie `zBazy` na pasujących nazwach.
+- Ćwiczenia z bazy (`zBazy: true`) można tylko ukryć; własne można ukryć lub usunąć.
+- „Ukryj" ustawia `ukryte: true`: ćwiczenie znika z listy, wyboru do treningów i planu oraz z liczników. „Pokaż ukryte (n)" na liście pokazuje ukryte z przyciskiem „Przywróć".
+- Ukryte ćwiczenie w istniejącym treningu zostaje (z dopiskiem „(ukryte)"); historia jest bez zmian.
+- Przycisk „Uzupełnij bazę ćwiczeń przykładowych" w Ustawieniach dopisuje brakujące ćwiczenia z bazy.
+
+## Prowadzenie przy tworzeniu planu
+- Ekran Dziś bez planu pokazuje 3 kroki (aktywności → rozkład na dni → ćwiczenia).
+- Każdy krok kreatora ma krótki wstęp u góry; puste sesje podpowiadają, co dotknąć („Dotknij, aby wybrać trening lub ćwiczenia").
+
+## Ćwiczenia w sesji planu (bez pojęcia „trening")
+- W sesji przycisk „Dodaj ćwiczenia" od razu otwiera listę ćwiczeń z bazy (sugerowane dla aktywności, albo wszystkie). „Zmień ćwiczenia" wczytuje obecny zestaw do edycji.
+- Zestaw powstaje automatycznie z flagą `roboczy: true` i nazwą „<aktywność> d.m"; nie pokazuje się w „Moje treningi". Pole „Zapisz w Moich zestawach" (z nazwą) zapisuje go na stałe.
+- „Z moich zestawów" (tylko gdy są zapisane zestawy) pozwala wybrać gotowy.
+
+## Przewodnik „Jak to działa?"
+- 10 kart ze zrzutami ekranu (`przewodnik/*.webp`), tekst w `przewodnik.js`. Otwiera się sam przy pierwszym uruchomieniu (`dane.przewodnikWidziany`), potem pod przyciskami „Jak to działa?" (ekran Dziś bez planu) i w Ustawieniach → Pomoc.
+- Nie pokazuje się w automatycznych testach (`navigator.webdriver`).
+- Zrzuty odświeża skrypt `narzedzia/zrzuty-przewodnika.js` (dane demonstracyjne z działającej aplikacji); po zmianach wyglądu uruchomić go ponownie i podnieść wersję.
+- Podpowiedzi ćwiczeń w sesji dla aktywności z partiami dopasowują też rodzaj (Siłownia → tylko ćwiczenia siłowni); reszta pod „Pokaż wszystkie ćwiczenia z bazy".
+
+## Rekordy
+- Przycisk „Rekord" przy ćwiczeniu: ręczny wpis (ciężar × powtórzenia + liczba serii; albo powtórzenia; albo czas) i opcjonalna data. Zapis w `cwiczenie.rekord = {typ, ciezar, powtorzenia, serie, czas(s), data}`.
+- Definicja: siłownia (ćwiczenia z ciężarem) = najcięższa seria (przy równym ciężarze więcej powtórzeń); bez ciężaru = najwięcej powtórzeń w serii; na czas = najdłuższy czas.
+- Po zaliczeniu ćwiczenia lepiej niż rekord (a gdy go nie ma: lepiej niż najlepszy wynik z historii) aplikacja pyta „Nowy rekord! Zapisać?". Ręczny rekord zmienia się tylko za zgodą.
+- Rekord widać na karcie ćwiczenia, na ekranie Dziś i w oknie Historia.
+- Postęp → „Rekordy aktywności": najdłuższy dystans, najwięcej kroków i najdłuższy czas dla biegania, roweru, spaceru itd. (liczone automatycznie z wyników).
+- Kod: `rekordy.js`.
+
+## Rekordy na dystansie i basen w metrach
+- Basen: dystans w metrach osobno dla każdego stylu (`etapy: [{styl, metry}]`), opcjonalny czas sesji. Stare sesje z długościami basenu są liczone jako 25 m na długość (`etapySesji`). Pole rodzaju: `polaPlanu: ["styl","czas"]` (migracja w dane.js).
+- Postęp → „Moje rekordy na dystansie": użytkownik sam dodaje dystans (podpowiedzi: bieganie 1/3/5/10 km, półmaraton, maraton; rower 10/20/40/50/100 km; basen 50–1500 m + styl; własny dystans w km lub m) i opcjonalnie rekord (czas). Zapis: `dane.rekordyDystans = [{id, rodzajId, dystansM, styl, czas(s), data}]`.
+- Po wpisaniu wyniku sesji (bieganie/rower z dystansem i czasem; basen z jednym stylem i czasem) dystans w tolerancji 2% i krótszy czas → „Nowy rekord! Zapisać?".
+- „Najdłuższe wyniki" (automatycznie): najdłuższy dystans i najwięcej kroków; bez „najdłuższego czasu" (dłuższy czas to nie postęp przy biegu, rowerze, spacerze i pływaniu). Dłuższy czas zostaje rekordem tylko w ćwiczeniach (statyka, joga).
+
+## Poprawki interfejsu (v35)
+- Okna rekordów (ćwiczenie i dystans) mają taki sam wygląd pól jak formularze kart (etykieta nad polem, wysokie pola); pole „własny dystans" jest szersze od wyboru jednostki.
+- Przyciski na karcie ćwiczenia (Mięśnie, Rekord, Historia, Film, Edytuj, Ukryj, Usuń) ułożone w siatce 3 kolumn pod nazwą, zamiast w jednym wąskim rzędzie.
+- Ciężar przy planowaniu: pole „Ciężar (kg)" obok „Serie" i „Powtórzenia"; przy różnych powtórzeniach w seriach każda seria ma parę „powtórzenia + ciężar". Ćwiczenia statyczne: jedno pole ciężaru obok jednostki.
+- Czas aktywności w formularzu sesji wpisuje się jako minuty i sekundy (mm:ss); zapis w danych w sekundach, wyświetlany jako „24 min 30 s".
+
+## Zestawy i formularz ćwiczenia (v36)
+- Zestawy (Moje treningi i budowa zestawu w planie) obejmują tylko aktywności z ćwiczeniami; bieganie, rower, spacer i basen nie są dostępne w wyborze ćwiczeń do zestawu (mają własne cele: dystans, czas).
+- „+ Utwórz nowe ćwiczenie" w formularzu zestawu i w budowie zestawu w kreatorze: otwiera formularz ćwiczenia (okno na cały ekran, `poZapisieCwiczenia`), a zapisane ćwiczenie od razu trafia do zestawu. W kreatorze rodzaj i partie są podpowiedziane z aktywności.
+- Formularz ćwiczenia: lista mięśni schowana („Pokaż listę mięśni"), przycisk „Zapisz" także na górze; w formularzu zestawu „Zapisz", w budowie zestawu „Gotowe" także na górze.
+
+## Rekordy automatyczne i kolejność ćwiczeń (v38)
+- Rekord ćwiczenia zapisuje się sam po zaliczeniu w planie: pierwszy wynik (albo najlepszy z historii), gdy rekordu nie ma, i każdy kolejny, który go poprawia. Bez pytania; wynik widać w wierszu „★ Rekord". Rekord to rekordowa seria: największy ciężar (z powtórzeniami), a bez ciężaru najwięcej powtórzeń w serii.
+- Dziś: uchwyt „⋮⋮" przy ćwiczeniu pozwala przeciągnąć je palcem w inne miejsce; kolejność zapisuje się w sesji (`sesja.kolejnosc`).
+
+## Tryb „Ćwicz" (v39, plik cwicz.js)
+- Przycisk „Ćwicz" (albo „Kontynuuj ćwiczenie") na karcie sesji na ekranie Dziś otwiera pełny ekran treningu: jedno ćwiczenie, seria po serii, w kolejności z ekranu Dziś.
+- Seria z powtórzeniami: pola powtórzeń i ciężaru (kg) wypełnione planem z przyciskami − i +; „Zrobione ✓" zapisuje wynik serii i włącza przerwę.
+- Ćwiczenia na czas (statyczne): stoper liczy w górę; po osiągnięciu celu daje sygnał, ale liczy dalej; „Stop" zapisuje czas serii i włącza przerwę (żeby można było bić rekordy).
+- Przerwa: odliczanie, −15 s / +15 s (zmiana zapamiętuje się w `cwiczenie.przerwa`), „Pomiń przerwę"; po czasie dźwięk i wibracja, napis „Zaczynaj!". Domyślna przerwa: `ustawienia.przerwa` (60 s).
+- Dodatkowe: „← Poprzednia", „+ seria", „Pomiń ćwiczenie", podsumowanie na końcu. Ekran nie wygasza się (Wake Lock).
+- Dane: `sesja.przebieg = {wyniki: {id: [{p, kg, t}]}, extra: {id: n}, pominiete: {id: true}}` (pozycja wyliczana, więc po zamknięciu aplikacji wracasz w to samo miejsce). Po ostatniej serii ćwiczenie jest odhaczane (`zrobione`, `wykonane`) i sprawdzany jest rekord.
+- Ustawienia → Trening: dźwięk, wibracja (`ustawienia.dzwiek`, `ustawienia.wibracja`), domyślna przerwa.
+
+## Opis ćwiczenia (v40)
+- `cwiczenie.opis = {start, ruch, uwaga}` (opcjonalne, edytowalne w formularzu ćwiczenia). Przycisk „▶ Film" zastąpiony kafelkiem „Opis" (karta ćwiczenia, wiersz na Dziś, lista w zestawach, tryb Ćwicz), widocznym, gdy jest opis albo link.
+- Okno opisu: miniatura filmu YouTube (po dotknięciu odtwarza się w oknie, youtube-nocookie), trzy pola opisu, adnotacja o technice, „Otwórz film w przeglądarce" (inne serwisy tylko jako link).
+- Naprawa: edycja ćwiczenia zachowuje `zBazy`, `ukryte`, `rekord`, `przerwa`.
+
+## Pierwsze opisy (v41)
+- Opisy (`opis: {start, ruch, uwaga}`) w `przyklady-kalistenika.json` dla 10 ćwiczeń: pompki klasyczne, przysiad klasyczny, wykroki w tył, podciąganie nachwytem, podciąganie australijskie, dipy na poręczach, deska przodem, most biodrowy, dead bug, spięcia brzucha. Język bez terminów anatomicznych, nacisk na technikę.
+- `WERSJA_BAZY = 2`: starsze dane dostają opisy z bazy przy starcie, ale tylko tam, gdzie ćwiczenie nie ma własnego opisu.
+
+## Opisy dla 50 ćwiczeń (v42)
+- Opisy (start/ruch/uwaga) dla 50 najpopularniejszych ćwiczeń: kalistenika (25), siłownia (20), joga/mobilność (5) w plikach `przyklady-*.json`. Pierwsze 10 z v41 przejrzane i uzupełnione (kąt łokci w pompkach, nieblokowanie oddechu w desce, krok w wykrokach itd.).
+- `WERSJA_BAZY = 3`. Opis z bazy ma znacznik `opisZBazy`: baza może go później zaktualizować; własny opis (zapisany w formularzu) nigdy nie jest nadpisywany. Opisy z v41 bez znacznika są aktualizowane, jeśli ich początek zgadza się z `STARE_OPISY_START`.
+
+## Opisy dla całej bazy (v43)
+- Wszystkie 219 ćwiczeń bazowych mają opis (start/ruch/uwaga), średnio ok. 55 słów. `WERSJA_BAZY = 4`: starsze dane dostają brakujące opisy; opisy zapisane w formularzu (bez znacznika `opisZBazy`) nie są nadpisywane.
+
+## v44: własna ocena ćwiczenia i 32 nowe ćwiczenia w bazie
+- Po skończeniu ćwiczenia (ekran przerwy i podsumowanie w trybie Ćwicz oraz wiersz zaliczonego ćwiczenia na Dziś) są trzy przyciski: Łatwo / W sam raz / Ciężko. Ponowne dotknięcie zdejmuje ocenę. Zapis: `sesja.ocena[idĆwiczenia]` = "latwo" | "wsam" | "ciezko". Ocena posłuży później do podpowiedzi progresji.
+- Baza ma 251 ćwiczeń (+32, każde z opisem): 11 na brzuch, 10 na maszynach i wyciągach, 11 podstawowych. `WERSJA_BAZY = 5`.
+- Osoby, które już mają bazę (wersja ≥ 1), dostają brakujące ćwiczenia z bazy automatycznie; kto miał własne ćwiczenia przed bazą, nadal dostaje tylko oznaczenia.
+
+## v45: Moje rekordy
+- Postęp: przycisk „★ Moje rekordy (N)" otwiera listę ćwiczeń, które mają rekord (pogrupowaną wg rodzaju), plus rekordy aktywności; dotknięcie ćwiczenia otwiera jego historię. Ćwiczenia bez rekordu się nie wyświetlają.
+- Jednorazowe przeliczenie rekordów z całej historii planów (`dane.rekordyPrzeliczone`) uzupełnia rekordy ćwiczeń zaliczonych wcześniej oraz podnosi te słabsze od historii.
+
+## v46: wiele planów naraz
+- Plan ma nazwę (`plan.nazwa`, pole „Nazwa planu" w kroku 1 kreatora; bez nazwy: „Plan N"; starsze plany: „Plan tygodniowy/miesięczny") i może być wyłączony (`plan.wylaczony`).
+- Nowy plan nie zamyka już poprzedniego. Plan zamyka się ręcznie (po zakończeniu okresu albo „Zamknij").
+- Dziś pokazuje sesje wszystkich włączonych planów, każdy w bloku z nazwą i „Edytuj". Gdy wszystkie są wyłączone, jest komunikat.
+- Postęp: sekcja „Moje plany" z przełącznikiem włącz/wyłącz; dotknięcie planu wybiera, którego dotyczą statystyki.
+
+## v47: „Jak wyżej" w seriach
+- W kreatorze, w serii z różnymi powtórzeniami/ciężarem, od drugiej serii pod każdym polem (powtórzenia, ciężar) jest przycisk „↑ Jak wyżej", który kopiuje wartość z poprzedniej serii.
+
+## v48: ciężar w kalistenice i bieganiu
+- 52 ćwiczenia kalisteniki i treningu statycznego, które można obciążyć (pompki, dipy, podciąganie, przysiady, wykroki, mosty, deska, unoszenie nóg i in.), mają włączone pole ciężaru (`ciezar: true` w plikach bazy, `WERSJA_BAZY = 6`). Istniejącym użytkownikom włącza się raz przy aktualizacji bazy; w formularzu ćwiczenia można je wyłączyć.
+- Ciężar 0 kg nie zmienia typu rekordu (rekord powtórzeń zostaje rekordem powtórzeń).
+- Bieganie i spacer: opcjonalne „Obciążenie (kg)" (plecak, kamizelka) w parametrach sesji i w wyniku (`sesja.obciazenie`); widoczne w opisie celu i wyniku.
+
+## v49: dodatkowy ciężar
+- W kalistenice i ćwiczeniach statycznych pole ciężaru nazywa się „Dodatkowy ciężar (kg), opcjonalnie" (kreator, wpis wartości, tryb Ćwicz); w siłowni zostaje „Ciężar (kg)". Pole w formularzu ćwiczenia: „Można dodać ciężar (kg)".
+
+## v51–v53: rozgrzewka, rozciąganie, postawa, dno miednicy, bloki
+- Baza ma 307 ćwiczeń (+56 w `przyklady-zdrowie.json`, każde z opisem): 18 rozgrzewkowych (nowy rodzaj „Rozgrzewka"), 24 rozciągające (rodzaj „Rozciąganie"), 8 na postawę (Kalistenika: wall angels, Y-T-W, face pull z gumą, band pull-apart…), 5 na dno miednicy (Joga / mobilność, nowy mięsień „Mięśnie dna miednicy" w partii Brzuch). Szyja pominięta. `WERSJA_BAZY = 7`.
+- Gotowe zestawy w `przyklady-zestawy.json` (10): 4 bloki rozgrzewki, 3 bloki rozciągania po treningu, „Mobilność: biodra i plecy", „Postawa: plecy i barki", „Dno miednicy". Dodawane po nazwie (`dodajZestawyBazy`), z domyślnymi wartościami (`trening.parametry`), oznaczone `zBazy`.
+- Zestaw może być blokiem: `trening.blok` = "rozgrzewka" | "rozciaganie" (wybór w formularzu zestawu).
+- Sesja ma opcjonalne `blokPrzedId` (rozgrzewka) i `blokPoId` (rozciąganie po treningu); wybór w panelu sesji w kreatorze. Parametry ćwiczeń bloku trafiają do `sesja.parametry`.
+- Dziś: bloki jako osobne sekcje nad i pod ćwiczeniami głównymi; w trybie Ćwicz sesja idzie: rozgrzewka → ćwiczenia → rozciąganie, z krótką przerwą (5 s) w blokach i bez oceny.
+- Ćwiczenia z bloków nie wliczają się do zaliczenia sesji, statystyk mięśni ani rekordów; rodzaje Rozgrzewka, Rozciąganie i Joga nie mają rekordów.
+- Rozciąganie na osobny dzień: zwykła aktywność „Rozciąganie" z zestawem (np. „Mobilność: biodra i plecy").
+
+## v54: kreator „Ułóż mi plan" (generator planów)
+- Przycisk „Ułóż mi plan" na pustym ekranie Dziś i w Postępie (ręczne tworzenie planu zostaje jako „Utwórz plan ręcznie"). Nakładka z pytaniami krok po kroku (`plan-kreator.js`): cel, doświadczenie, dni (2–6), czas treningu, sprzęt (siłownia / dom z hantlami / masa ciała z drążkiem), bolące miejsca, priorytet partii, kardio, długość (4/8/12 tyg.), ciężary startowe, podsumowanie z „Dlaczego ten plan?" i przyciskiem „Zacznij".
+- Generator (`plan-generator.js`): podział zależny od dni i doświadczenia (całe ciało A/B, góra/dół, push/pull/legs), ćwiczenia wybierane z bazy z listą zamienników (pomijane są kolidujące z bólem: kolana, plecy, barki, nadgarstki), serie i zakresy powtórzeń wg celu (masa/rzeźba 6–12, siła 4–6, zdrowie 10–15), przerwy, dopasowanie liczby ćwiczeń do czasu. Rozgrzewka i rozciąganie dołączane domyślnie.
+- Ciężary startowe: z trzech „kotwic" (10 powtórzeń z zapasem) przez proporcje (np. suwnica ≈ 1,4 × przysiad); brak odpowiedzi = łagodne wartości domyślne. Kalistenika: stopień trudności z maksa pompek i podciągnięć (drabinki wariantów). Bieganie: marszobieg albo biegi ciągłe + krótki trening siłowy nóg.
+- Plan zapisuje się jako zwykły, edytowalny plan na 28 dni (`plan.kreator` trzyma profil). Ilość w sesji ma opcjonalne `zakres: [od, do]` (np. „3 × 8–10"), sesja może mieć `notatka` (np. opis marszobiegu).
+- Jeszcze nie ma: propozycji progresji na Dziś i generowania kolejnych 4-tygodniowych bloków (dla 8 i 12 tygodni powstaje na razie pierwszy blok).
+
+## v55: propozycje progresji (`plan-progresja.js`)
+- Na ekranie Dziś, nad dzisiejszymi niezaliczonymi sesjami planu, karta „Propozycje na dziś": ćwiczenie, zmiana (np. „40 → 42,5 kg"), jedno zdanie powodu, przyciski „Przyjmij" / „Zostaw" (+ „Przyjmij wszystkie"). Nic nie zmienia się bez zgody.
+- Dotyczy ćwiczeń z zakresem powtórzeń (`ilosc.zakres`, z kreatora „Ułóż mi plan"). Źródło: ostatnie wykonanie tego ćwiczenia w planie (`wykonane`) i ocena (`ocena`).
+- Zasady: wszystkie serie na górze zakresu → +ciężar (hantle +1/2 kg, sztanga +2,5 kg góra / +5 kg nogi, maszyny +2,5/5 kg), powtórzenia wracają na początek zakresu; ocena „Łatwo" → +ciężar od razu; w zakresie, ale nie na górze → +1 powtórzenie; dwa razy z rzędu „Ciężko" → ok. −7,5% ciężaru; „Ciężko" raz → bez propozycji. Kalistenika: po osiągnięciu góry zakresu trudniejszy wariant z drabinki `PR_DRABINKA` (zestaw dla przyszłych sesji jest klonowany, historia zostaje). Ćwiczenia statyczne: +5 s w każdej serii.
+- Przyjęcie zmienia parametry wszystkich przyszłych niewykonanych sesji z tym ćwiczeniem w planie. Rozstrzygnięcie zapisane w `plan.progresja[idĆwiczenia] = {sesjaId, stan}`, więc ta sama propozycja nie wraca.
+- Powtórzenia w planie z zakresem pokazują się jako „3 × 9 (zakres 8–10)" (cel i zakres).
+
+## v56: brzuch w każdym treningu
+- Ćwiczenia na brzuch (rdzeń) są oznaczone w szablonach (`pgS(..., true)`) i nie odpadają przy skracaniu treningu do zadeklarowanego czasu (wcześniej brzuch był ostatni na liście i znikał pierwszy). Trening B (całe ciało) i Pull (PPL) dostały ćwiczenie na brzuch; masa 3×: 2 treningi × 3 serie tygodniowo.
+
+## v57: czytelność planu przy krótkim czasie
+- Generator zwraca dla każdego treningu listę pominiętych ćwiczeń i czas pełnego treningu. Gdy czas jest za krótki (pominięto ≥ 2 ćwiczenia; nie dotyczy planu na siłę), podsumowanie mówi wprost: co się mieści, ile minut potrzeba na pełny trening i co zostanie dołożone.
+- „Serie w tygodniu" liczą klatkę, plecy, nogi i pośladki, barki, ramiona, brzuch i łydki; partie bez bezpośrednich ćwiczeń są wymienione jako pracujące „tylko pośrednio".
+- Krok „Czas treningu" ostrzega, że plan na całe ciało potrzebuje ok. 60 minut.
+- Zamienniki dla bólu nie powtarzają tego samego ruchu (np. dwóch Hip Thrustów w jednym treningu).
+
+## v58: czas treningu bez rozgrzewki, ćwiczenia jednostronne, opis w przerwie
+- Kreator „Ułóż mi plan": czas treningu to sam trening. Nowy krok „Rozgrzewka i rozciąganie?" (tak / tylko rozgrzewka / tylko rozciąganie / nie) z orientacyjnym czasem bloków; podsumowanie pokazuje „Trening do 60 min plus ok. 14 min rozgrzewki i rozciągania". Profil: `rozgrzewka`, `rozciaganie` (zamiast `bloki`).
+- Gotowe zestawy: ćwiczenia jednostronne (rozciąganie czworogłowego, gołębia, wykrok niski, barku, tricepsa i in.; wymachy nogą, wykrok z rotacją) mają 2 serie (np. 2 × 30 s, po jednej na stronę). Czasy w nazwach zestawów przeliczone („ok. 5 min" itd.).
+- `WERSJA_BAZY = 8`: `odswiezZestawyBazy` aktualizuje istniejące zestawy z bazy (nazwa z czasem, parametry) oraz niewykonane sesje, w których wartość nie była zmieniona przez użytkownika. Nazwy zestawów porównywane są bez czasu w nawiasie (`nazwaBezCzasu`).
+- Tryb Ćwicz: na ekranie przerwy, pod „Następnie: …", przycisk „Opis następnego ćwiczenia".
+
+## v59: nowy generator kalisteniki + zapis zestawów
+- Kalistenika (każdy plan ze sprzętem „masa ciała") ma własne szablony `PG_KAL` zamiast przeróbki szablonu siłowni: ćwiczenia wybierane z drabinek trudności `PG_KAL_LAD` (pompki, pompki pionowe, dipy, podciąganie pionowe/poziome, biceps, przysiady, wykroki, mostki, uginanie nóg, łydki, 4 drabinki brzucha). Szczebel wynika z maksów (pompki, podciągnięcia) lub, gdy brak danych, z doświadczenia (ostrożnie, max do szczebla 2); zajęty wariant zastępowany łatwiejszym.
+- Nowy krok „Sprzęt do masy ciała": drążek i poręcze / tylko drążek / bez sprzętu (`p.drazek`, `p.poreczy`): bez poręczy dipy na ławce, bez drążka podciąganie australijskie pod stołem i brak ćwiczeń w zwisie.
+- Serie i zakresy zależą od doświadczenia: 3×8–12 → 4×5–8 w głównych ćwiczeniach; rdzeń 3 serie, nie odpada przy skracaniu. Więcej ćwiczeń na brzuch (deska, deska boczna, Hollow Body, odwrotne spięcia, unoszenie kolan/nóg w zwisie, Dead Bug, Russian Twist, L-Sit, Toes to Bar) i dodatkowe ćwiczenia wypełniające czas.
+- Progresja kalisteniki korzysta z tych samych drabinek (`PR_DRABINKA` uzupełniana z `PG_KAL_LAD`).
+- Podsumowanie planu: pole „Zapisz treningi jako moje zestawy" (domyślnie włączone): treningi planu trafiają do Ćwiczenia → Moje treningi z parametrami (`pgZapisz(wynik, {zapiszZestawy})`).
+
+## v60 – generator siłowni zależny od poziomu
+- Każde ćwiczenie w planie siłowni/dom ma osobną listę dla poziomów 0–3 (`PG_T`). Początkujący: maszyny i hantle (łatwa technika), średni: sztanga i wolne ciężary, zaawansowani: więcej wariantów (front squat, Pendlay, podciąganie nachwytem, kółko brzuszne, drwal).
+- Masa/rzeźba: serie, zakresy powtórzeń i przerwy rosną z doświadczeniem (np. główne 3×10–12 → 4×5–8, przerwa 90 → 150 s).
+- Brzuch zawsze w planie i nigdy nie jest przycinany.
+
+## v61 – kolejne bloki planu
+- Po zakończeniu planu ekran „Plan zakończony” ma przycisk „Ułóż kolejny blok” (`pkNastepnyBlok`, `pgProfilKolejnegoBloku`).
+- Profil zostaje z poprzedniego bloku, ciężary startowe pochodzą z ostatnio wykonanych serii (`profil.ostatnie`), a ćwiczenia dodatkowe (od 4. miejsca) zmieniają się na kolejne warianty. Główne ćwiczenia zostają.
+- Poprzedni plan zamyka się po „Zacznij”. Nazwa: „(blok 2/3)”. Nie dotyczy jeszcze kalisteniki (tam progresję robią propozycje) ani biegania.
+
+## v62 – przegląd kodu i generatorów
+- Błąd: przy doświadczeniu do 6 mies. i 5–6 dniach aplikacja pisała „wystarczą 4 treningi”, ale układała 5–6. Teraz układa 4, a wolne dni może zająć kardio.
+- 5 dni: podział góra/dół + push/pull/legs (wcześniej push/pull/legs dawał nogi raz w tygodniu, ok. 11 serii).
+- Górny limit serii tygodniowo na partię (`pgOgraniczObjetosc`): 14/16/20/22 wg poziomu, nogi +4.
+- Dni góry (góra/dół, push) mają krótkie ćwiczenie na brzuch (`COREG`); dni góry mają drugie ćwiczenie na klatkę (`FLY`), bo klatka miała 6–9 serii tygodniowo.
+- Dom z hantlami: ćwiczenia zależne od poziomu (`PG_TD`), więcej zamienników przy bólach kolana i pleców; usunięte martwe listy siłowni w `pgS` (zastąpione `PG_T`).
+- Martwe ciągi liczone do nóg (wcześniej RDL liczył się do pleców i zaniżał serie nóg).
+- Kalistenika: drabinka `pushC` (pompki szerokie/łucznicze) dla klatki; brzuch w dniach góry chroniony przed przycinaniem; przy bolącym nadgarstku pompki i dipy zostają z zaleceniem uchwytów/pięści (wcześniej dzień push był pusty).
+- Bieganie: biegi nie dzień po dniu, marszobieg max 3× w tygodniu.
+- 2 dni w tygodniu: główne ćwiczenia +1 seria. Nazwa planu podaje rzeczywistą liczbę dni.
+- Usunięte nieużywane zmienne (dzis.js, kreator2.js, plan-kreator.js), wspólna stała `NAZWY_DNI`.
+
+## v63 – nowy przewodnik
+- Przewodnik ma 14 kart z aktualnymi zrzutami: Ułóż mi plan, gotowy plan, Dziś, tryb Ćwicz, przerwa, ocena, propozycje progresji, inne wartości, plan ręczny, Postęp, baza, Moje treningi, kolejny blok. Zrzuty generuje `narzedzia/zrzuty-przewodnika.js`.
+- Ekran startowy (brak planu) opisuje „Ułóż mi plan”, plan ręczny i „Ćwicz”.
+- Poprawki znalezione przy zrzutach: lista Moje treningi odświeża się po przełączeniu (zestawy z kreatora były widoczne dopiero po ponownym uruchomieniu); własne zestawy na górze (najnowsze pierwsze), rozgrzewki i rozciągania na końcu; przyciski Pokaż/Edytuj/Usuń pod nazwą, lista ćwiczeń skrócona do 3 linii; pole wyszukiwania zestawów ma normalny wygląd; zmiana zakładki przewija ekran na górę.
+
+## v64 – ukryte ćwiczenia w generatorze
+- Generator domyślnie nie używa ćwiczeń ukrytych w bazie (tak było już wcześniej, ale bez informacji).
+- Nowy krok kreatora „Użyć ukrytych ćwiczeń?” (`ukryte`), tylko gdy coś jest ukryte. Profil: `uzyjUkrytych`. Przy „Nie” plan dostaje zamienniki, a uwaga wymienia pominięte ćwiczenia (`pgUkrytePominiete`).
+- Kolejny blok dziedziczy wybór. Propozycje trudniejszego wariantu (kalistenika) też go respektują.
+- Ograniczenie: gotowe bloki rozgrzewki i rozciągania zawierają swoje ćwiczenia niezależnie od ukrycia.
+- Przewodnik: nowa karta „Ukryte ćwiczenia a plan”.
+
+## v65 – 22 nowe ćwiczenia w bazie
+- Dodano do `przyklady-kalistenika.json` 22 ćwiczenia z listy PDF (bez powtórek i bez ćwiczeń nieefektywnych/ryzykownych): m.in. Pompki na kolanach, Pompki Sfinksa, Podciąganie z gumą, Podciąganie negatywne, Dipy na drążku prostym, Przysiad krewetkowy, Plank odwrócony, L-sit w zwisie, Kółko brzuszne do ściany / na bok / Iso-Hold, Kruk, Straddle Planche. Własne opisy po polsku.
+- `WERSJA_BAZY` = 9 – istniejący użytkownicy dostają nowe ćwiczenia po odświeżeniu.
+- Generator: Przysiad krewetkowy na drabince przysiadów (wariant B).
+
+## v66 – 34 ćwiczenia elitarne i ryzykowne
+- Dodano do bazy 34 ćwiczenia zaawansowane/elitarne z listy PDF: pompki plyometryczne (klaśnięcia, Supermana), Free HSPU, tygrysie, podciąganie za kark / do pasa / z klaśnięciem / na jednej ręce, dipy koreańskie / L-sit / eksplozywne / back lever, przysiad smoka, rollouty ze stania i na jednej ręce, ćwiczenia ze stopami na kółku, V-Sit, Manna, Planche, Human Flag (też z ugiętymi kolanami), One Arm Planche, pompki delfina.
+- Każde ma ostrzeżenie w polu „uwaga" (elitarne, ryzyko dla nadgarstków/barków/łokci).
+- Generator ich NIE używa – są tylko w bazie do ręcznego dodawania. `WERSJA_BAZY` = 10.
+
+## v67 – rozgrzewka i rozciąganie bez ukrytych ćwiczeń
+- Gotowe bloki rozgrzewki/rozciągania w wygenerowanym planie pomijają ukryte ćwiczenia (chyba że użytkownik w kreatorze zgodził się na użycie ukrytych). Dotyczy też liczenia czasu bloków.
+
+## v68 – 11 ćwiczeń z listy Tom III
+- Dodano 11 ćwiczeń: Rozpiętki ze ślizgaczami, Wycieraczki na podłodze (Hollow Body), Plank z wysuniętymi rękami oraz 8 elitarnych (Tuck Planche Push-ups, Skin the Cat, pompki 360°, skoki kozackie, Front Lever Pull-ups, dipy na kółkach RTO, Przysiad Sissy, archer HSPU). Pozycje 21–160 listy były pustymi wypełniaczami. `WERSJA_BAZY` = 11. Generator ich nie używa.
+
+## v69 – 81 ćwiczeń siłowych z trzech list
+- Dodano do `przyklady-silownia.json` 45 ćwiczeń efektywnych (m.in. Landmine Press, Z-Press, Meadows Row, Rack Pull, Reverse Hyper, Pendulum/Belt Squat, RDL i Hip Thrust jednonóż, Spider/Zottman/Bayesian Curl, Tate Press, Renegade Row, Turkish Get-Up, Copenhagen Plank) oraz 36 elitarnych/ryzykownych/technicznych z ostrzeżeniem w uwadze (Zercher, wyciskanie zza karku, ćwiczenia olimpijskie i kettlebell, sprzęt niszowy). Pominięto ok. 280 powtórek i warianty bez praktycznej różnicy. `WERSJA_BAZY` = 12. Generator ich nie używa.
+
+## v70 – 52 ćwiczenia siłowe z list Tom IV i V
+- Dodano 25 efektywnych (wyciskania naprzemienne/z podłogi/na Smithie, rozpiętki na wyciągu, W-Raise, Y na wyciągu, wiosłowania i ściąganie podchwytem, ćwiczenia chwytu: Wrist Roller, Pinch Carry, ściskacze) oraz 27 elitarnych/ryzykownych z ostrzeżeniem (Savickas, Klokov, Reeves, Anderson, ćwiczenia olimpijskie, strongman). Pominięto ok. 255 powtórek. `WERSJA_BAZY` = 13. Generator ich nie używa.
+
+## v71 – poziomy trudności ćwiczeń
+- Każde ćwiczenie z bazy (506) ma pole `poziom` 1–5: początkujący, podstawowy, średni, zaawansowany, elitarny. Nadane w plikach `przyklady-*.json`; import (także dla już istniejących ćwiczeń) ustawia poziom z bazy, `WERSJA_BAZY` = 14.
+- Zakładka Ćwiczenia: filtr „Trudność" (chipy 1–5 z nazwami), lista „Kolejność" (domyślna, od najłatwiejszych, od najtrudniejszych, alfabetycznie; bez poziomu na końcu), poziom w opisie karty („Poz. 3 (średni)"). W formularzu własnego ćwiczenia opcjonalne pole „Poziom trudności".
+- Podstawa pod ścieżki umiejętności (kroki do celu z regresjami).
+
+## v72 – zamiana ćwiczeń w planie, ukrywanie zestawów, kolory poziomów
+- **Zamiana ćwiczenia** (`plan-zamiana.js`): na ekranie Dziś przy niewykonanym ćwiczeniu głównym przycisk ⇄. Okno pokazuje odpowiedniki (te same mięśnie i partie, podobna trudność, sąsiedzi na drabince „krok łatwiej/trudniej", podobna nazwa ruchu) oraz wyszukiwarkę po całej bazie. Pomija ćwiczenia kolidujące z bólem z kreatora, niepasujące do sprzętu planu i ukryte (chyba że w kreatorze wybrano użycie ukrytych). Zakres: ta i kolejne sesje tego treningu albo tylko ta sesja; wykonane sesje się nie zmieniają. Trening jest kopiowany (roboczy), ilość przeliczana (powtórzenia ↔ czas), ciężar startowy jak w generatorze.
+- **Ukrywanie zestawów** w Moje treningi: „Ukryj" / „Przywróć", przycisk „Pokaż ukryte zestawy (n)". Ukryte zestawy nie pojawiają się w wyborze przy układaniu planu, w wyborze bloków ani w generatorze (rozgrzewki/rozciąganie).
+- **Poziomy trudności**: kolory 1–5 (zielony, niebieski, żółty, pomarańczowy, czerwony) na kartach i w filtrze, pasek skali i opis nad filtrem. Poziom 5 zostawiony tylko dla 15 ćwiczeń naprawdę elitarnych (Front Lever, Planche, Human Flag, Manna, jedna ręka, Free HSPU, Snatch, Clean and Jerk i podobne); pozostałe wróciły na poziom 4. `WERSJA_BAZY` = 14.
+
+## v73 – Ścieżki rozwoju
+
+- Nowa zakładka **Ścieżki** w Ćwiczeniach (obok „Baza ćwiczeń" i „Moje treningi").
+- 53 ścieżki (22 + 9 siłownia + dodatkowe warianty, razem 280 kroków) z pliku `sciezki.json`: kalistenika (pompki, stanie na rękach, planche, L-sit, podciąganie, muscle-up, front/back lever, flaga, pistol, nordic, kółko brzuszne, brzuch, nogi, pośladki, łydki, kółka, dipy…) i siłownia (martwy ciąg, przysiad, OHP, olimpijskie, chwyt, ściąganie…).
+- Każdy krok: ćwiczenie z poziomem trudności, kryterium przejścia dalej, ewentualne ostrzeżenie; ćwiczenia wspierające na końcu. Dotknięcie nazwy otwiera opis ćwiczenia.
+- Na razie tylko podgląd (bez śledzenia postępu i wyboru celu w kreatorze).
+
+## v74 – poprawki
+
+- Ścieżki czytelne w ciemnym trybie (kolory z motywu zamiast sztywnych jasnych).
+- Ćwiczenia jednostronne (jednonóż, jednorącz, łucznicze, kozackie, bułgarski, Pistol, Side Plank itd.) pokazują „na stronę” przy ilości (np. „3 × 10 na stronę”), w oknie wartości, w karcie kreatora i w opisie ćwiczenia jest wyjaśnienie, jak liczyć serie.
+- 24 ćwiczenia zdegradowane z poziomu 5 do 4 mają opis „Ćwiczenie zaawansowane –” zamiast „elitarne” (WERSJA_BAZY = 15 odświeża opisy z bazy).
+- Kreator: ćwiczenie z różnymi powtórzeniami w seriach zachowuje liczbę serii i pierwsze powtórzenia po przełączeniu na „Serie i powtórzenia”.
+
+## v75 – różne powtórzenia w seriach w generatorze
+
+- Ćwiczenia z ciężarem (min. 3 serie, zakres powtórzeń min. 3 szerokości) dostają wzór „opadający”: druga połowa serii ma o 2 powtórzenia mniej (nie poniżej dolnej granicy zakresu), np. 4 × 8 → 8 / 8 / 6 / 6 przy tym samym ciężarze.
+- Wzór (`wzor: "opadajace"`) jest zapisany w ilości sesji; okno wartości w Dziś otwiera się od razu w trybie serii osobno, plan pokazuje „8 / 8 / 6 / 6 powt.”, a porównanie z planem liczy sumę z wzoru.
+- Progresja liczy ostatnie serie względem ich własnego celu, więc wykonanie 8 / 8 / 6 / 6 nadal liczy się jako pełne wykonanie planu.
+
+## v76 – generator: cel przy masie ciała
+
+- Błąd: przy sprzęcie „Masa ciała z drążkiem” cele masa, rzeźba, siła i kalistenika dawały identyczny plan (te same ćwiczenia, serie i zakresy) – parametry zależały tylko od doświadczenia.
+- Teraz: masa – więcej serii (3–5 w głównych), 6–12 powt., przerwy 90–120 s; siła – 3–5 serii po 3–8 powt., przerwy 2–3 min i o szczebel trudniejszy wariant (przysiady zawsze, pchanie/ciąganie tylko gdy podano maks. pompek/podciągnięć); rzeźba – 10–15 (dodatkowe 12–20) powt., przerwy 45–60 s; kalistenika – jak dotąd.
+- Sweep 6720 profili bez błędów; jedynie przy 30 min + ból barku/kolan niektóre treningi siły/masy mają 3 ćwiczenia (więcej serii mieści się w czasie).
+
+## v77 – Moje możliwości (etap 1 celów i ścieżek)
+
+- Nowy plik `mozliwosci.js`; dane w `dane.mozliwosci = { data, wartosci }` (wartość `null` = nie wiem / nie robię).
+- Test: masa ciała (pompki, podciągnięcia, dipy, przysiady, plank, zwis) oraz opcjonalnie ciężary na 10 powt. z zapasem 2–3 – sztanga (wyciskanie, wiosłowanie, przysiad) i hantle. Wymagany co najmniej wynik pompek (0 też się liczy).
+- Ustawienia → „Moje możliwości”: podsumowanie wyników, data testu, przypomnienie po 8 tygodniach, przycisk „Zrób test / Zmień”.
+- Kreator planu: krok z ręcznym wpisywaniem maksów i ciężarów zastąpiony. Bez testu kreator pokazuje „Najpierw uzupełnij swoje możliwości” i nie pozwala przejść dalej; „Uzupełnij teraz” otwiera test, po zapisaniu wraca do kreatora z zachowanymi odpowiedziami. Z testem pokazuje wyniki użyte do planu i „Zmień wyniki testu”.
+- Generator: nowe dane wpływają na szczebel przysiadów (przysiady: <20, <40, 40+) i ćwiczenia stabilizacji (plank: <30 s, <60 s, 60+ s); pompki i podciągnięcia jak dotąd.
+
+## v78 – cele i „Tu jesteś” (etap 2)
+
+- Nowy plik `cele.js`. Dane: `dane.sciezkiPostep = { id: { krok, data } }` (krok = indeks bieżącego kroku; równy liczbie kroków = cel osiągnięty) i `dane.cele = [ {typ:"sciezka", id} | {typ:"liczba", k, cel} ]`.
+- Ścieżki: „Ustal / Zmień, gdzie jestem” – dotykasz najtrudniejszy krok, który już robisz (albo „Żadnego”); kroki zaliczone ✓, bieżący z „Tu jesteś”, pasek postępu; na liście ścieżek znaczek „Twój cel” i „Tu jesteś: krok N z M”.
+- Kreator planu (oprócz biegania): krok „Cele umiejętności (opcjonalnie)” – liczba powtórzeń pod rząd (pompki, podciąganie, dipy, przysiady; z wynikiem z testu jako „Teraz”) oraz ścieżki (przy siłowni wszystkie, inaczej kalistenika). Maks. 3 cele; ostrzeżenia, gdy cele obciążają te same stawy (nadgarstki, barki, proste ramiona, kolana, dolny odcinek pleców).
+- Krok „Gdzie jesteś” dla każdej wybranej ścieżki bez ustalonego startu.
+- Cele zapisują się po „Zacznij”; w podsumowaniu informacja, że ćwiczenia celów trafią do planu w etapie 3.
+- Przełącznik Baza / Moje treningi / Ścieżki – napisy się nie ucinają.
+
+## v79 – cele w planie (etap 3)
+
+- Generator (`pgDodajCele`, `pgBudujTrening(..., klucz)`): ćwiczenia celów na początku treningu (★). Przypisanie do rodzaju treningu: pchanie → A/B, Góra, Push; ciągnięcie → A/B, Góra, Pull; nogi i całe ciało → A/B, Dół, Legs; brzuch → A/B, Dół, Pull.
+- Ścieżka: ćwiczenie bieżącego kroku („Tu jesteś”); 3–5 serii, powtórzenia od połowy do kryterium kroku, statyczne 60% czasu kryterium; przerwa 120 s.
+- Cel „liczba pod rząd”: przy wyniku ≥ 3 – serie poniżej maksimum (zakres 50–75% maksimum, 4–5 serii); przy < 3 lub braku wyniku – krok ścieżki „Pompki / Podciąganie / Dipy / Nogi”.
+- Wliczanie objętości: cel zastępuje to samo ćwiczenie z planu, a gdy go nie ma – usuwa jedno ćwiczenie dodatkowe tej samej partii; cele nie odpadają przy dopasowaniu do czasu i nie są skracane przy limicie serii tygodniowych.
+- Uwagi w planie: warunki wstępne (np. planche – 20 pompek, front lever – 8 podciągnięć) i rozgrzewka nadgarstków przy celach obciążających nadgarstki.
+- Dziś: pod nazwą ćwiczenia celu opis „★ L-sit i V-sit – krok 3 z 6 (cel kroku: 3 × 15 s)” (`plan.celeOpisy`).
+- Test: 6360 kombinacji celów × profili bez błędów i dubli.
+
+## v80 – zaliczanie kroków, krok niżej, tydzień testu, postęp celów (etap 4)
+
+- `celeSprawdz` (wywoływane z `sprawdzRekord` po każdym zaliczeniu ćwiczenia: Dziś, okno wartości, tryb Ćwicz):
+  - ćwiczenie to bieżący krok ścieżki celu i wynik spełnia kryterium (np. 3 × 15 s) → krok zaliczony (`dane.sciezkiPostep`), komunikat; gdy następny krok to to samo ćwiczenie – nowe wartości od razu w przyszłych sesjach;
+  - lepsza pojedyncza seria w pompkach, podciąganiu nachwytem, dipach, przysiadach lub planku podnosi wynik w Moich możliwościach (i postęp celu „liczba pod rząd”).
+- Propozycje na dziś (`celPropozycja`): po zaliczonym kroku „Krok zaliczony: A → B” (zmiana ćwiczenia w przyszłych sesjach po „Przyjmij”); gdy dwa ostatnie treningi bieżącego kroku < 70% planu albo z oceną „Ciężko” – „krok niżej” (po przyjęciu cofa też „Tu jesteś”). Ćwiczenia celów nie przechodzą na zwykłą drabinkę wariantów.
+- Tydzień lżejszy i test: w 4. tygodniu bloku (dni 21–27) jedna seria mniej w ćwiczeniach poza celami (min. 2), `plan.tydzienTestu = 21`; w Dziś karta „Tydzień lżejszy i test” z przyciskiem „Zrób test” (po teście: „Test zrobiony ✓”). Nie dotyczy biegania i zdrowia.
+- Postęp: karta „Moje cele” – ścieżki (krok N z M, ćwiczenie, data, pasek; dotknięcie otwiera ścieżkę) i liczby (teraz z celu, pasek).
+
+## v81 – Bieganie, wersja 1: dane, rodzaj biegu, tempo, wysiłek
+
+Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
+- Nowy plik `bieg-logika.js` (bez interfejsu, do przeniesienia do wersji natywnej): rodzaje biegu, `biegMetry`, `biegSekundy`, `biegTempo`, `biegOpisTempa`, `biegMigruj`.
+- Format (zgodny z istniejącym): `sesja.rodzajBiegu` (spokojny / tempowy / interwaly / dlugi / marszobieg), `sesja.dystans` i `sesja.czas` = obiekt albo `null` (brak, nie 0); `sesja.wynik` dodatkowo `wysilek` (1–10 albo `null`) i `zrodlo` („reczny”; później „stoper”, „gps”). Tempo nie jest zapisywane.
+- Migracja przy starcie (`app.js`): dystans/czas z wartością 0 w sesjach i wynikach → `null`.
+- Edycja sesji biegowej: rodzaj biegu jednym dotknięciem z opisem; dystans opcjonalny (puste pole „brak”), czas puste zamiast 0, obciążenie puste = bez.
+- Okno wyniku: tytuł z rodzajem biegu, tempo liczone na żywo, wysiłek 1–10 (opcjonalny, ponowne dotknięcie usuwa); zapis bez dystansu bez „0 km”.
+- Opisy sesji i wyników: rodzaj, dystans, czas, tempo (gdy są dystans i czas), wysiłek.
+- Kopiowanie do innych sesji przenosi też rodzaj biegu i obciążenie; każdą sesję można potem zmienić osobno.
+- Generator biegowy ustawia rodzaj: marsz-bieg, spokojny, długi (ostatni bieg tygodnia).
+
+## v82 – Bieganie, wersja 2: stoper i ekran biegu
+
+- `bieg-logika.js`: stoper liczony z zegara (`startedAt`, `accumulated`, pauzy i czas pauz) – `biegStoperNowy/Czas/Pauza/Wznow/Wynik`, `biegFormatCzasu`.
+- Nowy plik `bieg.js` (ekran): na karcie Dziś przy sesji biegowej „▶ Start” i „Wpisz wynik ręcznie”. Ekran biegu: rodzaj, cel (ile zostało; sygnał dźwięk + wibracja po osiągnięciu celu czasu), duży czas, kafle dystans/tempo (na razie „—”, do GPS), Pauza/Wznów, Stop z potwierdzeniem („Biegnę dalej” / „Zakończ bieg”). Odświeżanie ekranu co 250 ms.
+- Trwający bieg w `localStorage` („cwiczenia-bieg-trwa”) – po odświeżeniu lub zamknięciu karty ekran biegu wraca z poprawnym czasem.
+- Wake Lock w czasie biegu, odnawiany po powrocie do karty; przełącznik w Ustawieniach „Ekran nie gaśnie podczas biegu” (`dane.ustawienia.biegEkran`).
+- Stop zapisuje pomiar jako szkic (`sesja.wynikSzkic`: czas, pauzy, czas pauz, źródło „stoper”) i otwiera okno wyniku wypełnione pomiarem. Anuluj nie traci pomiaru: na karcie „Niezapisany bieg …”, „Zapisz wynik biegu” albo „Odrzuć pomiar”. Wynik zapisuje też `pauzy` i `czasPauzS` (do celów „bez zatrzymania”).
+
+## v83 – poprawka: Stop zatrzymuje czas od razu
+
+- Stop natychmiast zatrzymuje stoper (napis „Zatrzymano – zakończyć bieg?”). „Zakończ bieg” zapisuje czas z chwili naciśnięcia Stop; „Biegnę dalej” wznawia bez doliczania przerwy i bez liczenia jej jako pauzy. Stan potwierdzenia przeżywa odświeżenie strony.
+
+## v84 – Bieganie, wersja 3: odcinki i interwały
+
+- `bieg-logika.js`: `sesja.odcinki` – lista odcinków `{ rodzaj, czasS | dystansM, tempoS? }` i grup `{ powtorz, odcinki }` (grupa to jeden element); rodzaje: rozgrzewka, bieg, szybko, wolno, marsz, schłodzenie. Funkcje: opis, płaska lista, suma, przesuwanie odcinka w stoperze (z czasu, nie z tyknięć), ręczne zakończenie odcinka; szablony: marsz-bieg 8 × (1 + 2), interwały 6 × (1 + 1), 6 × 400 m, tempowy 10-20-10.
+- Edycja sesji biegowej: „Odcinki (opcjonalnie)” – + Dodaj odcinek, + Powtórzenie (Powtórz N razy z odcinkami w środku), ↑ ↓ ✕, tempo docelowe (opcjonalne, „5:30”), gotowy szablon (ustawia też rodzaj biegu), „Łącznie: ≈ X min + Y km”. Gdy są odcinki, pola dystansu i czasu się chowają (sesja bez odcinków wygląda jak przedtem).
+- Ekran biegu: ramka bieżącego odcinka – „Odcinek 2 z 18: Bieg 1 min”, odliczanie do końca, „Następnie: …”, „jeszcze 7 powtórzeń”; zmiana odcinka = sygnał (dźwięk + wibracja), koniec ostatniego = 3 sygnały; odcinki na dystans kończy przycisk „Odcinek zrobiony →” (do czasu GPS). Stan odcinka przeżywa odświeżenie.
+- Wynik: zmierzone odcinki (z planem i oznaczeniem przerwanego) w oknie wyniku do poprawy (min:s); zapis w `wynik.odcinkiWyniki`. Wynik ręczny sesji z odcinkami podpowiada ich sumę. Podpis okna mówi, skąd są wartości (stoper / plan / wynik).
+- Generator: marsz-bieg ma odcinki (5 min marszu, N × (bieg + 2 min marszu), 5 min marszu), więc stoper prowadzi przez nie sam.
+- Kopiowanie do innych sesji przenosi odcinki.
+
+## v85 – Bieganie, wersja 4: generator biegowy z siłą i ścieżka „Bieganie”
+
+- Nowy plik `plan-bieg.js` (bez interfejsu): cele biegowe (pierwsze 5 km, 5 km szybciej, 10 km, półmaraton, utrzymanie formy), poziom (podpowiedź z celu: pierwsze 5 km / brak 20 min biegu / małe doświadczenie → początkujący), układ dni (biegi z przerwami, długi bieg na końcu tygodnia; siła w dni bez biegu, nie przed długim biegiem), tydzień planu liczony przez wszystkie bloki: objętość +8% na tydzień, co 4. tydzień 75%, ostatni 60% + sprawdzian na dystansie celu; akcenty od 2. tygodnia (tempowy z odcinkami / interwały 1 min albo 400 m dla zaawansowanych), marszobieg 8 poziomów rozłożonych na długość planu (max 3 biegi w tygodniu).
+- Siła w planie biegowym: bez, „siła dla biegacza” (nogi, pośladki, brzuch) 1–2× albo całe ciało (A/B) 1–2×; korzysta z istniejących szablonów, testu możliwości i bólu.
+- Kreator dla biegania: cel biegowy → (czy 20 min) → poziom → biegi w tygodniu → siła → (przy sile: doświadczenie, czas, rozgrzewka, sprzęt, ból) → długość 4/8/12/16 tyg. (zalecana z celu) → (przy sile: Moje możliwości) → podsumowanie z odcinkami i dystansami. Starsze profile biegowe dostają wartości domyślne (`pgBiegNormalizuj`).
+- Ścieżki „Bieganie: od 20 minut do półmaratonu” (7 kroków) i „Regularne bieganie” (2 / 3 biegi w tygodniu, 4 tygodnie z rzędu) z warunkami w danych (`warunek`: minCzasS, minDystansM, maxCzasS – przeliczany na dystans warunku, maxPauz, nieRodzaj, biegowWTygodniu, tygodniZRzedu); `biegWarunek`, `biegWarunekTygodnia` w `bieg-logika.js`.
+- Zaliczanie bez klikania: po zapisaniu wyniku biegu kolejne spełnione kroki zaliczają się same (komunikat). Gdy bieg bez dystansu mógłby zaliczyć krok z dystansem – prośba o dystans (drugie „Zapisz” zapisuje bez niego).
+- Plan biegowy dodaje ścieżkę „Bieganie” do celów (start: krok 1, jeśli biegasz 20 minut); widać ją w Ścieżkach (nowa grupa „Bieganie”) i w Postępie.
+- Test: 14 400 kombinacji profili biegowych × bloków bez błędów (liczba biegów i sesji siły, brak pustych sesji).
+
+## v86 – Bieganie, wersja 5: Postęp i poziom szczegółów
+
+- `bieg-logika.js`: `biegTygodnie`, `biegOstatnieTygodnie`, `biegSeriaTygodni`, `biegRekordy` (najdłuższy dystans i czas, najszybsze 1 / 5 / 10 km i półmaraton – tylko z biegów o tym dystansie ±3%). Puste wartości nie są liczone jako 0: dystans tygodnia i średnie tempo tylko z biegów z dystansem.
+- Postęp → karta „Bieganie”: ten tydzień (biegi, czas, dystans, u zaawansowanych średnie tempo), wykres słupkowy 8 tygodni (początkujący: minuty; zaawansowany: przełącznik Czas / Dystans), seria tygodni z biegiem (bieżąca i najdłuższa), rekordy (zaawansowany), „Historia biegów” – lista (data, rodzaj, dystans, czas, tempo, wysiłek) i szczegóły biegu z odcinkami.
+- Ustawienia → „Bieganie: poziom szczegółów” (Początkujący / Zaawansowany, `dane.ustawienia.biegPoziom`; ustawiany też przy tworzeniu planu biegowego) i „Serie i rekordy biegowe” (`biegSerie`). Początkujący: bez tempa i obciążenia w oknie wyniku (obciążenie zostaje, jeśli było ustawione), bez kafla tempa na ekranie biegu, bez rekordów i dystansu w wykresie. Zmiana poziomu niczego nie usuwa.
+
+## v87 – Bieganie, wersja 6: GPS i import GPX
+
+- `gps-logika.js` (bez interfejsu): punkt trasy = `[lat, lon, czas ms, dokładność m|null, wysokość|null, odcinek]`; `gpsFiltr` (odrzuca dokładność gorszą niż 25 m i skoki szybsze niż 12 m/s z zapasem na niepewność; uśrednia pozycję z 5 punktów, ignoruje drżenie, gdy stoisz; po 8 skokach z rzędu uznaje, że to ruch, nie błąd), `gpsSygnal` (szukam / dobry / słaby / brak), `gpsTempoOkno` (tempo z 30 s), `gpsPodsumuj`, `gpsZGpx`, `gpsPodsumujGpx`, `gpsDoGpx`. Numer wersji filtra: `GPS_FILTR.wersja` (zapisywany przy biegu).
+- `gps.js`: surowe punkty w IndexedDB (`cwiczenia-gps`, sklep `trasy`), zapis co 5 s i przy zamknięciu karty, odtwarzanie po odświeżeniu strony; nasłuch `watchPosition` tylko w czasie biegu i poza pauzą; po każdej pauzie nowy „odcinek trasy”, więc pauza nie dolicza dystansu. Trasy nie wchodzą do kopii zapasowej (są duże) – każdą można pobrać jako GPX; osierocone trasy są sprzątane przy starcie.
+- Pierwszy Start pyta (z krótkim wyjaśnieniem), czy mierzyć GPS; wybór w Ustawieniach → „Pomiar GPS podczas biegu” (`dane.ustawienia.biegGps`). Zgodę systemową prosi przeglądarka dopiero po włączeniu. Brak zgody = bieg liczony bez GPS z komunikatem. Na ekranie biegu przycisk „Wyłącz GPS (bieżnia, hala)” / „Włącz GPS”.
+- Ekran biegu: kafle dystansu i tempa (tempo u zaawansowanych) działają z GPS; komunikaty „GPS szuka sygnału…”, „Słaby sygnał GPS – dystans może być zaniżony”, „Brak sygnału GPS…”. GPS w przeglądarce działa tylko przy włączonym ekranie i aplikacji na wierzchu.
+- Po biegu dystans z GPS trafia do okna wyniku (poniżej 50 m traktowany jak brak), źródło „GPS”, w wyniku `trasaId` i `gps {dystansM, punktow, odrzuconych, slaby, filtr}`. Szczegóły biegu: „Pobierz trasę (GPX)” i „Przelicz dystans z zapisanej trasy”; Ustawienia: „Przelicz dystanse z zapisanych tras” (wszystkie biegi z GPS aktualnym filtrem).
+- Import GPX: na karcie biegu w Dziś „Wczytaj bieg z pliku GPX” – dystans, czas ruchu (przerwy dłuższe niż 30 s to pauzy), data z pliku; potem zwykłe okno wyniku.
+- Testy: filtr na trasach syntetycznych (błąd ≤ 2,5% przy szumie 4–8 m, skoki 300 m odrzucone, stanie 120 s = 0 m), symulowany GPS w Chromium (Start, pauza ze skokiem, Stop, zapis, przeliczenie, eksport i import GPX, odświeżenie w trakcie biegu, brak zgody, słaby sygnał, sprzątanie).
+- Nie ma jeszcze: mapy trasy, przełączania odcinków po dystansie, GPS przy wygaszonym ekranie (wymaga wersji natywnej).
+
+## v88 – Tempo zawsze widoczne
+
+- Kafel tempa na ekranie biegu i podgląd tempa w oknie wyniku są teraz widoczne na każdym poziomie szczegółów (wcześniej tylko „Zaawansowany”). Poziom nadal ukrywa tempo w Postępie i historii, rekordy oraz obciążenie.
+
+## v89 – Kolejny blok: nowy test, podsumowanie i dopasowanie; odcinki po dystansie z GPS
+
+- **Nowy test w kolejnym bloku.** `pgProfilKolejnegoBloku` wywołuje `mzDoProfilu`, więc świeży test z „Moje możliwości” trafia do profilu następnego bloku (maksy pompek, podciągnięć, przysiadów, planku i ciężary startowe; ciężary z ostatnich treningów mają pierwszeństwo).
+- **Podsumowanie bloku** (`plan-adaptacja.js`, `paOtworzPodsumowanie`): „Ułóż kolejny blok” najpierw pokazuje okno z liczbą zrobionych treningów i biegów, ocenami ćwiczeń (łatwo / w sam raz / ciężko), przebiegniętym dystansem i średnim wysiłkiem oraz listą zmian w kolejnym bloku. Gdy test możliwości jest starszy niż 8 tygodni albo go nie ma – propozycja „Zrób test teraz” (nie jest wymuszona).
+- **Dopasowanie** (`paZastosuj`, wnioski z poprzedniego bloku):
+  - zrobione poniżej 60% treningów (od 4 zaplanowanych) → o jeden dzień mniej w tygodniu (min. 2); przy 85% i więcej wraca do pierwotnej liczby dni (`dniOryg`);
+  - ćwiczenie ocenione co najmniej 3 razy: „łatwo” w ≥ 60% ocen → ciężar ok. +5% (zaokrąglone do 2,5 kg od 20 kg, inaczej 1 kg) albo +2 powtórzenia w ćwiczeniu z masą ciała; „ciężko” w ≥ 50% → ok. −5% albo mniej powtórzeń. Ćwiczenia czasowe bez zmian. Gdy w bloku zrobiono nowy test, ćwiczeń z masą ciała nie korygujemy ocenami (test dobiera trudność wariantu);
+  - bieganie: zrobione poniżej 60% biegów → powtórzenie 2 ostatnich tygodni planu (`p.biegPrzes`, plan wydłuża się o 2 tygodnie); średni wysiłek ≥ 8/10 → powtórzenie 1 tygodnia. `pgTydzienPlanu` liczy tydzień z uwzględnieniem przesunięcia.
+  - Zmiany widać w „Dlaczego ten plan?” jako „Po poprzednim bloku: …”.
+- **Odcinki po dystansie z GPS.** Odcinek zapisany na dystans (np. 400 m) kończy się sam, gdy GPS naliczy ten dystans (zapas 5 m na opóźnienie wygładzania), z tym samym sygnałem co przy odcinkach na czas; na ekranie „zostało X m”. Przycisk „Odcinek zrobiony →” działa zawsze, bez GPS wszystko po staremu. Ustawienia → „Odcinki na dystans przełączają się same” (`biegOdcDyst`, domyślnie włączone). Każdy zakończony odcinek zapisuje przebiegnięty dystans z GPS (`dystansGpsM`); w szczegółach biegu odcinki na czas pokazują dystans i tempo.
+
+## v90 – Bezpieczeństwo danych i wznawianie treningu
+
+- **Usuwanie danych** (`bezpieczenstwo.js`): przycisk „Wyczyść dane (tryb testowy)” zniknął z Postępu. W Ustawieniach → „Usuwanie danych” jest „Usuń wszystkie dane…”: okno 1 (co zniknie, że pobierze się kopia) → okno 2 (wpisz słowo USUŃ) → pobiera się plik `cwiczenia-kopia-RRRR-MM-DD-przed-usunieciem.json`, potem kasowane są dane, trwający bieg i trening oraz trasy GPS (IndexedDB). Baza przykładowych ćwiczeń wczytuje się ponownie sama.
+- **Przypomnienie o kopii**: gdy w aplikacji są jakiekolwiek wyniki (zrobione ćwiczenie, seria albo wynik biegu) i od ostatniej kopii (`dane.ustawienia.ostatniaKopia`, ustawiane przy każdym zapisie kopii) minęło 7 dni albo kopii nie było – karta na górze „Dziś” z „Zapisz kopię” i „Przypomnij za tydzień” (`kopiaOdlozona`).
+- **Nierealne wartości** (literówki): przed zapisem pytanie „Zapisać mimo to?”, gdy ciężar > 500 kg, > 200 powtórzeń w serii, > 20 serii, seria dłuższa niż godzina; wynik biegu/roweru/spaceru/basenu: dystans ponad 120 / 400 / 60 / 20 km, czas ponad 24 h, tempo biegu szybsze niż 2:30 min/km, ponad 100 000 kroków; test możliwości: pompki > 150, podciągnięcia > 60, dipy > 100, przysiady > 300, plank > 900 s, zwis > 600 s, ciężary > 400 kg. Działa w trybie „Ćwicz”, oknie wpisywania wykonania, oknie wyniku, edycji planu i teście możliwości.
+- **Wznów trening**: serie już wcześniej zapisywały się na bieżąco; teraz tryb „Ćwicz” pamięta też, który trening był otwarty i czy trwała przerwa (`localStorage` `cwiczenia-trening-trwa`, ważne 12 h). Po zamknięciu aplikacji, odświeżeniu albo restarcie telefonu na górze „Dziś” pojawia się karta „Przerwany trening” (ćwiczenie, seria, przycisk „Wznów trening” / „Nie teraz”); wznowienie wraca do tej samej serii, a trwająca przerwa odlicza dalej od tego samego momentu. Świadome zamknięcie (✕) i koniec treningu nie pokazują karty.
+
+## v91 – Słownictwo, pomoc „?” i dostępność
+
+- **Słownictwo w interfejsie** (nazwy w danych bez zmian, więc stare dane działają): „sesja” → **trening** (to, co robisz danego dnia), „trening”/„zestaw” jako szablon ćwiczeń → **zestaw ćwiczeń** (zakładka „Moje zestawy”, „Zestaw: …” na karcie Dziś), „aktywność” → **rodzaj treningu** (plan ręczny, filtry, rekord na dystansie). „Blok”, „ścieżka” i „cel” zostają i są objaśnione w słowniczku. Zmienione teksty: index.html, cwicz, cwiczenia, dzis, kreator, kreator2, kopia, plan-kreator, plan-zamiana, postep, treningi, ustawienia, przewodnik (zdjęcia w przewodniku mogą jeszcze pokazywać stare nazwy).
+- **Pomoc kontekstowa** (`pomoc.js`): okrągły przycisk „?” na: Dziś (obok zębatki), Ćwiczenia (pomoc zależy od wybranej zakładki: Baza / Moje zestawy / Ścieżki), Postęp, Ustawienia, plan ręczny, kreator planu, Moje możliwości, tryb Ćwicz, ekran biegu. Okno: 3–5 punktów do ekranu, rozwijany „Słowniczek pojęć” (plan, blok, trening, zestaw ćwiczeń, ćwiczenie, rodzaj treningu, ścieżka, cel), „Przewodnik ze zdjęciami”, „Rozumiem” (zamyka też Esc i dotknięcie tła). W pomocy kreatora: „Aplikacja nie zastępuje lekarza ani trenera”.
+- **Dostępność**:
+  - kontrast WCAG AA sprawdzony automatycznie (własny skrypt liczący kontrast każdego widocznego tekstu na 15 ekranach, jasny i ciemny motyw); poprawione: czerwone „Usuń…” w ciemnym motywie (nowa zmienna `--blad`), pomarańczowe ostrzeżenia (`--ostrzezenie`), napisy w znaczkach poziomu trudności (tekst w kolorze tekstu, kolor poziomu w ramce i tle);
+  - etykiety dla czytnika ekranu: pola dystansu, czasu, jednostek, testu możliwości i wyszukiwarka zestawów powiązane z etykietami (`dostepnoscPowiaz`);
+  - większy obszar dotyku (min. ok. 44–48 px) dla wartości ćwiczeń na Dziś i przełączników, bez zmiany wyglądu;
+  - widoczna ramka fokusu przy obsłudze klawiaturą.
+
+## v92 – Wyróżniki: skróć trening, słabszy dzień, 1RM i talerze, wykres, stagnacja, podsumowanie tygodnia, nogi przed biegiem
+
+- **Kalkulator talerzy** (`analiza.js`): w trybie „Ćwicz” przy ćwiczeniach ze sztangą (nazwa ze „sztang” albo martwy ciąg bez hantli) przycisk „Talerze na sztangę”. Wynik na jedną stronę (np. 87,5 kg = 1 × 25 + 1 × 5 + 1 × 2,5 + 1 × 1,25), rysunek talerzy; ciężar nieosiągalny → dwie najbliższe opcje do wyboru. „Gryf i dostępne talerze” (domyślnie gryf 20 kg; talerze 25/20/15/10/5/2,5/1,25, do wyboru też 2, 1, 0,5) w `dane.ustawienia.sztanga`. „Użyj tego ciężaru” wstawia ciężar do serii. Sprawdzone automatycznie dla wszystkich ciężarów od 20 do 300 kg co 0,5 kg.
+- **Szacowany 1RM**: wzór Epleya (ciężar × (1 + powtórzenia ÷ 30), tylko serie do 12 powtórzeń), najlepszy z ostatnich 120 dni. W opisie ćwiczenia sekcja „Twoje wyniki” (1RM z serii, z której wyliczony, informacja, że to szacunek), w „Ćwicz” pod ciężarem „≈ 68% szacowanego 1RM (88,5 kg)”.
+- **Wykres** w opisie ćwiczenia (od 2 treningów): przełącznik Ciężar / 1RM / Objętość (bez ciężaru: Powtórzenia / Objętość), linia w kolorze akcentu, dotknięcie pokazuje dzień i wartość, „Pokaż jako tabelę” (ostatnie 20). Historia (`anHistoria`) z serii trybu „Ćwicz”, a gdy ich nie ma – z wpisanego wykonania albo planu; wszystkie plany.
+- **Skróć trening** (`dzien.js`): na karcie dzisiejszego, nierozpoczętego treningu „Skróć trening” → 15 / 20 / 30 / 45 min (krótsze niż obecny szacowany czas) → podgląd: kolejno bez rozciągania, rozgrzewka 2 ćwiczenia, przerwy −25%, bez ćwiczeń dodatkowych od końca (wielostawowe zostają, min. 2), po jednej serii mniej (min. 2 serie), w ostateczności bez ostatnich głównych (zostaje min. 1). „Ćwiczę skrócony” zmienia tylko ten trening (oryginał w `sesja.zmianaDnia`, „Przywróć pełny trening” odtwarza go 1:1). Szacowany czas widać pod przyciskami. Skrócony trening po zrobieniu zalicza się normalnie.
+- **Słabszy dzień**: „Jak się dziś czujesz?” (świetnie / normalnie / słabo) i opcjonalnie „Coś boli?” (kolano, bark, dół pleców, nadgarstek). Słabo → ciężary ok. −15% i jedna seria mniej. Ból → ćwiczenia obciążające to miejsce (te same reguły co w kreatorze) do wyboru: pomiń dziś (domyślnie), zamień na odpowiednik bez kolizji, zostaw. Odpowiedź zapisuje się (`dane.samopoczucie`, 90 ostatnich). Trzecie „słabo” w 7 dniach → propozycja „Tydzień lżej”.
+- **Tydzień lżej (odciążenie)**: 7 dni, treningi siłowe nierozpoczęte: ciężary ok. −10% i jedna seria mniej (bez podwójnego odejmowania, gdy dzień już lżejszy). Odrzucenie zapamiętane na tydzień.
+- **Stagnacja**: ćwiczenie stoi, gdy od ostatniej poprawy szacowanego 1RM (bez ciężaru: najlepszej serii) o więcej niż 0,5% minęły ≥ 4 tygodnie treningowe, a ostatni trening był w ciągu 3 tygodni. Karta na „Dziś” najwyżej raz w tygodniu, tylko dla ćwiczeń w nadchodzących treningach: „Zmień zakres powtórzeń (3 tygodnie)” (8–12 → 4–6 i +10% albo odwrotnie, −15%), „Tydzień lżej”, „Zmień na inny wariant” (okno zamiany), „Nie pokazuj dla tego ćwiczenia”, „Później”. Informacja o stagnacji także w opisie ćwiczenia.
+- **Podsumowanie tygodnia**: w niedzielę od 18:00 i w poniedziałek karta za tydzień pon–nd: treningi (zrobione z zaplanowanych), podniesione kilogramy, kilometry biegu, rekordy i jedna rada (pierwsza pasująca: mało treningów → stałe pory; ≥3 słabe dni → sen i lżejszy tydzień; objętość +25% → nie przyspieszaj; rekordy; komplet; ogólna). „Udostępnij” (systemowe udostępnianie albo schowek), „Zamknij”.
+- **Ciężkie nogi przed biegiem**: gdy dziś trening z ciężkimi nogami (przysiad, martwy ciąg, wykroki, suwnica, hip thrust… min. 3 serie, z ciężarem albo trudny wariant), a jutro długi bieg, interwały lub bieg tempowy – ostrzeżenie na karcie z wyjaśnieniem i „Zamień kolejność dni” (ten sam plan) albo „Przenieś nogi na pojutrze” (inny plan) oraz „Zostaw”.
+- Poprawki: okna dialogowe są nad trybem „Ćwicz” (wcześniej pomoc „?” w „Ćwicz” otwierała się pod spodem); przy bólu kolana wykluczone też ćwiczenia na suwnicy, „spacer kaczki”, step-upy i sissy squat.
+
+## v93 – Porządek w Ustawieniach i Postępie, grupy ścieżek, moje ćwiczenia, zamiana w edycji planu
+
+- **Komunikat po biegu** (ścieżka „Bieganie”): zamiast „Pierwsze 20 minut biegu – zaliczone. Następny krok: 30 minut…” jest „Twój bieg (25 min) spełnia krok „Pierwsze 20 minut biegu” – zaliczony. Kolejny cel na ścieżce: 30 minut bez zatrzymania.” – widać, że bieg 25 min zaliczył próg 20 min, a 30 min to następny próg ścieżki (`celeOpisBiegu`).
+- **Ustawienia** – nowy układ, jednakowe karty i nagłówki sekcji: Moje możliwości (wyniki w siatce 2 kolumn), Trening siłowy (dźwięk, wibracja, domyślna przerwa w jednym wierszu), Bieganie (ilość szczegółów: „Podstawowe / Wszystkie”, serie i rekordy, ekran nie gaśnie, GPS, odcinki, przeliczenie tras), Przypomnienie (alarm, godzina w wierszu, kalendarz), Wygląd, Kopia zapasowa (z datą ostatniej kopii), Baza ćwiczeń, Pomoc, Usuwanie danych. Krótsze opisy.
+- **Postęp** – sekcje z jednakowymi nagłówkami: Twój plan (wybór planu chipami, gdy jest kilka; karta: nazwa, daty, kafelki Dziś i okres, seria, mięśnie, przyciski „Edytuj plan” i „Usuń plan”), Moje cele, Bieganie, Rekordy (rekordy w ćwiczeniach, na dystansie, najdłuższe wyniki), Moje plany (lista z przełącznikami), Poprzednie plany, na dole „Ułóż mi plan” i „Nowy plan ręcznie”. „Sesja” → „trening” także w kafelkach.
+- **Ścieżki**: trzy rozwijane grupy (Kalistenika, Siłownia, Bieganie) z liczbą ścieżek, liczbą „Twoich” i krótkim opisem; dotknięcie rozwija listę. Stan rozwinięcia zostaje po powrocie ze ścieżki.
+- **Moje ćwiczenia**: w Bazie przełącznik „Baza (n) / Moje ćwiczenia (n)”. Moje = dodane przez użytkownika albo z pliku (bez znacznika `zBazy`). Po dodaniu ćwiczenia lista przełącza się na „Moje”. Pusty stan z podpowiedzią.
+- **Zamiana ćwiczenia w edycji planu**: przy każdym ćwiczeniu treningu w edycji planu „Zamień na inne” – okno odpowiedników jak na „Dziś” (te same mięśnie, podobna trudność, bez kolizji z bólem z profilu planu), zakres: ten i kolejne treningi z tym zestawem albo tylko ten. Wpisane wartości zapisują się przed zamianą; zmiana trafia do edytowanej kopii i zapisuje się „Zapisz plan”.
+
+## v94 – Rozwijane sekcje w Ustawieniach i Postępie
+
+- Ustawienia i Postęp: każda sekcja to przycisk (tytuł, krótkie podsumowanie, strzałka); treść rozwija się po dotknięciu. Na starcie wszystko zwinięte, a rozwinięte sekcje zostają rozwinięte do zamknięcia aplikacji (także po odświeżeniu Postępu). Funkcja `rozwijaneSekcje(kontener, selektor, prefiks)` w `pomoc.js`.
+- Postęp: na wierzchu zostaje grafika mięśni (z wybranego planu, a gdy to plan bez siłowni – z pierwszego planu, który ją ma). Podsumowania w nagłówkach: „Twój plan” – procent realizacji, „Moje cele”, „Rekordy”, „Moje plany”, „Poprzednie plany” – liczby. Dotknięcie planu w „Moje plany” rozwija „Twój plan” z jego wynikami.
+- Testy automatyczne otwierają wszystkie sekcje flagą `window.sekcjeWszystkieOtwarte`.
+
+## v95 – Bez importu ćwiczeń z pliku
+
+- Z Ustawień zniknęła sekcja „Baza ćwiczeń” („Uzupełnij bazę ćwiczeń przykładowych”, „Dodaj ćwiczenia z pliku”, „Pobierz wzór pliku”) razem z kodem importu. Wbudowana baza (ok. 500 ćwiczeń, 10 zestawów) wczytuje się sama przy pierwszym starcie, po usunięciu danych i przy każdej nowej wersji bazy (`WERSJA_BAZY`); ćwiczeń z bazy nie da się usunąć, tylko ukryć, więc ręczne „uzupełnianie” nie jest potrzebne. Własne ćwiczenia: „+ Dodaj ćwiczenie”. Komunikaty kopii zapasowej (`kopia-info`) są teraz w sekcji „Kopia zapasowa”.
+
+## v96 – Nowy ekran Ćwiczenia (Baza): wyszukiwarka, arkusz filtrów, szczegóły
+
+- Zakładki Baza / Moje zestawy / Ścieżki jako jeden smukły przełącznik (bez liczb).
+- Na górze tylko pole szukania i przycisk „Filtry” (z liczbą włączonych filtrów, np. „Filtry · 2”). Pod spodem chipy włączonych filtrów (✕ wyłącza) i szybki chip „Moje ćwiczenia (n)”; liczba wyników nad listą.
+- Arkusz filtrów od dołu: Pokaż (Baza / Moje ćwiczenia / Wszystkie), partia mięśni (po wybraniu – mięśnie tej partii), rodzaj treningu, trudność 1–5 (kolorowe półksiężyce od zielonego do czerwonego, nazwa poziomu w podpowiedzi i dla czytnika), mięsień, kolejność, ukryte ćwiczenia; „Wyczyść” (tekst wyszukiwania zostaje); na dole „Pokaż N ćwiczeń”. Zamyka się przyciskiem, dotknięciem tła albo Esc.
+- „+ Dodaj ćwiczenie” jako pływający przycisk w prawym dolnym rogu (znika przy otwartym formularzu).
+- Karty na liście są krótkie (nazwa, poziom, rodzaj i partie, strzałka). Dotknięcie otwiera arkusz szczegółów: początek opisu, rekord, szacowany 1RM, data ostatniego treningu i przyciski: Opis i wyniki (opis, film, wykres), Mięśnie, Rekord, Historia, Edytuj, Ukryj, Usuń (tylko własne). Ukryte ćwiczenia nadal mają na karcie „Przywróć”.
+- „Dodaj do zestawu…” w szczegółach: lista Twoich zestawów, dopisuje ćwiczenie na koniec wybranego zestawu (do planów, które już go używają, dodaje się je w edycji planu).
+- Poprawka: lista ćwiczeń rysowana przy wczytywaniu nie używa funkcji z dzis.js (błąd „tekstElement is not defined” po odświeżeniu z danymi).
+
+## v97 – Pływanie: długości basenu, bloki, wynik jednym dotknięciem, plan, ścieżka i statystyki
+
+**Model danych (plik `plyw.js`).** Trening na basenie zapisuje się w długościach, a metry liczą się same:
+- `s.basen = { dlugosc, jednostka: "m" | "yd" }` – basen tego treningu (brak = „Mój basen” z Ustawień, domyślnie 25 m; jardy × 0,9144),
+- `s.bloki = [{ powt, dl, styl, tryb: "przerwa" | "odjazd", przerwaS, odjazdS, pomoce[], intensywnosc, typ, notatka }]`,
+- `s.trybProsty`, `s.czasSesji` (s, cały trening); wynik dodatkowo: `czas` (sam czas pływania – do tempa i rekordów), `najdluzszy` (najdłuższy odcinek bez zatrzymania, w długościach), `wysilek` 1–10.
+- `etapySesji()` liczy etapy {styl, metry} z bloków, więc starsze funkcje (opisy, cele, rekordy, % realizacji) działają bez zmian.
+
+**Style:** Kraul (dawny „Dowolny” to kraul), Grzbietowy, Klasyczny, Motylkowy, Zmienny, Dowolnie wybrany.
+
+**Migracja (jednorazowa, `plywMigracja`):** stare zapisy w metrach (`etapy`, `dlugosci` × 25 m) zamieniają się na bloki na basenie 25 m – metry zostają dokładnie te same (przy nierównych metrach ułamek długości, np. 330 m = 13,2 dł.). „Dowolny” → „Kraul” w treningach, wynikach, ćwiczeniach i rekordach.
+
+**Edycja treningu (plan):**
+- Basen: Mój basen / 25 m / 50 m / 25 jardów / inna długość.
+- „Prosty”: liczba długości + styl, metry obok. „Bloki”: lista bloków – zwinięte do jednej linii (część, powtórzenia × długości, metry, przerwa, intensywność); dotknięcie rozwija pola: część treningu, powtórzenia × długości, styl, intensywność, odpoczynek (przerwa albo „start co”), sprzęt (deska, ósemka, płetwy, łapki, fajka), notatka; ↑ ↓ kopiuj usuń.
+- Gotowe treningi: Technika (~1500 m), Wytrzymałość (~2000 m), Sprint (~1200 m) – przeliczone na długości wybranego basenu.
+- Podsumowanie na żywo: długości, metry, szacowany czas (tempo z ostatnich wyników, bez historii 3:00/100 m, plus przerwy).
+- Czas treningu w minutach (opcjonalnie). Domyślny tryb nowego treningu ustawia się w Ustawieniach.
+
+**Wynik:** „Zrobione wg planu” zapisuje plan jednym dotknięciem (najdłuższy odcinek = najdłuższe powtórzenie z bloków; w trybie prostym nieznany). „Poprawiam”: przepłynięte długości, styl, czas pływania, czas całego treningu, najdłuższy odcinek bez zatrzymania, wysiłek; na żywo metry i tempo /100 m. Inna liczba długości niż w planie zapisuje się jako jeden blok.
+
+**Dziś:** „Cel: 24 dł. × 25 m = 600 m · 4 bloki · trening 45 min”, rozwijany „Plan treningu” z blokami, notatkami i sprzętem. Wynik z tempem i najdłuższym odcinkiem.
+
+**Plan pływacki (kreator „Ułóż mi plan” → „Pływać”, plik `plan-plyw.js`):** pytania: cel (zacznij pływać regularnie; 400 / 800 / 1000 / 1500 m bez zatrzymania; kondycja; szybciej na 100 / 400 / 1500 m; nowy styl), który styl (przy nowym stylu), basen, test „ile długości kraulem bez zatrzymania”, znane style, 1–4 razy w tygodniu, 30–90 min, liczba tygodni.
+- Każdy trening: rozgrzewka (~15%), technika (~15–25%, ćwiczenia techniczne z opisem i sprzętem), część główna, wyciszenie (~10%).
+- Objętość od możliwości i czasu, +~10% na tydzień, co 4. tydzień ok. 75% i sprawdzian (jak najdalej bez zatrzymania; przy celach na szybkość – dystans na czas); ostatni tydzień planu – sprawdzian celu.
+- Odcinki rosną, przerwy maleją (np. 8×50 → 4×100 → 3×200 → 2×400 → 800); do ostatniej ćwiartki planu co najmniej 2 powtórzenia.
+- ~80/20: w drugim treningu tygodnia akcent (mocniej albo szybkie odcinki), poza celami „start” i „nowy styl”.
+- Kolejny blok: mało zrobionych treningów → powtórzenie 2 tygodni, średni wysiłek ≥ 8 → powtórzenie tygodnia, nowy najdłuższy odcinek → nowy punkt startu. Podsumowanie bloku pokazuje treningi na basenie, najdłuższy odcinek i wysiłek. Test możliwości nie jest wymagany.
+- Uwaga bezpieczeństwa w każdym planie (nie zastępuje instruktora; przy < 2 długościach – lekcje z instruktorem, nigdy samemu).
+
+**Ścieżka „Pływanie” (grupa Pływanie w Ścieżkach):** 2 długości → 4 → 8 → 400 m → 800 m → 1 km → 1500 m bez zatrzymania. Kroki zaliczają się same z „najdłuższego odcinka” w wyniku (`celeSprawdzPlyw`). Plan pływacki dodaje ścieżkę jako cel i zaczyna od kroku wynikającego z testu.
+
+**Postęp → Pływanie:** treningi i metry w tym tygodniu, tempo (ostatnie i średnie z 5), wykres metrów w tygodniach (8) albo miesiącach (6), najdłużej bez zatrzymania, rekordy 50–1500 m osobno dla basenów (25 m, 50 m, jardy, inne) i stylów – tylko z pływania bez zatrzymania z wpisanym czasem (±3%), historia pływania. Pytanie o rekord dystansu po zapisie wyniku pojawia się tylko dla pływania bez zatrzymania.
+
+**Ustawienia → Pływanie:** Mój basen (25 m / 50 m / 25 yd / inny), nowy trening: Prosty / Bloki. Słowniczek pomocy: długość, blok, start co, najdłuższy odcinek.
+
+## v98 – Domknięcie etapu 1: zestawy w planach, kilka stylów w pływaniu, dokumentacja
+
+- **„Dodaj do zestawu…”** (szczegóły ćwiczenia) dopisuje ćwiczenie także do przyszłych, niezaliczonych treningów planów, które używają tego zestawu (`cwDodajDoPrzyszlychSesji`). Ilość startowa: zapisana przy ćwiczeniu (`ilosciStartowa`) albo 3 × 10 / 3 × 30 s (`cwIloscStartowa`). Komunikat mówi, do ilu treningów trafiło. Treningi z przeszłości i zaliczone się nie zmieniają.
+- **Pływanie – kilka stylów w trybie prostym**: wiersze „długości + styl” z „+ Dodaj styl” i ✕ (`plywWierszeStylow`). Nowy wiersz podpowiada styl, którego jeszcze nie ma. Tryb prosty jest dostępny, gdy każdy blok to jedno powtórzenie bez sprzętu i notatki; przełączenie z bloków sumuje długości według stylów (`plywWgStylow`).
+- **Wynik basenu „Poprawiam”**: te same wiersze, wypełnione z planu według stylów. Bez zmian – zostają bloki planu (albo wcześniejszego wyniku); po zmianie – jeden blok na styl.
+- Opis celu i wyniku basenu wymienia style z długościami („kraul 16, grzbietowy 4”). Postęp → Pływanie: metry według stylów w bieżącym miesiącu.
+- **Dokumentacja**: `01-funkcjonalnosc.md` opisuje aktualny stan aplikacji; dawny zapis wersji przeniesiony do `04-historia-zmian.md`; zaktualizowane `00`, `02`, `03`.
+- **Pomoc „?”** zaktualizowana (basen, skróć trening, słabszy dzień, cztery grupy ścieżek, nowy Postęp, plan pływacki, Dodaj do zestawu).
+- **Przewodnik**: 19 kart (nowe: Moje możliwości, Bieganie, Pływanie, Ścieżki i cele), wszystkie zrzuty wygenerowane od nowa (`narzedzia/zrzuty-przewodnika.js`).
