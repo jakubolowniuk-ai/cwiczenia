@@ -576,3 +576,14 @@ Na podstawie specyfikacji „Bieganie w aplikacji treningowej” (etap 1).
 - **Dokumentacja**: `01-funkcjonalnosc.md` opisuje aktualny stan aplikacji; dawny zapis wersji przeniesiony do `04-historia-zmian.md`; zaktualizowane `00`, `02`, `03`.
 - **Pomoc „?”** zaktualizowana (basen, skróć trening, słabszy dzień, cztery grupy ścieżek, nowy Postęp, plan pływacki, Dodaj do zestawu).
 - **Przewodnik**: 19 kart (nowe: Moje możliwości, Bieganie, Pływanie, Ścieżki i cele), wszystkie zrzuty wygenerowane od nowa (`narzedzia/zrzuty-przewodnika.js`).
+
+
+## v99 – Trening prowadzony (wariant B) i Zegar
+
+- **Tryb Ćwicz przebudowany** według wariantu B z makiet: etykieta fazy (PRACA / PRZERWA), pierścień odliczania (`cwPierscien`) dla przerwy i ćwiczeń na czas (po celu zegar liczy dalej: „+0:05”), karta „Następne”, lista „Cały trening”.
+- **Ocena serii na przerwie** (`cwOcenaPrzerwy`): „Ciężko” +30 s, „Łatwo” −20 s do bieżącej przerwy; ocena zapisuje się przy ćwiczeniu i zasila propozycje po treningu.
+- **Czas treningu**: `sesja.przebieg.czasy { praca, przerwa }` (s) liczone przy zmianie fazy (`cwLiczCzas`, limit 30 min na fazę). Podsumowanie na końcu: czas, pasek praca/przerwy, stosunek.
+- **Zegar** – nowa zakładka i plik `zegar.js`: stoper z okrążeniami, minutnik, interwały (Start 1 + 1, 30 / 30, 4 × 4, Tabata, EMOM, własny; rozgrzewka i schłodzenie opcjonalne; pełny ekran z pierścieniem, odliczaniem 3-2-1, Pauza, Pomiń), alarm (w aplikacji z drzemką oraz plik .ics, opcjonalnie codziennie). Skrót „Zegar” w manifeście (`?ekran=zegar`).
+- Ustawienia Zegara w `dane.ustawienia.zegar`. Zegar nie zapisuje treningów w historii.
+- **Pomoc „?”**: nowa pomoc Zegara (też na pełnym ekranie interwałów), zaktualizowany Ćwicz; słowniczek: Interwały, EMOM, Tabata. **Przewodnik**: 21 kart (nowe: Zegar, Trening interwałowy; zmienione: Ćwicz, Przerwa, Ocena).
+- Poprawka układu: w trybie Ćwicz przyciski nie kurczą się przy długiej treści (`.cwicz-tresc > * { flex-shrink: 0 }`).

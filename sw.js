@@ -1,12 +1,12 @@
 // Service worker: aplikacja działa bez internetu, ale zawsze najpierw próbuje pobrać nowe pliki.
 // Przy każdej wgranej paczce zmień numer wersji poniżej.
-const WERSJA = "cwiczenia-v98";
+const WERSJA = "cwiczenia-v99";
 
 const PLIKI = [
   "./", "index.html", "style.css", "manifest.webmanifest",
   "dane.js", "anatomia.js", "cwiczenia.js", "treningi.js", "bieg-logika.js", "gps-logika.js", "gps.js", "kreator.js", "kreator2.js",
-  "dzis.js", "postep.js", "rekordy.js", "plyw.js", "cwicz.js", "bieg.js", "mozliwosci.js", "ustawienia.js", "kopia.js", "bezpieczenstwo.js", "plan-generator.js", "plan-bieg.js", "plan-plyw.js", "plan-kreator.js", "plan-progresja.js", "plan-adaptacja.js", "plan-zamiana.js", "sciezki.js", "cele.js", "sciezki.json", "przewodnik.js", "pomoc.js", "analiza.js", "dzien.js", "app.js",
-  "przewodnik/01-start.webp", "przewodnik/02-kreator.webp", "przewodnik/03-gotowy-plan.webp", "przewodnik/04-dzis.webp", "przewodnik/05-cwicz.webp", "przewodnik/06-przerwa.webp", "przewodnik/07-ocena.webp", "przewodnik/08-propozycje.webp", "przewodnik/09-inne-wartosci.webp", "przewodnik/10-recznie.webp", "przewodnik/11-postep.webp", "przewodnik/12-baza.webp", "przewodnik/12b-ukryte.webp", "przewodnik/13-moje-zestawy.webp", "przewodnik/14-kolejny-blok.webp", "przewodnik/02b-mozliwosci.webp", "przewodnik/15-bieg.webp", "przewodnik/16-basen.webp", "przewodnik/17-sciezki.webp",
+  "dzis.js", "postep.js", "rekordy.js", "plyw.js", "cwicz.js", "zegar.js", "bieg.js", "mozliwosci.js", "ustawienia.js", "kopia.js", "bezpieczenstwo.js", "plan-generator.js", "plan-bieg.js", "plan-plyw.js", "plan-kreator.js", "plan-progresja.js", "plan-adaptacja.js", "plan-zamiana.js", "sciezki.js", "cele.js", "sciezki.json", "przewodnik.js", "pomoc.js", "analiza.js", "dzien.js", "app.js",
+  "przewodnik/01-start.webp", "przewodnik/02-kreator.webp", "przewodnik/03-gotowy-plan.webp", "przewodnik/04-dzis.webp", "przewodnik/05-cwicz.webp", "przewodnik/06-przerwa.webp", "przewodnik/07-ocena.webp", "przewodnik/08-propozycje.webp", "przewodnik/09-inne-wartosci.webp", "przewodnik/10-recznie.webp", "przewodnik/11-postep.webp", "przewodnik/12-baza.webp", "przewodnik/12b-ukryte.webp", "przewodnik/13-moje-zestawy.webp", "przewodnik/14-kolejny-blok.webp", "przewodnik/02b-mozliwosci.webp", "przewodnik/15-bieg.webp", "przewodnik/16-basen.webp", "przewodnik/17-sciezki.webp", "przewodnik/18-zegar.webp", "przewodnik/19-interwaly.webp",
   "przyklady-kalistenika.json", "przyklady-silownia.json", "przyklady-mobilnosc.json", "przyklady-zdrowie.json", "przyklady-zestawy.json",
   "ikona-192.png", "ikona-512.png"
 ];

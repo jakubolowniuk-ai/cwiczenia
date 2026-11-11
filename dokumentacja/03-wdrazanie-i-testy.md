@@ -9,7 +9,7 @@
   4. `kreator.js`, `kreator2.js` (plan ręczny: krok 1, kalendarz, edycja treningu, zapis)
   5. `dzis.js` (Dziś, zaliczanie, okno wyniku), `postep.js`, `rekordy.js`
   6. `plyw.js` (pływanie: basen, bloki, wynik, statystyki, ustawienia)
-  7. `cwicz.js` (tryb Ćwicz), `bieg.js` (ekran biegu, Postęp biegu), `mozliwosci.js`
+  7. `cwicz.js` (tryb Ćwicz, wspólne pomocniki: pierścień, sygnał), `zegar.js` (Zegar: stoper, minutnik, interwały, alarm), `bieg.js` (ekran biegu, Postęp biegu), `mozliwosci.js`
   8. `ustawienia.js`, `kopia.js` (kopia, wbudowana baza), `bezpieczenstwo.js` (usuwanie danych, walidacja, przypomnienie o kopii)
   9. `plan-generator.js`, `plan-bieg.js`, `plan-plyw.js` (generatory), `plan-kreator.js` („Ułóż mi plan”), `plan-progresja.js`, `plan-adaptacja.js` (kolejny blok), `plan-zamiana.js`
   10. `sciezki.js`, `cele.js`, `przewodnik.js`, `pomoc.js` (pomoc „?”, słowniczek, rozwijane sekcje, dostępność), `analiza.js` (1RM, wykres, talerze, stagnacja), `dzien.js` (skróć trening, słabszy dzień, odciążenie, podsumowanie tygodnia), `app.js` (start, kontrola wersji, baner aktualizacji)

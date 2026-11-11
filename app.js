@@ -31,6 +31,9 @@ function pokazEkran(idEkranu) {
   if (idEkranu === "ekran-postep" && typeof rysujPostep === "function") {
     rysujPostep();
   }
+  if (idEkranu === "ekran-zegar" && typeof rysujZegar === "function") {
+    rysujZegar();
+  }
 }
 
 // Po dotknięciu zakładki pokazujemy jej ekran
@@ -85,6 +88,9 @@ zakladki.forEach(function (zakladka) {
   }
   if (typeof otworzCwicz === "undefined") {
     problemy.push("cwicz.js");
+  }
+  if (typeof rysujZegar === "undefined") {
+    problemy.push("zegar.js");
   }
   if (typeof zrobAnatomie === "undefined") {
     problemy.push("anatomia.js");
@@ -152,6 +158,11 @@ if (!dane.rekordyPrzeliczone && typeof przeliczRekordyZHistorii === "function") 
 // Pierwsze narysowanie ekranu Dziś
 if (typeof rysujDzis === "function" && document.getElementById("dzis-sesje")) {
   rysujDzis();
+}
+
+// Skrót "Zegar" z ekranu głównego telefonu otwiera zegar (adres ?ekran=zegar)
+if (location.search.indexOf("ekran=zegar") !== -1) {
+  pokazEkran("ekran-zegar");
 }
 
 // Wszystkie pliki są już wczytane (rekordy.js ładuje się po cwiczenia.js): odśwież listę ćwiczeń z rekordami

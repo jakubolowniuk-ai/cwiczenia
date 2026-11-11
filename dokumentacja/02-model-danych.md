@@ -1,6 +1,6 @@
 # Model danych
 
-Stan: wersja 98. Wszystko jest w jednym obiekcie `dane` pod kluczem `localStorage` **`cwiczenia-dane-v1`** (JSON). Kopia zapasowa to ten sam obiekt w pliku `.json`.
+Stan: wersja 99. Wszystko jest w jednym obiekcie `dane` pod kluczem `localStorage` **`cwiczenia-dane-v1`** (JSON). Kopia zapasowa to ten sam obiekt w pliku `.json`.
 
 - `dane.wersjaUstawien` (obecnie **5**) – przy zmianie ustawień startowych `uzupelnijDane` w `dane.js` aktualizuje starsze dane. Tę samą liczbę sprawdzają `app.js` i `WYMAGANA_WERSJA_DANYCH` w `kreator.js`.
 - `dane.wersjaBazy` – wersja wbudowanej bazy ćwiczeń (`WERSJA_BAZY = 15` w `kopia.js`); nowa wersja dopisuje brakujące ćwiczenia, opisy i zestawy.
@@ -63,7 +63,7 @@ aktywnosc = { id, rodzajId, partiaId, partieIds[], ogolny, razy, kolor }
 { id, aktywnoscId, dzien (od startu planu), treningId, parametry{ idĆw: ilosc },
   blokPrzedId?, blokPoId?, kolejnosc?[], notatka?,
   zrobione{ idĆw: true }, wykonane{ idĆw: ilosc }, ocena{ idĆw: "latwo"|"wsam"|"ciezko" },
-  przebieg{ wyniki, extra, pominiete }, przerwaMnoznik?, zmianaDnia?{ typy, opis, oryginal },
+  przebieg{ wyniki, extra, pominiete, czasy{ praca, przerwa } (s) }, przerwaMnoznik?, zmianaDnia?{ typy, opis, oryginal },
   dataWykonania?, wynik?, wynikSzkic?,
   // bieganie, rower, spacer
   rodzajBiegu?, dystans?, czas?, kroki?, obciazenie?, odcinki?[],
@@ -94,4 +94,4 @@ Odpowiedzi z „Ułóż mi plan” i stan bloków: `cel`, `dosw`, `dni`, `czas`,
 - `dane.historia` – zarezerwowane (historię tworzą zamknięte plany).
 
 ## ustawienia
-`godzinaAlarmu`, `alarmWlaczony`, `motyw`; trening: `dzwiek`, `wibracja`, `przerwa`, `sztanga { gryf, talerze }`; bieganie: `biegPoziom`, `biegSerie`, `biegEkran`, `biegGps`, `biegOdcDyst`; pływanie: `basen { dlugosc, jednostka }`, `plywTryb` („prosty” | „zaawansowany”); kopia: `ostatniaKopia`, `kopiaOdlozona`; karty Dziś: `deloadDo`, `deloadOdrzucony`, `stagnacjaKarta`, `stagnacjaPomin`, `tydzienPodsumowany`.
+`godzinaAlarmu`, `alarmWlaczony`, `motyw`; Zegar: `zegar { tryb, minutnik (s), int { szablon, praca, przerwa, rundy, rozgrzewka, schlodzenie }, alarm { czas, etykieta, wlaczony, cel (ms) }, alarmCodziennie }`; trening: `dzwiek`, `wibracja`, `przerwa`, `sztanga { gryf, talerze }`; bieganie: `biegPoziom`, `biegSerie`, `biegEkran`, `biegGps`, `biegOdcDyst`; pływanie: `basen { dlugosc, jednostka }`, `plywTryb` („prosty” | „zaawansowany”); kopia: `ostatniaKopia`, `kopiaOdlozona`; karty Dziś: `deloadDo`, `deloadOdrzucony`, `stagnacjaKarta`, `stagnacjaPomin`, `tydzienPodsumowany`.

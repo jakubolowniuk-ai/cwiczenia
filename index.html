@@ -8,7 +8,7 @@
   <meta name="theme-color" content="#0B6B5F">
   <link rel="icon" href="ikona-192.png">
   <link rel="apple-touch-icon" href="ikona-180.png">
-  <link rel="stylesheet" href="style.css?v=98">
+  <link rel="stylesheet" href="style.css?v=99">
 </head>
 <body>
 
@@ -240,6 +240,11 @@
       </div>
     </section>
 
+    <section id="ekran-zegar" class="ekran">
+      <h1>Zegar</h1>
+      <div id="zegar-tresc"></div>
+    </section>
+
     <section id="ekran-postep" class="ekran">
       <h1>Postęp</h1>
       <div id="postep-tresc"></div>
@@ -251,6 +256,7 @@
   <nav class="pasek">
     <button class="zakladka aktywna" data-ekran="ekran-dzis">Dziś</button>
     <button class="zakladka" data-ekran="ekran-cwiczenia">Ćwiczenia</button>
+    <button class="zakladka" data-ekran="ekran-zegar">Zegar</button>
     <button class="zakladka" data-ekran="ekran-postep">Postęp</button>
   </nav>
 
@@ -709,7 +715,7 @@
     </div>
   </div>
 
-  <script src="dane.js?v=98"></script>
+  <script src="dane.js?v=99"></script>
   <!-- Opis ćwiczenia (z miniaturą filmu) -->
   <div class="wynik-tlo opis-tlo" id="opis-tlo" hidden>
     <div class="okno" role="dialog" aria-label="Opis ćwiczenia">
@@ -732,24 +738,35 @@
     <div class="cwicz-tresc" id="cwicz-tresc"></div>
   </div>
 
-  <script src="anatomia.js?v=98"></script>
-  <script src="cwiczenia.js?v=98"></script>
-  <script src="treningi.js?v=98"></script>
-  <script src="bieg-logika.js?v=98"></script>
-  <script src="gps-logika.js?v=98"></script>
-  <script src="gps.js?v=98"></script>
-  <script src="kreator.js?v=98"></script>
-  <script src="kreator2.js?v=98"></script>
-  <script src="dzis.js?v=98"></script>
-  <script src="postep.js?v=98"></script>
-  <script src="rekordy.js?v=98"></script>
-  <script src="plyw.js?v=98"></script>
-  <script src="cwicz.js?v=98"></script>
-  <script src="bieg.js?v=98"></script>
-  <script src="mozliwosci.js?v=98"></script>
-  <script src="ustawienia.js?v=98"></script>
-  <script src="kopia.js?v=98"></script>
-  <script src="bezpieczenstwo.js?v=98"></script>
+  <!-- Zegar: trening interwałowy i alarm na pełnym ekranie -->
+  <div class="cwicz" id="zegar-bieg" hidden>
+    <div class="cwicz-gora">
+      <button class="wstecz" id="zegar-bieg-zamknij" aria-label="Zakończ trening interwałowy">✕</button>
+      <h2 class="cwicz-tytul" id="zegar-bieg-tytul">Interwały</h2>
+    </div>
+    <div class="cwicz-pasek"><div id="zegar-bieg-pasek"></div></div>
+    <div class="cwicz-tresc" id="zegar-bieg-tresc"></div>
+  </div>
+
+  <script src="anatomia.js?v=99"></script>
+  <script src="cwiczenia.js?v=99"></script>
+  <script src="treningi.js?v=99"></script>
+  <script src="bieg-logika.js?v=99"></script>
+  <script src="gps-logika.js?v=99"></script>
+  <script src="gps.js?v=99"></script>
+  <script src="kreator.js?v=99"></script>
+  <script src="kreator2.js?v=99"></script>
+  <script src="dzis.js?v=99"></script>
+  <script src="postep.js?v=99"></script>
+  <script src="rekordy.js?v=99"></script>
+  <script src="plyw.js?v=99"></script>
+  <script src="cwicz.js?v=99"></script>
+  <script src="zegar.js?v=99"></script>
+  <script src="bieg.js?v=99"></script>
+  <script src="mozliwosci.js?v=99"></script>
+  <script src="ustawienia.js?v=99"></script>
+  <script src="kopia.js?v=99"></script>
+  <script src="bezpieczenstwo.js?v=99"></script>
   <div class="przewodnik" id="przewodnik" hidden>
     <div class="przewodnik-karta" role="dialog" aria-label="Przewodnik">
       <button class="akcja prz-pomin" id="prz-pomin">Pomiń</button>
@@ -764,19 +781,19 @@
     </div>
   </div>
 
-  <script src="plan-generator.js?v=98"></script>
-  <script src="plan-bieg.js?v=98"></script>
-  <script src="plan-plyw.js?v=98"></script>
-  <script src="plan-kreator.js?v=98"></script>
-  <script src="plan-progresja.js?v=98"></script>
-  <script src="plan-adaptacja.js?v=98"></script>
-  <script src="plan-zamiana.js?v=98"></script>
-  <script src="sciezki.js?v=98"></script>
-  <script src="cele.js?v=98"></script>
-  <script src="przewodnik.js?v=98"></script>
-  <script src="pomoc.js?v=98"></script>
-  <script src="analiza.js?v=98"></script>
-  <script src="dzien.js?v=98"></script>
-  <script src="app.js?v=98"></script>
+  <script src="plan-generator.js?v=99"></script>
+  <script src="plan-bieg.js?v=99"></script>
+  <script src="plan-plyw.js?v=99"></script>
+  <script src="plan-kreator.js?v=99"></script>
+  <script src="plan-progresja.js?v=99"></script>
+  <script src="plan-adaptacja.js?v=99"></script>
+  <script src="plan-zamiana.js?v=99"></script>
+  <script src="sciezki.js?v=99"></script>
+  <script src="cele.js?v=99"></script>
+  <script src="przewodnik.js?v=99"></script>
+  <script src="pomoc.js?v=99"></script>
+  <script src="analiza.js?v=99"></script>
+  <script src="dzien.js?v=99"></script>
+  <script src="app.js?v=99"></script>
 </body>
 </html>

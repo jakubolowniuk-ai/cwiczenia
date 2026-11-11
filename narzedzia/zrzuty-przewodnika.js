@@ -72,16 +72,27 @@ const fs = require("fs");
     cwSesja.zrobione = cwSesja.zrobione || {};
     cwIds().forEach((id) => { cwSesja.zrobione[id] = true; });
     cwSesja.ocena = { [ids[0]]: "latwo", [ids[1]]: "wsam", [ids[2]]: "wsam" };
+    cwSesja.przebieg.czasy = { praca: 860, przerwa: 1670 };
     zapiszDane();
     cwFaza = "koniec";
     cwRysuj();
   });
   await p.waitForTimeout(300);
-  await p.locator("#cwicz-tresc .cw-podsumowanie").nth(7).evaluate((e) => e.scrollIntoView());
-  await p.waitForTimeout(200);
   await zrzut(p, "07-ocena");
   await p.locator("#cwicz-tresc button:text-is('Zamknij')").tap();
   await p.waitForTimeout(300);
+  // Zegar: ustawienia interwałów i trening w toku
+  await p.locator('nav [data-ekran="ekran-zegar"]').tap();
+  await p.waitForTimeout(300);
+  await p.locator('[data-szablon="4x4"]').tap();
+  await p.waitForTimeout(200);
+  await zrzut(p, "18-zegar");
+  await p.locator("#zg-int-start").tap();
+  await p.waitForTimeout(300);
+  await p.evaluate(() => { zgBieganie.i = 3; zgBieganie.koniec = Date.now() + 175000; zgRysujBieg(); });
+  await p.waitForTimeout(300);
+  await zrzut(p, "19-interwaly");
+  await p.evaluate(() => { zgZamknijBieg(); });
 
   // Propozycje progresji: dzisiejszy trening A po poprzednim A z górą zakresu
   await p.evaluate(() => {

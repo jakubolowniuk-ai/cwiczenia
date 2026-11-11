@@ -1,6 +1,6 @@
 # Instrukcja projektu: aplikacja do aktywności
 
-Stan na listopad 2026 (wersja 98). Ten plik opisuje kontekst, zasady pracy, technologię i ustalone decyzje.
+Stan na listopad 2026 (wersja 99). Ten plik opisuje kontekst, zasady pracy, technologię i ustalone decyzje.
 
 ## Kontekst
 - Autor: Jakub. Komunikuje się po polsku, uczy się programowania od podstaw, pracuje głównie na telefonie z Androidem.
@@ -40,6 +40,8 @@ Stan na listopad 2026 (wersja 98). Ten plik opisuje kontekst, zasady pracy, tech
 - **Słownictwo**: trening (dzień), zestaw ćwiczeń (szablon), rodzaj treningu, blok, ścieżka, cel.
 - **Ćwiczenia**: wbudowana baza (ok. 500), ćwiczeń z bazy nie usuwa się, tylko ukrywa; własne osobno („Moje ćwiczenia”). Import z pliku JSON usunięty (v95).
 - **„Dodaj do zestawu”** dopisuje ćwiczenie też do przyszłych treningów planów z tym zestawem (v98).
+- **Tryb Ćwicz (v99)**: trening prowadzony – PRACA / PRZERWA z pierścieniem, ocena serii zmienia przerwę (ciężko +30 s, łatwo −20 s), lista całego treningu, podsumowanie z czasem pracy i przerw. Wariant „B” z makiet.
+- **Zegar (v99)**: osobna zakładka – stoper, minutnik, interwały (szablony), alarm; wspólna baza z trybem Ćwicz (pierścień, sygnał). Zegarek (Bluetooth z tętnem, import TCX/FIT, Health Connect, Wear OS) – później.
 - **Pływanie**: wpis w długościach basenu, metry liczone; tryb prosty (wiersze stylów) i bloki; bez ekranu treningu w wodzie, dopóki nie będzie integracji z zegarkiem.
 - **Bieganie**: GPS z własnym filtrem, odcinki, GPX; tempo zawsze widoczne.
 - **Rower**: moduł w tej aplikacji (nie osobna aplikacja), razem ze spacerem na wspólnym ekranie aktywności z GPS; joga / mobilność później, osobno.

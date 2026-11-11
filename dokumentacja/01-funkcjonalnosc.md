@@ -1,6 +1,6 @@
 # Funkcjonalność aplikacji
 
-Stan: **wersja 98** (listopad 2026). Ten plik opisuje, co aplikacja robi dziś, ekran po ekranie. Jak do tego doszliśmy, wersja po wersji, jest w `04-historia-zmian.md`. Kierunek rozwoju i odłożone pomysły są w dokumencie „Strategia platformy aktywności”.
+Stan: **wersja 99** (listopad 2026). Ten plik opisuje, co aplikacja robi dziś, ekran po ekranie. Jak do tego doszliśmy, wersja po wersji, jest w `04-historia-zmian.md`. Kierunek rozwoju i odłożone pomysły są w dokumencie „Strategia platformy aktywności”.
 
 ## Cel i zasady
 
@@ -12,10 +12,10 @@ Stan: **wersja 98** (listopad 2026). Ten plik opisuje, co aplikacja robi dziś, 
 
 ## Nawigacja
 
-- Dolny pasek: **Dziś**, **Ćwiczenia**, **Postęp**.
+- Dolny pasek: **Dziś**, **Ćwiczenia**, **Zegar**, **Postęp**. Skrót „Zegar” jest też na ekranie głównym telefonu (długie dotknięcie ikony aplikacji, po ponownym zainstalowaniu aplikacji).
 - **Ustawienia** – zębatka na ekranie Dziś.
 - **Pomoc „?”** – okrągły przycisk na każdym głównym ekranie i w trybach pełnoekranowych (kreator, Moje możliwości, Ćwicz, bieg, plan ręczny). Okno: 3–5 wskazówek do ekranu, słowniczek pojęć, link do przewodnika.
-- **Przewodnik „Jak to działa?”** – 19 kart ze zrzutami ekranu; otwiera się sam przy pierwszym uruchomieniu, potem z ekranu Dziś (bez planu), z pomocy „?” i z Ustawień.
+- **Przewodnik „Jak to działa?”** – 21 kart ze zrzutami ekranu; otwiera się sam przy pierwszym uruchomieniu, potem z ekranu Dziś (bez planu), z pomocy „?” i z Ustawień.
 
 **Słownictwo w aplikacji**: *plan* (np. 4 tygodnie), *blok* (4 tygodnie planu), *trening* (to, co robisz danego dnia), *zestaw ćwiczeń* (lista ćwiczeń treningu siłowego), *rodzaj treningu* (Siłownia, Bieganie, Basen…), *ścieżka* (kroki do umiejętności), *cel*. Pływanie: *długość* (basen od ściany do ściany), *blok* (część treningu na basenie), *start co* (odjazd), *najdłuższy odcinek*.
 
@@ -92,7 +92,7 @@ Nakładka z pytaniami krok po kroku, na końcu podsumowanie: pierwszy tydzień, 
 
 - Treningi zaplanowane na dziś ze wszystkich włączonych planów, z postępem planu.
 - **Trening siłowy**: rozgrzewka, ćwiczenia, rozciąganie. Kwadracik zalicza ćwiczenie jak w planie; dotknięcie wartości otwiera okno „inne wartości” (serie, powtórzenia, ciężar, + / − seria). Przeciąganie zmienia kolejność. ⇄ zamienia ćwiczenie na odpowiednik. Opis przy każdym ćwiczeniu.
-- **„Ćwicz”** – tryb pełnoekranowy: seria po serii, − / + dla powtórzeń i ciężaru, stoper dla ćwiczeń na czas, przerwa z odliczaniem (± 15 s, zapamiętuje się), dźwięk i wibracja, opis następnego ćwiczenia, kalkulator talerzy przy sztandze, % szacowanego 1RM, ocena na końcu. Ekran nie gaśnie. Po zamknięciu – karta „Przerwany trening → Wznów”.
+- **„Ćwicz”** – tryb pełnoekranowy, trening prowadzony: **PRACA** (etykieta fazy, − / + dla powtórzeń i ciężaru; ćwiczenie na czas ma pierścień odliczania do celu, po celu liczy dalej „+0:05”, ważne dla rekordów), potem **PRZERWA** (pierścień, ± 15 s zapamiętywane przy ćwiczeniu, dźwięk i wibracja, karta „Następne”, opis następnego ćwiczenia). Po każdej serii pytanie „Jak poszła ta seria?”: **Ciężko** wydłuża tę przerwę o 30 s, **Łatwo** skraca o 20 s (ocena zapisuje się przy ćwiczeniu i zasila propozycje). Lista „Cały trening” (zrobione / teraz / zostało), kalkulator talerzy przy sztandze, % szacowanego 1RM. Na końcu **podsumowanie**: czas treningu, praca i przerwy (z paskiem i stosunkiem), lista ćwiczeń z oceną. Ekran nie gaśnie. Po zamknięciu – karta „Przerwany trening → Wznów”.
 - **Skróć trening** (15–45 min) z podglądem, „Przywróć pełny trening”.
 - **Jak się dziś czujesz?** – słabszy dzień (−15% ciężaru, seria mniej), ból (pomiń / zamień / zostaw ćwiczenia obciążające to miejsce); trzeci słaby dzień w tygodniu → propozycja **tygodnia lżej**.
 - Karty: propozycje, stagnacja ćwiczenia (zmiana zakresu, tydzień lżej, inny wariant), tydzień testowy, podsumowanie tygodnia (niedziela wieczór / poniedziałek, z „Udostępnij”), ciężkie nogi przed mocnym biegiem (zamiana dni), przypomnienie o kopii, przerwany trening, niezapisany bieg.
@@ -118,6 +118,13 @@ Nakładka z pytaniami krok po kroku, na końcu podsumowanie: pierwszy tydzień, 
 - **Style**: Kraul (dawny „Dowolny”), Grzbietowy, Klasyczny, Motylkowy, Zmienny, Dowolnie wybrany.
 - **Wynik**: „Zrobione wg planu” – jedno dotknięcie. „Poprawiam”: długości według stylów (wiersze z planu, „+ Dodaj styl”), czas pływania (do tempa i rekordów), czas całego treningu, najdłuższy odcinek bez zatrzymania, wysiłek; na żywo metry i tempo /100 m.
 - Postęp → **Pływanie**: ten tydzień, tempo (ostatnie i średnie), metry według stylów w tym miesiącu, wykres metrów (tygodnie / miesiące), najdłużej bez zatrzymania, rekordy 50–1500 m osobno dla basenów i stylów (tylko pływanie bez zatrzymania jednym stylem z czasem), historia pływania.
+
+## Zegar
+Osobna zakładka, narzędzia bez planu (plik `zegar.js`). Wybór: **Stoper | Minutnik | Interwały | Alarm** (zapamiętywany).
+- **Stoper**: Start / Stop / Dalej, **Okrążenie** (lista okrążeń z najszybszym i najwolniejszym), Wyzeruj. Liczy od znacznika czasu.
+- **Minutnik**: pierścień, szybkie czasy (0:30 … 10:00), minuty i sekundy przyciskami − / +, Pauza, Wyzeruj. Ekran nie gaśnie, na końcu sygnał i wibracja.
+- **Interwały**: szablony **Start 1 + 1**, **30 / 30**, **4 × 4**, **Tabata**, **EMOM** i **Własny**; czas pracy, przerwy i liczba rund (− / +), opcjonalna rozgrzewka (3:00) i schłodzenie (2:00), „Razem”. **Start** otwiera pełny ekran: 5 s przygotowania, faza (PRACA / PRZERWA / ROZGRZEWKA / SCHŁODZENIE), runda, pierścień, „Następne”, odliczanie 3-2-1 sygnałem i wibracją, **Pauza**, **Pomiń**, pasek postępu całości, podsumowanie na końcu. Ostatnia przerwa jest pomijana. Trening interwałowy z Zegara nie zapisuje się w historii.
+- **Alarm**: godzina i opis; **alarm w aplikacji** dzwoni na pełnym ekranie (Wyłącz, Drzemka 5 minut) tylko, gdy aplikacja jest otwarta; **plik kalendarza (.ics)** (opcjonalnie codziennie) daje alarm, który zadzwoni też przy zamkniętej aplikacji. Alarm, który minął, gdy aplikacja była zamknięta, nie dzwoni po fakcie.
 
 ## Rower i spacer
 - Na razie wpis ręczny: rower – dystans i czas; spacer – kroki, dystans, czas; opcjonalne obciążenie przy spacerze. Rekordy dystansu i najdłuższe wyniki w Postępie.
@@ -159,7 +166,8 @@ Rozwijane sekcje:
 
 ## Ograniczenia (znane)
 - GPS tylko przy włączonym ekranie i aplikacji na wierzchu – rozwiązanie w wersji APK (etap 3 strategii).
-- Przypomnienia przez plik kalendarza, bez prawdziwego alarmu – też APK.
+- Przypomnienia i alarm: prawdziwy budzik tylko przez plik kalendarza; alarm w aplikacji wymaga otwartej aplikacji – pełne rozwiązanie w APK.
+- Zegar: sygnał, wibracja i odliczanie 3-2-1 tylko przy włączonym ekranie; trening z Zegara nie trafia do historii; zegarek jeszcze niepołączony (Bluetooth z tętnem, import TCX/FIT i Health Connect – dalsze etapy).
 - Kroków nie da się liczyć w przeglądarce (krokomierz telefonu niedostępny).
 - Brak mapy trasy, ekranu treningu w wodzie (czeka na integrację z zegarkiem), kont i synchronizacji między telefonami.
 - Dane giną z telefonem lub przy czyszczeniu danych przeglądarki, jeśli nie ma kopii.

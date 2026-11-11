@@ -6,7 +6,7 @@ const POMOC = {
     tytul: "Ekran Dziś",
     punkty: [
       "Tu są treningi zaplanowane na dziś. Kwadracik przy ćwiczeniu zalicza je tak, jak w planie.",
-      "„Ćwicz” prowadzi przez trening seria po serii, z odliczaniem przerwy i sygnałem.",
+      "„Ćwicz” prowadzi przez trening seria po serii: PRACA, potem PRZERWA z pierścieniem odliczania i sygnałem. Na końcu zobaczysz, ile trwała praca, a ile przerwy.",
       "Zrobiłeś(aś) inaczej niż w planie? Popraw wartości – postęp i kolejne propozycje liczą się z tego, co wpiszesz.",
       "Bieg: „Start” włącza stoper (i GPS, jeśli go włączysz). Bieg z zegarka dodasz przyciskiem „Wczytaj bieg z pliku GPX”.",
       "Basen: „Wpisz wynik” → „Zrobione wg planu” zapisuje trening jednym dotknięciem. Było inaczej? „Poprawiam”: długości dla każdego stylu (+ Dodaj styl), czas i najdłuższy odcinek bez zatrzymania.",
@@ -89,9 +89,20 @@ const POMOC = {
   cwicz: {
     tytul: "Ćwiczenie krok po kroku",
     punkty: [
-      "Popraw powtórzenia i ciężar przyciskami − i +, jeśli zrobiłeś(aś) inaczej, i dotknij „Zrobione ✓”.",
-      "Przerwę wydłużysz lub skrócisz o 15 s – aplikacja zapamięta to dla ćwiczenia.",
+      "PRACA: popraw powtórzenia i ciężar przyciskami − i +, jeśli zrobiłeś(aś) inaczej, i dotknij „Zrobione ✓”. Ćwiczenie na czas ma pierścień: Start, odliczanie do celu, po celu zegar liczy dalej (+0:05), a Stop zapisuje czas.",
+      "PRZERWA: pierścień pokazuje, ile zostało. Oceń serię: „Ciężko” wydłuża tę przerwę o 30 s, „Łatwo” skraca o 20 s. Przyciskami −15 s i +15 s zmienisz ją ręcznie – aplikacja zapamięta to dla ćwiczenia.",
+      "Na dole jest lista całego treningu: co zrobione, co teraz, co zostało.",
       "Ekran nie gaśnie. ✕ zamyka tryb, a zrobione serie zostają zapisane. Po zamknięciu aplikacji na „Dziś” pojawi się „Wznów trening”."
+    ]
+  },
+  zegar: {
+    tytul: "Zegar",
+    punkty: [
+      "Stoper z okrążeniami, minutnik, interwały i alarm – bez planu, od razu.",
+      "Interwały: wybierz szablon (Start 1 + 1, 30 / 30, 4 × 4, Tabata, EMOM) albo ustaw własny czas pracy, przerwy i liczbę rund. Rozgrzewka i schłodzenie są opcjonalne.",
+      "W trakcie widzisz fazę (PRACA / PRZERWA), rundę i pierścień odliczania. Ostatnie 3 sekundy odliczają sygnał i wibracja. Pauza zatrzymuje czas, Pomiń przechodzi do następnej fazy.",
+      "Sygnał i wibracja działają przy włączonym ekranie (minutnik i interwały go nie gaszą). Prawdziwy alarm przy zamkniętej aplikacji da plik kalendarza („Dodaj do kalendarza”).",
+      "Zegar nie zapisuje treningu w historii. Wynik biegu albo ćwiczeń wpisz w planie."
     ]
   },
   bieg: {
@@ -116,7 +127,10 @@ const POMOC_SLOWNICZEK = [
   ["Długość (basen)", "jeden przepłynięty basen od ściany do ściany. Na basenie 25 m 4 długości to 100 m."],
   ["Blok (basen)", "część treningu na basenie, np. 4 × 2 długości kraulem z przerwą 20 s."],
   ["Start co (odjazd)", "każde powtórzenie zaczynasz co określony czas, np. co 1:00. Im szybciej płyniesz, tym dłużej odpoczywasz."],
-  ["Najdłuższy odcinek", "ile długości przepłynąłeś(aś) bez zatrzymania. Z niego zaliczają się kroki ścieżki „Pływanie”."]
+  ["Najdłuższy odcinek", "ile długości przepłynąłeś(aś) bez zatrzymania. Z niego zaliczają się kroki ścieżki „Pływanie”."],
+  ["Interwały", "szybkie odcinki (praca) na przemian z wolnymi albo odpoczynkiem (przerwa), powtarzane w rundach."],
+  ["EMOM", "co minutę zaczynasz nową rundę: robisz zadanie, a resztę minuty odpoczywasz."],
+  ["Tabata", "8 rund po 20 s maksymalnego wysiłku i 10 s przerwy. Bardzo ciężkie."]
 ];
 
 function pomocOtworz(klucz) {
@@ -243,7 +257,14 @@ function pomocPrzyNaglowku(h1, klucz, nazwa) {
     b.classList.add("na-prawo");
     krNagl.appendChild(b);
   }
-  const cwGora = document.querySelector(".cwicz-gora");
+  pomocPrzyNaglowku(document.querySelector("#ekran-zegar > h1"), "zegar", "Zegar");
+  const zgGora = document.querySelector("#zegar-bieg .cwicz-gora");
+  if (zgGora) {
+    const bz = pomocPrzycisk("zegar", "Zegar");
+    bz.classList.add("na-prawo");
+    zgGora.appendChild(bz);
+  }
+  const cwGora = document.querySelector("#cwicz .cwicz-gora");
   if (cwGora) {
     const b = pomocPrzycisk("cwicz", "Ćwiczenie krok po kroku");
     b.classList.add("na-prawo");

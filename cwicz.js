@@ -18,6 +18,39 @@ let cwInterwal = null;
 let cwBlokada = null;
 let cwAudio = null;
 let cwOstatnieId = null; // ćwiczenie, w którym zrobiono ostatnią serię (od niego zależy długość przerwy)
+let cwPrzerwaCalosc = 0; // długość bieżącej przerwy w sekundach (do pierścienia)
+let cwKorektaOceny = 0; // o ile ocena serii zmieniła bieżącą przerwę (s)
+let cwFazaZnana = null; // faza, której czas teraz liczymy ("seria" albo "przerwa")
+let cwFazaOd = 0; // od kiedy (ms) trwa ta faza
+
+// Czas treningu: ile spędzono na pracy (ekran serii), a ile na przerwach. Zapis w sesja.przebieg.czasy.
+const CW_OBWOD = 2 * Math.PI * 100; // obwód pierścienia o promieniu 100
+const CW_KOREKTA_OCENY = { latwo: -20, wsam: 0, ciezko: 30 };
+
+function cwCzasy() {
+  const p = cwPrzebieg();
+  if (!p.czasy) {
+    p.czasy = { praca: 0, przerwa: 0 };
+  }
+  return p.czasy;
+}
+
+// Dolicza czas ostatniej fazy; nowa to faza, w którą wchodzimy (null = koniec liczenia)
+function cwLiczCzas(nowa) {
+  const teraz = Date.now();
+  if (cwFazaZnana && cwFazaOd) {
+    const s = Math.min(1800, Math.max(0, Math.round((teraz - cwFazaOd) / 1000)));
+    const c = cwCzasy();
+    if (cwFazaZnana === "przerwa") {
+      c.przerwa += s;
+    } else {
+      c.praca += s;
+    }
+    zapiszDane();
+  }
+  cwFazaOd = teraz;
+  cwFazaZnana = nowa === "seria" || nowa === "przerwa" ? nowa : null;
+}
 
 // ===== Dźwięk, wibracja, ekran =====
 
@@ -256,6 +289,8 @@ function cwPoSerii(id) {
 function cwStartPrzerwy(sekundy) {
   cwFaza = "przerwa";
   cwPrzerwaDo = Date.now() + sekundy * 1000;
+  cwPrzerwaCalosc = sekundy;
+  cwKorektaOceny = 0;
   cwPrzerwaGotowa = false;
   cwRysuj();
 }
@@ -372,6 +407,127 @@ function cwStepper(etykieta, wartosc, krok, ulamki) {
   return { blok: blok, pole: pole };
 }
 
+// Etykieta fazy: PRACA albo PRZERWA (kolor i napis, nie sam kolor)
+function cwEtykietaFazy(praca) {
+  return cwEl("span", "cw-faza " + (praca ? "praca" : "przerwa"), praca ? "PRACA" : "PRZERWA");
+}
+
+// Czas w formacie m:ss albo g:mm:ss
+function cwFormatDlugi(s) {
+  s = Math.max(0, Math.round(s));
+  const g = Math.floor(s / 3600);
+  const m = Math.floor((s % 3600) / 60);
+  const r = s % 60;
+  return g > 0 ? g + ":" + String(m).padStart(2, "0") + ":" + String(r).padStart(2, "0") : m + ":" + String(r).padStart(2, "0");
+}
+
+// Pierścień z odliczaniem; w środku czas (tekst) i podpis. Zwraca elementy do uzupełnienia.
+function cwPierscien(klasa, idPostepu) {
+  const NS = "http://www.w3.org/2000/svg";
+  const obudowa = cwEl("div", "cw-pierscien " + klasa);
+  const svg = document.createElementNS(NS, "svg");
+  svg.setAttribute("viewBox", "0 0 240 240");
+  svg.setAttribute("aria-hidden", "true");
+  const tor = document.createElementNS(NS, "circle");
+  tor.setAttribute("cx", "120");
+  tor.setAttribute("cy", "120");
+  tor.setAttribute("r", "100");
+  tor.setAttribute("class", "cw-pierscien-tor");
+  const postep = document.createElementNS(NS, "circle");
+  postep.setAttribute("cx", "120");
+  postep.setAttribute("cy", "120");
+  postep.setAttribute("r", "100");
+  postep.setAttribute("class", "cw-pierscien-postep");
+  postep.setAttribute("transform", "rotate(-90 120 120)");
+  postep.style.strokeDasharray = String(CW_OBWOD);
+  postep.style.strokeDashoffset = "0";
+  if (idPostepu) {
+    postep.id = idPostepu;
+  }
+  svg.appendChild(tor);
+  svg.appendChild(postep);
+  obudowa.appendChild(svg);
+  const srodek = cwEl("div", "cw-pierscien-srodek");
+  const tekst = cwEl("div", "cw-pierscien-czas", "0:00");
+  const podpis = cwEl("div", "cw-pierscien-podpis", "");
+  srodek.appendChild(tekst);
+  srodek.appendChild(podpis);
+  obudowa.appendChild(srodek);
+  return { el: obudowa, tekst: tekst, podpis: podpis, postep: postep };
+}
+
+// Ocena serii na przerwie; wpływa na długość tej przerwy (ciężko +30 s, łatwo −20 s)
+function cwOcenaPrzerwy(id) {
+  const sesja = cwSesja;
+  const blok = cwEl("div", "cw-ocena");
+  const rzad = cwEl("div", "ocena-pasek");
+  rzad.appendChild(cwEl("span", "ocena-pytanie", "Jak poszła ta seria?"));
+  const odswiezPrzyciski = [];
+  OCENY.forEach(function (o) {
+    const p = cwPrzycisk(o[1], "ocena-przycisk", function () {
+      if (!sesja.ocena) {
+        sesja.ocena = {};
+      }
+      if (sesja.ocena[id] === o[0]) {
+        delete sesja.ocena[id];
+      } else {
+        sesja.ocena[id] = o[0];
+      }
+      const nowa = sesja.ocena[id] ? CW_KOREKTA_OCENY[sesja.ocena[id]] : 0;
+      const roznica = nowa - cwKorektaOceny;
+      cwKorektaOceny = nowa;
+      cwPrzerwaDo += roznica * 1000;
+      cwPrzerwaCalosc = Math.max(1, cwPrzerwaCalosc + roznica);
+      cwPrzerwaGotowa = false;
+      zapiszDane();
+      odswiezPrzyciski.forEach(function (f) { f(); });
+      cwOdswiezLicznik();
+    });
+    p.setAttribute("data-ocena", o[0]);
+    const odswiez = function () {
+      const wybrana = !!(sesja.ocena && sesja.ocena[id] === o[0]);
+      p.classList.toggle("wybrana", wybrana);
+      p.setAttribute("aria-pressed", wybrana ? "true" : "false");
+    };
+    odswiezPrzyciski.push(odswiez);
+    odswiez();
+    rzad.appendChild(p);
+  });
+  blok.appendChild(rzad);
+  blok.appendChild(cwEl("div", "cw-cel", "Ciężko: przerwa dłuższa o 30 s. Łatwo: krótsza o 20 s."));
+  return blok;
+}
+
+// Cały trening: co zrobione, co teraz, co zostało
+function cwListaTreningu(aktualneId) {
+  const karta = cwEl("div", "cw-lista");
+  karta.appendChild(cwEl("div", "cw-lista-tytul", "Cały trening"));
+  const p = cwPrzebieg();
+  cwIds().forEach(function (id) {
+    const cw = znajdzCwiczenie(id);
+    if (!cw) {
+      return;
+    }
+    const zrobione = cwWykonane(id);
+    const pominiete = !!p.pominiete[id];
+    const biezace = id === aktualneId;
+    const w = cwEl("div", "cw-lista-wiersz" + (zrobione ? " zrobione" : "") + (biezace ? " biezace" : "") + (pominiete ? " pominiete" : ""));
+    const znak = cwEl("span", "cw-lista-znak", zrobione ? "✓" : pominiete ? "–" : biezace ? "●" : "○");
+    znak.setAttribute("aria-hidden", "true");
+    w.appendChild(znak);
+    const nazwa = cwEl("span", "cw-lista-nazwa", cw.nazwa);
+    const stan = zrobione ? "zrobione" : pominiete ? "pominięte" : biezace ? "teraz" : "";
+    if (stan) {
+      nazwa.appendChild(cwEl("span", "cw-ukryte", " (" + stan + ")"));
+    }
+    w.appendChild(nazwa);
+    const ilosc = cwSesja.wykonane && cwSesja.wykonane[id] ? cwSesja.wykonane[id] : cwSesja.parametry[id];
+    w.appendChild(cwEl("span", "cw-lista-ilosc", ilosc ? opisIlosci(ilosc, cw) : ""));
+    karta.appendChild(w);
+  });
+  return karta;
+}
+
 function cwNaglowekCwiczenia(b, serie) {
   const cw = znajdzCwiczenie(b.id);
   const ids = cwIds();
@@ -382,6 +538,9 @@ function cwNaglowekCwiczenia(b, serie) {
   }).length;
   cwPasek.style.width = Math.round(zrobione * 100 / ids.length) + "%";
 
+  const gora = cwEl("div", "cw-faza-wiersz");
+  gora.appendChild(cwEtykietaFazy(true));
+  cwTresc.appendChild(gora);
   cwTresc.appendChild(cwEl("h2", "cw-nazwa", cw.nazwa));
   if (maOpis(cw)) {
     const opis = cwPrzycisk("Opis ćwiczenia", "akcja film cw-opis", function () {
@@ -474,10 +633,14 @@ function cwRysujSerie() {
       pola.appendChild(poleKg.blok);
       cwTresc.appendChild(pola);
     }
-    const stoper = cwEl("div", "cw-stoper", "0:00");
-    stoper.id = "cw-stoper";
-    cwTresc.appendChild(stoper);
-    cwTresc.appendChild(cwEl("div", "cw-cel", "Cel: " + opisCzasuSekund(s.t) + " (liczę dalej po celu)"));
+    const pier = cwPierscien("praca", "cw-pierscien-postep");
+    pier.tekst.id = "cw-stoper";
+    pier.tekst.textContent = cwFormatCzasu(s.t);
+    pier.podpis.textContent = "z " + cwFormatCzasu(s.t);
+    const polePier = cwEl("div", "cw-pierscien-pole");
+    polePier.appendChild(pier.el);
+    cwTresc.appendChild(polePier);
+    cwTresc.appendChild(cwEl("div", "cw-cel cw-srodek", "Cel: " + opisCzasuSekund(s.t) + " (po celu liczę dalej)"));
     const przycisk = cwPrzycisk(cwStoperStart ? "Stop" : "Start", "przycisk wielki cw-glowny", function () {
       if (!cwStoperStart) {
         if (cwDzwiekWlaczony()) {
@@ -496,6 +659,7 @@ function cwRysujSerie() {
     cwTresc.appendChild(przycisk);
   }
   cwDolneAkcje(b);
+  cwTresc.appendChild(cwListaTreningu(b.id));
 }
 
 function cwRysujPrzerwe() {
@@ -508,20 +672,33 @@ function cwRysujPrzerwe() {
   }).length;
   cwPasek.style.width = Math.round(zrobione * 100 / ids.length) + "%";
 
-  cwTresc.appendChild(cwEl("div", "cw-seria", "Odpoczywaj"));
-  const licznik = cwEl("div", "cw-stoper", "0:00");
-  licznik.id = "cw-licznik";
-  cwTresc.appendChild(licznik);
-  if (cwSesja.zrobione && cwSesja.zrobione[poprzednieId] && !cwBlokowe(poprzednieId)) {
-    const cwPoprz = znajdzCwiczenie(poprzednieId);
-    cwTresc.appendChild(cwEl("div", "cw-plan", "Skończone: " + (cwPoprz ? cwPoprz.nazwa : "")));
-    cwTresc.appendChild(ocenaPasek(cwSesja, poprzednieId));
+  const poprzCw = znajdzCwiczenie(poprzednieId);
+  const gora = cwEl("div", "cw-faza-wiersz");
+  gora.appendChild(cwEtykietaFazy(false));
+  if (poprzCw && cwSesja.parametry[poprzednieId]) {
+    const zrobioneSerie = (cwPrzebieg().wyniki[poprzednieId] || []).length;
+    const wszystkie = cwSerie(poprzednieId).length;
+    gora.appendChild(cwEl("span", "cw-seria-mala", "Po serii " + Math.min(zrobioneSerie, wszystkie) + " z " + wszystkie + " · " + poprzCw.nazwa));
+  }
+  cwTresc.appendChild(gora);
+
+  const pier = cwPierscien("przerwa", "cw-pierscien-postep");
+  pier.tekst.id = "cw-licznik";
+  pier.podpis.id = "cw-podpis";
+  const polePier = cwEl("div", "cw-pierscien-pole");
+  polePier.appendChild(pier.el);
+  cwTresc.appendChild(polePier);
+
+  if (poprzCw && !cwBlokowe(poprzednieId)) {
+    cwTresc.appendChild(cwOcenaPrzerwy(poprzednieId));
   }
 
-  const nastepne = cwEl("div", "cw-cel");
   const serie = cwSerie(b.id);
   const cw = znajdzCwiczenie(b.id);
-  nastepne.textContent = "Następnie: " + cw.nazwa + " · seria " + (b.nr + 1) + " z " + serie.length + " (" + cwOpisSerii(serie[Math.min(b.nr, serie.length - 1)], cw) + ")";
+  const nastepne = cwEl("div", "cw-nastepne");
+  nastepne.appendChild(cwEl("div", "cw-nastepne-etykieta", "NASTĘPNE"));
+  nastepne.appendChild(cwEl("div", "cw-nastepne-tytul", cw.nazwa + ", seria " + (b.nr + 1) + " z " + serie.length));
+  nastepne.appendChild(cwEl("div", "cw-nastepne-opis", cwOpisSerii(serie[Math.min(b.nr, serie.length - 1)], cw)));
   cwTresc.appendChild(nastepne);
   if (maOpis(cw)) {
     cwTresc.appendChild(cwPrzycisk("Opis następnego ćwiczenia", "akcja film cw-opis", function () {
@@ -532,6 +709,7 @@ function cwRysujPrzerwe() {
   const rzad = cwEl("div", "cw-dol");
   const zmien = function (ile) {
     cwPrzerwaDo += ile * 1000;
+    cwPrzerwaCalosc = Math.max(1, cwPrzerwaCalosc + ile);
     const cwPrz = znajdzCwiczenie(poprzednieId);
     if (cwPrz) {
       cwPrz.przerwa = Math.max(15, cwPrzerwaDla(poprzednieId) + ile);
@@ -546,6 +724,7 @@ function cwRysujPrzerwe() {
   const dalej = cwPrzycisk("Pomiń przerwę", "przycisk wielki cw-glowny", cwNastepna);
   dalej.id = "cw-dalej";
   cwTresc.appendChild(dalej);
+  cwTresc.appendChild(cwListaTreningu(b.id));
 }
 
 function cwRysujKoniec() {
@@ -553,7 +732,41 @@ function cwRysujKoniec() {
   cwPasek.style.width = "100%";
   const ids = cwIds();
   const zrobione = ids.filter(cwWykonane);
-  cwTresc.appendChild(cwEl("h2", "cw-nazwa", "Trening zakończony 🎉"));
+  const tr = cwSesja.treningId ? znajdzTrening(cwSesja.treningId) : null;
+  cwTresc.appendChild(cwEl("div", "cw-cel", "Trening zakończony"));
+  cwTresc.appendChild(cwEl("h2", "cw-nazwa", tr ? tr.nazwa : "Trening"));
+
+  const c = cwPrzebieg().czasy;
+  const praca = c ? c.praca : 0;
+  const przerwy = c ? c.przerwa : 0;
+  if (praca + przerwy >= 5) {
+    const hero = cwEl("div", "cw-hero");
+    const gora = cwEl("div", "cw-hero-gora");
+    gora.appendChild(cwEl("span", "cw-hero-etykieta", "Czas treningu"));
+    gora.appendChild(cwEl("span", "cw-hero-czas", cwFormatDlugi(praca + przerwy)));
+    hero.appendChild(gora);
+    const pasek = cwEl("div", "cw-hero-pasek");
+    pasek.setAttribute("aria-hidden", "true");
+    const wypelnienie = cwEl("div", "");
+    wypelnienie.style.width = Math.round(praca * 100 / (praca + przerwy)) + "%";
+    pasek.appendChild(wypelnienie);
+    hero.appendChild(pasek);
+    const dol = cwEl("div", "cw-hero-dol");
+    const poz = function (wartosc, podpis) {
+      const e = cwEl("span", "");
+      e.appendChild(cwEl("b", "", wartosc));
+      e.appendChild(document.createTextNode(" " + podpis));
+      return e;
+    };
+    dol.appendChild(poz(cwFormatDlugi(praca), "praca"));
+    dol.appendChild(poz(cwFormatDlugi(przerwy), "przerwy"));
+    if (praca >= 5) {
+      dol.appendChild(poz("1 : " + (Math.round(przerwy / praca * 10) / 10).toString().replace(".", ","), "praca do przerw"));
+    }
+    hero.appendChild(dol);
+    cwTresc.appendChild(hero);
+  }
+
   cwTresc.appendChild(cwEl("div", "cw-plan", "Zrobione ćwiczenia: " + zrobione.length + " z " + ids.length));
   zrobione.forEach(function (id) {
     const cw = znajdzCwiczenie(id);
@@ -580,6 +793,9 @@ function cwRysuj() {
   if (cwFaza !== "koniec" && !cwBiezace()) {
     cwFaza = "koniec";
   }
+  if (cwFaza !== cwFazaZnana) {
+    cwLiczCzas(cwFaza);
+  }
   if (cwFaza === "przerwa") {
     cwRysujPrzerwe();
   } else if (cwFaza === "koniec") {
@@ -592,6 +808,13 @@ function cwRysuj() {
 }
 
 // Odświeża liczniki (przerwa albo stoper); uruchamiane co ułamek sekundy z zegara, nie z licznika kroków
+function cwUstawPierscien(ulamekUplyniety) {
+  const postep = document.getElementById("cw-pierscien-postep");
+  if (postep) {
+    postep.style.strokeDashoffset = String(CW_OBWOD * Math.min(1, Math.max(0, ulamekUplyniety)));
+  }
+}
+
 function cwOdswiezLicznik() {
   if (cwFaza === "przerwa") {
     const licznik = document.getElementById("cw-licznik");
@@ -599,12 +822,18 @@ function cwOdswiezLicznik() {
       return;
     }
     const zostalo = Math.ceil((cwPrzerwaDo - Date.now()) / 1000);
+    const podpis = document.getElementById("cw-podpis");
+    if (podpis) {
+      podpis.textContent = "z " + cwFormatCzasu(cwPrzerwaCalosc);
+    }
     if (zostalo > 0) {
       licznik.textContent = cwFormatCzasu(zostalo);
       licznik.classList.remove("gotowe");
+      cwUstawPierscien(1 - zostalo / Math.max(1, cwPrzerwaCalosc));
     } else {
       licznik.textContent = "Zaczynaj!";
       licznik.classList.add("gotowe");
+      cwUstawPierscien(1);
       const dalej = document.getElementById("cw-dalej");
       if (dalej && dalej.textContent !== "Dalej") {
         dalej.textContent = "Dalej";
@@ -623,8 +852,11 @@ function cwOdswiezLicznik() {
     const serie = cwSerie(b.id);
     const cel = serie[Math.min(b.nr, serie.length - 1)].t;
     const uplynelo = (Date.now() - cwStoperStart) / 1000;
-    stoper.textContent = cwFormatCzasu(uplynelo);
+    const zostalo = cel - uplynelo;
+    // Do celu odliczamy w dół; po celu pokazujemy, ile ponad (+0:05) – ważne dla rekordów
+    stoper.textContent = zostalo > 0 ? cwFormatCzasu(Math.ceil(zostalo)) : "+" + cwFormatCzasu(-zostalo);
     stoper.classList.toggle("gotowe", uplynelo >= cel);
+    cwUstawPierscien(uplynelo / cel);
     if (uplynelo >= cel && !cwStoperSygnal) {
       cwStoperSygnal = true;
       cwSygnal(2);
@@ -652,6 +884,7 @@ function cwZapamietajStan() {
       sesjaId: cwSesja.id,
       faza: cwFaza,
       przerwaDo: cwPrzerwaDo,
+      przerwaCalosc: cwPrzerwaCalosc,
       ostatnieId: cwOstatnieId,
       zapisano: Date.now()
     }));
@@ -705,6 +938,8 @@ function cwWznow(w) {
   if (w.stan.faza === "przerwa" && w.stan.przerwaDo > Date.now()) {
     cwFaza = "przerwa";
     cwPrzerwaDo = w.stan.przerwaDo;
+    cwPrzerwaCalosc = Math.max(w.stan.przerwaCalosc || 0, Math.ceil((w.stan.przerwaDo - Date.now()) / 1000), 1);
+    cwKorektaOceny = 0;
     cwPrzerwaGotowa = false;
     cwOstatnieId = w.stan.ostatnieId || null;
     cwRysuj();
@@ -755,6 +990,10 @@ function cwKartaWznowienia() {
 function otworzCwicz(sesja) {
   cwSesja = sesja;
   cwStoperStart = 0;
+  cwFazaZnana = null;
+  cwFazaOd = 0;
+  cwKorektaOceny = 0;
+  cwPrzerwaCalosc = 0;
   cwFaza = cwBiezace() ? "seria" : "koniec";
   cwTlo.hidden = false;
   cwSygnal(0);
@@ -766,6 +1005,7 @@ function otworzCwicz(sesja) {
 
 function cwZamknijTryb() {
   // Świadome zamknięcie: nie proponujemy wznowienia (zrobione serie i tak zostają w sesji)
+  cwLiczCzas(null);
   cwZapomnijStan();
   clearInterval(cwInterwal);
   cwInterwal = null;
